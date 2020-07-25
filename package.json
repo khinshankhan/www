@@ -1,0 +1,26 @@
+{
+  "name": "anchorage",
+  "private": true,
+  "description": "",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "clean": "gatsby clean",
+    "test": "echo \"Haha what are test?\""
+  },
+  "dependencies": {
+    "gatsby": "^2.24.11",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {},
+  "repositories": {
+    "type": "git",
+    "url": "https://github.com/kkhan01/anchorage"
+  },
+  "bugs": {
+    "url": "https://github.com/kkhan01/anchorage/issues"
+  }
+}
