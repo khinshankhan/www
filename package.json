@@ -11,13 +11,16 @@
     "test": "echo \"Haha what are test?\""
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
     "axios": "^0.19.2",
     "gatsby": "^2.24.11",
     "gatsby-plugin-root-import": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gatsby-plugin-material-ui": "^2.1.10"
+  },
   "repositories": {
     "type": "git",
     "url": "https://github.com/kkhan01/anchorage"
