@@ -14,8 +14,10 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles((theme) => ({
   root: {},
   appbar: {
-    boxShadow: "none",
     backgroundColor: theme.palette.primary.main,
+  },
+  appbarUnelevated: {
+    boxShadow: "none",
   },
   title: {
     flexGrow: 1,
@@ -29,32 +31,35 @@ const Header = ({ siteTitle = "Shan", onToggleTheme, theme }) => {
   const classes = useStyles();
 
   return (
-    <HideOnScroll>
-      <AppBar position="sticky" className={classes.appbar}>
-        <Toolbar component="nav">
-          <Typography variant="h6" className={classes.title}>
-            <Link
-              to="/"
-              component={GatsbyLink}
-              color="inherit"
-              className={classes.link}
-            >
-              {siteTitle}
-            </Link>
-          </Typography>
-          <Tooltip title="Toggle light/ dark theme" enterDelay={300}>
-            <IconButton
-              color="inherit"
-              onClick={onToggleTheme}
-              data-ga-event-category="header"
-              data-ga-event-action="dark"
-            >
-              {theme === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
-            </IconButton>
-          </Tooltip>
-        </Toolbar>
-      </AppBar>
-    </HideOnScroll>
+    <>
+      <div id="back-to-top-anchor"></div>
+      <HideOnScroll>
+        <AppBar position="sticky" className={classes.appbar}>
+          <Toolbar component="nav">
+            <Typography variant="h6" className={classes.title}>
+              <Link
+                to="/"
+                component={GatsbyLink}
+                color="inherit"
+                className={classes.link}
+              >
+                {siteTitle}
+              </Link>
+            </Typography>
+            <Tooltip title="Toggle light/ dark theme" enterDelay={300}>
+              <IconButton
+                color="inherit"
+                onClick={onToggleTheme}
+                data-ga-event-category="header"
+                data-ga-event-action="dark"
+              >
+                {theme === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
+              </IconButton>
+            </Tooltip>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
+    </>
   );
 };
 
