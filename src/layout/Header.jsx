@@ -11,56 +11,50 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles((theme) => {
-  console.log(theme);
-  return {
-    root: {},
-    appbar: {
-      boxShadow: "none",
-      backgroundColor: theme.palette.primary.main,
-    },
-    toolbar: {},
-    title: {
-      flexGrow: 1,
-    },
-    link: {
-      textDecoration: "none",
-    },
-  };
-});
+const useStyles = makeStyles((theme) => ({
+  root: {},
+  appbar: {
+    boxShadow: "none",
+    backgroundColor: theme.palette.primary.main,
+  },
+  title: {
+    flexGrow: 1,
+  },
+  link: {
+    textDecoration: "none",
+  },
+}));
 
-const Header = ({ siteTitle = "Shan", onToggleTheme, theme, window }) => {
+const Header = ({ siteTitle = "Shan", onToggleTheme, theme }) => {
   const classes = useStyles();
 
   return (
-    <div>
-      <HideOnScroll window={window}>
-        <AppBar className={classes.appbar}>
-          <Toolbar className={classes.toolbar}>
-            <Typography variant="h6" className={classes.title}>
-              <Link
-                to="/"
-                component={GatsbyLink}
-                color="inherit"
-                className={classes.link}
-              >
-                {siteTitle}
-              </Link>
-            </Typography>
-            <Tooltip title="Toggle light/ dark theme" enterDelay={300}>
-              <IconButton
-                color="inherit"
-                onClick={onToggleTheme}
-                data-ga-event-category="header"
-                data-ga-event-action="dark"
-              >
-                {theme === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
-              </IconButton>
-            </Tooltip>
-          </Toolbar>
-        </AppBar>
-      </HideOnScroll>
-    </div>
+    <HideOnScroll>
+      <AppBar position="sticky" className={classes.appbar}>
+        <Toolbar component="nav">
+          <Typography variant="h6" className={classes.title}>
+            <Link
+              to="/"
+              component={GatsbyLink}
+              color="inherit"
+              className={classes.link}
+            >
+              {siteTitle}
+            </Link>
+          </Typography>
+          <Tooltip title="Toggle light/ dark theme" enterDelay={300}>
+            <IconButton
+              color="inherit"
+              onClick={onToggleTheme}
+              data-ga-event-category="header"
+              data-ga-event-action="dark"
+            >
+              {theme === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
+            </IconButton>
+          </Tooltip>
+        </Toolbar>
+      </AppBar>
+    </HideOnScroll>
   );
 };
 

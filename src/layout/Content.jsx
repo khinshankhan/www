@@ -5,7 +5,7 @@ import Container from "@material-ui/core/Container";
 const useStyles = makeStyles((theme) => ({
   root: { textColor: "white", backgroundColor: theme.palette.primary.main },
   main: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(1.125),
   },
 }));
 

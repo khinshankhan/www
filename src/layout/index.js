@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Layout = ({ children, container = false, window }) => {
+const Layout = ({ children, container = false }) => {
   const classes = useStyles();
   const [theme, setTheme] = useLocalStorage("theme", "dark");
 
@@ -28,7 +28,7 @@ const Layout = ({ children, container = false, window }) => {
     <ThemeProvider theme={themes[theme]}>
       <CssBaseline />
       <div className={classes.root}>
-        <Header onToggleTheme={toggleTheme} theme={theme} window={window} />
+        <Header onToggleTheme={toggleTheme} theme={theme} />
         <Content content={children} theme={theme} />
         <Footer />
       </div>

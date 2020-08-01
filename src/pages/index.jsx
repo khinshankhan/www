@@ -3,7 +3,7 @@ import Layout from "src/layout";
 
 const Index = (props) => {
   return (
-    <Layout {...props}>
+    <Layout>
       Elementum, nibh tellus molestie nunc, non blandit massa enim nec dui nunc
       mattis enim! Quis enim lobortis scelerisque fermentum dui faucibus in
       ornare quam viverra orci sagittis eu volutpat odio! Ornare suspendisse sed
