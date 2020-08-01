@@ -12,11 +12,15 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/styles": "^4.10.0",
     "axios": "^0.19.2",
+    "clsx": "^1.1.1",
     "gatsby": "^2.24.11",
     "gatsby-plugin-root-import": "^2.0.5",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "typeface-roboto": "^0.0.75"
   },
   "devDependencies": {
     "gatsby-plugin-material-ui": "^2.1.10"
