@@ -1,14 +1,7 @@
+const site = require("./config/site");
+const plugins = require("./config/plugins");
+
 module.exports = {
-  plugins: [
-    "gatsby-plugin-root-import",
-    {
-      resolve: `gatsby-plugin-material-ui`,
-      options: {
-        stylesProvider: {
-          injectFirst: true,
-        },
-      },
-    },
-    `custom-mui-theme`,
-  ],
+  siteMetadata: site,
+  plugins,
 };

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
 import axios from "axios";
+import Layout from "src/layout";
 
-const fetchData = async (url) =>
+const fetchData = async url =>
   axios(`https://cors-anywhere.herokuapp.com/${url}`);
 
-const getComic = async (num) => {
+const getComic = async num => {
   const comic = await fetchData(`https://xkcd.com/${num}/info.0.json`);
   return comic.data;
 };
@@ -29,7 +30,7 @@ const NotFound = () => {
 
   console.log(comicInfo);
   return (
-    <>
+    <Layout>
       <h1>404: Page not found</h1>
       <p>Sorry, but the page could not be found.</p>
       {comicInfo && (
@@ -41,7 +42,7 @@ const NotFound = () => {
       )}
       <br />
       <Link to="/">Click Here to Return to Safety</Link>
-    </>
+    </Layout>
   );
 };
 
