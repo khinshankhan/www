@@ -48,7 +48,7 @@ const Header = ({ siteTitle = "Shan", toggleTheme, themeType }) => {
           className={clsx(classes.appbar, !onTop && classes.appbarUnelevated)}
         >
           <Toolbar component="nav">
-            <Typography variant="h6" className={classes.title}>
+            <Typography variant="title" className={classes.title}>
               <Link
                 to="/"
                 component={GatsbyLink}
@@ -56,7 +56,6 @@ const Header = ({ siteTitle = "Shan", toggleTheme, themeType }) => {
                 className={classes.link}
               >
                 <Logo
-                  className="logo"
                   size="70"
                   kLogoFg="white"
                   kLogoBg={theme.palette.primary.main}
@@ -64,6 +63,7 @@ const Header = ({ siteTitle = "Shan", toggleTheme, themeType }) => {
                 />
               </Link>
             </Typography>
+
             <Typography variant="h6">
               <Link
                 to="/"
@@ -71,7 +71,57 @@ const Header = ({ siteTitle = "Shan", toggleTheme, themeType }) => {
                 color="inherit"
                 className={classes.link}
               >
-                {siteTitle}
+                Home
+              </Link>
+            </Typography>
+            <Typography variant="h6">
+              <Link
+                to="/about"
+                component={GatsbyLink}
+                color="inherit"
+                className={classes.link}
+              >
+                About
+              </Link>
+            </Typography>
+            <Typography variant="h6">
+              <Link
+                to="/blog"
+                component={GatsbyLink}
+                color="inherit"
+                className={classes.link}
+              >
+                Blog
+              </Link>
+            </Typography>
+            <Typography variant="h6">
+              <Link
+                to="/projects"
+                component={GatsbyLink}
+                color="inherit"
+                className={classes.link}
+              >
+                Projects
+              </Link>
+            </Typography>
+            <Typography variant="h6">
+              <Link
+                to="/resume"
+                component={GatsbyLink}
+                color="inherit"
+                className={classes.link}
+              >
+                Resume
+              </Link>
+            </Typography>
+            <Typography variant="h6">
+              <Link
+                to="/search"
+                component={GatsbyLink}
+                color="inherit"
+                className={classes.link}
+              >
+                Search
               </Link>
             </Typography>
 

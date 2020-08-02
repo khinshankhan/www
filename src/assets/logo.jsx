@@ -1,5 +1,12 @@
 import React from "react";
 import Icon from "@material-ui/core/Icon";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    fontSize: "1rem",
+  },
+}));
 
 const K_Logo = ({
   kLogoFg = "white",
@@ -63,8 +70,10 @@ const K_Logo = ({
 );
 
 const Logo = (props) => {
+  const classes = useStyles();
+
   return (
-    <Icon>
+    <Icon className={classes.root}>
       <K_Logo {...props} />
     </Icon>
   );
