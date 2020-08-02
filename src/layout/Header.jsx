@@ -1,6 +1,5 @@
 import React from "react";
 import { Link as GatsbyLink } from "gatsby";
-import useScrollPosition from "src/hooks/useScrollPosition";
 import { HideOnScroll } from "src/components/Scroll";
 import AppBar from "@material-ui/core/AppBar";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
@@ -10,6 +9,7 @@ import Link from "@material-ui/core/Link";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
 
@@ -31,10 +31,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = ({ siteTitle = "Shan", onToggleTheme, theme }) => {
   const classes = useStyles();
-  const [onTop, setOnTop] = React.useState(true);
 
-  useScrollPosition(({ _prevPos, currPos }) => {
-    setOnTop(currPos.y === 0 ? true : false);
+  const onTop = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
   });
 
   return (
@@ -43,7 +43,7 @@ const Header = ({ siteTitle = "Shan", onToggleTheme, theme }) => {
       <HideOnScroll>
         <AppBar
           position="sticky"
-          className={clsx(classes.appbar, onTop && classes.appbarUnelevated)}
+          className={clsx(classes.appbar, !onTop && classes.appbarUnelevated)}
         >
           <Toolbar component="nav">
             <Typography variant="h6" className={classes.title}>
