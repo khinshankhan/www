@@ -48,7 +48,7 @@ const Header = ({ siteTitle = "Shan", toggleTheme, themeType }) => {
           className={clsx(classes.appbar, !onTop && classes.appbarUnelevated)}
         >
           <Toolbar component="nav">
-            <Typography variant="title" className={classes.title}>
+            <Typography variant="inherit" className={classes.title}>
               <Link
                 to="/"
                 component={GatsbyLink}

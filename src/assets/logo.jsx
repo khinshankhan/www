@@ -64,7 +64,7 @@ const K_Logo = ({
       width="440"
       fill="none"
       stroke={kLogoBorder}
-      stroke-width="20"
+      strokeWidth="20"
     />
   </svg>
 );

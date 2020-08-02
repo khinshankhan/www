@@ -8,7 +8,7 @@ const wrapRootElement = ({ element }) => {
   function getTheme() {
     const isServer = typeof window === "undefined";
 
-    let theme = "light";
+    let theme = "dark";
 
     if (!isServer) {
       try {
