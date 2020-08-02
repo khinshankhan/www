@@ -1,17 +1,28 @@
-<svg version="1.1"
-     xmlns="http://www.w3.org/2000/svg"
-     width="460"
-     height="460"
-     viewBox="0 0 460 460"
-     preserveAspectRatio="xMidYMid meet"
-     >
-  <rect class="k_logo-fg" height="460" width="460" fill="white" />
-  <g class="k_logo-bg"
-     transform="translate(0,460) scale(0.1,-0.1)"
-     fill="#000000"
-     stroke="none"
-     >
-    <path  d="M0 2300 l0 -2300 2300 0 2300 0 0 2300 0 2300 -2300 0 -2300 0 0 -2300z
+import React from "react";
+import Icon from "@material-ui/core/Icon";
+
+const K_Logo = ({
+  kLogoFg = "white",
+  kLogoBg = "black",
+  kLogoBorder = "black",
+  size = 70,
+}) => (
+  <svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox={`0 0 460 460`}
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <rect height="100%" width="100%" fill={kLogoFg} />
+    <g
+      transform={`translate(0,460) scale(0.1,-0.1)`}
+      fill={kLogoBg}
+      stroke="none"
+    >
+      <path
+        d={`M0 2300 l0 -2300 2300 0 2300 0 0 2300 0 2300 -2300 0 -2300 0 0 -2300z
               m1578 810 l22 -21 0 -650 c0 -637 0 -650 19 -639 11 5 40 41 66 80 25 38
               50 72 56 75 5 4 9 231 9 571 0 551 0 564 20 584 28 28 84 27 104 -2 14 -20
               16 -81 16 -470 0 -247 3 -448 8 -448 4 0 34 39 67 86 128 183 154 220 167
@@ -36,8 +47,27 @@
               -163 -226 -46 -67 -154 -217 -193 -268 -43 -55 -52 -62 -83 -62 -61 0 -74
               24 -74 141 0 89 -2 100 -15 89 -8 -7 -15 -17 -15 -22 0 -19 -144 -199 -171
               -213 -37 -20 -45 -19 -69 7 -20 22 -20 31 -20 822 0 730 1 801 17 818 22
-              24 74 23 101 -2z"
-           />
-  </g>
-  <rect class="k_logo-border" x="10" y="10" height="440" width="440" fill="none" stroke="black" stroke-width="20" />
-</svg>
+              24 74 23 101 -2z`}
+      />
+    </g>
+    <rect
+      x="10"
+      y="10"
+      height="440"
+      width="440"
+      fill="none"
+      stroke={kLogoBorder}
+      stroke-width="20"
+    />
+  </svg>
+);
+
+const Logo = (props) => {
+  return (
+    <Icon>
+      <K_Logo {...props} />
+    </Icon>
+  );
+};
+
+export default Logo;

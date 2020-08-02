@@ -2,9 +2,7 @@ import deepMerge from "deepmerge";
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
 const makeTheme = (variant) => {
-  const common = {
-    palette: {},
-  };
+  const common = {};
 
   const theme = createMuiTheme(deepMerge(common, variant));
   return responsiveFontSizes(theme);

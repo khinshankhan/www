@@ -1,5 +1,6 @@
 import React from "react";
 import { Link as GatsbyLink } from "gatsby";
+import Logo from "src/assets/logo";
 import { HideOnScroll } from "src/components/Scroll";
 import AppBar from "@material-ui/core/AppBar";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
@@ -10,7 +11,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles, useTheme } from "@material-ui/styles";
 import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ siteTitle = "Shan", onToggleTheme, theme }) => {
+const Header = ({ siteTitle = "Shan", toggleTheme, themeType }) => {
+  const theme = useTheme();
   const classes = useStyles();
 
   const onTop = useScrollTrigger({
@@ -53,17 +55,40 @@ const Header = ({ siteTitle = "Shan", onToggleTheme, theme }) => {
                 color="inherit"
                 className={classes.link}
               >
+                <Logo
+                  className="logo"
+                  size="70"
+                  kLogoFg="white"
+                  kLogoBg={theme.palette.primary.main}
+                  kLogoBorder={theme.palette.primary.main}
+                />
+              </Link>
+            </Typography>
+            <Typography variant="h6">
+              <Link
+                to="/"
+                component={GatsbyLink}
+                color="inherit"
+                className={classes.link}
+              >
                 {siteTitle}
               </Link>
             </Typography>
+
+            <Typography variant="h6">{" | "}</Typography>
+
             <Tooltip title="Toggle light/ dark theme" enterDelay={300}>
               <IconButton
                 color="inherit"
-                onClick={onToggleTheme}
+                onClick={toggleTheme}
                 data-ga-event-category="header"
                 data-ga-event-action="dark"
               >
-                {theme === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
+                {themeType === "light" ? (
+                  <Brightness4Icon />
+                ) : (
+                  <Brightness7Icon />
+                )}
               </IconButton>
             </Tooltip>
           </Toolbar>

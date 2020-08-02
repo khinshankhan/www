@@ -1,46 +1,20 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import Content from "./Content";
+import Layout from "./Layout";
 import themes from "src/theme";
 import useLocalStorage from "src/hooks/useLocalStorage";
-import { makeStyles, ThemeProvider } from "@material-ui/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { ScrollToTop } from "src/components/Scroll";
-import Fab from "@material-ui/core/Fab";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { ThemeProvider } from "@material-ui/styles";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
-  },
-}));
-
-const Layout = ({ children, container = false }) => {
-  const classes = useStyles();
+const Index = ({ children, container = false }) => {
   const [theme, setTheme] = useLocalStorage("theme", "dark");
 
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
+  const toggleTheme = () =>
+    setTheme((theme) => (theme === "light" ? "dark" : "light"));
 
   return (
     <ThemeProvider theme={themes[theme]}>
-      <CssBaseline />
-      <div className={classes.root}>
-        <Header onToggleTheme={toggleTheme} theme={theme} />
-        <Content content={children} theme={theme} />
-        <ScrollToTop>
-          <Fab color="secondary" size="small" aria-label="scroll back to top">
-            <KeyboardArrowUpIcon />
-          </Fab>
-        </ScrollToTop>
-        <Footer />
-      </div>
+      <Layout content={children} toggleTheme={toggleTheme} themeType={theme} />
     </ThemeProvider>
   );
 };
 
-export default Layout;
+export default Index;
