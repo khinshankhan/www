@@ -1,4 +1,4 @@
-#+title: anchorage
+#+title: anchorage [[https://app.netlify.com/sites/goofy-leakey-0c4e26/deploys][https://api.netlify.com/api/v1/badges/9ed8d3eb-306c-4ac1-9a6f-32f89df02413/deploy-status.png]]
 
 :anchor:
 
