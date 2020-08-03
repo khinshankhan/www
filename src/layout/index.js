@@ -1,4 +1,5 @@
 import React from "react";
+import Metadata from "./Metadata";
 import Layout from "./Layout";
 import themes from "src/theme";
 import useLocalStorage from "src/hooks/useLocalStorage";
@@ -11,9 +12,16 @@ const Index = ({ children, container = false }) => {
     setTheme((theme) => (theme === "light" ? "dark" : "light"));
 
   return (
-    <ThemeProvider theme={themes[theme]}>
-      <Layout content={children} toggleTheme={toggleTheme} themeType={theme} />
-    </ThemeProvider>
+    <>
+      <Metadata />
+      <ThemeProvider theme={themes[theme]}>
+        <Layout
+          content={children}
+          toggleTheme={toggleTheme}
+          themeType={theme}
+        />
+      </ThemeProvider>
+    </>
   );
 };
 
