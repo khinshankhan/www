@@ -1,32 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
 import axios from "axios";
+import queryString from "query-string";
 import Layout from "src/layout";
 
-const fetchData = async url =>
+const fetchData = async (url) =>
   axios(`https://cors-anywhere.herokuapp.com/${url}`);
 
-const getComic = async num => {
+const getComic = async (num) => {
   const comic = await fetchData(`https://xkcd.com/${num}/info.0.json`);
   return comic.data;
 };
 
-const getRandomComic = async () => {
-  const xkcdInfo = await fetchData("https://xkcd.com/info.0.json");
+const getXKCDInfo = async () => fetchData("https://xkcd.com/info.0.json");
+
+const getRandomComic = async (xkcdInfo) => {
   const num = Math.floor(Math.random() * xkcdInfo.data.num);
   return getComic(num);
 };
 
-const NotFound = () => {
+const NotFound = (props) => {
+  const { num } = queryString.parse(props.location.search);
   const [comicInfo, setComicInfo] = useState(null);
 
   useEffect(() => {
     const setInfo = async () => {
-      const comic = await getRandomComic();
+      const xkcdInfo = await getXKCDInfo();
+      let comic;
+      if (!isNaN(num) && num <= xkcdInfo.data.num) {
+        comic = await getComic(num);
+      }
+
+      if (!comic) {
+        comic = await getRandomComic(xkcdInfo);
+      }
       setComicInfo(comic);
     };
     setInfo();
-  }, [setComicInfo]);
+  }, [num, setComicInfo]);
 
   console.log(comicInfo);
   return (
