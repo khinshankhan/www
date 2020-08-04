@@ -84,46 +84,6 @@ const Header = ({ siteTitle = "Shan", toggleTheme, themeType }) => {
                 About
               </Link>
             </Typography>
-            <Typography variant="h6">
-              <Link
-                to="/blog"
-                component={GatsbyLink}
-                color="inherit"
-                className={classes.link}
-              >
-                Blog
-              </Link>
-            </Typography>
-            <Typography variant="h6">
-              <Link
-                to="/projects"
-                component={GatsbyLink}
-                color="inherit"
-                className={classes.link}
-              >
-                Projects
-              </Link>
-            </Typography>
-            <Typography variant="h6">
-              <Link
-                to="/resume"
-                component={GatsbyLink}
-                color="inherit"
-                className={classes.link}
-              >
-                Resume
-              </Link>
-            </Typography>
-            <Typography variant="h6">
-              <Link
-                to="/search"
-                component={GatsbyLink}
-                color="inherit"
-                className={classes.link}
-              >
-                Search
-              </Link>
-            </Typography>
 
             <Typography variant="h6">{" | "}</Typography>
 
