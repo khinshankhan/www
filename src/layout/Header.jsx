@@ -22,11 +22,16 @@ const useStyles = makeStyles((theme) => ({
   appbarUnelevated: {
     boxShadow: "none",
   },
-  title: {
+  left: {
     flexGrow: 1,
+  },
+  right: {},
+  toolbar: {
+    flexWrap: "wrap",
   },
   link: {
     textDecoration: "none",
+    margin: theme.spacing(1, 1.5),
   },
 }));
 
@@ -47,8 +52,13 @@ const Header = ({ siteTitle = "Shan", toggleTheme, themeType }) => {
           position="sticky"
           className={clsx(classes.appbar, !onTop && classes.appbarUnelevated)}
         >
-          <Toolbar component="nav">
-            <Typography variant="inherit" className={classes.title}>
+          <Toolbar className={classes.toolbar}>
+            <Typography
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.left}
+            >
               <Link
                 to="/"
                 component={GatsbyLink}
@@ -57,50 +67,47 @@ const Header = ({ siteTitle = "Shan", toggleTheme, themeType }) => {
               >
                 <Logo
                   size="70"
-                  kLogoFg="white"
+                  kLogoFg={theme.palette.primary.contrastText}
                   kLogoBg={theme.palette.primary.main}
                   kLogoBorder={theme.palette.primary.main}
                 />
               </Link>
             </Typography>
-
-            <Typography variant="h6">
-              <Link
-                to="/"
-                component={GatsbyLink}
-                color="inherit"
-                className={classes.link}
-              >
-                Home
-              </Link>
-            </Typography>
-            <Typography variant="h6">
-              <Link
-                to="/about"
-                component={GatsbyLink}
-                color="inherit"
-                className={classes.link}
-              >
-                About
-              </Link>
-            </Typography>
-
-            <Typography variant="h6">{" | "}</Typography>
-
-            <Tooltip title="Toggle light/ dark theme" enterDelay={300}>
-              <IconButton
-                color="inherit"
-                onClick={toggleTheme}
-                data-ga-event-category="header"
-                data-ga-event-action="dark"
-              >
-                {themeType === "light" ? (
-                  <Brightness4Icon />
-                ) : (
-                  <Brightness7Icon />
-                )}
-              </IconButton>
-            </Tooltip>
+            <nav>
+              <Typography variant="h6">
+                <Link
+                  to="/"
+                  component={GatsbyLink}
+                  color="inherit"
+                  className={classes.link}
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/about"
+                  component={GatsbyLink}
+                  color="inherit"
+                  className={classes.link}
+                >
+                  About
+                </Link>
+                {" | "}
+                <Tooltip title="Toggle light/ dark theme" enterDelay={300}>
+                  <IconButton
+                    color="inherit"
+                    onClick={toggleTheme}
+                    data-ga-event-category="header"
+                    data-ga-event-action="dark"
+                  >
+                    {themeType === "light" ? (
+                      <Brightness4Icon />
+                    ) : (
+                      <Brightness7Icon />
+                    )}
+                  </IconButton>
+                </Tooltip>
+              </Typography>
+            </nav>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
