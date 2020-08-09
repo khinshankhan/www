@@ -5,7 +5,7 @@ import themes from "src/theme";
 import useLocalStorage from "src/hooks/useLocalStorage";
 import { ThemeProvider } from "@material-ui/styles";
 
-const Index = ({ children, container = false }) => {
+const Index = ({ children, title }) => {
   const [theme, setTheme] = useLocalStorage("theme", "dark");
 
   const toggleTheme = () =>
@@ -17,6 +17,7 @@ const Index = ({ children, container = false }) => {
       <ThemeProvider theme={themes[theme]}>
         <Layout
           content={children}
+          title={title}
           toggleTheme={toggleTheme}
           themeType={theme}
         />

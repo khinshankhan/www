@@ -36,18 +36,19 @@ const Gutters = ({ xs, classes, children }) => {
     </Grid>
   );
 };
-const Layout = ({ content, toggleTheme, themeType }) => {
+
+const Layout = ({ title, content, toggleTheme, themeType }) => {
   const theme = useTheme();
   const classes = useStyles();
   const xs = useMediaQuery(theme.breakpoints.only("xs"));
 
-  console.log({ xs });
   return (
     <>
       <CssBaseline />
       <div className={classes.root}>
         <Header toggleTheme={toggleTheme} themeType={themeType} />
         <Gutters xs={xs} classes={classes}>
+          <h1>{title}</h1>
           {content}
         </Gutters>
         <ScrollToTop>
