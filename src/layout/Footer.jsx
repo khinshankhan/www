@@ -2,7 +2,7 @@ import React from "react";
 import { Link as GatsbyLink, useStaticQuery, graphql } from "gatsby";
 import Socials from "src/components/Socials";
 import { makeStyles } from "@material-ui/styles";
-import { Container, Typography, Link } from "@material-ui/core";
+import { Container, Grid, Typography, Link } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -36,9 +36,14 @@ const Footer = () => {
 
   return (
     <footer className={classes.footer}>
+      <Grid container>
+        <Grid item xs={false} sm={1} />
+        <Grid item xs={12} sm={10}>
+          <hr />
+        </Grid>
+        <Grid item xs={false} sm={1} />
+      </Grid>
       <Container maxWidth="md">
-        <hr />
-
         <Typography align="center">
           <Socials />
         </Typography>
