@@ -1,6 +1,10 @@
 import React from "react";
-import Layout from "src/layouts/home";
+import Layout from "src/layouts/Home";
 
-const Index: JSX.Element = () => <Layout>Hello there!</Layout>;
+const Index = () => (
+  <Layout>
+    <>Hello there!</>
+  </Layout>
+);
 
 export default Index;

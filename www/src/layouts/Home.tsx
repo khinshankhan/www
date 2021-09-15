@@ -1,5 +1,5 @@
 import React, { Fragment, ReactNode } from "react";
-import Header from "../shared/Header";
+import Header from "./Shared/Header";
 
 interface IHomeLayoutProps {
   children?: ReactNode;
