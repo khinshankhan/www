@@ -1,0 +1,19 @@
+{
+  "name": "anchorage",
+  "description": "Source code for anchorage",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "develop": "pnpm run develop --filter www",
+    "build": "pnpm run build --filter www",
+    "serve": "pnpm run serve --filter www",
+    "clean": "pnpm run clean --filter www",
+    "typecheck": "pnpm run typecheck -recursive",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.19",
+    "typescript": "^4.4.2"
+  }
+}
