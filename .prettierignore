@@ -1,0 +1,11 @@
+.github
+.cache
+*.html
+build
+coverage
+node_modules
+package.json
+package-lock.json
+pnpm-*
+public
+yarn.lock
