@@ -1,6 +1,6 @@
 import React from "react";
-import HomeLayout from "src/layouts/home";
+import Layout from "src/layouts/home";
 
-const Index: JSX.Element = () => <HomeLayout>Hello there!</HomeLayout>;
+const Index: JSX.Element = () => <Layout>Hello there!</Layout>;
 
 export default Index;
