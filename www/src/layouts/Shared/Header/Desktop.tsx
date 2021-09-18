@@ -1,9 +1,9 @@
 import React from "react";
-import ToggleMode from "src/components/ToggleMode";
 import { Flex, Button, Stack, IconButton } from "@chakra-ui/react";
+import ToggleColorMode from "src/components/ToggleColorMode";
+import ToggleDirection from "src/components/ToggleDirection";
 import Logo from "src/assets/logo";
 import { FaCookie as Cookie } from "react-icons/fa";
-import { MdFormatTextdirectionLToR as Direction } from "react-icons/md";
 
 const Desktop = (): JSX.Element => (
   <Flex align="center" justify="space-between" p="4">
@@ -12,12 +12,8 @@ const Desktop = (): JSX.Element => (
       <Button variant="ghost">About</Button>
       <Button variant="ghost">Portfolio</Button>
       <Button variant="ghost">Writing</Button>
-      <ToggleMode />
-      <IconButton
-        aria-label={`Change header position`}
-        variant="ghost"
-        icon={<Direction fontSize="1.25rem" />}
-      />
+      <ToggleColorMode />
+      <ToggleDirection />
       <IconButton
         aria-label={`View storage policy`}
         variant="ghost"
