@@ -2,19 +2,19 @@ import React from "react";
 import { useColorMode, useColorModeValue, IconButton } from "@chakra-ui/react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 
-interface IToggleModeSvgProps {
+interface IToggleColorModeSvgProps {
   colorMode: `dark` | `light`;
   toggleColorMode: () => void;
 }
 
-const ToggleModeSvg = ({
+const ToggleColorModeSvg = ({
   colorMode,
   toggleColorMode,
-}: IToggleModeSvgProps): JSX.Element => (
+}: IToggleColorModeSvgProps): JSX.Element => (
   <DarkModeSwitch checked={colorMode === `dark`} onChange={toggleColorMode} />
 );
 
-const ToggleMode = () => {
+const ToggleColorMode = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const text = useColorModeValue(`dark`, `light`);
 
@@ -23,7 +23,7 @@ const ToggleMode = () => {
       aria-label={`Switch to ${text} mode`}
       variant="ghost"
       icon={
-        <ToggleModeSvg
+        <ToggleColorModeSvg
           colorMode={colorMode}
           toggleColorMode={toggleColorMode}
         />
@@ -32,4 +32,4 @@ const ToggleMode = () => {
   );
 };
 
-export default ToggleMode;
+export default ToggleColorMode;
