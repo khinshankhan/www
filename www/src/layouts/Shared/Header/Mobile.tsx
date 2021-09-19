@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from "react";
-import { Flex, IconButton } from "@chakra-ui/react";
+import { chakra, Flex, IconButton } from "@chakra-ui/react";
 import Logo from "src/assets/logo";
 import { GiHamburgerMenu as Hamburger } from "react-icons/gi";
 import { AiOutlineClose as Close } from "react-icons/ai";
@@ -11,9 +11,7 @@ interface IMobileProps {
 const Mobile = ({ children }: IMobileProps): JSX.Element => {
   const [open, setOpen] = useState(false);
 
-  const toggleOpen = () => {
-    setOpen((prev) => !prev);
-  };
+  const toggleOpen = () => setOpen((prev) => !prev);
 
   return (
     <nav>
@@ -29,7 +27,7 @@ const Mobile = ({ children }: IMobileProps): JSX.Element => {
         />
       </Flex>
       <Flex display={open ? `flex` : `none`} align="center" justify="center">
-        {children}
+        <chakra.div sx={{ height: `87vh` }}>{children}</chakra.div>
       </Flex>
     </nav>
   );
