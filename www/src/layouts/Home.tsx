@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import { Flex, Grid } from "@chakra-ui/react";
+import React, { Fragment, ReactNode } from "react";
+import { Flex } from "@chakra-ui/react";
 import Header from "./Shared/Header";
 
 interface IHomeLayoutProps {
@@ -8,10 +8,8 @@ interface IHomeLayoutProps {
 
 const HomeLayout = ({ children }: IHomeLayoutProps): JSX.Element => (
   <>
-    <Grid gridTemplateRows="64px" margin={4} minHeight="90vh">
-      <Header />
-      <Flex justify="center">{children}</Flex>
-    </Grid>
+    <Header />
+    <Fragment>{children}</Fragment>
     <Flex as="footer" align="center" justify="center" color="gray.400">
       All Rights Reserved
     </Flex>
