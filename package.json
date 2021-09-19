@@ -9,7 +9,7 @@
     "build": "pnpm run build --filter www",
     "serve": "pnpm run serve --filter www",
     "clean": "pnpm run clean --filter www",
-    "typecheck": "pnpm run typecheck -recursive",
+    "typecheck": "pnpm m run typecheck --workspace-concurrency 1",
     "lint": "eslint . --ignore-path .gitignore --ignore-path .prettierignore --ext .ts,.tsx,.js",
     "lint:fix": "pnpm run lint -- --fix",
     "format": "prettier \"**/*.{md,mdx,json,yaml}\" --write",
