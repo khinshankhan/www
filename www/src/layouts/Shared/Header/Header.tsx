@@ -12,7 +12,7 @@ interface INavigationProps {
 }
 
 const Navigation = ({ mobile }: INavigationProps): JSX.Element => (
-  <Stack isInline={!mobile} spacing={mobile ? `20` : `3`}>
+  <Stack as="nav" isInline={!mobile} spacing={mobile ? `20` : `3`}>
     <Button variant="ghost">About</Button>
     <Button variant="ghost">Portfolio</Button>
     <Button variant="ghost">Writing</Button>
