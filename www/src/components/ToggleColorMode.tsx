@@ -5,16 +5,26 @@ import { DarkModeSwitch } from "react-toggle-dark-mode";
 interface IToggleColorModeSvgProps {
   colorMode: `dark` | `light`;
   toggleColorMode: () => void;
+  size: number;
 }
 
 const ToggleColorModeSvg = ({
   colorMode,
   toggleColorMode,
+  size,
 }: IToggleColorModeSvgProps): JSX.Element => (
-  <DarkModeSwitch checked={colorMode === `dark`} onChange={toggleColorMode} />
+  <DarkModeSwitch
+    checked={colorMode === `dark`}
+    onChange={toggleColorMode}
+    size={size}
+  />
 );
 
-const ToggleColorMode = () => {
+interface IToggleColorModeProps {
+  size?: number;
+}
+
+const ToggleColorMode = ({ size = 24 }: IToggleColorModeProps) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const text = useColorModeValue(`dark`, `light`);
 
@@ -26,6 +36,7 @@ const ToggleColorMode = () => {
         <ToggleColorModeSvg
           colorMode={colorMode}
           toggleColorMode={toggleColorMode}
+          size={size}
         />
       }
     />

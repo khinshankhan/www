@@ -13,16 +13,22 @@ interface INavigationProps {
 
 const Navigation = ({ mobile }: INavigationProps): JSX.Element => (
   <Stack as="nav" isInline={!mobile} spacing={mobile ? `20` : `3`}>
-    <Button variant="ghost">About</Button>
-    <Button variant="ghost">Portfolio</Button>
-    <Button variant="ghost">Writing</Button>
-    <Stack isInline spacing="2">
-      <ToggleColorMode />
-      <ToggleDirection />
+    <Button variant="ghost" fontSize={mobile ? `2xl` : `1.125rem`}>
+      ABOUT
+    </Button>
+    <Button variant="ghost" fontSize={mobile ? `2xl` : `1.125rem`}>
+      PORTFOLIO
+    </Button>
+    <Button variant="ghost" fontSize={mobile ? `2xl` : `1.125rem`}>
+      WRITING
+    </Button>
+    <Stack isInline spacing="2" align="center" justify="center">
+      <ToggleColorMode size={mobile ? 30 : 24} />
+      <ToggleDirection fontSize={mobile ? `1.563rem` : `1.563rem`} />
       <IconButton
         aria-label={`View storage policy`}
         variant="ghost"
-        icon={<Cookie fontSize="1.25rem" />}
+        icon={<Cookie fontSize={mobile ? `1.953rem` : `1.563rem`} />}
       />
     </Stack>
   </Stack>
