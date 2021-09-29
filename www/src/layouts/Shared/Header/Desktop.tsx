@@ -7,7 +7,15 @@ interface IDesktopProps {
 }
 
 const Desktop = ({ children }: IDesktopProps): JSX.Element => (
-  <Flex as="header" align="center" justify="space-between" p="4" m="4" mb="5">
+  <Flex
+    as="header"
+    align="center"
+    justify="space-between"
+    pt="4"
+    pb="4"
+    mt="4"
+    mb="5"
+  >
     <Logo />
     {children}
   </Flex>

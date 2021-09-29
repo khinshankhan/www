@@ -15,7 +15,7 @@ const Mobile = ({ children }: IMobileProps): JSX.Element => {
 
   return (
     <header>
-      <Flex align="center" justify="space-between" p="4" m="4" mb="5">
+      <Flex align="center" justify="space-between" pt="4" pb="4" mt="4" mb="5">
         <Logo />
         <IconButton
           aria-label={`${open ? `Close` : `Open`} navigation`}
