@@ -1,7 +1,7 @@
 const Text = {
   variants: {
     body: {
-      fontSize: [`md`, `md`, `md`, `lg`, `lg`, `xl`],
+      fontSize: [`mdlg`, `mdlg`, `mdlg`, `lgxl`, `lgxl`, `xl2xl`],
     },
   },
 };

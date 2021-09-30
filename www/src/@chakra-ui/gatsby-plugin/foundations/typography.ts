@@ -9,10 +9,10 @@ const fontWeights: ThemeOverride["fontWeights"] = {
 };
 
 const fonts: ThemeOverride["fonts"] = {
-  // copy chakra-ui
-  heading: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
-  // copy chakra-ui
-  body: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
+  // copy chakra-ui from -apple-system
+  heading: `'Crimson Pro', ui-serif, Cambria, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
+  // copy chakra-ui from -apple-system
+  body: `'Montserrat', ui-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
   // copy chakra-ui
   mono: `SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
 };
@@ -22,8 +22,11 @@ const fontSizes: ThemeOverride["fontSizes"] = {
   xs: `0.64rem`,
   sm: `0.8rem`,
   md: `1rem`, // 16px
+  mdlg: `1.125rem`,
   lg: `1.25rem`,
+  lgxl: `1.4065rem`,
   xl: `1.563rem`,
+  xl2xl: `1.758`,
   "2xl": `1.953rem`,
   "3xl": `2.441rem`,
   "4xl": `3.052rem`,
