@@ -2,11 +2,11 @@ import React, { ReactNode } from "react";
 import { Container, Flex } from "@chakra-ui/react";
 import Header from "./Shared/Header";
 
-interface IHomeLayoutProps {
+interface ISingleLayoutProps {
   children?: ReactNode;
 }
 
-const HomeLayout = ({ children }: IHomeLayoutProps): JSX.Element => (
+const SingleLayout = ({ children }: ISingleLayoutProps): JSX.Element => (
   <>
     <Container>
       <Header />
@@ -20,4 +20,4 @@ const HomeLayout = ({ children }: IHomeLayoutProps): JSX.Element => (
   </>
 );
 
-export default HomeLayout;
+export default SingleLayout;

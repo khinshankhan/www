@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "gatsby";
 import useMobile from "src/hooks/useMobile";
 import { Button, Stack, IconButton } from "@chakra-ui/react";
 import ToggleColorMode from "src/components/ToggleColorMode";
@@ -13,13 +14,23 @@ interface INavigationProps {
 
 const Navigation = ({ mobile }: INavigationProps): JSX.Element => (
   <Stack as="nav" isInline={!mobile} spacing={mobile ? `20` : `3`}>
-    <Button variant="ghost" fontSize={mobile ? `2xl` : `1.125rem`}>
+    <Button
+      variant="ghost"
+      fontSize={mobile ? `2xl` : `1.125rem`}
+      as={Link}
+      to={`/about`}
+    >
       ABOUT
     </Button>
     <Button variant="ghost" fontSize={mobile ? `2xl` : `1.125rem`}>
       PORTFOLIO
     </Button>
-    <Button variant="ghost" fontSize={mobile ? `2xl` : `1.125rem`}>
+    <Button
+      variant="ghost"
+      fontSize={mobile ? `2xl` : `1.125rem`}
+      as={Link}
+      to={`/writing`}
+    >
       WRITING
     </Button>
     <Stack isInline spacing="2" align="center" justify="center">
