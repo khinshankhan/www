@@ -1,4 +1,6 @@
-module.exports = [
+import { GatsbyConfig } from "gatsby";
+
+export const plugins: GatsbyConfig["plugins"] = [
   `gatsby-plugin-root-import`,
   `@chakra-ui/gatsby-plugin`,
   {
