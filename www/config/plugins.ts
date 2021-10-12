@@ -4,6 +4,14 @@ export const plugins: GatsbyConfig["plugins"] = [
   `gatsby-plugin-root-import`,
   `@chakra-ui/gatsby-plugin`,
   {
+    resolve: `gatsby-plugin-manifest`,
+    options: {
+      start_url: `/`,
+      icon: `src/assets/logo.svg`,
+      cache_busting_mode: `none`,
+    },
+  },
+  {
     resolve: `gatsby-omni-font-loader`,
     options: {
       enableListener: true,
