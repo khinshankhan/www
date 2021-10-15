@@ -5,6 +5,7 @@ import { Button, Stack, IconButton } from "@chakra-ui/react";
 import ToggleColorMode from "src/components/ToggleColorMode";
 import ToggleDirection from "src/components/ToggleDirection";
 import { FaCookie as Cookie } from "react-icons/fa";
+import { defaultFontBody } from "src/constants/fonts";
 import Mobile from "./Mobile";
 import Desktop from "./Desktop";
 
@@ -19,10 +20,15 @@ const Navigation = ({ mobile }: INavigationProps): JSX.Element => (
       fontSize={mobile ? `2xl` : `1.125rem`}
       as={Link}
       to={`/about`}
+      fontFamily={`'Inter', ui-serif, ${defaultFontBody}`}
     >
       ABOUT
     </Button>
-    <Button variant="ghost" fontSize={mobile ? `2xl` : `1.125rem`}>
+    <Button
+      variant="ghost"
+      fontSize={mobile ? `2xl` : `1.125rem`}
+      fontFamily={`'Inter', ui-serif, ${defaultFontBody}`}
+    >
       PORTFOLIO
     </Button>
     <Button
@@ -30,6 +36,7 @@ const Navigation = ({ mobile }: INavigationProps): JSX.Element => (
       fontSize={mobile ? `2xl` : `1.125rem`}
       as={Link}
       to={`/writing`}
+      fontFamily={`'Inter', ui-serif, ${defaultFontBody}`}
     >
       WRITING
     </Button>
