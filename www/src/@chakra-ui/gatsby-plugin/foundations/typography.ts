@@ -1,4 +1,9 @@
 import { ThemeOverride } from "@chakra-ui/react";
+import {
+  defaultFontHeading,
+  defaultFontBody,
+  defaultFontMono,
+} from "src/constants/fonts";
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
 const fontWeights: ThemeOverride["fontWeights"] = {
@@ -9,12 +14,9 @@ const fontWeights: ThemeOverride["fontWeights"] = {
 };
 
 const fonts: ThemeOverride["fonts"] = {
-  // copy chakra-ui from -apple-system
-  heading: `'Crimson Pro', ui-serif, Cambria, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
-  // copy chakra-ui from -apple-system
-  body: `'Montserrat', ui-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
-  // copy chakra-ui
-  mono: `SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
+  heading: `'Crimson Pro', ui-serif, Cambria, ${defaultFontHeading}`,
+  body: `'Crimson Text', ui-serif, ${defaultFontBody}`,
+  mono: defaultFontMono,
 };
 
 // 1.250 Major Third Type Scale https://type-scale.com/ base 16px
@@ -26,7 +28,7 @@ const fontSizes: ThemeOverride["fontSizes"] = {
   lg: `1.25rem`,
   lgxl: `1.4065rem`,
   xl: `1.563rem`,
-  xl2xl: `1.758`,
+  xl2xl: `1.758rem`,
   "2xl": `1.953rem`,
   "3xl": `2.441rem`,
   "4xl": `3.052rem`,
