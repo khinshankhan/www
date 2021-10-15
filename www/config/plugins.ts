@@ -34,4 +34,18 @@ export const plugins: GatsbyConfig["plugins"] = [
       ],
     },
   },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      name: `writing`,
+      path: `content/writing`,
+    },
+  },
+  {
+    resolve: `gatsby-plugin-mdx`,
+    options: {
+      lessBabel: true,
+      extensions: [`.mdx`, `.md`],
+    },
+  },
 ];
