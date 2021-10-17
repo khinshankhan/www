@@ -1,5 +1,5 @@
 import { CreateNodeArgs } from "gatsby";
-import path from "path";
+import { capitalize } from "../../src/utils/strings";
 
 const onCreateNode = ({
   node,
@@ -10,25 +10,13 @@ const onCreateNode = ({
 }: CreateNodeArgs) => {
   if (node.internal.type !== `Mdx`) return;
 
-  const { createNode, createNodeField, createParentChildLink } = actions;
+  const { createNode, createParentChildLink } = actions;
 
-  // TODO: differentiate between different mdx templates based on source
-  // const fileNode = getNode(node.parent);
-  // const source = fileNode.sourceInstanceName;
+  const { sourceInstanceName } = getNode(node.parent);
   const fieldData = node.frontmatter as object;
 
   const mdxWritingId = createNodeId(`${node.id} >>> Mdx`);
-
-  const file = path.basename(
-    node.fileAbsolutePath as string,
-    path.extname(node.fileAbsolutePath as string)
-  );
-  const fileSlug =
-    file === `index`
-      ? path.basename(path.dirname(node.fileAbsolutePath as string))
-      : file;
-
-  createNodeField({ node, name: `slug`, value: `${fileSlug}` });
+  const sourceName = capitalize(sourceInstanceName as string);
 
   createNode({
     ...fieldData,
@@ -36,10 +24,10 @@ const onCreateNode = ({
     parent: node.id,
     children: [],
     internal: {
-      type: `MdxWriting`,
+      type: `Mdx${sourceName}`,
       contentDigest: createContentDigest(fieldData),
       content: JSON.stringify(fieldData),
-      description: `Mdx Writing`,
+      description: `Mdx ${sourceName}`,
     },
   });
 
