@@ -13,12 +13,14 @@ type IHeadingTemplateProps = {
 /* eslint-disable indent */
 const HeadingTemplate =
   (tag: HeadingsOptions, index?: number) =>
-  ({ children }: IHeadingTemplateProps): JSX.Element =>
-    (
-      <Heading as={tag} size={headingsSizes[index ?? 0]}>
+  (props: IHeadingTemplateProps): JSX.Element => {
+    const { children } = props;
+    return (
+      <Heading as={tag} size={headingsSizes[index ?? 0]} {...props}>
         {children}
       </Heading>
     );
+  };
 
 const headings = headingsOptions.reduce(
   (stored, curr, index) => ({
