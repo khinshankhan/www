@@ -38,6 +38,7 @@ importers:
 
   www:
     specifiers:
+      '@anchorage/gatsby-plugin-mdx-source-name': workspace:^0.0.1
       '@chakra-ui/gatsby-plugin': ^2.0.1
       '@chakra-ui/react': ^1.6.7
       '@emotion/react': ^11.4.1
@@ -62,6 +63,7 @@ importers:
       react-toggle-dark-mode: ^1.0.4
       typescript: ^4.4.3
     dependencies:
+      '@anchorage/gatsby-plugin-mdx-source-name': link:../packages/gatsby-plugin-mdx-source-name
       '@chakra-ui/gatsby-plugin': 2.0.1_d7e8387872852221e34b4d04468038bc
       '@chakra-ui/react': 1.6.7_68cf65bf7c0922c5f087bccafe16f4e7
       '@emotion/react': 11.4.1_ff4c499fe654e4edeee30199f4db039d
