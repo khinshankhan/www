@@ -12,8 +12,11 @@ const createPages: GatsbyNode["createPages"] = async ({
   const result = await graphql(`
     {
       writings: allMdx(
+        filter: {
+          fields: { source: { eq: "writing" } }
+          frontmatter: { published: { eq: true } }
+        }
         sort: { fields: frontmatter___planted, order: ASC }
-        filter: { frontmatter: { published: { eq: true } } }
       ) {
         edges {
           node {
@@ -37,14 +40,15 @@ const createPages: GatsbyNode["createPages"] = async ({
     return;
   }
 
-  const documents = result.data.writings.edges;
-  documents.forEach(({ node }, index) => {
-    const prev = index === documents.length - 1 ? null : documents[index + 1];
-    const next = index === 0 ? null : documents[index - 1];
+  const { writings } = result.data;
+  writings.edges.forEach(({ node }, index) => {
+    const prev =
+      index === writings.edges.length - 1 ? null : writings.edges[index + 1];
+    const next = index === 0 ? null : writings.edges[index - 1];
 
     createPage({
       component: proseTemplate,
-      path: `/writing/${node.fields.slug}`,
+      path: `/${node.fields.slug}`,
       context: {
         slug: node.fields.slug,
         prev,
