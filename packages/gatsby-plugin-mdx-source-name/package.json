@@ -1,0 +1,11 @@
+{
+  "name": "@anchorage/gatsby-plugin-mdx-source-name",
+  "description": "Adds source name as a node attribute to mdx nodes",
+  "private": true,
+  "version": "0.0.1",
+  "license": "MIT",
+  "peerDependencies": {
+    "gatsby": "^3.0.0"
+  },
+  "dependencies": {}
+}
