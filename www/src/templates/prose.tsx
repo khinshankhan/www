@@ -4,7 +4,7 @@ import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { components } from "src/components/mdx";
 import Layout from "src/layouts/Single";
-import headings from "src/components/mdx/h";
+import headings from "src/components/mdx/headings";
 
 const Prose = ({ data, pageContext, location }) => {
   console.log({ data, pageContext, location });

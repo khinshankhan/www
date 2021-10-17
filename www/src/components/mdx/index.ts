@@ -1,9 +1,9 @@
 import p from "./p";
-import headings from "./h";
+import headings from "./headings";
 import ul from "./ul";
 import ol from "./ol";
 import li from "./li";
-import a from "./a";
+import a from "./Link";
 
 export const components = {
   p,
