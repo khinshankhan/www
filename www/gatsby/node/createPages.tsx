@@ -23,8 +23,14 @@ const createPages: GatsbyNode["createPages"] = async ({
             fields {
               slug
             }
-            frontmatter {
-              title
+          }
+        }
+      }
+      pages: allMdx(filter: { fields: { source: { eq: "page" } } }) {
+        edges {
+          node {
+            fields {
+              slug
             }
           }
         }
@@ -40,7 +46,18 @@ const createPages: GatsbyNode["createPages"] = async ({
     return;
   }
 
-  const { writings } = result.data;
+  const { pages, writings } = result.data;
+
+  pages.edges.forEach(({ node }) => {
+    createPage({
+      component: proseTemplate,
+      path: `/${node.fields.slug}`,
+      context: {
+        slug: node.fields.slug,
+      },
+    });
+  });
+
   writings.edges.forEach(({ node }, index) => {
     const prev =
       index === writings.edges.length - 1 ? null : writings.edges[index + 1];

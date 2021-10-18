@@ -16,7 +16,7 @@ export const onCreateNode = ({ node, actions, getNode }: CreateNodeArgs) => {
 
   let fileSlug = p.substring(p.indexOf(source));
   // TODO: refactor to allow for theme options of source paths to ignore
-  if (source === `pages`) {
+  if (source === `page`) {
     fileSlug = fileSlug.substring(source.length + 1);
   }
 

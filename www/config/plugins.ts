@@ -39,6 +39,13 @@ export const plugins: GatsbyConfig["plugins"] = [
   {
     resolve: `gatsby-source-filesystem`,
     options: {
+      name: `page`,
+      path: `content/page`,
+    },
+  },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
       name: `writing`,
       path: `content/writing`,
     },
