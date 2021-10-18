@@ -1,24 +1,44 @@
 import { CreateNodeArgs } from "gatsby";
+import { MdxNode } from "@anchorage/types/MdxNode";
 import path from "path";
 
-export const onCreateNode = ({ node, actions, getNode }: CreateNodeArgs) => {
-  const { createNodeField } = actions;
+export interface ICreateSlugProps {
+  sourceInstanceName: string;
+  fileAbsolutePath: string;
+}
 
-  if (node.internal.type !== `Mdx`) return;
-
-  const fileNode = getNode(node.parent);
-  const source = fileNode.sourceInstanceName as string;
-
-  const fileAbsPath = node.fileAbsolutePath as string;
-  const file = path.basename(fileAbsPath, path.extname(fileAbsPath));
-  const fileDir = path.dirname(fileAbsPath);
+export const createFileSlug = ({
+  sourceInstanceName,
+  fileAbsolutePath,
+}: ICreateSlugProps) => {
+  const file = path.basename(fileAbsolutePath, path.extname(fileAbsolutePath));
+  const fileDir = path.dirname(fileAbsolutePath);
   const p = file === `index` ? fileDir : `${fileDir}/${file}`;
 
-  let fileSlug = p.substring(p.indexOf(source));
+  let fileSlug = p.substring(p.indexOf(sourceInstanceName));
   // TODO: refactor to allow for theme options of source paths to ignore
-  if (source === `page`) {
-    fileSlug = fileSlug.substring(source.length + 1);
+  if (sourceInstanceName === `page`) {
+    fileSlug = fileSlug.substring(sourceInstanceName.length + 1);
   }
 
-  createNodeField({ node, name: `slug`, value: `${fileSlug}` });
+  return fileSlug;
+};
+
+export type ICreateFileSlugFieldProps = CreateNodeArgs | { fileSlug: string };
+export const createFileSlugField = ({
+  node,
+  actions,
+  fileSlug,
+}: ICreateFileSlugFieldProps) => {
+  const { createNodeField } = actions;
+  createNodeField({ node, name: `slug`, value: fileSlug });
+};
+
+export const onCreateNode = ({ node, actions, getNode }: CreateNodeArgs) => {
+  if (node.internal.type !== `Mdx`) return;
+
+  const { sourceInstanceName } = getNode(node.parent) as MdxNode;
+  const { fileAbsolutePath } = node as MdxNode;
+  const fileSlug = createFileSlug({ sourceInstanceName, fileAbsolutePath });
+  createFileSlugField({ node, actions, fileSlug } as ICreateFileSlugFieldProps);
 };

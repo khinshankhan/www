@@ -42,6 +42,12 @@ importers:
     dependencies:
       '@anchorage/types': link:../types
 
+  packages/gatsby-plugin-mdx-source-name:
+    specifiers:
+      '@anchorage/types': workspace:^0.0.1
+    dependencies:
+      '@anchorage/types': link:../types
+
   www:
     specifiers:
       '@anchorage/gatsby-plugin-mdx-slug-name': workspace:^0.0.1

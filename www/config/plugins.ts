@@ -34,8 +34,6 @@ export const plugins: GatsbyConfig["plugins"] = [
       ],
     },
   },
-  `@anchorage/gatsby-plugin-mdx-slug-name`,
-  `@anchorage/gatsby-plugin-mdx-source-name`,
   {
     resolve: `gatsby-source-filesystem`,
     options: {
