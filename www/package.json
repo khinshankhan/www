@@ -17,6 +17,7 @@
   "dependencies": {
     "@anchorage/gatsby-plugin-mdx-slug-name": "workspace:^0.0.1",
     "@anchorage/gatsby-plugin-mdx-source-name": "workspace:^0.0.1",
+    "@anchorage/types": "workspace:^0.0.1",
     "@chakra-ui/gatsby-plugin": "^2.0.1",
     "@chakra-ui/react": "^1.6.7",
     "@emotion/react": "^11.4.1",
