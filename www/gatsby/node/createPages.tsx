@@ -1,6 +1,21 @@
 import { GatsbyNode } from "gatsby";
+import { WritingNode } from "@anchorage/types/WritingNode";
+import { PageNode } from "@anchorage/types/PageNode";
 
 const proseTemplate = require.resolve(`../../src/templates/prose.tsx`);
+
+interface ResultEdges<NodeType> {
+  edges: {
+    next: NodeType;
+    node: NodeType;
+    previous: NodeType;
+  }[];
+}
+
+interface ResultData {
+  writings: ResultEdges<WritingNode>;
+  pages: ResultEdges<PageNode>;
+}
 
 const createPages: GatsbyNode["createPages"] = async ({
   graphql,
@@ -46,7 +61,7 @@ const createPages: GatsbyNode["createPages"] = async ({
     return;
   }
 
-  const { pages, writings } = result.data;
+  const { pages, writings } = result.data as ResultData;
 
   pages.edges.forEach(({ node }) => {
     createPage({
