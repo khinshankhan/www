@@ -7,5 +7,7 @@
   "peerDependencies": {
     "gatsby": "^3.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@anchorage/types": "workspace:^0.0.1"
+  }
 }

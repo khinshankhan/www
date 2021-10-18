@@ -1,4 +1,14 @@
 import { CreateNodeArgs } from "gatsby";
+import { MdxNode } from "@anchorage/types/MdxNode";
+import {
+  createFileSlug,
+  createFileSlugField,
+  ICreateFileSlugFieldProps,
+} from "@anchorage/gatsby-plugin-mdx-slug-name/gatsby-node";
+import {
+  createSourceField,
+  ICreateSourceFieldProps,
+} from "@anchorage/gatsby-plugin-mdx-source-name/gatsby-node";
 import { capitalize } from "../../src/utils/strings";
 
 const onCreateNode = ({
@@ -10,14 +20,25 @@ const onCreateNode = ({
 }: CreateNodeArgs) => {
   if (node.internal.type !== `Mdx`) return;
 
-  const { createNode, createParentChildLink } = actions;
+  const { sourceInstanceName } = getNode(node.parent) as MdxNode;
+  const { fileAbsolutePath } = node as MdxNode;
 
-  const { sourceInstanceName } = getNode(node.parent);
+  // create file slug field
+  const fileSlug = createFileSlug({ sourceInstanceName, fileAbsolutePath });
+  createFileSlugField({ node, actions, fileSlug } as ICreateFileSlugFieldProps);
+
+  // create source field
+  createSourceField({
+    node,
+    actions,
+    sourceInstanceName,
+  } as ICreateSourceFieldProps);
+
   const fieldData = node.frontmatter as object;
-
   const mdxWritingId = createNodeId(`${node.id} >>> Mdx`);
   const sourceName = capitalize(sourceInstanceName as string);
 
+  const { createNode, createParentChildLink } = actions;
   createNode({
     ...fieldData,
     id: mdxWritingId,
@@ -31,8 +52,7 @@ const onCreateNode = ({
     },
   });
 
-  const currentNode = getNode(mdxWritingId);
-  createParentChildLink({ parent: node, child: currentNode });
+  createParentChildLink({ parent: node, child: getNode(mdxWritingId) });
 };
 
 export default onCreateNode;
