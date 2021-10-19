@@ -1,6 +1,5 @@
 import { GatsbyNode } from "gatsby";
-import { WritingNode } from "@anchorage/types/WritingNode";
-import { PageNode } from "@anchorage/types/PageNode";
+import { PageNode, WritingNode } from "@anchorage/types";
 
 const proseTemplate = require.resolve(`../../src/templates/prose.tsx`);
 
