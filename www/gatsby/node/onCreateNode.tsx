@@ -4,11 +4,11 @@ import {
   createFileSlug,
   createFileSlugField,
   ICreateFileSlugFieldProps,
-} from "@anchorage/gatsby-plugin-mdx-slug-name/gatsby-node";
+} from "@anchorage/gatsby-plugin-mdx-slug-name";
 import {
   createSourceField,
   ICreateSourceFieldProps,
-} from "@anchorage/gatsby-plugin-mdx-source-name/gatsby-node";
+} from "@anchorage/gatsby-plugin-mdx-source-name";
 import { capitalize } from "../../src/utils/strings";
 
 const onCreateNode = ({
