@@ -1,1 +1,2 @@
-module.exports = require(`./gatsby-node.ts`);
+const { onCreateNode } = require(`./gatsby-node.ts`);
+module.exports = { onCreateNode };
