@@ -5,8 +5,8 @@ import { createBreakpoints } from "@chakra-ui/theme-tools";
 import { fontWeights, fonts, fontSizes } from "./foundations/typography";
 
 // Components overrides & custom
-import Container from "./components/container";
-import Text from "./components/text";
+import Container from "./components/Container";
+import Text from "./components/Text";
 
 // Custom breakpoints
 const breakpoints = createBreakpoints({
