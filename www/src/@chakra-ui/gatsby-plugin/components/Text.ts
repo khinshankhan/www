@@ -1,7 +1,9 @@
+import { fontSizes } from "src/constants/fonts";
+
 const Text = {
   variants: {
     body: {
-      fontSize: [`mdlg`, `mdlg`, `mdlg`, `lgxl`, `lgxl`, `xl2xl`],
+      fontSize: fontSizes,
     },
   },
 };
