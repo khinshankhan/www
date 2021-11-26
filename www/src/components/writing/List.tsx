@@ -2,8 +2,14 @@ import React from "react";
 import { Box, Text, LinkOverlay, LinkBox } from "@chakra-ui/react";
 import headings from "src/components/mdx/headings";
 import Link from "src/components/mdx/Link";
+import { IWritingNodeWrapper, IWritingNode } from "src/queries/WritingNodes";
 
-const WritingListItem = ({ node, ...props }) => (
+type IWritingListItemProps = {
+  node: IWritingNode;
+  [key: string]: any;
+};
+
+const WritingListItem = ({ node, ...props }: IWritingListItemProps) => (
   <LinkBox
     pb="5"
     _hover={{
@@ -31,7 +37,11 @@ const WritingListItem = ({ node, ...props }) => (
   </LinkBox>
 );
 
-const WritingList = ({ nodes }) => (
+type IWritingListProps = {
+  nodes: IWritingNodeWrapper[];
+};
+
+const WritingList = ({ nodes }: IWritingListProps) => (
   <>
     {nodes.map((node) => (
       <WritingListItem key={node.node.id} node={node.node} />
