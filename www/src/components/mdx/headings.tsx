@@ -8,6 +8,7 @@ type HeadingsOptions = typeof headingsOptions[number];
 type IHeadingTemplateProps = {
   /*   id: string; */
   children: React.ReactNode;
+  [key: string]: any;
 };
 
 /* eslint-disable indent */

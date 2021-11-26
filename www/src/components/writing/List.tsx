@@ -1,12 +1,25 @@
 import React from "react";
 import { Box, Text, LinkOverlay, LinkBox } from "@chakra-ui/react";
 import headings from "src/components/mdx/headings";
+import Link from "src/components/mdx/Link";
 
 const WritingListItem = ({ node, ...props }) => (
-  <LinkBox pb="5" {...props}>
+  <LinkBox
+    pb="5"
+    _hover={{
+      color: `gray.400`,
+    }}
+    {...props}
+  >
     <Box as="article" pl="5" pb="3" borderWidth="1px" rounded="md">
-      <headings.h3>
-        <LinkOverlay href={`writing/${node.slug}`}>
+      <headings.h3
+        color="#BB72EC"
+        _hover={{
+          color: `#F40057`,
+          textDecoration: `none`,
+        }}
+      >
+        <LinkOverlay as={Link} href={node.slug}>
           {node.frontmatter.title}
         </LinkOverlay>
       </headings.h3>
