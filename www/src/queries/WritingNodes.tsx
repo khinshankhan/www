@@ -4,7 +4,8 @@ export type IWritingNode = {
   frontmatter: {
     title: string;
     planted: string;
-    humanDatePlanted?: string;
+    humanDatePlanted: string;
+    categories: string[];
   };
   slug: string;
   excerpt: string;
@@ -35,6 +36,7 @@ export const ListWritingNodes = () =>
               title
               planted
               humanDatePlanted: planted(formatString: "MMM Do, YYYY")
+              categories
             }
             slug
             excerpt(truncate: true, pruneLength: 300)
