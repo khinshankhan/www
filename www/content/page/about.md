@@ -2,7 +2,7 @@
 title: About
 planted: 2019-05-01
 tended: 2021-10-15
-categories: page
+categories: ["page"]
 published: true
 ---
 
