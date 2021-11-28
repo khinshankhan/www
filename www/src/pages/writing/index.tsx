@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "src/layouts/Single";
 import { Heading } from "@chakra-ui/react";
 import WritingList from "src/components/writing/List";
@@ -7,6 +7,7 @@ import Search from "src/components/Search";
 
 const Writing = () => {
   const data = ListWritingNodes();
+  const [nodes, setNodes] = useState(data.allMdx.edges);
 
   return (
     <Layout>
@@ -14,8 +15,8 @@ const Writing = () => {
         <Heading as="h1" pb="5">
           Writings
         </Heading>
-        <Search pb="5" />
-        <WritingList nodes={data.allMdx.edges} />
+        <Search nodes={data.allMdx.edges} setNodes={setNodes} pb="5" />
+        <WritingList nodes={nodes} />
       </>
     </Layout>
   );
