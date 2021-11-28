@@ -1,15 +1,12 @@
-import React, { MouseEvent } from "react";
+import React from "react";
 import { useSearchInfo } from "src/contexts/SearchInfo";
 import { HStack } from "@chakra-ui/react";
 import Tag from "src/components/Tag";
 
-type IWritingTags = {
-  categories: string[];
-};
-
-const WritingTags = ({ categories }: IWritingTags) => {
-  const { updateSelectedTags } = useSearchInfo();
-  const tags = categories;
+const DisplayTags = () => {
+  const { selectedTags, updateSelectedTags } = useSearchInfo();
+  const tags = [...selectedTags];
+  tags.sort();
 
   const handler = (event: MouseEvent, tag: string) => {
     event.preventDefault();
@@ -25,4 +22,4 @@ const WritingTags = ({ categories }: IWritingTags) => {
   );
 };
 
-export default WritingTags;
+export default DisplayTags;
