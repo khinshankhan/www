@@ -1,22 +1,6 @@
 import React, { MouseEvent } from "react";
-import { HStack, Button } from "@chakra-ui/react";
-
-type IWritingTag = {
-  tag: string;
-};
-
-const WritingTag = ({ tag }: IWritingTag) => {
-  const handler = (event: MouseEvent) => {
-    event.preventDefault();
-    console.log({ tag });
-  };
-
-  return (
-    <Button onClick={handler} size="sm" m="2">
-      {tag}
-    </Button>
-  );
-};
+import { HStack } from "@chakra-ui/react";
+import Tag from "src/components/Tag";
 
 type IWritingTags = {
   categories: string[];
@@ -25,10 +9,15 @@ type IWritingTags = {
 const WritingTags = ({ categories }: IWritingTags) => {
   const tags = categories;
 
+  const handler = (event: MouseEvent, tag: string) => {
+    event.preventDefault();
+    console.log({ tag });
+  };
+
   return (
     <HStack wrap="wrap">
       {tags.map((tag) => (
-        <WritingTag key={tag} tag={tag} />
+        <Tag key={tag} tag={tag} handler={handler} />
       ))}
     </HStack>
   );
