@@ -21,8 +21,6 @@ const WritingListItem = ({ node, ...props }: IWritingListItemProps) => {
   const bgHover = useColorModeValue(`#DDDDDD`, `#1E2430`);
   const colorHover = useColorModeValue(`gray.500`, `gray.400`);
 
-  console.log({ c: node.frontmatter.categories });
-
   return (
     <LinkBox
       pb="5"
