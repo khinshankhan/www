@@ -4,12 +4,11 @@ import { HStack } from "@chakra-ui/react";
 import Tag from "src/components/Tag";
 
 type IWritingTags = {
-  categories: string[];
+  tags: string[];
 };
 
-const WritingTags = ({ categories }: IWritingTags) => {
+const WritingTags = ({ tags }: IWritingTags) => {
   const { updateSelectedTags } = useSearchInfo();
-  const tags = categories;
 
   const handler = (event: MouseEvent, tag: string) => {
     event.preventDefault();

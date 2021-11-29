@@ -1,26 +1,29 @@
 import { graphql, useStaticQuery } from "gatsby";
 
-export type IWritingNode = {
-  frontmatter: {
-    title: string;
-    planted: string;
-    humanDatePlanted: string;
-    categories: string[];
+export type IListWritingNodes = {
+  allMdx: {
+    edges: IWritingNodeWrapper[];
   };
-  slug: string;
-  excerpt: string;
-  timeToRead: number;
-  id: string;
 };
 
 export type IWritingNodeWrapper = {
   node: IWritingNode;
 };
 
-export type IListWritingNodes = {
-  allMdx: {
-    edges: IWritingNodeWrapper[];
+export type IWritingNode = {
+  fields: {
+    slug: string;
+    tags: string[];
   };
+  frontmatter: {
+    title: string;
+    planted: string;
+    humanDatePlanted: string;
+  };
+  slug: string;
+  excerpt: string;
+  timeToRead: number;
+  id: string;
 };
 
 export const ListWritingNodes = () =>
@@ -32,16 +35,18 @@ export const ListWritingNodes = () =>
       ) {
         edges {
           node {
+            fields {
+              slug
+              tags
+            }
             frontmatter {
               title
               planted
               humanDatePlanted: planted(formatString: "MMM Do, YYYY")
-              categories
             }
-            slug
             excerpt(truncate: true, pruneLength: 300)
-            timeToRead
             id
+            timeToRead
           }
         }
       }
