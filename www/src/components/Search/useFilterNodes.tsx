@@ -16,7 +16,7 @@ const useFilterNodes = ({ nodes, setNodes }: IUseFilterNodes) => {
     if (selectedTags.size !== 0) {
       const tags = [...selectedTags];
       newNodes = nodes.filter((node) =>
-        tags.every((tag) => node.node.frontmatter.categories.includes(tag))
+        tags.every((tag) => node.node.fields.tags.includes(tag))
       );
     }
 

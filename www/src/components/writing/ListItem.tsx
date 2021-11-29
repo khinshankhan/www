@@ -47,7 +47,7 @@ const WritingListItem = ({ node, ...props }: IWritingListItemProps) => {
             textDecoration: `none`,
           }}
         >
-          <LinkOverlay as={Link} href={node.slug}>
+          <LinkOverlay as={Link} href={node.fields.slug}>
             {node.frontmatter.title}
           </LinkOverlay>
         </headings.h3>
@@ -57,7 +57,7 @@ const WritingListItem = ({ node, ...props }: IWritingListItemProps) => {
             read
           </Text>
         </Box>
-        <Tag categories={node.frontmatter.categories} />
+        <Tag tags={node.fields.tags} />
         <Text>{node.excerpt}</Text>
       </Box>
     </LinkBox>

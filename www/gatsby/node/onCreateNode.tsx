@@ -9,7 +9,12 @@ import {
   createSourceField,
   ICreateSourceFieldProps,
 } from "@anchorage/gatsby-plugin-mdx-source-name";
-import { capitalize } from "../../src/utils/strings";
+import { capitalize, spaceConsciousSplit } from "../../src/utils/strings";
+
+interface IFrontmatter {
+  categories?: string;
+  [key: string]: any;
+}
 
 const onCreateNode = ({
   node,
@@ -20,8 +25,10 @@ const onCreateNode = ({
 }: CreateNodeArgs) => {
   if (node.internal.type !== `Mdx`) return;
 
+  const { createNodeField } = actions;
   const { sourceInstanceName } = getNode(node.parent) as MdxNode;
   const { fileAbsolutePath } = node as MdxNode;
+  const fieldData = node.frontmatter as IFrontmatter;
 
   // create file slug field
   const fileSlug = createFileSlug({ sourceInstanceName, fileAbsolutePath });
@@ -34,7 +41,12 @@ const onCreateNode = ({
     sourceInstanceName,
   } as ICreateSourceFieldProps);
 
-  const fieldData = node.frontmatter as object;
+  // create tags field
+  const categories = fieldData?.categories || ``;
+  const tags = spaceConsciousSplit(categories);
+  tags.sort();
+  createNodeField({ node, name: `tags`, value: tags });
+
   const mdxWritingId = createNodeId(`${node.id} >>> Mdx`);
   const sourceName = capitalize(sourceInstanceName as string);
 
