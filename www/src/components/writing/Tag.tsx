@@ -8,7 +8,7 @@ type IWritingTags = {
 };
 
 const WritingTags = ({ tags }: IWritingTags) => {
-  const { updateSelectedTags } = useSearchInfo();
+  const { selectedTags, updateSelectedTags } = useSearchInfo();
 
   const handler = (event: MouseEvent, tag: string) => {
     event.preventDefault();
@@ -17,9 +17,13 @@ const WritingTags = ({ tags }: IWritingTags) => {
 
   return (
     <HStack wrap="wrap">
-      {tags.map((tag) => (
-        <Tag key={tag} tag={tag} handler={handler} />
-      ))}
+      {tags.map((tag) =>
+        selectedTags.has(tag) ? (
+          <Tag key={tag} tag={tag} handler={handler} bg={`#F40057`} />
+        ) : (
+          <Tag key={tag} tag={tag} handler={handler} />
+        )
+      )}
     </HStack>
   );
 };
