@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import Layout from "src/layouts/Single";
-import { Heading } from "@chakra-ui/react";
+import { SearchInfoProvider } from "src/contexts/SearchInfo";
+import headings from "src/components/mdx/headings";
 import WritingList from "src/components/writing/List";
 import { ListCleanedWritingNodes } from "src/queries/WritingNodes";
 import Search from "src/components/Search";
 
-const Writing = () => {
+const Body = () => {
   const [data] = useState(ListCleanedWritingNodes());
   const [nodes, setNodes] = useState(data);
 
   return (
-    <Layout>
-      <>
-        <Heading as="h1" pb="5">
-          Writings
-        </Heading>
-        <Search nodes={data} setNodes={setNodes} pb="5" />
-        <WritingList nodes={nodes} />
-      </>
-    </Layout>
+    <SearchInfoProvider>
+      <Search nodes={data} setNodes={setNodes} pb="5" />
+      <WritingList nodes={nodes} />
+    </SearchInfoProvider>
   );
 };
+
+const Writing = () => (
+  <Layout>
+    <headings.h1 pb="5">Writings</headings.h1>
+    <Body />
+  </Layout>
+);
 
 export default Writing;
