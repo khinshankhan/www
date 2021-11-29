@@ -52,3 +52,15 @@ export const ListWritingNodes = () =>
       }
     }
   `) as IListWritingNodes;
+
+export interface ICleanedWritingNode extends IWritingNode {
+  custom: {
+    tagsLookup: Set<string>;
+  };
+}
+
+export const ListCleanedWritingNodes = () =>
+  ListWritingNodes().allMdx.edges.map((node) => ({
+    ...node.node,
+    custom: { tagsLookup: new Set(node.node.fields.tags) },
+  })) as ICleanedWritingNode[];

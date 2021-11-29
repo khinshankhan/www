@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { Box } from "@chakra-ui/react";
-import { IWritingNodeWrapper } from "src/queries/WritingNodes";
+import { ICleanedWritingNode } from "src/queries/WritingNodes";
 import DisplayTags from "./DisplayTags";
 import useFilterNodes from "./useFilterNodes";
 
 interface ISearchProps {
-  nodes: IWritingNodeWrapper[];
-  setNodes: Dispatch<SetStateAction<IWritingNodeWrapper[]>>;
+  nodes: ICleanedWritingNode[];
+  setNodes: Dispatch<SetStateAction<ICleanedWritingNode[]>>;
   [key: string]: any;
 }
 
