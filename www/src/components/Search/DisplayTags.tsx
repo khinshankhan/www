@@ -16,7 +16,7 @@ const DisplayTags = () => {
   return (
     <HStack wrap="wrap">
       {tags.map((tag) => (
-        <Tag key={tag} tag={tag} handler={handler} />
+        <Tag key={tag} tag={tag} handler={handler} bg={`#F40057`} />
       ))}
     </HStack>
   );
