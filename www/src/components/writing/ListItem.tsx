@@ -8,11 +8,11 @@ import {
 } from "@chakra-ui/react";
 import headings from "src/components/mdx/headings";
 import Link from "src/components/mdx/Link";
-import { IWritingNode } from "src/queries/WritingNodes";
+import { ICleanedWritingNode } from "src/queries/WritingNodes";
 import Tag from "./Tag";
 
 type IWritingListItemProps = {
-  node: IWritingNode;
+  node: ICleanedWritingNode;
   [key: string]: any;
 };
 
@@ -47,7 +47,7 @@ const WritingListItem = ({ node, ...props }: IWritingListItemProps) => {
             textDecoration: `none`,
           }}
         >
-          <LinkOverlay as={Link} href={node.fields.slug}>
+          <LinkOverlay as={Link} href={`/${node.fields.slug}`}>
             {node.frontmatter.title}
           </LinkOverlay>
         </headings.h3>

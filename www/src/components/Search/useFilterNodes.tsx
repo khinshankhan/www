@@ -1,10 +1,10 @@
 import { useEffect, Dispatch, SetStateAction } from "react";
 import { useSearchInfo } from "src/contexts/SearchInfo";
-import { IWritingNodeWrapper } from "src/queries/WritingNodes";
+import { ICleanedWritingNode } from "src/queries/WritingNodes";
 
 interface IUseFilterNodes {
-  nodes: IWritingNodeWrapper[];
-  setNodes: Dispatch<SetStateAction<IWritingNodeWrapper[]>>;
+  nodes: ICleanedWritingNode[];
+  setNodes: Dispatch<SetStateAction<ICleanedWritingNode[]>>;
 }
 
 const useFilterNodes = ({ nodes, setNodes }: IUseFilterNodes) => {
@@ -16,7 +16,7 @@ const useFilterNodes = ({ nodes, setNodes }: IUseFilterNodes) => {
     if (selectedTags.size !== 0) {
       const tags = [...selectedTags];
       newNodes = nodes.filter((node) =>
-        tags.every((tag) => node.node.fields.tags.includes(tag))
+        tags.every((tag) => node.custom.tagsLookup.has(tag))
       );
     }
 
