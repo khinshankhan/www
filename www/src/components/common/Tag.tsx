@@ -1,14 +1,19 @@
 import React, { MouseEvent } from "react";
 import Button from "./Button";
 
+export type TagHandler = (
+  event: MouseEvent<HTMLButtonElement>,
+  tag: string
+) => void;
+
 interface ITagProps {
   tag: string;
-  handler: (event: MouseEvent, tag: string) => void;
+  handler: TagHandler;
   [key: string]: any;
 }
 
 const Tag = ({ tag, handler, ...props }: ITagProps) => {
-  const onClick = (event: MouseEvent) => {
+  const onClick = (event: MouseEvent<HTMLButtonElement>) => {
     handler(event, tag);
   };
 

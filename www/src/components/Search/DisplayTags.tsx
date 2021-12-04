@@ -2,14 +2,14 @@ import React from "react";
 import { useSearchInfo } from "src/contexts/SearchInfo";
 import { HStack } from "@chakra-ui/react";
 import headings from "src/components/mdx/headings";
-import Tag from "src/components/common/Tag";
+import Tag, { TagHandler } from "src/components/common/Tag";
 
 const DisplayTags = () => {
   const { selectedTags, updateSelectedTags } = useSearchInfo();
   const tags = [...selectedTags];
   tags.sort();
 
-  const handler = (event: MouseEvent, tag: string) => {
+  const handler: TagHandler = (event, tag) => {
     event.preventDefault();
     updateSelectedTags(tag);
   };

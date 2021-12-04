@@ -1,10 +1,13 @@
 import React from "react";
 import { OrderedList } from "@chakra-ui/react";
 
-const ol = (props) => {
-  const { children }: { children: React.ReactNode } = props;
+interface IOlProps {
+  children: React.ReactNode;
+  [key: string]: any;
+}
 
-  return <OrderedList {...props}>{children}</OrderedList>;
-};
+const ol = ({ children, ...props }: IOlProps) => (
+  <OrderedList {...props}>{children}</OrderedList>
+);
 
 export default ol;
