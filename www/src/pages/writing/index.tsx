@@ -12,7 +12,7 @@ const Body = () => {
 
   return (
     <SearchInfoProvider>
-      <Search nodes={data} setNodes={setNodes} pb="5" />
+      <Search nodes={data} setNodes={setNodes} mb="5" />
       <WritingList nodes={nodes} />
     </SearchInfoProvider>
   );
