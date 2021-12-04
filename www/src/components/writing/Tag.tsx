@@ -1,7 +1,7 @@
 import React, { MouseEvent } from "react";
 import { useSearchInfo } from "src/contexts/SearchInfo";
 import { HStack } from "@chakra-ui/react";
-import Tag from "src/components/Tag";
+import Tag from "src/components/common/Tag";
 
 type IWritingTags = {
   tags: string[];
@@ -17,13 +17,14 @@ const WritingTags = ({ tags }: IWritingTags) => {
 
   return (
     <HStack wrap="wrap">
-      {tags.map((tag) =>
-        selectedTags.has(tag) ? (
-          <Tag key={tag} tag={tag} handler={handler} bg={`#F40057`} />
-        ) : (
-          <Tag key={tag} tag={tag} handler={handler} />
-        )
-      )}
+      {tags.map((tag) => (
+        <Tag
+          key={tag}
+          tag={tag}
+          handler={handler}
+          selected={selectedTags.has(tag)}
+        />
+      ))}
     </HStack>
   );
 };

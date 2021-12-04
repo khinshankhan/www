@@ -1,5 +1,5 @@
 import React, { MouseEvent } from "react";
-import { Button } from "@chakra-ui/react";
+import Button from "./Button";
 
 interface ITagProps {
   tag: string;
@@ -13,7 +13,7 @@ const Tag = ({ tag, handler, ...props }: ITagProps) => {
   };
 
   return (
-    <Button onClick={onClick} size="sm" m="2" {...props}>
+    <Button onClick={onClick} size="sm" mt="2" mb="2" {...props}>
       {tag}
     </Button>
   );
