@@ -1,7 +1,8 @@
 import React from "react";
 import { useSearchInfo } from "src/contexts/SearchInfo";
 import { HStack } from "@chakra-ui/react";
-import Tag from "src/components/Tag";
+import headings from "src/components/mdx/headings";
+import Tag from "src/components/common/Tag";
 
 const DisplayTags = () => {
   const { selectedTags, updateSelectedTags } = useSearchInfo();
@@ -15,8 +16,9 @@ const DisplayTags = () => {
 
   return (
     <HStack wrap="wrap">
+      {tags.length > 0 && <headings.h4>Selected Tags:</headings.h4>}
       {tags.map((tag) => (
-        <Tag key={tag} tag={tag} handler={handler} bg={`#F40057`} />
+        <Tag key={tag} tag={tag} handler={handler} selected />
       ))}
     </HStack>
   );
