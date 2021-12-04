@@ -1,23 +1,17 @@
 import React, { ReactNode } from "react";
-import { Container, Flex } from "@chakra-ui/react";
-import Header from "./Shared/Header";
+import { Container, chakra } from "@chakra-ui/react";
+import { Header, Footer } from "./shared";
 
 interface ISingleLayoutProps {
   children?: ReactNode;
 }
 
 const SingleLayout = ({ children }: ISingleLayoutProps): JSX.Element => (
-  <>
-    <Container>
-      <Header />
-    </Container>
-    <Container>{children}</Container>
-    <Container>
-      <Flex as="footer" align="center" justify="center" color="gray.400">
-        All Rights Reserved
-      </Flex>
-    </Container>
-  </>
+  <chakra.div id="page">
+    <Header />
+    <Container minH="67.85vh">{children}</Container>
+    <Footer />
+  </chakra.div>
 );
 
 export default SingleLayout;

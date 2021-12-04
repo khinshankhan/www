@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 import useMobile from "src/hooks/useMobile";
-import { Button, Stack, IconButton } from "@chakra-ui/react";
+import { Button, Container, IconButton, Stack } from "@chakra-ui/react";
 import ToggleColorMode from "src/components/ToggleColorMode";
 import ToggleDirection from "src/components/ToggleDirection";
 import { FaCookie as Cookie } from "react-icons/fa";
@@ -57,9 +57,11 @@ const Header = (): JSX.Element => {
   const Nav = mobilep ? Mobile : Desktop;
 
   return (
-    <Nav>
-      <Navigation mobile={mobilep} />
-    </Nav>
+    <Container as="nav">
+      <Nav>
+        <Navigation mobile={mobilep} />
+      </Nav>
+    </Container>
   );
 };
 
