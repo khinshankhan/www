@@ -6,7 +6,14 @@ import { components } from "src/components/mdx";
 import Layout from "src/layouts/Single";
 import headings from "src/components/mdx/headings";
 
-const Prose = ({ data, pageContext, location }) => {
+// TODO: get to more elaborate types
+interface IPropsProps {
+  data: any;
+  pageContext: any;
+  location: any;
+}
+
+const Prose = ({ data, pageContext, location }: IPropsProps) => {
   console.log({ data, pageContext, location });
 
   const { mdx } = data;

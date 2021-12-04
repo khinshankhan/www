@@ -2,14 +2,15 @@ import React from "react";
 import { ListItem } from "@chakra-ui/react";
 import { fontSizes } from "src/constants/fonts";
 
-const li = (props) => {
-  const { children }: { children: React.ReactNode } = props;
+interface ILiProps {
+  children: React.ReactNode;
+  [key: string]: any;
+}
 
-  return (
-    <ListItem fontSize={fontSizes} {...props}>
-      {children}
-    </ListItem>
-  );
-};
+const li = ({ children, ...props }: ILiProps) => (
+  <ListItem fontSize={fontSizes} {...props}>
+    {children}
+  </ListItem>
+);
 
 export default li;

@@ -1,14 +1,15 @@
 import React from "react";
 import { Text } from "@chakra-ui/react";
 
-const p = (props) => {
-  const { children }: { children: React.ReactNode } = props;
+interface IPProps {
+  children: React.ReactNode;
+  [key: string]: any;
+}
 
-  return (
-    <Text variant="body" {...props}>
-      {children}
-    </Text>
-  );
-};
+const p = ({ children, ...props }: IPProps) => (
+  <Text variant="body" {...props}>
+    {children}
+  </Text>
+);
 
 export default p;

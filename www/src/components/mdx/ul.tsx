@@ -1,10 +1,13 @@
 import React from "react";
 import { UnorderedList } from "@chakra-ui/react";
 
-const ul = (props) => {
-  const { children }: { children: React.ReactNode } = props;
+interface IUlProps {
+  children: React.ReactNode;
+  [key: string]: any;
+}
 
-  return <UnorderedList {...props}>{children}</UnorderedList>;
-};
+const ul = ({ children, ...props }: IUlProps) => (
+  <UnorderedList {...props}>{children}</UnorderedList>
+);
 
 export default ul;
