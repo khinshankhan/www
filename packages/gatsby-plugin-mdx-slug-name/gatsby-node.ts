@@ -7,10 +7,7 @@ export interface ICreateSlugProps {
   fileAbsolutePath: string;
 }
 
-export const createFileSlug = ({
-  sourceInstanceName,
-  fileAbsolutePath,
-}: ICreateSlugProps) => {
+export const createFileSlug = ({ sourceInstanceName, fileAbsolutePath }: ICreateSlugProps) => {
   const file = path.basename(fileAbsolutePath, path.extname(fileAbsolutePath));
   const fileDir = path.dirname(fileAbsolutePath);
   const p = file === `index` ? fileDir : `${fileDir}/${file}`;
@@ -25,11 +22,7 @@ export const createFileSlug = ({
 };
 
 export type ICreateFileSlugFieldProps = CreateNodeArgs | { fileSlug: string };
-export const createFileSlugField = ({
-  node,
-  actions,
-  fileSlug,
-}: ICreateFileSlugFieldProps) => {
+export const createFileSlugField = ({ node, actions, fileSlug }: ICreateFileSlugFieldProps) => {
   const { createNodeField } = actions;
   createNodeField({ node, name: `slug`, value: fileSlug });
 };

@@ -23,11 +23,7 @@ const KLogo = ({
     preserveAspectRatio="xMidYMid meet"
   >
     <rect height="100%" width="100%" fill={kLogoFg} />
-    <g
-      transform={`translate(0,460) scale(0.1,-0.1)`}
-      fill={kLogoBg}
-      stroke="none"
-    >
+    <g transform={`translate(0,460) scale(0.1,-0.1)`} fill={kLogoBg} stroke="none">
       <path
         d={`M0 2300 l0 -2300 2300 0 2300 0 0 2300 0 2300 -2300 0 -2300 0 0 -2300z
               m1578 810 l22 -21 0 -650 c0 -637 0 -650 19 -639 11 5 40 41 66 80 25 38

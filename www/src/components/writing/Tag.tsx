@@ -18,12 +18,7 @@ const WritingTags = ({ tags }: IWritingTags) => {
   return (
     <HStack wrap="wrap">
       {tags.map((tag) => (
-        <Tag
-          key={tag}
-          tag={tag}
-          handler={handler}
-          selected={selectedTags.has(tag)}
-        />
+        <Tag key={tag} tag={tag} handler={handler} selected={selectedTags.has(tag)} />
       ))}
     </HStack>
   );

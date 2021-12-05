@@ -13,11 +13,7 @@ const ToggleColorModeSvg = ({
   toggleColorMode,
   size,
 }: IToggleColorModeSvgProps): JSX.Element => (
-  <DarkModeSwitch
-    checked={colorMode === `dark`}
-    onChange={toggleColorMode}
-    size={size}
-  />
+  <DarkModeSwitch checked={colorMode === `dark`} onChange={toggleColorMode} size={size} />
 );
 
 interface IToggleColorModeProps {
@@ -33,11 +29,7 @@ const ToggleColorMode = ({ size = 24 }: IToggleColorModeProps) => {
       aria-label={`Switch to ${text} mode`}
       variant="ghost"
       icon={
-        <ToggleColorModeSvg
-          colorMode={colorMode}
-          toggleColorMode={toggleColorMode}
-          size={size}
-        />
+        <ToggleColorModeSvg colorMode={colorMode} toggleColorMode={toggleColorMode} size={size} />
       }
     />
   );

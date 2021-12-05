@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "src/layouts/Single";
 import { SearchInfoProvider } from "src/contexts/SearchInfo";
-import headings from "src/components/mdx/headings";
+import Heading from "src/components/common/Heading";
 import WritingList from "src/components/writing/List";
 import { ListCleanedWritingNodes } from "src/queries/WritingNodes";
 import Search from "src/components/Search";
@@ -20,7 +20,7 @@ const Body = () => {
 
 const Writing = () => (
   <Layout>
-    <headings.h1 pb="5">Writings</headings.h1>
+    <Heading.h1 pb="5">Writings</Heading.h1>
     <Body />
   </Layout>
 );

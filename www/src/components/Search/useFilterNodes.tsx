@@ -15,9 +15,7 @@ const useFilterNodes = ({ nodes, setNodes }: IUseFilterNodes) => {
 
     if (selectedTags.size !== 0) {
       const tags = [...selectedTags];
-      newNodes = nodes.filter((node) =>
-        tags.every((tag) => node.custom.tagsLookup.has(tag))
-      );
+      newNodes = nodes.filter((node) => tags.every((tag) => node.custom.tagsLookup.has(tag)));
     }
 
     setNodes(newNodes);

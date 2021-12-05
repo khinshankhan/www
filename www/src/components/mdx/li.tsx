@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { ListItem } from "@chakra-ui/react";
 import { fontSizes } from "src/constants/fonts";
 
 interface ILiProps {
-  children: React.ReactNode;
+  children: ReactNode;
   [key: string]: any;
 }
 

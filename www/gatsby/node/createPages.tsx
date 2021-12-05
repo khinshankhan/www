@@ -16,20 +16,13 @@ interface ResultData {
   pages: ResultEdges<PageNode>;
 }
 
-const createPages: GatsbyNode["createPages"] = async ({
-  graphql,
-  actions,
-  reporter,
-}) => {
+const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
 
   const result = await graphql(`
     {
       writings: allMdx(
-        filter: {
-          fields: { source: { eq: "writing" } }
-          frontmatter: { published: { eq: true } }
-        }
+        filter: { fields: { source: { eq: "writing" } }, frontmatter: { published: { eq: true } } }
         sort: { fields: frontmatter___planted, order: ASC }
       ) {
         edges {
@@ -73,8 +66,7 @@ const createPages: GatsbyNode["createPages"] = async ({
   });
 
   writings.edges.forEach(({ node }, index) => {
-    const prev =
-      index === writings.edges.length - 1 ? null : writings.edges[index + 1];
+    const prev = index === writings.edges.length - 1 ? null : writings.edges[index + 1];
     const next = index === 0 ? null : writings.edges[index - 1];
 
     createPage({
