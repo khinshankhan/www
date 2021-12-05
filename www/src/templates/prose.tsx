@@ -4,7 +4,7 @@ import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { components } from "src/components/mdx";
 import Layout from "src/layouts/Single";
-import headings from "src/components/mdx/headings";
+import Heading from "src/components/common/Heading";
 
 // TODO: get to more elaborate types
 interface IPropsProps {
@@ -21,7 +21,7 @@ const Prose = ({ data, pageContext, location }: IPropsProps) => {
 
   return (
     <Layout>
-      <headings.h1>{frontmatter.title}</headings.h1>
+      <Heading.h1>{frontmatter.title}</Heading.h1>
       <br />
       <MDXProvider components={components}>
         <MDXRenderer>{body}</MDXRenderer>

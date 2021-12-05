@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { UnorderedList } from "@chakra-ui/react";
 
 interface IUlProps {
-  children: React.ReactNode;
+  children: ReactNode;
   [key: string]: any;
 }
 

@@ -22,22 +22,20 @@ const ExternalLink = chakra(chakra.a, {
   },
 });
 
-type ILinkProps = {
+export type ILinkProps = {
   href: string;
   title?: string;
   /*   type: string; */
   /*   children: [{ type: string; value: string }]; */
 };
 
-const a = (props: ILinkProps) => {
-  const { href } = props;
-
+const Link = ({ href, ...props }: ILinkProps) => {
   const foreignLink = href && href.startsWith(`http`);
-  const Link = foreignLink ? ExternalLink : InternalLink;
+  const LinkComponent = foreignLink ? ExternalLink : InternalLink;
+  const target = foreignLink ? `_blank` : undefined;
+  const rel = foreignLink ? `noreferrer noopener` : undefined;
 
-  return (
-    <Link to={href} target={foreignLink ? `_blank` : undefined} {...props} />
-  );
+  return <LinkComponent to={href} target={target} rel={rel} {...props} />;
 };
 
-export default a;
+export default Link;

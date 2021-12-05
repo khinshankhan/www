@@ -2,12 +2,9 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import { ICleanedWritingNode } from "src/queries/WritingNodes";
 import useMobile from "src/hooks/useMobile";
 import { Box, HStack, Flex, Spacer, Text } from "@chakra-ui/react";
-import headings from "src/components/mdx/headings";
+import Heading from "src/components/common/Heading";
 import { FcSearch as SearchIcon } from "react-icons/fc";
-import {
-  HiFilter as FilterIcon,
-  HiOutlineFilter as FilterOutlineIcon,
-} from "react-icons/hi";
+import { HiFilter as FilterIcon, HiOutlineFilter as FilterOutlineIcon } from "react-icons/hi";
 import Button from "src/components/common/Button";
 import useFilterNodes from "./useFilterNodes";
 import DisplayTags from "./DisplayTags";
@@ -34,16 +31,11 @@ const Search = ({ nodes, setNodes, ...props }: ISearchProps) => {
       <Box mb="2">
         <Flex>
           <HStack>
-            <headings.h3>Search</headings.h3>
+            <Heading.h3>Search</Heading.h3>
             <SearchIcon fontSize={mobilep ? `1.953rem` : `1.563rem`} />
           </HStack>
           <Spacer />
-          <Button
-            as={Button}
-            onClick={toggleShow}
-            variant="ghost"
-            selected={show}
-          >
+          <Button as={Button} onClick={toggleShow} variant="ghost" selected={show}>
             <ShowIcon fontSize={mobilep ? `1.953rem` : `1.563rem`} />
             <Text> {showText}</Text>
           </Button>

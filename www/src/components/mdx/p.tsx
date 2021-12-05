@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Text } from "@chakra-ui/react";
 
 interface IPProps {
-  children: React.ReactNode;
+  children: ReactNode;
   [key: string]: any;
 }
 

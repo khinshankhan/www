@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { ReactNode, useState, createContext, useContext } from "react";
 
 type ISearchInfoState = {
   selectedTags: Set<string>;
@@ -14,7 +14,7 @@ const SearchInfoContext = createContext(initalState);
 export const useSearchInfo = () => useContext(SearchInfoContext);
 
 type ISearchInfoProvider = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export const SearchInfoProvider = ({ children }: ISearchInfoProvider) => {

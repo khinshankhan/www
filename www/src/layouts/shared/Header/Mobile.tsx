@@ -20,9 +20,7 @@ const Mobile = ({ children }: IMobileProps): JSX.Element => {
         <IconButton
           aria-label={`${open ? `Close` : `Open`} navigation`}
           variant="ghost"
-          icon={
-            open ? <Close fontSize="2rem" /> : <Hamburger fontSize="2rem" />
-          }
+          icon={open ? <Close fontSize="2rem" /> : <Hamburger fontSize="2rem" />}
           onClick={toggleOpen}
         />
       </Flex>

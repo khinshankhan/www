@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { Box, FormControl, FormLabel, Input } from "@chakra-ui/react";
-import headings from "src/components/mdx/headings";
+import Heading from "src/components/common/Heading";
 
 interface ITermProps {
   term: string;
@@ -9,11 +9,11 @@ interface ITermProps {
 
 const Term = ({ term, setTerm }: ITermProps) => (
   <Box>
-    <headings.h6>{term}</headings.h6>
+    <Heading.h6>{term}</Heading.h6>
     <FormControl marginBottom="6">
-      <headings.h4 as={FormLabel} mb="2">
+      <Heading.h4 as={FormLabel} mb="2">
         Search term:
-      </headings.h4>
+      </Heading.h4>
       <Box position="relative">
         <Input
           data-prop={`search-term`}

@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  Box,
-  Text,
-  LinkOverlay,
-  LinkBox,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import headings from "src/components/mdx/headings";
-import Link from "src/components/mdx/Link";
+import { Box, Text, LinkOverlay, LinkBox, useColorModeValue } from "@chakra-ui/react";
+import Heading from "src/components/common/Heading";
+import Link from "src/components/common/Link";
 import { ICleanedWritingNode } from "src/queries/WritingNodes";
 import Tag from "./Tag";
 
@@ -40,7 +34,7 @@ const WritingListItem = ({ node, ...props }: IWritingListItemProps) => {
           background: bgHover,
         }}
       >
-        <headings.h3
+        <Heading.h3
           color="#BB72EC"
           _hover={{
             color: `#F40057`,
@@ -50,11 +44,10 @@ const WritingListItem = ({ node, ...props }: IWritingListItemProps) => {
           <LinkOverlay as={Link} href={`/${node.fields.slug}`}>
             {node.frontmatter.title}
           </LinkOverlay>
-        </headings.h3>
+        </Heading.h3>
         <Box as="time" dateTime={node.frontmatter.planted}>
           <Text as="em">
-            {node.frontmatter.humanDatePlanted} &middot; {node.timeToRead} min
-            read
+            {node.frontmatter.humanDatePlanted} &middot; {node.timeToRead} min read
           </Text>
         </Box>
         <Tag tags={node.fields.tags} />
