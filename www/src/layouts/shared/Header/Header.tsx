@@ -5,7 +5,7 @@ import { Button, Container, IconButton, Stack } from "@chakra-ui/react";
 import ToggleColorMode from "src/components/ToggleColorMode";
 import ToggleDirection from "src/components/ToggleDirection";
 import { FaCookie as Cookie } from "react-icons/fa";
-import { defaultFontBody } from "src/constants/fonts";
+import { defaultFontBody } from "constants/fonts";
 import Mobile from "./Mobile";
 import Desktop from "./Desktop";
 
