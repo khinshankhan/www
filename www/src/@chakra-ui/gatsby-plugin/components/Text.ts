@@ -1,4 +1,4 @@
-import { fontSizes } from "src/constants/fonts";
+import { fontSizes } from "constants/fonts";
 
 const Text = {
   variants: {
