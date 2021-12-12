@@ -1,14 +1,14 @@
 import React from "react";
-import { Box, Divider, Stack } from "@chakra-ui/react";
+import { Container, Divider, Stack } from "@chakra-ui/react";
 import Copyright from "./Copyright";
 import SocialMediaLinks from "./SocialMediaLinks";
 
 const Footer = () => (
-  <Box
+  <Container
     as="footer"
+    id="footer"
     role="contentinfo"
     mx="auto"
-    maxW="7xl"
     py="12"
     px={{ base: `4`, md: `8` }}
     marginTop="5"
@@ -22,7 +22,7 @@ const Footer = () => (
       <Copyright />
       <SocialMediaLinks />
     </Stack>
-  </Box>
+  </Container>
 );
 
 export default Footer;
