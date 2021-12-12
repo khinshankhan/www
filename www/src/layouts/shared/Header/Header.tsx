@@ -57,7 +57,7 @@ const Header = (): JSX.Element => {
   const Nav = mobilep ? Mobile : Desktop;
 
   return (
-    <Container as="nav">
+    <Container as="nav" id="navbar">
       <Nav>
         <Navigation mobile={mobilep} />
       </Nav>
