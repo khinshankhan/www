@@ -8,6 +8,8 @@ published: true
 
 My name is **Khinshan Khan**.
 
+<deleteMb/>
+
 To contact me, look at the footer of this website for your preferred method.
 
 ### About myself
