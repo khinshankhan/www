@@ -27,6 +27,8 @@ const Navigation = ({ mobile }: INavigationProps): JSX.Element => (
     <Button
       variant="ghost"
       fontSize={mobile ? `2xl` : `1.125rem`}
+      as={Link}
+      to={`/portfolio`}
       fontFamily={`'Inter', ui-serif, ${defaultFontBody}`}
     >
       PORTFOLIO
