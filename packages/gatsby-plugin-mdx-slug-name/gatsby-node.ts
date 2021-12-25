@@ -1,6 +1,6 @@
-import { CreateNodeArgs } from "gatsby";
-import { MdxNode } from "@anchorage/types";
 import path from "path";
+import { MdxNode } from "@anchorage/types";
+import { CreateNodeArgs } from "gatsby";
 
 export interface ICreateSlugProps {
   sourceInstanceName: string;

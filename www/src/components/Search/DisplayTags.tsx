@@ -1,8 +1,8 @@
 import React from "react";
-import { useSearchInfo } from "src/contexts/SearchInfo";
 import { HStack } from "@chakra-ui/react";
 import Heading from "src/components/common/Heading";
 import Tag, { TagHandler } from "src/components/common/Tag";
+import { useSearchInfo } from "src/contexts/SearchInfo";
 
 const DisplayTags = () => {
   const { selectedTags, updateSelectedTags } = useSearchInfo();

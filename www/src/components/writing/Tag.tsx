@@ -1,7 +1,7 @@
 import React, { MouseEvent } from "react";
-import { useSearchInfo } from "src/contexts/SearchInfo";
 import { HStack } from "@chakra-ui/react";
 import Tag from "src/components/common/Tag";
+import { useSearchInfo } from "src/contexts/SearchInfo";
 
 type IWritingTags = {
   tags: string[];

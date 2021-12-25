@@ -1,5 +1,3 @@
-import { CreateNodeArgs } from "gatsby";
-import { MdxNode } from "@anchorage/types";
 import {
   createFileSlug,
   createFileSlugField,
@@ -9,6 +7,8 @@ import {
   createSourceField,
   ICreateSourceFieldProps,
 } from "@anchorage/gatsby-plugin-mdx-source-name";
+import { MdxNode } from "@anchorage/types";
+import { CreateNodeArgs } from "gatsby";
 import { capitalize, spaceConsciousSplit } from "../../src/utils/strings";
 
 interface IFrontmatter {

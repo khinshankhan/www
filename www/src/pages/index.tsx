@@ -1,8 +1,8 @@
 import React from "react";
-import Layout from "src/layouts/Centered";
 import { Center } from "@chakra-ui/react";
-import Heading from "src/components/common/Heading";
 import FancySpan from "src/components/common/FancySpan";
+import Heading from "src/components/common/Heading";
+import Layout from "src/layouts/Centered";
 
 // TODO: make a debounce clicking easter egg
 const StarterEgg = () => <FancySpan>0</FancySpan>;

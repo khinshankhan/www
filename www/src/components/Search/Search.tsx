@@ -1,14 +1,14 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { ICleanedWritingNode } from "src/queries/WritingNodes";
-import useMobile from "src/hooks/useMobile";
 import { Box, HStack, Flex, Spacer, Text } from "@chakra-ui/react";
-import Heading from "src/components/common/Heading";
 import { FcSearch as SearchIcon } from "react-icons/fc";
 import { HiFilter as FilterIcon, HiOutlineFilter as FilterOutlineIcon } from "react-icons/hi";
 import Button from "src/components/common/Button";
-import useFilterNodes from "./useFilterNodes";
+import Heading from "src/components/common/Heading";
+import useMobile from "src/hooks/useMobile";
+import { ICleanedWritingNode } from "src/queries/WritingNodes";
 import DisplayTags from "./DisplayTags";
 import Term from "./Term";
+import useFilterNodes from "./useFilterNodes";
 
 interface ISearchProps {
   nodes: ICleanedWritingNode[];
