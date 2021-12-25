@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
-import useMobile from "src/hooks/useMobile";
 import { Container } from "@chakra-ui/react";
+import useMobile from "src/hooks/useMobile";
 import SingleLayout from "./Single";
 
 interface ICenteredLayoutProps {

@@ -1,5 +1,5 @@
-import { ThemeOverride } from "@chakra-ui/react";
 import { defaultFontHeading, defaultFontBody, defaultFontMono } from "constants/fonts";
+import { ThemeOverride } from "@chakra-ui/react";
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
 const fontWeights: ThemeOverride["fontWeights"] = {

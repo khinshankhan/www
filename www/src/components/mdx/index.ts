@@ -1,10 +1,10 @@
-import p from "./p";
-import headings from "./headings";
-import ul from "./ul";
-import ol from "./ol";
-import li from "./li";
 import a from "./a";
 import deleteMb from "./deleteMb";
+import headings from "./headings";
+import li from "./li";
+import ol from "./ol";
+import p from "./p";
+import ul from "./ul";
 
 export const components = {
   p,

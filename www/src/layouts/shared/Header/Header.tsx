@@ -1,13 +1,13 @@
+import { defaultFontBody } from "constants/fonts";
 import React from "react";
-import { Link } from "gatsby";
-import useMobile from "src/hooks/useMobile";
 import { Button, Container, IconButton, Stack } from "@chakra-ui/react";
+import { Link } from "gatsby";
+import { FaCookie as Cookie } from "react-icons/fa";
 import ToggleColorMode from "src/components/ToggleColorMode";
 import ToggleDirection from "src/components/ToggleDirection";
-import { FaCookie as Cookie } from "react-icons/fa";
-import { defaultFontBody } from "constants/fonts";
-import Mobile from "./Mobile";
+import useMobile from "src/hooks/useMobile";
 import Desktop from "./Desktop";
+import Mobile from "./Mobile";
 
 interface INavigationProps {
   mobile: boolean;

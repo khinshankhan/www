@@ -1,12 +1,8 @@
 import { extendTheme } from "@chakra-ui/react";
 import { createBreakpoints } from "@chakra-ui/theme-tools";
-
-// Foundational style overrides
-import { fontWeights, fonts, fontSizes } from "./foundations/typography";
-
-// Components overrides & custom
 import Container from "./components/Container";
 import Text from "./components/Text";
+import { fontWeights, fonts, fontSizes } from "./foundations/typography";
 
 // Custom breakpoints
 const breakpoints = createBreakpoints({

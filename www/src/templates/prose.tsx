@@ -1,11 +1,11 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { chakra } from "@chakra-ui/react";
 import { MDXProvider } from "@mdx-js/react";
+import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
+import Heading from "src/components/common/Heading";
 import { components } from "src/components/mdx";
 import Layout from "src/layouts/Single";
-import Heading from "src/components/common/Heading";
-import { chakra } from "@chakra-ui/react";
 import GlobalStyles from "src/styles/global";
 
 // TODO: get to more elaborate types

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Layout from "src/layouts/Single";
-import { SearchInfoProvider } from "src/contexts/SearchInfo";
 import Heading from "src/components/common/Heading";
-import WritingList from "src/components/writing/List";
-import { ListCleanedWritingNodes } from "src/queries/WritingNodes";
 import Search from "src/components/Search";
+import WritingList from "src/components/writing/List";
+import { SearchInfoProvider } from "src/contexts/SearchInfo";
+import Layout from "src/layouts/Single";
+import { ListCleanedWritingNodes } from "src/queries/WritingNodes";
 
 const Body = () => {
   const [data] = useState(ListCleanedWritingNodes());

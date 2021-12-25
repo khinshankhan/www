@@ -1,8 +1,8 @@
 import React, { ReactNode, useState } from "react";
 import { Flex, IconButton } from "@chakra-ui/react";
-import Logo from "src/assets/logo";
-import { GiHamburgerMenu as Hamburger } from "react-icons/gi";
 import { AiOutlineClose as Close } from "react-icons/ai";
+import { GiHamburgerMenu as Hamburger } from "react-icons/gi";
+import Logo from "src/assets/logo";
 
 interface IMobileProps {
   children?: ReactNode;
