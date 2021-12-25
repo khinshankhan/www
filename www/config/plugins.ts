@@ -1,15 +1,6 @@
-import path from "path";
-import { GatsbyConfig } from "gatsby";
+import { PluginRef } from "gatsby";
 
-const rootDir = path.join(__dirname, `..`);
-
-export const plugins: GatsbyConfig["plugins"] = [
-  {
-    resolve: `gatsby-plugin-root-import`,
-    options: {
-      resolveModules: [rootDir],
-    },
-  },
+export const plugins: PluginRef[] = [
   `@chakra-ui/gatsby-plugin`,
   {
     resolve: `gatsby-plugin-manifest`,
