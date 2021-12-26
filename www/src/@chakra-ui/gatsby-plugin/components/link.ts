@@ -1,3 +1,4 @@
+import { fontSizes } from "constants/fonts";
 import { mode, StyleFunctionProps } from "@chakra-ui/theme-tools";
 
 const Link = {
@@ -5,6 +6,9 @@ const Link = {
     const palette = mode(`light`, `dark`)(props);
 
     return {
+      fontFamily: `body`,
+      fontWeight: `normal`,
+      fontSize: fontSizes,
       color: `brand.${palette}.primary`,
       _hover: {
         color: `brand.${palette}.secondary`,

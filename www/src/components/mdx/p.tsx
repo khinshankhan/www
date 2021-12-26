@@ -6,10 +6,6 @@ interface IPProps {
   [key: string]: any;
 }
 
-const p = ({ children, ...props }: IPProps) => (
-  <Text variant="body" {...props}>
-    {children}
-  </Text>
-);
+const p = (props: IPProps) => <Text {...props} />;
 
 export default p;
