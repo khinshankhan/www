@@ -1,41 +1,26 @@
 import React from "react";
-import { chakra } from "@chakra-ui/react";
+import { chakra, Icon, Link as ChakraLink } from "@chakra-ui/react";
 import { Link as GatsbyLink } from "gatsby";
+import { BsBoxArrowUpRight as BoxArrowUpRight } from "react-icons/bs";
 
-const InternalLink = chakra(GatsbyLink, {
-  baseStyle: {
-    color: `#BB72EC`,
-    _hover: {
-      color: `#F40057`,
-      textDecoration: `underline`,
-    },
-  },
-});
-
-const ExternalLink = chakra(chakra.a, {
-  baseStyle: {
-    color: `aqua`,
-    _hover: {
-      color: `#F40057`,
-      textDecoration: `underline`,
-    },
-  },
-});
-
+// TODO: handle title
 export type ILinkProps = {
   href: string;
   title?: string;
-  /*   type: string; */
-  /*   children: [{ type: string; value: string }]; */
+  children?: string;
 };
 
-const Link = ({ href, ...props }: ILinkProps) => {
+const Link = ({ href, children, ...props }: ILinkProps) => {
   const foreignLink = href && href.startsWith(`http`);
-  const LinkComponent = foreignLink ? ExternalLink : InternalLink;
+  const LinkComponent = foreignLink ? chakra.a : GatsbyLink;
   const target = foreignLink ? `_blank` : undefined;
   const rel = foreignLink ? `noreferrer noopener` : undefined;
 
-  return <LinkComponent to={href} target={target} rel={rel} {...props} />;
+  return (
+    <ChakraLink as={LinkComponent} to={href} href={href} target={target} rel={rel} {...props}>
+      {children} {foreignLink && <Icon as={BoxArrowUpRight} />}
+    </ChakraLink>
+  );
 };
 
 export default Link;
