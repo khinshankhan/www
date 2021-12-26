@@ -1,8 +1,8 @@
 import { ThemeOverride } from "@chakra-ui/react";
-import { mode } from "@chakra-ui/theme-tools";
+import { mode, StyleFunctionProps } from "@chakra-ui/theme-tools";
 
 const styles: ThemeOverride["styles"] = {
-  global: (props) => {
+  global: (props: StyleFunctionProps) => {
     const palette = mode(`light`, `dark`)(props);
 
     return {
