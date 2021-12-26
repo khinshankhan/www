@@ -23,7 +23,6 @@ const Prose = ({ data, pageContext, location }: IPropsProps) => {
   return (
     <Layout>
       <Heading.h1>{frontmatter.title}</Heading.h1>
-      <br />
       <chakra.div>
         <MDXProvider components={components}>
           <MDXRenderer>{body}</MDXRenderer>

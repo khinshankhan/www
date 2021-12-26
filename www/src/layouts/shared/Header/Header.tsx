@@ -1,4 +1,3 @@
-import { defaultFontBody } from "constants/fonts";
 import React from "react";
 import { Button, Container, IconButton, Stack } from "@chakra-ui/react";
 import { Link } from "gatsby";
@@ -15,31 +14,13 @@ interface INavigationProps {
 
 const Navigation = ({ mobile }: INavigationProps): JSX.Element => (
   <Stack as="nav" isInline={!mobile} spacing={mobile ? `20` : `3`}>
-    <Button
-      variant="ghost"
-      fontSize={mobile ? `2xl` : `1.125rem`}
-      as={Link}
-      to={`/about`}
-      fontFamily={`'Inter', ui-serif, ${defaultFontBody}`}
-    >
+    <Button variant="ghost" fontSize={mobile ? `2xl` : `md`} as={Link} to={`/about`}>
       ABOUT
     </Button>
-    <Button
-      variant="ghost"
-      fontSize={mobile ? `2xl` : `1.125rem`}
-      as={Link}
-      to={`/portfolio`}
-      fontFamily={`'Inter', ui-serif, ${defaultFontBody}`}
-    >
+    <Button variant="ghost" fontSize={mobile ? `2xl` : `md`} as={Link} to={`/portfolio`}>
       PORTFOLIO
     </Button>
-    <Button
-      variant="ghost"
-      fontSize={mobile ? `2xl` : `1.125rem`}
-      as={Link}
-      to={`/writing`}
-      fontFamily={`'Inter', ui-serif, ${defaultFontBody}`}
-    >
+    <Button variant="ghost" fontSize={mobile ? `2xl` : `md`} as={Link} to={`/writing`}>
       WRITING
     </Button>
     <Stack isInline spacing="2" align="center" justify="center">

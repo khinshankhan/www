@@ -1,10 +1,11 @@
 import { fontSizes } from "constants/fonts";
 
 const Text = {
-  variants: {
-    body: {
-      fontSize: fontSizes,
-    },
+  baseStyle: {
+    fontFamily: `body`,
+    fontWeight: `normal`,
+    // TODO: look into variants for mono
+    fontSize: fontSizes,
   },
 };
 

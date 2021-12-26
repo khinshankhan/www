@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { Box, HStack, Flex, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, Icon, Spacer } from "@chakra-ui/react";
 import { FcSearch as SearchIcon } from "react-icons/fc";
 import { HiFilter as FilterIcon, HiOutlineFilter as FilterOutlineIcon } from "react-icons/hi";
 import Button from "src/components/common/Button";
@@ -35,9 +35,8 @@ const Search = ({ nodes, setNodes, ...props }: ISearchProps) => {
             <SearchIcon fontSize={mobilep ? `1.953rem` : `1.563rem`} />
           </HStack>
           <Spacer />
-          <Button as={Button} onClick={toggleShow} variant="ghost" selected={show}>
-            <ShowIcon fontSize={mobilep ? `1.953rem` : `1.563rem`} />
-            <Text> {showText}</Text>
+          <Button onClick={toggleShow} variant="solid" selected={show}>
+            <Icon as={ShowIcon} fontSize={mobilep ? `1.953rem` : `1.563rem`} /> {` `} {showText}
           </Button>
         </Flex>
       </Box>

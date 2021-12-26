@@ -1,4 +1,4 @@
-import { defaultFontHeading, defaultFontBody, defaultFontMono } from "constants/fonts";
+import { fonts as userFonts } from "constants/fonts";
 import { ThemeOverride } from "@chakra-ui/react";
 
 const letterSpacings: ThemeOverride["letterSpacings"] = {
@@ -41,28 +41,29 @@ const fontWeights: ThemeOverride["fontWeights"] = {
   black: 900,
 };
 
-const fonts: ThemeOverride["fonts"] = {
-  heading: defaultFontHeading,
-  body: defaultFontBody,
-  mono: defaultFontMono,
-};
+const fonts: ThemeOverride["fonts"] = userFonts;
 
-// 1.250 Major Third Type Scale,
 // https://type-scale.com/
+// 1.250 Major Third Type Scale, base 16 px
+// but offset by 2 to adjust for crimson pro being a small font
+// along with adding mdlg, lgxl, and xl2xl
 const fontSizes: ThemeOverride["fontSizes"] = {
-  xs: `0.75rem`,
-  sm: `0.875rem`,
-  md: `1rem`,
-  lg: `1.125rem`,
-  xl: `1.25rem`,
-  "2xl": `1.5rem`,
-  "3xl": `1.875rem`,
-  "4xl": `2.25rem`,
-  "5xl": `3rem`,
-  "6xl": `3.75rem`,
-  "7xl": `4.5rem`,
-  "8xl": `6rem`,
-  "9xl": `8rem`,
+  xs: `1rem`, // 16px
+  sm: `1.25rem`,
+  md: `1.563rem`,
+  mdlg: `1.758rem`,
+  lg: `1.953rem`,
+  lgxl: `2.197rem`,
+  xl: `2.441rem`,
+  xl2xl: `2.7465rem`,
+  "2xl": `3.052rem`,
+  "3xl": `3.815rem`,
+  "4xl": `4.768rem`,
+  "5xl": `5.96rem`,
+  "6xl": `7.451rem`,
+  "7xl": `9.313rem`,
+  "8xl": `11.642rem`,
+  "9xl": `14.552rem`,
 };
 
 const typography: ThemeOverride["typography"] = {
