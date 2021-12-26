@@ -1,9 +1,9 @@
 import React from "react";
-import { chakra, Icon, Link as ChakraLink } from "@chakra-ui/react";
+import { chakra, Icon, Link as ChakraLink, Text } from "@chakra-ui/react";
 import { Link as GatsbyLink } from "gatsby";
 import {
-  BsBoxArrowUpRight as BoxArrowUpRight,
-  BsBoxArrowInDown as BoxArrowInDown,
+  BsArrowDownSquare as ArrowDownSquare,
+  BsArrowUpRightSquare as ArrowUpRightSquare,
 } from "react-icons/bs";
 import { urlsAreOnSameOrigin } from "src/utils/url";
 
@@ -27,7 +27,9 @@ const Link = ({ href, children, ...props }: ILinkProps) => {
   const relative = sameOrigin && !file;
 
   const LinkComponent = relative ? GatsbyLink : chakra.a;
-  const VisualIcon = sameOrigin && file ? BoxArrowInDown : BoxArrowUpRight;
+  // TODO: potentially have an icon for every type of link
+  // and have aria text for the icon for accessibility purposes
+  const VisualIcon = sameOrigin && file ? ArrowDownSquare : ArrowUpRightSquare;
 
   return (
     <ChakraLink
@@ -38,7 +40,12 @@ const Link = ({ href, children, ...props }: ILinkProps) => {
       rel={!relative ? `noreferrer noopener` : undefined}
       {...props}
     >
-      {children} {!relative && <Icon as={VisualIcon} />}
+      {children}
+      {` `}
+      <Text as="sup" color="inherit">
+        {` `}
+        {!relative && <Icon as={VisualIcon} boxSize="0.9rem" />}
+      </Text>
     </ChakraLink>
   );
 };
