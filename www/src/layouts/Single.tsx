@@ -8,8 +8,8 @@ interface ISingleLayoutProps {
 
 const SingleLayout = ({ children }: ISingleLayoutProps): JSX.Element => (
   <chakra.div id="page">
-    <Header />
-    <Container minH="67.85vh" id="content">
+    <Container minH="74vh" id="content">
+      <Header />
       {children}
     </Container>
     <Footer />
