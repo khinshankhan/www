@@ -75,6 +75,8 @@ const Logo = (props: IKLogoProps): JSX.Element => {
   const kLogoProps: IKLogoProps = { kLogoFg, kLogoBg, kLogoBorder, ...props };
   return (
     <IconButton
+      as="a"
+      href="/"
       aria-label={`Navigate to homepage`}
       variant="ghost"
       icon={<KLogo {...kLogoProps} />}
