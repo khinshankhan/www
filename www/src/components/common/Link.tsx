@@ -41,11 +41,12 @@ const Link = ({ href, children, ...props }: ILinkProps) => {
       {...props}
     >
       {children}
-      {` `}
-      <Text as="sup" color="inherit">
-        {` `}
-        {!relative && <Icon as={VisualIcon} boxSize="0.9rem" />}
-      </Text>
+      {!relative && (
+        <Text as="sup" color="inherit">
+          {` `}
+          <Icon as={VisualIcon} boxSize="0.9rem" />
+        </Text>
+      )}
     </ChakraLink>
   );
 };

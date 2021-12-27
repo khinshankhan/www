@@ -10,11 +10,13 @@ const Index = () => (
       Whoops, page is WIP!
     </Center>
     <Center as={Heading.h2} mt="5" align="center">
-      Howsa 'bout going {` `}
-      <Link fontSize="xl" href="/">
-        home
-      </Link>
-      ?
+      <span>
+        Howsa 'bout going {` `}
+        <Link href="/">
+          <Heading.h2 display="inline">home</Heading.h2>
+        </Link>
+        ?
+      </span>
     </Center>
   </Layout>
 );
