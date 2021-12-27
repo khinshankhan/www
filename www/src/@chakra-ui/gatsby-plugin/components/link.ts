@@ -7,7 +7,7 @@ const Link = {
 
     return {
       fontFamily: `body`,
-      fontWeight: `normal`,
+      fontWeight: `inherit`,
       fontSize: fontSizes,
       color: `brand.${palette}.primary`,
       _hover: {
