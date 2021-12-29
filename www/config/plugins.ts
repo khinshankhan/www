@@ -1,7 +1,12 @@
 import { PluginRef } from "gatsby";
 
 export const plugins: PluginRef[] = [
-  `@chakra-ui/gatsby-plugin`,
+  {
+    resolve: `@chakra-ui/gatsby-plugin`,
+    options: {
+      resetCSS: true,
+    },
+  },
   {
     resolve: `gatsby-plugin-manifest`,
     options: {
@@ -25,10 +30,6 @@ export const plugins: PluginRef[] = [
         {
           name: `Crimson Pro`,
           file: `https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400..700&display=swap`,
-        },
-        {
-          name: `Crimson Text`,
-          file: `https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400..700&display=swap`,
         },
       ],
     },
