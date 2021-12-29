@@ -5,9 +5,9 @@ import foundations from "./foundations";
 import styles from "./styles";
 
 const config: ThemeOverride["config"] = {
-  cssVarPrefix: `chakra`,
+  cssVarPrefix: `ck`,
   initialColorMode: `dark`,
-  useSystemColorMode: true,
+  useSystemColorMode: false,
 };
 
 const breakpoints = createBreakpoints({
