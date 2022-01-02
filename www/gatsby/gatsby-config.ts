@@ -12,6 +12,7 @@ const plugins: GatsbyConfig["plugins"] = [
     },
   },
   ...userPlugins,
+  `gatsby-plugin-remove-trailing-slashes`,
 ];
 
 const config: GatsbyConfig = {

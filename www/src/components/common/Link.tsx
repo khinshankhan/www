@@ -11,7 +11,10 @@ import { urlsAreOnSameOrigin } from "src/utils/url";
 export type ILinkProps = {
   href: string;
   title?: string;
-  children?: string;
+  // HACK: this is just a lazy fix
+  // these types should be discerned properly later
+  children?: any;
+  [key: string]: any;
 };
 
 // TODO: decide how to handle href-less links

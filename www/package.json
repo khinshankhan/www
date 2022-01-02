@@ -18,8 +18,6 @@
     "@anchorage/gatsby-plugin-mdx-slug-name": "workspace:^0.0.1",
     "@anchorage/gatsby-plugin-mdx-source-name": "workspace:^0.0.1",
     "@anchorage/types": "workspace:^0.0.1",
-    "@babel/core": "^7.16.5",
-    "@babel/eslint-parser": "^7.16.5",
     "@chakra-ui/anatomy": "^1.2.1",
     "@chakra-ui/gatsby-plugin": "^2.0.2",
     "@chakra-ui/react": "^1.7.3",
@@ -29,12 +27,9 @@
     "@emotion/styled": "^11.6.0",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
-    "@types/mdx-js__react": "^1.5.5",
-    "babel-eslint": "^10.0.0",
     "framer-motion": "^5.5.5",
     "gatsby": "^4.4.0",
     "gatsby-omni-font-loader": "^1.3.3",
-    "gatsby-plugin-catch-links": "^4.4.0",
     "gatsby-plugin-manifest": "^4.4.0",
     "gatsby-plugin-mdx": "^3.4.0",
     "gatsby-plugin-remove-trailing-slashes": "^4.4.0",
@@ -47,7 +42,19 @@
     "react-toggle-dark-mode": "^1.0.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@babel/eslint-parser": "^7.16.5",
+    "@babel/preset-env": "^7.16.7",
+    "@react-three/fiber": "^7.0.24",
+    "@types/mdx-js__react": "^1.5.5",
     "@types/react": "^17.0.38",
-    "typescript": "^4.5.4"
+    "babel-eslint": "^10.0.0",
+    "konva": "^8.3.1",
+    "react-konva": "^17.0.2-5",
+    "react-native": "^0.66.4",
+    "react-zdog": "^1.0.11",
+    "three": "^0.135.0",
+    "typescript": "^4.5.4",
+    "zdog": "^1.1.2"
   }
 }

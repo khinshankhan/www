@@ -1,7 +1,7 @@
 import { MdxNode } from "@anchorage/types";
 import { CreateNodeArgs } from "gatsby";
 
-export type ICreateSourceFieldProps = CreateNodeArgs | { sourceInstanceName: string };
+export type ICreateSourceFieldProps = CreateNodeArgs & { sourceInstanceName: string };
 export const createSourceField = ({
   node,
   actions,
@@ -14,7 +14,7 @@ export const createSourceField = ({
 export const onCreateNode = ({ node, getNode, actions }: CreateNodeArgs) => {
   if (node.internal.type !== `Mdx`) return;
 
-  const { sourceInstanceName } = getNode(node.parent) as MdxNode;
+  const { sourceInstanceName } = getNode(node.parent ?? ``) as MdxNode;
   createSourceField({
     node,
     actions,

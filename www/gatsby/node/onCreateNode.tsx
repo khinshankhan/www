@@ -8,7 +8,7 @@ import {
   ICreateSourceFieldProps,
 } from "@anchorage/gatsby-plugin-mdx-source-name";
 import { MdxNode } from "@anchorage/types";
-import { CreateNodeArgs } from "gatsby";
+import { CreateNodeArgs, Node } from "gatsby";
 import { capitalize, spaceConsciousSplit } from "../../src/utils/strings";
 
 interface IFrontmatter {
@@ -26,7 +26,7 @@ const onCreateNode = ({
   if (node.internal.type !== `Mdx`) return;
 
   const { createNodeField } = actions;
-  const { sourceInstanceName } = getNode(node.parent) as MdxNode;
+  const { sourceInstanceName } = getNode(node.parent ?? ``) as MdxNode;
   const { fileAbsolutePath } = node as MdxNode;
   const fieldData = node.frontmatter as IFrontmatter;
 
@@ -64,7 +64,7 @@ const onCreateNode = ({
     },
   });
 
-  createParentChildLink({ parent: node, child: getNode(mdxWritingId) });
+  createParentChildLink({ parent: node, child: getNode(mdxWritingId) as Node });
 };
 
 export default onCreateNode;

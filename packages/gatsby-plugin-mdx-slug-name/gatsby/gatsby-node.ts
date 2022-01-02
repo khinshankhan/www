@@ -21,7 +21,7 @@ export const createFileSlug = ({ sourceInstanceName, fileAbsolutePath }: ICreate
   return fileSlug;
 };
 
-export type ICreateFileSlugFieldProps = CreateNodeArgs | { fileSlug: string };
+export type ICreateFileSlugFieldProps = CreateNodeArgs & { fileSlug: string };
 export const createFileSlugField = ({ node, actions, fileSlug }: ICreateFileSlugFieldProps) => {
   const { createNodeField } = actions;
   createNodeField({ node, name: `slug`, value: fileSlug });
@@ -30,7 +30,7 @@ export const createFileSlugField = ({ node, actions, fileSlug }: ICreateFileSlug
 export const onCreateNode = ({ node, actions, getNode }: CreateNodeArgs) => {
   if (node.internal.type !== `Mdx`) return;
 
-  const { sourceInstanceName } = getNode(node.parent) as MdxNode;
+  const { sourceInstanceName } = getNode(node.parent ?? ``) as MdxNode;
   const { fileAbsolutePath } = node as MdxNode;
   const fileSlug = createFileSlug({ sourceInstanceName, fileAbsolutePath });
   createFileSlugField({ node, actions, fileSlug } as ICreateFileSlugFieldProps);
