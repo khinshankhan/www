@@ -1,10 +1,15 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, ThemeOverride } from "@chakra-ui/react";
 import { createBreakpoints } from "@chakra-ui/theme-tools";
-import Container from "./components/Container";
-import Text from "./components/Text";
-import { fontWeights, fonts, fontSizes } from "./foundations/typography";
+import components from "./components";
+import foundations from "./foundations";
+import styles from "./styles";
 
-// Custom breakpoints
+const config: ThemeOverride["config"] = {
+  cssVarPrefix: `ck`,
+  initialColorMode: `dark`,
+  useSystemColorMode: false,
+};
+
 const breakpoints = createBreakpoints({
   sm: `640px`,
   md: `768px`,
@@ -15,17 +20,10 @@ const breakpoints = createBreakpoints({
 
 const theme = extendTheme({
   breakpoints,
-  fontWeights,
-  fonts,
-  fontSizes,
-  components: {
-    Container,
-    Text,
-  },
-  config: {
-    initialColorMode: `dark`,
-    useSystemColorMode: true,
-  },
+  ...foundations,
+  components,
+  styles,
+  config,
 });
 
 export default theme;

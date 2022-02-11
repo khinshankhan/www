@@ -6,7 +6,6 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import Heading from "src/components/common/Heading";
 import { components } from "src/components/mdx";
 import Layout from "src/layouts/Single";
-import GlobalStyles from "src/styles/global";
 
 // TODO: get to more elaborate types
 interface IPropsProps {
@@ -24,8 +23,7 @@ const Prose = ({ data, pageContext, location }: IPropsProps) => {
   return (
     <Layout>
       <Heading.h1>{frontmatter.title}</Heading.h1>
-      <br />
-      <chakra.div __css={GlobalStyles}>
+      <chakra.div>
         <MDXProvider components={components}>
           <MDXRenderer>{body}</MDXRenderer>
         </MDXProvider>

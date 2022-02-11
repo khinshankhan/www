@@ -10,11 +10,11 @@ interface ICenteredLayoutProps {
 const CenteredLayout = ({ children }: ICenteredLayoutProps) => {
   const mobilep = useMobile();
 
-  const fromTop = mobilep ? `20%` : `30%`;
+  const fromTop = mobilep ? `20%` : `10%`;
 
   return (
     <SingleLayout>
-      <Container position="absolute" top={fromTop}>
+      <Container position="relative" mt={fromTop}>
         {children}
       </Container>
     </SingleLayout>

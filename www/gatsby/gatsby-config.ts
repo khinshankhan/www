@@ -1,7 +1,18 @@
+import path from "path";
 import { GatsbyConfig } from "gatsby";
-import { plugins as userPlugins, siteMetadata } from "../config";
+import { siteMetadata, plugins as userPlugins } from "../config";
 
-const plugins: GatsbyConfig["plugins"] = [...userPlugins];
+const baseDir = path.join(__dirname, `..`);
+
+const plugins: GatsbyConfig["plugins"] = [
+  {
+    resolve: `gatsby-plugin-root-import`,
+    options: {
+      resolveModules: [baseDir],
+    },
+  },
+  ...userPlugins,
+];
 
 const config: GatsbyConfig = {
   siteMetadata,

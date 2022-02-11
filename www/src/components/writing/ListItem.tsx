@@ -34,17 +34,9 @@ const WritingListItem = ({ node, ...props }: IWritingListItemProps) => {
           background: bgHover,
         }}
       >
-        <Heading.h3
-          color="#BB72EC"
-          _hover={{
-            color: `#F40057`,
-            textDecoration: `none`,
-          }}
-        >
-          <LinkOverlay as={Link} href={`/${node.fields.slug}`}>
-            {node.frontmatter.title}
-          </LinkOverlay>
-        </Heading.h3>
+        <LinkOverlay as={Link} href={`/${node.fields.slug}`}>
+          <Heading.h2>{node.frontmatter.title}</Heading.h2>
+        </LinkOverlay>
         <Box as="time" dateTime={node.frontmatter.planted}>
           <Text as="em">
             {node.frontmatter.humanDatePlanted} &middot; {node.timeToRead} min read

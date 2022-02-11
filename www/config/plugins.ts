@@ -1,16 +1,12 @@
-import path from "path";
-import { GatsbyConfig } from "gatsby";
+import { PluginRef } from "gatsby";
 
-const rootDir = path.join(__dirname, `..`);
-
-export const plugins: GatsbyConfig["plugins"] = [
+export const plugins: PluginRef[] = [
   {
-    resolve: `gatsby-plugin-root-import`,
+    resolve: `@chakra-ui/gatsby-plugin`,
     options: {
-      resolveModules: [rootDir],
+      resetCSS: true,
     },
   },
-  `@chakra-ui/gatsby-plugin`,
   {
     resolve: `gatsby-plugin-manifest`,
     options: {
@@ -34,10 +30,6 @@ export const plugins: GatsbyConfig["plugins"] = [
         {
           name: `Crimson Pro`,
           file: `https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400..700&display=swap`,
-        },
-        {
-          name: `Crimson Text`,
-          file: `https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400..700&display=swap`,
         },
       ],
     },
