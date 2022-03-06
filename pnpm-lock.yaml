@@ -53,6 +53,7 @@ importers:
       '@types/react': ^17.0.38
       framer-motion: ^6.2.8
       gatsby: ^4.4.0
+      gatsby-plugin-root-import: ^2.0.8
       react: ^17.0.2
       react-dom: ^17.0.2
       ts-node: ^10.6.0
@@ -64,6 +65,7 @@ importers:
       '@emotion/styled': 11.8.1_8f686e653fceebfbea019eb5fc4b4fa9
       framer-motion: 6.2.8_react-dom@17.0.2+react@17.0.2
       gatsby: 4.7.1_3e110919350e0ee2e64d1a654bd03c09
+      gatsby-plugin-root-import: 2.0.8_gatsby@4.7.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
     devDependencies:
@@ -6454,6 +6456,14 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
+    dev: false
+
+  /gatsby-plugin-root-import/2.0.8_gatsby@4.7.1:
+    resolution: {integrity: sha512-y07q3c+Pz1qoW3XdkAvl5PbO2+gc0GhcfZYq+Msw2JBe5M+FSByhQVDhZYCVMRVZz0qx6L4qr3w3i04/k4S2HA==}
+    peerDependencies:
+      gatsby: ^2 || ^3 || ^4
+    dependencies:
+      gatsby: 4.7.1_3e110919350e0ee2e64d1a654bd03c09
     dev: false
 
   /gatsby-plugin-typescript/4.7.0_gatsby@4.7.1:
