@@ -17,6 +17,14 @@ const plugins: GatsbyConfig["plugins"] = [
       portalZIndex: 40,
     },
   },
+  {
+    resolve: `gatsby-plugin-manifest`,
+    options: {
+      start_url: `/`,
+      icon: `src/assets/logo.svg`,
+      cache_busting_mode: `none`,
+    },
+  },
 ];
 
 const config: GatsbyConfig = {
