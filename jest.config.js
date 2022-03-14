@@ -10,6 +10,7 @@ module.exports = {
       },
     },
   },
+  testEnvironment: `jsdom`,
   transform: {
     "^.+\\.[jt]sx?$": `<rootDir>/jest/jest-preprocess.js`,
   },
