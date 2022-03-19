@@ -10,6 +10,7 @@ import * as url from "src/utils/url";
 // TODO: handle title
 export type ILinkProps = {
   href: string;
+  isFile?: boolean;
   title?: string;
   // HACK: this is just a lazy fix
   // these types should be discerned properly later
@@ -18,9 +19,9 @@ export type ILinkProps = {
 };
 
 // TODO: decide how to handle href-less links
-const Link = ({ href, children, ...props }: ILinkProps) => {
+const Link = ({ href, isFile = false, children, ...props }: ILinkProps) => {
   const sameOrigin = url.onSameOrigin(href, window.location.href);
-  const file = url.isFile(href);
+  const file = isFile || url.isUrlFile(href);
   const relative = sameOrigin && !file;
 
   const LinkComponent = relative ? GatsbyLink : chakra.a;

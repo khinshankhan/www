@@ -1,9 +1,16 @@
-import { isFile, onSameOrigin } from "../url";
+import { isUrlFile, onSameOrigin } from "../url";
 
 describe(`url`, () => {
-  describe(`isFile`, () => {
+  describe(`isUrlFile`, () => {
     describe(`is file`, () =>
-      [`hello.pdf`].forEach((file) => it(file, () => expect(isFile(file)).toBe(true))));
+      [`https://hello.com/test.pdf`].forEach((file) =>
+        it(file, () => expect(isUrlFile(file)).toBe(true))
+      ));
+
+    describe(`not file`, () =>
+      [`https://hello.com/test.html`].forEach((file) =>
+        it(file, () => expect(isUrlFile(file)).toBe(false))
+      ));
 
     // TODO: account for false positive cases
   });
