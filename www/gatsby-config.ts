@@ -1,13 +1,10 @@
-import path from "path";
 import { GatsbyConfig } from "gatsby";
-
-const baseDir = path.join(__dirname, `..`);
 
 const plugins: GatsbyConfig["plugins"] = [
   {
     resolve: `gatsby-plugin-root-import`,
     options: {
-      resolveModules: [baseDir],
+      resolveModules: [`.`],
     },
   },
   {
