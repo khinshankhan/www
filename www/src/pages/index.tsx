@@ -4,7 +4,7 @@ import Layout from "src/layouts/Page";
 
 const Index = () => (
   <Layout>
-    <Heading as="h1">Hello world!</Heading>
+    <Heading variant="h1">Hello world!</Heading>
   </Layout>
 );
 
