@@ -4,12 +4,12 @@ import { DarkModeSwitch } from "react-toggle-dark-mode";
 
 interface IToggleColorModeSvgProps {
   colorMode: `dark` | `light`;
-  toggleColorMode: () => void;
+  toggleColorMode?: () => void;
   size: number;
 }
 const ToggleColorModeSvg = ({
   colorMode,
-  toggleColorMode,
+  toggleColorMode = () => {},
   size,
 }: IToggleColorModeSvgProps): JSX.Element => (
   <DarkModeSwitch checked={colorMode === `dark`} onChange={toggleColorMode} size={size} />
@@ -24,9 +24,8 @@ const ToggleColorMode = ({ size = 24 }: IToggleColorModeProps) => {
     <IconButton
       aria-label={`Switch to ${text} mode`}
       variant="ghost"
-      icon={
-        <ToggleColorModeSvg colorMode={colorMode} toggleColorMode={toggleColorMode} size={size} />
-      }
+      onClick={toggleColorMode}
+      icon={<ToggleColorModeSvg colorMode={colorMode} size={size} />}
     />
   );
 };
