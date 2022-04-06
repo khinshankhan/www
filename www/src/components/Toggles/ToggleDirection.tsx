@@ -6,8 +6,7 @@ import useLocalStorage from "src/hooks/useLocalStorage";
 interface IToggleDirectionProps {
   fontSize?: string;
 }
-
-const ToggleDirection = ({ fontSize = `1.563rem` }: IToggleDirectionProps) => {
+export const ToggleDirection = ({ fontSize = `1.563rem` }: IToggleDirectionProps) => {
   const [direction, setDirection] = useLocalStorage(`direction`, 0);
 
   // TODO

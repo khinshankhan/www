@@ -5,7 +5,7 @@ import { CgMoon as Moon, CgSun as Sun } from "react-icons/cg";
 interface IToggleColorModeProps {
   size?: number;
 }
-const ToggleColorMode = ({ size = 24 }: IToggleColorModeProps) => {
+export const ToggleColorMode = ({ size = 24 }: IToggleColorModeProps) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const isDark = colorMode === `dark`;
   const text = isDark ? `dark` : `light`;
