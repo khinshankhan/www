@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { IconButton, useColorModeValue } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
@@ -7,6 +7,7 @@ export interface IKLogoProps {
   kLogoBg?: string;
   kLogoBorder?: string;
   size?: number;
+  innerLogoTransform?: string;
 }
 
 // TODO: redo logo such that base is the overlapping Ks instead of the box
@@ -15,6 +16,7 @@ const KLogo = ({
   kLogoBg = `black`,
   kLogoBorder = `black`,
   size = 70,
+  innerLogoTransform = `translate(0,150) scale(0.1,-0.1)`,
 }: IKLogoProps) => (
   <svg
     version="1.1"
@@ -25,7 +27,7 @@ const KLogo = ({
     preserveAspectRatio="xMidYMid meet"
   >
     <rect height="100%" width="100%" fill={kLogoBg} />
-    <g transform={`translate(0,150) scale(0.1,-0.1)`} fill={kLogoFg} stroke="none">
+    <g transform={innerLogoTransform} fill={kLogoFg} stroke="none">
       <path
         d={`m1578 0 l22 -21 0 -650 c0 -637 0 -650 19 -639 11 5 40 41 66 80 25 38
              50 72 56 75 5 4 9 231 9 571 0 551 0 564 20 584 28 28 84 27 104 -2 14 -20
@@ -69,11 +71,19 @@ const KLogo = ({
 const Logo = (props: IKLogoProps): JSX.Element => {
   const bg = useColorModeValue(`white`, `var(--chakra-colors-gray-800)`);
   const bgContrast = useColorModeValue(`black`, `white`);
+  const [focused, setFocused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  const focusing = focused || hovered;
+
   const kLogoFg = bgContrast;
   const kLogoBg = bg;
   const kLogoBorder = bgContrast;
+  const innerLogoTransform = focusing
+    ? `translate(-90,100) scale(0.15,-0.15)`
+    : `translate(0,150) scale(0.1,-0.1)`;
 
-  const kLogoProps: IKLogoProps = { kLogoFg, kLogoBg, kLogoBorder, ...props };
+  const kLogoProps: IKLogoProps = { kLogoFg, kLogoBg, kLogoBorder, innerLogoTransform, ...props };
   return (
     <IconButton
       as={Link}
@@ -81,6 +91,10 @@ const Logo = (props: IKLogoProps): JSX.Element => {
       aria-label={`Navigate to homepage`}
       variant="ghost"
       icon={<KLogo {...kLogoProps} />}
+      onMouseEnter={() => setFocused(true)}
+      onMouseLeave={() => setFocused(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
     />
   );
 };
