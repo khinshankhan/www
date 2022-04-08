@@ -5,7 +5,6 @@ import { Link } from "gatsby";
 export interface IKLogoProps {
   kLogoFg?: string;
   kLogoBg?: string;
-  kLogoBorder?: string;
   size?: string;
   innerLogoTransform?: string;
 }
@@ -14,7 +13,6 @@ export interface IKLogoProps {
 const KLogo = ({
   kLogoFg = `white`,
   kLogoBg = `black`,
-  kLogoBorder = `black`,
   size = `70`,
   innerLogoTransform = `translate(0,150) scale(0.1,-0.1)`,
 }: IKLogoProps) => (
@@ -56,20 +54,10 @@ const KLogo = ({
              24 74 23 101 -2z`}
       />
     </g>
-    <rect
-      x="10"
-      y="10"
-      height="440"
-      width="440"
-      fill="none"
-      stroke={kLogoBorder}
-      strokeWidth="20"
-    />
   </svg>
 );
 
 const Logo = ({ size = `65`, ...props }: IKLogoProps): JSX.Element => {
-  const bg = useColorModeValue(`white`, `var(--chakra-colors-gray-800)`);
   const bgContrast = useColorModeValue(`black`, `white`);
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -77,8 +65,7 @@ const Logo = ({ size = `65`, ...props }: IKLogoProps): JSX.Element => {
   const focusing = focused || hovered;
 
   const kLogoFg = bgContrast;
-  const kLogoBg = bg;
-  const kLogoBorder = bgContrast;
+  const kLogoBg = `transparent`;
   const innerLogoTransform = focusing
     ? `translate(-90,100) scale(0.15,-0.15)`
     : `translate(0,150) scale(0.1,-0.1)`;
@@ -86,7 +73,6 @@ const Logo = ({ size = `65`, ...props }: IKLogoProps): JSX.Element => {
   const kLogoProps: IKLogoProps = {
     kLogoFg,
     kLogoBg,
-    kLogoBorder,
     innerLogoTransform,
     size,
     ...props,
@@ -103,6 +89,9 @@ const Logo = ({ size = `65`, ...props }: IKLogoProps): JSX.Element => {
       onMouseLeave={() => setFocused(false)}
       onFocus={() => setHovered(true)}
       onBlur={() => setHovered(false)}
+      border={2}
+      borderStyle={`solid`}
+      borderColor={bgContrast}
     />
   );
 };
