@@ -6,15 +6,14 @@ export interface IKLogoProps {
   kLogoFg?: string;
   kLogoBg?: string;
   size?: string;
-  innerLogoTransform?: string;
+  focusing?: boolean;
 }
 
-// TODO: redo logo such that base is the overlapping Ks instead of the box
 const KLogo = ({
   kLogoFg = `white`,
-  kLogoBg = `black`,
+  kLogoBg = `transparent`,
   size = `70`,
-  innerLogoTransform = `translate(0,150) scale(0.1,-0.1)`,
+  focusing = false,
 }: IKLogoProps) => (
   <svg
     version="1.1"
@@ -23,9 +22,10 @@ const KLogo = ({
     height={size}
     viewBox={`0 0 460 460`}
     preserveAspectRatio="xMidYMid meet"
+    transform={focusing ? `scale(1.15)` : `scale(1)`}
   >
     <rect height="100%" width="100%" fill={kLogoBg} />
-    <g transform={innerLogoTransform} fill={kLogoFg} stroke="none">
+    <g transform={`translate(0,150) scale(0.1,-0.1)`} fill={kLogoFg} stroke="none">
       <path
         d={`m1578 0 l22 -21 0 -650 c0 -637 0 -650 19 -639 11 5 40 41 66 80 25 38
              50 72 56 75 5 4 9 231 9 571 0 551 0 564 20 584 28 28 84 27 104 -2 14 -20
@@ -66,17 +66,8 @@ const Logo = ({ size = `65`, ...props }: IKLogoProps): JSX.Element => {
 
   const kLogoFg = bgContrast;
   const kLogoBg = `transparent`;
-  const innerLogoTransform = focusing
-    ? `translate(-90,100) scale(0.15,-0.15)`
-    : `translate(0,150) scale(0.1,-0.1)`;
+  const kLogoProps: IKLogoProps = { kLogoFg, kLogoBg, size, focusing, ...props };
 
-  const kLogoProps: IKLogoProps = {
-    kLogoFg,
-    kLogoBg,
-    innerLogoTransform,
-    size,
-    ...props,
-  };
   return (
     <IconButton
       as={Link}
@@ -90,7 +81,7 @@ const Logo = ({ size = `65`, ...props }: IKLogoProps): JSX.Element => {
       onFocus={() => setHovered(true)}
       onBlur={() => setHovered(false)}
       border={2}
-      borderStyle={`solid`}
+      borderStyle="solid"
       borderColor={bgContrast}
     />
   );
