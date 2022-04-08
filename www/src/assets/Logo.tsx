@@ -6,7 +6,7 @@ export interface IKLogoProps {
   kLogoFg?: string;
   kLogoBg?: string;
   kLogoBorder?: string;
-  size?: number;
+  size?: string;
   innerLogoTransform?: string;
 }
 
@@ -15,7 +15,7 @@ const KLogo = ({
   kLogoFg = `white`,
   kLogoBg = `black`,
   kLogoBorder = `black`,
-  size = 70,
+  size = `70`,
   innerLogoTransform = `translate(0,150) scale(0.1,-0.1)`,
 }: IKLogoProps) => (
   <svg
@@ -68,7 +68,7 @@ const KLogo = ({
   </svg>
 );
 
-const Logo = (props: IKLogoProps): JSX.Element => {
+const Logo = ({ size = `65`, ...props }: IKLogoProps): JSX.Element => {
   const bg = useColorModeValue(`white`, `var(--chakra-colors-gray-800)`);
   const bgContrast = useColorModeValue(`black`, `white`);
   const [focused, setFocused] = useState(false);
@@ -83,7 +83,14 @@ const Logo = (props: IKLogoProps): JSX.Element => {
     ? `translate(-90,100) scale(0.15,-0.15)`
     : `translate(0,150) scale(0.1,-0.1)`;
 
-  const kLogoProps: IKLogoProps = { kLogoFg, kLogoBg, kLogoBorder, innerLogoTransform, ...props };
+  const kLogoProps: IKLogoProps = {
+    kLogoFg,
+    kLogoBg,
+    kLogoBorder,
+    innerLogoTransform,
+    size,
+    ...props,
+  };
   return (
     <IconButton
       as={Link}
@@ -91,6 +98,7 @@ const Logo = (props: IKLogoProps): JSX.Element => {
       aria-label={`Navigate to homepage`}
       variant="ghost"
       icon={<KLogo {...kLogoProps} />}
+      size={size}
       onMouseEnter={() => setFocused(true)}
       onMouseLeave={() => setFocused(false)}
       onFocus={() => setHovered(true)}
