@@ -9,16 +9,17 @@ import {
   Collapse,
   Flex,
   HStack,
-  IconButton,
   VStack,
 } from "@chakra-ui/react";
-import { AiOutlineClose as CloseIcon } from "react-icons/ai";
-import { FaCookie as Cookie } from "react-icons/fa";
-import { GiHamburgerMenu as Hamburger } from "react-icons/gi";
 import Logo from "src/assets/Logo";
 import Heading from "src/components/common/Heading";
 import Link from "src/components/common/Link";
-import { ToggleColorMode, ToggleDirection } from "src/components/Toggles";
+import {
+  ToggleColorMode,
+  ToggleDirection,
+  ToggleNavbarMenu,
+  TogglePolicyMenu,
+} from "src/components/Toggles";
 import useMobile from "src/hooks/useMobile";
 
 // TODO: replace this with a call to gatsby to get config based values
@@ -56,7 +57,7 @@ const DirectionalMenu = (MenuStack: ComponentWithAs<"div", StackProps>) => () =>
       <HStack>
         <ToggleColorMode />
         <ToggleDirection />
-        <IconButton aria-label={`View storage policy`} variant="ghost" icon={<Cookie />} />
+        <TogglePolicyMenu />
       </HStack>
     </MenuStack>
   );
@@ -70,7 +71,6 @@ export const Navbar = () => {
     if (!isMobile && isOpen) onToggle();
   }, [isMobile, isOpen, onToggle]);
 
-  const MenuIcon = isOpen ? CloseIcon : Hamburger;
   const MenuStack = isMobile ? VStack : HStack;
   const Menu = useMemo(() => DirectionalMenu(MenuStack), [MenuStack]);
 
@@ -92,12 +92,7 @@ export const Navbar = () => {
 
           <Box as="menu" id="menu">
             {isMobile ? (
-              <IconButton
-                aria-label={`Toggle Navigation`}
-                onClick={onToggle}
-                variant="ghost"
-                icon={<MenuIcon fontSize={`1.563rem`} />}
-              />
+              <ToggleNavbarMenu isOpen={isOpen} onClick={onToggle} fontSize="1.563rem" />
             ) : (
               <Box as="menu" id="menu">
                 <Menu />
