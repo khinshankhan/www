@@ -68,7 +68,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     if (!isMobile && isOpen) onToggle();
-  }, [isMobile]);
+  }, [isMobile, isOpen, onToggle]);
 
   const MenuIcon = isOpen ? CloseIcon : Hamburger;
   const MenuStack = isMobile ? VStack : HStack;
