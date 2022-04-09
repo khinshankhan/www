@@ -11,7 +11,7 @@ import {
   HStack,
   VStack,
 } from "@chakra-ui/react";
-import Logo from "src/assets/Logo";
+import { Logo } from "src/assets";
 import Heading from "src/components/common/Heading";
 import Link from "src/components/common/Link";
 import {
@@ -19,7 +19,7 @@ import {
   ToggleDirection,
   ToggleNavbarMenu,
   TogglePolicyMenu,
-} from "src/components/Toggles";
+} from "src/components/toggles";
 import useMobile from "src/hooks/useMobile";
 
 // TODO: replace this with a call to gatsby to get config based values

@@ -9,7 +9,7 @@ export interface IKLogoProps {
   focusing?: boolean;
 }
 
-const KLogo = ({
+export const KLogo = ({
   kLogoFg = `white`,
   kLogoBg = `transparent`,
   size = `70`,
@@ -57,7 +57,7 @@ const KLogo = ({
   </svg>
 );
 
-const Logo = ({ size = `65`, ...props }: IKLogoProps): JSX.Element => {
+export const Logo = ({ size = `65`, ...props }: IKLogoProps): JSX.Element => {
   const bgContrast = useColorModeValue(`black`, `white`);
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
