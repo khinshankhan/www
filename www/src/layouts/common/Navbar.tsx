@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import {
   ComponentWithAs,
   StackProps,
@@ -65,6 +65,9 @@ export const Navbar = () => {
   const isMobile = useMobile();
   const { isOpen, onToggle } = useDisclosure();
   const dividerColor = useColorModeValue(`gray.200`, `white`);
+  useEffect(() => {
+    if (!isMobile && isOpen) onToggle();
+  }, [isMobile]);
 
   const MenuIcon = isOpen ? CloseIcon : Hamburger;
   const MenuStack = isMobile ? VStack : HStack;
