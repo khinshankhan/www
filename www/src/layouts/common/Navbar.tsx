@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
+  ComponentWithAs,
+  StackProps,
   useColorModeValue,
   useDisclosure,
   Box,
@@ -10,49 +12,43 @@ import {
   IconButton,
   VStack,
 } from "@chakra-ui/react";
-import useMobile from "src/hooks/useMobile";
+import { AiOutlineClose as CloseIcon } from "react-icons/ai";
+import { FaCookie as Cookie } from "react-icons/fa";
+import { GiHamburgerMenu as Hamburger } from "react-icons/gi";
 import Logo from "src/assets/Logo";
 import Heading from "src/components/common/Heading";
 import Link from "src/components/common/Link";
-import { FaCookie as Cookie } from "react-icons/fa";
-import { GiHamburgerMenu as Hamburger } from "react-icons/gi";
-import { AiOutlineClose as CloseIcon } from "react-icons/ai";
 import { ToggleColorMode, ToggleDirection } from "src/components/Toggles";
+import useMobile from "src/hooks/useMobile";
 
 // TODO: replace this with a call to gatsby to get config based values
 const MENU_ITEMS = [
   {
-    title: "About",
-    href: "/about",
+    title: `About`,
+    href: `/about`,
   },
   {
-    title: "Writing",
-    href: "/writing",
+    title: `Writing`,
+    href: `/writing`,
   },
   {
-    title: "Portfolio",
-    href: "/portfolio",
+    title: `Portfolio`,
+    href: `/portfolio`,
   },
   {
-    title: "Contact",
-    href: "/contact",
+    title: `Contact`,
+    href: `/contact`,
   },
 ];
 
-export const Navbar = () => {
-  const isMobile = useMobile();
-  const { isOpen, onToggle } = useDisclosure();
-  const dividerColor = useColorModeValue("gray.200", "white");
-
-  const MenuIcon = isOpen ? CloseIcon : Hamburger;
-  const MenuStack = isMobile ? VStack : HStack;
-  const Menu = () => (
-    <MenuStack flex={0} justify={"flex-end"} direction={"row"} spacing={6}>
+const DirectionalMenu = (MenuStack: ComponentWithAs<"div", StackProps>) => () =>
+  (
+    <MenuStack flex={0} justify={`flex-end`} direction={`row`} spacing={6}>
       <MenuStack as="ul" listStyleType="none" spacing={4}>
         {MENU_ITEMS.map((item) => (
           <Heading.h3 as="li" key={item.title} variant="link">
             {/* TODO: replace href with item.href once pages are ready */}
-            <Link href={"#"}>{item.title}</Link>
+            <Link href={`#`}>{item.title}</Link>
           </Heading.h3>
         ))}
       </MenuStack>
@@ -64,6 +60,15 @@ export const Navbar = () => {
       </HStack>
     </MenuStack>
   );
+
+export const Navbar = () => {
+  const isMobile = useMobile();
+  const { isOpen, onToggle } = useDisclosure();
+  const dividerColor = useColorModeValue(`gray.200`, `white`);
+
+  const MenuIcon = isOpen ? CloseIcon : Hamburger;
+  const MenuStack = isMobile ? VStack : HStack;
+  const Menu = useMemo(() => DirectionalMenu(MenuStack), [isMobile]);
 
   return (
     <>
