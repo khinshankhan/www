@@ -8,9 +8,11 @@ interface IToggleColorModeProps {
 export const ToggleColorMode = ({ size = 24 }: IToggleColorModeProps) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const isDark = colorMode === `dark`;
-  const text = isDark ? `dark` : `light`;
 
-  const ColorIcon = isDark ? Moon : Sun;
+  // when in dark/ light mode, display info for light/ dark mode respectively to make it clear what toggling will do
+  const text = isDark ? `light` : `dark`;
+  const ColorIcon = isDark ? Sun : Moon;
+
   return (
     <IconButton
       aria-label={`Switch to ${text} mode`}
