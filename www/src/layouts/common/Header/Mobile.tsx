@@ -10,11 +10,11 @@ import {
   TogglePolicyMenu,
 } from "src/components/toggles";
 
-export interface IMobileNavbarProps {
+export interface IMobileHeaderProps {
   items: { title: string }[];
   dividerColor: string;
 }
-export const MobileNavbar = ({ items, dividerColor }: IMobileNavbarProps) => {
+export const MobileHeader = ({ items, dividerColor }: IMobileHeaderProps) => {
   const { isOpen, onToggle } = useDisclosure();
 
   const borderStyles = {
@@ -72,4 +72,4 @@ export const MobileNavbar = ({ items, dividerColor }: IMobileNavbarProps) => {
   );
 };
 
-export default MobileNavbar;
+export default MobileHeader;

@@ -1,8 +1,8 @@
 import React from "react";
 import { useColorModeValue } from "@chakra-ui/react";
 import useMobile from "src/hooks/useMobile";
-import DesktopNavbar from "./Desktop";
-import MobileNavbar from "./Mobile";
+import DesktopHeader from "./Desktop";
+import MobileHeader from "./Mobile";
 
 // TODO: replace this with a call to gatsby to get config based values
 const MENU_ITEMS = [
@@ -24,13 +24,13 @@ const MENU_ITEMS = [
   },
 ];
 
-export const Navbar = () => {
+export const Header = () => {
   const isMobile = useMobile();
   // TODO: make this a semantic token
   const dividerColor = useColorModeValue(`gray.200`, `white`);
 
-  if (isMobile) return <MobileNavbar items={MENU_ITEMS} dividerColor={dividerColor} />;
-  return <DesktopNavbar items={MENU_ITEMS} dividerColor={dividerColor} />;
+  if (isMobile) return <MobileHeader items={MENU_ITEMS} dividerColor={dividerColor} />;
+  return <DesktopHeader items={MENU_ITEMS} dividerColor={dividerColor} />;
 };
 
-export default Navbar;
+export default Header;

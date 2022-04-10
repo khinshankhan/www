@@ -5,11 +5,11 @@ import Heading from "src/components/common/Heading";
 import Link from "src/components/common/Link";
 import { ToggleColorMode, ToggleDirection, TogglePolicyMenu } from "src/components/toggles";
 
-export interface IDesktopNavbarProps {
+export interface IDesktopHeaderProps {
   items: { title: string }[];
   dividerColor: string;
 }
-export const DesktopNavbar = ({ items, dividerColor }: IDesktopNavbarProps) => (
+export const DesktopHeader = ({ items, dividerColor }: IDesktopHeaderProps) => (
   <Container as="header" variant="page" mb="4">
     <Flex
       as="nav"
@@ -48,4 +48,4 @@ export const DesktopNavbar = ({ items, dividerColor }: IDesktopNavbarProps) => (
   </Container>
 );
 
-export default DesktopNavbar;
+export default DesktopHeader;
