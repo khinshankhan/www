@@ -13,6 +13,8 @@ export const Footer = () => {
         justifyContent="space-between"
         alignItems="center"
         pt="4"
+        mb="3"
+        mt="4"
         borderTop={1}
         borderStyle="solid"
         borderColor={dividerColor}
