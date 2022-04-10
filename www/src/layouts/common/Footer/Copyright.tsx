@@ -6,9 +6,11 @@ const name = `Khinshan Khan`;
 const startYear = 2017;
 const currentYear = new Date().getFullYear();
 
+// TODO: add link to copyright page
 const Copyright = (props: TextProps) => (
   <Text {...props}>
-    &copy; {name} {startYear} {startYear !== currentYear && ` - ${currentYear}`}
+    &copy; {startYear} {startYear !== currentYear && ` - ${currentYear}`} {name}. All rights
+    reserved.
   </Text>
 );
 

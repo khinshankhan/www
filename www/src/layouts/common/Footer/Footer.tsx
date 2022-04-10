@@ -9,7 +9,7 @@ export const Footer = () => {
   return (
     <Container variant="page" as="footer" id="footer">
       <Stack
-        direction={{ base: `column`, md: `row` }}
+        direction={{ base: `column-reverse`, md: `row` }}
         justifyContent="space-between"
         alignItems="center"
         pt="4"
