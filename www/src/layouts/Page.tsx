@@ -5,7 +5,6 @@ import { Navbar, Footer } from "./common";
 interface ISingleLayoutProps {
   children?: ReactNode;
 }
-
 const Page = ({ children }: ISingleLayoutProps): JSX.Element => (
   <chakra.div id="page">
     <Navbar />
