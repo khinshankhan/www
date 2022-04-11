@@ -19,6 +19,12 @@ const Heading = {
     h4: {
       ...headingBaseStyles.h4,
     },
+    mainNav: {
+      fontFamily: `heading`,
+      fontWeight: `bold`,
+      fontSize: [`xl`, null, null, `2xl`],
+      letterSpacings: `wider`,
+    },
   },
 };
 

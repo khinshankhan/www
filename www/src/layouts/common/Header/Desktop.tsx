@@ -28,12 +28,16 @@ export const DesktopHeader = ({ items }: IDesktopHeaderProps) => (
       <HStack as="menu" id="navbar-content" flex={0} justify="flex-end" direction="row" spacing={6}>
         <HStack as="ul" id="navbar-links" listStyleType="none" spacing={4}>
           {items.map((item) => (
-            <Heading.h3 as="li" key={item.title} variant="link">
+            <Heading as="li" key={item.title} variant="mainNav">
               {/* TODO: replace href with item.href once pages are ready */}
-              <Link href={`/`} aria-label={`Navigate to ${item.title.toLowerCase()}`}>
+              <Link
+                href={`/`}
+                aria-label={`Navigate to ${item.title.toLowerCase()}`}
+                variant="mainNav"
+              >
                 {item.title}
               </Link>
-            </Heading.h3>
+            </Heading>
           ))}
         </HStack>
 

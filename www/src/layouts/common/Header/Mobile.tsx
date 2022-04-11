@@ -51,12 +51,12 @@ export const MobileHeader = ({ items }: IMobileHeaderProps) => {
         <Collapse in={isOpen} animateOpacity>
           <VStack as="ul" id="navbar-links" listStyleType="none" spacing={4}>
             {items.map((item) => (
-              <Heading.h3 as="li" key={item.title} variant="link">
+              <Heading as="li" key={item.title} variant="mainNav">
                 {/* TODO: replace href with item.href once pages are ready */}
                 <Link href={`/`} aria-label={`Navigate to ${item.title.toLowerCase()}`}>
                   {item.title}
                 </Link>
-              </Heading.h3>
+              </Heading>
             ))}
           </VStack>
 

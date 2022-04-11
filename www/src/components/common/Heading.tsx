@@ -1,11 +1,10 @@
 import React, { ReactNode } from "react";
-import { Heading as ChakraHeading } from "@chakra-ui/react";
+import { ComponentWithAs, HeadingProps, Heading as ChakraHeading } from "@chakra-ui/react";
 
 const headingsOptions = [`h1`, `h2`, `h3`, `h4`, `h5`, `h6`] as const;
 type HeadingsOptions = typeof headingsOptions[number];
 
 type IHeadingTemplateProps = {
-  /*   id: string; */
   children: ReactNode;
   [key: string]: any;
 };
@@ -20,12 +19,21 @@ const HeadingTemplate =
       </ChakraHeading>
     );
 
-const Heading = headingsOptions.reduce(
+const Headings = headingsOptions.reduce(
   (stored, curr) => ({
     ...stored,
     [curr]: HeadingTemplate(curr),
   }),
   {} as Record<HeadingsOptions, (args: IHeadingTemplateProps) => JSX.Element>
 );
+
+type HeadingType = ComponentWithAs<"h2", HeadingProps> & {
+  [key: string]: (props: IHeadingTemplateProps) => JSX.Element;
+};
+
+const Heading = ChakraHeading as HeadingType;
+Object.entries(Headings).forEach(([tag, fn]) => {
+  Heading[tag] = fn;
+});
 
 export default Heading;
