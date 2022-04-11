@@ -1,3 +1,14 @@
+const linkStyle = (c: string) => ({
+  textDecoration: `underline`,
+  textDecorationColor: c,
+  _hover: {
+    color: c,
+  },
+  _focus: {
+    color: c,
+  },
+});
+
 const Link = {
   baseStyle: {
     transitionProperty: `common`,
@@ -18,16 +29,7 @@ const Link = {
     },
   },
   variants: {
-    mainNav: {
-      textDecoration: `underline`,
-      textDecorationColor: `internal`,
-      _hover: {
-        color: `internal`,
-      },
-      _focus: {
-        color: `internal`,
-      },
-    },
+    internal: linkStyle(`internal`),
   },
 };
 

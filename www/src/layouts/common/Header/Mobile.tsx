@@ -53,7 +53,11 @@ export const MobileHeader = ({ items }: IMobileHeaderProps) => {
             {items.map((item) => (
               <Heading as="li" key={item.title} variant="mainNav">
                 {/* TODO: replace href with item.href once pages are ready */}
-                <Link href={`/`} aria-label={`Navigate to ${item.title.toLowerCase()}`}>
+                <Link
+                  href={`/`}
+                  aria-label={`Navigate to ${item.title.toLowerCase()}`}
+                  variant="internal"
+                >
                   {item.title}
                 </Link>
               </Heading>

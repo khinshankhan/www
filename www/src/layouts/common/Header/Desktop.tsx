@@ -33,7 +33,7 @@ export const DesktopHeader = ({ items }: IDesktopHeaderProps) => (
               <Link
                 href={`/`}
                 aria-label={`Navigate to ${item.title.toLowerCase()}`}
-                variant="mainNav"
+                variant="internal"
               >
                 {item.title}
               </Link>
