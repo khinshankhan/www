@@ -7,9 +7,8 @@ import { ToggleColorMode, ToggleDirection, TogglePolicyMenu } from "src/componen
 
 export interface IDesktopHeaderProps {
   items: { title: string }[];
-  dividerColor: string;
 }
-export const DesktopHeader = ({ items, dividerColor }: IDesktopHeaderProps) => (
+export const DesktopHeader = ({ items }: IDesktopHeaderProps) => (
   <Container as="header" variant="page" mb="4">
     <Flex
       as="nav"
@@ -19,7 +18,7 @@ export const DesktopHeader = ({ items, dividerColor }: IDesktopHeaderProps) => (
       pb="8"
       borderBottom={1}
       borderStyle="solid"
-      borderColor={dividerColor}
+      borderColor="dividerColor"
       align="center"
     >
       <Flex id="main-logo" flex={1} justify="start">

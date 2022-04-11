@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IconButton, useColorModeValue } from "@chakra-ui/react";
+import { useToken, IconButton } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
 export interface IKLogoProps {
@@ -58,7 +58,11 @@ export const KLogo = ({
 );
 
 export const Logo = ({ size = `65`, ...props }: IKLogoProps): JSX.Element => {
-  const bgContrast = useColorModeValue(`black`, `white`);
+  const [bgContrast, internal] = useToken(`semanticToken`, [
+    `colors.bgContrast`,
+    `colors.internal`,
+  ]);
+
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
 
@@ -82,7 +86,7 @@ export const Logo = ({ size = `65`, ...props }: IKLogoProps): JSX.Element => {
       onBlur={() => setHovered(false)}
       border={2}
       borderStyle="solid"
-      borderColor={bgContrast}
+      borderColor={focusing ? internal : bgContrast}
     />
   );
 };

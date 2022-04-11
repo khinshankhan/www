@@ -12,13 +12,12 @@ import {
 
 export interface IMobileHeaderProps {
   items: { title: string }[];
-  dividerColor: string;
 }
-export const MobileHeader = ({ items, dividerColor }: IMobileHeaderProps) => {
+export const MobileHeader = ({ items }: IMobileHeaderProps) => {
   const { isOpen, onToggle } = useDisclosure();
 
   const borderStyles = {
-    ...(isOpen && { pb: 4, borderBottom: 1, borderStyle: `solid`, borderColor: dividerColor }),
+    ...(isOpen && { pb: 4, borderBottom: 1, borderStyle: `solid`, borderColor: `dividerColor` }),
   };
   return (
     <Container as="header" variant="page" mb="4">
@@ -30,7 +29,7 @@ export const MobileHeader = ({ items, dividerColor }: IMobileHeaderProps) => {
         pb="8"
         borderBottom={1}
         borderStyle="solid"
-        borderColor={dividerColor}
+        borderColor="dividerColor"
         align="center"
       >
         <Flex id="main-logo" flex={1} justify="start">
