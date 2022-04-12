@@ -9,8 +9,12 @@ export const getExtension = (name: string) => {
 };
 
 export const isUrlFile = (url: string) => {
-  if (!hasExtension(url)) return false;
-  const ext = getExtension(url);
+  const destination = document.createElement(`a`);
+  destination.href = url;
+  const { pathname } = destination;
+
+  if (!hasExtension(pathname)) return false;
+  const ext = getExtension(pathname);
 
   if (COMMON_URL_EXTENSIONS.includes(ext)) return false;
   return true;

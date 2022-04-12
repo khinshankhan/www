@@ -8,8 +8,8 @@ describe(`url`, () => {
       ));
 
     describe(`not file`, () =>
-      [`https://hello.com/test.html`].forEach((file) =>
-        it(file, () => expect(isUrlFile(file)).toBe(false))
+      [`/`, `https://hello.com`, `https://hello.com/`, `https://hello.com/test.html`].forEach(
+        (file) => it(file, () => expect(isUrlFile(file)).toBe(false))
       ));
 
     // TODO: account for false positive cases
