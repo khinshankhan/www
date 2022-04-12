@@ -1,8 +1,7 @@
 import React from "react";
 import { useDisclosure, Container, Collapse, Flex, HStack, VStack } from "@chakra-ui/react";
 import { Logo } from "src/assets";
-import Heading from "src/components/common/Heading";
-import Link from "src/components/common/Link";
+import { Heading, InternalLink } from "src/components/common";
 import {
   ToggleColorMode,
   ToggleDirection,
@@ -53,13 +52,13 @@ export const MobileHeader = ({ items }: IMobileHeaderProps) => {
             {items.map((item) => (
               <Heading as="li" key={item.title} variant="mainNav">
                 {/* TODO: replace href with item.href once pages are ready */}
-                <Link
+                <InternalLink
                   href={`/`}
                   aria-label={`Navigate to ${item.title.toLowerCase()}`}
                   variant="internal"
                 >
                   {item.title}
-                </Link>
+                </InternalLink>
               </Heading>
             ))}
           </VStack>

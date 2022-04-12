@@ -30,6 +30,7 @@ const Link = {
   },
   variants: {
     internal: linkStyle(`internal`),
+    external: linkStyle(`external`),
   },
 };
 

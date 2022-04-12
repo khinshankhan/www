@@ -1,16 +1,17 @@
 import React from "react";
-import { chakra, Icon, Link as ChakraLink, Text } from "@chakra-ui/react";
-import { Link as GatsbyLink } from "gatsby";
+import { Icon, Text } from "@chakra-ui/react";
 import {
   BsArrowDownSquare as ArrowDownSquare,
   BsArrowUpRightSquare as ArrowUpRightSquare,
 } from "react-icons/bs";
 import * as url from "src/utils/url";
+import ExternalLink from "./ExternalLink";
+import InternalLink from "./InternalLink";
 
 // TODO: handle title
 export type ILinkProps = {
   href: string;
-  isFile?: boolean;
+  isFile?: boolean | undefined;
   title?: string;
   // HACK: this is just a lazy fix
   // these types should be discerned properly later
@@ -19,33 +20,32 @@ export type ILinkProps = {
 };
 
 // TODO: decide how to handle href-less links
-const Link = ({ href, isFile = false, children, ...props }: ILinkProps) => {
+export const Link = ({ href, isFile = undefined, children, ...props }: ILinkProps) => {
   const sameOrigin = url.onSameOrigin(href, window.location.href);
-  const file = isFile || url.isUrlFile(href);
+  const file = isFile ?? url.isUrlFile(href);
   const relative = sameOrigin && !file;
 
-  const LinkComponent = relative ? GatsbyLink : chakra.a;
+  const LinkComponent = relative ? InternalLink : ExternalLink;
   // TODO: potentially have an icon for every type of link
   // and have aria text for the icon for accessibility purposes
   const VisualIcon = sameOrigin && file ? ArrowDownSquare : ArrowUpRightSquare;
 
+  const linkProps = {
+    href,
+    ...(!relative && { target: `_blank`, rel: `noreferrer noopener` }),
+  };
   return (
-    <ChakraLink
-      as={LinkComponent}
-      to={relative ? href : undefined}
-      href={!relative ? href : undefined}
-      target={!relative ? `_blank` : undefined}
-      rel={!relative ? `noreferrer noopener` : undefined}
-      {...props}
-    >
-      {children}
+    <>
+      <LinkComponent {...linkProps} {...props}>
+        {children}
+      </LinkComponent>
       {!relative && (
-        <Text as="sup" color="inherit">
+        <Text as="sup" color="inherit" textDecoration="none">
           {` `}
           <Icon as={VisualIcon} boxSize="0.9rem" />
         </Text>
       )}
-    </ChakraLink>
+    </>
   );
 };
 

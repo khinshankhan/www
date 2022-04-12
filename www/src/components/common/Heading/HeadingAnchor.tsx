@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { Icon } from "@chakra-ui/react";
 import { FaAnchor as Anchor } from "react-icons/fa";
-import Link from "src/components/common/Link";
+import { Link } from "src/components/common/Link";
 import { HeadingsTag } from "./Headings";
 
 type HeadingAnchorProps = {

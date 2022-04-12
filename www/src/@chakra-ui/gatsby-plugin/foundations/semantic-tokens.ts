@@ -17,10 +17,15 @@ const semanticTokens = {
 
     // TODO: look into better contrasting colors to reach AAA accessibility
     internal: {
-      // NOTE: slightly unaccessible (AA) but according to
+      // NOTE: slightly unaccessible(near the cusp of AA) for light but according to
       // https://uxmovement.com/buttons/the-myths-of-color-contrast-accessibility/ it should be fine
       default: `#AC9100`,
       _dark: `#FBD000`,
+    },
+    external: {
+      // NOTE: slightly unaccessible (AA) for both
+      default: `#037dae`,
+      _dark: `#049CD8`,
     },
   },
 };
