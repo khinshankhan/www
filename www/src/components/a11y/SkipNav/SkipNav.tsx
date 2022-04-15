@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, Container, Flex, Spacer } from "@chakra-ui/react";
+import { Button, Container, Stack } from "@chakra-ui/react";
 
 export const SkipNav = () => (
   <Container
-    as={Flex}
+    as={Stack}
     variant="page"
     bg="bg"
     border={1}
@@ -13,11 +13,17 @@ export const SkipNav = () => (
     pos="fixed"
     mt={10}
     p={3}
+    left="-100vw"
+    direction="row"
+    justifyContent="space-between"
+    alignItems="center"
+    _focusWithin={{
+      left: `50%`,
+      transform: `translate(-50%, -50%)`,
+    }}
   >
     <Button>Skip to main content</Button>
-    <Spacer />
     <Button>Skip to footer</Button>
-    <Spacer />
     <Button>Accessibility feedback</Button>
   </Container>
 );
