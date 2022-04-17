@@ -8,13 +8,6 @@ const plugins: GatsbyConfig["plugins"] = [
     },
   },
   {
-    resolve: `@chakra-ui/gatsby-plugin`,
-    options: {
-      resetCSS: true,
-      portalZIndex: 40,
-    },
-  },
-  {
     resolve: `gatsby-plugin-manifest`,
     options: {
       start_url: `/`,
