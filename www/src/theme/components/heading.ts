@@ -7,21 +7,11 @@ const sizes = fontSizes.reduce(
 const Heading = {
   sizes,
   variants: {
-    h1: {
-      ...headingBaseStyles.h1,
-    },
-    h2: {
-      ...headingBaseStyles.h2,
-    },
-    h3: {
-      ...headingBaseStyles.h3,
-    },
-    h4: {
-      ...headingBaseStyles.h4,
-    },
+    // h1-h6
+    ...headingBaseStyles,
     mainNav: {
       fontFamily: `heading`,
-      fontWeight: `bold`,
+      fontWeight: `medium`,
       fontSize: [`xl`, null, null, `2xl`],
       letterSpacings: `wider`,
     },
