@@ -6,17 +6,20 @@ import { HeadingsTag } from "./Headings";
 
 type HeadingAnchorProps = {
   children: ReactNode;
+  icon?: any;
   [key: string]: any;
 };
+
+export type HeadingsAnchorTag = (props: HeadingAnchorProps) => JSX.Element;
 
 /* eslint-disable indent */
 const HeadingAnchor =
   (HeadingTag: HeadingsTag) =>
-  ({ children, ...props }: HeadingAnchorProps) =>
+  ({ children, icon = Anchor, ...props }: HeadingAnchorProps) =>
     (
       <HeadingTag>
         <Link href={`/`} variant="internal" {...props}>
-          <Icon as={Anchor} fontSize="inherit" h={[4, 5, null, 6]} color="internal" />
+          {icon && <Icon as={icon} fontSize="inherit" h={[4, null, null, 5]} color="internal" />}
           {children}
         </Link>
       </HeadingTag>

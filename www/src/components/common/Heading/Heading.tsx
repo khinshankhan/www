@@ -1,9 +1,9 @@
 import { ComponentWithAs, HeadingProps, Heading as ChakraHeading } from "@chakra-ui/react";
-import HeadingAnchor from "./HeadingAnchor";
+import HeadingAnchor, { HeadingsAnchorTag } from "./HeadingAnchor";
 import Headings, { HeadingsTag } from "./Headings";
 
 type HeadingType = ComponentWithAs<"h2", HeadingProps> & {
-  [key: string]: HeadingsTag;
+  [key: string]: HeadingsTag | HeadingsAnchorTag;
 };
 const Heading = ChakraHeading as HeadingType;
 Object.entries(Headings).forEach(([tag, Fn]) => {
