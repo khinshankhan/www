@@ -8,8 +8,8 @@ interface ICenteredLayoutProps {
 }
 
 const CenteredLayout = ({ children }: ICenteredLayoutProps) => {
-  const mobilep = useMobile();
-  const fromTop = mobilep ? `0%` : `7%`;
+  const { isMobile } = useMobile();
+  const fromTop = isMobile ? `0%` : `7%`;
 
   return (
     <PageLayout minH={[`70vh`, null, `75vh`, null, null, `76vh`]}>

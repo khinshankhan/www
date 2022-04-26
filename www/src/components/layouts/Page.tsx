@@ -8,7 +8,7 @@ interface ISingleLayoutProps {
   children?: ReactNode;
 }
 const Page = ({ minH = null, children }: ISingleLayoutProps): JSX.Element => {
-  const isMobile = useMobile();
+  const { isMobile } = useMobile();
   const minHeight = minH ?? (isMobile ? `70vh` : `75vh`);
 
   return (

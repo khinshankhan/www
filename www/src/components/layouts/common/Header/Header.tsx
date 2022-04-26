@@ -24,8 +24,7 @@ const MENU_ITEMS = [
 ];
 
 export const Header = () => {
-  const isMobile = useMobile();
-  // TODO: make this a semantic token
+  const { isMobile } = useMobile();
 
   if (isMobile) return <MobileHeader items={MENU_ITEMS} />;
   return <DesktopHeader items={MENU_ITEMS} />;
