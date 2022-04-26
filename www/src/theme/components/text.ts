@@ -8,8 +8,8 @@ const Text = {
   sizes,
   baseStyle: {
     fontFamily: `body`,
-    fontWeight: `medium`,
-    fontSize: [`md`, `lg`, null, null, `xl`],
+    fontWeight: `normal`,
+    fontSize: [`md`, `lg`],
   },
 };
 
