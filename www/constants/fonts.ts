@@ -10,7 +10,7 @@ export const defaultFonts: ThemeOverride["fonts"] = {
 };
 
 export const fonts: ThemeOverride["fonts"] = {
-  heading: `Circular, ${defaultFonts.heading}`,
-  body: `Inter, ui-serif, ${defaultFonts.body}`,
+  heading: `'Crimson Pro', ${defaultFonts.heading}`,
+  body: `'Inter', ui-serif, ${defaultFonts.body}`,
   mono: defaultFonts.mono,
 };
