@@ -1,16 +1,7 @@
 import { extendTheme, ThemeOverride } from "@chakra-ui/react";
-import { createBreakpoints } from "@chakra-ui/theme-tools";
 import components from "./components";
 import foundations from "./foundations";
 import styles from "./styles";
-
-const breakpoints = createBreakpoints({
-  sm: `640px`,
-  md: `768px`,
-  lg: `1024px`,
-  xl: `1280px`,
-  "2xl": `1536px`,
-});
 
 const config: ThemeOverride["config"] = {
   cssVarPrefix: `ck`,
@@ -20,7 +11,6 @@ const config: ThemeOverride["config"] = {
 };
 
 const theme = extendTheme({
-  breakpoints,
   ...foundations,
   components,
   styles,
