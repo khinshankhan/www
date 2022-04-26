@@ -10,9 +10,9 @@ const Heading = {
     // h1-h6
     ...headingBaseStyles,
     mainNav: {
-      fontFamily: `heading`,
+      fontFamily: `body`,
       fontWeight: `medium`,
-      fontSize: [`xl`, null, null, `2xl`],
+      fontSize: [`xl`, null, null, null, `2xl`],
       letterSpacings: `wider`,
     },
   },
