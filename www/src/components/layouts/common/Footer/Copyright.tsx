@@ -7,7 +7,7 @@ const startYear = 2017;
 
 // TODO: add link to copyright page
 const Copyright = (props: TextProps) => (
-  <Text {...props}>
+  <Text align="center" {...props}>
     &copy; {startYear}+, {name}. All rights reserved.
   </Text>
 );
