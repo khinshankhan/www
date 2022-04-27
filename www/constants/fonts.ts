@@ -10,9 +10,7 @@ export const defaultFonts: ThemeOverride["fonts"] = {
 };
 
 export const fonts: ThemeOverride["fonts"] = {
-  heading: `'Crimson Pro', ui-serif, Cambria, ${defaultFonts.heading}`,
-  body: `'Crimson Pro', ui-serif, ${defaultFonts.body}`,
+  heading: `'Crimson Pro', ${defaultFonts.heading}`,
+  body: `'Inter', ui-serif, ${defaultFonts.body}`,
   mono: defaultFonts.mono,
 };
-
-export const fontSizes = [`mdlg`, `mdlg`, `mdlg`, `lgxl`];
