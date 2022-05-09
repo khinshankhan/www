@@ -24,6 +24,75 @@ module.exports = {
     "import/internal-regex": `^anchorage/`,
   },
   rules: {
+    import: `off`,
+    "import/export": `error`,
+    "import/extensions": `off`, // no point
+    "import/first": `error`,
+    "import/exports-last": `off`, // it's okay to export types beforehand
+    "import/named": `off`, // ts will check for us anyways
+    "import/newline-after-import": `error`,
+    "import/no-anonymous-default-export": `error`,
+    // 'trust me' -- said no one ever, occasionally toggle this on to check
+    // but it's super expensive to run to by default it'll be off
+    "import/no-cycle": `error`,
+    "import/no-duplicates": `error`,
+    "import/no-extraneous-dependencies": `error`,
+    "import/no-self-import": `error`,
+    "import/no-unresolved": `off`, // ts will check for us anyways
+    "import/no-unused-modules": [
+      `error`,
+      // TODO: set unusedExports to true to clean up old code
+      { missingExports: true, unusedExports: false },
+    ],
+    "import/no-useless-path-segments": [
+      `error`,
+      {
+        noUselessIndex: true,
+      },
+    ],
+    "import/order": [
+      `warn`,
+      {
+        groups: [`builtin`, `external`, `internal`],
+        pathGroups: [
+          {
+            pattern: `react`,
+            group: `external`,
+            position: `before`,
+          },
+        ],
+        pathGroupsExcludedImportTypes: [`react`],
+        "newlines-between": `never`,
+        alphabetize: {
+          order: `asc`,
+          caseInsensitive: true,
+        },
+      },
+    ],
+    "import/prefer-default-export": `error`,
+
+    "no-console": [`warn`, { allow: [`warn`] }],
+    "spaced-comment": [`error`, `always`, { exceptions: [`-`, `+`], markers: [`/`] }],
+    "no-use-before-define": `off`,
+    "no-plusplus": `off`,
+    "no-continue": `off`,
+    "linebreak-style": `off`,
+    "consistent-return": `off`,
+    "space-before-function-paren": `off`,
+    "func-names": `off`,
+    camelcase: `warn`,
+
+    indent: [`error`, 2, { SwitchCase: 1 }],
+    "prettier/prettier": [
+      `error`,
+      {
+        trailingComma: `es5`,
+        semi: true,
+        singleQuote: false,
+        printWidth: 100,
+      },
+    ],
+
     "@typescript-eslint/no-unused-vars": [
       `warn`,
       {
@@ -60,23 +129,7 @@ module.exports = {
     "@typescript-eslint/no-empty-function": `off`,
     "@typescript-eslint/explicit-module-boundary-types": `off`,
     "@typescript-eslint/ban-ts-comment": `off`,
-    "no-console": [`warn`, { allow: [`warn`] }],
-    "spaced-comment": [`error`, `always`, { exceptions: [`-`, `+`], markers: [`/`] }],
-    "no-use-before-define": `off`,
-    "no-plusplus": `off`,
-    "no-continue": `off`,
-    "linebreak-style": `off`,
-    "consistent-return": `off`,
-    import: `off`,
-    camelcase: `warn`,
-    "import/no-unresolved": `off`,
-    "func-names": `off`,
-    "import/no-extraneous-dependencies": `off`,
-    "import/prefer-default-export": `off`,
-    "import/no-cycle": `off`,
-    "space-before-function-paren": `off`,
-    "import/extensions": `off`,
-    "import/no-anonymous-default-export": `error`,
+
     "react/function-component-definition": [
       `warn`,
       {
@@ -110,16 +163,7 @@ module.exports = {
     ],
     "react-hooks/rules-of-hooks": `error`,
     "react-hooks/exhaustive-deps": `warn`,
-    indent: [`error`, 2, { SwitchCase: 1 }],
-    "prettier/prettier": [
-      `error`,
-      {
-        trailingComma: `es5`,
-        semi: true,
-        singleQuote: false,
-        printWidth: 100,
-      },
-    ],
+
     // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/tree/master/docs/rules
     // "jsx-a11y/accessible-emoji": `warn`, Deprecated
     "jsx-a11y/alt-text": `warn`,
@@ -203,24 +247,38 @@ module.exports = {
     "jsx-a11y/scope": `warn`,
     "jsx-a11y/tabindex-no-positive": `warn`,
     "jsx-a11y/href-no-hash": `off`,
-    "import/order": [
-      `warn`,
-      {
-        groups: [`builtin`, `external`, `internal`],
-        pathGroups: [
-          {
-            pattern: `react`,
-            group: `external`,
-            position: `before`,
-          },
-        ],
-        pathGroupsExcludedImportTypes: [`react`],
-        "newlines-between": `never`,
-        alphabetize: {
-          order: `asc`,
-          caseInsensitive: true,
-        },
-      },
-    ],
   },
+  overrides: [
+    {
+      // Config-related files
+      files: [`**eslint*.js`, `**lint-staged*.js`, `**jest*.js`],
+      rules: {
+        "import/no-unused-modules": `off`,
+      },
+    },
+    {
+      // Gatbsy config files
+      files: [`**gatsby-*.tsx`],
+      rules: {
+        "import/no-unused-modules": `off`,
+        "import/prefer-default-export": `off`,
+      },
+    },
+    {
+      // Testing-related files
+      files: [`**/__tests__/**/*`, `**/__mocks__/**/*`, `**.test.*`],
+      rules: {
+        "import/no-unused-modules": `off`,
+      },
+    },
+    {
+      // Barrel files
+      files: [`**index.ts`],
+      rules: {
+        // TODO: come back to this
+        "import/no-unused-modules": `off`,
+        "import/prefer-default-export": `off`,
+      },
+    },
+  ],
 };
