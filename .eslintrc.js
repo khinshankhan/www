@@ -71,18 +71,22 @@ module.exports = {
     ],
     "import/prefer-default-export": `error`,
 
-    "no-console": [`warn`, { allow: [`warn`] }],
-    "spaced-comment": [`error`, `always`, { exceptions: [`-`, `+`], markers: [`/`] }],
-    "no-use-before-define": `off`,
-    "no-plusplus": `off`,
-    "no-continue": `off`,
-    "linebreak-style": `off`,
-    "consistent-return": `off`,
-    "space-before-function-paren": `off`,
-    "func-names": `off`,
+    "arrow-body-style": [`error`, `as-needed`],
     camelcase: `warn`,
-
+    "consistent-return": `error`,
+    "func-names": `off`,
     indent: [`error`, 2, { SwitchCase: 1 }],
+    "linebreak-style": `off`,
+    "no-console": [`warn`, { allow: [`warn`, `error`] }],
+    "no-continue": `off`,
+    "no-plusplus": `off`,
+    "no-unused-expressions": [
+      `warn`,
+      {
+        allowTaggedTemplates: true,
+      },
+    ],
+    "no-use-before-define": `error`,
     "prettier/prettier": [
       `error`,
       {
@@ -92,32 +96,27 @@ module.exports = {
         printWidth: 100,
       },
     ],
+    "space-before-function-paren": `error`,
+    "spaced-comment": [`error`, `always`, { exceptions: [`-`, `+`], markers: [`/`] }],
 
-    "@typescript-eslint/no-unused-vars": [
-      `warn`,
-      {
-        argsIgnorePattern: `res|next|stage|^err|on|config|e|_`,
-      },
-    ],
-    "arrow-body-style": [`error`, `as-needed`],
-    "no-param-reassign": [
-      `error`,
-      {
-        props: false,
-      },
-    ],
-    "no-unused-expressions": [
-      `warn`,
-      {
-        allowTaggedTemplates: true,
-      },
-    ],
     quotes: `off`,
     "@typescript-eslint/quotes": [
       `error`,
       `backtick`,
       {
         avoidEscape: true,
+      },
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      `warn`,
+      {
+        argsIgnorePattern: `res|next|stage|^err|on|config|e|_`,
+      },
+    ],
+    "no-param-reassign": [
+      `error`,
+      {
+        props: false,
       },
     ],
     "@typescript-eslint/prefer-interface": `off`,
