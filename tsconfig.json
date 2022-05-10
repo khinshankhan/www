@@ -16,5 +16,6 @@
     "noImplicitAny": true,
     "resolveJsonModule": true,
     "baseUrl": "."
-  }
+  },
+  "include": ["./packages/**/*", "./www/**/*"]
 }

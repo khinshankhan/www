@@ -72,13 +72,18 @@ module.exports = {
     "import/prefer-default-export": `error`,
 
     "arrow-body-style": [`error`, `as-needed`],
-    camelcase: `warn`,
     "consistent-return": `error`,
     "func-names": `off`,
     indent: [`error`, 2, { SwitchCase: 1 }],
     "linebreak-style": `off`,
     "no-console": [`warn`, { allow: [`warn`, `error`] }],
     "no-continue": `off`,
+    "no-param-reassign": [
+      `error`,
+      {
+        props: false,
+      },
+    ],
     "no-plusplus": `off`,
     "no-unused-expressions": [
       `warn`,
@@ -86,7 +91,6 @@ module.exports = {
         allowTaggedTemplates: true,
       },
     ],
-    "no-use-before-define": `error`,
     "prettier/prettier": [
       `error`,
       {
@@ -99,6 +103,13 @@ module.exports = {
     "space-before-function-paren": `error`,
     "spaced-comment": [`error`, `always`, { exceptions: [`-`, `+`], markers: [`/`] }],
 
+    "@typescript-eslint/ban-ts-comment": `off`,
+    // DEPRECATED: in favor of naming-convention
+    camelcase: `off`,
+    "@typescript-eslint/camelcase": `off`,
+    "@typescript-eslint/explicit-function-return-type": `off`,
+    "@typescript-eslint/explicit-module-boundary-types": `off`,
+    "@typescript-eslint/prefer-interface": `off`,
     quotes: `off`,
     "@typescript-eslint/quotes": [
       `error`,
@@ -107,27 +118,29 @@ module.exports = {
         avoidEscape: true,
       },
     ],
+    "@typescript-eslint/no-empty-function": `off`,
+    "no-loop-func": `off`,
+    "@typescript-eslint/no-loop-func": [`error`],
+    "no-loss-of-precision": `off`,
+    "@typescript-eslint/no-loss-of-precision": [`error`],
+    "no-magic-numbers": `off`,
+    // TODO: toggle this on after looking into how to avoid triggering rule on default args
+    "@typescript-eslint/no-magic-numbers": `off`,
+    "@typescript-eslint/no-non-null-assertion": `off`,
+    "no-use-before-define": `off`,
+    "@typescript-eslint/no-use-before-define": `error`,
     "@typescript-eslint/no-unused-vars": [
       `warn`,
       {
         argsIgnorePattern: `res|next|stage|^err|on|config|e|_`,
       },
     ],
-    "no-param-reassign": [
-      `error`,
-      {
-        props: false,
-      },
-    ],
-    "@typescript-eslint/prefer-interface": `off`,
-    "@typescript-eslint/explicit-function-return-type": `off`,
-    "@typescript-eslint/no-use-before-define": `off`,
-    "@typescript-eslint/camelcase": `off`,
-    "@typescript-eslint/no-var-requires": `off`,
-    "@typescript-eslint/no-non-null-assertion": `off`,
-    "@typescript-eslint/no-empty-function": `off`,
-    "@typescript-eslint/explicit-module-boundary-types": `off`,
-    "@typescript-eslint/ban-ts-comment": `off`,
+    "@typescript-eslint/no-var-requires": `error`,
+    "object-curly-spacing": `off`,
+    // TODO: look into prettier support as well
+    "@typescript-eslint/object-curly-spacing": [`off`],
+    "@typescript-eslint/type-annotation-spacing": `error`,
+    "@typescript-eslint/unified-signatures": `warn`,
 
     "react/function-component-definition": [
       `warn`,
@@ -253,6 +266,8 @@ module.exports = {
       files: [`**eslint*.js`, `**lint-staged*.js`, `**jest*.js`],
       rules: {
         "import/no-unused-modules": `off`,
+        "@typescript-eslint/no-magic-numbers": `off`,
+        "@typescript-eslint/no-var-requires": `off`,
       },
     },
     {
@@ -268,6 +283,7 @@ module.exports = {
       files: [`**/__tests__/**/*`, `**/__mocks__/**/*`, `**.test.*`],
       rules: {
         "import/no-unused-modules": `off`,
+        "@typescript-eslint/no-var-requires": `off`,
       },
     },
     {
@@ -278,6 +294,36 @@ module.exports = {
         "import/no-unused-modules": `off`,
         "import/prefer-default-export": `off`,
       },
+    },
+    {
+      // Typescript project files only
+      files: [`*.ts`, `*.tsx`],
+      rules: {
+        "@typescript-eslint/no-unnecessary-condition": [
+          `error`,
+          {
+            allowConstantLoopConditions: false,
+            allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: true,
+          },
+        ],
+        "@typescript-eslint/prefer-includes": `warn`,
+        "@typescript-eslint/prefer-nullish-coalescing": [
+          `warn`,
+          {
+            ignoreConditionalTests: true,
+            ignoreMixedLogicalExpressions: true,
+          },
+        ],
+        "@typescript-eslint/prefer-optional-chain": `warn`,
+        "@typescript-eslint/prefer-reduce-type-parameter": `warn`,
+        "@typescript-eslint/prefer-string-starts-ends-with": `warn`,
+        "@typescript-eslint/promise-function-async": `error`,
+      },
+      parserOptions: {
+        project: [`./tsconfig.json`], // Specify it only for TypeScript files
+      },
+      // TODO: get back to this rule after reading up on it
+      // extends: [`plugin:@typescript-eslint/recommended-requiring-type-checking`],
     },
   ],
 };
