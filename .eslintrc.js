@@ -32,8 +32,8 @@ module.exports = {
     "import/named": `off`, // ts will check for us anyways
     "import/newline-after-import": `error`,
     "import/no-anonymous-default-export": `error`,
-    // 'trust me' -- said no one ever, occasionally toggle this on to check
-    // but it's super expensive to run to by default it'll be off
+    // 'trust me' -- said no one ever, occasionally toggle this on to check but
+    // it's super expensive to run to by default it'll be off
     "import/no-cycle": `error`,
     "import/no-duplicates": `error`,
     "import/no-extraneous-dependencies": `error`,
@@ -124,7 +124,8 @@ module.exports = {
     "no-loss-of-precision": `off`,
     "@typescript-eslint/no-loss-of-precision": [`error`],
     "no-magic-numbers": `off`,
-    // TODO: toggle this on after looking into how to avoid triggering rule on default args
+    // TODO: toggle this on after looking into how to avoid triggering rule on
+    // default args
     "@typescript-eslint/no-magic-numbers": `off`,
     "@typescript-eslint/no-non-null-assertion": `off`,
     "no-use-before-define": `off`,
@@ -142,6 +143,14 @@ module.exports = {
     "@typescript-eslint/type-annotation-spacing": `error`,
     "@typescript-eslint/unified-signatures": `warn`,
 
+    "react/boolean-prop-naming": [
+      `error`,
+      { rule: `^(is|has|to)[A-Z]([A-Za-z0-9]?)+`, validateNested: true },
+    ],
+    // NOTE: could be helpful... will keep this in the back of mind while coding
+    // but officially it'll be off
+    "react/display-name": `off`,
+    "react/forbid-prop-types": `off`,
     "react/function-component-definition": [
       `warn`,
       {
@@ -149,32 +158,33 @@ module.exports = {
         unnamedComponents: `arrow-function`,
       },
     ],
-    "react/jsx-one-expression-per-line": `off`,
-    "react/no-danger": `off`,
-    "react/display-name": `off`,
-    "react/react-in-jsx-scope": `off`,
-    "react/jsx-uses-react": `warn`,
-    "react/require-default-props": `off`,
-    "react/forbid-prop-types": `off`,
-    "react/no-unescaped-entities": `off`,
-    "react/prop-types": `off`,
-    "react/jsx-props-no-spreading": `off`,
-    "react/jsx-fragments": `off`,
     "react/jsx-curly-brace-presence": `off`,
-    "react/jsx-pascal-case": [
-      `warn`,
-      {
-        allowNamespace: true,
-      },
-    ],
     "react/jsx-filename-extension": [
       `warn`,
       {
         extensions: [`.js`, `.jsx`, `.tsx`],
       },
     ],
-    "react-hooks/rules-of-hooks": `error`,
+    "react/jsx-fragments": `off`,
+    // TODO: soo waiting to try this out when it releases
+    // "react/jsx-no-leaked-render": `warn`,
+    "react/jsx-one-expression-per-line": `off`,
+    "react/jsx-pascal-case": [
+      `warn`,
+      {
+        allowNamespace: true,
+      },
+    ],
+    "react/jsx-props-no-spreading": `off`,
+    "react/jsx-uses-react": `warn`,
+    "react/no-danger": `off`, // kind of the point of a blog...
+    "react/no-unescaped-entities": `warn`,
+    "react/prop-types": `off`,
+    "react/react-in-jsx-scope": `off`,
+    "react/require-default-props": `off`,
+
     "react-hooks/exhaustive-deps": `warn`,
+    "react-hooks/rules-of-hooks": `error`,
 
     // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/tree/master/docs/rules
     // "jsx-a11y/accessible-emoji": `warn`, Deprecated
@@ -232,7 +242,8 @@ module.exports = {
         ],
       },
     ],
-    // "jsx-a11y/label-has-for": `warn`, was deprecated and replaced with jsx-a11y/has-associated-control in v6.1.0
+    // "jsx-a11y/label-has-for": `warn`, was deprecated and replaced with
+    // jsx-a11y/has-associated-control in v6.1.0
     "jsx-a11y/label-has-associated-control": `warn`,
     "jsx-a11y/lang": `warn`,
     "jsx-a11y/media-has-caption": `warn`,
@@ -318,6 +329,9 @@ module.exports = {
         "@typescript-eslint/prefer-reduce-type-parameter": `warn`,
         "@typescript-eslint/prefer-string-starts-ends-with": `warn`,
         "@typescript-eslint/promise-function-async": `error`,
+        // TODO: waiting for https://github.com/jsx-eslint/eslint-plugin-react/issues/3286
+        // before adding in `destructureInSignature`
+        "react/destructuring-assignment": [`warn`, `always`, { ignoreClassFields: false }],
       },
       parserOptions: {
         project: [`./tsconfig.json`], // Specify it only for TypeScript files
