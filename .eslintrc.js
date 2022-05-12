@@ -1,7 +1,7 @@
 module.exports = {
   parser: `@typescript-eslint/parser`, // Specifies the ESLint parser
-  extends: [`airbnb`, `plugin:prettier/recommended`],
-  plugins: [`@typescript-eslint`, `prettier`, `react-hooks`, `graphql`],
+  plugins: [`@typescript-eslint`, `prettier`, `react-hooks`, `graphql`, `jsx-a11y`],
+  extends: [`airbnb`, `plugin:prettier/recommended`, `plugin:jsx-a11y/recommended`],
   parserOptions: {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: `module`, // Allows for the use of imports
@@ -24,6 +24,7 @@ module.exports = {
     "import/internal-regex": `^anchorage/`,
   },
   rules: {
+    // https://eslint.org/docs/rules/
     import: `off`,
     "import/export": `error`,
     "import/extensions": `off`, // no point
@@ -103,6 +104,7 @@ module.exports = {
     "space-before-function-paren": `error`,
     "spaced-comment": [`error`, `always`, { exceptions: [`-`, `+`], markers: [`/`] }],
 
+    // https://typescript-eslint.io/rules/
     "@typescript-eslint/ban-ts-comment": `off`,
     // DEPRECATED: in favor of naming-convention
     camelcase: `off`,
@@ -143,6 +145,7 @@ module.exports = {
     "@typescript-eslint/type-annotation-spacing": `error`,
     "@typescript-eslint/unified-signatures": `warn`,
 
+    // https://github.com/jsx-eslint/eslint-plugin-react
     "react/boolean-prop-naming": [
       `error`,
       { rule: `^(is|has|to)[A-Z]([A-Za-z0-9]?)+`, validateNested: true },
@@ -223,6 +226,7 @@ module.exports = {
       },
     ],
     "jsx-a11y/heading-has-content": `warn`,
+    "jsx-a11y/href-no-hash": `off`,
     "jsx-a11y/html-has-lang": `warn`,
     "jsx-a11y/iframe-has-title": `warn`,
     "jsx-a11y/img-redundant-alt": `warn`,
@@ -269,7 +273,6 @@ module.exports = {
     "jsx-a11y/role-supports-aria-props": `warn`,
     "jsx-a11y/scope": `warn`,
     "jsx-a11y/tabindex-no-positive": `warn`,
-    "jsx-a11y/href-no-hash": `off`,
   },
   overrides: [
     {
