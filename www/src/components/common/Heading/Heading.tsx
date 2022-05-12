@@ -5,6 +5,7 @@ import Headings, { HeadingsTag } from "./Headings";
 type HeadingType = ComponentWithAs<"h2", HeadingProps> & {
   [key: string]: HeadingsTag | HeadingsAnchorTag;
 };
+
 const Heading = ChakraHeading as HeadingType;
 Object.entries(Headings).forEach(([tag, Fn]) => {
   Heading[tag] = Fn;

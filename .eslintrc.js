@@ -86,6 +86,16 @@ module.exports = {
       },
     ],
     "no-plusplus": `off`,
+    // allow for default for airbnb's rules
+    // https://github.com/airbnb/javascript/blob/7fdc87a8be565fa1f1779dc1d6b6461b953f7d85/packages/eslint-config-airbnb-base/rules/es6.js#L63-L70
+    "no-restricted-exports": [
+      `error`,
+      {
+        restrictedNamedExports: [
+          `then`, // this will cause tons of confusion when your module is dynamically `import()`ed, and will break in most node ESM versions
+        ],
+      },
+    ],
     "no-unused-expressions": [
       `warn`,
       {
