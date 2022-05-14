@@ -22,7 +22,7 @@ const HeadingAnchor = (HeadingTag: HeadingsTag) => ({
 }: HeadingAnchorProps) => (
   <HeadingTag>
     <Link href={href} variant="internal" {...props}>
-      {icon && <Icon as={icon} fontSize="inherit" h={[4, null, null, 5]} color="internal" />}
+      {icon && <Icon as={icon} fontSize="inherit" h={{ base: 4, lg: 5 }} color="internal" />}
       {children}
     </Link>
   </HeadingTag>

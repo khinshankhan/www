@@ -19,7 +19,7 @@ const Index = () => (
       I&apos;m a software engineer.
     </Center>
 
-    <Text align="center" fontSize={[`lg`, `xl`]}>
+    <Text align="center" fontSize={{ base: `lg`, sm: `xl` }}>
       Wasn&apos;t too sure what to put on a homepage, so I put what would interest me: this site
       currently has{` `}
       <Text display="inline-block" color="internal" fontSize="inherit">

@@ -4,7 +4,8 @@ import useMobile from "src/hooks/useMobile";
 import { Header, Footer } from "./common";
 
 interface ISingleLayoutProps {
-  minH?: string | (string | null)[] | null;
+  // TODO: look into better type for this
+  minH?: string | (string | null)[] | { [key: string]: string } | null;
   children?: ReactNode;
 }
 const Page = ({ minH = null, children }: ISingleLayoutProps): JSX.Element => {

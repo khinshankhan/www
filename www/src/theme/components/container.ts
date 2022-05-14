@@ -6,8 +6,8 @@ const Container = {
     page: {
       w: `100%`,
       mx: `auto`,
-      maxW: [`95%`, `90%`, `90%`, `85%`],
-      px: [`1rem`, `1.5rem`],
+      maxW: { base: `95%`, sm: `90%`, lg: `85%` },
+      px: { base: `1rem`, sm: `1.5rem` },
     },
   },
 };
