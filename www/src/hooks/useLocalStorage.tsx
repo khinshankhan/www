@@ -1,7 +1,7 @@
 // Inspiration credit: https://github.com/Junscuzzy/gatsby-material-typescript-starter/blob/88bedf4995e24876246ffce4984585fdbcb7ce90/src/hooks/useLocalStorage.ts
 import { useState } from "react";
 
-const useLocalStorage = <T extends unknown>(
+export const useLocalStorage = <T extends unknown>(
   key: string,
   initialValue: T
 ): [T, (value: T) => boolean, () => boolean] => {

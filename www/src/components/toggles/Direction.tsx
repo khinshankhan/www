@@ -1,7 +1,7 @@
 import React from "react";
 import { IconButton } from "@chakra-ui/react";
 import { MdFormatTextdirectionLToR as Direction } from "react-icons/md";
-import useLocalStorage from "src/hooks/useLocalStorage";
+import { useLocalStorage } from "src/hooks";
 
 interface IToggleDirectionProps {
   fontSize?: string;

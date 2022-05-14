@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { Container, VStack } from "@chakra-ui/react";
-import useMobile from "src/hooks/useMobile";
+import { useMobile } from "src/hooks";
 import PageLayout from "./Page";
 
 interface ICenteredLayoutProps {

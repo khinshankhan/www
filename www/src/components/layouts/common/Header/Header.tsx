@@ -1,5 +1,5 @@
 import React from "react";
-import useMobile from "src/hooks/useMobile";
+import { useMobile } from "src/hooks";
 import DesktopHeader from "./Desktop";
 import MobileHeader from "./Mobile";
 
@@ -26,8 +26,8 @@ const MENU_ITEMS = [
 export const Header = () => {
   const { isMobile } = useMobile();
 
-  if (isMobile) return <MobileHeader items={MENU_ITEMS} />;
-  return <DesktopHeader items={MENU_ITEMS} />;
+  const HeaderComponent = isMobile ? MobileHeader : DesktopHeader;
+  return <HeaderComponent items={MENU_ITEMS} />;
 };
 
 export default Header;
