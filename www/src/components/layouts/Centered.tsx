@@ -19,7 +19,7 @@ const CenteredLayout = ({ children }: ICenteredLayoutProps) => {
         position="relative"
         mt={fromTop}
         spacing={10}
-        maxW={{ base: `32ch`, sm: `80ch` }}
+        maxW={{ base: `32ch`, xs: `50ch`, sm: `80ch` }}
       >
         {children}
       </Container>
