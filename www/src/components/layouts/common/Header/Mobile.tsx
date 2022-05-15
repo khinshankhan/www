@@ -1,18 +1,14 @@
 import React from "react";
-import { useDisclosure, Container, Collapse, Flex, HStack, VStack } from "@chakra-ui/react";
+import { useDisclosure, Container, Collapse, Flex, Stack, VStack } from "@chakra-ui/react";
 import { Logo } from "src/assets";
 import { ToggleNavbarMenu } from "src/components/toggles";
-import useNav from "./useNav";
+import NavbarLinks from "./navs/NavbarLinks";
+import SettingToggles from "./navs/SettingToggles";
 
 export interface IMobileHeaderProps {
   items: { title: string; href: string }[];
 }
 export const MobileHeader = ({ items }: IMobileHeaderProps) => {
-  const { NavbarLinks, SettingToggles } = useNav({
-    NavbarLinksStack: VStack,
-    SettingsToggleStack: HStack,
-    items,
-  });
   const { isOpen, onToggle } = useDisclosure();
 
   const borderStyles = {
@@ -48,8 +44,8 @@ export const MobileHeader = ({ items }: IMobileHeaderProps) => {
         {...borderStyles}
       >
         <Collapse in={isOpen} animateOpacity>
-          <NavbarLinks />
-          <SettingToggles />
+          <NavbarLinks Stack={VStack} items={items} />
+          <SettingToggles Stack={Stack} />
         </Collapse>
       </Flex>
     </Container>
