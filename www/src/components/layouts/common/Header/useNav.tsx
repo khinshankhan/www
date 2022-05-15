@@ -1,14 +1,14 @@
 import React from "react";
 import { ComponentWithAs, StackProps } from "@chakra-ui/react";
 import { Heading, InternalLink } from "src/components/common";
-import { ToggleColorMode, ToggleDirection, TogglePolicyMenu } from "src/components/toggles";
+import { ToggleColorMode } from "src/components/toggles";
 
 type MenuStack = ComponentWithAs<"div", StackProps>;
 
 export interface IUseNavProps {
   NavbarLinksStack: MenuStack;
   SettingsToggleStack: MenuStack;
-  items: { title: string }[];
+  items: { title: string; href: string }[];
 }
 
 const useNav = ({ NavbarLinksStack, SettingsToggleStack, items }: IUseNavProps) => {
@@ -16,9 +16,8 @@ const useNav = ({ NavbarLinksStack, SettingsToggleStack, items }: IUseNavProps) 
     <NavbarLinksStack as="ul" id="navbar-links" listStyleType="none" spacing={4}>
       {items.map((item) => (
         <Heading as="li" key={item.title} variant="mainNav">
-          {/* TODO: replace href with item.href once pages are ready */}
           <InternalLink
-            href={`/`}
+            href={item.href}
             aria-label={`Navigate to ${item.title.toLowerCase()}`}
             variant="internal"
           >
@@ -30,10 +29,8 @@ const useNav = ({ NavbarLinksStack, SettingsToggleStack, items }: IUseNavProps) 
   );
 
   const SettingToggles = () => (
-    <SettingsToggleStack as="menu" id="setting-toggles" m={0} p={0} pt="4">
+    <SettingsToggleStack as="menu" id="setting-toggles" m={0} p={0}>
       <ToggleColorMode />
-      <ToggleDirection />
-      <TogglePolicyMenu />
     </SettingsToggleStack>
   );
 

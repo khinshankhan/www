@@ -5,7 +5,7 @@ import { ToggleNavbarMenu } from "src/components/toggles";
 import useNav from "./useNav";
 
 export interface IMobileHeaderProps {
-  items: { title: string }[];
+  items: { title: string; href: string }[];
 }
 export const MobileHeader = ({ items }: IMobileHeaderProps) => {
   const { NavbarLinks, SettingToggles } = useNav({

@@ -4,7 +4,7 @@ import { Logo } from "src/assets";
 import useNav from "./useNav";
 
 export interface IDesktopHeaderProps {
-  items: { title: string }[];
+  items: { title: string; href: string }[];
 }
 export const DesktopHeader = ({ items }: IDesktopHeaderProps) => {
   const { NavbarLinks, SettingToggles } = useNav({
