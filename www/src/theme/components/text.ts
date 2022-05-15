@@ -9,7 +9,7 @@ const Text = {
   baseStyle: {
     fontFamily: `body`,
     fontWeight: `normal`,
-    fontSize: [`md`, `lg`],
+    fontSize: { base: `md`, sm: `lg` },
   },
 };
 
