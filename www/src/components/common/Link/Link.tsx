@@ -8,14 +8,14 @@ import * as url from "src/utils/url";
 import ExternalLink from "./ExternalLink";
 import InternalLink from "./InternalLink";
 
-// TODO: handle title
 export type ILinkProps = {
   href: string;
   isFile?: boolean | undefined;
+  // TODO: handle title
   title?: string;
+  children?: any;
   // HACK: this is just a lazy fix
   // these types should be discerned properly later
-  children?: any;
   [key: string]: any;
 };
 

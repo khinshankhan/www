@@ -12,7 +12,7 @@ const SocialMediaLinks = (props: ButtonGroupProps) => (
   <ButtonGroup variant="ghost" color="gray.600" {...props}>
     <IconButton
       as="a"
-      href="https://github.com/kkhan01"
+      href="https://github.com/khinshankhan"
       target="_blank"
       rel="noreferrer noopener"
       aria-label="GitHub"
@@ -26,22 +26,8 @@ const SocialMediaLinks = (props: ButtonGroupProps) => (
       aria-label="LinkedIn"
       icon={<FaLinkedin fontSize="20px" />}
     />
-    <IconButton
-      as="a"
-      href="https://discordapp.com/users/356260437567995914/"
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label="Discord"
-      icon={<FaDiscord fontSize="20px" />}
-    />
-    <IconButton
-      as="a"
-      href="https://khinshankhan.com/feed.xml"
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label="Rss"
-      icon={<FaRss fontSize="20px" />}
-    />
+    <IconButton as="a" href="/soon" aria-label="Discord" icon={<FaDiscord fontSize="20px" />} />
+    <IconButton as="a" href="/soon" aria-label="Rss" icon={<FaRss fontSize="20px" />} />
   </ButtonGroup>
 );
 

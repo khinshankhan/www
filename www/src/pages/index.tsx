@@ -11,16 +11,16 @@ const Index = () => (
     <Center as={Heading.h1} align="center">
       <VStack>
         <chakra.span>Hello there 👋</chakra.span>
-        <chakra.span>I'm {name}!</chakra.span>
+        <chakra.span>I&apos;m {name}!</chakra.span>
       </VStack>
     </Center>
 
     <Center as={Heading.h2} align="center">
-      I'm a software engineer.
+      I&apos;m a software engineer.
     </Center>
 
-    <Text align="center" fontSize={[`lg`, `xl`]}>
-      Wasn't too sure what to put on a homepage, so I put what would interest me: this site
+    <Text align="center" fontSize={{ base: `lg`, sm: `xl` }}>
+      Wasn&apos;t too sure what to put on a homepage, so I put what would interest me: this site
       currently has{` `}
       <Text display="inline-block" color="internal" fontSize="inherit">
         0

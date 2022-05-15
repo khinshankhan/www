@@ -7,6 +7,7 @@ export type IInternalLinkProps = {
   children?: any;
   [key: string]: any;
 };
+
 export const InternalLink = ({ href, ...props }: IInternalLinkProps) => (
   <ChakraLink as={GatsbyLink} to={href} variant="internal" {...props} />
 );

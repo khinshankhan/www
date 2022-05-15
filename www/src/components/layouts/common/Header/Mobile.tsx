@@ -1,16 +1,12 @@
 import React from "react";
-import { useDisclosure, Container, Collapse, Flex, HStack, VStack } from "@chakra-ui/react";
+import { useDisclosure, Container, Collapse, Flex, Stack, VStack } from "@chakra-ui/react";
 import { Logo } from "src/assets";
-import { Heading, InternalLink } from "src/components/common";
-import {
-  ToggleColorMode,
-  ToggleDirection,
-  ToggleNavbarMenu,
-  TogglePolicyMenu,
-} from "src/components/toggles";
+import { ToggleNavbarMenu } from "src/components/toggles";
+import NavbarLinks from "./navs/NavbarLinks";
+import SettingToggles from "./navs/SettingToggles";
 
 export interface IMobileHeaderProps {
-  items: { title: string }[];
+  items: { title: string; href: string }[];
 }
 export const MobileHeader = ({ items }: IMobileHeaderProps) => {
   const { isOpen, onToggle } = useDisclosure();
@@ -48,26 +44,8 @@ export const MobileHeader = ({ items }: IMobileHeaderProps) => {
         {...borderStyles}
       >
         <Collapse in={isOpen} animateOpacity>
-          <VStack as="ul" id="navbar-links" listStyleType="none" spacing={4}>
-            {items.map((item) => (
-              <Heading as="li" key={item.title} variant="mainNav">
-                {/* TODO: replace href with item.href once pages are ready */}
-                <InternalLink
-                  href={`/`}
-                  aria-label={`Navigate to ${item.title.toLowerCase()}`}
-                  variant="internal"
-                >
-                  {item.title}
-                </InternalLink>
-              </Heading>
-            ))}
-          </VStack>
-
-          <HStack as="menu" id="setting-toggles" m={0} p={0} pt="4">
-            <ToggleColorMode />
-            <ToggleDirection />
-            <TogglePolicyMenu />
-          </HStack>
+          <NavbarLinks Stack={VStack} items={items} />
+          <SettingToggles Stack={Stack} />
         </Collapse>
       </Flex>
     </Container>

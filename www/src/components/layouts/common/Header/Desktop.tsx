@@ -1,11 +1,11 @@
 import React from "react";
 import { Container, Flex, HStack } from "@chakra-ui/react";
 import { Logo } from "src/assets";
-import { Heading, InternalLink } from "src/components/common";
-import { ToggleColorMode, ToggleDirection, TogglePolicyMenu } from "src/components/toggles";
+import NavbarLinks from "./navs/NavbarLinks";
+import SettingToggles from "./navs/SettingToggles";
 
 export interface IDesktopHeaderProps {
-  items: { title: string }[];
+  items: { title: string; href: string }[];
 }
 export const DesktopHeader = ({ items }: IDesktopHeaderProps) => (
   <Container as="header" variant="page" mb="4">
@@ -25,26 +25,8 @@ export const DesktopHeader = ({ items }: IDesktopHeaderProps) => (
       </Flex>
 
       <HStack as="menu" id="navbar-content" flex={0} justify="flex-end" direction="row" spacing={6}>
-        <HStack as="ul" id="navbar-links" listStyleType="none" spacing={4}>
-          {items.map((item) => (
-            <Heading as="li" key={item.title} variant="mainNav">
-              {/* TODO: replace href with item.href once pages are ready */}
-              <InternalLink
-                href={`/`}
-                aria-label={`Navigate to ${item.title.toLowerCase()}`}
-                variant="internal"
-              >
-                {item.title}
-              </InternalLink>
-            </Heading>
-          ))}
-        </HStack>
-
-        <HStack as="menu" id="setting-toggles" m={0} p={0}>
-          <ToggleColorMode />
-          <ToggleDirection />
-          <TogglePolicyMenu />
-        </HStack>
+        <NavbarLinks Stack={HStack} items={items} />
+        <SettingToggles Stack={HStack} />
       </HStack>
     </Flex>
   </Container>

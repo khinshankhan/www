@@ -6,6 +6,7 @@ export type IExternalLinkProps = {
   children?: any;
   [key: string]: any;
 };
+
 export const ExternalLink = ({ href, ...props }: IExternalLinkProps) => (
   <ChakraLink
     as={chakra.a}
