@@ -9,8 +9,11 @@ export const defaultFonts: ThemeOverride["fonts"] = {
   mono: `SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
 };
 
+// TODO: source this from config?
 export const fonts: ThemeOverride["fonts"] = {
   heading: `'Crimson Pro', ${defaultFonts.heading}`,
   body: `'Inter', ui-serif, ${defaultFonts.body}`,
   mono: defaultFonts.mono,
 };
+
+export const fontSizes = [`5xl`, `4xl`, `3xl`, `2xl`, `xl`, `lg`, `md`, `sm`];

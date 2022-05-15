@@ -1,5 +1,5 @@
-import { fonts as userFonts } from "constants/fonts";
 import { ThemeOverride } from "@chakra-ui/react";
+import { fonts as userFonts } from "../custom/typography";
 
 const letterSpacings: ThemeOverride["letterSpacings"] = {
   tighter: `-0.05em`,

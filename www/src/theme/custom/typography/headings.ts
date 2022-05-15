@@ -1,6 +1,4 @@
-export const fontSizes = [`5xl`, `4xl`, `3xl`, `2xl`, `xl`, `lg`, `md`, `sm`];
-
-export const headingBaseStyles = {
+export const headingBaseVariantsStyles = {
   h1: {
     fontFamily: `heading`,
     fontWeight: `bold`,
@@ -35,6 +33,15 @@ export const headingBaseStyles = {
     fontFamily: `heading`,
     fontWeight: `semibold`,
     fontSize: { base: `sm`, sm: `md`, "2xl": `lg` },
+    letterSpacings: `wider`,
+  },
+};
+
+export const headingVariantsStyles = {
+  mainNav: {
+    fontFamily: `body`,
+    fontWeight: `medium`,
+    fontSize: { base: `xl`, "2xl": `2xl` },
     letterSpacings: `wider`,
   },
 };

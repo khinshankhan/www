@@ -1,4 +1,4 @@
-import { fontSizes, headingBaseStyles } from "../custom/typography";
+import { fontSizes, headingBaseVariantsStyles, headingVariantsStyles } from "../custom/typography";
 
 const sizes = fontSizes.reduce(
   (stored, curr) => ({ ...stored, [curr]: { fontSize: curr, lineHeight: curr } }),
@@ -7,14 +7,8 @@ const sizes = fontSizes.reduce(
 const Heading = {
   sizes,
   variants: {
-    // h1-h6
-    ...headingBaseStyles,
-    mainNav: {
-      fontFamily: `body`,
-      fontWeight: `medium`,
-      fontSize: [`xl`, null, null, null, `2xl`],
-      letterSpacings: `wider`,
-    },
+    ...headingBaseVariantsStyles, // h1-h6
+    ...headingVariantsStyles,
   },
 };
 
