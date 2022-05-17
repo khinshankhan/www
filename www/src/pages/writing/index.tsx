@@ -1,8 +1,7 @@
 import React from "react";
-import { Text } from "@chakra-ui/react";
-import { Card } from "src/components/blocks";
 import { Heading } from "src/components/common";
 import Layout from "src/components/layouts/Page";
+import { WritingCard } from "src/components/writing";
 
 const WRITING_NODE1 = {
   id: `one`,
@@ -71,14 +70,9 @@ const Index = () => (
     <Heading.h1>Writing</Heading.h1>
     <>
       {WRITING_NODES.map((node) => (
-        <Text key={node.id}>{node.frontmatter.title}</Text>
+        <WritingCard key={node.id} node={node} />
       ))}
     </>
-    <Card href={WRITING_NODE1.fields.slug}>
-      {WRITING_NODE1.frontmatter.title}
-      {WRITING_NODE1.fields.tags.join(`,`)}
-      {WRITING_NODE1.excerpt}
-    </Card>
   </Layout>
 );
 
