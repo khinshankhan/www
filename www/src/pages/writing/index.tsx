@@ -67,7 +67,7 @@ const WRITING_NODES = [WRITING_NODE1, WRITING_NODE2, WRITING_NODE3, WRITING_NODE
 
 const Index = () => (
   <Layout>
-    <Heading.h1>Writing</Heading.h1>
+    <Heading.h1>WRITING</Heading.h1>
     <>
       {WRITING_NODES.map((node) => (
         <WritingCard key={node.id} node={node} />
