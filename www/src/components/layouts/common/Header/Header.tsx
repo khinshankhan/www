@@ -12,7 +12,7 @@ const MENU_ITEMS = [
   },
   {
     title: `Writing`,
-    href: `/soon`,
+    href: `/writing`,
   },
   {
     title: `Portfolio`,
