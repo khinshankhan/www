@@ -1,18 +1,31 @@
-import React from "react";
+import React, { FC } from "react";
 import { Card, Pill, PillGroup } from "src/components/blocks";
 
-export const WritingCard = ({ node, ...props }) => (
-  <Card href={node.fields.slug} {...props}>
-    {node.frontmatter.title}
+export const WritingCard: FC = ({ node, ...props }) => {
+  const tagPills = (
     <PillGroup>
       {node.fields.tags.map((tag) => (
-        <Pill key={tag} zIndex={0}>
+        <Pill
+          key={tag}
+          onClick={() => {
+            console.log({ tag });
+          }}
+        >
           {tag}
         </Pill>
       ))}
     </PillGroup>
-    {node.excerpt}
-  </Card>
-);
+  );
+
+  return (
+    <Card
+      href={node.fields.slug}
+      {...props}
+      title={node.frontmatter.title}
+      middle={tagPills}
+      body={node.excerpt}
+    />
+  );
+};
 
 export default WritingCard;

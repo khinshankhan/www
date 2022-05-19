@@ -1,4 +1,4 @@
-import React, { ReactNode, Children } from "react";
+import React, { FC, ReactNode, Children } from "react";
 import { Text, LinkOverlay, LinkBox, useColorModeValue } from "@chakra-ui/react";
 import { Link } from "src/components/common";
 import Heading from "src/components/common/Heading";
@@ -8,15 +8,14 @@ interface ICardProps {
   title?: string | ReactNode;
   middle?: string | ReactNode;
   body?: string | ReactNode;
-  children: ReactNode;
 }
 
-export const Card = ({ href, title, middle, body, children, ...props }: ICardProps) => {
+export const Card: FC<ICardProps> = ({ href, title, middle, body, children, ...props }) => {
   const bg = useColorModeValue(`#FFFFFF`, `#1A202C`);
   const bgHover = useColorModeValue(`#DDDDDD`, `#1E2430`);
   const colorHover = useColorModeValue(`gray.500`, `gray.400`);
 
-  const arrayChildren = Children.toArray(children);
+  const arrayChildren = children ? Children.toArray(children) : [];
 
   let cardTitle = title;
   let cardMiddle = middle;
@@ -42,6 +41,11 @@ export const Card = ({ href, title, middle, body, children, ...props }: ICardPro
       throw new Error(`Invalid number of children`);
   }
 
+  const focusingStyles = {
+    background: bgHover,
+    color: colorHover,
+  };
+
   return (
     <LinkBox
       pl="5"
@@ -52,23 +56,11 @@ export const Card = ({ href, title, middle, body, children, ...props }: ICardPro
       borderWidth="1px"
       rounded="md"
       background={bg}
-      _hover={{
-        background: bgHover,
-        color: colorHover,
-      }}
-      _focusWithin={{
-        background: bgHover,
-        color: colorHover,
-      }}
+      _hover={focusingStyles}
+      _focusWithin={focusingStyles}
       {...props}
     >
-      <Heading.h3
-        fontFamily="body"
-        color="inherit"
-        _hover={{
-          textDecoration: `none`,
-        }}
-      >
+      <Heading.h3 fontFamily="body" color="inherit">
         <LinkOverlay as={Link} href={href}>
           {cardTitle}
         </LinkOverlay>
