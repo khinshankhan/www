@@ -1,7 +1,7 @@
 import React from "react";
 import { chakra, Center, Text, VStack } from "@chakra-ui/react";
 import { Heading } from "src/components/common";
-import Layout from "src/components/layouts/Centered";
+import { CenteredLayout as Layout } from "src/components/layouts";
 
 // TODO: fetch name from site meta
 const name = `Khinshan`;

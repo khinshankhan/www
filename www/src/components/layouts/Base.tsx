@@ -8,7 +8,7 @@ interface IBaseLayoutProps {
   children?: ReactNode;
 }
 
-const BaseLayout = ({ minH = null, children }: IBaseLayoutProps): JSX.Element => {
+export const BaseLayout = ({ minH = null, children }: IBaseLayoutProps): JSX.Element => {
   const minHeight = minH ?? { base: `70vh`, md: `75vh` };
 
   return (

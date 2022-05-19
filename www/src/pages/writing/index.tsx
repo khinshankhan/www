@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Heading } from "src/components/common";
-import Layout from "src/components/layouts/Page";
+import { PageLayout as Layout } from "src/components/layouts";
 import { WritingCard } from "src/components/writing";
 
 const WRITING_NODE1 = {

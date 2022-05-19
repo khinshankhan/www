@@ -1,7 +1,7 @@
 import React from "react";
 import { Center, Text } from "@chakra-ui/react";
 import { Heading, Link } from "src/components/common";
-import Layout from "src/components/layouts/Centered";
+import { CenteredLayout as Layout } from "src/components/layouts";
 
 const Index = () => (
   <Layout>

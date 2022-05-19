@@ -10,7 +10,7 @@ interface ICenteredLayoutProps {
   [key: string]: any;
 }
 
-const CenteredLayout = ({
+export const CenteredLayout = ({
   pageMinH = { base: `70vh`, md: `75vh`, "2xl": `76vh` },
   topSpace = true,
   bottomSpace = true,
