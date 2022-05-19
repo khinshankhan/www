@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Heading } from "src/components/common";
 import Layout from "src/components/layouts/Page";
 import { WritingCard } from "src/components/writing";
@@ -59,21 +59,37 @@ const WRITING_NODE5 = {
   excerpt: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae mi id diam finibus tincidunt. Cras rutrum nunc vitae porta maximus. Proin nisi dui, luctus ut urna sit amet, vulputate aliquet erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum orci non ligula mattis, nec consectetur magna malesuada. Praesent vel fringilla tellus. Sed faucibus, nisl sit amet porta viverra, ipsum orci faucibus metus, at lobortis lectus nulla quis tortor.`,
   fields: {
     slug: `/soon`,
-    tags: [`fifth`, `post`, `t`],
+    tags: [
+      `fifth`,
+      `post`,
+      `t`,
+      `long tag`,
+      `super long tag`,
+      `anotha long tag`,
+      `and anotha`,
+      `one more`,
+    ],
   },
 };
 
 const WRITING_NODES = [WRITING_NODE1, WRITING_NODE2, WRITING_NODE3, WRITING_NODE4, WRITING_NODE5];
 
-const Index = () => (
-  <Layout>
-    <Heading.h1>WRITING</Heading.h1>
-    <>
-      {WRITING_NODES.map((node) => (
-        <WritingCard key={node.id} node={node} />
-      ))}
-    </>
-  </Layout>
-);
+const Index = () => {
+  // TODO: remove once filters are implemented
+  // potentially make this at context level?
+  const [active, setActive] = useState({} as { [key: string]: boolean });
+  const toggleTag = (tag) => setActive((prev) => ({ ...prev, [tag]: !prev[tag] }));
+
+  return (
+    <Layout>
+      <Heading.h1>WRITING</Heading.h1>
+      <>
+        {WRITING_NODES.map((node) => (
+          <WritingCard key={node.id} node={node} active={active} toggle={toggleTag} />
+        ))}
+      </>
+    </Layout>
+  );
+};
 
 export default Index;
