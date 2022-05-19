@@ -1,10 +1,16 @@
 import React from "react";
-import { Card } from "src/components/blocks";
+import { Card, Pill, PillGroup } from "src/components/blocks";
 
 export const WritingCard = ({ node, ...props }) => (
   <Card href={node.fields.slug} {...props}>
     {node.frontmatter.title}
-    {node.fields.tags.join(`,`)}
+    <PillGroup>
+      {node.fields.tags.map((tag) => (
+        <Pill key={tag} zIndex={0}>
+          {tag}
+        </Pill>
+      ))}
+    </PillGroup>
     {node.excerpt}
   </Card>
 );
