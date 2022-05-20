@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { Box, Button, ButtonProps, Icon } from "@chakra-ui/react";
+import { BoxProps, ButtonProps, Box, Button, Icon } from "@chakra-ui/react";
 import { AiOutlineClose as CloseIcon } from "react-icons/ai";
 
-export const PillGroup: FC = ({ children, ...props }) => (
+export const PillGroup: FC<BoxProps> = ({ children, ...props }) => (
   <Box display="flex" flexWrap="wrap" {...props}>
     {children}
   </Box>

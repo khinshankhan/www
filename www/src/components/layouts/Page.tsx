@@ -7,7 +7,7 @@ interface IPageLayoutProps {
 }
 
 export const PageLayout = ({ children, ...props }: IPageLayoutProps) => (
-  <CenteredLayout mt={{ base: `0%` }} maxW="100%" {...props}>
+  <CenteredLayout mt={{ base: `0%` }} maxW="100%" p={0} {...props}>
     {children}
   </CenteredLayout>
 );
