@@ -1,5 +1,14 @@
 import React, { FC } from "react";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Box,
+} from "@chakra-ui/react";
 import { Pill, PillGroup } from "src/components/blocks";
+import { Heading } from "src/components/common";
 import { SidebarContainer, SidebarTitle } from "src/components/layouts";
 
 interface ISearchSidebarProps {
@@ -18,27 +27,47 @@ export const SearchSidebar: FC<ISearchSidebarProps> = ({ selectedTags, available
       Tags
     </SidebarTitle>
 
-    <SidebarTitle as="h4" variant="h6">
-      Selected
-    </SidebarTitle>
-    <PillGroup mb={4}>
-      {selectedTags.map((tag) => (
-        <Pill key={tag} selected>
-          {tag}
-        </Pill>
-      ))}
-    </PillGroup>
+    <Accordion defaultIndex={[0]} allowMultiple w="100%">
+      <AccordionItem>
+        <Heading.h2 as="h5" fontFamily="body">
+          <AccordionButton>
+            <Box flex="1" textAlign="left">
+              Selected
+            </Box>
+            <AccordionIcon />
+          </AccordionButton>
+        </Heading.h2>
+        <AccordionPanel pb={4}>
+          <PillGroup mb={4}>
+            {selectedTags.map((tag) => (
+              <Pill key={tag} selected>
+                {tag}
+              </Pill>
+            ))}
+          </PillGroup>
+        </AccordionPanel>
+      </AccordionItem>
 
-    <SidebarTitle as="h4" variant="h6">
-      Available
-    </SidebarTitle>
-    <PillGroup mb={4}>
-      {availableTags.map((tag) => (
-        <Pill key={tag} selected={false}>
-          {tag}
-        </Pill>
-      ))}
-    </PillGroup>
+      <AccordionItem>
+        <Heading.h2 as="h5" fontFamily="body">
+          <AccordionButton>
+            <Box flex="1" textAlign="left">
+              Available
+            </Box>
+            <AccordionIcon />
+          </AccordionButton>
+        </Heading.h2>
+        <AccordionPanel pb={4}>
+          <PillGroup mb={4}>
+            {availableTags.map((tag) => (
+              <Pill key={tag} selected>
+                {tag}
+              </Pill>
+            ))}
+          </PillGroup>
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
   </SidebarContainer>
 );
 
