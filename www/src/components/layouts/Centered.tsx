@@ -10,7 +10,7 @@ interface ICenteredLayoutProps {
   [key: string]: any;
 }
 
-const CenteredLayout = ({
+export const CenteredLayout = ({
   pageMinH = { base: `70vh`, md: `75vh`, "2xl": `76vh` },
   topSpace = true,
   bottomSpace = true,
@@ -21,7 +21,6 @@ const CenteredLayout = ({
     {topSpace && <br />}
     <Container
       as={VStack}
-      position="relative"
       spacing={10}
       mt={{ base: `0%`, md: `7%` }}
       maxW={{ base: `32ch`, xs: `50ch`, sm: `80ch` }}

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Heading } from "src/components/common";
-import Layout from "src/components/layouts/Page";
-import { WritingCard } from "src/components/writing";
+import { PageLayout as Layout, WithSidebar } from "src/components/layouts";
+import { SearchSidebar } from "src/components/search";
+import { WritingList } from "src/components/writing";
 
 const WRITING_NODE1 = {
   id: `one`,
@@ -75,19 +76,61 @@ const WRITING_NODE5 = {
 const WRITING_NODES = [WRITING_NODE1, WRITING_NODE2, WRITING_NODE3, WRITING_NODE4, WRITING_NODE5];
 
 const Index = () => {
+  const nodes = WRITING_NODES;
   // TODO: remove once filters are implemented
   // potentially make this at context level?
-  const [active, setActive] = useState({} as { [key: string]: boolean });
-  const toggleTag = (tag) => setActive((prev) => ({ ...prev, [tag]: !prev[tag] }));
+  const [tags, setTags] = useState({} as { [key: string]: boolean });
+  const toggleTag = (tag: string) => setTags((prev) => ({ ...prev, [tag]: !prev[tag] }));
+
+  useEffect(() => {
+    setTags(
+      WRITING_NODES.flatMap((node) => node.fields.tags).reduce(
+        (stored, curr) => ({ ...stored, [curr]: false }),
+        {}
+      )
+    );
+  }, []);
+
+  const organizedTags = Object.entries(tags).reduce(
+    (stored, [tag, status]) => {
+      const selected = [...stored.selected];
+      const available = [...stored.available];
+      if (status) {
+        selected.push(tag);
+      } else {
+        available.push(tag);
+      }
+      return {
+        selected,
+        available,
+      };
+    },
+    { selected: [] as string[], available: [] as string[] }
+  );
+
+  let displayNodes = nodes;
+  if (organizedTags.selected.length !== 0) {
+    displayNodes = nodes.filter((node) =>
+      organizedTags.selected.every((selectedTag) => node.fields.tags.includes(selectedTag))
+    );
+  }
 
   return (
     <Layout>
-      <Heading.h1>WRITING</Heading.h1>
       <>
-        {WRITING_NODES.map((node) => (
-          <WritingCard key={node.id} node={node} active={active} toggle={toggleTag} />
-        ))}
+        <Heading.h1 align="center" pb="2">
+          WRITING
+        </Heading.h1>
+        <Heading.h3 align="center" fontFamily="body" fontWeight="normal" pb="10">
+          My thoughts and ideas
+        </Heading.h3>
       </>
+
+      <WithSidebar direction="left">
+        <SearchSidebar organizedTags={organizedTags} toggle={toggleTag} />
+
+        <WritingList nodes={displayNodes} tags={tags} toggle={toggleTag} />
+      </WithSidebar>
     </Layout>
   );
 };

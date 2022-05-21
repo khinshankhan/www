@@ -1,15 +1,19 @@
 import React, { ReactNode } from "react";
-import CenteredLayout from "./Centered";
+import { Container } from "@chakra-ui/react";
+import Layout from "./Base";
 
 interface IPageLayoutProps {
   children?: ReactNode;
   [key: string]: any;
 }
 
-const PageLayout = ({ children, ...props }: IPageLayoutProps) => (
-  <CenteredLayout mt={{ base: `0%` }} maxW="90%" {...props}>
-    {children}
-  </CenteredLayout>
+export const PageLayout = ({ children, ...props }: IPageLayoutProps) => (
+  <Layout {...props}>
+    <Container maxW="95%" p={0}>
+      {children}
+      <br />
+    </Container>
+  </Layout>
 );
 
 export default PageLayout;
