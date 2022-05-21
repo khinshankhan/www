@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Heading } from "src/components/common";
 import { PageLayout as Layout, WithSidebar, ContentContainer } from "src/components/layouts";
 import { SearchSidebar } from "src/components/search";
@@ -75,26 +75,29 @@ const WRITING_NODE5 = {
 
 const WRITING_NODES = [WRITING_NODE1, WRITING_NODE2, WRITING_NODE3, WRITING_NODE4, WRITING_NODE5];
 
-const genNums = (n) => [...Array.from({ length: n }, (_, index) => index + 1)];
-
 const Index = () => {
   // TODO: remove once filters are implemented
   // potentially make this at context level?
-  const [active, setActive] = useState({} as { [key: string]: boolean });
-  const toggleTag = (tag) => setActive((prev) => ({ ...prev, [tag]: !prev[tag] }));
+  const [tags, setTags] = useState({} as { [key: string]: boolean });
+  const toggleTag = (tag: string) => setTags((prev) => ({ ...prev, [tag]: !prev[tag] }));
 
-  const nums = genNums(5).map((n) => `${n}00`);
-  const nums2 = genNums(6).map((n) => `${n}01`);
+  useEffect(() => {
+    setTags(
+      WRITING_NODES.flatMap((node) => node.fields.tags).reduce(
+        (stored, curr) => ({ ...stored, [curr]: false }),
+        {}
+      )
+    );
+  }, []);
 
   return (
     <Layout>
       <Heading.h1>WRITING</Heading.h1>
-
       <WithSidebar direction="left">
-        <SearchSidebar selectedTags={nums} availableTags={nums2} />
+        <SearchSidebar tags={tags} toggle={toggleTag} />
         <ContentContainer maxW="95%">
           {WRITING_NODES.map((node) => (
-            <WritingCard key={node.id} node={node} active={active} toggle={toggleTag} />
+            <WritingCard key={node.id} node={node} active={tags} toggle={toggleTag} />
           ))}
         </ContentContainer>
       </WithSidebar>
