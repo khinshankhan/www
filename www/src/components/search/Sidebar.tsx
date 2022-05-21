@@ -46,7 +46,7 @@ export const SearchSidebar: FC<ISearchSidebarProps> = ({ tags, toggle }) => {
         Tags
       </SidebarTitle>
 
-      <Accordion defaultIndex={[0]} allowMultiple w="100%">
+      <Accordion defaultIndex={[0, 1]} allowMultiple w="100%">
         <AccordionItem>
           <Heading.h2 as="h5" fontFamily="body">
             <AccordionButton>
@@ -82,7 +82,7 @@ export const SearchSidebar: FC<ISearchSidebarProps> = ({ tags, toggle }) => {
           </Heading.h2>
           <AccordionPanel pb={4}>
             {organizedTags.available.length === 0 ? (
-              <Text>All tags seems to be selected!</Text>
+              <Text>All tags seem to be selected!</Text>
             ) : (
               <PillGroup mb={4}>
                 {organizedTags.available.map((tag) => (

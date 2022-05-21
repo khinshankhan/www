@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Heading } from "src/components/common";
-import { PageLayout as Layout, WithSidebar, ContentContainer } from "src/components/layouts";
+import { PageLayout as Layout, WithSidebar } from "src/components/layouts";
 import { SearchSidebar } from "src/components/search";
-import { WritingCard } from "src/components/writing";
+import { WritingList } from "src/components/writing";
 
 const WRITING_NODE1 = {
   id: `one`,
@@ -76,6 +76,7 @@ const WRITING_NODE5 = {
 const WRITING_NODES = [WRITING_NODE1, WRITING_NODE2, WRITING_NODE3, WRITING_NODE4, WRITING_NODE5];
 
 const Index = () => {
+  const nodes = WRITING_NODES;
   // TODO: remove once filters are implemented
   // potentially make this at context level?
   const [tags, setTags] = useState({} as { [key: string]: boolean });
@@ -95,11 +96,7 @@ const Index = () => {
       <Heading.h1>WRITING</Heading.h1>
       <WithSidebar direction="left">
         <SearchSidebar tags={tags} toggle={toggleTag} />
-        <ContentContainer maxW="95%">
-          {WRITING_NODES.map((node) => (
-            <WritingCard key={node.id} node={node} active={tags} toggle={toggleTag} />
-          ))}
-        </ContentContainer>
+        <WritingList nodes={nodes} tags={tags} toggle={toggleTag} />
       </WithSidebar>
     </Layout>
   );
