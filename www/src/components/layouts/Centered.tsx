@@ -21,7 +21,6 @@ export const CenteredLayout = ({
     {topSpace && <br />}
     <Container
       as={VStack}
-      position="relative"
       spacing={10}
       mt={{ base: `0%`, md: `7%` }}
       maxW={{ base: `32ch`, xs: `50ch`, sm: `80ch` }}

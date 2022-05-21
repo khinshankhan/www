@@ -1,20 +1,22 @@
-import React, { ReactNode } from "react";
-import { Container, chakra } from "@chakra-ui/react";
+import React, { FC, ReactNode } from "react";
+import { ContainerProps, Container, chakra } from "@chakra-ui/react";
 import { Header, Footer } from "./common";
 
-interface IBaseLayoutProps {
-  // TODO: look into better type for this
-  minH?: string | (string | null)[] | { [key: string]: string } | null;
+interface IBaseLayoutProps extends ContainerProps {
   children?: ReactNode;
 }
 
-export const BaseLayout = ({ minH = null, children }: IBaseLayoutProps): JSX.Element => {
+export const BaseLayout: FC<IBaseLayoutProps> = ({
+  minH = null,
+  children,
+  ...props
+}): JSX.Element => {
   const minHeight = minH ?? { base: `70vh`, md: `75vh` };
 
   return (
     <chakra.div id="page">
       <Header />
-      <Container variant="page" minH={minHeight} id="content">
+      <Container id="content" variant="page" minH={minHeight} {...props}>
         {children}
       </Container>
       <Footer />
