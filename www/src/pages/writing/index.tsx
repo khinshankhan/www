@@ -91,12 +91,45 @@ const Index = () => {
     );
   }, []);
 
+  const organizedTags = Object.entries(tags).reduce(
+    (stored, [tag, status]) => {
+      const selected = [...stored.selected];
+      const available = [...stored.available];
+      if (status) {
+        selected.push(tag);
+      } else {
+        available.push(tag);
+      }
+      return {
+        selected,
+        available,
+      };
+    },
+    { selected: [] as string[], available: [] as string[] }
+  );
+
+  let displayNodes = nodes;
+  if (organizedTags.selected.length !== 0) {
+    displayNodes = nodes.filter((node) =>
+      organizedTags.selected.every((selectedTag) => node.fields.tags.includes(selectedTag))
+    );
+  }
+
   return (
     <Layout>
-      <Heading.h1>WRITING</Heading.h1>
+      <>
+        <Heading.h1 align="center" pb="2">
+          WRITING
+        </Heading.h1>
+        <Heading.h3 align="center" fontFamily="body" fontWeight="normal" pb="10">
+          My thoughts and ideas
+        </Heading.h3>
+      </>
+
       <WithSidebar direction="left">
-        <SearchSidebar tags={tags} toggle={toggleTag} />
-        <WritingList nodes={nodes} tags={tags} toggle={toggleTag} />
+        <SearchSidebar organizedTags={organizedTags} toggle={toggleTag} />
+
+        <WritingList nodes={displayNodes} tags={tags} toggle={toggleTag} />
       </WithSidebar>
     </Layout>
   );
