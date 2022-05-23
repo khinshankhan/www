@@ -1,22 +1,21 @@
-import React, { ReactNode } from "react";
-import { Container, VStack } from "@chakra-ui/react";
+import React, { FC, ReactNode } from "react";
+import { ContainerProps, Container, VStack } from "@chakra-ui/react";
 import BaseLayout from "./Base";
 
-interface ICenteredLayoutProps {
-  pageMinH?: string | (string | null)[] | { [key: string]: string } | null;
+interface ICenteredLayoutProps extends ContainerProps {
+  pageMinH?: ContainerProps["minH"];
   topSpace?: boolean;
   bottomSpace?: boolean;
   children?: ReactNode;
-  [key: string]: any;
 }
 
-export const CenteredLayout = ({
+export const CenteredLayout: FC<ICenteredLayoutProps> = ({
   pageMinH = { base: `70vh`, md: `75vh`, "2xl": `76vh` },
   topSpace = true,
   bottomSpace = true,
   children,
   ...props
-}: ICenteredLayoutProps) => (
+}) => (
   <BaseLayout minH={pageMinH}>
     {topSpace && <br />}
     <Container

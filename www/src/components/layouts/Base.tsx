@@ -1,12 +1,8 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC } from "react";
 import { ContainerProps, Container, chakra } from "@chakra-ui/react";
 import { Header, Footer } from "./common";
 
-interface IBaseLayoutProps extends ContainerProps {
-  children?: ReactNode;
-}
-
-export const BaseLayout: FC<IBaseLayoutProps> = ({
+export const BaseLayout: FC<ContainerProps> = ({
   minH = null,
   children,
   ...props
