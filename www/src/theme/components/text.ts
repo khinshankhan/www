@@ -4,12 +4,18 @@ const sizes = fontSizes.reduce(
   (stored, curr) => ({ ...stored, [curr]: { fontSize: curr, lineHeight: curr } }),
   {}
 );
+
 const Text = {
   sizes,
   baseStyle: {
     fontFamily: `body`,
     fontWeight: `normal`,
     fontSize: { base: `md`, sm: `lg` },
+  },
+  variants: {
+    dashboard: {
+      fontSize: { base: `lg`, sm: `xl` },
+    },
   },
 };
 

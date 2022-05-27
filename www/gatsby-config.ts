@@ -7,6 +7,7 @@ const plugins: GatsbyConfig["plugins"] = [
       resolveModules: [`.`],
     },
   },
+  `gatsby-plugin-react-helmet-async`,
   {
     resolve: `gatsby-plugin-manifest`,
     options: {
