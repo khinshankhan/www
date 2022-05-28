@@ -1,14 +1,14 @@
-import React from "react";
-import { Container, Flex, HStack } from "@chakra-ui/react";
+import React, { FC } from "react";
+import { ContainerProps, Container, Flex, HStack } from "@chakra-ui/react";
 import { Logo } from "src/assets";
 import NavbarLinks from "./navs/NavbarLinks";
 import SettingToggles from "./navs/SettingToggles";
 
-export interface IDesktopHeaderProps {
+export interface IDesktopHeaderProps extends ContainerProps {
   items: { title: string; href: string }[];
 }
-export const DesktopHeader = ({ items }: IDesktopHeaderProps) => (
-  <Container as="header" variant="page" mb="4">
+export const DesktopHeader: FC<IDesktopHeaderProps> = ({ items, ...props }) => (
+  <Container as="header" variant="page" mb="4" {...props}>
     <Flex
       as="nav"
       id="main-nav"

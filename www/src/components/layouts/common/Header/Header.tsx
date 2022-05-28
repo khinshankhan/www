@@ -28,7 +28,16 @@ export const Header = () => {
   const { isMobile } = useMobile();
 
   const HeaderComponent = isMobile ? MobileHeader : DesktopHeader;
-  return <HeaderComponent items={MENU_ITEMS} />;
+  return (
+    <HeaderComponent
+      items={MENU_ITEMS}
+      pos="sticky"
+      backdropFilter="blur(8px)"
+      top={0}
+      zIndex="sticky"
+      bg="bgAlpha"
+    />
+  );
 };
 
 export default Header;

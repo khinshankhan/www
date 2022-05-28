@@ -1,3 +1,6 @@
+import { transparentize } from "@chakra-ui/theme-tools";
+import { colorPalette } from "./colors";
+
 const semanticTokens = {
   colors: {
     bg: {
@@ -7,6 +10,10 @@ const semanticTokens = {
     bgContrast: {
       default: `blueGray.800`,
       _dark: `whiteAlpha.900`,
+    },
+    bgAlpha: {
+      default: transparentize(`white`, 0.85)(colorPalette),
+      _dark: transparentize(`blueGray.800`, 0.85)(colorPalette),
     },
     dividerColor: {
       default: `blueGray.200`,

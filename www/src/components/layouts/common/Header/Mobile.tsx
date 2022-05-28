@@ -1,21 +1,29 @@
-import React from "react";
-import { useDisclosure, Container, Collapse, Flex, Stack, VStack } from "@chakra-ui/react";
+import React, { FC } from "react";
+import {
+  ContainerProps,
+  useDisclosure,
+  Container,
+  Collapse,
+  Flex,
+  Stack,
+  VStack,
+} from "@chakra-ui/react";
 import { Logo } from "src/assets";
 import { ToggleNavbarMenu } from "src/components/toggles";
 import NavbarLinks from "./navs/NavbarLinks";
 import SettingToggles from "./navs/SettingToggles";
 
-export interface IMobileHeaderProps {
+export interface IMobileHeaderProps extends ContainerProps {
   items: { title: string; href: string }[];
 }
-export const MobileHeader = ({ items }: IMobileHeaderProps) => {
+export const MobileHeader: FC<IMobileHeaderProps> = ({ items, ...props }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   const borderStyles = {
     ...(isOpen && { pb: 4, borderBottom: 1, borderStyle: `solid`, borderColor: `dividerColor` }),
   };
   return (
-    <Container as="header" variant="page" mb="4">
+    <Container as="header" variant="page" mb="4" {...props}>
       <Flex
         as="nav"
         id="main-nav"
