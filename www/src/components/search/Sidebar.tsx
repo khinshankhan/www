@@ -37,7 +37,7 @@ export const SearchSidebar: FC<ISearchSidebarProps> = ({ organizedTags, toggle }
   }, [isMobile]);
 
   return (
-    <SidebarContainer>
+    <SidebarContainer separate>
       <Flex
         borderBottom={{ base: 1, md: 0 }}
         borderStyle="solid"

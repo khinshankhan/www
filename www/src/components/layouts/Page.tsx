@@ -1,13 +1,8 @@
-import React, { ReactNode } from "react";
-import { Container } from "@chakra-ui/react";
+import React, { FC } from "react";
+import { ContainerProps, Container } from "@chakra-ui/react";
 import Layout from "./Base";
 
-interface IPageLayoutProps {
-  children?: ReactNode;
-  [key: string]: any;
-}
-
-export const PageLayout = ({ children, ...props }: IPageLayoutProps) => (
+export const PageLayout: FC<ContainerProps> = ({ children, ...props }) => (
   <Layout {...props}>
     <Container maxW="95%" p={0}>
       {children}

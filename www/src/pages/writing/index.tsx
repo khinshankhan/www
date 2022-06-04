@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Heading } from "src/components/common";
 import { PageLayout as Layout, WithSidebar } from "src/components/layouts";
 import { SearchSidebar } from "src/components/search";
+import Seo from "src/components/Seo";
 import { WritingList } from "src/components/writing";
 
 const WRITING_NODE1 = {
@@ -117,14 +118,13 @@ const Index = () => {
 
   return (
     <Layout>
-      <>
-        <Heading.h1 align="center" pb="2">
-          WRITING
-        </Heading.h1>
-        <Heading.h3 align="center" fontFamily="body" fontWeight="normal" pb="10">
-          My thoughts and ideas
-        </Heading.h3>
-      </>
+      <Seo title="Writing" />
+      <Heading.h1 align="center" pb="2">
+        WRITING
+      </Heading.h1>
+      <Heading.h3 align="center" fontFamily="body" fontWeight="normal" pb="10">
+        My thoughts and ideas
+      </Heading.h3>
 
       <WithSidebar direction="left">
         <SearchSidebar organizedTags={organizedTags} toggle={toggleTag} />
