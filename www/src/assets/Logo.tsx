@@ -25,7 +25,7 @@ export const KLogo = ({
     transform={focusing ? `scale(1.15)` : `scale(1)`}
   >
     <rect height="100%" width="100%" fill={kLogoBg} />
-    <g transform={`translate(0,150) scale(0.1,-0.1)`} fill={kLogoFg} stroke="none">
+    <g transform={`translate(-50,125) scale(0.13,-0.13)`} fill={kLogoFg} stroke="none">
       <path
         d={`m1578 0 l22 -21 0 -650 c0 -637 0 -650 19 -639 11 5 40 41 66 80 25 38
              50 72 56 75 5 4 9 231 9 571 0 551 0 564 20 584 28 28 84 27 104 -2 14 -20
@@ -57,7 +57,7 @@ export const KLogo = ({
   </svg>
 );
 
-export const Logo = ({ size = `65`, ...props }: IKLogoProps): JSX.Element => {
+export const Logo = ({ size = `50`, ...props }: IKLogoProps): JSX.Element => {
   const [bgContrast, internal] = useToken(`semanticToken`, [
     `colors.bgContrast`,
     `colors.internal`,
