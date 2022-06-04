@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useDisclosure, Box, Collapse, Container, Flex, HStack, VStack } from "@chakra-ui/react";
 import { Logo } from "src/assets";
 import { ToggleNavbarMenu } from "src/components/toggles";
@@ -28,10 +28,14 @@ const MENU_ITEMS = [
 
 const Header: FC = () => {
   const { isMobile } = useMobile();
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onClose } = useDisclosure({ defaultIsOpen: false });
+
+  useEffect(() => {
+    onClose();
+  }, [isMobile]);
 
   return (
-    <Box pos="sticky" backdropFilter="blur(8px)" top={0} zIndex="sticky" bg="bgAlpha" mb={4}>
+    <Box top={0} mb={4} bg="bgAlpha" backdropFilter="blur(8px)" pos="sticky" zIndex="sticky">
       <Container variant="page">
         <Flex as="nav" id="main-nav" minH="55px" pt="4" pb="2" align="center">
           <Flex id="main-logo" flex={1} justify="start">
@@ -54,18 +58,19 @@ const Header: FC = () => {
         </Flex>
 
         {isMobile && (
-          <Flex
-            as="menu"
-            id="navbar-content"
-            flex={0}
-            justify="center"
-            align="center"
-            direction="row"
-          >
-            <Collapse in={isOpen} animateOpacity>
-              <NavbarLinks Stack={VStack} items={MENU_ITEMS} mb={4} />
-            </Collapse>
-          </Flex>
+          <Collapse in={isOpen} animateOpacity>
+            {/* TODO: replace collapse with an internal version */}
+            <NavbarLinks
+              Stack={VStack}
+              items={MENU_ITEMS}
+              borderTop={1}
+              borderBottom={1}
+              borderStyle="solid"
+              borderColor="dividerColor"
+              mb={4}
+              p={4}
+            />
+          </Collapse>
         )}
       </Container>
     </Box>

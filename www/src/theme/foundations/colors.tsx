@@ -177,7 +177,7 @@ export const colorPalette = {
 export const colors = {
   ...colorPalette,
   brand: {
-    primary: colorPalette.green[`500`],
+    primary: `#70A582`,
     bg: `#FDFCF7`,
     elevate: `#F6F2EC`,
   },

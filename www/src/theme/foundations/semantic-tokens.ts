@@ -16,7 +16,7 @@ const semanticTokens = {
       default: transparentize(`brand.elevate`, navBgTransparency)(theme),
     },
     dividerColor: {
-      default: `blueGray.200`,
+      default: `brand.primary`,
     },
     internal: {
       default: `brand.primary`,
