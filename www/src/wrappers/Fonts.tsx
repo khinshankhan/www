@@ -30,56 +30,56 @@ const Fonts = () => (
       /* Butler */
       @font-face {
         font-family: "Butler";
-        src: url("Butler-UltraLight.woff2?f=butler&v=1") format("woff2"),
-          url("Butler-UltraLight.woff?f=butler&v=1") format("woff");
+        src: url(/fonts/Butler/Butler-UltraLight.woff2?f=butler&v=1) format("woff2"),
+          url(/fonts/Butler/Butler-UltraLight.woff?f=butler&v=1) format("woff");
         font-weight: 200;
         font-style: normal;
       }
 
       @font-face {
         font-family: "Butler";
-        src: url("Butler-Medium.woff2?f=butler&v=1") format("woff2"),
-          url("Butler-Medium.woff?f=butler&v=1") format("woff");
+        src: url(/fonts/Butler/Butler-Medium.woff2?f=butler&v=1) format("woff2"),
+          url(/fonts/Butler/Butler-Medium.woff?f=butler&v=1) format("woff");
         font-weight: 500;
         font-style: normal;
       }
 
       @font-face {
         font-family: "Butler";
-        src: url("Butler-Light.woff2?f=butler&v=1") format("woff2"),
-          url("Butler-Light.woff?f=butler&v=1") format("woff");
+        src: url(/fonts/Butler/Butler-Light.woff2?f=butler&v=1) format("woff2"),
+          url(/fonts/Butler/Butler-Light.woff?f=butler&v=1) format("woff");
         font-weight: 300;
         font-style: normal;
       }
 
       @font-face {
         font-family: "Butler";
-        src: url("Butler-Black.woff2?f=butler&v=1") format("woff2"),
-          url("Butler-Black.woff?f=butler&v=1") format("woff");
+        src: url(/fonts/Butler/Butler-Black.woff2?f=butler&v=1) format("woff2"),
+          url(/fonts/Butler/Butler-Black.woff?f=butler&v=1) format("woff");
         font-weight: 900;
         font-style: normal;
       }
 
       @font-face {
         font-family: "Butler";
-        src: url("Butler-Bold.woff2?f=butler&v=1") format("woff2"),
-          url("Butler-Bold.woff?f=butler&v=1") format("woff");
+        src: url(/fonts/Butler/Butler-Bold.woff2?f=butler&v=1) format("woff2"),
+          url(/fonts/Butler/Butler-Bold.woff?f=butler&v=1) format("woff");
         font-weight: bold;
         font-style: normal;
       }
 
       @font-face {
         font-family: "Butler";
-        src: url("Butler-ExtraBold.woff2?f=butler&v=1") format("woff2"),
-          url("Butler-ExtraBold.woff?f=butler&v=1") format("woff");
+        src: url(/fonts/Butler/Butler-ExtraBold.woff2?f=butler&v=1) format("woff2"),
+          url(/fonts/Butler/Butler-ExtraBold.woff?f=butler&v=1) format("woff");
         font-weight: 800;
         font-style: normal;
       }
 
       @font-face {
         font-family: "Butler";
-        src: url("Butler.woff2?f=butler&v=1") format("woff2"),
-          url("Butler.woff?f=butler&v=1") format("woff");
+        src: url(/fonts/Butler/Butler.woff2?f=butler&v=1) format("woff2"),
+          url(/fonts/Butler/Butler.woff?f=butler&v=1) format("woff");
         font-weight: normal;
         font-style: normal;
       }
