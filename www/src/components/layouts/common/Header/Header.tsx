@@ -1,5 +1,15 @@
-import React, { FC, useEffect } from "react";
-import { useDisclosure, Box, Collapse, Container, Flex, HStack, VStack } from "@chakra-ui/react";
+import React, { useEffect } from "react";
+import {
+  BoxProps,
+  forwardRef,
+  useDisclosure,
+  Box,
+  Collapse,
+  Container,
+  Flex,
+  HStack,
+  VStack,
+} from "@chakra-ui/react";
 import { Logo } from "src/assets";
 import { ToggleNavbarMenu } from "src/components/toggles";
 import { useMobile } from "src/hooks";
@@ -26,7 +36,7 @@ const MENU_ITEMS = [
   },
 ];
 
-const Header: FC = () => {
+const Header = forwardRef((props: BoxProps, ref = null) => {
   const { isMobile } = useMobile();
   const { isOpen, onToggle, onClose } = useDisclosure({ defaultIsOpen: false });
 
@@ -46,6 +56,8 @@ const Header: FC = () => {
           backdropFilter: `blur(7px)`,
         },
       }}
+      ref={ref}
+      {...props}
     >
       <Container variant="page">
         <Flex as="nav" id="main-nav" minH="55px" pt="4" pb="2.5" align="center">
@@ -86,6 +98,6 @@ const Header: FC = () => {
       </Container>
     </Box>
   );
-};
+});
 
 export default Header;
