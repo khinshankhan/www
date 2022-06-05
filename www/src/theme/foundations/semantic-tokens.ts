@@ -2,7 +2,6 @@ import { transparentize } from "@chakra-ui/theme-tools";
 import colors from "./colors";
 
 const theme = { colors };
-const navBgTransparency = 0.85;
 
 const semanticTokens = {
   colors: {
@@ -13,7 +12,10 @@ const semanticTokens = {
       default: `blueGray.800`,
     },
     bgAlpha: {
-      default: transparentize(`brand.elevate`, navBgTransparency)(theme),
+      default: transparentize(`brand.elevate`, 0.85)(theme),
+    },
+    bgOpaque: {
+      default: transparentize(`brand.elevate`, 0.98)(theme),
     },
     dividerColor: {
       default: `brand.primary`,
