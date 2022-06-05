@@ -22,7 +22,7 @@ const semanticTokens = {
       default: `brand.primary`,
     },
     external: {
-      default: `brand.primary`,
+      default: `blue.400`,
     },
   },
 };
