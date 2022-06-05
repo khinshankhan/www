@@ -35,9 +35,9 @@ const Header: FC = () => {
   }, [isMobile]);
 
   return (
-    <Box top={0} mb={4} bg="bgAlpha" backdropFilter="blur(7px)" pos="sticky" zIndex="sticky">
+    <Box top={0} bg="bgAlpha" backdropFilter="blur(7px)" pos="sticky" zIndex="sticky">
       <Container variant="page">
-        <Flex as="nav" id="main-nav" minH="55px" pt="4" pb="2" align="center">
+        <Flex as="nav" id="main-nav" minH="55px" pt="4" pb="2.5" align="center">
           <Flex id="main-logo" flex={1} justify="start">
             <Logo size="55" />
           </Flex>

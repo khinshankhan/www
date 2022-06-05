@@ -4,7 +4,7 @@ import Copyright from "./Copyright";
 import SocialMediaLinks from "./SocialMediaLinks";
 
 const Footer: FC = () => (
-  <Box mt={4} top={0} bg="bgAlpha" backdropFilter="blur(7px)" pos="sticky" zIndex="sticky">
+  <Box top={0} bg="bgAlpha" backdropFilter="blur(7px)" pos="sticky" zIndex="sticky">
     <Container variant="page" as="footer" id="footer">
       <Stack
         direction={{ base: `column-reverse`, md: `row` }}
@@ -12,7 +12,6 @@ const Footer: FC = () => (
         alignItems="center"
         pt={4}
         pb={4}
-        mt={4}
         bg="bgAlpha"
       >
         <Copyright />
