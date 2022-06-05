@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import {
   BoxProps,
   forwardRef,
@@ -36,13 +36,22 @@ const MENU_ITEMS = [
   },
 ];
 
-const Header = forwardRef((props: BoxProps, ref = null) => {
+interface IHeaderProps extends BoxProps {
+  setRecalculate: Dispatch<SetStateAction<number>>;
+}
+
+const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = null) => {
   const { isMobile } = useMobile();
   const { isOpen, onToggle, onClose } = useDisclosure({ defaultIsOpen: false });
 
   useEffect(() => {
     onClose();
   }, [isMobile]);
+
+  useEffect(() => {
+    // NOTE: timeout accounts for collapse animation
+    setTimeout(() => setRecalculate((p) => p + 1), 200);
+  }, [isOpen]);
 
   return (
     <Box
