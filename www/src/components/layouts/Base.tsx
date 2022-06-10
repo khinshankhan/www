@@ -25,7 +25,7 @@ export const BaseLayout: FC<BoxProps> = ({ minH = null, children, ...props }): J
   return (
     <chakra.div id="page">
       <Header ref={headerRef} setRecalculate={setRecalculate} />
-      <Box id="content" variant="page" minH={minHeight} {...props}>
+      <Box id="content" minH={minHeight} {...props}>
         {children}
       </Box>
       <Footer ref={footerRef} />

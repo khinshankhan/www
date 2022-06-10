@@ -15,7 +15,7 @@ const Text = {
   variants: {
     dashboard: {
       fontWeight: `medium`,
-      fontSize: { base: `xl`, sm: `2xl`, lg: `2xl` },
+      fontSize: { base: `xl`, sm: `2xl`, lg: `2xl`, "2xl": `3xl` },
     },
   },
 };
