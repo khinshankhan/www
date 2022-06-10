@@ -1,24 +1,24 @@
 import React from "react";
-import { ComponentWithAs, StackProps, Text } from "@chakra-ui/react";
-import { InternalLink } from "src/components/common";
+import { ComponentWithAs, StackProps } from "@chakra-ui/react";
+import { Heading, InternalLink } from "src/components/common";
 
-export interface INavbarLinksProps extends StackProps {
+export interface INavbarLinksProps {
   Stack: ComponentWithAs<"div", StackProps>;
   items: { title: string; href: string }[];
 }
 
-const NavbarLinks = ({ Stack: NavbarLinksStack, items, ...props }: INavbarLinksProps) => (
-  <NavbarLinksStack as="ul" id="navbar-links" listStyleType="none" spacing={4} {...props}>
+const NavbarLinks = ({ Stack: NavbarLinksStack, items }: INavbarLinksProps) => (
+  <NavbarLinksStack as="ul" id="navbar-links" listStyleType="none" spacing={4}>
     {items.map((item) => (
-      <Text as="li" key={item.title}>
+      <Heading as="li" key={item.title} variant="mainNav">
         <InternalLink
           href={item.href}
           aria-label={`Navigate to ${item.title.toLowerCase()}`}
-          variant="internal"
+          variant="grayInternal"
         >
           {item.title}
         </InternalLink>
-      </Text>
+      </Heading>
     ))}
   </NavbarLinksStack>
 );

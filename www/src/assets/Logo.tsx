@@ -68,7 +68,7 @@ export const Logo = ({ size = `50`, ...props }: IKLogoProps): JSX.Element => {
 
   const focusing = focused || hovered;
 
-  const kLogoFg = bgContrast;
+  const kLogoFg = focusing ? internal : bgContrast;
   const kLogoBg = `transparent`;
   const kLogoProps: IKLogoProps = { kLogoFg, kLogoBg, size, focusing, ...props };
 
