@@ -3,6 +3,7 @@ import colors from "./colors";
 
 const theme = { colors };
 
+// TODO: build out dark theme later
 const semanticTokens = {
   colors: {
     primary: {
@@ -11,6 +12,12 @@ const semanticTokens = {
     primaryAccent: {
       default: `brand.palette.100`,
     },
+    selection: {
+      // TODO: check a11y for this
+      default: `brand.palette.200`,
+    },
+
+    // backgrounds
     bg: {
       default: `brand.primaryBg`,
     },

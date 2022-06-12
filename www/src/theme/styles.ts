@@ -17,6 +17,9 @@ const styles: Styles = {
       borderColor: mode(`blueGray.200`, `whiteAlpha.300`)(props),
       wordWrap: `break-word`,
     },
+    "::selection": {
+      background: `selection`,
+    },
     "p + p": {
       mt: 3,
     },
