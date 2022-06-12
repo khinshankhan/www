@@ -1,20 +1,3 @@
-interface ILinkStyleProps {
-  c: string;
-  u?: string;
-  h?: string;
-  f?: string;
-}
-const linkStyle = ({ c, u, h, f }: ILinkStyleProps) => ({
-  textDecoration: `underline`,
-  textDecorationColor: u ?? c,
-  _hover: {
-    color: h ?? c,
-  },
-  _focus: {
-    color: f ?? c,
-  },
-});
-
 const Link = {
   baseStyle: {
     transitionProperty: `common`,
@@ -35,8 +18,32 @@ const Link = {
     },
   },
   variants: {
-    internal: linkStyle({ c: `internal`, u: `internalDecoration` }),
-    external: linkStyle({ c: `external` }),
+    internal: {
+      textDecoration: `underline`,
+      textDecorationColor: `internalDecoration`,
+      _hover: {
+        color: `internal`,
+      },
+      _focus: {
+        color: `internal`,
+      },
+      // NOTE: although this isn't used by chakra ui, it will be reference by internal link
+      _active: {
+        color: `internal`,
+        textDecorationColor: `internalActiveDecoration`,
+      },
+    },
+    external: {
+      textDecoration: `underline`,
+      // TODO: add this to semantic tokens
+      textDecorationColor: `externalDecoration`,
+      _hover: {
+        color: `external`,
+      },
+      _focus: {
+        color: `external`,
+      },
+    },
   },
 };
 

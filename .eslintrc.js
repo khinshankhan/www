@@ -96,6 +96,12 @@ module.exports = {
         ],
       },
     ],
+    "no-underscore-dangle": [
+      `error`,
+      {
+        allow: [`_active`],
+      },
+    ],
     "no-unused-expressions": [
       `warn`,
       {
