@@ -46,12 +46,12 @@ const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = nul
 
   useEffect(() => {
     onClose();
-  }, [isMobile]);
+  }, [isMobile, onClose]);
 
   useEffect(() => {
     // NOTE: timeout accounts for collapse animation
     setTimeout(() => setRecalculate((p) => p + 1), 200);
-  }, [isOpen]);
+  }, [isOpen, setRecalculate]);
 
   return (
     <Box

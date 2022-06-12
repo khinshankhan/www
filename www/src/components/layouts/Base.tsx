@@ -19,7 +19,8 @@ export const BaseLayout: FC<BoxProps> = ({ minH = null, children, ...props }): J
       `calc(${innerHeight ?? 0}px - ${headerRef.current?.clientHeight ?? 0}px - ${
         footerRef.current?.clientHeight ?? 0
       }px)`,
-    [innerWidth, innerHeight, recalucate]
+    /* eslint-disable react-hooks/exhaustive-deps */
+    [minH, innerWidth, innerHeight, recalucate]
   );
 
   return (
