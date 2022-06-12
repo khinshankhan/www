@@ -38,7 +38,10 @@ const semanticTokens = {
       default: `brand.palette.600`,
     },
     external: {
-      default: `blue.400`,
+      default: `blue.600`,
+    },
+    externalDecoration: {
+      default: `blue.200`,
     },
   },
 };

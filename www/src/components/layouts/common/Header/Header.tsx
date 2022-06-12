@@ -13,28 +13,8 @@ import {
 import { Logo } from "src/assets";
 import { ToggleNavbarMenu } from "src/components/toggles";
 import { useMobile } from "src/hooks";
+import MENU_ITEMS from "./items";
 import NavbarLinks from "./navs/NavbarLinks";
-
-// TODO: replace soon hrefs as features get built out
-// TODO: replace this with a call to gatsby to get config based values
-const MENU_ITEMS = [
-  {
-    title: `About`,
-    href: `/404`,
-  },
-  {
-    title: `Writing`,
-    href: `/writing`,
-  },
-  {
-    title: `Portfolio`,
-    href: `/404`,
-  },
-  {
-    title: `Contact`,
-    href: `/404`,
-  },
-];
 
 interface IHeaderProps extends BoxProps {
   setRecalculate: Dispatch<SetStateAction<number>>;
