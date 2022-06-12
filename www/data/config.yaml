@@ -1,5 +1,5 @@
 meta:
-  name: Khinshan Khan
+  fullname: Khinshan Khan
   startYear: 2017
   socials:
     github: khinshankhan
@@ -12,8 +12,7 @@ pages:
     taglines:
       - Hello there 👋
       - I'm Khinshan!
-    roles:
-      - software engineer
+    roles: software engineer
   about:
     taglines:
       - Me, myself, & I
