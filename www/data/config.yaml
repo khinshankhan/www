@@ -1,0 +1,19 @@
+meta:
+  name: Khinshan Khan
+  startYear: 2017
+  socials:
+    github: khinshankhan
+    linkedin: khinshankhan
+    discord: !
+    rss: !
+
+pages:
+  home:
+    taglines:
+      - Hello there 👋
+      - I'm Khinshan!
+    roles:
+      - software engineer
+  about:
+    taglines:
+      - Me, myself, & I
