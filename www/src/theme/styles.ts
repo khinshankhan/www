@@ -23,6 +23,9 @@ const styles: Styles = {
     "p + p": {
       mt: 3,
     },
+    "p + p ol, p + p ul": {
+      mt: -3,
+    },
   }),
 };
 

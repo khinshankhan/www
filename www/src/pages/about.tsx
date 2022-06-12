@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, UnorderedList, ListItem } from "@chakra-ui/react";
+import { Text, ListItem, UnorderedList } from "@chakra-ui/react";
 import { Heading, InternalLink, ExternalLink } from "src/components/common";
 import { PageLayout as Layout } from "src/components/layouts";
 
