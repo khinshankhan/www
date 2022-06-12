@@ -35,10 +35,8 @@ const Link = {
     },
   },
   variants: {
-    internal: linkStyle({ c: `internal` }),
+    internal: linkStyle({ c: `internal`, u: `internalDecoration` }),
     external: linkStyle({ c: `external` }),
-    grayInternal: linkStyle({ c: `internal`, u: `gray.400` }),
-    grayExternal: linkStyle({ c: `external`, u: `gray.400` }),
   },
 };
 

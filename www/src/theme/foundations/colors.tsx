@@ -174,12 +174,25 @@ export const colorPalette = {
   },
 };
 
+const natureGreen = {
+  50: `#E8F1EC`,
+  100: `#C8DECF`,
+  200: `#A6C8B2`,
+  300: `#86B496`,
+  400: `#70A582`,
+  500: `#5B976E`,
+  600: `#548864`,
+  700: `#4B7758`,
+  800: `#45664E`,
+  900: `#344839`,
+};
+
 export const colors = {
   ...colorPalette,
   brand: {
-    primary: `#70A582`,
-    bg: `#FDFCF7`,
-    elevate: `#F6F2EC`,
+    palette: natureGreen,
+    primaryBg: `#FDFCF7`,
+    elevateBg: `#F6F2EC`,
   },
 };
 
