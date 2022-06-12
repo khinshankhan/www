@@ -18,7 +18,7 @@ const semanticTokens = {
       default: `blueGray.800`,
     },
     bgAlpha: {
-      default: transparentize(`brand.elevateBg`, 0.85)(theme),
+      default: transparentize(`brand.elevateBg`, 0.8)(theme),
     },
     bgOpaque: {
       default: transparentize(`brand.elevateBg`, 0.98)(theme),

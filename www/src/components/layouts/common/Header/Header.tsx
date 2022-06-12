@@ -24,7 +24,7 @@ const MENU_ITEMS = [
   },
   {
     title: `Writing`,
-    href: `/404`,
+    href: `/writing`,
   },
   {
     title: `Portfolio`,
@@ -60,9 +60,9 @@ const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = nul
       pos="sticky"
       zIndex="sticky"
       sx={{
-        "@supports ((-webkit-backdrop-filter: blur(7px)) or (backdrop-filter: blur(7px)))": {
+        "@supports ((-webkit-backdrop-filter: blur(6px)) or (backdrop-filter: blur(6px)))": {
           backgroundColor: `bgAlpha`,
-          backdropFilter: `blur(7px)`,
+          backdropFilter: `blur(6px)`,
         },
       }}
       ref={ref}

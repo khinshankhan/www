@@ -70,7 +70,7 @@ module.exports = {
         },
       },
     ],
-    "import/prefer-default-export": `error`,
+    "import/prefer-default-export": `off`,
 
     "arrow-body-style": [`error`, `as-needed`],
     "consistent-return": `error`,

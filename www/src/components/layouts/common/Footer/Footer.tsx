@@ -5,12 +5,17 @@ import SocialMediaLinks from "./SocialMediaLinks";
 
 const Footer = forwardRef((props: BoxProps, ref = null) => (
   <Box
+    ref={ref}
     top={0}
-    bg="bgAlpha"
-    backdropFilter="blur(7px)"
+    bg="bgOpaque"
     pos="sticky"
     zIndex="sticky"
-    ref={ref}
+    sx={{
+      "@supports ((-webkit-backdrop-filter: blur(6px)) or (backdrop-filter: blur(6px)))": {
+        backgroundColor: `bgAlpha`,
+        backdropFilter: `blur(6px)`,
+      },
+    }}
     {...props}
   >
     <Container variant="page" as="footer" id="footer">
