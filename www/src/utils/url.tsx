@@ -34,3 +34,27 @@ export const onSameOrigin = (originUrl: string, destinationUrl: string) => {
     origin.host === destination.host
   );
 };
+
+interface IMatchLinkProps {
+  link1: string;
+  link2: string;
+  fullPath: boolean;
+  excludeParams: boolean;
+}
+// this will be called after checking same origin, so we can assume as much
+export const matchLink = ({ link1, link2, fullPath, excludeParams }: IMatchLinkProps) => {
+  const anchorA = document.createElement(`a`);
+  anchorA.href = link1;
+  const anchorB = document.createElement(`a`);
+  anchorB.href = link2;
+
+  if (!excludeParams && anchorA.search !== anchorB.search) return false;
+
+  const paths = [anchorA.pathname, anchorB.pathname];
+  if (fullPath) {
+    return paths[0] === paths[1];
+  }
+
+  paths.sort();
+  return paths[1].includes(paths[0]);
+};

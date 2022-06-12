@@ -1,4 +1,4 @@
-import { isUrlFile, onSameOrigin } from "../url";
+import { isUrlFile, onSameOrigin, matchLink } from "../url";
 
 describe(`url`, () => {
   describe(`isUrlFile`, () => {
@@ -37,6 +37,110 @@ describe(`url`, () => {
       ].forEach((destinationUrl) =>
         it(destinationUrl, () => expect(onSameOrigin(originUrl, destinationUrl)).toBe(false))
       );
+    });
+  });
+
+  describe(`matchLink`, () => {
+    describe(`fullPath`, () => {
+      it(`pass`, () =>
+        expect(
+          matchLink({
+            link1: `https://hello.com/portfolio`,
+            link2: `https://hello.com/portfolio`,
+            fullPath: true,
+            excludeParams: true,
+          })
+        ).toBe(true));
+      it(`fail`, () =>
+        expect(
+          matchLink({
+            link1: `https://hello.com/portfolio`,
+            link2: `https://hello.com/portfolio/anchorage`,
+            fullPath: true,
+            excludeParams: true,
+          })
+        ).toBe(false));
+
+      describe(`excludeParams`, () => {
+        it(`pass matching`, () =>
+          expect(
+            matchLink({
+              link1: `https://hello.com/portfolio?a=b`,
+              link2: `https://hello.com/portfolio?a=b`,
+              fullPath: true,
+              excludeParams: false,
+            })
+          ).toBe(true));
+        it(`pass not matching`, () =>
+          expect(
+            matchLink({
+              link1: `https://hello.com/portfolio?a=b`,
+              link2: `https://hello.com/portfolio?a=b&c=d`,
+              fullPath: true,
+              excludeParams: true,
+            })
+          ).toBe(true));
+        it(`fail`, () =>
+          expect(
+            matchLink({
+              link1: `https://hello.com/portfolio?a=b`,
+              link2: `https://hello.com/portfolio?a=b&c=d`,
+              fullPath: true,
+              excludeParams: false,
+            })
+          ).toBe(false));
+      });
+    });
+
+    describe(`partiallyActive`, () => {
+      it(`pass full`, () =>
+        expect(
+          matchLink({
+            link1: `https://hello.com/portfolio`,
+            link2: `https://hello.com/portfolio`,
+            fullPath: false,
+            excludeParams: true,
+          })
+        ).toBe(true));
+      it(`pass partial`, () =>
+        expect(
+          matchLink({
+            link1: `https://hello.com/portfolio`,
+            link2: `https://hello.com/portfolio/anchorage`,
+            fullPath: false,
+            excludeParams: true,
+          })
+        ).toBe(true));
+
+      describe(`excludeParams`, () => {
+        it(`pass matching`, () =>
+          expect(
+            matchLink({
+              link1: `https://hello.com/portfolio?a=b`,
+              link2: `https://hello.com/portfolio/anchorage?a=b`,
+              fullPath: false,
+              excludeParams: false,
+            })
+          ).toBe(true));
+        it(`pass not matching`, () =>
+          expect(
+            matchLink({
+              link1: `https://hello.com/portfolio?a=b`,
+              link2: `https://hello.com/portfolio?a=b&c=d`,
+              fullPath: false,
+              excludeParams: true,
+            })
+          ).toBe(true));
+        it(`fail`, () =>
+          expect(
+            matchLink({
+              link1: `https://hello.com/portfolio?a=b`,
+              link2: `https://hello.com/portfolio/anchorage?a=b&c=d`,
+              fullPath: false,
+              excludeParams: false,
+            })
+          ).toBe(false));
+      });
     });
   });
 });
