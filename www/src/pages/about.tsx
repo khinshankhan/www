@@ -13,7 +13,15 @@ const Index = () => (
       <InternalLink href="/portfolio">work</InternalLink>.
     </Text>
 
-    <Text>Other things I like that you may like:</Text>
+    <Text>
+      I do want to make it clear that although at times my thoughts may be the same as my
+      colleagues, unless stated explicitly, my writing and opinions <i>should not</i> be considered
+      {` `}
+      <i>wholly nor partially representative</i> of my employer. In that vein, unless stated
+      explicitly... employer’s opinions are not mine.
+    </Text>
+
+    <Text>Some things I like that you may like:</Text>
     <UnorderedList>
       <ListItem>
         <Text>cooking</Text>
@@ -25,7 +33,7 @@ const Index = () => (
         <Text>puzzles & fallacies</Text>
       </ListItem>
       <ListItem>
-        <Text>videogames</Text>
+        <Text>(video | board | *)games</Text>
       </ListItem>
       <ListItem>
         <Text>interactivity</Text>
@@ -40,9 +48,9 @@ const Index = () => (
     <Text>
       To start with, the source code for this website is available on GitHub{` `}
       <ExternalLink href="https://github.com/khinshankhan/anchorage">here</ExternalLink>. You're
-      free to do use the code in accordance to the MIT licensing I have on it. The content however
-      is not under MIT licensing (tldr: cite me if you use my words, would be cool if you mentioned
-      me somewhere when you use my code too 😛).
+      free to use the code in accordance to the MIT licensing I have on it. The content however is
+      not under MIT licensing (tldr: cite me if you use my words, would be cool if you mentioned me
+      somewhere when you use my code too 😛).
     </Text>
 
     <Text>
