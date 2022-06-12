@@ -16,12 +16,18 @@ export type HeadingsAnchorTag = (props: HeadingAnchorProps) => JSX.Element;
 /* eslint-disable indent, prettier/prettier */
 const HeadingAnchor = (HeadingTag: HeadingsTag) => ({
   children,
-  href = `#`,
+  href = `?anchor=true`,
   icon = Anchor,
   ...props
 }: HeadingAnchorProps) => (
   <HeadingTag>
-    <Link href={href} variant="internal" {...props}>
+    <Link
+      href={href}
+      aria-label={`Create anchor link to this point in the page`}
+      variant="internal"
+      matchExcludeParams
+      {...props}
+    >
       {icon && <Icon as={icon} fontSize="inherit" h={{ base: 4, lg: 5 }} color="internal" />}
       {children}
     </Link>

@@ -1,38 +1,54 @@
 import { transparentize } from "@chakra-ui/theme-tools";
-import { colorPalette } from "./colors";
+import colors from "./colors";
 
+const theme = { colors };
+
+// TODO: build out dark theme later
 const semanticTokens = {
   colors: {
+    primary: {
+      default: `brand.palette.700`,
+    },
+    primaryAccent: {
+      default: `brand.palette.100`,
+    },
+    selection: {
+      // TODO: check a11y for this
+      default: `brand.palette.200`,
+    },
+
+    // backgrounds
     bg: {
-      default: `white`,
-      _dark: `blueGray.800`,
+      default: `brand.primaryBg`,
     },
     bgContrast: {
       default: `blueGray.800`,
-      _dark: `whiteAlpha.900`,
     },
     bgAlpha: {
-      default: transparentize(`white`, 0.85)(colorPalette),
-      _dark: transparentize(`blueGray.800`, 0.85)(colorPalette),
+      default: transparentize(`brand.elevateBg`, 0.8)(theme),
+    },
+    bgOpaque: {
+      default: transparentize(`brand.elevateBg`, 0.98)(theme),
     },
     dividerColor: {
-      default: `blueGray.200`,
-      _dark: `whiteAlpha.800`,
+      default: `brand.palette.700`,
     },
-    // NOTE: it really isn't necessary to build out the entirety of the palette and its accents for the brand since
-    // they're mostly specific colors for specific parts of the site. So to save some time, I won't...
 
-    // TODO: look into better contrasting colors to reach AAA accessibility
+    // used for links
     internal: {
-      // NOTE: slightly unaccessible(near the cusp of AA) for light but according to
-      // https://uxmovement.com/buttons/the-myths-of-color-contrast-accessibility/ it should be fine
-      default: `#AC9100`,
-      _dark: `#FBD000`,
+      default: `brand.palette.700`,
+    },
+    internalDecoration: {
+      default: `brand.palette.200`,
+    },
+    internalActiveDecoration: {
+      default: `brand.palette.600`,
     },
     external: {
-      // NOTE: slightly unaccessible (AA) for both
-      default: `#037dae`,
-      _dark: `#049CD8`,
+      default: `blue.600`,
+    },
+    externalDecoration: {
+      default: `blue.200`,
     },
   },
 };

@@ -5,8 +5,8 @@ import styles from "./styles";
 
 const config: ThemeOverride["config"] = {
   cssVarPrefix: `ck`,
-  initialColorMode: `dark`,
-  // TODO: change to true after theme is built out
+  initialColorMode: `light`,
+  // NOTE: using system color mode is iffy, just avoid it
   useSystemColorMode: false,
 };
 

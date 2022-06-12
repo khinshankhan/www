@@ -39,7 +39,7 @@ export const headingBaseVariantsStyles = {
 
 export const headingVariantsStyles = {
   mainNav: {
-    fontFamily: `body`,
+    fontFamily: `title`,
     fontWeight: `medium`,
     fontSize: { base: `xl`, "2xl": `2xl` },
     letterSpacings: `wider`,

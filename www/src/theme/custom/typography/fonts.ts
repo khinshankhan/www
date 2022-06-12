@@ -11,8 +11,9 @@ export const defaultFonts: ThemeOverride["fonts"] = {
 
 // TODO: source this from config?
 export const fonts: ThemeOverride["fonts"] = {
-  heading: `'Crimson Pro', ${defaultFonts.heading}`,
-  body: `'Inter', ui-serif, ${defaultFonts.body}`,
+  title: `'Crimson Pro', ${defaultFonts.heading}`,
+  heading: `'Butler', ${defaultFonts.heading}`,
+  body: `'Butler', ui-serif, ${defaultFonts.body}`,
   mono: defaultFonts.mono,
 };
 

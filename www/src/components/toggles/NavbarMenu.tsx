@@ -23,6 +23,7 @@ export const ToggleNavbarMenu: FC<IToggleNavbarMenuProps> = ({
     <IconButton
       onClick={onClick}
       variant="ghost"
+      color="bgContrast"
       icon={<MenuIcon fontSize={fontSize} />}
       {...props}
       aria-label={ariaLabel}

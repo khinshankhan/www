@@ -10,11 +10,12 @@ const Text = {
   baseStyle: {
     fontFamily: `body`,
     fontWeight: `normal`,
-    fontSize: { base: `md`, sm: `lg` },
+    fontSize: { base: `1.125rem`, lg: `1.3125rem` },
   },
   variants: {
     dashboard: {
-      fontSize: { base: `lg`, sm: `xl` },
+      fontWeight: `medium`,
+      fontSize: { base: `xl`, sm: `2xl`, lg: `2xl`, "2xl": `3xl` },
     },
   },
 };

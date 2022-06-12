@@ -70,7 +70,7 @@ module.exports = {
         },
       },
     ],
-    "import/prefer-default-export": `error`,
+    "import/prefer-default-export": `off`,
 
     "arrow-body-style": [`error`, `as-needed`],
     "consistent-return": `error`,
@@ -94,6 +94,12 @@ module.exports = {
         restrictedNamedExports: [
           `then`, // this will cause tons of confusion when your module is dynamically `import()`ed, and will break in most node ESM versions
         ],
+      },
+    ],
+    "no-underscore-dangle": [
+      `error`,
+      {
+        allow: [`_active`],
       },
     ],
     "no-unused-expressions": [
