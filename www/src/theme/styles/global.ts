@@ -29,6 +29,13 @@ const styles: Styles = {
     "li > p": {
       mb: 0,
     },
+    "#content > * > p:nth-of-type(1)::first-letter": {
+      color: `primary`,
+      float: `left`,
+      fontWeight: `bold`,
+      fontSize: { base: `5rem`, lg: `6rem` },
+      lineHeight: { base: `3.375rem` },
+    },
   }),
 };
 
