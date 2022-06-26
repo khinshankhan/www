@@ -15,7 +15,11 @@ pages:
 navs:
   footer:
     socials:
-      - github: khinshankhan
-      - linkedin: khinshankhan
-      - discord: "!"
-      - rss: "!"
+      - socialType: github
+        link: khinshankhan
+      - socialType: linkedin
+        link: khinshankhan
+      - socialType: discord
+        link: "!"
+      - socialType: rss
+        link: "!"

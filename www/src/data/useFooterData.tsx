@@ -2,9 +2,9 @@ import { graphql, useStaticQuery } from "gatsby";
 
 export type Socials = "discord" | "github" | "linkedin" | "rss";
 export type SocialsObject = {
-  [key in Socials]: string | null;
+  link: string | null;
+  socialType: Socials;
 };
-export type SocialsList = SocialsObject[];
 
 type Props = {
   dataConfig: {
@@ -14,7 +14,7 @@ type Props = {
     };
     navs: {
       footer: {
-        socials: SocialsList;
+        socials: SocialsObject[];
       };
     };
   };
@@ -31,10 +31,8 @@ const useFooterData = () => {
         navs {
           footer {
             socials {
-              github
-              linkedin
-              rss
-              discord
+              link
+              socialType
             }
           }
         }
