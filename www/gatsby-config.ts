@@ -18,6 +18,7 @@ const plugins: GatsbyConfig["plugins"] = [
   {
     resolve: `gatsby-transformer-yaml`,
     options: {
+      // @ts-ignore
       typeName: ({ node }) => `data${capitalize(node.name, `-`, ``)}`,
     },
   },
