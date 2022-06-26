@@ -12,8 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { Logo } from "src/assets";
 import { ToggleNavbarMenu } from "src/components/toggles";
+import useHeaderData from "src/data/useHeaderData";
 import { useMobile } from "src/hooks";
-import MENU_ITEMS from "./items";
 import NavbarLinks from "./navs/NavbarLinks";
 
 interface IHeaderProps extends BoxProps {
@@ -21,6 +21,7 @@ interface IHeaderProps extends BoxProps {
 }
 
 const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = null) => {
+  const { navs } = useHeaderData();
   const { isMobile } = useMobile();
   const { isOpen, onToggle, onClose } = useDisclosure({ defaultIsOpen: false });
 
@@ -64,7 +65,7 @@ const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = nul
               direction="row"
               spacing={6}
             >
-              <NavbarLinks Stack={HStack} items={MENU_ITEMS} />
+              <NavbarLinks Stack={HStack} items={navs.header.pages} />
             </HStack>
           )}
         </Flex>
@@ -74,7 +75,7 @@ const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = nul
             {/* TODO: replace collapse with an internal version */}
             <NavbarLinks
               Stack={VStack}
-              items={MENU_ITEMS}
+              items={navs.header.pages}
               borderTop={1}
               borderBottom={1}
               borderStyle="solid"
