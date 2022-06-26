@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from "gatsby";
 type Props = {
   dataConfig: {
     pages: {
-      home: {
+      index: {
         taglines: string[];
         roles: string;
       };
@@ -11,12 +11,12 @@ type Props = {
   };
 };
 
-const useHomeData = () => {
+const useIndexData = () => {
   const data = useStaticQuery<Props>(graphql`
     query {
       dataConfig {
         pages {
-          home {
+          index {
             taglines
             roles
           }
@@ -25,7 +25,7 @@ const useHomeData = () => {
     }
   `);
 
-  return data.dataConfig.pages.home;
+  return data.dataConfig.pages.index;
 };
 
-export default useHomeData;
+export default useIndexData;

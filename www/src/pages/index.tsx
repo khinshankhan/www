@@ -3,7 +3,7 @@ import { ButtonProps, chakra, Button, Container, Text, SlideFade, VStack } from 
 import { motion } from "framer-motion";
 import { Heading } from "src/components/common";
 import { CenteredLayout as Layout } from "src/components/layouts";
-import useHomeData from "src/data/useHomeData";
+import useIndexData from "src/data/useIndexData";
 
 interface IEasterEggButton extends ButtonProps {
   eggCount?: number;
@@ -15,7 +15,7 @@ const EasterEggButton = ({ eggCount = 0, ...props }: IEasterEggButton) => (
 
 const Index = () => {
   // TODO: let roles be an array and have a typewriter effect for it
-  const { taglines, roles } = useHomeData();
+  const { taglines, roles } = useIndexData();
 
   return (
     <Layout>
