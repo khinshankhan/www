@@ -5,7 +5,8 @@ import Copyright from "./Copyright";
 import SocialMediaLinks from "./SocialMediaLinks";
 
 const Footer = forwardRef((props: BoxProps, ref = null) => {
-  const { meta } = useFooterData();
+  const { meta, ...data } = useFooterData();
+  const { socials } = data.navs.footer;
 
   return (
     <Box
@@ -32,7 +33,7 @@ const Footer = forwardRef((props: BoxProps, ref = null) => {
           bg="bgAlpha"
         >
           <Copyright name={meta.fullname} year={meta.startYear} />
-          <SocialMediaLinks />
+          <SocialMediaLinks socials={socials} />
         </Stack>
       </Container>
     </Box>

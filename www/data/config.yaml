@@ -1,11 +1,6 @@
 meta:
   fullname: Khinshan Khan
   startYear: 2017
-  socials:
-    github: khinshankhan
-    linkedin: khinshankhan
-    discord: !
-    rss: !
 
 pages:
   home:
@@ -16,3 +11,11 @@ pages:
   about:
     taglines:
       - Me, myself, & I
+
+navs:
+  footer:
+    socials:
+      - github: khinshankhan
+      - linkedin: khinshankhan
+      - discord: "!"
+      - rss: "!"
