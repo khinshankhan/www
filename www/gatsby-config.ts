@@ -1,10 +1,25 @@
 import { GatsbyConfig } from "gatsby";
+import { capitalize } from "./src/utils/string";
 
 const plugins: GatsbyConfig["plugins"] = [
   {
     resolve: `gatsby-plugin-root-import`,
     options: {
       resolveModules: [`.`],
+    },
+  },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      name: `data`,
+      path: `data`,
+    },
+  },
+  {
+    resolve: `gatsby-transformer-yaml`,
+    options: {
+      // @ts-ignore
+      typeName: ({ node }) => `data${capitalize(node.name, `-`, ``)}`,
     },
   },
   `gatsby-plugin-react-helmet-async`,

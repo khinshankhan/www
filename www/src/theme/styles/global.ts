@@ -20,11 +20,21 @@ const styles: Styles = {
     "::selection": {
       background: `selection`,
     },
-    "p + p": {
-      mt: 3,
+    "h2, h3, h4, h5, h6, p, ol, ul": {
+      mb: 5,
     },
-    "p + p ol, p + p ul": {
-      mt: -3,
+    "p+ol, p+ul": {
+      mt: -5,
+    },
+    "li > p": {
+      mb: 0,
+    },
+    "#content > * > p:nth-of-type(1)::first-letter": {
+      color: `primary`,
+      float: `left`,
+      fontWeight: `bold`,
+      fontSize: { base: `5rem`, lg: `6rem` },
+      lineHeight: { base: `3.375rem` },
     },
   }),
 };
