@@ -3,7 +3,7 @@ meta:
   startYear: 2017
 
 pages:
-  home:
+  index:
     taglines:
       - Hello there 👋
       - I'm Khinshan!
