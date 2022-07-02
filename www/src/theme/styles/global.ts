@@ -20,14 +20,14 @@ const styles: Styles = {
     "::selection": {
       background: `selection`,
     },
-    "#content > * > h2, #content > * > h3, #content > * > h4, #content > * > h5, #content > * > h6, #content > * > p, #content > * > ol, #content > * > ul":
-      {
-        mb: 5,
-      },
-    "#content > * >  p+ol, #content > * >  p+ul": {
+    // NOTE: `#content > * >` limits to prose elements (* is container)
+    "#content > * > :where(h2, h3, h4, h5, h6, p, ol, ul)": {
+      mb: 5,
+    },
+    "#content > * > p+:where(ol, ul)": {
       mt: -5,
     },
-    "#content > * > li > p": {
+    "#content > * > :where(ol, ul) > li > p": {
       mb: 0,
     },
     "#content > * > p:nth-of-type(1)::first-letter": {
