@@ -20,13 +20,14 @@ const styles: Styles = {
     "::selection": {
       background: `selection`,
     },
-    "h2, h3, h4, h5, h6, p, ol, ul": {
-      mb: 5,
-    },
-    "p+ol, p+ul": {
+    "#content > * > h2, #content > * > h3, #content > * > h4, #content > * > h5, #content > * > h6, #content > * > p, #content > * > ol, #content > * > ul":
+      {
+        mb: 5,
+      },
+    "#content > * >  p+ol, #content > * >  p+ul": {
       mt: -5,
     },
-    "li > p": {
+    "#content > * > li > p": {
       mb: 0,
     },
     "#content > * > p:nth-of-type(1)::first-letter": {
