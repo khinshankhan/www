@@ -20,7 +20,7 @@ navs:
       - label: Writing
         href: /writing
       - label: Portfolio
-        href: /404
+        href: /portfolio
       - label: Contact
         href: /contact
 
