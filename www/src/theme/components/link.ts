@@ -23,9 +23,11 @@ const Link = {
       textDecorationColor: `internalDecoration`,
       _hover: {
         color: `internal`,
+        textDecorationColor: `internalFocusDecoration`,
       },
       _focus: {
         color: `internal`,
+        textDecorationColor: `internalFocusDecoration`,
       },
       // NOTE: although this isn't used by chakra ui, it will be reference by internal link
       _active: {
@@ -39,9 +41,11 @@ const Link = {
       textDecorationColor: `externalDecoration`,
       _hover: {
         color: `external`,
+        textDecorationColor: `externalFocusDecoration`,
       },
       _focus: {
         color: `external`,
+        textDecorationColor: `externalFocusDecoration`,
       },
     },
   },

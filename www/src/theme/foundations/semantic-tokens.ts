@@ -41,6 +41,9 @@ const semanticTokens = {
     internalDecoration: {
       default: `brand.palette.200`,
     },
+    internalFocusDecoration: {
+      default: `brand.palette.600`,
+    },
     internalActiveDecoration: {
       default: `brand.palette.600`,
     },
@@ -49,6 +52,9 @@ const semanticTokens = {
     },
     externalDecoration: {
       default: `blue.200`,
+    },
+    externalFocusDecoration: {
+      default: `blue.600`,
     },
   },
 };
