@@ -22,6 +22,19 @@ const plugins: GatsbyConfig["plugins"] = [
       typeName: ({ node }) => `data${capitalize(node.name, `-`, ``)}`,
     },
   },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      name: `writing`,
+      path: `content/writing`,
+    },
+  },
+  {
+    resolve: `gatsby-plugin-mdx`,
+    options: {
+      extensions: [`.mdx`, `.md`],
+    },
+  },
   `gatsby-plugin-react-helmet-async`,
   {
     resolve: `gatsby-plugin-manifest`,
