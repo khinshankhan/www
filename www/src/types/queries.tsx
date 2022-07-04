@@ -14,3 +14,15 @@ export interface WritingCardNode {
 }
 
 export type WritingCardNodes = WritingCardNode[];
+
+export interface WritingPageNode {
+  frontmatter: {
+    title: string;
+    spoiler?: string;
+  };
+
+  body: string;
+  id: string;
+}
+
+export type WritingPageNodes = WritingPageNode[];
