@@ -10,7 +10,6 @@ export interface WritingCardNode {
     spoiler?: string;
   };
 
-  excerpt: string;
   id: string;
 }
 
