@@ -1,8 +1,6 @@
 import React, { ReactNode } from "react";
 import { Heading as ChakraHeading } from "@chakra-ui/react";
-
-const headingsOptions = [`h1`, `h2`, `h3`, `h4`, `h5`, `h6`] as const;
-type HeadingsOptions = typeof headingsOptions[number];
+import { headingsOptions, HeadingsOptions } from "./shared";
 
 export type IHeadingsTemplateProps = {
   children: ReactNode;
