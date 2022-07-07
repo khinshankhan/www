@@ -1,6 +1,5 @@
 ---
 title: First
-slug: first
 spoiler: This is a small spoiler to replace excerpt.
 
 planted: "2022-07-02"
