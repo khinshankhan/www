@@ -1,12 +1,10 @@
 import path from "path";
 import { GatsbyNode, CreateNodeArgs, Node } from "gatsby";
 import { FileSystemNode } from "gatsby-source-filesystem";
-import { queryFilter } from "./src/utils/query";
+import { queryFilter, Layouts } from "./src/utils/query";
 import { slugify } from "./src/utils/string";
 
-type Layouts = `article`;
-
-type WritingNode = Node & {
+type ArticleNode = Node & {
   frontmatter: {
     title: string;
     slug?: string;
@@ -32,7 +30,7 @@ type NodeRefinedFields = {
   };
 };
 
-type MdxNode = WritingNode;
+type MdxNode = ArticleNode;
 
 export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
   if (args.node.internal.type === `Mdx`) {
@@ -81,8 +79,8 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
 };
 
 interface ResultData {
-  writings: {
-    nodes: (WritingNode & NodeRefinedFields)[];
+  articles: {
+    nodes: (ArticleNode & NodeRefinedFields)[];
   };
 }
 
@@ -96,14 +94,13 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
 
   const query = `
     {
-      writings: allMdx(
+      articles: allMdx(
         filter: ${queryFilter}
         sort: { fields: frontmatter___planted, order: DESC }
       ) {
         nodes {
           fields {
             slug
-            layout
           }
           frontmatter {
             title
@@ -130,15 +127,20 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
   }
 
   const {
-    data: { writings },
+    data: { articles },
   } = result;
 
-  writings.nodes.forEach((article) => {
+  articles.nodes.forEach((article, i) => {
+    const prev = i === articles.nodes.length - 1 ? null : articles.nodes[i + 1];
+    const next = i === 0 ? null : articles.nodes[i - 1];
+
     createPage({
       path: article.fields.slug,
-      component: templateLayouts[article.fields.layout],
+      component: templateLayouts.article,
       context: {
         slug: article.fields.slug,
+        prev,
+        next,
       },
     });
   });
