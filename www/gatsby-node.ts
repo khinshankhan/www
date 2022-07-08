@@ -138,7 +138,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
       path: article.fields.slug,
       component: templateLayouts[article.fields.layout],
       context: {
-        slug: article.slug,
+        slug: article.fields.slug,
       },
     });
   });
