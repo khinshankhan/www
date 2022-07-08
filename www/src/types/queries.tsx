@@ -16,13 +16,13 @@ export interface WritingCardNode {
 export type WritingCardNodes = WritingCardNode[];
 
 export interface WritingPageNode {
+  fields: {
+    slug: string;
+  };
   frontmatter: {
     title: string;
     spoiler?: string;
   };
-
-  body: string;
-  id: string;
 }
 
 export type WritingPageNodes = WritingPageNode[];

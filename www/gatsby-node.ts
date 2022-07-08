@@ -1,6 +1,7 @@
 import path from "path";
 import { GatsbyNode, CreateNodeArgs, Node } from "gatsby";
 import { FileSystemNode } from "gatsby-source-filesystem";
+import { queryFilter } from "./src/utils/query";
 import { slugify } from "./src/utils/string";
 
 type Layouts = `article`;
@@ -85,17 +86,6 @@ interface ResultData {
   };
 }
 
-// TODO: add to build command or dotenv
-const isProd = process.env.STAGE === `production`;
-
-const layoutFilter = (layout: Layouts) => `layout: {eq: "${layout}"}`;
-const draftFilter = (status: string) => `status: {eq: "${status}"}`;
-
-const fieldFilters = (layout: Layouts, status: string) =>
-  [layoutFilter(layout), ...(isProd ? [draftFilter(status)] : [])].join(`, `);
-
-const filter = `filter: {fields: {${fieldFilters(`article`, `published`)}}}`;
-
 const articleTemplate = path.resolve(`src/templates/article.tsx`);
 const templateLayouts: { [key in Layouts]: string } = {
   article: articleTemplate,
@@ -107,7 +97,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
   const query = `
     {
       writings: allMdx(
-        ${filter}
+        filter: ${queryFilter}
         sort: { fields: frontmatter___planted, order: DESC }
       ) {
         nodes {
