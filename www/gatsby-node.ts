@@ -1,6 +1,9 @@
+import path from "path";
 import { GatsbyNode, CreateNodeArgs, Node } from "gatsby";
 import { FileSystemNode } from "gatsby-source-filesystem";
 import { slugify } from "./src/utils/string";
+
+type Layouts = `article`;
 
 type WritingNode = Node & {
   frontmatter: {
@@ -8,7 +11,7 @@ type WritingNode = Node & {
     slug?: string;
     spoiler?: string;
 
-    layout?: string;
+    layout?: Layouts;
     status?: string;
 
     planted: string;
@@ -16,6 +19,15 @@ type WritingNode = Node & {
 
     categories?: string[];
     tags?: string[];
+  };
+};
+
+type NodeRefinedFields = {
+  fields: {
+    slug: string;
+    source: string;
+    layout: Layouts;
+    status: string;
   };
 };
 
@@ -65,4 +77,79 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
       value: node.frontmatter.status ?? `published`,
     });
   }
+};
+
+interface ResultData {
+  writings: {
+    nodes: (WritingNode & NodeRefinedFields)[];
+  };
+}
+
+// TODO: add to build command or dotenv
+const isProd = process.env.STAGE === `production`;
+
+const layoutFilter = (layout: Layouts) => `layout: {eq: "${layout}"}`;
+const draftFilter = (status: string) => `status: {eq: "${status}"}`;
+
+const fieldFilters = (layout: Layouts, status: string) =>
+  [layoutFilter(layout), ...(isProd ? [draftFilter(status)] : [])].join(`, `);
+
+const filter = `filter: {fields: {${fieldFilters(`article`, `published`)}}}`;
+
+const articleTemplate = path.resolve(`src/templates/article.tsx`);
+const templateLayouts: { [key in Layouts]: string } = {
+  article: articleTemplate,
+};
+
+export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions;
+
+  const query = `
+    {
+      writings: allMdx(
+        ${filter}
+        sort: { fields: frontmatter___planted, order: DESC }
+      ) {
+        nodes {
+          fields {
+            slug
+            layout
+          }
+          frontmatter {
+            title
+          }
+        }
+      }
+    }
+`;
+  const result = await graphql<ResultData>(query);
+  if (result.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading the createPages query results`,
+      result.errors
+    );
+    return;
+  }
+
+  if (result.data === undefined) {
+    reporter.panicOnBuild(
+      `There was an issue loading the createPages query results`,
+      result.errors
+    );
+    return;
+  }
+
+  const {
+    data: { writings },
+  } = result;
+
+  writings.nodes.forEach((article) => {
+    createPage({
+      path: article.fields.slug,
+      component: templateLayouts[article.fields.layout],
+      context: {
+        slug: article.slug,
+      },
+    });
+  });
 };
