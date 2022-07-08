@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { Icon } from "@chakra-ui/react";
 import { FaAnchor as Anchor } from "react-icons/fa";
 import { Link } from "src/components/common/Link";
-import { HeadingsTag } from "./Headings";
+import { headingsOptions, HeadingsOptions } from "./shared";
 
 type HeadingAnchorProps = {
   href?: string;
@@ -14,7 +14,7 @@ type HeadingAnchorProps = {
 export type HeadingsAnchorTag = (props: HeadingAnchorProps) => JSX.Element;
 
 /* eslint-disable indent, prettier/prettier */
-const HeadingAnchor = (HeadingTag: HeadingsTag) => ({
+const HeadingAnchor = (HeadingTag: HeadingsOptions) => ({
   children,
   href = `?anchor=true`,
   icon = Anchor,
@@ -34,4 +34,12 @@ const HeadingAnchor = (HeadingTag: HeadingsTag) => ({
   </HeadingTag>
 );
 
-export default HeadingAnchor;
+export const AnchorHeadings = headingsOptions.reduce(
+  (stored, curr) => ({
+    ...stored,
+    [curr]: HeadingAnchor(curr),
+  }),
+  {} as Record<HeadingsOptions, HeadingsAnchorTag>
+);
+
+export default AnchorHeadings;

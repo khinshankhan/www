@@ -1,15 +1,17 @@
 import { ComponentWithAs, HeadingProps, Heading as ChakraHeading } from "@chakra-ui/react";
-import HeadingAnchor, { HeadingsAnchorTag } from "./HeadingAnchor";
+import AnchorHeadings, { HeadingsAnchorTag } from "./AnchorHeadings";
 import Headings, { HeadingsTag } from "./Headings";
+import { headingsOptions } from "./shared";
 
 type HeadingType = ComponentWithAs<"h2", HeadingProps> & {
   [key: string]: HeadingsTag | HeadingsAnchorTag;
 };
 
 const Heading = ChakraHeading as HeadingType;
-Object.entries(Headings).forEach(([tag, Fn]) => {
-  Heading[tag] = Fn;
-  Heading[`${tag}Anchor`] = HeadingAnchor(Fn);
+
+headingsOptions.forEach((tag) => {
+  Heading[tag] = Headings[tag];
+  Heading[`${tag}Anchor`] = AnchorHeadings[tag];
 });
 
 export default Heading;
