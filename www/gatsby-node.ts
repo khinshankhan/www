@@ -4,7 +4,18 @@ import { slugify } from "./src/utils/string";
 
 type WritingNode = Node & {
   frontmatter: {
+    title: string;
     slug?: string;
+    spoiler?: string;
+
+    layout?: string;
+    status?: string;
+
+    planted: string;
+    tended: string;
+
+    categories?: string[];
+    tags?: string[];
   };
 };
 
@@ -23,7 +34,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
       ? extensionlessRelativePath.slice(0, -5)
       : extensionlessRelativePath;
 
-    const value = slugify(
+    const slug = slugify(
       { slug: node.frontmatter.slug, filePath: cleanedRelativePath },
       // TODO: don't add source to files under pages/*
       node.frontmatter.slug ? `` : sourceInstanceName
@@ -32,7 +43,26 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value: slug,
+    });
+
+    createNodeField({
+      name: `source`,
+      node,
+      value: sourceInstanceName,
+    });
+
+    // TODO: set up favored layouts based on source
+    createNodeField({
+      name: `layout`,
+      node,
+      value: node.frontmatter.layout ?? `article`,
+    });
+
+    createNodeField({
+      name: `status`,
+      node,
+      value: node.frontmatter.status ?? `published`,
     });
   }
 };
