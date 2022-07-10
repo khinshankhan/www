@@ -2,9 +2,15 @@ import React, { FC } from "react";
 import { PageProps, graphql } from "gatsby";
 import { InternalLink } from "src/components/common";
 import { PageLayout as Layout } from "src/components/layouts";
-import { MdxQuery, WritingPageNodes } from "src/types/queries";
+import { WritingCardNode } from "src/types/queries";
 
-const Index: FC<PageProps<MdxQuery<WritingPageNodes>>> = ({
+interface WritingPageQuery {
+  allMdx: {
+    nodes: WritingCardNode[];
+  };
+}
+
+const Index: FC<PageProps<WritingPageQuery>> = ({
   data: {
     allMdx: { nodes },
   },
@@ -43,10 +49,14 @@ export const query = graphql`
       nodes {
         fields {
           slug
+          status
         }
         frontmatter {
           title
           spoiler
+          planted
+          tended
+          tags
         }
       }
     }

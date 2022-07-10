@@ -14,11 +14,12 @@ export type AllMdxNode = Node & {
   };
 };
 
+// TODO: figure out excerpts
 export interface AllEnhancedMdxFields {
   fields: {
+    layout: Layouts;
     slug: string;
     source: string;
-    layout: Layouts;
     status: string;
   };
 }
