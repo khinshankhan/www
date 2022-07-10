@@ -4,6 +4,10 @@ import { Subset } from "./utils";
 export type WritingCardNode = Subset<
   ArticleNode,
   {
+    fields: {
+      slug: string;
+      status: string;
+    };
     frontmatter: {
       title: string;
       spoiler?: string;
@@ -13,9 +17,6 @@ export type WritingCardNode = Subset<
 
       tags?: string[];
     };
-    fields: {
-      slug: string;
-      status: string;
-    };
+    timeToRead: number;
   }
 >;
