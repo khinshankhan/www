@@ -1,13 +1,14 @@
 import React, { MouseEvent } from "react";
-import { Button } from "@chakra-ui/react";
+import { ButtonProps, Button } from "@chakra-ui/react";
+import { motion, MotionProps } from "framer-motion";
 
 export type TagHandler = (tag: string, event: MouseEvent<HTMLButtonElement>) => void;
 
-interface ITagProps {
-  tag: string;
-  handler?: TagHandler;
-  [key: string]: any;
-}
+export type ITagProps = MotionProps &
+  ButtonProps & {
+    tag: string;
+    handler?: TagHandler;
+  };
 
 export const Tag = ({ tag, handler = () => {}, ...props }: ITagProps) => {
   const onClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -16,7 +17,16 @@ export const Tag = ({ tag, handler = () => {}, ...props }: ITagProps) => {
 
   return (
     // TODO: use better bgColor once more of the site is figured out
-    <Button onClick={onClick} size="sm" mt="2" mb="2" bgColor="brand.palette.400" {...props}>
+    <Button
+      as={motion.button}
+      onClick={onClick}
+      size="sm"
+      mt="2"
+      mb="2"
+      bgColor="brand.palette.300"
+      whileTap={{ scale: 1.5 }}
+      {...props}
+    >
       {tag}
     </Button>
   );

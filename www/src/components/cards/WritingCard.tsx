@@ -1,17 +1,18 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { LinkBox, LinkOverlay, Box, Text, HStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { InternalLink, Heading, Tag } from "src/components/common";
+import { InternalLink, Heading, Tag, ITagProps } from "src/components/common";
 import { WritingCardNode } from "src/types/queries";
 
 interface IWritingTags {
   tags: string[];
+  tagProps?: ITagProps | {};
 }
 
-const WritingTags = ({ tags }: IWritingTags) => (
+const WritingTags = ({ tags, tagProps = {} }: IWritingTags) => (
   <HStack wrap="wrap">
     {tags.map((tag) => (
-      <Tag key={tag} tag={tag} />
+      <Tag key={tag} tag={tag} {...tagProps} />
     ))}
   </HStack>
 );
@@ -27,6 +28,10 @@ export const WritingCard: FC<IWritingCardProps> = ({
     timeToRead,
   },
 }) => {
+  const [innerHover, setInnerHover] = useState(false);
+  const activateInnerHover = () => setInnerHover(true);
+  const deactivateInnerHover = () => setInnerHover(false);
+
   const subtitle = spoiler ?? `A little surprise reading 😊`;
 
   return (
@@ -37,13 +42,15 @@ export const WritingCard: FC<IWritingCardProps> = ({
       borderColor="bgContrast"
       rounded="md"
       mb={5}
-      whileHover={{ translateX: 15 }}
+      bgColor="green.50"
+      _hover={{ ...(!innerHover && { bgColor: `orange.100` }) }}
+      whileHover={{ ...(!innerHover && { translateX: 15 }) }}
     >
-      <Heading.h1 variant="h3" mt={2} mb={3}>
+      <Heading.h2 variant="h3" mt={2} mb={3}>
         <LinkOverlay as={InternalLink} href={slug}>
           {title}
         </LinkOverlay>
-      </Heading.h1>
+      </Heading.h2>
 
       <Box>
         <Text as="em" fontSize={{ base: `sm`, sm: `md`, md: `lg` }}>
@@ -60,7 +67,10 @@ export const WritingCard: FC<IWritingCardProps> = ({
         </Text>
       </Box>
 
-      <WritingTags tags={[`tag1`, `tag2`, `tag3`]} />
+      <WritingTags
+        tags={[`tag1`, `tag2`, `tag3`]}
+        tagProps={{ onHoverStart: activateInnerHover, onHoverEnd: deactivateInnerHover }}
+      />
 
       <Text mb={3} mt={2}>
         {subtitle}
