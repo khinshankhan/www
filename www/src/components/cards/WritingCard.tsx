@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { LinkBox, LinkOverlay, Box, Text, HStack } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import { InternalLink, Heading, Tag } from "src/components/common";
 import { WritingCardNode } from "src/types/queries";
 
@@ -29,7 +30,15 @@ export const WritingCard: FC<IWritingCardProps> = ({
   const subtitle = spoiler ?? `A little surprise reading 😊`;
 
   return (
-    <LinkBox as="article" p="5" borderWidth="1px" borderColor="bgContrast" rounded="md" mb={5}>
+    <LinkBox
+      as={motion.article}
+      p="5"
+      borderWidth="1px"
+      borderColor="bgContrast"
+      rounded="md"
+      mb={5}
+      whileHover={{ translateX: 15 }}
+    >
       <Heading.h1 variant="h3" mt={2} mb={3}>
         <LinkOverlay as={InternalLink} href={slug}>
           {title}
