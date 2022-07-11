@@ -1,21 +1,8 @@
 import React, { FC, useState } from "react";
-import { LinkBox, LinkOverlay, Box, Text, HStack } from "@chakra-ui/react";
+import { Box, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { InternalLink, Heading, Tag, ITagProps } from "src/components/common";
+import { InternalLink, Heading, TagList } from "src/components/common";
 import { WritingCardNode } from "src/types/queries";
-
-interface IWritingTags {
-  tags: string[];
-  tagProps?: ITagProps | {};
-}
-
-const WritingTags = ({ tags, tagProps = {} }: IWritingTags) => (
-  <HStack wrap="wrap">
-    {tags.map((tag) => (
-      <Tag key={tag} tag={tag} {...tagProps} />
-    ))}
-  </HStack>
-);
 
 interface IWritingCardProps {
   node: WritingCardNode;
@@ -28,9 +15,11 @@ export const WritingCard: FC<IWritingCardProps> = ({
     timeToRead,
   },
 }) => {
-  const [innerHover, setInnerHover] = useState(false);
-  const activateInnerHover = () => setInnerHover(true);
-  const deactivateInnerHover = () => setInnerHover(false);
+  const [tagFocus, setTagFocus] = useState(false);
+  const activateTagFocus = () => setTagFocus(true);
+  const deactivateTagFocus = () => setTagFocus(false);
+
+  const tagHandler = (tag: string) => console.log({ tag });
 
   const subtitle = spoiler ?? `A little surprise reading 😊`;
 
@@ -43,10 +32,11 @@ export const WritingCard: FC<IWritingCardProps> = ({
       rounded="md"
       mb={5}
       bgColor="green.50"
-      _hover={{ ...(!innerHover && { bgColor: `orange.100` }) }}
-      whileHover={{ ...(!innerHover && { translateX: 15 }) }}
+      _hover={{ ...(!tagFocus && { bgColor: `orange.100` }) }}
+      _focusWithin={{ ...(!tagFocus && { bgColor: `orange.100` }) }}
+      whileHover={{ ...(!tagFocus && { translateX: 15 }) }}
     >
-      <Heading.h2 variant="h3" mt={2} mb={3}>
+      <Heading.h2 fontFamily="title" mt={2} mb={3}>
         <LinkOverlay as={InternalLink} href={slug}>
           {title}
         </LinkOverlay>
@@ -67,10 +57,33 @@ export const WritingCard: FC<IWritingCardProps> = ({
         </Text>
       </Box>
 
-      <WritingTags
-        tags={[`tag1`, `tag2`, `tag3`]}
-        tagProps={{ onHoverStart: activateInnerHover, onHoverEnd: deactivateInnerHover }}
-      />
+      <Box
+        onMouseEnter={activateTagFocus}
+        onMouseLeave={deactivateTagFocus}
+        onFocus={activateTagFocus}
+        onBlur={deactivateTagFocus}
+      >
+        <TagList
+          tagProps={{ handler: tagHandler }}
+          tags={[
+            `tag1`,
+            `tag2`,
+            `tag3`,
+            `tag4`,
+            `tag5`,
+            `tag6`,
+            `tag7`,
+            `tag8`,
+            `tag9`,
+            `tag12`,
+            `tag13`,
+            `tag14`,
+            `tag15`,
+            `tag16`,
+            `tag17`,
+          ]}
+        />
+      </Box>
 
       <Text mb={3} mt={2}>
         {subtitle}

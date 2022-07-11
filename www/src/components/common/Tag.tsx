@@ -1,35 +1,41 @@
 import React, { MouseEvent } from "react";
-import { ButtonProps, Button } from "@chakra-ui/react";
-import { motion, MotionProps } from "framer-motion";
+import { ButtonProps, Button, FlexProps, Flex } from "@chakra-ui/react";
 
 export type TagHandler = (tag: string, event: MouseEvent<HTMLButtonElement>) => void;
 
-export type ITagProps = MotionProps &
-  ButtonProps & {
-    tag: string;
-    handler?: TagHandler;
-  };
+export type ITagProps = ButtonProps & {
+  tag: string;
+  handler?: TagHandler;
+};
 
 export const Tag = ({ tag, handler = () => {}, ...props }: ITagProps) => {
+  // TODO: get back to active state for a tag
+  // const [active, setActive] = useState(false);
+  // const toggle = () => setActive((p) => !p);
   const onClick = (event: MouseEvent<HTMLButtonElement>) => {
     handler(tag, event);
+    // toggle();
   };
 
   return (
     // TODO: use better bgColor once more of the site is figured out
-    <Button
-      as={motion.button}
-      onClick={onClick}
-      size="sm"
-      mt="2"
-      mb="2"
-      bgColor="brand.palette.300"
-      whileTap={{ scale: 1.5 }}
-      {...props}
-    >
+    <Button variant="tag" mt="2" mb="2" onClick={onClick} {...props}>
       {tag}
     </Button>
   );
 };
+
+export type ITagListProps = FlexProps & {
+  tags: string[];
+  tagProps?: ITagProps | {};
+};
+
+export const TagList = ({ tags, tagProps = {}, ...props }: ITagListProps) => (
+  <Flex flexWrap="wrap" columnGap={2} rowGap={0} {...props}>
+    {tags.map((tag) => (
+      <Tag key={tag} tag={tag} {...tagProps} />
+    ))}
+  </Flex>
+);
 
 export default Tag;
