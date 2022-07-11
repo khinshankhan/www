@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, MouseEvent, useState } from "react";
 import { Box, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { InternalLink, Heading, TagList, TagHandler } from "src/components/common";
@@ -15,16 +15,24 @@ export const WritingCard: FC<IWritingCardProps> = ({
     timeToRead,
   },
 }) => {
-  const [tagFocus, setTagFocus] = useState(false);
-  const activateTagFocus = () => setTagFocus(true);
-  const deactivateTagFocus = () => setTagFocus(false);
+  const [tagFocused, setTagFocused] = useState(false);
+  const activateTagFocused = () => setTagFocused(true);
+  const deactivateTagFocused = () => setTagFocused(false);
 
-  const tagHandler: TagHandler = (tag, e) => {
+  const [tagHovered, setTagHovered] = useState(false);
+  const activateTagHovered = () => setTagHovered(true);
+  const deactivateTagHovered = () => setTagHovered(false);
+
+  const tagFocus = tagFocused || tagHovered;
+
+  // NOTE: removes 'sticky' focus caused by synthetic event
+  const removeStickyFocus = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    // NOTE: this prevents 'sticky' focus
     e.currentTarget.blur();
-    e.currentTarget.focus();
+    deactivateTagFocused();
+  };
 
+  const tagHandler: TagHandler = (tag) => {
     console.log({ tag });
   };
 
@@ -65,10 +73,11 @@ export const WritingCard: FC<IWritingCardProps> = ({
       </Box>
 
       <Box
-        onMouseEnter={activateTagFocus}
-        onMouseLeave={deactivateTagFocus}
-        onFocus={activateTagFocus}
-        onBlur={deactivateTagFocus}
+        onMouseEnter={activateTagHovered}
+        onMouseLeave={deactivateTagHovered}
+        onMouseDown={removeStickyFocus}
+        onFocus={activateTagFocused}
+        onBlur={deactivateTagFocused}
       >
         <TagList
           tagProps={{ handler: tagHandler }}
