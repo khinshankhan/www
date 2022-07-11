@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { Box, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { InternalLink, Heading, TagList } from "src/components/common";
+import { InternalLink, Heading, TagList, TagHandler } from "src/components/common";
 import { WritingCardNode } from "src/types/queries";
 
 interface IWritingCardProps {
@@ -19,7 +19,14 @@ export const WritingCard: FC<IWritingCardProps> = ({
   const activateTagFocus = () => setTagFocus(true);
   const deactivateTagFocus = () => setTagFocus(false);
 
-  const tagHandler = (tag: string) => console.log({ tag });
+  const tagHandler: TagHandler = (tag, e) => {
+    e.preventDefault();
+    // NOTE: this prevents 'sticky' focus
+    e.currentTarget.blur();
+    e.currentTarget.focus();
+
+    console.log({ tag });
+  };
 
   const subtitle = spoiler ?? `A little surprise reading 😊`;
 
@@ -27,14 +34,14 @@ export const WritingCard: FC<IWritingCardProps> = ({
     <LinkBox
       as={motion.article}
       p="5"
-      borderWidth="1px"
-      borderColor="bgContrast"
+      borderWidth={4}
+      borderColor="orange.500"
       rounded="md"
       mb={5}
-      bgColor="green.50"
-      _hover={{ ...(!tagFocus && { bgColor: `orange.100` }) }}
-      _focusWithin={{ ...(!tagFocus && { bgColor: `orange.100` }) }}
-      whileHover={{ ...(!tagFocus && { translateX: 15 }) }}
+      bgColor="orange.100"
+      _hover={{ ...(!tagFocus && { bgColor: `green.50` }) }}
+      _focusWithin={{ ...(!tagFocus && { bgColor: `green.50` }) }}
+      whileHover={{ translateX: 15 }}
     >
       <Heading.h2 fontFamily="title" mt={2} mb={3}>
         <LinkOverlay as={InternalLink} href={slug}>
