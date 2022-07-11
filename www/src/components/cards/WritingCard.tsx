@@ -1,7 +1,8 @@
-import React, { FC, MouseEvent, useState } from "react";
-import { Box, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
+import React, { FC, MouseEvent, useState, useMemo } from "react";
+import { useToken, Box, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { InternalLink, Heading, TagList, TagHandler } from "src/components/common";
+import { cardStyles } from "src/theme/custom/styles";
 import { WritingCardNode } from "src/types/queries";
 
 interface IWritingCardProps {
@@ -15,6 +16,14 @@ export const WritingCard: FC<IWritingCardProps> = ({
     timeToRead,
   },
 }) => {
+  const [internal] = useToken(`colors`, [`internal`]);
+
+  const writingCardStyles = useMemo(
+    () => cardStyles({ cardType: `writing`, internal }),
+    [internal]
+  );
+  const { _hover, _focusWithin, sx } = writingCardStyles;
+
   const [tagFocused, setTagFocused] = useState(false);
   const activateTagFocused = () => setTagFocused(true);
   const deactivateTagFocused = () => setTagFocused(false);
@@ -43,13 +52,17 @@ export const WritingCard: FC<IWritingCardProps> = ({
       as={motion.article}
       p="5"
       borderWidth={4}
-      borderColor="orange.500"
+      borderColor="inactiveCardBorder"
       rounded="md"
       mb={5}
-      bgColor="orange.100"
-      _hover={{ ...(!tagFocus && { bgColor: `green.50` }) }}
-      _focusWithin={{ ...(!tagFocus && { bgColor: `green.50` }) }}
-      whileHover={{ translateX: 15 }}
+      bgColor="inactiveCardBg"
+      _hover={{
+        ...(!tagFocus && _hover),
+      }}
+      _focusWithin={{
+        ...(!tagFocus && _focusWithin),
+      }}
+      sx={sx}
     >
       <Heading.h2 fontFamily="title" mt={2} mb={3}>
         <LinkOverlay as={InternalLink} href={slug}>

@@ -30,6 +30,17 @@ const semanticTokens = {
     bgOpaque: {
       default: transparentize(`brand.elevateBg`, 0.98)(theme),
     },
+
+    inactiveCardBg: {
+      default: `orange.100`,
+    },
+    inactiveCardBorder: {
+      default: `orange.500`,
+    },
+    activeCardBg: {
+      default: `green.50`,
+    },
+
     dividerColor: {
       default: `brand.palette.700`,
     },
