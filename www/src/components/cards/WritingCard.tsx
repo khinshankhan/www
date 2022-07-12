@@ -12,7 +12,7 @@ interface IWritingCardProps {
 export const WritingCard: FC<IWritingCardProps> = ({
   node: {
     fields: { slug },
-    frontmatter: { title, spoiler, planted, tended },
+    frontmatter: { title, spoiler, planted, tended, tags },
     timeToRead,
   },
 }) => {
@@ -85,34 +85,17 @@ export const WritingCard: FC<IWritingCardProps> = ({
         </Text>
       </Box>
 
-      <Box
-        onMouseEnter={activateTagHovered}
-        onMouseLeave={deactivateTagHovered}
-        onMouseDown={removeStickyFocus}
-        onFocus={activateTagFocused}
-        onBlur={deactivateTagFocused}
-      >
-        <TagList
-          tagProps={{ handler: tagHandler }}
-          tags={[
-            `tag1`,
-            `tag2`,
-            `tag3`,
-            `tag4`,
-            `tag5`,
-            `tag6`,
-            `tag7`,
-            `tag8`,
-            `tag9`,
-            `tag12`,
-            `tag13`,
-            `tag14`,
-            `tag15`,
-            `tag16`,
-            `tag17`,
-          ]}
-        />
-      </Box>
+      {tags && tags.length > 0 && (
+        <Box
+          onMouseEnter={activateTagHovered}
+          onMouseLeave={deactivateTagHovered}
+          onMouseDown={removeStickyFocus}
+          onFocus={activateTagFocused}
+          onBlur={deactivateTagFocused}
+        >
+          <TagList tagProps={{ handler: tagHandler }} tags={tags} />
+        </Box>
+      )}
 
       <Text mb={3} mt={2}>
         {subtitle}
