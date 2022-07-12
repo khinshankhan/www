@@ -1,7 +1,6 @@
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   BoxProps,
-  forwardRef,
   useDisclosure,
   Box,
   Collapse,
@@ -16,11 +15,7 @@ import useHeaderData from "src/data/useHeaderData";
 import { useMobile } from "src/hooks";
 import NavbarLinks from "./navs/NavbarLinks";
 
-interface IHeaderProps extends BoxProps {
-  setRecalculate: Dispatch<SetStateAction<number>>;
-}
-
-const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = null) => {
+const Header = (props: BoxProps) => {
   const { navs } = useHeaderData();
   const { isMobile } = useMobile();
   const { isOpen, onToggle, onClose } = useDisclosure({ defaultIsOpen: false });
@@ -28,11 +23,6 @@ const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = nul
   useEffect(() => {
     onClose();
   }, [isMobile, onClose]);
-
-  useEffect(() => {
-    // NOTE: timeout accounts for collapse animation
-    setTimeout(() => setRecalculate((p) => p + 1), 200);
-  }, [isOpen, setRecalculate]);
 
   return (
     <Box
@@ -46,7 +36,6 @@ const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = nul
           backdropFilter: `blur(6px)`,
         },
       }}
-      ref={ref}
       {...props}
     >
       <Container variant="page">
@@ -88,6 +77,6 @@ const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = nul
       </Container>
     </Box>
   );
-});
+};
 
 export default Header;

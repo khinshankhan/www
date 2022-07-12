@@ -7,7 +7,7 @@ export const CenteredLayout: FC<BoxProps> = ({ children }) => (
     <Flex
       justifyContent="center"
       align="center"
-      pt={{ base: `10vh`, sm: `12vh` }}
+      pt={{ base: `12vh`, sm: `14vh` }}
       pb={{ base: 4, xs: 5 }}
     >
       {children}
