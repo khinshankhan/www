@@ -1,11 +1,8 @@
-export type CardType = "writing";
-
 export interface ICardStyleProps {
-  cardType: CardType;
   internal: string;
 }
 
-export const cardStyles = ({ cardType, internal }: ICardStyleProps) => {
+export const cardStyles = ({ internal }: ICardStyleProps) => {
   const animationTransition = `background 0.15s, border 0.15s, transform 0.3s linear`;
 
   return {
@@ -14,7 +11,7 @@ export const cardStyles = ({ cardType, internal }: ICardStyleProps) => {
       outline: `none`,
       borderColor: `internalActiveDecoration`,
       boxShadow: `0 0 10px ${internal}`,
-      transform: { writing: `translateX(15px)` }[cardType],
+      transform: `translateY(-10px)`,
     },
     _focusWithin: {
       bgColor: `activeCardBg`,

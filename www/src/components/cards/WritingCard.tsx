@@ -1,7 +1,6 @@
-import React, { FC, MouseEvent, useState, useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import { useToken, Box, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
-import { motion } from "framer-motion";
-import { InternalLink, Heading, TagList, TagHandler } from "src/components/common";
+import { InternalLink, Heading } from "src/components/common";
 import { cardStyles } from "src/theme/custom/styles";
 import { WritingCardNode } from "src/types/queries";
 
@@ -12,56 +11,28 @@ interface IWritingCardProps {
 export const WritingCard: FC<IWritingCardProps> = ({
   node: {
     fields: { slug },
-    frontmatter: { title, spoiler, planted, tended, tags },
+    frontmatter: { title, spoiler, planted, tended },
     timeToRead,
   },
 }) => {
   const [internal] = useToken(`colors`, [`internal`]);
 
-  const writingCardStyles = useMemo(
-    () => cardStyles({ cardType: `writing`, internal }),
-    [internal]
-  );
+  const writingCardStyles = useMemo(() => cardStyles({ internal }), [internal]);
   const { _hover, _focusWithin, sx } = writingCardStyles;
-
-  const [tagFocused, setTagFocused] = useState(false);
-  const activateTagFocused = () => setTagFocused(true);
-  const deactivateTagFocused = () => setTagFocused(false);
-
-  const [tagHovered, setTagHovered] = useState(false);
-  const activateTagHovered = () => setTagHovered(true);
-  const deactivateTagHovered = () => setTagHovered(false);
-
-  const tagFocus = tagFocused || tagHovered;
-
-  // NOTE: removes 'sticky' focus caused by synthetic event
-  const removeStickyFocus = (e: MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.currentTarget.blur();
-    deactivateTagFocused();
-  };
-
-  const tagHandler: TagHandler = (tag) => {
-    console.log({ tag });
-  };
 
   const subtitle = spoiler ?? `A little surprise reading 😊`;
 
   return (
     <LinkBox
-      as={motion.article}
+      as="article"
       p="5"
       borderWidth={4}
       borderColor="inactiveCardBorder"
       rounded="md"
       mb={5}
       bgColor="inactiveCardBg"
-      _hover={{
-        ...(!tagFocus && _hover),
-      }}
-      _focusWithin={{
-        ...(!tagFocus && _focusWithin),
-      }}
+      _hover={_hover}
+      _focusWithin={_focusWithin}
       sx={sx}
     >
       <Heading.h2 fontFamily="title" mt={2} mb={3}>
@@ -84,18 +55,6 @@ export const WritingCard: FC<IWritingCardProps> = ({
           &middot; {timeToRead} min read
         </Text>
       </Box>
-
-      {tags && tags.length > 0 && (
-        <Box
-          onMouseEnter={activateTagHovered}
-          onMouseLeave={deactivateTagHovered}
-          onMouseDown={removeStickyFocus}
-          onFocus={activateTagFocused}
-          onBlur={deactivateTagFocused}
-        >
-          <TagList tagProps={{ handler: tagHandler }} tags={tags} />
-        </Box>
-      )}
 
       <Text mb={3} mt={2}>
         {subtitle}
