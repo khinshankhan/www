@@ -1,28 +1,22 @@
-export interface MdxQuery<T> {
-  allMdx: {
-    nodes: T;
-  };
-}
+import { ArticleNode } from "./Nodes";
+import { Subset } from "./utils";
 
-export interface WritingCardNode {
-  frontmatter: {
-    title: string;
-    spoiler?: string;
-  };
+export type WritingCardNode = Subset<
+  ArticleNode,
+  {
+    fields: {
+      slug: string;
+      status: string;
+    };
+    frontmatter: {
+      title: string;
+      spoiler?: string;
 
-  id: string;
-}
+      planted: string;
+      tended: string;
 
-export type WritingCardNodes = WritingCardNode[];
-
-export interface WritingPageNode {
-  fields: {
-    slug: string;
-  };
-  frontmatter: {
-    title: string;
-    spoiler?: string;
-  };
-}
-
-export type WritingPageNodes = WritingPageNode[];
+      tags?: string[];
+    };
+    timeToRead: number;
+  }
+>;

@@ -1,4 +1,4 @@
-type Layouts = `article`;
+import { Layouts } from "../types/Layouts";
 
 // TODO: add to build command or dotenv
 export const isProd = process.env.STAGE === `production`;

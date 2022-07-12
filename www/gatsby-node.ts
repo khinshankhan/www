@@ -1,40 +1,14 @@
 import path from "path";
-import { GatsbyNode, CreateNodeArgs, Node } from "gatsby";
+import { GatsbyNode, CreateNodeArgs } from "gatsby";
 import { FileSystemNode } from "gatsby-source-filesystem";
-import { queryFilter, Layouts } from "./src/utils/query";
+import { Layouts } from "./src/types/Layouts";
+import { AllMdxNode, ArticleNode } from "./src/types/Nodes";
+import { queryFilter } from "./src/utils/query";
 import { slugify } from "./src/utils/string";
-
-type ArticleNode = Node & {
-  frontmatter: {
-    title: string;
-    slug?: string;
-    spoiler?: string;
-
-    layout?: Layouts;
-    status?: string;
-
-    planted: string;
-    tended: string;
-
-    categories?: string[];
-    tags?: string[];
-  };
-};
-
-type NodeRefinedFields = {
-  fields: {
-    slug: string;
-    source: string;
-    layout: Layouts;
-    status: string;
-  };
-};
-
-type MdxNode = ArticleNode;
 
 export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
   if (args.node.internal.type === `Mdx`) {
-    const { node, actions, getNode } = args as CreateNodeArgs<MdxNode>;
+    const { node, actions, getNode } = args as CreateNodeArgs<AllMdxNode>;
     const { createNodeField } = actions;
 
     if (!node.parent) return;
@@ -80,7 +54,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
 
 interface ResultData {
   articles: {
-    nodes: (ArticleNode & NodeRefinedFields)[];
+    nodes: ArticleNode[];
   };
 }
 
