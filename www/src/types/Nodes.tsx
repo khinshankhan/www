@@ -13,6 +13,7 @@ export type AllMdxNode = Node & {
     tended: string;
   };
 
+  excerpt: string;
   timeToRead: number;
 };
 

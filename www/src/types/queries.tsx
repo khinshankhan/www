@@ -17,6 +17,7 @@ export type WritingCardNode = Subset<
 
       tags?: string[];
     };
+    excerpt: string;
     timeToRead: number;
   }
 >;
