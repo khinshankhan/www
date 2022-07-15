@@ -23,16 +23,16 @@ const semanticTokens = {
 
     // backgrounds
     bgPrimary: {
-      default: transparentize(`brand.bg.100`, 1)(theme),
+      default: transparentize(`brand.bg.50`, 1)(theme),
     },
     bgContrast: {
       default: `blueGray.800`,
     },
     bgAlpha: {
-      default: transparentize(`brand.bg.300`, 0.8)(theme),
+      default: transparentize(`brand.bg.100`, 0.8)(theme),
     },
     bgOpaque: {
-      default: transparentize(`brand.bg.300`, 0.98)(theme),
+      default: transparentize(`brand.bg.100`, 0.98)(theme),
     },
 
     inactiveCardBg: {

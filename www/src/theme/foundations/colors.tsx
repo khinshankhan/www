@@ -174,7 +174,22 @@ export const colorPalette = {
   },
 };
 
+const bg = {
+  "50": `#edecec`,
+  "100": `#d5ced1`,
+  "200": `#baadb3`,
+  "300": `#a08b95`,
+  "400": `#8c717f`,
+  "500": `#7a5869`,
+  "600": `#6d4f5f`,
+  "700": `#5c4351`,
+  "800": `#4c3845`,
+  "900": `#3b2b37`,
+};
+
 const natureGreen = {
+  /*
+  // og attempt
   50: `#E8F1EC`,
   100: `#C8DECF`,
   200: `#A6C8B2`,
@@ -185,13 +200,35 @@ const natureGreen = {
   700: `#4B7758`,
   800: `#45664E`,
   900: `#344839`,
-};
+  // good green, but doesn't have great synergy with bg
+  50: `#D8F0EB`,
+  100: `#B8D3CA`,
+  200: `#91B3A9`,
+  300: `#6B9489`,
+  400: `#507D72`,
+  500: `#34675C`,
+  600: `#2B594E`,
+  700: `#1D463D`,
+  800: `#0F342D`,
+  900: `#00201A`,
+   */
 
+  50: `#E3F3F0`,
+  100: `#BBE2D9`,
+  200: `#91D0C1`,
+  300: `#6ABDA8`,
+  400: `#52AE97`,
+  500: `#469F86`,
+  600: `#40927A`,
+  700: `#3A816B`,
+  800: `#34715D`,
+  900: `#295443`,
+};
 export const colors = {
   ...colorPalette,
   brand: {
     palette: natureGreen,
-    bg: natureGreen,
+    bg,
   },
 };
 
