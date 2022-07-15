@@ -191,8 +191,7 @@ export const colors = {
   ...colorPalette,
   brand: {
     palette: natureGreen,
-    primaryBg: `#FDFCF7`,
-    elevateBg: `#F6F2EC`,
+    bg: natureGreen,
   },
 };
 

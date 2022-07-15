@@ -25,19 +25,7 @@ const Header = (props: BoxProps) => {
   }, [isMobile, onClose]);
 
   return (
-    <Box
-      top={0}
-      bg="bgOpaque"
-      pos="sticky"
-      zIndex="sticky"
-      sx={{
-        "@supports ((-webkit-backdrop-filter: blur(6px)) or (backdrop-filter: blur(6px)))": {
-          backgroundColor: `bgAlpha`,
-          backdropFilter: `blur(6px)`,
-        },
-      }}
-      {...props}
-    >
+    <Box top={0} pos="sticky" zIndex="sticky" {...props}>
       <Container variant="page">
         <Flex as="nav" id="main-nav" minH="55px" pt="4" pb="2.5" align="center">
           <Flex id="main-logo" flex={1} justify="start">

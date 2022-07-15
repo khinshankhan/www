@@ -1,11 +1,20 @@
 import { mode, Styles } from "@chakra-ui/theme-tools";
+import semanticTokens from "../foundations/semantic-tokens";
 
+const {
+  colors: { bgPrimary, bgOpaque },
+} = semanticTokens;
+
+const primaryBg = bgPrimary.default;
+const navStartBg = bgOpaque.default;
+
+// TODO: account for color modes properly when dark mode is implemented
 const styles: Styles = {
   global: (props) => ({
     body: {
       fontFamily: `body`,
       color: `bgContrast`,
-      bg: `bg`,
+      bg: `bgPrimary`,
       transitionProperty: `background-color`,
       transitionDuration: `normal`,
       lineHeight: `base`,
@@ -36,6 +45,13 @@ const styles: Styles = {
       fontWeight: `bold`,
       fontSize: { base: `5rem`, lg: `6rem` },
       lineHeight: { base: `3.375rem` },
+    },
+    ".sharedNavBg": {
+      // HACK: 350px just works
+      backgroundImage: `linear-gradient(${navStartBg}, ${primaryBg} 350px)`,
+      backgroundSize: `cover`,
+      backgroundPosition: `center`,
+      backgroundAttachment: `fixed`,
     },
   }),
 };

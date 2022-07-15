@@ -17,7 +17,6 @@ const Footer = forwardRef((props: BoxProps, ref = null) => {
           alignItems="center"
           pt={4}
           pb={4}
-          bg="bgAlpha"
         >
           <Copyright name={meta.fullname} year={meta.startYear} />
           <SocialMediaLinks socials={socials} />
