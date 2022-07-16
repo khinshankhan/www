@@ -36,13 +36,16 @@ const semanticTokens = {
     },
 
     inactiveCardBg: {
-      default: `orange.50`,
+      default: `orange.100`,
     },
     inactiveCardBorder: {
-      default: `orange.500`,
+      default: `brand.bg.300`,
     },
     activeCardBg: {
       default: `green.50`,
+    },
+    spoilerText: {
+      default: `blueGray.500`,
     },
 
     dividerColor: {

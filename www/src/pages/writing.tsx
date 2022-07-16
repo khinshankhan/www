@@ -20,8 +20,7 @@ const Writing: FC<PageProps<WritingPageQuery>> = ({
     <SimpleGrid
       alignContent={`center`}
       justifyItems={`center`}
-      columns={{ base: 1, md: 2, lg: 3 }}
-      minChildWidth="375px"
+      columns={{ base: 1, md: 2, "2xl": 3 }}
       spacing={10}
     >
       {nodes.map((node) => (
