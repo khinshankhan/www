@@ -25,13 +25,12 @@ export const WritingCard: FC<IWritingCardProps> = ({
   return (
     <LinkBox
       as="article"
-      maxW="sm"
-      p="5"
-      borderWidth={4}
-      borderColor="inactiveCardBorder"
-      rounded="md"
-      mb={5}
-      bgColor="inactiveCardBg"
+      width="full"
+      rounded="xl"
+      boxShadow="lg"
+      justifyContent="space-between"
+      p={7}
+      bg="inactiveCardBg"
       _hover={_hover}
       _focusWithin={_focusWithin}
       sx={sx}
@@ -41,8 +40,7 @@ export const WritingCard: FC<IWritingCardProps> = ({
           {title}
         </LinkOverlay>
       </Heading.h2>
-
-      <Text color="blueGray.500" mb={3} mt={2}>
+      <Text color="spoilerText" mb={3} mt={2}>
         {subtitle}
       </Text>
       <Text mb={3} mt={2}>
