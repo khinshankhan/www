@@ -47,8 +47,11 @@ const styles: Styles = {
       lineHeight: { base: `3.375rem` },
     },
     ".sharedNavBg": {
-      // HACK: 350px just works
-      backgroundImage: `linear-gradient(${navStartBg}, ${primaryBg} 350px)`,
+      // HACK: px just works on breakpoints
+      backgroundImage: {
+        base: `linear-gradient(${navStartBg}, ${primaryBg} 275px)`,
+        md: `linear-gradient(${navStartBg}, ${primaryBg} 350px)`,
+      },
       backgroundSize: `cover`,
       backgroundPosition: `center`,
       backgroundAttachment: `fixed`,
