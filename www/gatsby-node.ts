@@ -45,6 +45,12 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
     });
 
     createNodeField({
+      name: `subtitle`,
+      node,
+      value: node.frontmatter.spoiler ?? `A little surprise reading 😊`,
+    });
+
+    createNodeField({
       name: `status`,
       node,
       value: node.frontmatter.status ?? `published`,

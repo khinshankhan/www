@@ -5,6 +5,7 @@ export type AllMdxNode = Node & {
   frontmatter: {
     title: string;
     slug?: string;
+    spoiler?: string;
 
     layout?: Layouts;
     status?: string;
@@ -24,6 +25,7 @@ export interface AllEnhancedMdxFields {
     slug: string;
     source: string;
     status: string;
+    subtitle: string;
   };
 }
 
@@ -31,9 +33,6 @@ export type AllEnhancedMdxNode = AllMdxNode & AllEnhancedMdxFields;
 
 export type ArticleNode = AllEnhancedMdxNode & {
   frontmatter: {
-    spoiler?: string;
-
-    categories?: string[];
     tags?: string[];
   };
 };

@@ -44,10 +44,10 @@ export const query = graphql`
         fields {
           slug
           status
+          subtitle
         }
         frontmatter {
           title
-          spoiler
           planted
           tended
           tags

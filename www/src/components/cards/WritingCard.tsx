@@ -10,8 +10,8 @@ interface IWritingCardProps {
 
 export const WritingCard: FC<IWritingCardProps> = ({
   node: {
-    fields: { slug },
-    frontmatter: { title, spoiler },
+    fields: { slug, subtitle },
+    frontmatter: { title },
     excerpt,
   },
 }) => {
@@ -19,8 +19,6 @@ export const WritingCard: FC<IWritingCardProps> = ({
 
   const writingCardStyles = useMemo(() => cardStyles({ internal }), [internal]);
   const { _hover, _focusWithin, sx } = writingCardStyles;
-
-  const subtitle = spoiler ?? `A little surprise reading 😊`;
 
   return (
     <LinkBox
