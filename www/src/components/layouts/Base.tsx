@@ -1,9 +1,16 @@
 import React, { FC } from "react";
-import { BoxProps, Box, Flex } from "@chakra-ui/react";
+import { BoxProps, Box, FlexProps, Flex } from "@chakra-ui/react";
+import { pageAnimationTransition } from "src/theme/custom/styles";
 import { Header, Footer } from "./common";
 
-export const BaseLayout: FC<BoxProps> = ({ children, ...props }): JSX.Element => {
-  const animationTransition = `background-image 50s ease-in-out`;
+export interface IBaseLayoutProps extends BoxProps {
+  topProps?: FlexProps;
+}
+
+export const BaseLayout: FC<IBaseLayoutProps> = ({ children, topProps, ...props }): JSX.Element => {
+  // TODO: figure out how/ when to combine animation transitions
+  // could be a simple concat?
+  const { sx, ...restTopProps } = topProps ?? {};
 
   return (
     <>
@@ -12,9 +19,11 @@ export const BaseLayout: FC<BoxProps> = ({ children, ...props }): JSX.Element =>
         direction="column"
         minH="96vh"
         sx={{
-          WebkitTransition: animationTransition,
-          transition: animationTransition,
+          WebkitTransition: pageAnimationTransition,
+          transition: pageAnimationTransition,
+          ...sx,
         }}
+        {...restTopProps}
       >
         <Header as="header" className="topNav sharedNavBg" />
         <Box id="content" {...props}>

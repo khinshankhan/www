@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { BoxProps, Flex } from "@chakra-ui/react";
-import { BaseLayout as Layout } from "src/components/layouts";
+import { Flex } from "@chakra-ui/react";
+import { BaseLayout as Layout, IBaseLayoutProps } from "src/components/layouts";
 
-export const CenteredLayout: FC<BoxProps> = ({ children }) => (
+export const CenteredLayout: FC<IBaseLayoutProps> = ({ children }) => (
   <Layout>
     <Flex
       justifyContent="center"

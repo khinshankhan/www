@@ -29,23 +29,6 @@ const styles: Styles = {
     "::selection": {
       background: `selection`,
     },
-    // NOTE: `#content > * >` limits to prose elements (* is container)
-    "#content > * > :where(h2, h3, h4, h5, h6, p, ol, ul)": {
-      mb: 5,
-    },
-    "#content > * > p+:where(ol, ul)": {
-      mt: -5,
-    },
-    "#content > * > :where(ol, ul) > li > p": {
-      mb: 0,
-    },
-    "#content > * > p:nth-of-type(1)::first-letter": {
-      color: `primary`,
-      float: `left`,
-      fontWeight: `bold`,
-      fontSize: { base: `5rem`, lg: `6rem` },
-      lineHeight: { base: `3.375rem` },
-    },
     ".sharedNavBg": {
       // HACK: px just works on breakpoints
       backgroundImage: {

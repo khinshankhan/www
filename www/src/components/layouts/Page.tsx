@@ -1,15 +1,15 @@
 import React, { FC } from "react";
-import { BoxProps, chakra, Box, Container, Text, VStack } from "@chakra-ui/react";
+import { chakra, Box, Container, Text, VStack } from "@chakra-ui/react";
 import { Heading } from "src/components/common";
-import { BaseLayout as Layout } from "src/components/layouts";
+import { BaseLayout as Layout, IBaseLayoutProps } from "src/components/layouts";
 
-interface IPageLayoutProps extends BoxProps {
+interface IPageLayoutProps extends IBaseLayoutProps {
   title: string;
   taglines: string[];
 }
 
-export const PageLayout: FC<IPageLayoutProps> = ({ title, taglines = [], children }) => (
-  <Layout>
+export const PageLayout: FC<IPageLayoutProps> = ({ title, taglines = [], children, ...props }) => (
+  <Layout {...props}>
     <Box pt={14} pb={12} className="sharedNavBg" mb={10}>
       <Heading.h1 align="center" fontFamily="title" pb={taglines.length === 0 ? 0 : 8}>
         {title}
