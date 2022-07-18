@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { SimpleGrid } from "@chakra-ui/react";
 import { PageProps, graphql } from "gatsby";
 import { WritingCard } from "src/components/cards";
 import { PageLayout as Layout } from "src/components/layouts";
@@ -16,9 +17,16 @@ const Writing: FC<PageProps<WritingPageQuery>> = ({
   },
 }) => (
   <Layout title="Writing" taglines={[`My thoughts and ideas`]}>
-    {nodes.map((node) => (
-      <WritingCard key={node.fields.slug} node={node} />
-    ))}
+    <SimpleGrid
+      alignContent={`center`}
+      justifyItems={`center`}
+      columns={{ base: 1, md: 2, "2xl": 3 }}
+      spacing={10}
+    >
+      {nodes.map((node) => (
+        <WritingCard key={node.fields.slug} node={node} />
+      ))}
+    </SimpleGrid>
   </Layout>
 );
 
@@ -36,14 +44,15 @@ export const query = graphql`
         fields {
           slug
           status
+          subtitle
         }
         frontmatter {
           title
-          spoiler
           planted
           tended
           tags
         }
+        excerpt
         timeToRead
       }
     }

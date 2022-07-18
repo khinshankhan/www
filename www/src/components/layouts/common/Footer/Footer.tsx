@@ -9,20 +9,7 @@ const Footer = forwardRef((props: BoxProps, ref = null) => {
   const { socials } = data.navs.footer;
 
   return (
-    <Box
-      ref={ref}
-      top={0}
-      bg="bgOpaque"
-      pos="sticky"
-      zIndex="sticky"
-      sx={{
-        "@supports ((-webkit-backdrop-filter: blur(6px)) or (backdrop-filter: blur(6px)))": {
-          backgroundColor: `bgAlpha`,
-          backdropFilter: `blur(6px)`,
-        },
-      }}
-      {...props}
-    >
+    <Box ref={ref} bg="bgOpaque" zIndex="sticky" bottom={0} {...props}>
       <Container variant="page" as="footer" id="footer">
         <Stack
           direction={{ base: `column-reverse`, md: `row` }}
@@ -30,7 +17,6 @@ const Footer = forwardRef((props: BoxProps, ref = null) => {
           alignItems="center"
           pt={4}
           pb={4}
-          bg="bgAlpha"
         >
           <Copyright name={meta.fullname} year={meta.startYear} />
           <SocialMediaLinks socials={socials} />

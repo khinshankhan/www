@@ -3,12 +3,19 @@ import { Text, ListItem, UnorderedList } from "@chakra-ui/react";
 import { Heading, InternalLink, ExternalLink } from "src/components/common";
 import { PageLayout as Layout } from "src/components/layouts";
 import useAboutData from "src/data/useAboutData";
+import { normalizeElements, fancyFirstLetter } from "src/theme/custom/styles";
 
 const Index = () => {
   const { taglines } = useAboutData();
 
   return (
-    <Layout title="About" taglines={taglines}>
+    <Layout
+      title="About"
+      taglines={taglines}
+      topProps={{
+        sx: { ...normalizeElements, ...fancyFirstLetter },
+      }}
+    >
       <Text>
         Nice to meet you! I'm Khinshan, but feel free to call me Shan. I've put on many different
         hats and poked around a few different fields, but in the end I'm a software engineer

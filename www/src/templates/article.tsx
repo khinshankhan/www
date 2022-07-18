@@ -4,6 +4,7 @@ import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import Headings from "src/components/common/Heading/Headings";
 import { PageLayout as Layout } from "src/components/layouts";
+import { normalizeElements, fancyFirstLetter } from "src/theme/custom/styles";
 
 const components = { ...Headings };
 
@@ -20,11 +21,17 @@ const Article = ({ data, pageContext, location }: IPropsProps) => {
   console.log({ data, pageContext, location });
 
   const {
-    mdx: { frontmatter, body },
+    mdx: { fields, frontmatter, body },
   } = data;
 
   return (
-    <Layout title={frontmatter.title} taglines={[]}>
+    <Layout
+      title={frontmatter.title}
+      taglines={[fields.subtitle]}
+      topProps={{
+        sx: { ...normalizeElements, ...fancyFirstLetter },
+      }}
+    >
       <MDXProvider components={components}>
         <MDXRenderer>{body}</MDXRenderer>
       </MDXProvider>
@@ -37,6 +44,9 @@ export default Article;
 export const query = graphql`
   query Article($slug: String!) {
     mdx(fields: { slug: { eq: $slug } }) {
+      fields {
+        subtitle
+      }
       frontmatter {
         title
       }

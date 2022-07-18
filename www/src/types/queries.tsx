@@ -7,16 +7,17 @@ export type WritingCardNode = Subset<
     fields: {
       slug: string;
       status: string;
+      subtitle: string;
     };
     frontmatter: {
       title: string;
-      spoiler?: string;
 
       planted: string;
       tended: string;
 
       tags?: string[];
     };
+    excerpt: string;
     timeToRead: number;
   }
 >;

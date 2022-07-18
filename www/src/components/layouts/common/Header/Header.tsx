@@ -1,7 +1,6 @@
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   BoxProps,
-  forwardRef,
   useDisclosure,
   Box,
   Collapse,
@@ -16,11 +15,7 @@ import useHeaderData from "src/data/useHeaderData";
 import { useMobile } from "src/hooks";
 import NavbarLinks from "./navs/NavbarLinks";
 
-interface IHeaderProps extends BoxProps {
-  setRecalculate: Dispatch<SetStateAction<number>>;
-}
-
-const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = null) => {
+const Header = (props: BoxProps) => {
   const { navs } = useHeaderData();
   const { isMobile } = useMobile();
   const { isOpen, onToggle, onClose } = useDisclosure({ defaultIsOpen: false });
@@ -29,26 +24,8 @@ const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = nul
     onClose();
   }, [isMobile, onClose]);
 
-  useEffect(() => {
-    // NOTE: timeout accounts for collapse animation
-    setTimeout(() => setRecalculate((p) => p + 1), 200);
-  }, [isOpen, setRecalculate]);
-
   return (
-    <Box
-      top={0}
-      bg="bgOpaque"
-      pos="sticky"
-      zIndex="sticky"
-      sx={{
-        "@supports ((-webkit-backdrop-filter: blur(6px)) or (backdrop-filter: blur(6px)))": {
-          backgroundColor: `bgAlpha`,
-          backdropFilter: `blur(6px)`,
-        },
-      }}
-      ref={ref}
-      {...props}
-    >
+    <Box top={0} pos="sticky" zIndex="sticky" {...props}>
       <Container variant="page">
         <Flex as="nav" id="main-nav" minH="55px" pt="4" pb="2.5" align="center">
           <Flex id="main-logo" flex={1} justify="start">
@@ -88,6 +65,6 @@ const Header = forwardRef(({ setRecalculate, ...props }: IHeaderProps, ref = nul
       </Container>
     </Box>
   );
-});
+};
 
 export default Header;

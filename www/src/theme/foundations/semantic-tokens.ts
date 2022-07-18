@@ -3,6 +3,10 @@ import colors from "./colors";
 
 const theme = { colors };
 
+// NOTE: transparentize with 1 is a hack
+// to be able to import tokens from this file and use them
+// as values for string interpolation css
+
 // TODO: build out dark theme later
 const semanticTokens = {
   colors: {
@@ -18,27 +22,30 @@ const semanticTokens = {
     },
 
     // backgrounds
-    bg: {
-      default: `brand.primaryBg`,
+    bgPrimary: {
+      default: transparentize(`brand.bg.50`, 1)(theme),
     },
     bgContrast: {
       default: `blueGray.800`,
     },
     bgAlpha: {
-      default: transparentize(`brand.elevateBg`, 0.8)(theme),
+      default: transparentize(`brand.bg.100`, 0.8)(theme),
     },
     bgOpaque: {
-      default: transparentize(`brand.elevateBg`, 0.98)(theme),
+      default: transparentize(`brand.bg.100`, 0.98)(theme),
     },
 
     inactiveCardBg: {
       default: `orange.100`,
     },
     inactiveCardBorder: {
-      default: `orange.500`,
+      default: `brand.bg.300`,
     },
     activeCardBg: {
       default: `green.50`,
+    },
+    spoilerText: {
+      default: `blueGray.500`,
     },
 
     dividerColor: {
@@ -47,25 +54,25 @@ const semanticTokens = {
 
     // used for links
     internal: {
-      default: `brand.palette.700`,
+      default: `brand.palette.500`,
     },
     internalDecoration: {
-      default: `brand.palette.200`,
+      default: `brand.palette.300`,
     },
     internalFocusDecoration: {
-      default: `brand.palette.600`,
+      default: `brand.palette.500`,
     },
     internalActiveDecoration: {
-      default: `brand.palette.600`,
+      default: `brand.palette.500`,
     },
     external: {
-      default: `blue.600`,
+      default: `cyan.600`,
     },
     externalDecoration: {
-      default: `blue.200`,
+      default: `cyan.300`,
     },
     externalFocusDecoration: {
-      default: `blue.600`,
+      default: `cyan.600`,
     },
   },
 };
