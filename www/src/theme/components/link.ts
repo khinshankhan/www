@@ -32,7 +32,7 @@ const Link = {
       // NOTE: although this isn't used by chakra ui, it will be reference by internal link
       _active: {
         color: `internal`,
-        textDecorationColor: `internalActiveDecoration`,
+        // textDecorationColor: `internalActiveDecoration`,
       },
     },
     external: {

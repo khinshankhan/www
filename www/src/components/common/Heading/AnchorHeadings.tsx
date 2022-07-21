@@ -23,7 +23,6 @@ const HeadingAnchor = (HeadingTag: HeadingsOptions) => {
       <Link
         href={href}
         aria-label={`Create anchor link to this point in the page`}
-        variant="internal"
         matchExcludeParams
         {...props}
       >
