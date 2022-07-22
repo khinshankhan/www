@@ -20,6 +20,11 @@ This test is from https://agea.github.io/tutorial.md
 - List items are tiny because they dont have p styling
   - some list items get wrapped in p
   - perhaps list item styling needs to be updated
+- links are okay, icons are a bit off
+  - mailtos shouldnt have an icon
+  - wonder if md can be excepted -> could specify explicitly
+- images need a component
+  - should I use https://www.joshwcomeau.com/css/full-bleed/
 
 And the actual test:
 
@@ -50,3 +55,33 @@ Paragraphs are delimited by blank lines, leading and trailing spaces are removed
 You may force a line break with two spaces
 or with a `\`\
 at the end of the line
+
+## Links
+
+- You can insert links in text like [this](/tutorial.md)
+
+- You may add a [title](https://agea.github.io/tutorial.md "Markdown Tutorial") to your link (can you see the tooltip?)
+
+- If your link contains spaces you have to write the [link](<http://example.com/a space>) between `<>`
+
+- You can use spaces and markup inside the [link **text**](https://agea.github.io/tutorial.md)
+
+- Long links may decrease source readability, so it's posible to define all links somewhere in the document (the end is a good place) and just reference the [link][tutorial.md], you may also collapse the reference if it matches the link text (example: [tutorial.md][])
+
+- You may also write directly the link: <https://agea.github.io/tutorial.md>
+
+- It will work also for email addresses: <email@example.com> (you may write vaild email links also using [mailto](mailto:email@example.com) as protocol)
+
+[tutorial.md]: https://agea.github.io/tutorial.md
+
+## Images
+
+Syntax for images is like the syntax for links, but with a `!` before:
+
+![alt text](https://agea.github.io/tutorial.md/img/1.png "image title")
+
+![](https://agea.github.io/tutorial.md/img/2.png)
+
+![ref]
+
+[ref]: https://agea.github.io/tutorial.md/img/3.png
