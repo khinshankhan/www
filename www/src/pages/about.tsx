@@ -35,24 +35,12 @@ const Index = () => {
 
       <Text>Some things I like that you may like:</Text>
       <UnorderedList>
-        <ListItem>
-          <Text>cooking</Text>
-        </ListItem>
-        <ListItem>
-          <Text>linguistics</Text>
-        </ListItem>
-        <ListItem>
-          <Text>puzzles & fallacies</Text>
-        </ListItem>
-        <ListItem>
-          <Text>(video | board | *)games</Text>
-        </ListItem>
-        <ListItem>
-          <Text>interactivity</Text>
-        </ListItem>
-        <ListItem>
-          <Text>unordered lists</Text>
-        </ListItem>
+        <ListItem>cooking</ListItem>
+        <ListItem>linguistics</ListItem>
+        <ListItem>puzzles & fallacies</ListItem>
+        <ListItem>(video | board | *)games</ListItem>
+        <ListItem>interactivity</ListItem>
+        <ListItem>unordered lists</ListItem>
       </UnorderedList>
 
       <Heading.h2Anchor>This Site</Heading.h2Anchor>

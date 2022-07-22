@@ -17,9 +17,6 @@ This test is from https://agea.github.io/tutorial.md
 
 - First paragraph's fancy lettering break the next paragraph if sufficient space isn't given.
   - a thematic break seems to work for sizes sm+
-- List items are tiny because they dont have p styling
-  - some list items get wrapped in p
-  - perhaps list item styling needs to be updated
 - links are okay, icons are a bit off
   - mailtos shouldnt have an icon
   - wonder if md can be excepted -> could specify explicitly
@@ -85,3 +82,46 @@ Syntax for images is like the syntax for links, but with a `!` before:
 ![ref]
 
 [ref]: https://agea.github.io/tutorial.md/img/3.png
+
+## Lists
+
+To define a list of items, just put a `*`, a `-`, or a `+` at the start of the line of each item of the list followed by at least a space, to end the list, leave a blank line
+
+- red
+- green
+- blue
+
+* white
+* grey
+* black
+
+- yellow
+- pink
+- orange
+
+You can also define numbered list, putting a number followed by a `.` or a `)` and a space at the start of the line (you may use any number, the first one is taken to start counting, then it will increment by one):
+
+3.
+4. you may leave blank items
+
+1) or start
+1) again
+
+You can insert any block inside a list, you have to respect the indentation of the text of the list item
+
+- A _paragraph_ of text
+  (spanning multiple lines),
+
+  ```
+  fenced code,
+  ```
+
+      indented code (4 spaces + 2 spaces for the list
+      indentation, one blank line above, one below),
+
+  > quotes,
+
+  - another
+    - list
+      - (and so on...),
+  - ### or headers
