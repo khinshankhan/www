@@ -2,11 +2,9 @@ import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import Headings from "src/components/common/Heading/Headings";
 import { PageLayout as Layout } from "src/components/layouts";
+import MdxComponents from "src/components/mdx";
 import { normalizeElements, fancyFirstLetter } from "src/theme/custom/styles";
-
-const components = { ...Headings };
 
 // TODO: get to more elaborate types
 interface IPropsProps {
@@ -32,7 +30,7 @@ const Article = ({ data, pageContext, location }: IPropsProps) => {
         sx: { ...normalizeElements, ...fancyFirstLetter },
       }}
     >
-      <MDXProvider components={components}>
+      <MDXProvider components={MdxComponents}>
         <MDXRenderer>{body}</MDXRenderer>
       </MDXProvider>
     </Layout>
