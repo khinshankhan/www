@@ -3,7 +3,7 @@ import { Text, ListItem, UnorderedList } from "@chakra-ui/react";
 import { Heading, InternalLink, ExternalLink } from "src/components/common";
 import { PageLayout as Layout } from "src/components/layouts";
 import useAboutData from "src/data/useAboutData";
-import { normalizeElements, fancyFirstLetter } from "src/theme/custom/styles";
+import { normalizeElements, fancyFirstLetter } from "src/theme/styles/mdx";
 
 const Index = () => {
   const { taglines } = useAboutData();

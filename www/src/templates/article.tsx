@@ -4,7 +4,7 @@ import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { PageLayout as Layout } from "src/components/layouts";
 import MdxComponents from "src/components/mdx";
-import { normalizeElements, fancyFirstLetter } from "src/theme/custom/styles";
+import { normalizeElements, fancyFirstLetter } from "src/theme/styles/mdx";
 
 // TODO: get to more elaborate types
 interface IPropsProps {

@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from "react";
 import { useToken, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
 import { InternalLink, Heading } from "src/components/common";
-import { cardStyles } from "src/theme/custom/styles";
+import { cardStyles } from "src/theme/styles/card";
 import { WritingCardNode } from "src/types/queries";
 
 interface IWritingCardProps {
