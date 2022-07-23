@@ -26,7 +26,22 @@ const HeadingAnchor = (HeadingTag: HeadingsOptions) => {
         matchExcludeParams
         {...props}
       >
-        {icon && <Icon as={icon} fontSize="inherit" h={{ base: 4, lg: 5 }} color="internal" />}
+        {icon && (
+          <Icon
+            as={icon}
+            fontSize="inherit"
+            h={{ base: 4, lg: 5, xl: 6 }}
+            color="internalDecoration"
+            sx={{
+              "*:focus > &": {
+                color: `internal`,
+              },
+              "*:hover > &": {
+                color: `internal`,
+              },
+            }}
+          />
+        )}
         {children}
       </Link>
     </HeadingComponent>
