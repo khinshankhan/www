@@ -1,5 +1,21 @@
 // TODO: exclude common extensions that aren't files
-const COMMON_URL_EXTENSIONS = [`html`, `png`, `jpg`, `jpeg`, `svg`, `webp`, `gif`];
+const COMMON_URL_EXTENSIONS = [
+  // could be a file but usually renders a page
+  `html`,
+  `php`,
+  `md`,
+  // images
+  `png`,
+  `jpg`,
+  `jpeg`,
+  `svg`,
+  `webp`,
+  `gif`,
+  // common domains
+  `com`,
+  `dev`,
+  `net`,
+];
 
 export const hasExtension = (name: string) => /\.[0-9a-z]+$/i.test(name);
 

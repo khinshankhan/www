@@ -17,9 +17,6 @@ This test is from https://agea.github.io/tutorial.md
 
 - First paragraph's fancy lettering break the next paragraph if sufficient space isn't given.
   - a thematic break seems to work for sizes sm+
-- links are okay, icons are a bit off
-  - mailtos shouldnt have an icon
-  - wonder if md can be excepted -> could specify explicitly
 - images need a component
   - should I use https://www.joshwcomeau.com/css/full-bleed/
 
