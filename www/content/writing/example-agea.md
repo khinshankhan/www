@@ -11,14 +11,11 @@ tags: ["agea"]
 
 This test is from https://agea.github.io/tutorial.md
 
----
-
 <h2 as="h3">Notes:</h2>
 
-- First paragraph's fancy lettering break the next paragraph if sufficient space isn't given.
-  - a thematic break seems to work for sizes sm+
 - images need a component
   - should I use https://www.joshwcomeau.com/css/full-bleed/
+- pre/ codeblocks + code need styling
 
 And the actual test:
 

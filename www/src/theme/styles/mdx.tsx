@@ -9,6 +9,10 @@ export const normalizeElements = {
   "#content > * > :where(ol, ul) > li > p": {
     mb: 0,
   },
+  // TODO: add some sort of fancy bottom border to make the spacing look more natural
+  "#content > * > p:nth-of-type(1)": {
+    pb: { base: 8, sm: 10 },
+  },
 };
 
 export const fancyFirstLetter = {
