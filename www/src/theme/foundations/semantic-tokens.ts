@@ -86,7 +86,7 @@ const semanticTokens = {
       default: `brand.palette.100`,
     },
     codeHighlight: {
-      default: `orange.800`,
+      default: `brand.bg.700`,
     },
     codeHighlightBorderLeft: {
       default: transparentize(`brand.bg.200`, 1)(theme),

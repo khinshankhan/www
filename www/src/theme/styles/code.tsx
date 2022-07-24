@@ -11,6 +11,8 @@ const borderLeft = codeHighlightBorderLeft.default;
 // with small tweaks, which is on Sarah Drasner's Night Owl
 // (https://github.com/sdras/night-owl-vscode-theme/) with small tweaks
 
+// TODO: figure out file titles
+// TODO: figure out copy button
 // TODO: potentially make codeblocks bleed into the page edges on smaller sizes
 const codeStyles = {
   "code[class*='language-'], pre[class*='language-']": {
