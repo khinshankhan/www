@@ -74,6 +74,23 @@ const semanticTokens = {
     externalFocusDecoration: {
       default: `cyan.600`,
     },
+
+    // TODO: check a11y for this
+    inlineCodeBg: {
+      default: `brand.bg.200`,
+    },
+    codeBg: {
+      default: `brand.bg.900`,
+    },
+    inlineCodeSelection: {
+      default: `brand.palette.100`,
+    },
+    codeHighlight: {
+      default: `orange.800`,
+    },
+    codeHighlightBorderLeft: {
+      default: transparentize(`brand.bg.200`, 1)(theme),
+    },
   },
 };
 
