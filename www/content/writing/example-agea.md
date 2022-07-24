@@ -196,3 +196,9 @@ const add = (...args) => args.reduce((sum, addend) => (sum += addend), 0);
 console.log(add(2, 3))
 console.log(add(4, 5))
 ```
+
+```diff-javascript
++const add = (...args) => args.reduce((sum, addend) => (sum += addend), 0);
+-console.log(add(2, 3))
+-console.log(add(4, 5))
+```

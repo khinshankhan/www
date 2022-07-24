@@ -151,6 +151,34 @@ const codeStyles = {
     float: `left`,
     minWidth: `100%`,
   },
+
+  // Diff styles
+
+  // HACK: replace diff token with pseudo element for nicer copy, this can
+  // probably be done in a better way, no idea what the a11y is like for it
+  ".gatsby-highlight pre[class*='language-'] .inserted-sign .prefix": {
+    visibility: `hidden`,
+  },
+  ".gatsby-highlight pre[class*='language-'] .inserted-sign .inserted:before": {
+    content: `"+"`,
+    visibility: `visible`,
+  },
+  ".gatsby-highlight pre[class*='language-'] .deleted-sign .prefix": {
+    visibility: `hidden`,
+  },
+  ".gatsby-highlight pre[class*='language-'] .deleted-sign .deleted:before": {
+    content: `"-"`,
+    visibility: `visible`,
+  },
+  // color diff blocks
+  ".gatsby-highlight pre[class*='language-'] .inserted-sign": {
+    bgColor: `codeInsertedBg`,
+    display: `block`,
+  },
+  ".gatsby-highlight pre[class*='language-'] .deleted-sign": {
+    bgColor: `codeDeletedBg`,
+    display: `block`,
+  },
 };
 
 export default codeStyles;

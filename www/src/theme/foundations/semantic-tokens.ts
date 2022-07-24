@@ -91,6 +91,12 @@ const semanticTokens = {
     codeHighlightBorderLeft: {
       default: transparentize(`brand.bg.200`, 1)(theme),
     },
+    codeInsertedBg: {
+      default: transparentize(`green.700`, 1)(theme),
+    },
+    codeDeletedBg: {
+      default: transparentize(`red.700`, 1)(theme),
+    },
   },
 };
 
