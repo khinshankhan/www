@@ -9,4 +9,6 @@ categories: ["1cat"]
 tags: ["1tag"]
 ---
 
-This page intentionally left blank.
+This page intentionally left [blank](https://google.com).
+
+This shows a bug of weird spacing with links.
