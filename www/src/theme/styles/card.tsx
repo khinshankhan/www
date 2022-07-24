@@ -20,7 +20,7 @@ export const cardStyles = ({ internal }: ICardStyleProps) => {
       boxShadow: `none`,
     },
     sx: {
-      "-webkit-transition": animationTransition,
+      WebkitTransition: animationTransition,
       transition: animationTransition,
     },
   };

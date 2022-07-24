@@ -172,23 +172,9 @@ export const colorPalette = {
     800: `#702459`,
     900: `#521B41`,
   },
-};
 
-const bg = {
-  "50": `#edecec`,
-  "100": `#d5ced1`,
-  "200": `#baadb3`,
-  "300": `#a08b95`,
-  "400": `#8c717f`,
-  "500": `#7a5869`,
-  "600": `#6d4f5f`,
-  "700": `#5c4351`,
-  "800": `#4c3845`,
-  "900": `#3b2b37`,
-};
-
-const natureGreen = {
-  /*
+  natureGreen: {
+    /*
   // og attempt
   50: `#E8F1EC`,
   100: `#C8DECF`,
@@ -213,22 +199,35 @@ const natureGreen = {
   900: `#00201A`,
    */
 
-  50: `#E3F3F0`,
-  100: `#BBE2D9`,
-  200: `#91D0C1`,
-  300: `#6ABDA8`,
-  400: `#52AE97`,
-  500: `#469F86`,
-  600: `#40927A`,
-  700: `#3A816B`,
-  800: `#34715D`,
-  900: `#295443`,
+    50: `#E3F3F0`,
+    100: `#BBE2D9`,
+    200: `#91D0C1`,
+    300: `#6ABDA8`,
+    400: `#52AE97`,
+    500: `#469F86`,
+    600: `#40927A`,
+    700: `#3A816B`,
+    800: `#34715D`,
+    900: `#295443`,
+  },
+  deepTaupe: {
+    "50": `#edecec`,
+    "100": `#d5ced1`,
+    "200": `#baadb3`,
+    "300": `#a08b95`,
+    "400": `#8c717f`,
+    "500": `#7a5869`,
+    "600": `#6d4f5f`,
+    "700": `#5c4351`,
+    "800": `#4c3845`,
+    "900": `#3b2b37`,
+  },
 };
 export const colors = {
   ...colorPalette,
   brand: {
-    palette: natureGreen,
-    bg,
+    palette: colorPalette.natureGreen,
+    bg: colorPalette.deepTaupe,
   },
 };
 
