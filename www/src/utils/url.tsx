@@ -1,5 +1,21 @@
 // TODO: exclude common extensions that aren't files
-const COMMON_URL_EXTENSIONS = [`html`];
+const COMMON_URL_EXTENSIONS = [
+  // could be a file but usually renders a page
+  `html`,
+  `php`,
+  `md`,
+  // images
+  `png`,
+  `jpg`,
+  `jpeg`,
+  `svg`,
+  `webp`,
+  `gif`,
+  // common domains
+  `com`,
+  `dev`,
+  `net`,
+];
 
 export const hasExtension = (name: string) => /\.[0-9a-z]+$/i.test(name);
 
@@ -16,7 +32,7 @@ export const isUrlFile = (url: string) => {
   if (!hasExtension(pathname)) return false;
   const ext = getExtension(pathname);
 
-  if (COMMON_URL_EXTENSIONS.includes(ext)) return false;
+  if (COMMON_URL_EXTENSIONS.includes(ext.toLowerCase())) return false;
   return true;
 };
 

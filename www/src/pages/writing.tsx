@@ -53,7 +53,6 @@ export const query = graphql`
           tags
         }
         excerpt
-        timeToRead
       }
     }
   }

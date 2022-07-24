@@ -8,6 +8,14 @@ const plugins: GatsbyConfig["plugins"] = [
       resolveModules: [`.`],
     },
   },
+  `gatsby-plugin-image`,
+  `gatsby-transformer-sharp`,
+  {
+    resolve: `gatsby-plugin-sharp`,
+    options: {
+      stripMetadata: true,
+    },
+  },
   {
     resolve: `gatsby-source-filesystem`,
     options: {
@@ -33,6 +41,25 @@ const plugins: GatsbyConfig["plugins"] = [
     resolve: `gatsby-plugin-mdx`,
     options: {
       extensions: [`.mdx`, `.md`],
+      gatsbyRemarkPlugins: [
+        {
+          resolve: `gatsby-remark-prismjs`,
+          options: {
+            classPrefix: `language-`,
+            inlineCodeMarker: `›`,
+            aliases: {},
+            showLineNumbers: false,
+          },
+        },
+        {
+          resolve: `gatsby-remark-images`,
+          options: {
+            maxWidth: 1325,
+            quality: 90,
+            linkImagesToOriginal: true,
+          },
+        },
+      ],
     },
   },
   `gatsby-plugin-react-helmet-async`,

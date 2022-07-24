@@ -1,5 +1,6 @@
 import { mode, Styles } from "@chakra-ui/theme-tools";
 import semanticTokens from "../foundations/semantic-tokens";
+import codeStyles from "./code";
 
 const {
   colors: { bgPrimary, bgOpaque },
@@ -39,6 +40,8 @@ const styles: Styles = {
       backgroundPosition: `center`,
       backgroundAttachment: `fixed`,
     },
+
+    ...codeStyles,
   }),
 };
 

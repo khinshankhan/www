@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 import { BoxProps, Box, FlexProps, Flex } from "@chakra-ui/react";
-import { pageAnimationTransition } from "src/theme/custom/styles";
 import { Header, Footer } from "./common";
+
+export const pageAnimationTransition = `background-image 50s ease-in-out`;
 
 export interface IBaseLayoutProps extends BoxProps {
   topProps?: FlexProps;

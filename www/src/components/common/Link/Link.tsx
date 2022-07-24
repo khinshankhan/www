@@ -30,6 +30,27 @@ export const Link = ({ href, isFile = undefined, children, ...props }: ILinkProp
   // and have aria text for the icon for accessibility purposes
   const VisualIcon = file ? ArrowDownSquare : ArrowUpRightSquare;
 
+  // TODO: probably a better way to cleanly do this
+  // apply props only if they match the link type
+  // since these aren't legitimate props on a DOM element
+  const {
+    isActive = false,
+    allowActiveStyle = true,
+    activeStyle = null,
+    matchFullPath = true,
+    matchExcludeParams = false,
+    ...generalLinkProps
+  } = props;
+  const linkProps = {
+    ...(relative && {
+      isActive,
+      allowActiveStyle,
+      activeStyle,
+      matchFullPath,
+      matchExcludeParams,
+    }),
+  };
+
   return (
     <>
       <LinkComponent
@@ -37,7 +58,8 @@ export const Link = ({ href, isFile = undefined, children, ...props }: ILinkProp
         target={!relative ? `_blank` : undefined}
         rel={!relative ? `noreferrer noopener` : undefined}
         variant={sameOrigin ? `internal` : `external`}
-        {...props}
+        {...generalLinkProps}
+        {...linkProps}
       >
         {children}
       </LinkComponent>

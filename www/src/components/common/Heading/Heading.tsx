@@ -7,7 +7,7 @@ type HeadingType = ComponentWithAs<"h2", HeadingProps> & {
   [key: string]: HeadingsTag | HeadingsAnchorTag;
 };
 
-const Heading = ChakraHeading as HeadingType;
+export const Heading = ChakraHeading as HeadingType;
 
 headingsOptions.forEach((tag) => {
   Heading[tag] = Headings[tag];

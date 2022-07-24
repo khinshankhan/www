@@ -15,7 +15,6 @@ export type AllMdxNode = Node & {
   };
 
   excerpt: string;
-  timeToRead: number;
 };
 
 // TODO: figure out excerpts
