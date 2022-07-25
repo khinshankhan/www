@@ -2,8 +2,8 @@
 status: draft
 title: Agea
 spoiler: This is a small spoiler to replace excerpt.
-thumbnail:
-  src: https://source.unsplash.com/gySMaocSdqs/600x300
+cover:
+  url: https://source.unsplash.com/gySMaocSdqs/600x300
   alt: Photo by Aaron Burden on Unsplash
 
 planted: "2022-07-23"

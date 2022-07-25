@@ -48,6 +48,13 @@ export const query = graphql`
         }
         frontmatter {
           title
+          cover {
+            alt
+            url
+            src {
+              publicURL
+            }
+          }
           planted
           tended
           tags

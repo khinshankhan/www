@@ -3,6 +3,7 @@ import { useToken, Box, Image, LinkBox, LinkOverlay, Text } from "@chakra-ui/rea
 import { InternalLink, Heading } from "src/components/common";
 import { cardStyles } from "src/theme/styles/card";
 import { WritingCardNode } from "src/types/queries";
+import { normalizeCover } from "src/utils/image";
 import Badges, { checkBadges } from "./Badges";
 
 interface IWritingCardProps {
@@ -12,21 +13,19 @@ interface IWritingCardProps {
 export const WritingCard: FC<IWritingCardProps> = ({
   node: {
     fields: { slug, subtitle, status },
-    frontmatter: { title, planted, tended },
+    frontmatter: { title, planted, tended, cover },
     excerpt,
   },
 }) => {
-  const imgSrc = `https://source.unsplash.com/gySMaocSdqs/600x300`;
-  const imgAlt = `Hard at work`;
-
   const [internal] = useToken(`colors`, [`internal`]);
 
   const writingCardStyles = useMemo(() => cardStyles({ internal }), [internal]);
   const { _hover, _focusWithin, sx } = writingCardStyles;
 
-  console.log(slug);
+  const img = normalizeCover(cover);
   const badges = checkBadges(planted, tended, status);
   const { newBadge, updatedBadge, statusBadge } = badges;
+
   return (
     <LinkBox
       as="article"
@@ -39,7 +38,7 @@ export const WritingCard: FC<IWritingCardProps> = ({
       _focusWithin={_focusWithin}
       sx={sx}
     >
-      <Image src={imgSrc} alt={imgAlt} />
+      <Image src={img.src} alt={img.alt} />
       <Box p={7} pt={1}>
         <Box display="block">
           <Heading.h2 display="inline" fontFamily="title" mt={2} mb={3}>
