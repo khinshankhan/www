@@ -2,8 +2,8 @@
 title: First
 spoiler: This is a small spoiler to replace excerpt.
 
-planted: "2022-07-02"
-tended: "2022-07-03"
+planted: "2022-07-01"
+tended: "2022-07-23"
 
 categories: ["1cat"]
 tags: ["1tag"]

@@ -3,6 +3,7 @@ import { useToken, Box, Image, LinkBox, LinkOverlay, Text } from "@chakra-ui/rea
 import { InternalLink, Heading } from "src/components/common";
 import { cardStyles } from "src/theme/styles/card";
 import { WritingCardNode } from "src/types/queries";
+import Badges, { checkBadges } from "./Badges";
 
 interface IWritingCardProps {
   node: WritingCardNode;
@@ -10,8 +11,8 @@ interface IWritingCardProps {
 
 export const WritingCard: FC<IWritingCardProps> = ({
   node: {
-    fields: { slug, subtitle },
-    frontmatter: { title },
+    fields: { slug, subtitle, status },
+    frontmatter: { title, planted, tended },
     excerpt,
   },
 }) => {
@@ -23,6 +24,9 @@ export const WritingCard: FC<IWritingCardProps> = ({
   const writingCardStyles = useMemo(() => cardStyles({ internal }), [internal]);
   const { _hover, _focusWithin, sx } = writingCardStyles;
 
+  console.log(slug);
+  const badges = checkBadges(planted, tended, status);
+  const { newBadge, updatedBadge, statusBadge } = badges;
   return (
     <LinkBox
       as="article"
@@ -37,11 +41,18 @@ export const WritingCard: FC<IWritingCardProps> = ({
     >
       <Image src={imgSrc} alt={imgAlt} />
       <Box p={7} pt={1}>
-        <Heading.h2 fontFamily="title" mt={2} mb={3}>
-          <LinkOverlay as={InternalLink} href={slug}>
-            {title}
-          </LinkOverlay>
-        </Heading.h2>
+        <Box display="block">
+          <Heading.h2 display="inline" fontFamily="title" mt={2} mb={3}>
+            <LinkOverlay as={InternalLink} href={slug}>
+              {title}
+            </LinkOverlay>
+          </Heading.h2>
+          {(newBadge || updatedBadge || statusBadge) && (
+            <Box display="inline" style={{ float: `right` }}>
+              <Badges status={status} {...badges} />
+            </Box>
+          )}
+        </Box>
         <Text color="spoilerText" mb={2}>
           {subtitle}
         </Text>

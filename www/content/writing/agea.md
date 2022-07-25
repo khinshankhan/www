@@ -1,8 +1,12 @@
 ---
+status: draft
 title: Agea
 spoiler: This is a small spoiler to replace excerpt.
+thumbnail:
+  src: https://source.unsplash.com/gySMaocSdqs/600x300
+  alt: Photo by Aaron Burden on Unsplash
 
-planted: "2022-07-02"
+planted: "2022-07-23"
 tended: "2022-07-03"
 
 categories: ["tutorial"]
@@ -254,3 +258,9 @@ MIT - <http://www.opensource.org/licenses/mit-license.php>
   args.reduce((sum, addend) => (sum+= addend), 0)
 - }
 ```
+
+a good search engine is [google](https://google.com)
+
+<p>a good search engine is [google](https://google.com)</p>
+
+<p color="spoilerText">a good search engine is [google](https://google.com)</p>
