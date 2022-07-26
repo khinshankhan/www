@@ -6,6 +6,7 @@ import {
   Collapse,
   Container,
   Flex,
+  Stack,
   HStack,
   VStack,
 } from "@chakra-ui/react";
@@ -14,7 +15,9 @@ import { ToggleNavbarMenu } from "src/components/toggles";
 import useHeaderData from "src/data/useHeaderData";
 import { useMobile } from "src/hooks";
 import NavbarLinks from "./navs/NavbarLinks";
+import SettingToggles from "./navs/SettingToggles";
 
+// NOTE: mobile header should be updated to pass in HStack for more than 1 setting toggle
 const Header = (props: BoxProps) => {
   const { navs } = useHeaderData();
   const { isMobile } = useMobile();
@@ -43,6 +46,7 @@ const Header = (props: BoxProps) => {
               spacing={6}
             >
               <NavbarLinks Stack={HStack} items={navs.header.pages} />
+              <SettingToggles Stack={Stack} />
             </HStack>
           )}
         </Flex>
@@ -60,6 +64,7 @@ const Header = (props: BoxProps) => {
               mb={4}
               p={4}
             />
+            <SettingToggles Stack={Stack} />
           </Collapse>
         )}
       </Container>
