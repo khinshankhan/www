@@ -38,7 +38,10 @@ export const query = graphql`
   {
     allMdx(
       filter: { fields: { layout: { eq: "article" } } }
-      sort: { fields: frontmatter___planted, order: DESC }
+      sort: {
+        fields: [frontmatter___planted, frontmatter___tended, frontmatter___title]
+        order: [DESC, DESC, ASC]
+      }
     ) {
       nodes {
         fields {

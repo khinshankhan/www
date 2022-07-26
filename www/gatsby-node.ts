@@ -77,7 +77,10 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
     {
       articles: allMdx(
         filter: ${queryFilter}
-        sort: { fields: frontmatter___planted, order: DESC }
+        sort: {
+          fields: [frontmatter___planted, frontmatter___tended, frontmatter___title]
+          order: [DESC, DESC, ASC]
+        }
       ) {
         nodes {
           fields {
