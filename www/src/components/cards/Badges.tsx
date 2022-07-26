@@ -1,15 +1,15 @@
 import React, { FC } from "react";
 import { Badge } from "@chakra-ui/react";
-import { checkIfRecent } from "src/utils/time";
+import { isDateClose } from "src/utils/time";
 
 export const checkBadges = (planted: string, tended: string, status: string) => {
   const today = new Date();
   const plantedDate = new Date(planted);
   const tendedDate = new Date(tended);
 
-  const newBadge = checkIfRecent(plantedDate, today);
+  const newBadge = isDateClose(plantedDate, today, 24 * 3);
   // no need for updated badge if new badge since it's implicit it was updated
-  const updatedBadge = !newBadge && checkIfRecent(tendedDate, today);
+  const updatedBadge = !newBadge && isDateClose(tendedDate, today, 24 * 7);
 
   return { newBadge, updatedBadge, statusBadge: status !== `published` };
 };
