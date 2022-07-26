@@ -1,7 +1,7 @@
 import path from "path";
 import { GatsbyNode, CreateNodeArgs } from "gatsby";
 import { FileSystemNode } from "gatsby-source-filesystem";
-import { Layouts } from "./src/types/Layouts";
+import { Layouts, defaultSubtitle } from "./src/types/Layouts";
 import { AllMdxNode, ArticleNode } from "./src/types/Nodes";
 import { queryFilter } from "./src/utils/query";
 import { slugify } from "./src/utils/string";
@@ -38,16 +38,17 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
     });
 
     // TODO: set up favored layouts based on source
+    const layout = node.frontmatter.layout ?? `article`;
     createNodeField({
       name: `layout`,
       node,
-      value: node.frontmatter.layout ?? `article`,
+      value: layout,
     });
 
     createNodeField({
       name: `subtitle`,
       node,
-      value: node.frontmatter.spoiler ?? `A little surprise reading 😊`,
+      value: node.frontmatter.spoiler ?? defaultSubtitle[layout],
     });
 
     createNodeField({
@@ -76,7 +77,10 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
     {
       articles: allMdx(
         filter: ${queryFilter}
-        sort: { fields: frontmatter___planted, order: DESC }
+        sort: {
+          fields: [frontmatter___planted, frontmatter___tended, frontmatter___title]
+          order: [DESC, DESC, ASC]
+        }
       ) {
         nodes {
           fields {

@@ -1,5 +1,5 @@
-import { ArticleNode } from "./Nodes";
-import { Subset } from "./utils";
+import type { ArticleNode, Cover } from "./Nodes";
+import type { Subset } from "./utils";
 
 export type WritingCardNode = Subset<
   ArticleNode,
@@ -9,7 +9,7 @@ export type WritingCardNode = Subset<
       status: string;
       subtitle: string;
     };
-    frontmatter: {
+    frontmatter: Cover & {
       title: string;
 
       planted: string;

@@ -1,8 +1,19 @@
 import { Node } from "gatsby";
+import type { FileSystemNode } from "gatsby-source-filesystem";
 import { Layouts } from "./Layouts";
 
+export type CoverData = {
+  src?: FileSystemNode;
+  url?: string;
+  alt?: string;
+};
+
+export type Cover = {
+  cover?: CoverData;
+};
+
 export type AllMdxNode = Node & {
-  frontmatter: {
+  frontmatter: Cover & {
     title: string;
     slug?: string;
     spoiler?: string;

@@ -20,7 +20,7 @@ const Writing: FC<PageProps<WritingPageQuery>> = ({
     <SimpleGrid
       alignContent={`center`}
       justifyItems={`center`}
-      columns={{ base: 1, md: 2, "2xl": 3 }}
+      columns={{ base: 1, md: 2, xl: 3 }}
       spacing={10}
     >
       {nodes.map((node) => (
@@ -38,7 +38,10 @@ export const query = graphql`
   {
     allMdx(
       filter: { fields: { layout: { eq: "article" } } }
-      sort: { fields: frontmatter___planted, order: DESC }
+      sort: {
+        fields: [frontmatter___planted, frontmatter___tended, frontmatter___title]
+        order: [DESC, DESC, ASC]
+      }
     ) {
       nodes {
         fields {
@@ -48,6 +51,13 @@ export const query = graphql`
         }
         frontmatter {
           title
+          cover {
+            alt
+            url
+            src {
+              publicURL
+            }
+          }
           planted
           tended
           tags
