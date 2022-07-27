@@ -5,7 +5,7 @@ import { Layouts, defaultSubtitle } from "./src/types/Layouts";
 import { AllMdxNode, ArticleNode } from "./src/types/Nodes";
 import { MdxCreationNode } from "./src/types/queries";
 import { queryFilter } from "./src/utils/query";
-import { slugify } from "./src/utils/string";
+import { slugify, removeIndexSuffix } from "./src/utils/string";
 
 export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
   if (args.node.internal.type === `Mdx`) {
@@ -16,9 +16,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
     const { sourceInstanceName, relativePath, extension } = getNode(node.parent) as FileSystemNode;
 
     const extensionlessRelativePath = relativePath.slice(0, (extension.length + 1) * -1);
-    const cleanedRelativePath = extensionlessRelativePath.endsWith(`index`)
-      ? extensionlessRelativePath.slice(0, -5)
-      : extensionlessRelativePath;
+    const cleanedRelativePath = removeIndexSuffix(extensionlessRelativePath);
 
     const slug = slugify(
       { slug: node.frontmatter.slug, filePath: cleanedRelativePath },
