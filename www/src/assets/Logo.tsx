@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useToken, IconButton } from "@chakra-ui/react";
+import { useToken, IconButtonProps, IconButton } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
 export interface IKLogoProps {
@@ -57,7 +57,11 @@ export const KLogo = ({
   </svg>
 );
 
-export const Logo = ({ size = `50`, ...props }: IKLogoProps): JSX.Element => {
+export interface ILogoProps extends IKLogoProps {
+  iconButtonProps?: Omit<IconButtonProps, "aria-label">;
+}
+
+export const Logo = ({ size = `50`, iconButtonProps, ...props }: ILogoProps): JSX.Element => {
   const [bgContrast, internal] = useToken(`semanticToken`, [
     `colors.bgContrast`,
     `colors.internal`,
@@ -87,6 +91,7 @@ export const Logo = ({ size = `50`, ...props }: IKLogoProps): JSX.Element => {
       border={2}
       borderStyle="solid"
       borderColor={focusing ? internal : bgContrast}
+      {...iconButtonProps}
     />
   );
 };
