@@ -1,10 +1,17 @@
-import React from "react";
+import React, { FC } from "react";
 import { chakra, Box, Center, Grid, GridItem, Text } from "@chakra-ui/react";
 import { Logo } from "src/assets";
 import { Heading } from "src/components/common";
 import { minToEmoji } from "src/utils/time";
 
-const Index = () => (
+export interface ICreatePreviewProps {
+  title: string;
+  subtitle: string;
+  url: string;
+  timeToRead?: number;
+}
+
+export const Preview: FC<ICreatePreviewProps> = ({ title, subtitle, url, timeToRead }) => (
   <Grid
     templateAreas={`"left right"`}
     gridTemplateColumns="1fr 400px"
@@ -12,7 +19,6 @@ const Index = () => (
     h="630px"
     color="blackAlpha.700"
     fontWeight="bold"
-    border="1px solid salmon"
   >
     <GridItem
       area={`left`}
@@ -30,25 +36,35 @@ const Index = () => (
           display="inline"
           textDecoration="underline"
           textDecorationColor="internalFocusDecoration"
-        >{`https://uptogood.dev`}</Text>
+        >
+          {url}
+        </Text>
       </Box>
 
       <Box>
         <Box w="63ch">
-          <Heading.h3 color="blackAlpha.800">New Years Resolution 2022</Heading.h3>
+          <Heading.h3 color="blackAlpha.800">{title}</Heading.h3>
           <Text color="spoilerText" mt={3}>
-            Because last year's was so successful
+            {subtitle}
           </Text>
         </Box>
       </Box>
 
       <Box>
         <Text>
-          <chakra.span color="black">
-            {minToEmoji(105)} {` `}
-          </chakra.span>
-          {` `}
-          105 min read
+          {timeToRead != null ? (
+            <chakra.span>
+              <chakra.span color="black">
+                {minToEmoji(timeToRead)} {` `}
+              </chakra.span>
+              {timeToRead} min read
+            </chakra.span>
+          ) : (
+            <chakra.span>
+              A nice read
+              <chakra.span color="black">{` `} 🙃</chakra.span>
+            </chakra.span>
+          )}
         </Text>
       </Box>
     </GridItem>
@@ -84,7 +100,7 @@ const Index = () => (
             Khinshan Khan
           </Text>
           <Text textAlign="center" mt={1}>
-            A dev up to good <chakra.span color="black">😊</chakra.span>
+            A dev up to [no] good <chakra.span color="black">😊</chakra.span>
           </Text>
         </Box>
       </Center>
@@ -92,4 +108,4 @@ const Index = () => (
   </Grid>
 );
 
-export default Index;
+export default Preview;
