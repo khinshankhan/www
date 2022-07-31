@@ -45,10 +45,10 @@ const Index = () => (
       <Box>
         <Text>
           <chakra.span color="black">
-            {minToEmoji(75)} {` `}
+            {minToEmoji(105)} {` `}
           </chakra.span>
           {` `}
-          75 min read
+          105 min read
         </Text>
       </Box>
     </GridItem>

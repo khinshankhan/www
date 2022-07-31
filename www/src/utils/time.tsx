@@ -8,9 +8,10 @@ export const isDateClose = (date: Date, benchmarkDate: Date, hours = 24) => {
 // sort of based off dan https://github.com/gaearon/overreacted.io/blob/master/src/utils/helpers.js
 const minDiv = (min: number, divider: number) => [Math.floor(min / divider), min % divider];
 export const minToEmoji = (t: number) => {
-  const [bentos, bentosRemainder] = minDiv(t, 30);
-  const [riceballs, riceballsRemainder] = minDiv(bentosRemainder, 10);
+  const [bentos, bentosRemainder] = minDiv(t, 60);
+  const [shrimps, shrimpsRemainder] = minDiv(bentosRemainder, 30);
+  const [riceballs, riceballsRemainder] = minDiv(shrimpsRemainder, 10);
   const sushi = Math.ceil(riceballsRemainder / 5);
 
-  return `🍱`.repeat(bentos) + `🍙`.repeat(riceballs) + `🍣`.repeat(sushi);
+  return `🍱`.repeat(bentos) + `🍤`.repeat(shrimps) + `🍙`.repeat(riceballs) + `🍣`.repeat(sushi);
 };
