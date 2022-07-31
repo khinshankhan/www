@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Center, Grid, GridItem, Text } from "@chakra-ui/react";
 import { Logo } from "src/assets";
 import { Heading } from "src/components/common";
+import { minToEmoji } from "src/utils/time";
 
 const Index = () => (
   <Grid
@@ -40,7 +41,10 @@ const Index = () => (
       </Box>
 
       <Box>
-        <Text>75 min read</Text>
+        <Text>
+          {` `}
+          {minToEmoji(75)} {` `} 75 min read
+        </Text>
       </Box>
     </GridItem>
     <GridItem bg="bgOpaque" area={`right`} zIndex="2">
