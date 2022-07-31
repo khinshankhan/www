@@ -31,10 +31,12 @@ const Index = () => (
       </Box>
 
       <Box>
-        <Heading.h3 color="blackAlpha.800">New Years Resolution 2022</Heading.h3>
-        <Text color="spoilerText" mt={3}>
-          Because last year's was so successful
-        </Text>
+        <Box w="63ch">
+          <Heading.h3 color="blackAlpha.800">New Years Resolution 2022</Heading.h3>
+          <Text color="spoilerText" mt={3}>
+            Because last year's was so successful
+          </Text>
+        </Box>
       </Box>
 
       <Box>
