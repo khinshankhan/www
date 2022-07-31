@@ -10,7 +10,7 @@ const minDiv = (min: number, divider: number) => [Math.floor(min / divider), min
 export const minToEmoji = (t: number) => {
   const [bentos, bentosRemainder] = minDiv(t, 30);
   const [riceballs, riceballsRemainder] = minDiv(bentosRemainder, 10);
-  const teas = Math.ceil(riceballsRemainder / 5) || !!bentos;
+  const sushi = Math.ceil(riceballsRemainder / 5);
 
-  return `🍱`.repeat(bentos) + `🍙`.repeat(riceballs) + `🍵`.repeat(teas);
+  return `🍱`.repeat(bentos) + `🍙`.repeat(riceballs) + `🍣`.repeat(sushi);
 };
