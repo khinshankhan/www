@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Center, Grid, GridItem, Text } from "@chakra-ui/react";
 import { Logo } from "src/assets";
+import { Heading } from "src/components/common";
 
 const Index = () => (
   <Grid
@@ -12,8 +13,33 @@ const Index = () => (
     fontWeight="bold"
     border="1px solid salmon"
   >
-    <GridItem area="left" m="5">
-      hello
+    <GridItem
+      area={`left`}
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
+      m="7"
+      my="10"
+    >
+      <Box>
+        <Text display="inline">👉 </Text>
+        <Text
+          display="inline"
+          textDecoration="underline"
+          textDecorationColor="internalFocusDecoration"
+        >{`https://uptogood.dev`}</Text>
+      </Box>
+
+      <Box>
+        <Heading.h3 color="blackAlpha.800">New Years Resolution 2022</Heading.h3>
+        <Text color="spoilerText" mt={3}>
+          Because last year's was so successful
+        </Text>
+      </Box>
+
+      <Box>
+        <Text>75 min read</Text>
+      </Box>
     </GridItem>
     <GridItem bg="bgOpaque" area={`right`} zIndex="2">
       <Center mt={5}>
