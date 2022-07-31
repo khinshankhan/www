@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Center, Grid, GridItem, Text } from "@chakra-ui/react";
+import { chakra, Box, Center, Grid, GridItem, Text } from "@chakra-ui/react";
 import { Logo } from "src/assets";
 import { Heading } from "src/components/common";
 import { minToEmoji } from "src/utils/time";
@@ -23,7 +23,9 @@ const Index = () => (
       my="10"
     >
       <Box>
-        <Text display="inline">👉 </Text>
+        <Text display="inline" color="black">
+          👉{` `}
+        </Text>
         <Text
           display="inline"
           textDecoration="underline"
@@ -42,8 +44,11 @@ const Index = () => (
 
       <Box>
         <Text>
+          <chakra.span color="black">
+            {minToEmoji(75)} {` `}
+          </chakra.span>
           {` `}
-          {minToEmoji(75)} {` `} 75 min read
+          75 min read
         </Text>
       </Box>
     </GridItem>
@@ -79,7 +84,7 @@ const Index = () => (
             Khinshan Khan
           </Text>
           <Text textAlign="center" mt={1}>
-            A dev up to good 😊
+            A dev up to good <chakra.span color="black">😊</chakra.span>
           </Text>
         </Box>
       </Center>
