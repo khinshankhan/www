@@ -1,17 +1,18 @@
 import React from "react";
 import { Box, Center, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Logo } from "src/assets";
 
 const Index = () => (
   <Grid
     templateAreas={`"left right"`}
-    gridTemplateColumns={`1fr 400px`}
+    gridTemplateColumns="1fr 400px"
     w="1200"
     h="630px"
     color="blackAlpha.700"
     fontWeight="bold"
     border="1px solid salmon"
   >
-    <GridItem area={`left`} m="5">
+    <GridItem area="left" m="5">
       hello
     </GridItem>
     <GridItem bg="bgOpaque" area={`right`} zIndex="2">
@@ -39,8 +40,14 @@ const Index = () => (
           zIndex="1"
         />
         <Box bg="bgOpaque" position="absolute" zIndex="2" top={50} bottom={0} right={45}>
+          <Center>
+            <Logo size="100" />
+          </Center>
+          <Text textAlign="center" variant="dashboard" mt={15}>
+            Khinshan Khan
+          </Text>
           <Text textAlign="center" mt={1}>
-            Hello 2
+            A dev up to good 😊
           </Text>
         </Box>
       </Center>
