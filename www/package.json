@@ -48,6 +48,7 @@
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@chakra-ui/styled-system": "^2.2.7",
+    "@types/mdx": "^2.0.2",
     "@types/node": "^18.7.3",
     "@types/react": "^18.0.17",
     "add": "^2.0.6",
