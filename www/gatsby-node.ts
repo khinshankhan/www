@@ -3,6 +3,7 @@ import { GatsbyNode, CreateNodeArgs } from "gatsby";
 import { FileSystemNode } from "gatsby-source-filesystem";
 import { Layouts, defaultSubtitle } from "./src/types/Layouts";
 import { AllMdxNode, ArticleNode } from "./src/types/Nodes";
+import { MdxCreationNode } from "./src/types/queries";
 import { queryFilter } from "./src/utils/query";
 import { slugify } from "./src/utils/string";
 
@@ -61,7 +62,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
 
 interface ResultData {
   articles: {
-    nodes: ArticleNode[];
+    nodes: MdxCreationNode<ArticleNode>[];
   };
 }
 
@@ -89,6 +90,9 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
           frontmatter {
             title
           }
+          internal {
+            contentFilePath
+          }
         }
       }
     }
@@ -114,17 +118,12 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
     data: { articles },
   } = result;
 
-  articles.nodes.forEach((article, i) => {
-    const prev = i === articles.nodes.length - 1 ? null : articles.nodes[i + 1];
-    const next = i === 0 ? null : articles.nodes[i - 1];
-
+  articles.nodes.forEach((article) => {
     createPage({
       path: article.fields.slug,
-      component: templateLayouts.article,
+      component: `${templateLayouts.article}?__contentFilePath=${article.internal.contentFilePath}`,
       context: {
         slug: article.fields.slug,
-        prev,
-        next,
       },
     });
   });

@@ -31,6 +31,7 @@ const MdxUl: MDXComponents["ul"] = ({ children }) => <UnorderedList>{children}</
 const MdxOl: MDXComponents["ol"] = ({ children }) => <OrderedList>{children}</OrderedList>;
 
 const MdxLi: MDXComponents["li"] = ({ children }) => <ListItem>{children}</ListItem>;
+
 const MdxStrong: MDXComponents["strong"] = ({ ref, ...props }) => (
   <Box as="strong" fontWeight="semibold" {...props} />
 );

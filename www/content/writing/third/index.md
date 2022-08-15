@@ -7,7 +7,7 @@ cover:
   alt: My cool image
 
 planted: "2022-07-01"
-tended: "2022-07-04"
+tended: "2022-08-12"
 
 categories: ["1cat"]
 tags: ["1tag", "2tag"]
