@@ -41,3 +41,7 @@ export const slugify = (
   const p = sindresorhusSlugify(prefix, slugifyOptions);
   return `/${p}/${slug}`.replace(singleSlashRegex, `/`);
 };
+
+// splits on space unless in quotes ("")
+// https://stackoverflow.com/a/16261693
+export const spaceSplit = (str: string) => str.match(/(?:[^\s"]+|"[^"]*")+/g);

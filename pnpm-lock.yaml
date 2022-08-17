@@ -103,6 +103,8 @@ importers:
       gatsby-transformer-sharp: 4.22.0-next.1
       gatsby-transformer-yaml: 4.22.0-next.0
       graphql: '15'
+      parse-numeric-range: ^1.3.0
+      prism-react-renderer: ^1.3.5
       react: ^18.2.0
       react-dom: ^18.2.0
       react-helmet-async: ^1.3.0
@@ -131,6 +133,8 @@ importers:
       gatsby-transformer-remark: 5.22.0-next.1_gatsby@4.22.0-next.4
       gatsby-transformer-sharp: 4.22.0-next.1_l2lsi6tx44lq75iwvyrlwlqy3u
       gatsby-transformer-yaml: 4.22.0-next.0_gatsby@4.22.0-next.4
+      parse-numeric-range: 1.3.0
+      prism-react-renderer: 1.3.5_react@18.2.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-helmet-async: 1.3.0_biqbaboplfbrettd7655fr4n2y
@@ -12738,6 +12742,10 @@ packages:
       unist-util-visit-children: 1.1.4
     dev: false
 
+  /parse-numeric-range/1.3.0:
+    resolution: {integrity: sha512-twN+njEipszzlMJd4ONUYgSfZPDxgHhT9Ahed5uTigpQn90FggW4SA/AIPq/6a149fTbE9qBEcSwE3FAEp6wQQ==}
+    dev: false
+
   /parse-path/5.0.0:
     resolution: {integrity: sha512-qOpH55/+ZJ4jUu/oLO+ifUKjFPNZGfnPJtzvGzKN/4oLMil5m9OH4VpOj6++9/ytJcfks4kzH2hhi87GL/OU9A==}
     dependencies:
@@ -13387,6 +13395,14 @@ packages:
       ansi-styles: 5.2.0
       react-is: 18.2.0
     dev: true
+
+  /prism-react-renderer/1.3.5_react@18.2.0:
+    resolution: {integrity: sha512-IJ+MSwBWKG+SM3b2SUfdrhC+gu01QkV2KmRQgREThBfSQRoufqRfxfHUxpG1WcaFjP+kojcFyO9Qqtpgt3qLCg==}
+    peerDependencies:
+      react: '>=0.14.9'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /probe-image-size/7.2.3:
     resolution: {integrity: sha512-HubhG4Rb2UH8YtV4ba0Vp5bQ7L78RTONYu/ujmCu5nBI8wGv24s4E9xSKBi0N1MowRpxk76pFCpJtW0KPzOK0w==}

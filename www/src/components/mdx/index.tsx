@@ -2,7 +2,7 @@ import React from "react";
 import { Alert, Box, ListItem, OrderedList, Text, UnorderedList } from "@chakra-ui/react";
 import { MDXComponents } from "mdx/types";
 import { Headings, Link } from "src/components/common";
-import { codeToCode } from "src/utils/code";
+import { codeToCode, getPreCodeMeta } from "src/utils/code";
 
 const MdxP: MDXComponents["p"] = Text;
 
@@ -39,22 +39,29 @@ const MdxStrong: MDXComponents["strong"] = ({ ref, ...props }) => (
 
 // TODO
 const MdxPre: MDXComponents["pre"] = ({ children, ...props }) => {
-  console.log({ pre: props, children });
+  // TODO: no idea, a pre block that's not a codeblock is possible
+  // I'm fairly confident in these types...
+  if (!(children as any)?.props?.className || (children as any)?.props?.className === ``) {
+    <pre {...props}>{children}</pre>;
+  }
 
+  const meta = getPreCodeMeta((children as any)!.props!.className);
+
+  const divWrapperProps = { className: `gatsby-highlight`, dataLanguage: meta.language };
+  // TODO: maybe insert title + copy button around here?
   return (
-    <div className="gatsby-highlight">
-      <pre {...props}>{children}</pre>
+    <div {...divWrapperProps}>
+      <pre {...props} className={`language-${meta.language}`}>
+        {children}
+      </pre>
     </div>
   );
 };
 
 const MdxCode: MDXComponents["code"] = ({ className, children }) => {
-  console.log({ className, children });
-
   if (!className) {
+    // NOTE: no idea if it children won't be a string at this point but this seems to always be the case
     const { language, content } = codeToCode({ children: children as string });
-
-    console.log({ language, content });
 
     // TODO: actually utilize the language?
     return (
@@ -66,7 +73,7 @@ const MdxCode: MDXComponents["code"] = ({ className, children }) => {
     );
   }
 
-  // TODO
+  // TODO: use prism renderer
   return <Box color="white">Hello there</Box>;
 };
 
@@ -90,6 +97,8 @@ const mdxComponents: MDXComponents = {
   li: MdxLi,
   pre: MdxPre,
   code: MdxCode,
+  // NOTE: this didn't do anything?
+  // inlineCode: MdxInlineCode,
   strong: MdxStrong,
   hr: MdxHr,
   a: MdxA,
