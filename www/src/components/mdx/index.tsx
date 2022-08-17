@@ -2,6 +2,7 @@ import React from "react";
 import { Alert, Box, ListItem, OrderedList, Text, UnorderedList } from "@chakra-ui/react";
 import { MDXComponents } from "mdx/types";
 import { Headings, Link } from "src/components/common";
+import { codeToCode } from "src/utils/code";
 
 const MdxP: MDXComponents["p"] = Text;
 
@@ -36,6 +37,39 @@ const MdxStrong: MDXComponents["strong"] = ({ ref, ...props }) => (
   <Box as="strong" fontWeight="semibold" {...props} />
 );
 
+// TODO
+const MdxPre: MDXComponents["pre"] = ({ children, ...props }) => {
+  console.log({ pre: props, children });
+
+  return (
+    <div className="gatsby-highlight">
+      <pre {...props}>{children}</pre>
+    </div>
+  );
+};
+
+const MdxCode: MDXComponents["code"] = ({ className, children }) => {
+  console.log({ className, children });
+
+  if (!className) {
+    const { language, content } = codeToCode({ children: children as string });
+
+    console.log({ language, content });
+
+    // TODO: actually utilize the language?
+    return (
+      <Box as="span">
+        <Box as="code" className={`language-${language}`}>
+          {content}
+        </Box>
+      </Box>
+    );
+  }
+
+  // TODO
+  return <Box color="white">Hello there</Box>;
+};
+
 const MdxHr: MDXComponents["hr"] = () => (
   <Box pt="10" mb="10" borderBottom={1} borderStyle="solid" borderColor="dividerColor" />
 );
@@ -54,6 +88,8 @@ const mdxComponents: MDXComponents = {
   ul: MdxUl,
   ol: MdxOl,
   li: MdxLi,
+  pre: MdxPre,
+  code: MdxCode,
   strong: MdxStrong,
   hr: MdxHr,
   a: MdxA,
