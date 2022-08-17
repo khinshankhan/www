@@ -30,12 +30,14 @@ function add(...args) {
 
 ```diff-js
 -function add(...args) {
-+  return args.reduce((sum, addend) => (sum+= addend), 0)
-}
++const add = (...args) =>
+  args.reduce((sum, addend) => (sum+= addend), 0)
+-}
 ```
 
 ```diff-js:h=1
 -function add(...args) {
-+  return args.reduce((sum, addend) => (sum+= addend), 0)
++  const add = (...args) =>
+  args.reduce((sum, addend) => (sum+= addend), 0)
 -}
 ```

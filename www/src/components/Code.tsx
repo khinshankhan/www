@@ -46,16 +46,16 @@ const Code: FCC<ICodeProps> = ({ content, language, linesToHighlight, diff }) =>
             // HACK: this is so the diff highlight is encompassed by a line highlight if both are active
             const doubleHighlight = hlClassName !== `` && diffClassName !== ``;
 
-            const spanProps = doubleHighlight
-              ? { className: [hlClassName, languageClass].join(` `) }
-              : { className: [hlClassName, diffClassName, languageClass].join(` `) };
+            const divProps = doubleHighlight
+              ? { className: [hlClassName, languageClass].join(` `).trim() }
+              : { className: [hlClassName, diffClassName, languageClass].join(` `).trim() };
             const diffSpanProps = doubleHighlight
-              ? { className: [diffClassName, languageClass].join(` `) }
+              ? { className: [diffClassName, languageClass].join(` `).trim() }
               : {};
             const DiffSpan = doubleHighlight ? chakra.span : Fragment;
 
             return (
-              <span {...spanProps}>
+              <Box as="div" {...divProps}>
                 <DiffSpan {...diffSpanProps}>
                   {cleanedLine.map((token, key) => {
                     const tokenProps = { ...getTokenProps({ token, key }), style: {} };
@@ -73,7 +73,7 @@ const Code: FCC<ICodeProps> = ({ content, language, linesToHighlight, diff }) =>
                     );
                   })}
                 </DiffSpan>
-              </span>
+              </Box>
             );
           })}
         </Box>
