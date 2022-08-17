@@ -20,3 +20,10 @@ export type WritingCardNode = Subset<
     excerpt: string;
   }
 >;
+
+export type MdxCreationNode<T extends ArticleNode> = Subset<
+  T,
+  { fields: { slug: string }; frontmatter: { title: string } }
+> & {
+  internal: { contentFilePath: string };
+};

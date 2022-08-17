@@ -1,9 +1,11 @@
 ---
 title: Fifth
 
-pic: https://images.unsplash.com/photo-1514625796505-dba9ebaf5816?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1349&q=80
+cover:
+  url: https://source.unsplash.com/VXGgWP_D3MQ/600x300
+  alt: testing not great sized
 
-planted: "2022-07-01"
+planted: "2022-07-02"
 tended: "2022-07-04"
 
 categories: ["1cat"]

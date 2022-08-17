@@ -1,10 +1,10 @@
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { graphql } from "gatsby";
-import { MDXRenderer } from "gatsby-plugin-mdx";
 import { PageLayout as Layout } from "src/components/layouts";
 import MdxComponents from "src/components/mdx";
 import { normalizeElements, fancyFirstLetter } from "src/theme/styles/mdx";
+import type { FCC } from "src/types/react";
 
 // TODO: get to more elaborate types
 interface IPropsProps {
@@ -15,11 +15,11 @@ interface IPropsProps {
 
 // TODO: use taglines and fallback on spoiler?
 // maybe make it a field
-const Article = ({ data, pageContext, location }: IPropsProps) => {
+const Article: FCC<IPropsProps> = ({ data, pageContext, location, children }) => {
   console.log({ data, pageContext, location });
 
   const {
-    mdx: { fields, frontmatter, body },
+    mdx: { fields, frontmatter },
   } = data;
 
   return (
@@ -30,9 +30,7 @@ const Article = ({ data, pageContext, location }: IPropsProps) => {
         sx: { ...normalizeElements, ...fancyFirstLetter },
       }}
     >
-      <MDXProvider components={MdxComponents}>
-        <MDXRenderer>{body}</MDXRenderer>
-      </MDXProvider>
+      <MDXProvider components={MdxComponents}>{children}</MDXProvider>
     </Layout>
   );
 };
@@ -40,7 +38,7 @@ const Article = ({ data, pageContext, location }: IPropsProps) => {
 export default Article;
 
 export const query = graphql`
-  query Article($slug: String!) {
+  query ($slug: String!) {
     mdx(fields: { slug: { eq: $slug } }) {
       fields {
         subtitle
@@ -48,7 +46,6 @@ export const query = graphql`
       frontmatter {
         title
       }
-      body
     }
   }
 `;

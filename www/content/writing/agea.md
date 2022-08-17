@@ -13,7 +13,7 @@ categories: ["tutorial"]
 tags: ["agea"]
 ---
 
-Using https://agea.github.io/tutorial.md/ as a markdown component test.
+Using [https://agea.github.io/tutorial.md/](https://agea.github.io/tutorial.md/) as a markdown component test.
 
 ## Introduction
 
@@ -51,13 +51,11 @@ at the end of the line
 
 - If your link contains spaces you have to write the [link](<http://example.com/a space>) between `<>`
 
-- You can use spaces and markup inside the [link **text**](https://agea.github.io/tutorial.md)
-
 - Long links may decrease source readability, so it's posible to define all links somewhere in the document (the end is a good place) and just reference the [link][tutorial.md], you may also collapse the reference if it matches the link text (example: [tutorial.md][])
 
-- You may also write directly the link: <https://agea.github.io/tutorial.md>
+- You may also write directly the link: https://agea.github.io/tutorial.md
 
-- It will work also for email addresses: <email@example.com> (you may write vaild email links also using [mailto](mailto:email@example.com) as protocol)
+- It will work also for email addresses: email@example.com (you may write vaild email links also using [mailto](mailto:email@example.com) as protocol)
 
 [tutorial.md]: https://agea.github.io/tutorial.md
 
@@ -102,7 +100,7 @@ You can insert any block inside a list, you have to respect the indentation of t
 - A _paragraph_ of text
   (spanning multiple lines),
 
-  ```
+  ```text
   fenced code,
   ```
 
@@ -248,7 +246,7 @@ The source code for this tutorial is on [Github](https://github.com/agea/tutoria
 
 ### License
 
-MIT - <http://www.opensource.org/licenses/mit-license.php>
+MIT - http://www.opensource.org/licenses/mit-license.php
 
 # Some more stuff:
 
@@ -264,3 +262,11 @@ a good search engine is [google](https://google.com)
 <p>a good search engine is [google](https://google.com)</p>
 
 <p color="spoilerText">a good search engine is [google](https://google.com)</p>
+
+<pre>
+Text in a pre element
+is displayed in a fixed-width
+font, and it preserves
+both      spaces and
+line breaks
+</pre>

@@ -1,7 +1,8 @@
-import React, { FC } from "react";
+import React from "react";
 import { chakra, Box, Center, Grid, GridItem, Text } from "@chakra-ui/react";
 import { Logo } from "src/assets";
 import { Heading } from "src/components/common";
+import type { FCC } from "src/types/react";
 import { minToEmoji } from "src/utils/time";
 
 export interface ICreatePreviewProps {
@@ -11,7 +12,7 @@ export interface ICreatePreviewProps {
   timeToRead?: number;
 }
 
-export const Preview: FC<ICreatePreviewProps> = ({ title, subtitle, url, timeToRead }) => (
+export const Preview: FCC<ICreatePreviewProps> = ({ title, subtitle, url, timeToRead }) => (
   <Grid
     templateAreas={`"left right"`}
     gridTemplateColumns="1fr 400px"

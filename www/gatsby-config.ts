@@ -43,15 +43,6 @@ const plugins: GatsbyConfig["plugins"] = [
       extensions: [`.mdx`, `.md`],
       gatsbyRemarkPlugins: [
         {
-          resolve: `gatsby-remark-prismjs`,
-          options: {
-            classPrefix: `language-`,
-            inlineCodeMarker: `›`,
-            aliases: {},
-            showLineNumbers: false,
-          },
-        },
-        {
           resolve: `gatsby-remark-images`,
           options: {
             maxWidth: 1325,

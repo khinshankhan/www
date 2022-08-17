@@ -7,6 +7,8 @@ const theme = { colors };
 // to be able to import tokens from this file and use them
 // as values for string interpolation css
 
+// NOTE: transparentize will be deprecated next release, need to migrate the logic
+
 // TODO: build out dark theme later
 const semanticTokens = {
   colors: {
