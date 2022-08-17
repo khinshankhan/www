@@ -1,5 +1,4 @@
 import rangeParser from "parse-numeric-range";
-import { spaceSplit } from "./string";
 
 const DELIMITER = `±`;
 
@@ -21,24 +20,15 @@ export const codeToCode = ({ children }: ICodeToCodeProps) => {
   return { language, content, diff: false, linesToHighlight: [] as number[] };
 };
 
-// https://prince.dev/highlight-with-react
-const linesRe = /{([\d,-]+)}/;
-
-const calculateLinesToHighlight = (meta: string) => {
-  const strlineNumbers = linesRe.exec(meta);
-  if (!strlineNumbers || strlineNumbers.length === 0) return [];
-
-  return rangeParser(strlineNumbers[0]);
-};
+// based off https://stackoverflow.com/a/1757107
+const metaRe = /:(?=(?:[^"]*"[^"]*")*[^"]*$)/g;
 
 export const getPreCodeMeta = (className: string) => {
-  const metaInfo = spaceSplit(className);
-  if (!metaInfo || metaInfo.length === 0) throw new Error(`Invalid code meta passed in!`);
-
+  const metaInfo = className.split(metaRe);
   const [langStr, ...rest] = metaInfo;
+
   let language = langStr;
   let diff = false;
-
   if (language.startsWith(`language-`)) {
     language = language.slice(9);
   }
@@ -48,16 +38,23 @@ export const getPreCodeMeta = (className: string) => {
     language = language.slice(5);
   }
 
-  let linesToHighlight: number[] = [];
+  const info = rest.reduce(
+    (stored, current) => {
+      const [start] = current.split(`=`);
 
-  // TODO: account for other meta properties
-  rest.forEach((e) => {
-    if (linesRe.test(e)) {
-      linesToHighlight = calculateLinesToHighlight(e);
-    }
-  });
+      // loosely based on https://prince.dev/highlight-with-react
+      // planning on just having a bunch of if statements to deal with 'parsing'
+      if (start === `h`) {
+        return { ...stored, linesToHighlight: rangeParser(current.slice(2)) };
+      }
+      if (start === `title`) return { ...stored, title: current.slice(6) };
 
-  return { language, diff, linesToHighlight };
+      return stored;
+    },
+    { title: null as string | null, linesToHighlight: [] as number[] }
+  );
+
+  return { language, diff, ...info };
 };
 
 interface IPreCodeToCodeProps {
