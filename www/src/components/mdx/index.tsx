@@ -48,10 +48,9 @@ const MdxPre: MDXComponents["pre"] = ({ children, ...props }) => {
 
   const meta = getPreCodeMeta((children as any)!.props!.className);
 
-  const divWrapperProps = { className: `gatsby-highlight`, dataLanguage: meta.language };
   // TODO: maybe insert title + copy button around here?
   return (
-    <div {...divWrapperProps}>
+    <div className="gatsby-highlight">
       <pre {...props} className={`language-${meta.language}`}>
         {children}
       </pre>

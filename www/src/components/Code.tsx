@@ -15,8 +15,10 @@ interface ICodeProps {
 // so I have to write the rnederition like that
 // Basically copied whatever was outputted on commit 3e444df5c057195084dae0cc86a2544866abcb19
 
-const Code: FCC<ICodeProps> = ({ content, language }) => {
+const Code: FCC<ICodeProps> = ({ content, language, linesToHighlight }) => {
   const code = content.trimEnd();
+
+  const shouldHighlightLine = (i: number) => linesToHighlight.includes(i);
 
   return (
     <Highlight {...defaultProps} code={code} language={language as Language}>
@@ -24,15 +26,18 @@ const Code: FCC<ICodeProps> = ({ content, language }) => {
         console.log({ tokens, getLineProps, getTokenProps });
         return (
           <Box as="code" className={`language-${language}`}>
-            {tokens.map((line) => (
-              <div>
-                {line.map((token, key) => {
-                  const tokenProps = { ...getTokenProps({ token, key }), style: {} };
-                  console.log({ tokenProps });
-                  return <span key={tokenProps.children} {...tokenProps} />;
-                })}
-              </div>
-            ))}
+            {tokens.map((line, i) => {
+              const hlClassname = shouldHighlightLine(i + 1) ? `gatsby-highlight-code-line` : ``;
+
+              return (
+                <div className={[hlClassname].join(` `)}>
+                  {line.map((token, key) => {
+                    const tokenProps = { ...getTokenProps({ token, key }), style: {} };
+                    return <span key={tokenProps.children} {...tokenProps} />;
+                  })}
+                </div>
+              );
+            })}
           </Box>
         );
       }}
