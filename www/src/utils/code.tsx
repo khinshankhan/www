@@ -24,7 +24,7 @@ export const codeToCode = ({ children }: ICodeToCodeProps) => {
 const metaRe = /:(?=(?:[^"]*"[^"]*")*[^"]*$)/g;
 
 export const getPreCodeMeta = (className: string) => {
-  const metaInfo = className.split(metaRe);
+  const metaInfo = (className || ``).split(metaRe);
   const [langStr, ...rest] = metaInfo;
 
   let language = langStr;

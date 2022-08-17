@@ -100,7 +100,7 @@ You can insert any block inside a list, you have to respect the indentation of t
 - A _paragraph_ of text
   (spanning multiple lines),
 
-  ```
+  ```text
   fenced code,
   ```
 
@@ -262,3 +262,11 @@ a good search engine is [google](https://google.com)
 <p>a good search engine is [google](https://google.com)</p>
 
 <p color="spoilerText">a good search engine is [google](https://google.com)</p>
+
+<pre>
+Text in a pre element
+is displayed in a fixed-width
+font, and it preserves
+both      spaces and
+line breaks
+</pre>
