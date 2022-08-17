@@ -1,5 +1,5 @@
-import React from "react";
-import { Box } from "@chakra-ui/react";
+import React, { Fragment } from "react";
+import { chakra, Box } from "@chakra-ui/react";
 import type { Language } from "prism-react-renderer";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import type { FCC } from "src/types/react";
@@ -43,23 +43,36 @@ const Code: FCC<ICodeProps> = ({ content, language, linesToHighlight, diff }) =>
               }
             }
 
-            return (
-              <span className={[hlClassName, diffClassName, languageClass].join(` `)}>
-                {cleanedLine.map((token, key) => {
-                  const tokenProps = { ...getTokenProps({ token, key }), style: {} };
-                  let tokenClassName = tokenProps.className;
-                  if (diff) {
-                    if (token.content === `+`) {
-                      tokenClassName = `token prefix inserted`;
-                    } else if (token.content === `-`) {
-                      tokenClassName = `token prefix deleted`;
-                    }
-                  }
+            // HACK: this is so the diff highlight is encompassed by a line highlight if both are active
+            const doubleHighlight = hlClassName !== `` && diffClassName !== ``;
 
-                  return (
-                    <span key={tokenProps.children} {...tokenProps} className={tokenClassName} />
-                  );
-                })}
+            const spanProps = doubleHighlight
+              ? { className: [hlClassName, languageClass].join(` `) }
+              : { className: [hlClassName, diffClassName, languageClass].join(` `) };
+            const diffSpanProps = doubleHighlight
+              ? { className: [diffClassName, languageClass].join(` `) }
+              : {};
+            const DiffSpan = doubleHighlight ? chakra.span : Fragment;
+
+            return (
+              <span {...spanProps}>
+                <DiffSpan {...diffSpanProps}>
+                  {cleanedLine.map((token, key) => {
+                    const tokenProps = { ...getTokenProps({ token, key }), style: {} };
+                    let tokenClassName = tokenProps.className;
+                    if (diff) {
+                      if (token.content === `+`) {
+                        tokenClassName = `token prefix inserted`;
+                      } else if (token.content === `-`) {
+                        tokenClassName = `token prefix deleted`;
+                      }
+                    }
+
+                    return (
+                      <span key={tokenProps.children} {...tokenProps} className={tokenClassName} />
+                    );
+                  })}
+                </DiffSpan>
               </span>
             );
           })}
