@@ -1,8 +1,9 @@
 import React from "react";
 import { Alert, Box, ListItem, OrderedList, Text, UnorderedList } from "@chakra-ui/react";
 import { MDXComponents } from "mdx/types";
+import Code from "src/components/Code";
 import { Headings, Link } from "src/components/common";
-import { codeToCode, getPreCodeMeta } from "src/utils/code";
+import { codeToCode, getPreCodeMeta, getCodeProps } from "src/utils/code";
 
 const MdxP: MDXComponents["p"] = Text;
 
@@ -59,11 +60,12 @@ const MdxPre: MDXComponents["pre"] = ({ children, ...props }) => {
 };
 
 const MdxCode: MDXComponents["code"] = ({ className, children }) => {
+  // NOTE: no idea if it children won't be a string at this point but this seems to always be the case
+
   if (!className) {
-    // NOTE: no idea if it children won't be a string at this point but this seems to always be the case
+    // TODO: actually utilize the language for highlighting?
     const { language, content } = codeToCode({ children: children as string });
 
-    // TODO: actually utilize the language?
     return (
       <Box as="span">
         <Box as="code" className={`language-${language}`}>
@@ -73,8 +75,11 @@ const MdxCode: MDXComponents["code"] = ({ className, children }) => {
     );
   }
 
-  // TODO: use prism renderer
-  return <Box color="white">Hello there</Box>;
+  const codeProps = getCodeProps({
+    className,
+    children: children as string,
+  });
+  return <Code {...codeProps} />;
 };
 
 const MdxHr: MDXComponents["hr"] = () => (

@@ -18,7 +18,7 @@ export const codeToCode = ({ children }: ICodeToCodeProps) => {
     content = givenContent.join(DELIMITER);
   }
 
-  return { language, content };
+  return { language, content, diff: false, linesToHighlight: [] as number[] };
 };
 
 // https://prince.dev/highlight-with-react
@@ -65,7 +65,7 @@ interface IPreCodeToCodeProps {
   children: string;
 }
 
-export const preCodeToCode = ({ className, children }: IPreCodeToCodeProps) => {
+export const getCodeProps = ({ className, children }: IPreCodeToCodeProps) => {
   if (!className || className === ``) {
     return codeToCode({ children });
   }
