@@ -15,9 +15,7 @@ interface IPropsProps {
 
 // TODO: use taglines and fallback on spoiler?
 // maybe make it a field
-const Article: FCC<IPropsProps> = ({ data, pageContext, location, children }) => {
-  console.log({ data, pageContext, location });
-
+const Article: FCC<IPropsProps> = ({ data, children }) => {
   const {
     mdx: { fields, frontmatter },
   } = data;
@@ -29,6 +27,7 @@ const Article: FCC<IPropsProps> = ({ data, pageContext, location, children }) =>
       topProps={{
         sx: { ...normalizeElements, ...fancyFirstLetter },
       }}
+      backInfo={{ href: `/writing`, children: `Writing` }}
     >
       <MDXProvider components={MdxComponents}>{children}</MDXProvider>
     </Layout>
