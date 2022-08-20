@@ -1,11 +1,11 @@
 import React, { ReactNode } from "react";
 import { Heading as ChakraHeading } from "@chakra-ui/react";
-import { headingsOptions, HeadingsOptions } from "./shared";
+import type { HeadingProps, HeadingsOptions } from "./shared";
+import { headingsOptions } from "./shared";
 
-export type IHeadingsTemplateProps = {
+export interface IHeadingsTemplateProps extends HeadingProps {
   children: ReactNode;
-  [key: string]: any;
-};
+}
 
 export type HeadingsTag = (props: IHeadingsTemplateProps) => JSX.Element;
 

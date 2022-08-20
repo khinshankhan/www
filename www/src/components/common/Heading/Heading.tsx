@@ -1,6 +1,7 @@
-import { ComponentWithAs, HeadingProps, Heading as ChakraHeading } from "@chakra-ui/react";
+import { ComponentWithAs, Heading as ChakraHeading } from "@chakra-ui/react";
 import AnchorHeadings, { HeadingsAnchorTag } from "./AnchorHeadings";
 import Headings, { HeadingsTag } from "./Headings";
+import type { HeadingProps } from "./shared";
 import { headingsOptions } from "./shared";
 
 type HeadingType = ComponentWithAs<"h2", HeadingProps> & {

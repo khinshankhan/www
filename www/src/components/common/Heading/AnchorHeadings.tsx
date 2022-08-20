@@ -1,24 +1,26 @@
 import React, { ReactNode } from "react";
-import { Icon } from "@chakra-ui/react";
+import { IconProps, Icon } from "@chakra-ui/react";
 import { FaAnchor as Anchor } from "react-icons/fa";
-import { Link } from "src/components/common/Link";
+import { Link, ILinkProps } from "src/components/common/Link";
 import Headings from "./Headings";
-import { headingsOptions, HeadingsOptions } from "./shared";
+import type { HeadingProps, HeadingsOptions } from "./shared";
+import { headingsOptions } from "./shared";
 
-type HeadingAnchorProps = {
+interface IHeadingAnchorProps extends HeadingProps {
   href?: string;
+  linkProps?: ILinkProps;
   icon?: any;
+  iconProps?: IconProps;
   children: ReactNode;
-  [key: string]: any;
-};
+}
 
-export type HeadingsAnchorTag = (props: HeadingAnchorProps) => JSX.Element;
+export type HeadingsAnchorTag = (props: IHeadingAnchorProps) => JSX.Element;
 
 /* eslint-disable indent, prettier/prettier */
 const HeadingAnchor = (HeadingTag: HeadingsOptions) => {
   const HeadingComponent = Headings[HeadingTag];
 
-  return ({ children, href = `?anchor=true`, icon = Anchor, ...props }: HeadingAnchorProps) => (
+  return ({ children, href = `?anchor=true`, icon = Anchor, ...props }: IHeadingAnchorProps) => (
     <HeadingComponent>
       <Link
         href={href}
