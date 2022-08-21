@@ -2,7 +2,7 @@ import React from "react";
 import { Alert, Box, ListItem, OrderedList, Text, UnorderedList } from "@chakra-ui/react";
 import { MDXComponents } from "mdx/types";
 import Code from "src/components/Code";
-import { Headings, Link } from "src/components/common";
+import { Headings, Link, Spoiler } from "src/components/common";
 import { codeToCode, getPreCodeMeta, getCodeProps } from "src/utils/code";
 
 const MdxP: MDXComponents["p"] = Text;
@@ -143,6 +143,7 @@ const mdxComponents: MDXComponents = {
   UnorderedList,
   OrderedList,
   ListItem,
+  Spoiler,
 };
 
 export default mdxComponents;
