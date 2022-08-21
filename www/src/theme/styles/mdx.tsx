@@ -13,6 +13,14 @@ export const normalizeElements = {
   "#content > * > p:nth-of-type(1)": {
     pb: { base: 8, sm: 10 },
   },
+  figure: {
+    mb: 5,
+  },
+  "figure > figcaption": {
+    mt: 2,
+    textAlign: `center`,
+    color: `spoilerText`,
+  },
 };
 
 export const fancyFirstLetter = {
