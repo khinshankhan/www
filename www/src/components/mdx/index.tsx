@@ -87,6 +87,35 @@ const MdxHr: MDXComponents["hr"] = () => (
 
 const MdxA: MDXComponents["a"] = ({ href = `#`, children }) => <Link href={href}>{children}</Link>;
 
+const MdxImg: MDXComponents["img"] = ({ title, alt, src, children }) => (
+  <div>
+    <figure>
+      <span
+        style={{
+          display: `block`,
+          marginLeft: `auto`,
+          marginRight: `auto`,
+          maxWidth: `1325px`,
+        }}
+      >
+        <img
+          src={src}
+          alt={alt || `This is an image from ${src}`}
+          title={title || ``}
+          style={{
+            width: `100%`,
+            height: `100%`,
+            margin: 0,
+            top: 0,
+            left: 0,
+          }}
+        />
+      </span>
+      {(children || title) && <Box as="figcaption">{children || title}</Box>}
+    </figure>
+  </div>
+);
+
 const mdxComponents: MDXComponents = {
   p: MdxP,
   h1: MdxH1,
@@ -106,7 +135,9 @@ const mdxComponents: MDXComponents = {
   strong: MdxStrong,
   hr: MdxHr,
   a: MdxA,
+  img: MdxImg,
 
+  MdxImg,
   Headings,
   Alert,
   UnorderedList,
