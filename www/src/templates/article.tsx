@@ -9,16 +9,25 @@ import type { FCC } from "src/types/react";
 // TODO: get to more elaborate types
 interface IPropsProps {
   data: any;
-  pageContext: any;
+  pageContext: {
+    slug: string;
+    parentTitle: string;
+    parentSlug: string;
+  };
   location: any;
 }
 
 // TODO: use taglines and fallback on spoiler?
 // maybe make it a field
-const Article: FCC<IPropsProps> = ({ data, children }) => {
+const Article: FCC<IPropsProps> = ({ data, pageContext, children }) => {
   const {
     mdx: { fields, frontmatter },
   } = data;
+
+  const backInfo = {
+    href: pageContext.parentSlug,
+    children: pageContext.parentTitle,
+  };
 
   return (
     <Layout
@@ -27,7 +36,7 @@ const Article: FCC<IPropsProps> = ({ data, children }) => {
       topProps={{
         sx: { ...normalizeElements, ...fancyFirstLetter },
       }}
-      backInfo={{ href: `/writing`, children: `Writing` }}
+      backInfo={backInfo}
     >
       <MDXProvider components={MdxComponents}>{children}</MDXProvider>
     </Layout>
