@@ -1,10 +1,14 @@
 import React from "react";
+import type { FC } from "react";
 import { Box } from "@chakra-ui/react";
-import type { FCC } from "src/types/react";
+
+interface ISpoilerProps {
+  text: string;
+}
 
 // Inspired by: https://stackoverflow.com/a/41712116
 // TODO: circle back for a11y and better theming
-export const Spoiler: FCC = () => (
+export const Spoiler: FC<ISpoilerProps> = ({ text }) => (
   <Box
     as="span"
     cursor="default"
@@ -15,8 +19,8 @@ export const Spoiler: FCC = () => (
     tabIndex={0}
     sx={{
       "::after": {
-        content: `"Hello there budaroo"`,
-        color: `codeBg`,
+        content: `"${text}"`,
+        color: `transparent`,
         padding: `0 0.5em`,
       },
       "&:focus::after, &:hover::after": {

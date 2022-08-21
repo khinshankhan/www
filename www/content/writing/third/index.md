@@ -62,3 +62,9 @@ cursuque volucris antemnis in in amorem vestros tamen Ino quisquis. Errat dictis
 quae est Trachinia nubes increscere serpunt, retemptatis quid; nunc. Magis
 letum, sacrum utro, nec [fortuna](http://www.lorisque.net/) errat illa [viribus
 ergo](http://miratur-ceciderunt.io/lingua-in) rupta undis.
+
+**Q:** Why take forever to redo this website?
+
+**A:** Well, why not? <Spoiler text="Just kidding... not 😔"/>
+
+Hello there.
