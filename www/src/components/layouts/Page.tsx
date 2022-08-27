@@ -35,7 +35,9 @@ export const PageLayout: FCC<IPageLayoutProps> = ({
           pt={showBackButton ? 7 : 14}
           pb={12}
           className="sharedNavBg"
+          position="relative"
           mb={10}
+          zIndex={1}
           {...subHeaderProps}
         >
           <Container variant="page">
