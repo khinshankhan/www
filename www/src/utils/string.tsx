@@ -45,3 +45,16 @@ export const slugify = (
 // splits on space unless in quotes ("")
 // https://stackoverflow.com/a/16261693
 export const spaceSplit = (str: string) => str.match(/(?:[^\s"]+|"[^"]*")+/g);
+
+// NOTE: This is a temporary solution until we have a better way to handle
+// first attempt at github copilot
+export const removeIndexSuffix = (str: string) => {
+  let newStr = str;
+  while (newStr.endsWith(`index`)) {
+    newStr = newStr.slice(0, -5);
+    if (newStr.endsWith(`/`)) {
+      newStr = newStr.slice(0, -1);
+    }
+  }
+  return newStr;
+};

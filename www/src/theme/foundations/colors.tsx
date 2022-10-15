@@ -227,7 +227,7 @@ export const colors = {
   ...colorPalette,
   brand: {
     palette: colorPalette.natureGreen,
-    bg: colorPalette.deepTaupe,
+    bg: { light: colorPalette.deepTaupe, dark: colorPalette.blueGray },
   },
 };
 

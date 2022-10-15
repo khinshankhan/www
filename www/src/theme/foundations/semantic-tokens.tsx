@@ -14,6 +14,7 @@ const semanticTokens = {
   colors: {
     primary: {
       default: `brand.palette.700`,
+      _dark: `brand.palette.600`,
     },
     primaryAccent: {
       default: `brand.palette.100`,
@@ -25,29 +26,35 @@ const semanticTokens = {
 
     // backgrounds
     bgPrimary: {
-      default: transparentize(`brand.bg.50`, 1)(theme),
+      default: transparentize(`brand.bg.light.50`, 1)(theme),
+      _dark: transparentize(`brand.bg.dark.700`, 1)(theme),
     },
     bgContrast: {
       default: `blueGray.800`,
+      _dark: `white`,
     },
     bgAlpha: {
-      default: transparentize(`brand.bg.100`, 0.8)(theme),
+      default: transparentize(`brand.bg.light.100`, 0.8)(theme),
+      _dark: transparentize(`brand.bg.dark.900`, 0.8)(theme),
     },
     bgOpaque: {
-      default: transparentize(`brand.bg.100`, 0.98)(theme),
+      default: transparentize(`brand.bg.light.100`, 0.98)(theme),
+      _dark: transparentize(`brand.bg.dark.800`, 0.98)(theme),
     },
 
     inactiveCardBg: {
       default: `orange.100`,
     },
     inactiveCardBorder: {
-      default: `brand.bg.300`,
+      default: `brand.bg.light.300`,
     },
     activeCardBg: {
       default: `green.50`,
+      _dark: `brand.palette.200`,
     },
     spoilerText: {
       default: `blueGray.500`,
+      _dark: `brand.bg.dark.500`,
     },
 
     dividerColor: {
@@ -79,19 +86,21 @@ const semanticTokens = {
 
     // TODO: check a11y for this
     inlineCodeBg: {
-      default: `brand.bg.200`,
+      default: `brand.bg.light.200`,
+      _dark: `brand.bg.dark.800`,
     },
     codeBg: {
-      default: `brand.bg.900`,
+      default: `brand.bg.light.900`,
+      _dark: `brand.bg.dark.800`,
     },
     inlineCodeSelection: {
       default: `brand.palette.100`,
     },
     codeHighlight: {
-      default: `brand.bg.700`,
+      default: `brand.bg.light.700`,
     },
     codeHighlightBorderLeft: {
-      default: transparentize(`brand.bg.200`, 1)(theme),
+      default: transparentize(`brand.bg.light.200`, 1)(theme),
     },
     codeInsertedBg: {
       default: transparentize(`green.700`, 1)(theme),
