@@ -1,4 +1,5 @@
 import { GatsbyConfig } from "gatsby";
+import remarkUnwrapImages from "remark-unwrap-images";
 import { capitalize } from "./src/utils/string";
 
 const plugins: GatsbyConfig["plugins"] = [
@@ -47,10 +48,20 @@ const plugins: GatsbyConfig["plugins"] = [
           options: {
             maxWidth: 1325,
             quality: 90,
-            linkImagesToOriginal: true,
+            showCaptions: [`title`],
+            markdownCaptions: true,
+            linkImagesToOriginal: false,
+            backgroundColor: `transparent`,
+            tracedSvg: true,
+            withWebp: {
+              quality: 95,
+            },
           },
         },
       ],
+      mdxOptions: {
+        remarkPlugins: [remarkUnwrapImages],
+      },
     },
   },
   `gatsby-plugin-react-helmet-async`,

@@ -106,6 +106,12 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
     return;
   }
 
+  const lookup = new Map<string, string>([
+    [`/`, `Home`],
+    [`/writing`, `Writing`],
+    [`/about`, `About`],
+  ]);
+
   if (result.data === undefined) {
     reporter.panicOnBuild(
       `There was an issue loading the createPages query results`,
@@ -119,12 +125,25 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
   } = result;
 
   articles.nodes.forEach((article) => {
+    let parentSlug = article.fields.slug;
+    while (!lookup.has(parentSlug)) {
+      parentSlug = parentSlug.split(`/`).slice(0, -1).join(`/`);
+      if (parentSlug === ``) {
+        parentSlug = `/`;
+      }
+    }
+    const parentTitle = lookup.get(parentSlug);
+
     createPage({
       path: article.fields.slug,
       component: `${templateLayouts.article}?__contentFilePath=${article.internal.contentFilePath}`,
       context: {
         slug: article.fields.slug,
+        parentTitle,
+        parentSlug,
       },
     });
+
+    lookup.set(article.fields.slug, article.frontmatter.title);
   });
 };

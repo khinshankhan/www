@@ -35,7 +35,6 @@
     "gatsby-plugin-root-import": "^2.0.8",
     "gatsby-plugin-sharp": "4.21.0",
     "gatsby-remark-images": "6.21.0",
-    "gatsby-remark-prismjs": "^6.21.0",
     "gatsby-source-filesystem": "4.21.0",
     "gatsby-transformer-remark": "5.21.0",
     "gatsby-transformer-sharp": "4.21.0",
@@ -45,7 +44,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^1.3.0",
-    "react-icons": "^4.4.0"
+    "react-icons": "^4.4.0",
+    "remark-unwrap-images": "2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",

@@ -192,7 +192,7 @@ Text between `<` and `>` that looks like an HTML tag is parsed as a raw HTML tag
 
 While it may be useful when writing online content, please note that your tag may be stripped for security reasons and in output other than HTML you may have unexpected results
 
-<p class="text-right">Look I'm right!</p>
+<p className="text-right">Look I'm right!</p>
 
 This is the list of allowed html tags (case insensitive):
 

@@ -55,25 +55,27 @@ const Code: FCC<ICodeProps> = ({ content, language, linesToHighlight, diff }) =>
             const DiffSpan = doubleHighlight ? chakra.span : Fragment;
 
             return (
-              <Box as="div" {...divProps}>
-                <DiffSpan {...diffSpanProps}>
-                  {cleanedLine.map((token, key) => {
-                    const tokenProps = { ...getTokenProps({ token, key }), style: {} };
-                    let tokenClassName = tokenProps.className;
-                    if (diff) {
-                      if (token.content === `+`) {
-                        tokenClassName = `token prefix inserted`;
-                      } else if (token.content === `-`) {
-                        tokenClassName = `token prefix deleted`;
+              <>
+                {/* eslint-disable-next-line react/no-array-index-key*/}
+                <Box as="div" key={i} {...divProps}>
+                  <DiffSpan {...diffSpanProps}>
+                    {cleanedLine.map((token, key) => {
+                      const tokenProps = { ...getTokenProps({ token, key }), style: {} };
+                      let tokenClassName = tokenProps.className;
+                      if (diff) {
+                        if (token.content === `+`) {
+                          tokenClassName = `token prefix inserted`;
+                        } else if (token.content === `-`) {
+                          tokenClassName = `token prefix deleted`;
+                        }
                       }
-                    }
 
-                    return (
-                      <span key={tokenProps.children} {...tokenProps} className={tokenClassName} />
-                    );
-                  })}
-                </DiffSpan>
-              </Box>
+                      // eslint-disable-next-line react/no-array-index-key
+                      return <span key={key} {...tokenProps} className={tokenClassName} />;
+                    })}
+                  </DiffSpan>
+                </Box>
+              </>
             );
           })}
         </Box>
