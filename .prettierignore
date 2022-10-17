@@ -1,0 +1,7 @@
+.cache
+.next
+build
+dist
+node_modules
+pnpm-*
+public
