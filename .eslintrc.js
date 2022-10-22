@@ -304,5 +304,38 @@ module.exports = {
         "@typescript-eslint/no-var-requires": `off`,
       },
     },
+    {
+      // Typescript project files only
+      files: [`*.ts`, `*.tsx`],
+      rules: {
+        "@typescript-eslint/no-unnecessary-condition": [
+          `error`,
+          {
+            allowConstantLoopConditions: false,
+            allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: true,
+          },
+        ],
+        "@typescript-eslint/prefer-includes": `warn`,
+        "@typescript-eslint/prefer-nullish-coalescing": [
+          `warn`,
+          {
+            ignoreConditionalTests: true,
+            ignoreMixedLogicalExpressions: true,
+          },
+        ],
+        "@typescript-eslint/prefer-optional-chain": `warn`,
+        "@typescript-eslint/prefer-reduce-type-parameter": `warn`,
+        "@typescript-eslint/prefer-string-starts-ends-with": `warn`,
+        "@typescript-eslint/promise-function-async": `error`,
+        // TODO: waiting for https://github.com/jsx-eslint/eslint-plugin-react/issues/3286
+        // before adding in `destructureInSignature`
+        "react/destructuring-assignment": [`warn`, `always`, { ignoreClassFields: false }],
+      },
+      parserOptions: {
+        project: [`./tsconfig.json`], // Specify it only for TypeScript files
+      },
+      // TODO: get back to this rule after reading up on it
+      // extends: [`plugin:@typescript-eslint/recommended-requiring-type-checking`],
+    },
   ],
 };
