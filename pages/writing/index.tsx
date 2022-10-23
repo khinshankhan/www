@@ -5,13 +5,15 @@ import { allArticles } from "contentlayer/generated";
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 type Article = InferGetStaticPropsType<typeof getStaticProps>["articles"][number];
 
-const ArticleCard = ({ planted, tended, title }: Article) => (
+const ArticleCard = ({ planted, tended, title, slug }: Article) => (
   <div>
+    <h2>{title}</h2>
+
     <time dateTime={planted}>{format(parseISO(planted), `MM/dd/yyyy`)}</time>
     <br />
     <time dateTime={tended}>{format(parseISO(tended), `MM/dd/yyyy`)}</time>
-
-    <h2>{title}</h2>
+    <br />
+    <span>{slug}</span>
   </div>
 );
 
@@ -26,7 +28,7 @@ const Writing: NextPage<Props> = ({ articles }) => (
   </div>
 );
 
-const getStaticProps = async () => {
+export const getStaticProps = async () => {
   const articles = allArticles
     .map((article) => ({
       title: article.title,
@@ -35,6 +37,7 @@ const getStaticProps = async () => {
       planted: article.planted.slice(0, -1),
       tended: article.tended.slice(0, -1),
       tags: article.tags,
+      slug: article.slug,
     }))
     .sort(
       (a, b) =>

@@ -2,6 +2,7 @@ import { defineDocumentType } from "contentlayer/source-files";
 
 export const Article = defineDocumentType(() => ({
   name: `Article`,
+  contentType: `mdx`,
   filePathPattern: `articles/**/*.md`,
   fields: {
     title: {
@@ -27,6 +28,12 @@ export const Article = defineDocumentType(() => ({
         type: `string`,
       },
       required: true,
+    },
+  },
+  computedFields: {
+    slug: {
+      type: `string`,
+      resolve: (doc) => doc._raw.flattenedPath.slice(8),
     },
   },
 }));
