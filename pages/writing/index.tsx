@@ -1,4 +1,4 @@
-import { compareDesc, format, parseISO } from "date-fns";
+import { compareAsc, format, parseISO } from "date-fns";
 import type { NextPage, InferGetStaticPropsType } from "next";
 import { allArticles } from "contentlayer/generated";
 
@@ -38,8 +38,8 @@ const getStaticProps = async () => {
     }))
     .sort(
       (a, b) =>
-        compareDesc(new Date(a.planted), new Date(b.planted)) ||
-        compareDesc(new Date(a.tended), new Date(b.tended)) ||
+        compareAsc(new Date(b.planted), new Date(a.planted)) ||
+        compareAsc(new Date(b.tended), new Date(a.tended)) ||
         b.title.localeCompare(a.title)
     );
 
