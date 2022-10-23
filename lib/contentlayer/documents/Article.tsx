@@ -35,5 +35,9 @@ export const Article = defineDocumentType(() => ({
       type: `string`,
       resolve: (doc) => doc._raw.flattenedPath.slice(8),
     },
+    subtitle: {
+      type: `string`,
+      resolve: (doc) => doc.subtitle ?? `My default subtitle`,
+    },
   },
 }));

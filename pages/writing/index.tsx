@@ -5,9 +5,10 @@ import { allArticles } from "contentlayer/generated";
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 type Article = InferGetStaticPropsType<typeof getStaticProps>["articles"][number];
 
-const ArticleCard = ({ planted, tended, title, slug }: Article) => (
+const ArticleCard = ({ planted, tended, title, subtitle, slug }: Article) => (
   <div>
     <h2>{title}</h2>
+    <h3>{subtitle}</h3>
 
     <time dateTime={planted}>{format(parseISO(planted), `MM/dd/yyyy`)}</time>
     <br />

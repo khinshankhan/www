@@ -1,6 +1,5 @@
 ---
 title: Bye 2
-subtitle: Testing 2
 
 planted: "2022-07-07"
 tended: "2022-08-20"
