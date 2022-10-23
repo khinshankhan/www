@@ -300,6 +300,7 @@ module.exports = {
       files: [`**eslint*.js`, `**lint-staged*.js`, `**jest*.js`, `next*`],
       rules: {
         "import/no-unused-modules": `off`,
+        "@typescript-eslint/quotes": `off`,
         "@typescript-eslint/no-magic-numbers": `off`,
         "@typescript-eslint/no-var-requires": `off`,
       },
