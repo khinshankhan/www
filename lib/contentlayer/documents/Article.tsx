@@ -7,13 +7,15 @@ export const Article = defineDocumentType(() => ({
   fields: {
     title: {
       type: `string`,
-      description: `The title of the article`,
       required: true,
     },
     subtitle: {
       type: `string`,
-      description: `The text shown just below the title or the featured image`,
     },
+    slug: {
+      type: `string`,
+    },
+
     planted: {
       type: `date`,
       required: true,
@@ -22,6 +24,7 @@ export const Article = defineDocumentType(() => ({
       type: `date`,
       required: true,
     },
+
     tags: {
       type: `list`,
       of: {
@@ -29,15 +32,25 @@ export const Article = defineDocumentType(() => ({
       },
       required: true,
     },
+
+    status: {
+      type: `enum`,
+      options: [`draft`, `published`],
+    },
   },
   computedFields: {
     slug: {
       type: `string`,
-      resolve: (doc) => doc._raw.flattenedPath.slice(8),
+      resolve: (article) => article.slug ?? article._raw.flattenedPath.slice(8),
     },
     subtitle: {
       type: `string`,
-      resolve: (doc) => doc.subtitle ?? `My default subtitle`,
+      resolve: (article) => article.subtitle ?? `A little surprise reading 😊`,
+    },
+    status: {
+      type: `enum`,
+      options: [`draft`, `published`],
+      resolve: (article) => article.status ?? `published`,
     },
   },
 }));

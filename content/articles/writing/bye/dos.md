@@ -1,10 +1,10 @@
 ---
-title: Bye 2
+title: Bye
 
 planted: "2022-07-07"
-tended: "2022-08-20"
+tended: "2022-08-15"
 
-tags: ["1tag", "2tag"]
+tags: ["1tag", "3tag"]
 ---
 
 Lorem markdownum erigitur cum heros. Duos sole. Per illa, illo funda me
