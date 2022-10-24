@@ -5,23 +5,23 @@ import { allArticles } from "contentlayer/generated";
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 type Article = InferGetStaticPropsType<typeof getStaticProps>["articles"][number];
 
-const ArticleCard = (article: Article) => (
-  <div>
-    <h2>{article.title}</h2>
+const ArticleCard = (article: Article) => {
+  const { title, planted, tended } = article;
 
-    <time dateTime={article.planted}>
-      Planted date: {format(parseISO(article.planted), `MM/dd/yyyy`)}
-    </time>
-    <br />
-    <time dateTime={article.tended}>
-      Tended date: {format(parseISO(article.tended), `MM/dd/yyyy`)}
-    </time>
-    <br />
+  return (
     <div>
-      <pre>{JSON.stringify(article, null, 2)}</pre>
+      <h2>{title}</h2>
+
+      <time dateTime={planted}>Planted date: {format(parseISO(planted), `MM/dd/yyyy`)}</time>
+      <br />
+      <time dateTime={tended}>Tended date: {format(parseISO(tended), `MM/dd/yyyy`)}</time>
+      <br />
+      <div>
+        <pre>{JSON.stringify(article, null, 2)}</pre>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Writing: NextPage<Props> = ({ articles }) => (
   <div>
