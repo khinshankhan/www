@@ -1,15 +1,15 @@
 import { defineDocumentType } from "contentlayer/source-files";
 import { fields, getComputedFields } from "../utils";
 
-const computedFields = getComputedFields<"Listing">({
-  prefix: `listings`,
+const computedFields = getComputedFields<"Contextual">({
+  prefix: `contextual`,
   subtitle: `Another fun list 🙃`,
 });
 
-export const Listing = defineDocumentType(() => ({
-  name: `Listing`,
+export const Contextual = defineDocumentType(() => ({
+  name: `Contextual`,
   contentType: `mdx`,
-  filePathPattern: `listings/**/*.md`,
+  filePathPattern: `contextual/**/*.md`,
   fields,
   computedFields,
 }));

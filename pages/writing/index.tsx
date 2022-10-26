@@ -1,6 +1,6 @@
 import { compareAsc, format, parseISO } from "date-fns";
 import type { NextPage, InferGetStaticPropsType } from "next";
-import { allArticles } from "contentlayer/generated";
+import { allListeds as allArticles } from "contentlayer/generated";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 type Article = InferGetStaticPropsType<typeof getStaticProps>["articles"][number];

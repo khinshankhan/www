@@ -33,10 +33,12 @@ export const fields: FieldDefs = {
 interface IComputedFieldsProps {
   prefix: string;
   subtitle: string;
+  status?: string;
 }
 export const getComputedFields = <T extends string>({
   prefix,
   subtitle,
+  status = `published`,
 }: IComputedFieldsProps): ComputedFields<T> => {
   const slugify = getSlug(prefix);
 
@@ -53,7 +55,7 @@ export const getComputedFields = <T extends string>({
       type: `enum`,
       // @ts-ignore confident enum should have accompanying options array
       options: [`draft`, `published`],
-      resolve: (doc) => doc.status ?? `published`,
+      resolve: (doc) => doc.status ?? status,
     },
   };
 };
