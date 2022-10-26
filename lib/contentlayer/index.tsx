@@ -53,7 +53,7 @@ export const categories = (() => {
 
   articles.forEach((article) =>
     article.categories?.forEach((category) => {
-      m.set(category, [...(m.get(category) || []), article]);
+      m.set(category, [...(m.get(category) ?? []), article]);
     })
   );
 

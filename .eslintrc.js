@@ -174,7 +174,7 @@ module.exports = {
     "react/display-name": `off`,
     "react/forbid-prop-types": `off`,
     "react/function-component-definition": [
-      `warn`,
+      `off`,
       {
         namedComponents: `arrow-function`,
         unnamedComponents: `arrow-function`,

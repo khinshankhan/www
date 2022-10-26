@@ -4,7 +4,7 @@ import { allListedWritings } from "lib/contentlayer";
 
 export const getStaticPaths = () => {
   const paths = allListedWritings.map((p) => ({
-    params: { listedWritingSlug: p.slug!.split(`/`) },
+    params: { slug: p.slug!.split(`/`) },
   }));
 
   return {
@@ -16,7 +16,7 @@ export const getStaticPaths = () => {
 export const getStaticProps: GetStaticProps<{
   article: Listed;
 }> = async ({ params }) => {
-  const slug = (params?.listedWritingSlug as string[])!.join(`/`);
+  const slug = (params?.slug as string[])!.join(`/`);
   const article = allListedWritings.find((doc) => doc!.slug === slug);
 
   if (!article) {
