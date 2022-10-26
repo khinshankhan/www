@@ -4,7 +4,7 @@ import { chopOffWord } from "../utils/string";
 const getSlug = (prefix: string) => {
   const cleanPath = chopOffWord(prefix, false);
   return (doc: { slug?: string; _raw: { flattenedPath: string } }) =>
-    doc.slug ?? cleanPath(doc._raw.flattenedPath);
+    doc.slug ?? cleanPath(doc._raw.flattenedPath).slice(1);
 };
 
 export const fields: FieldDefs = {
