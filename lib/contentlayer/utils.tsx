@@ -28,6 +28,13 @@ export const fields: FieldDefs = {
     type: `enum`,
     options: [`draft`, `published`],
   },
+
+  categories: {
+    type: `list`,
+    of: {
+      type: `string`,
+    },
+  },
 };
 
 interface IComputedFieldsProps {

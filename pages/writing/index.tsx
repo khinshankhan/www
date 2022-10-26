@@ -1,6 +1,6 @@
 import { compareAsc, format, parseISO } from "date-fns";
 import type { NextPage, InferGetStaticPropsType } from "next";
-import { allListeds as allArticles } from "contentlayer/generated";
+import { allListedWritings } from "lib/contentlayer/import";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 type Article = InferGetStaticPropsType<typeof getStaticProps>["articles"][number];
@@ -35,7 +35,7 @@ const Writing: NextPage<Props> = ({ articles }) => (
 );
 
 export const getStaticProps = async () => {
-  let articles = allArticles
+  const articles = allListedWritings
     .map((article) => ({
       title: article.title,
       subtitle: article.subtitle,
@@ -52,11 +52,6 @@ export const getStaticProps = async () => {
         compareAsc(new Date(b.tended), new Date(a.tended)) ||
         b.title.localeCompare(a.title)
     );
-
-  // TODO: add back in for production
-  if (process.env.NODE_ENV === `production`) {
-    articles = articles.filter((article) => article.status === `published`);
-  }
 
   return { props: { articles } };
 };

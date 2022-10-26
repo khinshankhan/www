@@ -78,7 +78,7 @@ module.exports = {
     "arrow-body-style": [`error`, `as-needed`],
     "consistent-return": `error`,
     "func-names": `off`,
-    indent: [`error`, 2, { SwitchCase: 1 }],
+    indent: [`error`, 2, { SwitchCase: 1, offsetTernaryExpressions: true }],
     "linebreak-style": `off`,
     "no-console": [`warn`, { allow: [`warn`, `error`] }],
     "no-continue": `off`,
