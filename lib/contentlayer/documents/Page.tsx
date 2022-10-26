@@ -1,9 +1,11 @@
 import { defineDocumentType } from "contentlayer/source-files";
-import { fields, getComputedFields } from "../utils";
+import { getFields, getComputedFields } from "../utils";
 
+const fields = getFields({
+  subtitle: `Doing my best ✍️`,
+});
 const computedFields = getComputedFields<"Page">({
   prefix: `page`,
-  subtitle: `Doing my best ✍️`,
 });
 
 export const Page = defineDocumentType(() => ({

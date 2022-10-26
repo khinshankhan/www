@@ -7,13 +7,18 @@ const getSlug = (prefix: string) => {
     doc.slug ?? cleanPath(doc._raw.flattenedPath).slice(1);
 };
 
-export const fields: FieldDefs = {
+interface IFieldsProps {
+  subtitle: string;
+  status?: string;
+}
+export const getFields = ({ subtitle, status = `published` }: IFieldsProps): FieldDefs => ({
   title: {
     type: `string`,
     required: true,
   },
   subtitle: {
     type: `string`,
+    default: subtitle,
   },
   slug: {
     type: `string`,
@@ -27,6 +32,7 @@ export const fields: FieldDefs = {
   status: {
     type: `enum`,
     options: [`draft`, `published`],
+    default: status,
   },
 
   categories: {
@@ -35,17 +41,18 @@ export const fields: FieldDefs = {
       type: `string`,
     },
   },
-};
+
+  backButton: {
+    type: `boolean`,
+    default: false,
+  },
+});
 
 interface IComputedFieldsProps {
   prefix: string;
-  subtitle: string;
-  status?: string;
 }
 export const getComputedFields = <T extends string>({
   prefix,
-  subtitle,
-  status = `published`,
 }: IComputedFieldsProps): ComputedFields<T> => {
   const slugify = getSlug(prefix);
 
@@ -53,16 +60,6 @@ export const getComputedFields = <T extends string>({
     slug: {
       type: `string`,
       resolve: slugify,
-    },
-    subtitle: {
-      type: `string`,
-      resolve: (doc) => doc.subtitle ?? subtitle,
-    },
-    status: {
-      type: `enum`,
-      // @ts-ignore confident enum should have accompanying options array
-      options: [`draft`, `published`],
-      resolve: (doc) => doc.status ?? status,
     },
   };
 };

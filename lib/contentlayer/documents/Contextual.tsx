@@ -1,9 +1,11 @@
 import { defineDocumentType } from "contentlayer/source-files";
-import { fields, getComputedFields } from "../utils";
+import { getFields, getComputedFields } from "../utils";
 
+const fields = getFields({
+  subtitle: `Another fun list 🙃`,
+});
 const computedFields = getComputedFields<"Contextual">({
   prefix: `contextual`,
-  subtitle: `Another fun list 🙃`,
 });
 
 export const Contextual = defineDocumentType(() => ({
