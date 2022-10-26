@@ -3,8 +3,8 @@ import { chopOffWord } from "../utils/string";
 
 const getSlug = (prefix: string) => {
   const cleanPath = chopOffWord(prefix, false);
-  return (doc: { slug?: string; _raw: { flattenedPath: string } }) =>
-    doc.slug ?? cleanPath(doc._raw.flattenedPath).slice(1);
+  return (doc: { givenSlug?: string; _raw: { flattenedPath: string } }) =>
+    doc.givenSlug ?? cleanPath(doc._raw.flattenedPath).slice(1);
 };
 
 interface IFieldsProps {
@@ -20,7 +20,7 @@ export const getFields = ({ subtitle, status = `published` }: IFieldsProps): Fie
     type: `string`,
     default: subtitle,
   },
-  slug: {
+  givenSlug: {
     type: `string`,
   },
 

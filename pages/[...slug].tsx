@@ -16,7 +16,14 @@ export const getStaticPaths = () => {
 export const getStaticProps: GetStaticProps<{
   article: Listed;
 }> = async ({ params }) => {
-  const slug = (params?.slug as string[])!.join(`/`);
+  // unknown case
+  if (!params?.slug) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const slug = !Array.isArray(params.slug) ? params.slug : params.slug.join(`/`);
   const article = allListedWritings.find((doc) => doc!.slug === slug);
 
   if (!article) {
