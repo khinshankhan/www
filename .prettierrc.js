@@ -1,6 +1,7 @@
 module.exports = {
-  trailingComma: `es5`,
+  arrowParens: `always`,
+  printWidth: 100,
   semi: true,
   singleQuote: false,
-  printWidth: 100, // To make code blocks on the website more readable
+  trailingComma: `es5`,
 };

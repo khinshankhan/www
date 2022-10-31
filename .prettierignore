@@ -1,11 +1,7 @@
-.github
 .cache
-*.html
+.next
 build
-coverage
+dist
 node_modules
-package.json
-package-lock.json
 pnpm-*
 public
-yarn.lock

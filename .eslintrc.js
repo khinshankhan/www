@@ -1,7 +1,14 @@
 module.exports = {
   parser: `@typescript-eslint/parser`, // Specifies the ESLint parser
-  plugins: [`@typescript-eslint`, `prettier`, `react-hooks`, `graphql`, `jsx-a11y`],
-  extends: [`airbnb`, `plugin:prettier/recommended`, `plugin:jsx-a11y/recommended`],
+  plugins: [`@typescript-eslint`, `import`, `prettier`, `react-hooks`, `jsx-a11y`],
+  extends: [
+    `airbnb`,
+    `plugin:import/recommended`,
+    `plugin:import/typescript`,
+    `plugin:prettier/recommended`,
+    `plugin:jsx-a11y/recommended`,
+    `next`,
+  ],
   parserOptions: {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: `module`, // Allows for the use of imports
@@ -18,10 +25,6 @@ module.exports = {
     cy: true,
     Cypress: true,
     JSX: true,
-    graphql: true,
-  },
-  settings: {
-    "import/internal-regex": `^anchorage/`,
   },
   rules: {
     // https://eslint.org/docs/rules/
@@ -33,7 +36,7 @@ module.exports = {
     "import/named": `off`, // ts will check for us anyways
     "import/newline-after-import": `error`,
     "import/no-anonymous-default-export": `error`,
-    // 'trust me' -- said no one ever, occasionally toggle this on to check but
+    // NOTE: 'trust me bro' -- said no one ever, occasionally toggle this on to check but
     // it's super expensive to run to by default it'll be off
     "import/no-cycle": `error`,
     "import/no-duplicates": `error`,
@@ -290,39 +293,15 @@ module.exports = {
     "jsx-a11y/scope": `warn`,
     "jsx-a11y/tabindex-no-positive": `warn`,
   },
+
   overrides: [
     {
       // Config-related files
-      files: [`**eslint*.js`, `**lint-staged*.js`, `**jest*.js`],
+      files: [`**eslint*.js`, `**lint-staged*.js`, `**jest*.js`, `next*`],
       rules: {
         "import/no-unused-modules": `off`,
         "@typescript-eslint/no-magic-numbers": `off`,
         "@typescript-eslint/no-var-requires": `off`,
-      },
-    },
-    {
-      // Gatbsy config files
-      files: [`**gatsby-*.tsx`],
-      rules: {
-        "import/no-unused-modules": `off`,
-        "import/prefer-default-export": `off`,
-      },
-    },
-    {
-      // Testing-related files
-      files: [`**/__tests__/**/*`, `**/__mocks__/**/*`, `**.test.*`],
-      rules: {
-        "import/no-unused-modules": `off`,
-        "@typescript-eslint/no-var-requires": `off`,
-      },
-    },
-    {
-      // Barrel files
-      files: [`**index.ts`],
-      rules: {
-        // TODO: come back to this
-        "import/no-unused-modules": `off`,
-        "import/prefer-default-export": `off`,
       },
     },
     {
