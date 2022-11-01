@@ -306,6 +306,13 @@ module.exports = {
       },
     },
     {
+      // barrel files
+      files: [`**index.ts`, `**index.tsx`],
+      rules: {
+        "import/no-unused-modules": `off`,
+      },
+    },
+    {
       // Typescript project files only
       files: [`*.ts`, `*.tsx`],
       rules: {
