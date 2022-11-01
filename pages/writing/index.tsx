@@ -25,7 +25,7 @@ const ArticleCard = (article: Article) => {
 
 const Writing: NextPage<Props> = ({ articles }) => (
   <div>
-    <h1>Posts:</h1>
+    <h1>Articles:</h1>
     <div>
       {articles.map((article) => (
         <ArticleCard key={article.slug} {...article} />

@@ -1,30 +1,44 @@
-import type { Listed, Unlisted } from "contentlayer/generated";
-import { allContextuals, allListeds, allUnlisteds } from "contentlayer/generated";
+import type { Writing, Project } from "contentlayer/generated";
+import { allWritings, allProjects, allPages } from "contentlayer/generated";
 
-// all articles under listed
-export const allListedWritings =
+export const allWritingArticles =
   process.env.NODE_ENV !== `production`
-    ? allListeds
-    : allListeds.filter((doc) => doc.status === `published`);
+    ? allWritings
+    : allWritings.filter((doc) => doc.status === `published`);
 
-// contextual /projects should have listing pages for projects
-// all the projects listings together form listedProjects
-const listedProjects = allContextuals.filter((doc) => doc.slug.startsWith(`/projects`));
-export const allListedProjects =
+export const allProjectArticles =
   process.env.NODE_ENV !== `production`
-    ? listedProjects
-    : listedProjects.filter((doc) => doc.status === `published`);
+    ? allProjects
+    : allProjects.filter((doc) => doc.status === `published`);
+
+export const allListedWritings = [...allWritingArticles, ...allProjectArticles];
+
+export const categories = (() => {
+  // documents that have an article layout but arent contextual are context-able
+  // there may be future cases of contextual being context-able, but not now
+  const docs = [...allListedWritings];
+  const m = new Map<string, (Writing | Project)[]>();
+
+  docs.forEach((doc) =>
+    doc.categories?.forEach((category) => {
+      m.set(category, [...(m.get(category) ?? []), doc]);
+    })
+  );
+
+  return m;
+})();
 
 // used mostly for back button/ breadcrumbs
 type slugContext = { title: string; parentTitle: string; parentSlug: string };
 export const parentLookup = (() => {
+  // base cases should be pages not created from mdx files
   const m = new Map<string, slugContext>([
     [`/`, { title: `Home`, parentTitle: `Home`, parentSlug: `/` }],
     [`/writing`, { title: `Writing`, parentTitle: `Home`, parentSlug: `/` }],
     [`/projects`, { title: `Projects`, parentTitle: `Home`, parentSlug: `/` }],
   ]);
 
-  const docs = [...allContextuals, ...allListeds, ...allUnlisteds].sort((a, b) =>
+  const docs = [...allListedWritings, ...allPages].sort((a, b) =>
     a.slug.localeCompare(b.slug as string)
   );
   docs.forEach((doc) => {
@@ -48,17 +62,15 @@ export const parentLookup = (() => {
   return m;
 })();
 
-export const categories = (() => {
-  // documents that have an article layout but arent contextual are context-able
-  // there may be future cases of contextual being context-able, but not now
-  const articles = [...allListeds, ...allUnlisteds];
-  const m = new Map<string, (Listed | Unlisted)[]>();
-
-  articles.forEach((article) =>
-    article.categories?.forEach((category) => {
-      m.set(category, [...(m.get(category) ?? []), article]);
-    })
-  );
-
-  return m;
-})();
+/* TODO: this will come probably post partiy
+ *
+ * contextual /projects should have listing pages for projects
+ * all the projects listings together form listedProjects
+ * stretch: list how many articles are associated with each listed project(?)
+ *   could be as simple as going through listed projects and looking at parent lookup
+ */
+// const projectContextuals = allContextuals.filter((doc) => doc.slug.startsWith(`/projects`));
+// export const allListedProjects =
+//   process.env.NODE_ENV !== `production`
+//     ? projectContextuals
+//     : projectContextuals.filter((doc) => doc.status === `published`);

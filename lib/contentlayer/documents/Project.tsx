@@ -4,14 +4,15 @@ import { getFields, getComputedFields } from "../utils";
 const fields = getFields({
   subtitle: `A little surprise reading 😊`,
 });
-const computedFields = getComputedFields<"Unlisted">({
-  prefix: `unlisted`,
+const computedFields = getComputedFields<"Project">({
+  prefix: `project`,
+  chopPrefix: false,
 });
 
-export const Unlisted = defineDocumentType(() => ({
-  name: `Unlisted`,
+export const Project = defineDocumentType(() => ({
+  name: `Project`,
   contentType: `mdx`,
-  filePathPattern: `unlisted/**/*.md`,
+  filePathPattern: `project/**/*.md`,
   fields: {
     ...fields,
 

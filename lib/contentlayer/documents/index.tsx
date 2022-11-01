@@ -1,5 +1,4 @@
-export { Listed } from "./Listed";
-export { Unlisted } from "./Unlisted";
-export { Contextual } from "./Contextual";
 export { Page } from "./Page";
+export { Project } from "./Project";
+export { Writing } from "./Writing";
 export * from "./config";

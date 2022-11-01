@@ -1,5 +1,5 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { Listed } from "contentlayer/generated";
+import type { Writing, Project } from "contentlayer/generated";
 import { allListedWritings } from "lib/contentlayer";
 
 export const getStaticPaths = () => {
@@ -14,7 +14,7 @@ export const getStaticPaths = () => {
 };
 
 export const getStaticProps: GetStaticProps<{
-  article: Listed;
+  article: Writing | Project;
 }> = async ({ params }) => {
   // unknown case
   if (!params?.slug) {
