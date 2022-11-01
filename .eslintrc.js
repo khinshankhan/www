@@ -78,7 +78,7 @@ module.exports = {
     "arrow-body-style": [`error`, `as-needed`],
     "consistent-return": `error`,
     "func-names": `off`,
-    indent: [`error`, 2, { SwitchCase: 1 }],
+    indent: [`error`, 2, { SwitchCase: 1, offsetTernaryExpressions: true }],
     "linebreak-style": `off`,
     "no-console": [`warn`, { allow: [`warn`, `error`] }],
     "no-continue": `off`,
@@ -102,7 +102,7 @@ module.exports = {
     "no-underscore-dangle": [
       `error`,
       {
-        allow: [`_active`, `_dark`],
+        allow: [`_raw`, `_active`, `_dark`],
       },
     ],
     "no-unused-expressions": [
@@ -174,7 +174,7 @@ module.exports = {
     "react/display-name": `off`,
     "react/forbid-prop-types": `off`,
     "react/function-component-definition": [
-      `warn`,
+      `off`,
       {
         namedComponents: `arrow-function`,
         unnamedComponents: `arrow-function`,
@@ -300,8 +300,16 @@ module.exports = {
       files: [`**eslint*.js`, `**lint-staged*.js`, `**jest*.js`, `next*`],
       rules: {
         "import/no-unused-modules": `off`,
+        "@typescript-eslint/quotes": `off`,
         "@typescript-eslint/no-magic-numbers": `off`,
         "@typescript-eslint/no-var-requires": `off`,
+      },
+    },
+    {
+      // barrel files
+      files: [`**index.ts`, `**index.tsx`],
+      rules: {
+        "import/no-unused-modules": `off`,
       },
     },
     {
