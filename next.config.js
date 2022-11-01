@@ -6,4 +6,11 @@ const nextConfig = {
   swcMinify: true,
 };
 
-module.exports = withContentlayer(nextConfig);
+const compose = (initial, fns) => fns.reduce((acc, fn) => fn(acc), initial);
+
+module.exports = () => {
+  const plugins = [withContentlayer].filter(Boolean);
+  const config = compose(nextConfig, plugins);
+
+  return config;
+};
