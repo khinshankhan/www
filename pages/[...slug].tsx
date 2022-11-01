@@ -1,9 +1,9 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { Writing, Project } from "contentlayer/generated";
-import { allListedWritings } from "lib/contentlayer";
+import type { Page } from "contentlayer/generated";
+import { allPages } from "contentlayer/generated";
 
 export const getStaticPaths = () => {
-  const paths = allListedWritings.map((p) => ({
+  const paths = allPages.map((p) => ({
     params: { slug: p.slug!.split(`/`) },
   }));
 
@@ -14,7 +14,7 @@ export const getStaticPaths = () => {
 };
 
 export const getStaticProps: GetStaticProps<{
-  article: Writing | Project;
+  page: Page;
 }> = async ({ params }) => {
   // unknown case
   if (!params?.slug) {
@@ -24,9 +24,9 @@ export const getStaticProps: GetStaticProps<{
   }
 
   const slug = !Array.isArray(params.slug) ? params.slug : params.slug.join(`/`);
-  const article = allListedWritings.find((doc) => doc!.slug === slug);
+  const page = allPages.find((doc) => doc!.slug === slug);
 
-  if (!article) {
+  if (!page) {
     return {
       notFound: true,
     };
@@ -34,11 +34,11 @@ export const getStaticProps: GetStaticProps<{
 
   return {
     props: {
-      article,
+      page,
     },
   };
 };
 
-export default function ArticlePage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return <h1>{article.title}</h1>;
+export default function PageView({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
+  return <h1>Page: {page.title}</h1>;
 }
