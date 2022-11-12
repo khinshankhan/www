@@ -1,5 +1,14 @@
 import React, { useEffect } from "react";
-import { useDisclosure, Container, Flex, HStack, Stack } from "@chakra-ui/react";
+import {
+  useDisclosure,
+  Box,
+  Collapse,
+  Container,
+  Flex,
+  HStack,
+  Stack,
+  VStack,
+} from "@chakra-ui/react";
 import { LogoButton } from "components/icons";
 import { ToggleNavbarMenu } from "components/toggles";
 import { useMobile } from "hooks";
@@ -41,7 +50,7 @@ export const Header = () => {
           <LogoButton size={55} />
         </Flex>
         {isMobile ? (
-          <ToggleNavbarMenu isOpen={isOpen} onClick={onToggle} fontSize={40} />
+          <ToggleNavbarMenu isOpen={isOpen} onClick={onToggle} fontSize={35} />
         ) : (
           <HStack
             as="menu"
@@ -56,6 +65,24 @@ export const Header = () => {
           </HStack>
         )}
       </Flex>
+
+      {isMobile && (
+        <Collapse in={isOpen} animateOpacity>
+          <Box
+            borderTop={1}
+            borderBottom={1}
+            borderStyle="solid"
+            borderColor="dividerColor"
+            mt={1}
+            mb={4}
+            p={4}
+          >
+            {/* TODO: replace collapse with an internal version */}
+            <NavbarLinks Stack={VStack} items={pages} />
+            <SettingToggles Stack={Stack} />
+          </Box>
+        </Collapse>
+      )}
     </Container>
   );
 };
