@@ -1,4 +1,5 @@
 import { extendTheme, ThemeOverride } from "@chakra-ui/react";
+import components from "./components";
 import foundations from "./foundations";
 
 const config: ThemeOverride["config"] = {
@@ -10,6 +11,7 @@ const config: ThemeOverride["config"] = {
 
 const theme = extendTheme({
   ...foundations,
+  components,
   config,
 });
 
