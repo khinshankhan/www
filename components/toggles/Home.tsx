@@ -3,13 +3,17 @@ import { IconButton } from "@chakra-ui/react";
 import { Link } from "components/common/Link";
 import type { ILogoProps } from "components/icons/Logo";
 import { Logo } from "components/icons/Logo";
+import {
+  _focus as IconButtonFocusStyles,
+  _hover as IconButtonHoverStyles,
+} from "lib/theme/styles/IconButton";
 
 interface IHomeToggleProps extends ILogoProps {
   size?: number | string;
 }
 
 export const HomeToggle = ({ size = 50, ...props }: IHomeToggleProps) => {
-  const atProps = {
+  const svgAtProps = {
     ".fg": {
       fill: `primary`,
       transform: `translate(-50px,-50px) scale(1.25)`,
@@ -38,8 +42,8 @@ export const HomeToggle = ({ size = 50, ...props }: IHomeToggleProps) => {
         borderStyle: `solid`,
         borderColor: `chakra-body-text`,
         borderRadius: 7,
-        _hover: atProps,
-        _focus: atProps,
+        _focus: { ...svgAtProps, ...IconButtonFocusStyles },
+        _hover: { ...svgAtProps, ...IconButtonHoverStyles },
       }}
     />
   );

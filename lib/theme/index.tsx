@@ -1,7 +1,7 @@
 import { extendTheme, ThemeOverride } from "@chakra-ui/react";
 import components from "./components";
 import foundations from "./foundations";
-import styles from "./styles";
+import styles from "./styles/global";
 
 const config: ThemeOverride["config"] = {
   cssVarPrefix: `ck`,
