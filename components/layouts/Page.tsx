@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import type { FCC } from "lib/types/react";
-import { Header } from "./shared";
+import { Header, Footer } from "./shared";
 
 export interface IPageLayoutProps {
   title: string;
@@ -22,7 +22,7 @@ export const PageLayout: FCC<IPageLayoutProps> = ({ title, subtitle = null, chil
       </Box>
       <Container variant="page">{children}</Container>
     </Flex>
-    <Container variant="page">Footer</Container>
+    <Footer />
   </>
 );
 
