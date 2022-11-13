@@ -1,23 +1,26 @@
 import React, { Fragment, ReactNode } from "react";
-import { Heading, Flex, Link, Text } from "@chakra-ui/react";
-import type { FooterSectionItem } from "contentlayer/generated";
+import type { FlexProps } from "@chakra-ui/react";
+import { Button, Heading, Flex, Link, Text } from "@chakra-ui/react";
+import type { FooterSectionItem, FooterSocialItem } from "contentlayer/generated";
 import { metaConfig } from "contentlayer/generated";
 import type { FCC } from "lib/types/react";
 
-interface ISectionProps {
+interface ISectionProps extends FlexProps {
   items: {
     title: ReactNode;
     link: string;
   }[];
+  innerFlexProps?: FlexProps;
 }
-const Section: FCC<ISectionProps> = ({ items, children }) => (
-  <Flex flexDirection="column" alignItems="flex-start" mb={{ base: 8, lg: 0 }}>
+const Section: FCC<ISectionProps> = ({ items, innerFlexProps = {}, children, ...props }) => (
+  <Flex flexDirection="column" alignItems="flex-start" mb={{ base: 8, lg: 0 }} {...props}>
     {children}
     <Flex
       flexDirection={{ base: `row`, lg: `column` }}
       alignItems="flex-start"
       flexWrap={{ base: `wrap`, lg: `nowrap` }}
       w="100%"
+      {...innerFlexProps}
     >
       {items.map((item) => (
         <Fragment key={item.link}>
@@ -36,8 +39,14 @@ const convertSectionItems = (items: FooterSectionItem[]) =>
     link,
   }));
 
+const convertSocialItems = (items: FooterSocialItem[]) =>
+  items.map(({ title, link }) => ({
+    title: <Text casing="capitalize">{title}</Text>,
+    link,
+  }));
+
 export const Navigation = () => {
-  const { sections } = metaConfig!.footer;
+  const { sections, socials } = metaConfig!.footer;
   return (
     <Flex
       flexDirection={{ base: `column`, lg: `row` }}
@@ -51,6 +60,17 @@ export const Navigation = () => {
           </Heading>
         </Section>
       ))}
+      <Section
+        items={convertSocialItems(socials)}
+        alignItems="center"
+        innerFlexProps={{ alignItems: `center` }}
+      >
+        <Button borderRadius={20} p={{ base: 7, lg: 3 }}>
+          <Heading as="p" variant="h6">
+            Subscribe via RSS Feed
+          </Heading>
+        </Button>
+      </Section>
     </Flex>
   );
 };
