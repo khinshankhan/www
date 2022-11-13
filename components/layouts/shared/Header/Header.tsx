@@ -60,8 +60,9 @@ export const Header = () => {
             direction="row"
             spacing={6}
           >
-            <NavbarLinks Stack={HStack} items={pages} />
-            <SettingToggles Stack={Stack} />
+            <NavbarLinks Stack={HStack} items={pages}>
+              <SettingToggles Stack={Stack} />
+            </NavbarLinks>
           </HStack>
         )}
       </Flex>
@@ -78,8 +79,9 @@ export const Header = () => {
             p={4}
           >
             {/* TODO: replace collapse with an internal version */}
-            <NavbarLinks Stack={VStack} items={pages} />
-            <SettingToggles Stack={Stack} />
+            <NavbarLinks Stack={VStack} items={pages}>
+              <SettingToggles Stack={Stack} />
+            </NavbarLinks>
           </Box>
         </Collapse>
       )}
