@@ -9,8 +9,7 @@ import {
   Stack,
   VStack,
 } from "@chakra-ui/react";
-import { LogoButton } from "components/icons";
-import { ToggleNavbarMenu } from "components/toggles";
+import { HomeToggle, ToggleNavbarMenu } from "components/toggles";
 import { useMobile } from "hooks";
 import NavbarLinks from "./NavbarLinks";
 import SettingToggles from "./SettingsToggles";
@@ -47,7 +46,7 @@ export const Header = () => {
     <Container variant="page">
       <Flex as="nav" id="main-nav" role="navigation" minH="55px" pt="4" pb="2.5" align="center">
         <Flex id="main-logo" flex={1} justify="start">
-          <LogoButton size={55} />
+          <HomeToggle size={isMobile ? `50px` : `55px`} />
         </Flex>
         {isMobile ? (
           <ToggleNavbarMenu isOpen={isOpen} onClick={onToggle} fontSize={35} />
