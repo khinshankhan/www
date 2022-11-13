@@ -1,11 +1,14 @@
-import React, { Fragment } from "react";
+import React, { Fragment, ReactNode } from "react";
 import { Heading, Flex, Link, Text } from "@chakra-ui/react";
 import type { FooterSectionItem } from "contentlayer/generated";
 import { metaConfig } from "contentlayer/generated";
 import type { FCC } from "lib/types/react";
 
 interface ISectionProps {
-  items: FooterSectionItem[];
+  items: {
+    title: ReactNode;
+    link: string;
+  }[];
 }
 const Section: FCC<ISectionProps> = ({ items, children }) => (
   <Flex flexDirection="column" alignItems="flex-start" mb={{ base: 8, lg: 0 }}>
@@ -19,13 +22,19 @@ const Section: FCC<ISectionProps> = ({ items, children }) => (
       {items.map((item) => (
         <Fragment key={item.link}>
           <Link mr={{ base: 2, lg: 0 }} p={1} href={item.link}>
-            <Text>{item.title}</Text>
+            {item.title}
           </Link>
         </Fragment>
       ))}
     </Flex>
   </Flex>
 );
+
+const convertSectionItems = (items: FooterSectionItem[]) =>
+  items.map(({ title, link }) => ({
+    title: <Text>{title}</Text>,
+    link,
+  }));
 
 export const Navigation = () => {
   const { sections } = metaConfig!.footer;
@@ -36,7 +45,7 @@ export const Navigation = () => {
       justifyContent="space-between"
     >
       {sections.map(({ title, items }) => (
-        <Section key={title} items={items}>
+        <Section key={title} items={convertSectionItems(items)}>
           <Heading as="p" variant="h4">
             {title}
           </Heading>

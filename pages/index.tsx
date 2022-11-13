@@ -1,11 +1,12 @@
 import type { NextPage } from "next";
-import { LogoButton } from "components/icons";
+import { HomeToggle, ToggleColorMode } from "components/toggles";
 import { metaConfig } from "contentlayer/generated";
 
 const Home: NextPage = () => (
   <div>
-    <LogoButton size={55} />
+    <HomeToggle size={55} />
     <h1>Hello there.</h1>
+    <ToggleColorMode />
     <p>
       &copy; {metaConfig.startYear}+, {metaConfig.fullname}. All rights reserved.
     </p>
