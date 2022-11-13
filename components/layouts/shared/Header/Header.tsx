@@ -69,15 +69,7 @@ export const Header = () => {
 
       {isMobile && (
         <Collapse in={isOpen} animateOpacity>
-          <Box
-            borderTop={1}
-            borderBottom={1}
-            borderStyle="solid"
-            borderColor="dividerColor"
-            mt={1}
-            mb={4}
-            p={4}
-          >
+          <Box borderTop={1} borderBottom={1} borderStyle="solid" mt={1} mb={4} p={4}>
             {/* TODO: replace collapse with an internal version */}
             <NavbarLinks Stack={VStack} items={pages}>
               <SettingToggles Stack={Stack} />
