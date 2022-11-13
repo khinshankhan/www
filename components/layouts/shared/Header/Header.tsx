@@ -43,40 +43,42 @@ export const Header = () => {
   }, [isMobile, onClose]);
 
   return (
-    <Container variant="page">
-      <Flex as="nav" id="main-nav" role="navigation" minH="55px" pt="4" pb="2.5" align="center">
-        <Flex id="main-logo" flex={1} justify="start">
-          <HomeToggle size={isMobile ? `50px` : `55px`} />
+    <Box className="sharedNavBg" w="100%" top={0} pos="sticky" zIndex="sticky">
+      <Container variant="page">
+        <Flex as="nav" id="main-nav" role="navigation" minH="55px" pt="4" pb="2.5" align="center">
+          <Flex id="main-logo" flex={1} justify="start">
+            <HomeToggle size={isMobile ? `50px` : `55px`} />
+          </Flex>
+          {isMobile ? (
+            <ToggleNavbarMenu isOpen={isOpen} onClick={onToggle} fontSize={35} />
+          ) : (
+            <HStack
+              as="menu"
+              id="navbar-content"
+              flex={0}
+              justify="flex-end"
+              direction="row"
+              spacing={6}
+            >
+              <NavbarLinks Stack={HStack} items={pages}>
+                <SettingToggles Stack={Stack} />
+              </NavbarLinks>
+            </HStack>
+          )}
         </Flex>
-        {isMobile ? (
-          <ToggleNavbarMenu isOpen={isOpen} onClick={onToggle} fontSize={35} />
-        ) : (
-          <HStack
-            as="menu"
-            id="navbar-content"
-            flex={0}
-            justify="flex-end"
-            direction="row"
-            spacing={6}
-          >
-            <NavbarLinks Stack={HStack} items={pages}>
-              <SettingToggles Stack={Stack} />
-            </NavbarLinks>
-          </HStack>
-        )}
-      </Flex>
 
-      {isMobile && (
-        <Collapse in={isOpen} animateOpacity>
-          <Box borderTop={1} borderBottom={1} borderStyle="solid" mt={1} mb={4} p={4}>
-            {/* TODO: replace collapse with an internal version */}
-            <NavbarLinks Stack={VStack} items={pages}>
-              <SettingToggles Stack={Stack} />
-            </NavbarLinks>
-          </Box>
-        </Collapse>
-      )}
-    </Container>
+        {isMobile && (
+          <Collapse in={isOpen} animateOpacity>
+            <Box borderTop={1} borderBottom={1} borderStyle="solid" mt={1} mb={4} p={4}>
+              {/* TODO: replace collapse with an internal version */}
+              <NavbarLinks Stack={VStack} items={pages}>
+                <SettingToggles Stack={Stack} />
+              </NavbarLinks>
+            </Box>
+          </Collapse>
+        )}
+      </Container>
+    </Box>
   );
 };
 
