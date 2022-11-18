@@ -1,5 +1,4 @@
 import React from "react";
-import { IconButton } from "@chakra-ui/react";
 import { Link } from "components/common/Link";
 import type { ILogoProps } from "components/icons/Logo";
 import { Logo } from "components/icons/Logo";
@@ -22,21 +21,9 @@ export const HomeToggle = ({ size = 50, ...props }: IHomeToggleProps) => {
   };
 
   return (
-    <IconButton
-      as={Link}
+    <Link
       href="/"
       aria-label={`Navigate to homepage`}
-      variant="ghost"
-      icon={
-        <Logo
-          width={size}
-          height={size}
-          bgColor="transparent"
-          fgColor="chakra-body-text"
-          borderColor="transparent"
-          {...props}
-        />
-      }
       chakraProps={{
         border: 2.75,
         borderStyle: `solid`,
@@ -45,7 +32,16 @@ export const HomeToggle = ({ size = 50, ...props }: IHomeToggleProps) => {
         _focus: { ...svgAtProps, ...IconButtonFocusStyles },
         _hover: { ...svgAtProps, ...IconButtonHoverStyles },
       }}
-    />
+    >
+      <Logo
+        width={size}
+        height={size}
+        bgColor="transparent"
+        fgColor="chakra-body-text"
+        borderColor="transparent"
+        {...props}
+      />
+    </Link>
   );
 };
 
