@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@babel/core': ^7.0.0
   '@chakra-ui/react': ^2.3.7
+  '@chakra-ui/theme-tools': ^2.0.12
   '@emotion/react': ^11
   '@emotion/styled': ^11
   '@testing-library/jest-dom': ^5.16.5
@@ -38,6 +39,7 @@ specifiers:
 
 dependencies:
   '@chakra-ui/react': 2.3.7_bcbhrns62chvt3cdxy6p73cevy
+  '@chakra-ui/theme-tools': 2.0.12
   '@emotion/react': 11.10.5_bjroym7kxlcs2vvwnej4p3gzwu
   '@emotion/styled': 11.10.5_4ogoqwwuwamwrnyxqdf7jrdstm
   contentlayer: 0.2.8
@@ -1320,6 +1322,15 @@ packages:
       '@chakra-ui/form-control': 2.0.11_5t7bkk6q574vskeot6qtu5gahi
       '@chakra-ui/system': 2.3.1_dovxhg2tvkkxkdnqyoum6wzcxm
       react: 18.2.0
+    dev: false
+
+  /@chakra-ui/theme-tools/2.0.12:
+    resolution: {integrity: sha512-mnMlKSmXkCjHUJsKWmJbgBTGF2vnLaMLv1ihkBn5eQcCubMQrBLTiMAEFl5pZdzuHItU6QdnLGA10smcXbNl0g==}
+    peerDependencies:
+      '@chakra-ui/styled-system': '>=2.0.0'
+    dependencies:
+      '@chakra-ui/anatomy': 2.0.7
+      '@ctrl/tinycolor': 3.4.1
     dev: false
 
   /@chakra-ui/theme-tools/2.0.12_kzevwk2hxgy6fnrjqv25jdmqp4:

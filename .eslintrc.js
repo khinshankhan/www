@@ -102,7 +102,7 @@ module.exports = {
     "no-underscore-dangle": [
       `error`,
       {
-        allow: [`_raw`, `_active`, `_dark`],
+        allow: [`_raw`, `_active`, `_dark`, `_light`, `_focus`, `_hover`],
       },
     ],
     "no-unused-expressions": [
