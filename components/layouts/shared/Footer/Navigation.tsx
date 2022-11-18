@@ -47,30 +47,33 @@ const convertSocialItems = (items: FooterSocialItem[]) =>
 
 export const Navigation = () => {
   const { sections, socials } = metaConfig!.footer;
+
   return (
     <Flex
       flexDirection={{ base: `column`, lg: `row` }}
       flexWrap="wrap"
       justifyContent="space-between"
     >
-      {sections.map(({ title, items }) => (
-        <Section key={title} items={convertSectionItems(items)}>
-          <Heading as="p" variant="h4">
-            {title}
-          </Heading>
-        </Section>
-      ))}
       <Section
         items={convertSocialItems(socials)}
         alignItems="center"
         innerFlexProps={{ alignItems: `center` }}
+        order={{ base: 0, lg: sections.length }}
       >
-        <Button borderRadius={20} p={{ base: 7, lg: 3 }}>
+        <Button borderRadius={20} p={{ base: 7, lg: 3 }} mb={{ base: 3, lg: 0 }}>
           <Heading as="p" variant="h6">
             Subscribe via RSS Feed
           </Heading>
         </Button>
       </Section>
+
+      {sections.map(({ title, items }, i) => (
+        <Section key={title} items={convertSectionItems(items)} order={{ base: i + 1, lg: i }}>
+          <Heading as="p" variant="h4">
+            {title}
+          </Heading>
+        </Section>
+      ))}
     </Flex>
   );
 };
