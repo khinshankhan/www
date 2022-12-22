@@ -1,9 +1,0 @@
-.cache
-.next
-build
-dist
-node_modules
-package.json
-pnpm-*
-public
-.contentlayer
