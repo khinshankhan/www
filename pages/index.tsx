@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { styled } from "lib/theme";
-import ToggleTheme from "components/toggles/theme";
+import ToggleTheme from "components/toggle/theme";
 
 const Box = styled("div", {});
 
