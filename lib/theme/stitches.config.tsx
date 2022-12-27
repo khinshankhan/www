@@ -1,22 +1,10 @@
 import { createStitches } from "@stitches/react";
 import { reset } from "./styles/reset";
-import typography from "./foundations/typography";
+import foundations from "./foundations";
+import {colors, darkColors} from "./foundations/colors"
 
 export const { styled, getCssText, createTheme, globalCss } = createStitches({
   prefix: "anchorage",
-  theme: {
-    colors: {
-      text: "black",
-      background: "white",
-
-      placeholder: "black",
-      border: "black",
-
-      logoBg: "transparent",
-      logoBorder: "$border",
-    },
-    ...typography,
-  },
   media: {
     xs: "(min-width: 392px)",
     sm: "(min-width: 640px)",
@@ -29,16 +17,38 @@ export const { styled, getCssText, createTheme, globalCss } = createStitches({
     dark: "(prefers-color-scheme: dark)",
     light: "(prefers-color-scheme: light)",
   },
+  theme: {
+    ...foundations,
+    colors: {
+      ...colors,
+      text: "black",
+      background: "$mauve2",
+
+      placeholder: "black",
+      border: "black",
+
+      logoFg: "$plumblossom",
+      logoBg: "transparent",
+      logoBorder: "$logoFg",
+
+      navStartBg: "rgba(237, 242, 247, 0.99)",
+    },
+  },
 });
 
 export const darkTheme = createTheme("dark", {
   colors: {
+    ...darkColors,
     text: "white",
-    background: "black",
+    background: "rgb(23, 25, 35)",
 
     placeholder: "white",
     border: "white",
-  },
+
+    logoFg: "$sakurarose",
+
+    navStartBg: "rgba(14, 14, 26, 0.99)",
+    },
 });
 
 export const GlobalStyles = globalCss({
@@ -60,6 +70,14 @@ export const GlobalStyles = globalCss({
     "*, *::before, &::after": {
       borderColor: `$color$border`,
       wordWrap: `break-word`,
+    },
+
+    ".sharedNavBg": {
+      // HACK: px just works on breakpoints
+      backgroundImage: `linear-gradient($navStartBg, $background 275px)`,
+      backgroundSize: `cover`,
+      backgroundPosition: `center`,
+      backgroundAttachment: `fixed`,
     },
   },
 });
