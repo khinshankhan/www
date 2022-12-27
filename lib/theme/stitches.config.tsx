@@ -1,5 +1,6 @@
 import { createStitches } from "@stitches/react";
 import { reset } from "./styles/reset";
+import typography from "./foundations/typography";
 
 export const { styled, getCssText, createTheme, globalCss } = createStitches({
   prefix: "anchorage",
@@ -11,6 +12,7 @@ export const { styled, getCssText, createTheme, globalCss } = createStitches({
       placeholder: "black",
       border: "black",
     },
+    ...typography,
   },
 });
 
@@ -32,6 +34,11 @@ export const GlobalStyles = globalCss({
   body: {
     background: "$background",
     color: "$text",
+
+    fontFamily: "$body",
+    lineHeight: "$base",
+    fontSize: "$lg", // 18px
+
     "*::placeholder": {
       color: `$color$placeholder`,
     },
