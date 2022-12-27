@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@next/font": "13.1.0",
+    "@radix-ui/colors": "^0.1.8",
+    "@radix-ui/react-icons": "^1.1.1",
     "@stitches/react": "^1.2.8",
     "@types/node": "18.11.17",
     "@types/react": "18.0.26",

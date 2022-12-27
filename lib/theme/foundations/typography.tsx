@@ -43,7 +43,6 @@ const fonts = {
   body: `Mona Sans`,
 };
 
-
 // https://type-scale.com/
 // 1.250 Major Third Type Scale, base 16 px
 const fontSizes = {

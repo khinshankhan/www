@@ -11,8 +11,23 @@ export const { styled, getCssText, createTheme, globalCss } = createStitches({
 
       placeholder: "black",
       border: "black",
+
+      logoBg: "transparent",
+      logoBorder: "$border",
     },
     ...typography,
+  },
+  media: {
+    xs: "(min-width: 392px)",
+    sm: "(min-width: 640px)",
+    md: "(min-width: 768px)",
+    lg: "(min-width: 1024px)",
+    xl: "(min-width: 1280px)",
+    "2xl": "(min-width: 1536px)",
+    motion: "(prefers-reduced-motion)",
+    hover: "(any-hover: hover)",
+    dark: "(prefers-color-scheme: dark)",
+    light: "(prefers-color-scheme: light)",
   },
 });
 
