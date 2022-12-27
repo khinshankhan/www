@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
 
+// TODO: move state to react context
 export const ToggleTheme = () => {
   const [mounted, setMounted] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
@@ -9,13 +11,13 @@ export const ToggleTheme = () => {
 
   if (!mounted) return null;
 
-  const toggleTheme = () => {
-    const targetTheme = resolvedTheme === "light" ? "dark" : "light";
+  const isLight = resolvedTheme === `light`;
+  const oppositeTheme = isLight ? `dark` : `light`;
+  const ColorIcon = isLight ? MoonIcon : SunIcon;
 
-    setTheme(targetTheme);
-  };
+  const toggleTheme = () => setTheme(oppositeTheme);
 
-  return <button onClick={toggleTheme}>Switch theme</button>;
+  return <ColorIcon aria-label={`Switch to ${oppositeTheme} mode`} onClick={toggleTheme} />;
 };
 
 export default ToggleTheme;
