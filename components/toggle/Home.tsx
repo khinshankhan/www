@@ -24,7 +24,7 @@ const LogoLink = styled(Link, {
       stroke: "purple",
     },
   },
-})
+});
 
 export const HomeToggle = ({ size = 50, ...props }: IHomeToggleProps) => {
   return (

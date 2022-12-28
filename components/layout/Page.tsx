@@ -32,7 +32,9 @@ export const PageLayout: FCC = ({ children }) => {
         <Box>hello there</Box>
       </Box>
 
-      <Main id="content" className="page-container">{children}</Main>
+      <Main id="content" className="page-container">
+        {children}
+      </Main>
     </Fragment>
   );
 };
