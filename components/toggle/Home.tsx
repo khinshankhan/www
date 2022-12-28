@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { css } from "lib/theme";
+import { styled } from "lib/theme";
 import type { ILogoProps } from "components/icon/Logo";
 import Logo from "components/icon/Logo";
 
@@ -9,7 +9,7 @@ interface IHomeToggleProps extends ILogoProps {
 }
 
 // TODO: replace purple with theme primary
-const svgAt = css({
+const LogoLink = styled(Link, {
   "&:focus, &:focus-visible, &:hover": {
     ".fg": {
       transform: `translate(-50px,-50px) scale(1.25)`,
@@ -24,11 +24,11 @@ const svgAt = css({
       stroke: "purple",
     },
   },
-});
+})
 
 export const HomeToggle = ({ size = 50, ...props }: IHomeToggleProps) => {
   return (
-    <Link href="/" className={svgAt()} aria-label={`Navigate to homepage`}>
+    <LogoLink href="/" aria-label={`Navigate to homepage`}>
       <Logo
         width={size}
         height={size}
@@ -37,7 +37,7 @@ export const HomeToggle = ({ size = 50, ...props }: IHomeToggleProps) => {
         borderColor="var(--anchorage-colors-logoBorder)"
         {...props}
       />
-    </Link>
+    </LogoLink>
   );
 };
 

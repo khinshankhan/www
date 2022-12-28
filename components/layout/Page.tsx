@@ -1,3 +1,4 @@
+import type { FCC } from "types/react";
 import React, { Fragment } from "react";
 import { styled } from "lib/theme";
 import { Box } from "lib/theme/components";
@@ -5,7 +6,7 @@ import Header from "components/layout/Header";
 
 const Main = styled("main");
 
-export function PageLayout({ children }) {
+export const PageLayout: FCC = ({ children }) => {
   return (
     <Fragment>
       <Header />
@@ -31,9 +32,9 @@ export function PageLayout({ children }) {
         <Box>hello there</Box>
       </Box>
 
-      <Main className="page-container">{children}</Main>
+      <Main id="content" className="page-container">{children}</Main>
     </Fragment>
   );
-}
+};
 
 export default PageLayout;
