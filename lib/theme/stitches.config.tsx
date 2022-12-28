@@ -72,7 +72,7 @@ export const GlobalStyles = globalCss({
       wordWrap: `break-word`,
     },
 
-    ".sharedNavBg": {
+    ".shared-nav-bg": {
       // HACK: px just works on breakpoints
       backgroundImage: `linear-gradient($navStartBg, $background 275px)`,
       backgroundSize: `cover`,
