@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { styled } from "lib/theme";
-import {HomeToggle, ToggleTheme} from "components/toggle"
+import { HomeToggle, ToggleTheme } from "components/toggle";
 
 const links = [
   { title: "About", to: "/about" },
