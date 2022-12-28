@@ -1,8 +1,6 @@
 import React, { Fragment } from "react";
-import { styled } from "lib/theme";
+import { Box } from "lib/theme/components";
 import ToggleTheme from "components/toggle/theme";
-
-const Box = styled("div", {});
 
 export default function Home() {
   return (
