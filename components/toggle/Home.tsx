@@ -10,29 +10,25 @@ interface IHomeToggleProps extends ILogoProps {
 
 // TODO: replace purple with theme primary
 const svgAt = css({
-  "&:focus, &:focus-visible, &:hover":{
+  "&:focus, &:focus-visible, &:hover": {
     ".fg": {
       transform: `translate(-50px,-50px) scale(1.25)`,
     },
     ".bg": {
-      fill: "rgba(0, 0, 0, 0.12)"
+      fill: "rgba(0, 0, 0, 0.12)",
     },
 
     border: "none",
     outline: "none",
     ".border": {
-      stroke: "purple"
+      stroke: "purple",
     },
-  }
-})
+  },
+});
 
 export const HomeToggle = ({ size = 50, ...props }: IHomeToggleProps) => {
   return (
-    <Link
-      href="/"
-      className={svgAt()}
-      aria-label={`Navigate to homepage`}
-    >
+    <Link href="/" className={svgAt()} aria-label={`Navigate to homepage`}>
       <Logo
         width={size}
         height={size}

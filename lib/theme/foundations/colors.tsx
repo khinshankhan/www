@@ -16,4 +16,4 @@ export const colors = {
 // try to keep shared colors within colors
 export const darkColors = {
   ...mauveDark,
-}
+};

@@ -1,7 +1,7 @@
 import { createStitches } from "@stitches/react";
 import { reset } from "./styles/reset";
 import foundations from "./foundations";
-import {colors, darkColors} from "./foundations/colors"
+import { colors, darkColors } from "./foundations/colors";
 
 export const { styled, css, getCssText, createTheme, globalCss } = createStitches({
   prefix: "anchorage",
@@ -48,7 +48,7 @@ export const darkTheme = createTheme("dark", {
     logoFg: "$sakurarose",
 
     navStartBg: "rgba(14, 14, 26, 0.99)",
-    },
+  },
 });
 
 export const GlobalStyles = globalCss({
@@ -85,11 +85,11 @@ export const GlobalStyles = globalCss({
         paddingLeft: "1.5rem",
         paddingRight: "1.5rem",
       },
-      "@lg":{
-        maxWidth: "1024px"
+      "@lg": {
+        maxWidth: "1024px",
       },
-      "@2xl":{
-        maxWidth: "1325px"
+      "@2xl": {
+        maxWidth: "1325px",
       },
     },
     ".shared-nav-bg": {
