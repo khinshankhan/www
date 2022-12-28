@@ -3,7 +3,7 @@ import { reset } from "./styles/reset";
 import foundations from "./foundations";
 import {colors, darkColors} from "./foundations/colors"
 
-export const { styled, getCssText, createTheme, globalCss } = createStitches({
+export const { styled, css, getCssText, createTheme, globalCss } = createStitches({
   prefix: "anchorage",
   media: {
     xs: "(min-width: 392px)",

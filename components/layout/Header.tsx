@@ -1,8 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { styled } from "lib/theme";
-import ToggleTheme from "components/toggle/theme";
-import Logo from "components/icon/Logo";
+import {HomeToggle, ToggleTheme} from "components/toggle"
 
 const links = [
   { title: "About", to: "/about" },
@@ -54,15 +53,7 @@ export default function Header() {
   return (
     <SemanticHeader role="navigation" className="shared-nav-bg">
       <Nav className="page-container">
-        <Link href="/">
-          <Logo
-            height={logoSize}
-            width={logoSize}
-            fgColor="var(--anchorage-colors-logoFg)"
-            bgColor="var(--anchorage-colors-logoBg)"
-            borderColor="var(--anchorage-colors-logoBorder)"
-          />
-        </Link>
+        <HomeToggle size={logoSize} />
         <NavbarMenu>
           <Ul>
             {links.map((link) => (
