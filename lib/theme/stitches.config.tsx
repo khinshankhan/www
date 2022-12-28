@@ -65,19 +65,39 @@ export const GlobalStyles = globalCss({
     fontSize: "$lg", // 18px
 
     "*::placeholder": {
-      color: `$color$placeholder`,
+      color: "$color$placeholder",
     },
     "*, *::before, &::after": {
-      borderColor: `$color$border`,
-      wordWrap: `break-word`,
+      borderColor: "$color$border",
+      wordWrap: "break-word",
     },
 
+    ".page-container": {
+      width: "100%",
+      marginLeft: "auto",
+      marginRight: "auto",
+
+      maxWidth: "95%",
+      paddingLeft: "1rem",
+      paddingRight: "1rem",
+      "@sm": {
+        maxWidth: "90%",
+        paddingLeft: "1.5rem",
+        paddingRight: "1.5rem",
+      },
+      "@lg":{
+        maxWidth: "1024px"
+      },
+      "@2xl":{
+        maxWidth: "1325px"
+      },
+    },
     ".shared-nav-bg": {
       // HACK: px just works on breakpoints
-      backgroundImage: `linear-gradient($navStartBg, $background 275px)`,
-      backgroundSize: `cover`,
-      backgroundPosition: `center`,
-      backgroundAttachment: `fixed`,
+      backgroundImage: "linear-gradient($navStartBg, $background 275px)",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundAttachment: "fixed",
     },
   },
 });

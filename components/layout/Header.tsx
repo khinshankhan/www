@@ -25,8 +25,6 @@ const Nav = styled("nav", {
   minHeight: "55px",
   paddingTop: "16px",
   paddingBottom: "10px",
-  marginLeft: "16px",
-  marginRight: "16px",
 
   display: "flex",
   direction: "row",
@@ -55,7 +53,7 @@ const logoSize = `50px`;
 export default function Header() {
   return (
     <SemanticHeader role="navigation" className="shared-nav-bg">
-      <Nav>
+      <Nav className="page-container">
         <Link href="/">
           <Logo
             height={logoSize}
