@@ -44,7 +44,6 @@ const Ul = styled("ul", {
 const Li = styled("li", {
   display: "inline-block",
   margin: "16px",
-  fontFamily: "$heading",
 });
 
 interface IHeaderProps {
@@ -60,7 +59,7 @@ export default function Header({ className = "shared-nav-bg", logoSize = `50px` 
           <Ul>
             {links.map((link) => (
               <Li key={link.to}>
-                <Link href={link.to}>{link.title}</Link>
+                <Link className="main-nav" href={link.to}>{link.title}</Link>
               </Li>
             ))}
           </Ul>

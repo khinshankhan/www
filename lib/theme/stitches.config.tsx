@@ -1,5 +1,6 @@
 import { createStitches } from "@stitches/react";
 import { reset } from "./styles/reset";
+import { typography as typographyStyles } from "./styles/typography";
 import foundations from "./foundations";
 import { colors, darkColors } from "./foundations/colors";
 
@@ -63,6 +64,12 @@ export const GlobalStyles = globalCss({
     fontFamily: "$body",
     lineHeight: "$base",
     fontSize: "$lg", // 18px
+    "@lg": {
+      fontSize: "1.3125rem", // 21px
+    },
+    "@2xl": {
+      fontSize: "1.43775rem", // ~23px, avg 21px and $xl
+    },
 
     "*::placeholder": {
       color: "$color$placeholder",
@@ -72,6 +79,7 @@ export const GlobalStyles = globalCss({
       wordWrap: "break-word",
     },
 
+    ...typographyStyles,
     ".page-container": {
       width: "100%",
       marginLeft: "auto",
