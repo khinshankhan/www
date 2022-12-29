@@ -1,7 +1,7 @@
 import type { FCC } from "types/react";
 import React, { Fragment } from "react";
 import { styled } from "lib/theme";
-import { Box } from "lib/theme/components";
+import { Box, Heading } from "lib/theme/components";
 import Header from "components/layout/Header";
 
 const Main = styled("main");
@@ -21,14 +21,7 @@ export const PageLayout: FCC = ({ children }) => {
           textAlign: "center",
         }}
       >
-        <Box
-          css={{
-            fontFamily: "$title",
-            paddingBottom: "24px",
-          }}
-        >
-          mhm yes
-        </Box>
+        <Heading.h1 css={{ paddingBottom: "24px" }}>mhm yes</Heading.h1>
         <Box>hello there</Box>
       </Box>
 
