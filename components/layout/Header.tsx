@@ -47,11 +47,13 @@ const Li = styled("li", {
   fontFamily: "$heading",
 });
 
-const logoSize = `50px`;
-
-export default function Header() {
+interface IHeaderProps {
+  className?: string;
+  logoSize?: string;
+}
+export default function Header({ className = "shared-nav-bg", logoSize = `50px` }: IHeaderProps) {
   return (
-    <SemanticHeader role="navigation" className="shared-nav-bg">
+    <SemanticHeader role="navigation" className={className}>
       <Nav className="page-container">
         <HomeToggle size={logoSize} />
         <NavbarMenu>
