@@ -1,6 +1,5 @@
 import { createStitches } from "@stitches/react";
-import { reset } from "./styles/reset";
-import { typography as typographyStyles } from "./styles/typography";
+import { resetStyles, bgStyles, containerStyles, typographyStyles } from "./styles";
 import foundations from "./foundations";
 import { colors, darkColors } from "./foundations/colors";
 
@@ -54,7 +53,7 @@ export const darkTheme = createTheme("dark", {
 
 export const GlobalStyles = globalCss({
   // get rid of browser default, leaving everything unstyled
-  ...reset,
+  ...resetStyles,
 
   // apply website styles sanely
   body: {
@@ -79,33 +78,8 @@ export const GlobalStyles = globalCss({
       wordWrap: "break-word",
     },
 
+    ...bgStyles,
+    ...containerStyles,
     ...typographyStyles,
-    ".page-container": {
-      width: "100%",
-      marginLeft: "auto",
-      marginRight: "auto",
-
-      maxWidth: "95%",
-      paddingLeft: "1rem",
-      paddingRight: "1rem",
-      "@sm": {
-        maxWidth: "90%",
-        paddingLeft: "1.5rem",
-        paddingRight: "1.5rem",
-      },
-      "@lg": {
-        maxWidth: "1024px",
-      },
-      "@2xl": {
-        maxWidth: "1325px",
-      },
-    },
-    ".shared-nav-bg": {
-      // HACK: px just works on breakpoints
-      backgroundImage: "linear-gradient($navStartBg, $background 275px)",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundAttachment: "fixed",
-    },
   },
 });

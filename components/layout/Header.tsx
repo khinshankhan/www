@@ -59,7 +59,9 @@ export default function Header({ className = "shared-nav-bg", logoSize = `50px` 
           <Ul>
             {links.map((link) => (
               <Li key={link.to}>
-                <Link className="main-nav" href={link.to}>{link.title}</Link>
+                <Link className="main-nav" href={link.to}>
+                  {link.title}
+                </Link>
               </Li>
             ))}
           </Ul>

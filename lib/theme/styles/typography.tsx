@@ -1,13 +1,13 @@
-export const typography = {
+export const typographyStyles = {
   ".h1": {
     fontFamily: "$heading",
     fontWeight: "$bold",
     letterSpacing: "$widest",
     fontSize: "$3xl",
-    "@sm":{
+    "@sm": {
       fontSize: "$4xl",
     },
-    "@2xl":{
+    "@2xl": {
       fontSize: "$5xl",
     },
   },
@@ -16,10 +16,10 @@ export const typography = {
     fontWeight: "$semibold",
     letterSpacing: "$widest",
     fontSize: "$2xl",
-    "@sm":{
+    "@sm": {
       fontSize: "$3xl",
     },
-    "@2xl":{
+    "@2xl": {
       fontSize: "$4xl",
     },
   },
@@ -28,10 +28,10 @@ export const typography = {
     fontWeight: "$semibold",
     letterSpacing: "$wider",
     fontSize: "$xl",
-    "@sm":{
+    "@sm": {
       fontSize: "$2xl",
     },
-    "@2xl":{
+    "@2xl": {
       fontSize: "$3xl",
     },
   },
@@ -40,10 +40,10 @@ export const typography = {
     fontWeight: "$semibold",
     letterSpacing: "$wider",
     fontSize: "$lg",
-    "@sm":{
+    "@sm": {
       fontSize: "$xl",
     },
-    "@2xl":{
+    "@2xl": {
       fontSize: "$2xl",
     },
   },
@@ -52,10 +52,10 @@ export const typography = {
     fontWeight: "$semibold",
     letterSpacing: "$wider",
     fontSize: "$md",
-    "@sm":{
+    "@sm": {
       fontSize: "$lg",
     },
-    "@2xl":{
+    "@2xl": {
       fontSize: "$xl",
     },
   },
@@ -64,10 +64,10 @@ export const typography = {
     fontWeight: "$semibold",
     letterSpacing: "$wider",
     fontSize: "$sm",
-    "@sm":{
+    "@sm": {
       fontSize: "$md",
     },
-    "@2xl":{
+    "@2xl": {
       fontSize: "$lg",
     },
   },
@@ -77,11 +77,11 @@ export const typography = {
     fontWeight: "$medium",
     letterSpacing: "$wider",
     fontSize: "$lg",
-    "@lg":{
+    "@lg": {
       fontSize: "1.344rem", // avg lg and xl
     },
     textTransform: "uppercase",
   },
-}
+};
 
-export default typography
+export default typographyStyles;
