@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { styled } from "lib/theme";
+import { Flex } from "lib/theme/components";
 import { HomeToggle, ToggleTheme } from "components/toggle";
 
 const links = [
@@ -31,20 +32,36 @@ const Nav = styled("nav", {
   alignItems: "center",
 });
 
-const NavbarMenu = styled("menu", {
-  display: "flex",
-  direction: "row",
-  justifyContent: "space-between",
-  alignItems: "flex-end",
-});
-
-const Ul = styled("ul", {
-  minHeight: "55px",
-});
 const Li = styled("li", {
   display: "inline-block",
   margin: "16px",
+  textAlign: "center",
 });
+
+const NavbarMenu = ({ mobile }: { mobile: boolean }) => (
+  <Flex
+    as="menu"
+    flexDirection={mobile ? "column" : "row"}
+    justifyContent={mobile ? "center" : "space-between"}
+    alignItems={mobile ? "center" : "flex-end"}
+  >
+    <Flex as="ul" flexDirection={mobile ? "column" : "row"}>
+      {links.map((link) => (
+        <Li key={link.to}>
+          <Link className="main-nav" href={link.to}>
+            {link.title}
+          </Link>
+        </Li>
+      ))}
+    </Flex>
+
+    <Flex as="ul" flexDirection="row" alignItems={mobile ? "center" : "flex-end"}>
+      <Li>
+        <ToggleTheme />
+      </Li>
+    </Flex>
+  </Flex>
+);
 
 interface IHeaderProps {
   className?: string;
@@ -55,23 +72,7 @@ export default function Header({ className = "shared-nav-bg", logoSize = `50px` 
     <SemanticHeader role="navigation" className={className}>
       <Nav className="page-container">
         <HomeToggle size={logoSize} />
-        <NavbarMenu>
-          <Ul>
-            {links.map((link) => (
-              <Li key={link.to}>
-                <Link className="main-nav" href={link.to}>
-                  {link.title}
-                </Link>
-              </Li>
-            ))}
-          </Ul>
-
-          <Ul>
-            <Li>
-              <ToggleTheme />
-            </Li>
-          </Ul>
-        </NavbarMenu>
+        <NavbarMenu mobile={false} />
       </Nav>
     </SemanticHeader>
   );
