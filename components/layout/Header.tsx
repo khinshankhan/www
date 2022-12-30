@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
+import { useMobile, useDisclosure } from "hooks";
 import { styled } from "lib/theme";
 import { Flex } from "lib/theme/components";
-import { HomeToggle, ToggleTheme } from "components/toggle";
+import { ToggleHome, ToggleTheme, ToggleNavbarMenu } from "components/toggle";
 
 const links = [
   { title: "About", to: "/about" },
@@ -68,12 +69,21 @@ interface IHeaderProps {
   logoSize?: string;
 }
 export default function Header({ className = "shared-nav-bg", logoSize = `50px` }: IHeaderProps) {
+  const { isMobile } = useMobile();
+  const { isOpen, onToggle, onClose } = useDisclosure({ defaultIsOpen: false });
+
+  useEffect(() => {
+    onClose();
+  }, [isMobile]);
+
   return (
     <SemanticHeader role="navigation" className={className}>
       <Nav className="page-container">
-        <HomeToggle size={logoSize} />
-        <NavbarMenu mobile={false} />
+        <ToggleHome size={logoSize} />
+        {!isMobile && <NavbarMenu mobile={false} />}
+        {isMobile && <ToggleNavbarMenu isOpen={isOpen} onClick={onToggle} />}
       </Nav>
+      {isOpen && <NavbarMenu mobile={true} />}
     </SemanticHeader>
   );
 }

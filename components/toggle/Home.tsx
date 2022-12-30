@@ -26,7 +26,7 @@ const LogoLink = styled(Link, {
   },
 });
 
-export const HomeToggle = ({ size = 50, ...props }: IHomeToggleProps) => {
+export const ToggleHome = ({ size = 50, ...props }: IHomeToggleProps) => {
   return (
     <LogoLink href="/" aria-label={`Navigate to homepage`}>
       <Logo
@@ -41,4 +41,4 @@ export const HomeToggle = ({ size = 50, ...props }: IHomeToggleProps) => {
   );
 };
 
-export default HomeToggle;
+export default ToggleHome;
