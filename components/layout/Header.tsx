@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useMobile, useDisclosure } from "hooks";
 import { styled } from "lib/theme";
@@ -68,7 +68,7 @@ interface IHeaderProps {
   className?: string;
   logoSize?: string;
 }
-export default function Header({ className = "shared-nav-bg", logoSize = `50px` }: IHeaderProps) {
+export function Header({ className = "shared-nav-bg", logoSize = `50px` }: IHeaderProps) {
   const { isMobile } = useMobile();
   const { isOpen, onToggle, onClose } = useDisclosure({ defaultIsOpen: false });
 
@@ -86,4 +86,31 @@ export default function Header({ className = "shared-nav-bg", logoSize = `50px` 
       {isOpen && <NavbarMenu mobile={true} />}
     </SemanticHeader>
   );
+}
+
+export default Header;
+
+const scrollTolerance = 15;
+export function HomeHeader() {
+  const [headerClass, setHeaderClass] = useState("");
+
+  const handleHeaderClass = () => {
+    setHeaderClass((prev) => {
+      if (prev === "" && window.scrollY > scrollTolerance) {
+        return "shared-nav-bg";
+      }
+      if (prev === "shared-nav-bg" && window.scrollY <= scrollTolerance) {
+        return "";
+      }
+
+      return prev;
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleHeaderClass);
+    return () => window.removeEventListener("scroll", handleHeaderClass);
+  }, []);
+
+  return <Header className={headerClass} />;
 }
