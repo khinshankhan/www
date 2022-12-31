@@ -15,8 +15,13 @@ const Menu = styled("menu", {
     alignItems: "flex-end",
   },
 
+  transition: "all 0.5s ease-in-out",
+  opacity: "1",
+  lineHeight: "$base",
   "&[class*='closed']": {
-    display: "none",
+    overflow: "hidden",
+    opacity: "0",
+    lineHeight: "0",
   },
 });
 
