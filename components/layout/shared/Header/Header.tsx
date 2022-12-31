@@ -1,16 +1,8 @@
 import React, { useEffect } from "react";
-import Link from "next/link";
 import { useMobile, useDisclosure } from "hooks";
 import { styled } from "lib/theme";
-import { Flex } from "lib/theme/components";
-import { ToggleHome, ToggleTheme, ToggleNavbarMenu } from "components/toggle";
-
-const links = [
-  { title: "About", to: "/about" },
-  { title: "Writing", to: "/writing" },
-  { title: "Projects", to: "/projects" },
-  { title: "Contact", to: "/contact" },
-];
+import { ToggleHome, ToggleNavbarMenu } from "components/toggle";
+import NavbarMenu from "./NavbarMenu";
 
 const SemanticHeader = styled("header", {
   w: "100%",
@@ -33,37 +25,6 @@ const Nav = styled("nav", {
   alignItems: "center",
 });
 
-const Li = styled("li", {
-  display: "inline-block",
-  margin: "16px",
-  textAlign: "center",
-});
-
-const NavbarMenu = ({ mobile }: { mobile: boolean }) => (
-  <Flex
-    as="menu"
-    flexDirection={mobile ? "column" : "row"}
-    justifyContent={mobile ? "center" : "space-between"}
-    alignItems={mobile ? "center" : "flex-end"}
-  >
-    <Flex as="ul" flexDirection={mobile ? "column" : "row"}>
-      {links.map((link) => (
-        <Li key={link.to}>
-          <Link className="main-nav" href={link.to}>
-            {link.title}
-          </Link>
-        </Li>
-      ))}
-    </Flex>
-
-    <Flex as="ul" flexDirection="row" alignItems={mobile ? "center" : "flex-end"}>
-      <Li>
-        <ToggleTheme />
-      </Li>
-    </Flex>
-  </Flex>
-);
-
 interface IHeaderProps {
   className?: string;
   logoSize?: string;
@@ -80,10 +41,10 @@ export function Header({ className = "shared-nav-bg", logoSize = `50px` }: IHead
     <SemanticHeader role="navigation" className={className}>
       <Nav className="page-container">
         <ToggleHome size={logoSize} />
-        {!isMobile && <NavbarMenu mobile={false} />}
+        {!isMobile && <NavbarMenu />}
         {isMobile && <ToggleNavbarMenu isOpen={isOpen} onClick={onToggle} />}
       </Nav>
-      {isOpen && <NavbarMenu mobile={true} />}
+      {isOpen && <NavbarMenu />}
     </SemanticHeader>
   );
 }

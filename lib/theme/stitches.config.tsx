@@ -10,8 +10,13 @@ export const media = {
   lg: "(min-width: 1024px)",
   xl: "(min-width: 1280px)",
   "2xl": "(min-width: 1536px)",
+
+  isMobile: "(max-width: 768px)",
+  isDesktop: "(min-width: 768px)",
+
   motion: "(prefers-reduced-motion)",
   hover: "(any-hover: hover)",
+
   dark: "(prefers-color-scheme: dark)",
   light: "(prefers-color-scheme: light)",
 };
