@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useMobile, useDisclosure } from "hooks";
 import { styled } from "lib/theme";
@@ -89,28 +89,3 @@ export function Header({ className = "shared-nav-bg", logoSize = `50px` }: IHead
 }
 
 export default Header;
-
-const scrollTolerance = 15;
-export function HomeHeader() {
-  const [headerClass, setHeaderClass] = useState("");
-
-  const handleHeaderClass = () => {
-    setHeaderClass((prev) => {
-      if (prev === "" && window.scrollY > scrollTolerance) {
-        return "shared-nav-bg";
-      }
-      if (prev === "shared-nav-bg" && window.scrollY <= scrollTolerance) {
-        return "";
-      }
-
-      return prev;
-    });
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleHeaderClass);
-    return () => window.removeEventListener("scroll", handleHeaderClass);
-  }, []);
-
-  return <Header className={headerClass} />;
-}

@@ -2,8 +2,7 @@ import type { FCC } from "types/react";
 import React, { Fragment } from "react";
 import { styled } from "lib/theme";
 import { Flex } from "lib/theme/components";
-import { HomeHeader } from "./Header";
-import Footer from "./Footer";
+import { HomeHeader, Footer } from "./shared";
 
 const Main = styled("main");
 
