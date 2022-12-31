@@ -6,7 +6,7 @@ export default function Home() {
     <Layout>
       <p>Hello there</p>
 
-      {Array.from({ length: 50 }, (_, i) => i + 1).map((e) => (
+      {Array.from({ length: 5 }, (_, i) => i + 1).map((e) => (
         <p key={e}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam porta odio nulla, ac
           lacinia est pharetra et. Maecenas risus nunc, aliquam eget accumsan at, finibus eu massa.

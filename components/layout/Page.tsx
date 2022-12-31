@@ -1,14 +1,16 @@
 import type { FCC } from "types/react";
 import React, { Fragment } from "react";
 import { styled } from "lib/theme";
-import { Box, Heading } from "lib/theme/components";
+import { Box, Flex, Heading } from "lib/theme/components";
 import Header from "components/layout/Header";
+import Footer from "./Footer";
 
 const Main = styled("main");
 
 export const PageLayout: FCC = ({ children }) => {
   return (
     <Fragment>
+      <Flex flexDirection="column" css={{ minHeight: "96vh" }}>
       <Header />
       <Box
         className="shared-nav-bg"
@@ -28,6 +30,8 @@ export const PageLayout: FCC = ({ children }) => {
       <Main id="content" className="page-container">
         {children}
       </Main>
+      </Flex>
+      <Footer />
     </Fragment>
   );
 };
