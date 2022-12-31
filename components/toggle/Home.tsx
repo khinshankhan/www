@@ -21,7 +21,7 @@ const LogoLink = styled(Link, {
     border: "none",
     outline: "none",
     ".border": {
-      stroke: "purple",
+      stroke: "$linkActive",
     },
   },
 });

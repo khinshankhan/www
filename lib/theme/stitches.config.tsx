@@ -28,13 +28,16 @@ export const { styled, css, getCssText, createTheme, globalCss } = createStitche
     ...foundations,
     colors: {
       ...colors,
-      text: "black",
+      text: "$gray12",
       background: "$mauve2",
 
       placeholder: "black",
-      border: "black",
+      border: "$gray12",
 
-      logoFg: "$plumblossom",
+      link: "$plum7",
+      linkActive: "$plum8",
+
+      logoFg: "$gray12",
       logoBg: "transparent",
       logoBorder: "$logoFg",
 
@@ -46,13 +49,9 @@ export const { styled, css, getCssText, createTheme, globalCss } = createStitche
 export const darkTheme = createTheme("dark", {
   colors: {
     ...darkColors,
-    text: "white",
     background: "rgb(23, 25, 35)",
 
     placeholder: "white",
-    border: "white",
-
-    logoFg: "$sakurarose",
 
     navStartBg: "rgba(14, 14, 26, 0.99)",
   },
