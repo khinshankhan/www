@@ -14,11 +14,15 @@ const Menu = styled("menu", {
     justifyContent: "space-between",
     alignItems: "flex-end",
   },
+
+  "&[class*='closed']": {
+    display: "none",
+  },
 });
 
-export function NavbarMenu() {
+export function NavbarMenu({ className = "" }: { className?: string }) {
   return (
-    <Menu>
+    <Menu className={className}>
       <NavbarLinks />
       <NavbarSettings />
     </Menu>

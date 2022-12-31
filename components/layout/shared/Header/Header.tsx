@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useMobile, useDisclosure } from "hooks";
 import { styled } from "lib/theme";
+import clsx from "clsx";
 import { ToggleHome, ToggleNavbarMenu } from "components/toggle";
 import NavbarMenu from "./NavbarMenu";
 
@@ -41,10 +42,10 @@ export function Header({ className = "shared-nav-bg", logoSize = `50px` }: IHead
     <SemanticHeader role="navigation" className={className}>
       <Nav className="page-container">
         <ToggleHome size={logoSize} />
-        {!isMobile && <NavbarMenu />}
-        {isMobile && <ToggleNavbarMenu isOpen={isOpen} onClick={onToggle} />}
+        <NavbarMenu className="hide-mobile" />
+        <ToggleNavbarMenu className="hide-desktop" isOpen={isOpen} onClick={onToggle} />
       </Nav>
-      {isOpen && <NavbarMenu />}
+      <NavbarMenu className={clsx("hide-desktop", !isOpen && "closed")} />
     </SemanticHeader>
   );
 }
