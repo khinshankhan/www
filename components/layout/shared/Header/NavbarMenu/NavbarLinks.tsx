@@ -24,7 +24,7 @@ export function NavbarLinks() {
     <Ul>
       {links.map((link) => (
         <Li key={link.to}>
-          <Link className="main-nav" href={link.to}>
+          <Link className="main-nav" href={link.to} aria-label={`Navigate to ${link.title}`}>
             {link.title}
           </Link>
         </Li>
