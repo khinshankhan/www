@@ -5,8 +5,6 @@ export const containerStyles = {
     marginRight: "auto",
 
     maxWidth: "95%",
-    paddingLeft: "1rem",
-    paddingRight: "1rem",
     "@sm": {
       maxWidth: "90%",
       paddingLeft: "1.5rem",

@@ -24,11 +24,6 @@ const Nav = styled("nav", {
   direction: "row",
   justifyContent: "space-between",
   alignItems: "center",
-
-  "@isMobile": {
-    marginLeft: "2px",
-    marginRight: "2px",
-  },
 });
 
 interface IHeaderProps {
