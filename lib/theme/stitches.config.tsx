@@ -49,6 +49,7 @@ export const { styled, css, getCssText, createTheme, globalCss } = createStitche
       logoBorder: "$logoFg",
 
       navBg: "rgba(237, 242, 247, 0.99)",
+      iconBg: "rgba(0, 0, 0, 0.12)",
     },
   },
 });
@@ -61,6 +62,7 @@ export const darkTheme = createTheme("dark", {
     placeholder: "white",
 
     navBg: "rgba(14, 14, 26, 0.99)",
+    iconBg: "rgba(255, 255, 255, 0.12)",
   },
 });
 

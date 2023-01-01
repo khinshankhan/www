@@ -1,10 +1,11 @@
 import React from "react";
 import { HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
+import { IconButton } from "lib/theme/components";
 
 interface IToggleNavbarMenuProps {
   className?: string;
   isOpen?: boolean;
-  onClick?: React.MouseEventHandler<SVGElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 export const ToggleNavbarMenu = ({
   className = "",
@@ -15,7 +16,9 @@ export const ToggleNavbarMenu = ({
   const action = isOpen ? "Close" : "Open";
 
   return (
-    <MenuIcon className={className} aria-label={`${action} navigation menu`} onClick={onClick} />
+    <IconButton className={className} aria-label={`${action} navigation menu`} onClick={onClick}>
+      <MenuIcon />
+    </IconButton>
   );
 };
 

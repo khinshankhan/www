@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
+import { IconButton } from "lib/theme/components";
 
 // TODO: move state to react context
 export const ToggleTheme = () => {
@@ -17,7 +18,11 @@ export const ToggleTheme = () => {
 
   const toggleTheme = () => setTheme(oppositeTheme);
 
-  return <ColorIcon aria-label={`Switch to ${oppositeTheme} mode`} onClick={toggleTheme} />;
+  return (
+    <IconButton aria-label={`Switch to ${oppositeTheme} mode`} onClick={toggleTheme}>
+      <ColorIcon />
+    </IconButton>
+  );
 };
 
 export default ToggleTheme;
