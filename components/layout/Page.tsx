@@ -4,31 +4,57 @@ import { styled } from "lib/theme";
 import { Box, Flex, Heading } from "lib/theme/components";
 import { Header, Footer } from "./shared";
 
-const Main = styled("main");
+const ContentHeader = styled("header", {
+  zIndex: 1,
+  paddingTop: "56px",
+  paddingBottom: "56px",
+  "@isDesktop": {
+    paddingBottom: "224px",
+  },
+  textAlign: "center",
+});
 
-export const PageLayout: FCC = ({ children }) => {
+const Article = styled("article", {
+  backgroundColor: "$background",
+  marginTop: "24px",
+  zIndex: 2,
+  "@isDesktop": {
+    marginTop: "-128px",
+    paddingTop: "24px",
+    paddingLeft: "32px",
+    paddingRight: "32px",
+  },
+});
+
+interface IHeaderProps {
+  title?: string;
+  subtitle?: string;
+}
+
+export const PageLayout: FCC<IHeaderProps> = ({
+  title = "mhm yes",
+  subtitle = "hello there",
+  children,
+}) => {
   return (
     <Fragment>
       <Flex flexDirection="column" css={{ minHeight: "96vh" }}>
         <Header />
-        <Box
-          className="shared-nav-bg"
-          css={{
-            paddingTop: "56px",
-            paddingBottom: "48px",
-            position: "relative",
-            mb: "40px",
-            zIndex: 1,
-            textAlign: "center",
-          }}
-        >
-          <Heading.h1 css={{ paddingBottom: "24px" }}>mhm yes</Heading.h1>
-          <Box>hello there</Box>
-        </Box>
 
-        <Main id="content" className="page-container">
-          {children}
-        </Main>
+        <Box as="main">
+          <ContentHeader className="nav-bg">
+            <Heading.h1 className="h2" css={{ paddingBottom: "24px" }}>
+              {title}
+            </Heading.h1>
+            <Box as="p" className="main-nav">
+              {subtitle}
+            </Box>
+          </ContentHeader>
+
+          <Article id="article" className="page-container">
+            {children}
+          </Article>
+        </Box>
       </Flex>
       <Footer />
     </Fragment>

@@ -80,7 +80,6 @@ export const typographyStyles = {
     "@lg": {
       fontSize: "1.344rem", // avg lg and xl
     },
-    textTransform: "uppercase",
   },
 
   a: {

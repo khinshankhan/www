@@ -30,7 +30,7 @@ interface IHeaderProps {
   className?: string;
   logoSize?: string;
 }
-export function Header({ className = "shared-nav-bg", logoSize = `50px` }: IHeaderProps) {
+export function Header({ className = "nav-bg", logoSize = `50px` }: IHeaderProps) {
   const { isMobile } = useMobile();
   const { isOpen, onToggle, onClose } = useDisclosure({ defaultIsOpen: false });
 

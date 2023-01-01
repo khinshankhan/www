@@ -9,9 +9,9 @@ export function HomeHeader() {
   const handleHeaderClass = () => {
     setHeaderClass((prev) => {
       if (prev === "" && window.scrollY > scrollTolerance) {
-        return "shared-nav-bg";
+        return "nav-bg";
       }
-      if (prev === "shared-nav-bg" && window.scrollY <= scrollTolerance) {
+      if (prev === "nav-bg" && window.scrollY <= scrollTolerance) {
         return "";
       }
 

@@ -7,8 +7,9 @@ const startYear = 2017;
 export const Footer = () => {
   return (
     <Box
+      as="footer"
+      className="nav-bg"
       css={{
-        backgroundColor: "$navStartBg",
         marginTop: "20px",
         paddingTop: "28px",
         paddingBottom: "35px",
