@@ -12,17 +12,17 @@ export const normalizeStyles = {
     marginBottom: 0,
   },
   "#article > p:nth-of-type(1)::first-letter": {
-    "@xs":{
+    fontWeight: `$black`,
+    "@xs": {
       color: `$mauve12`,
       float: `left`,
-      fontWeight: `$black`,
+      lineHeight: `3.375rem`,
       fontSize: `5rem`,
       "@lg": {
         fontSize: `6rem`,
       },
-      lineHeight: `3.375rem`,
     },
-  }
+  },
 };
 
 export default normalizeStyles;
