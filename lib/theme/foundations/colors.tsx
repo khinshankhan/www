@@ -11,17 +11,17 @@ import {
 
 // consider these to be mostly light theme
 export const colors = {
+  ...gray,
   ...mauve,
   ...plumDark,
-  ...gray,
   ...plumDarkA,
 };
 
 // override any light theme same key names
 // try to keep shared colors within colors
 export const darkColors = {
+  ...grayDark,
   ...mauveDark,
   ...plum,
-  ...grayDark,
   ...plumA,
 };

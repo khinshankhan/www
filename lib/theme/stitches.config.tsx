@@ -1,5 +1,12 @@
 import { createStitches } from "@stitches/react";
-import { resetStyles, bgStyles, containerStyles, mediaStyles, typographyStyles } from "./styles";
+import {
+  resetStyles,
+  bgStyles,
+  containerStyles,
+  mediaStyles,
+  normalizeStyles,
+  typographyStyles,
+} from "./styles";
 import foundations from "./foundations";
 import { colors, darkColors } from "./foundations/colors";
 
@@ -88,5 +95,6 @@ export const GlobalStyles = globalCss({
     ...bgStyles,
     ...containerStyles,
     ...typographyStyles,
+    ...normalizeStyles,
   },
 });
