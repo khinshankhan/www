@@ -18,8 +18,8 @@ const LogoLink = styled(Link, {
       fill: "rgba(0, 0, 0, 0.12)",
     },
 
+    outlineOffset: "2px",
     border: "none",
-    outline: "none",
     ".border": {
       stroke: "$linkActive",
     },

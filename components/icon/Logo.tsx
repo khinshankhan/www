@@ -15,7 +15,13 @@ export const Logo = ({
   fgColor = `#fff`,
   borderColor = `#000`,
 }: ILogoProps) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 460 460">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    viewBox="0 0 460 460"
+    style={{ display: "block" }}
+  >
     <rect className="bg" width="100%" height="100%" fill={bgColor} />
     <path
       className="fg"
