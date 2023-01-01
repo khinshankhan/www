@@ -11,6 +11,18 @@ export const normalizeStyles = {
   "#article > :where(ol, ul) > li > p": {
     marginBottom: 0,
   },
+  "#article > p:nth-of-type(1)::first-letter": {
+    "@xs":{
+      color: `$mauve12`,
+      float: `left`,
+      fontWeight: `$black`,
+      fontSize: `5rem`,
+      "@lg": {
+        fontSize: `6rem`,
+      },
+      lineHeight: `3.375rem`,
+    },
+  }
 };
 
 export default normalizeStyles;
