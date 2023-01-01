@@ -20,6 +20,7 @@ const Menu = styled("menu", {
   opacity: "1",
   maxHeight: "500px",
   "&[class*='closed']": {
+    transition: "visibility 0.5s, opacity 0.5s ease-in-out, max-height 0.5s ease-in-out",
     visibility: "collapse",
     opacity: "0",
     maxHeight: "0",
