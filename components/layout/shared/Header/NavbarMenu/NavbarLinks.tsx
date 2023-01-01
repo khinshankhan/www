@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { styled } from "lib/theme";
-import { Li } from "./shared";
 
 const links = [
   { title: "About", to: "/about" },
@@ -17,6 +16,13 @@ const Ul = styled("ul", {
   "@isDesktop": {
     flexDirection: "row",
   },
+});
+
+const Li = styled("li", {
+  display: "inline-block",
+  margin: "16px",
+  textAlign: "center",
+  textTransform: "uppercase",
 });
 
 export function NavbarLinks() {

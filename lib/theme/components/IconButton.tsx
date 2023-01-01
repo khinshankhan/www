@@ -1,6 +1,7 @@
 import { styled } from "../stitches.config";
 
 export const IconButton = styled("button", {
+  display: "inline-block",
   lineHeight: 0,
   borderWidth: 0,
   padding: "10px",
