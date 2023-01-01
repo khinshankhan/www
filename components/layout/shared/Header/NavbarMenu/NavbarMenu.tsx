@@ -15,13 +15,32 @@ const Menu = styled("menu", {
     alignItems: "flex-end",
   },
 
-  transition: "all 0.5s ease-in-out",
+  transition: "visibility 0s, opacity 0.5s ease-in-out, max-height 0.5s ease-in-out",
+  visibility: "visible",
   opacity: "1",
-  lineHeight: "$base",
+  maxHeight: "500px",
   "&[class*='closed']": {
-    overflow: "hidden",
+    visibility: "collapse",
     opacity: "0",
-    lineHeight: "0",
+    maxHeight: "0",
+    overflow: "hidden",
+  },
+
+  "@isMobile": {
+    position: "relative",
+    paddingBottom: "20px",
+    "&[class*='closed']": {
+      paddingBottom: "2px",
+    },
+    "&:before": {
+      content: "''",
+      position: "absolute",
+      margin: "auto",
+      bottom: "0",
+      width: "70%",
+      borderBottom: "1px dotted white",
+      marginBottom: "15px",
+    },
   },
 });
 
