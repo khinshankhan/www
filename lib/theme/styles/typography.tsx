@@ -82,6 +82,16 @@ export const typographyStyles = {
     },
   },
 
+  small: {
+    fontSize: "$md", // 18px
+    "@isDesktop": {
+      fontSize: "$sm",
+    },
+    "@2xl": {
+      fontSize: "$md", // ~23px, avg 21px and $xl
+    },
+  },
+
   a: {
     color: "$link",
     textDecoration: "underline 0 transparent",

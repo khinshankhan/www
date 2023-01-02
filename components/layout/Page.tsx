@@ -1,39 +1,48 @@
 import type { FCC } from "types/react";
 import React, { Fragment } from "react";
 import { styled } from "lib/theme";
+import clsx from "clsx";
 import { Box, Flex, Heading } from "lib/theme/components";
 import { Header, Footer } from "./shared";
 
 const ContentHeader = styled("header", {
+  textAlign: "center",
   zIndex: 1,
   paddingTop: "56px",
   paddingBottom: "56px",
-  "@isDesktop": {
-    paddingBottom: "224px",
+
+  "&[class*='intersect']": {
+    "@isDesktop": {
+      paddingBottom: "224px",
+    },
   },
-  textAlign: "center",
 });
 
-const Article = styled("article", {
+const Content = styled("article", {
   backgroundColor: "$background",
-  marginTop: "24px",
   zIndex: 2,
-  "@isDesktop": {
-    marginTop: "-128px",
-    paddingTop: "24px",
-    paddingLeft: "32px",
-    paddingRight: "32px",
+  marginTop: "24px",
+
+  "&[class*='intersect']": {
+    "@isDesktop": {
+      marginTop: "-128px",
+      paddingTop: "24px",
+      paddingLeft: "32px",
+      paddingRight: "32px",
+    },
   },
 });
 
-interface IHeaderProps {
+interface IPageLayoutProps {
   title?: string;
   subtitle?: string;
+  intersect?: boolean;
 }
 
-export const PageLayout: FCC<IHeaderProps> = ({
+export const PageLayout: FCC<IPageLayoutProps> = ({
   title = "mhm yes",
   subtitle = "hello there",
+  intersect = true,
   children,
 }) => {
   return (
@@ -42,7 +51,7 @@ export const PageLayout: FCC<IHeaderProps> = ({
         <Header />
 
         <Box as="main">
-          <ContentHeader className="nav-bg">
+          <ContentHeader className={clsx("nav-bg", intersect && "intersect")}>
             <Heading.h1 className="h2" css={{ paddingBottom: "24px" }}>
               {title}
             </Heading.h1>
@@ -51,9 +60,9 @@ export const PageLayout: FCC<IHeaderProps> = ({
             </Box>
           </ContentHeader>
 
-          <Article id="article" className="page-container">
+          <Content id="article" className={clsx("page-container", intersect && "intersect")}>
             {children}
-          </Article>
+          </Content>
         </Box>
       </Flex>
       <Footer />
