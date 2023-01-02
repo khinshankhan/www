@@ -39,8 +39,8 @@ const fontWeights = {
 };
 
 const fonts = {
-  heading: `Inter`,
-  body: `Mona Sans`,
+  heading: `Noto Serif`,
+  body: `Noto Serif`,
 };
 
 // https://type-scale.com/
