@@ -1,7 +1,7 @@
 export const typographyStyles = {
-  ".h1": {
+  "h1, .h1": {
     fontFamily: "$heading",
-    fontWeight: "$bold",
+    fontWeight: "$semibold",
     letterSpacing: "$widest",
     fontSize: "$3xl",
     "@sm": {
@@ -11,7 +11,7 @@ export const typographyStyles = {
       fontSize: "$5xl",
     },
   },
-  ".h2": {
+  "h2, .h2": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
     letterSpacing: "$widest",
@@ -23,7 +23,7 @@ export const typographyStyles = {
       fontSize: "$4xl",
     },
   },
-  ".h3": {
+  "h3, .h3": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
     letterSpacing: "$wider",
@@ -35,7 +35,7 @@ export const typographyStyles = {
       fontSize: "$3xl",
     },
   },
-  ".h4": {
+  "h4, .h4": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
     letterSpacing: "$wider",
@@ -47,7 +47,7 @@ export const typographyStyles = {
       fontSize: "$2xl",
     },
   },
-  ".h5": {
+  "h5, .h5": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
     letterSpacing: "$wider",
@@ -59,7 +59,7 @@ export const typographyStyles = {
       fontSize: "$xl",
     },
   },
-  ".h6": {
+  "h6, .h6": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
     letterSpacing: "$wider",

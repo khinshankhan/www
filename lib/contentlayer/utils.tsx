@@ -12,36 +12,46 @@ const getSlug = (prefix: string, chopPrefix = true) => {
 interface IFieldsProps {
   subtitle: string;
   status?: string;
+  intersect?: boolean;
 }
-export const getFields = ({ subtitle, status = `published` }: IFieldsProps): FieldDefs => ({
+export const getFields = ({
+  subtitle,
+  status = "published",
+  intersect = true,
+}: IFieldsProps): FieldDefs => ({
   title: {
-    type: `string`,
+    type: "string",
     required: true,
   },
   subtitle: {
-    type: `string`,
+    type: "string",
     default: subtitle,
   },
   givenSlug: {
-    type: `string`,
+    type: "string",
   },
 
   tended: {
-    type: `date`,
+    type: "date",
     required: true,
   },
 
   status: {
-    type: `enum`,
-    options: [`draft`, `published`],
+    type: "enum",
+    options: ["draft", "published"],
     default: status,
   },
 
   categories: {
-    type: `list`,
+    type: "list",
     of: {
-      type: `string`,
+      type: "string",
     },
+  },
+
+  intersect: {
+    type: "boolean",
+    default: intersect,
   },
 });
 
@@ -57,7 +67,7 @@ export const getComputedFields = <T extends string>({
 
   return {
     slug: {
-      type: `string`,
+      type: "string",
       resolve: slugify,
     },
   };

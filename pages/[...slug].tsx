@@ -1,6 +1,8 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Page } from "contentlayer/generated";
 import { allPages } from "contentlayer/generated";
+import { Page as Layout } from "templates/Page";
+import { useLiveReload, useMDXComponent } from "next-contentlayer/hooks";
 
 export const getStaticPaths = () => {
   const paths = allPages.map((p) => ({
@@ -39,6 +41,14 @@ export const getStaticProps: GetStaticProps<{
   };
 };
 
+const mdxComponents = {};
+
 export default function PageView({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return <h1>Page: {page.title}</h1>;
+  useLiveReload();
+  const MDXContent = useMDXComponent(page?.body?.code || "");
+  return (
+    <Layout title={page.title} subtitle={page.subtitle}>
+      {MDXContent && <MDXContent components={mdxComponents} />}
+    </Layout>
+  );
 }
