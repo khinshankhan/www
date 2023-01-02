@@ -11,7 +11,7 @@ export const normalizeStyles = {
   "#article > :where(ol, ul) > li > p": {
     marginBottom: 0,
   },
-  "#article > p:nth-of-type(1)::first-letter": {
+  "#content > p:nth-of-type(1)::first-letter": {
     fontWeight: `$black`,
     "@xs": {
       color: `$mauve12`,
