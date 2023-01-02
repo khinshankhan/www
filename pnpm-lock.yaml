@@ -18,6 +18,7 @@ specifiers:
   prettier: ^2.8.1
   react: 18.2.0
   react-dom: 18.2.0
+  react-emoji-render: ^1.2.4
   typescript: 4.9.4
 
 dependencies:
@@ -37,6 +38,7 @@ dependencies:
   next-themes: 0.2.1_s75y6mxmikaw2mhqmuko6w7njm
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-emoji-render: 1.2.4_biqbaboplfbrettd7655fr4n2y
   typescript: 4.9.4
 
 devDependencies:
@@ -1141,6 +1143,10 @@ packages:
       fsevents: 2.3.2
     dev: false
 
+  /classnames/2.3.2:
+    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
+    dev: false
+
   /client-only/0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
     dev: false
@@ -1328,6 +1334,10 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
+    dev: false
+
+  /emoji-regex/6.5.1:
+    resolution: {integrity: sha512-PAHp6TxrCy7MGMFidro8uikr+zlJJKJ/Q6mm2ExZ7HwkyR9lSVFfE3kt36qcwa24BQL7y0G9axycGjK1A/0uNQ==}
     dev: false
 
   /emoji-regex/8.0.0:
@@ -2345,6 +2355,12 @@ packages:
       side-channel: 1.0.4
     dev: false
 
+  /invariant/2.2.4:
+    resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false
+
   /is-alphabetical/2.0.1:
     resolution: {integrity: sha512-FWyyY60MeTNyeSRpkM2Iry0G9hpr7/9kD40mD/cGQEuilcZYS4okz8SN2Q6rLCJ8gbCt6fN+rC+6tMGS99LaxQ==}
     dev: false
@@ -2606,6 +2622,14 @@ packages:
 
   /lodash.camelcase/4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
+    dev: false
+
+  /lodash.flatten/4.4.0:
+    resolution: {integrity: sha512-C5N2Z3DgnnKr0LOpv/hKCgKdb7ZZwafIrsesve6lmzvZIRZRGaZ/l6Q8+2W7NaT+ZwO3fFlSCzCzrDCFdJfZ4g==}
+    dev: false
+
+  /lodash.isstring/4.0.1:
+    resolution: {integrity: sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw==}
     dev: false
 
   /lodash.merge/4.6.2:
@@ -3459,6 +3483,21 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+  /react-emoji-render/1.2.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-AqktVXV38uDpgf02BoCXrzLYFsHAsxfdWwjrLexSJ22l1JgB01y1KejjxW/zTuCzod6O7BZfiMS866LEEfMHmA==}
+    peerDependencies:
+      react: '>=0.14.0'
+      react-dom: '>=0.14.0'
+    dependencies:
+      classnames: 2.3.2
+      emoji-regex: 6.5.1
+      lodash.flatten: 4.4.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      string-replace-to-array: 1.0.3
+    dev: false
+
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
@@ -3701,6 +3740,14 @@ packages:
 
   /sprintf-js/1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
+    dev: false
+
+  /string-replace-to-array/1.0.3:
+    resolution: {integrity: sha512-QIdKvmfXbdFvblXAAz6IIjR7A+C6SU6m2A+e7fE/0EYDC5yfeWNMJQ193fPsW7nG+9q52dv/UjnVrDaNVZXpmQ==}
+    dependencies:
+      invariant: 2.2.4
+      lodash.flatten: 4.4.0
+      lodash.isstring: 4.0.1
     dev: false
 
   /string-width/4.2.3:
