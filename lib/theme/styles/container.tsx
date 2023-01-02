@@ -17,6 +17,19 @@ export const containerStyles = {
       maxWidth: "1325px",
     },
   },
+
+  ".collapsible": {
+    transition: "visibility 0s, opacity 0.5s ease-in-out, max-height 0.5s ease-in-out",
+    visibility: "visible",
+    opacity: 1,
+    "&[class*='closed']": {
+      transition: "visibility 0.5s, opacity 0.5s ease-in-out, max-height 0.5s ease-in-out",
+      visibility: "collapse",
+      opacity: 0,
+      maxHeight: 0,
+      overflow: "hidden",
+    },
+  },
 };
 
 export default containerStyles;

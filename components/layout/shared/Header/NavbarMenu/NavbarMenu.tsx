@@ -1,9 +1,11 @@
 import React from "react";
 import { styled } from "lib/theme";
+import clsx from "clsx";
 import NavbarLinks from "./NavbarLinks";
 import NavbarSettings from "./NavbarSettings";
 
 const Menu = styled("menu", {
+  maxHeight: "315px",
   display: "flex",
 
   flexDirection: "column",
@@ -13,18 +15,6 @@ const Menu = styled("menu", {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
-  },
-
-  transition: "visibility 0s, opacity 0.5s ease-in-out, max-height 0.5s ease-in-out",
-  visibility: "visible",
-  opacity: "1",
-  maxHeight: "500px",
-  "&[class*='closed']": {
-    transition: "visibility 0.5s, opacity 0.5s ease-in-out, max-height 0.5s ease-in-out",
-    visibility: "collapse",
-    opacity: "0",
-    maxHeight: "0",
-    overflow: "hidden",
   },
 
   "@isMobile": {
@@ -47,7 +37,7 @@ const Menu = styled("menu", {
 
 export function NavbarMenu({ className = "" }: { className?: string }) {
   return (
-    <Menu className={className}>
+    <Menu className={clsx("collapsible", className)}>
       <NavbarLinks />
       <NavbarSettings />
     </Menu>
