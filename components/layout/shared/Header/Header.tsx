@@ -36,7 +36,7 @@ export function Header({ className = "nav-bg", logoSize = `50px` }: IHeaderProps
 
   useEffect(() => {
     onClose();
-  }, [isMobile]);
+  }, [isMobile, onClose]);
 
   return (
     <SemanticHeader role="navigation" className={className}>

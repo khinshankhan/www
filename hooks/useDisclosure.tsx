@@ -1,28 +1,32 @@
 // https://chakra-ui.com/docs/hooks/use-disclosure
 import { useState, useCallback } from "react";
+import { useCallbackRef } from "./useCallbackRef";
 
 interface UseDisclosureProps {
   defaultIsOpen?: boolean;
-  handleOpen?: () => void;
-  handleClose?: () => void;
+  onOpen?: () => void;
+  onClose?: () => void;
 }
 
-export const useDisclosure = ({
+export function useDisclosure({
   defaultIsOpen = false,
-  handleOpen = () => {},
-  handleClose = () => {},
-}: UseDisclosureProps) => {
-  const [isOpen, setOpen] = useState(defaultIsOpen);
+  onOpen: onOpenProp = () => {},
+  onClose: onCloseProp = () => {},
+}: UseDisclosureProps) {
+  const handleOpen = useCallbackRef(onOpenProp);
+  const handleClose = useCallbackRef(onCloseProp);
 
-  const onOpen = useCallback(() => {
-    setOpen(true);
-    handleOpen();
-  }, [setOpen, handleOpen]);
+  const [isOpen, setIsOpen] = useState(defaultIsOpen);
 
   const onClose = useCallback(() => {
-    setOpen(false);
-    handleClose();
-  }, [setOpen, handleClose]);
+    setIsOpen(false);
+    handleClose?.();
+  }, [handleClose]);
+
+  const onOpen = useCallback(() => {
+    setIsOpen(true);
+    handleOpen?.();
+  }, [handleOpen]);
 
   const onToggle = useCallback(() => {
     if (isOpen) {
@@ -30,7 +34,7 @@ export const useDisclosure = ({
     } else {
       onOpen();
     }
-  }, [onClose, onOpen]);
+  }, [isOpen, onOpen, onClose]);
 
   return {
     isOpen,
@@ -38,6 +42,6 @@ export const useDisclosure = ({
     onClose,
     onToggle,
   };
-};
+}
 
 export default useDisclosure;
