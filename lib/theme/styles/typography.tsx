@@ -12,7 +12,7 @@ export const typographyStyles = {
   "h1, .h1": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
-    letterSpacing: "$widest",
+    letterSpacing: "$wider",
     fontSize: "$3xl",
     "@sm": {
       fontSize: "$4xl",
@@ -24,7 +24,7 @@ export const typographyStyles = {
   "h2, .h2": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
-    letterSpacing: "$widest",
+    letterSpacing: "$wider",
     fontSize: "$2xl",
     "@sm": {
       fontSize: "$3xl",
@@ -36,7 +36,7 @@ export const typographyStyles = {
   "h3, .h3": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
-    letterSpacing: "$wider",
+    letterSpacing: "$wide",
     fontSize: "$xl",
     "@sm": {
       fontSize: "$2xl",
@@ -48,7 +48,7 @@ export const typographyStyles = {
   "h4, .h4": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
-    letterSpacing: "$wider",
+    letterSpacing: "$wide",
     fontSize: "$lg",
     "@sm": {
       fontSize: "$xl",
@@ -60,7 +60,7 @@ export const typographyStyles = {
   "h5, .h5": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
-    letterSpacing: "$wider",
+    letterSpacing: "$wide",
     fontSize: "$md",
     "@sm": {
       fontSize: "$lg",
@@ -72,7 +72,7 @@ export const typographyStyles = {
   "h6, .h6": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
-    letterSpacing: "$wider",
+    letterSpacing: "$wide",
     fontSize: "$sm",
     "@sm": {
       fontSize: "$md",
@@ -85,7 +85,7 @@ export const typographyStyles = {
   ".main-nav": {
     fontFamily: "$heading",
     fontWeight: "$medium",
-    letterSpacing: "$wider",
+    letterSpacing: "$wide",
     fontSize: "$lg",
     "@lg": {
       fontSize: "1.344rem", // avg lg and xl
