@@ -1,8 +1,18 @@
+const smallStyle = {
+  fontSize: "$md",
+  "@isDesktop": {
+    fontSize: "$sm",
+  },
+  "@2xl": {
+    fontSize: "$md",
+  },
+};
+
 export const typographyStyles = {
-  ".h1": {
+  "h1, .h1": {
     fontFamily: "$heading",
-    fontWeight: "$bold",
-    letterSpacing: "$widest",
+    fontWeight: "$semibold",
+    letterSpacing: "$wider",
     fontSize: "$3xl",
     "@sm": {
       fontSize: "$4xl",
@@ -11,10 +21,10 @@ export const typographyStyles = {
       fontSize: "$5xl",
     },
   },
-  ".h2": {
+  "h2, .h2": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
-    letterSpacing: "$widest",
+    letterSpacing: "$wider",
     fontSize: "$2xl",
     "@sm": {
       fontSize: "$3xl",
@@ -23,10 +33,10 @@ export const typographyStyles = {
       fontSize: "$4xl",
     },
   },
-  ".h3": {
+  "h3, .h3": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
-    letterSpacing: "$wider",
+    letterSpacing: "$wide",
     fontSize: "$xl",
     "@sm": {
       fontSize: "$2xl",
@@ -35,10 +45,10 @@ export const typographyStyles = {
       fontSize: "$3xl",
     },
   },
-  ".h4": {
+  "h4, .h4": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
-    letterSpacing: "$wider",
+    letterSpacing: "$wide",
     fontSize: "$lg",
     "@sm": {
       fontSize: "$xl",
@@ -47,10 +57,10 @@ export const typographyStyles = {
       fontSize: "$2xl",
     },
   },
-  ".h5": {
+  "h5, .h5": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
-    letterSpacing: "$wider",
+    letterSpacing: "$wide",
     fontSize: "$md",
     "@sm": {
       fontSize: "$lg",
@@ -59,10 +69,10 @@ export const typographyStyles = {
       fontSize: "$xl",
     },
   },
-  ".h6": {
+  "h6, .h6": {
     fontFamily: "$heading",
     fontWeight: "$semibold",
-    letterSpacing: "$wider",
+    letterSpacing: "$wide",
     fontSize: "$sm",
     "@sm": {
       fontSize: "$md",
@@ -75,21 +85,21 @@ export const typographyStyles = {
   ".main-nav": {
     fontFamily: "$heading",
     fontWeight: "$medium",
-    letterSpacing: "$wider",
+    letterSpacing: "$wide",
     fontSize: "$lg",
     "@lg": {
       fontSize: "1.344rem", // avg lg and xl
     },
   },
 
-  small: {
-    fontSize: "$md", // 18px
-    "@isDesktop": {
-      fontSize: "$sm",
-    },
-    "@2xl": {
-      fontSize: "$md", // ~23px, avg 21px and $xl
-    },
+  small: smallStyle,
+  sup: {
+    ...smallStyle,
+    verticalAlign: "super",
+  },
+  sub: {
+    ...smallStyle,
+    verticalAlign: "sub",
   },
 
   a: {
