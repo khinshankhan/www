@@ -23,6 +23,18 @@ export const normalizeStyles = {
       },
     },
   },
+
+  ".anchor": {
+    "&:after": {
+      transition: "opacity 0.4s ease-in-out",
+      content: "var(--anchorage-icons-linkBefore)",
+      opacity: 0,
+      marginLeft: "0.125em",
+    },
+    "&:hover:after": {
+      opacity: 1,
+    },
+  },
 };
 
 export default normalizeStyles;
