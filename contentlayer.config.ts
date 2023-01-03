@@ -1,6 +1,8 @@
 import { makeSource } from "contentlayer/source-files";
 import * as documentTypes from "./lib/contentlayer/documents";
 import remarkGfm from "remark-gfm"
+import rehypeSlug from "rehype-slug"
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
 
 export default makeSource({
   contentDirPath: `data`,
@@ -10,6 +12,17 @@ export default makeSource({
       options.target = "esnext"
       return options
     },
-    remarkPlugins: [[remarkGfm]],
+    remarkPlugins: [
+      [remarkGfm]
+    ],
+    rehypePlugins: [
+      [rehypeSlug],
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: "wrap",
+        },
+      ],
+    ],
   },
 });
