@@ -1,3 +1,13 @@
+const smallStyle = {
+  fontSize: "$md",
+  "@isDesktop": {
+    fontSize: "$sm",
+  },
+  "@2xl": {
+    fontSize: "$md",
+  },
+};
+
 export const typographyStyles = {
   "h1, .h1": {
     fontFamily: "$heading",
@@ -82,14 +92,14 @@ export const typographyStyles = {
     },
   },
 
-  small: {
-    fontSize: "$md", // 18px
-    "@isDesktop": {
-      fontSize: "$sm",
-    },
-    "@2xl": {
-      fontSize: "$md", // ~23px, avg 21px and $xl
-    },
+  small: smallStyle,
+  sup: {
+    ...smallStyle,
+    verticalAlign: "super",
+  },
+  sub: {
+    ...smallStyle,
+    verticalAlign: "sub",
   },
 
   a: {
