@@ -9,7 +9,9 @@
     "lint:code": "NEXT_TELEMETRY_DISABLED=1 next lint",
     "lint:format": "prettier \"**/*.{ts,tsx,js,jsx}\" --write",
     "lint": "pnpm run lint:code && pnpm run lint:format",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --ci"
   },
   "dependencies": {
     "@next/font": "13.1.0",
