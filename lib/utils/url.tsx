@@ -1,3 +1,5 @@
+export const isRelative = (url: string) => url.startsWith("/") || url.startsWith("#");
+
 // NOTE: extension logic should be used with the path rather than the url itself
 export const hasExtension = (ext: string) => /\.[0-9a-z]+$/i.test(ext);
 
@@ -26,9 +28,10 @@ const COMMON_URL_EXTENSIONS = [
   `net`,
 ];
 
-export const isUrlFile = (url: string) => {
-  const destination = document.createElement(`a`);
-  destination.href = url;
+type IsUrlFile = (url: string, base?: string | undefined) => boolean;
+export const isUrlFile: IsUrlFile = (url, baseProp = undefined) => {
+  const base = isRelative(url) && (baseProp ?? "https://khinshankhan.com");
+  const destination = new URL(url, base || undefined);
   const { pathname } = destination;
 
   if (!hasExtension(pathname)) return false;

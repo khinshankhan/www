@@ -23,14 +23,18 @@ describe("url", () => {
 
   describe("isUrlFile", () => {
     describe("is file", () =>
-      ["https://hello.com/test.pdf"].forEach((file) =>
+      ["https://hello.com/test.pdf", "/relative/file.pdf"].forEach((file) =>
         it(file, () => expect(isUrlFile(file)).toBe(true))
       ));
 
     describe("not file", () =>
-      ["/", "https://hello.com", "https://hello.com/", "https://hello.com/test.html"].forEach(
-        (file) => it(file, () => expect(isUrlFile(file)).toBe(false))
-      ));
+      [
+        "/",
+        "/relative",
+        "https://hello.com",
+        "https://hello.com/",
+        "https://hello.com/test.html",
+      ].forEach((file) => it(file, () => expect(isUrlFile(file)).toBe(false))));
 
     // TODO: account for false positive cases
   });
