@@ -27,6 +27,7 @@ specifiers:
   rehype-autolink-headings: ^6.1.1
   rehype-slug: ^5.1.0
   remark-gfm: ^3.0.1
+  remark-unwrap-images: ^3.0.1
   typescript: 4.9.4
 
 dependencies:
@@ -53,6 +54,7 @@ dependencies:
   rehype-autolink-headings: 6.1.1
   rehype-slug: 5.1.0
   remark-gfm: 3.0.1
+  remark-unwrap-images: 3.0.1
   typescript: 4.9.4
 
 devDependencies:
@@ -5876,6 +5878,15 @@ packages:
       '@types/mdast': 3.0.10
       mdast-util-to-hast: 12.2.4
       unified: 10.1.2
+    dev: false
+
+  /remark-unwrap-images/3.0.1:
+    resolution: {integrity: sha512-5VUY0n+J9lPTPfkct5S3/SbutryBjp8J/4mbgtlkDrOk3h8jde0hyqdYUJOoJKherZezS08tjd6i4+nnQ+wl5w==}
+    dependencies:
+      '@types/mdast': 3.0.10
+      hast-util-whitespace: 2.0.0
+      unified: 10.1.2
+      unist-util-visit: 4.1.1
     dev: false
 
   /repeat-string/1.6.1:
