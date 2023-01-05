@@ -1,4 +1,27 @@
 export const normalizeStyles = {
+  a: {
+    color: "$link",
+    textDecoration: "underline 0 transparent",
+    textUnderlineOffset: "0.4em",
+    transition: "text-decoration-color 300ms",
+    "&:hover": {
+      color: "$linkActive",
+      textDecorationColor: "$linkActive",
+      textUnderlineOffset: "0.4em",
+    },
+  },
+  ".anchor": {
+    "&:after": {
+      transition: "opacity 0.4s ease-in-out",
+      content: "var(--anchorage-icons-linkBefore)",
+      opacity: 0,
+      marginLeft: "0.125em",
+    },
+    "&:hover:after": {
+      opacity: 1,
+    },
+  },
+
   "#content > :where(h2, h3, h4, h5, h6, p, ol, ul)": {
     marginBottom: "20px",
   },
@@ -21,18 +44,6 @@ export const normalizeStyles = {
       "@lg": {
         fontSize: `6rem`,
       },
-    },
-  },
-
-  ".anchor": {
-    "&:after": {
-      transition: "opacity 0.4s ease-in-out",
-      content: "var(--anchorage-icons-linkBefore)",
-      opacity: 0,
-      marginLeft: "0.125em",
-    },
-    "&:hover:after": {
-      opacity: 1,
     },
   },
 };

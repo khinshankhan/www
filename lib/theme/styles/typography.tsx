@@ -92,26 +92,18 @@ export const typographyStyles = {
     },
   },
 
-  small: smallStyle,
-  sup: {
+  "small, .small": smallStyle,
+  "sup, .sup": {
     ...smallStyle,
     verticalAlign: "super",
   },
-  sub: {
+  "sub, .sub": {
     ...smallStyle,
     verticalAlign: "sub",
   },
-
-  a: {
-    color: "$link",
-    textDecoration: "underline 0 transparent",
-    textUnderlineOffset: "0.4em",
-    transition: "text-decoration-color 300ms",
-    "&:hover": {
-      color: "$linkActive",
-      textDecorationColor: "$linkActive",
-      textUnderlineOffset: "0.4em",
-    },
+  ".small-bottom": {
+    ...smallStyle,
+    verticalAlign: "bottom",
   },
 };
 
