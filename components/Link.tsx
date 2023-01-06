@@ -4,7 +4,7 @@ import type { LinkProps } from "next/link";
 import { default as NextLink } from "next/link";
 import clsx from "clsx";
 import { Icon } from "lib/theme/components";
-import { ExternalLinkIcon, DownloadIcon } from "@radix-ui/react-icons";
+import { ArrowTopRightIcon, DownloadIcon } from "@radix-ui/react-icons";
 import * as url from "lib/utils/url";
 
 interface ILinkProps extends LinkProps {
@@ -28,7 +28,7 @@ export const Link: FCC<ILinkProps> = ({
 
   const VisualIcon = (
     <Icon className={clsx("link-icon", isFile ? "small-bottom" : "sup")}>
-      {isFile ? <DownloadIcon /> : <ExternalLinkIcon />}
+      {isFile ? <DownloadIcon /> : <ArrowTopRightIcon />}
     </Icon>
   );
 
