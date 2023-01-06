@@ -20,21 +20,14 @@ const StyledImage = styled(NextImage, {
   height: "auto",
 });
 
-type IImageProps = Omit<ImageProps, "title" | "alt"> & { title?: string; alt?: string }
+type IImageProps = Omit<ImageProps, "title" | "alt"> & { title?: string; alt?: string };
 
 const FullImage: FCC<IImageProps> = ({ title, alt: altProp = "", src, ...props }) => {
-  const alt = altProp !== "" ? altProp : title ?? `This is an image from ${src}`
+  const alt = altProp !== "" ? altProp : title ?? `This is an image from ${src}`;
 
   return (
     <Figure>
-      <StyledImage
-        width={9999}
-        height={9999}
-        src={src}
-        alt={alt}
-        title={title || ""}
-        {...props}
-      />
+      <StyledImage width={9999} height={9999} src={src} alt={alt} title={title || ""} {...props} />
       {(title || alt) && <FigCaption>{title || alt}</FigCaption>}
     </Figure>
   );
