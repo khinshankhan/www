@@ -20,6 +20,9 @@ const rehypePrettyCodeOptions: Partial<Options> = {
       node.children = [{ type: "text", value: " " }];
     }
   },
+  onVisitHighlightedLine: (node) => {
+    node.properties.className.push("highlighted");
+  },
 };
 
 export default makeSource({

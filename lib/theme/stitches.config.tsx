@@ -58,6 +58,7 @@ export const { styled, css, getCssText, createTheme, globalCss } = createStitche
       navBg: "rgba(237, 242, 247, 0.99)",
       iconBg: "rgba(0, 0, 0, 0.12)",
       codeBg: "hsla(0, 0%, 100%, 1)",
+      codeHighlightBg: "hsla(0, 0%, 95%, 0.95)",
     },
     icons: {
       // https://yoksel.github.io/url-encoder/
@@ -87,6 +88,7 @@ export const darkTheme = createTheme("dark", {
     navBg: "rgba(14, 14, 26, 0.99)",
     iconBg: "rgba(255, 255, 255, 0.12)",
     codeBg: "#1A202C",
+    codeHighlightBg: "hsla(218, 23%, 20%, 0.95)",
   },
   icons: {
     //plum8 #cf91d8

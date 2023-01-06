@@ -49,6 +49,14 @@ export const codeStyles = {
       color: "gray",
     },
   },
+
+  "div > pre[data-language] > code > span.line.highlighted": {
+    backgroundColor: "$codeHighlightBg",
+    borderLeft: "0.25em solid $amber6",
+  },
+  "div > pre[data-language] > code > span.line:not(.highlighted)": {
+    paddingLeft: "0.25em",
+  },
 };
 
 export default codeStyles;
