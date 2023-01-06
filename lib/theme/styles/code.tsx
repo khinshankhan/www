@@ -57,6 +57,11 @@ export const codeStyles = {
   "div > pre[data-language] > code > span.line:not(.highlighted)": {
     paddingLeft: "0.25em",
   },
+
+  "code > span.line > span[class^='word-highlighted-']": {
+    color: "$codeWordHighlightFg",
+    backgroundColor: "$codeWordHighlightBg",
+  },
 };
 
 export default codeStyles;

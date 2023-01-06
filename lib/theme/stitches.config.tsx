@@ -59,6 +59,8 @@ export const { styled, css, getCssText, createTheme, globalCss } = createStitche
       iconBg: "rgba(0, 0, 0, 0.12)",
       codeBg: "hsla(0, 0%, 100%, 1)",
       codeHighlightBg: "hsla(0, 0%, 95%, 0.95)",
+      codeWordHighlightBg: "$amber12",
+      codeWordHighlightFg: "$amber6",
     },
     icons: {
       // https://yoksel.github.io/url-encoder/
