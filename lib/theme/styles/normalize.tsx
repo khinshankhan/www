@@ -16,6 +16,7 @@ export const normalizeStyles = {
       content: "var(--anchorage-icons-linkBefore)",
       opacity: 0,
       marginLeft: "0.125em",
+      verticalAlign: "middle",
     },
     "&:hover:after": {
       opacity: 1,
