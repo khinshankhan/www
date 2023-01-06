@@ -19,7 +19,7 @@ export const media = {
   "2xl": "(min-width: 1536px)",
 
   isMobile: "(max-width: 768px)",
-  isDesktop: "(min-width: 768px)",
+  isDesktop: "not (max-width: 768px)",
 
   motion: "(prefers-reduced-motion)",
   hover: "(any-hover: hover)",
