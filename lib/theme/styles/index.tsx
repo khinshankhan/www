@@ -1,4 +1,5 @@
 export * from "./bg";
+export * from "./code";
 export * from "./container";
 export * from "./media";
 export * from "./normalize";

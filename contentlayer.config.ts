@@ -4,6 +4,23 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkUnwrapImages from "remark-unwrap-images";
+import type { Options } from "rehype-pretty-code";
+import rehypePrettyCode from "rehype-pretty-code";
+
+const rehypePrettyCodeOptions: Partial<Options> = {
+  // Use one of Shiki's packaged themes
+  theme: {
+    light: "github-light",
+    dark: "github-dark-dimmed",
+  },
+  onVisitLine(node) {
+    // Prevent lines from collapsing in `display: grid` mode, and
+    // allow empty lines to be copy/pasted
+    if (node.children.length === 0) {
+      node.children = [{ type: "text", value: " " }];
+    }
+  },
+};
 
 export default makeSource({
   contentDirPath: `data`,
@@ -25,6 +42,7 @@ export default makeSource({
           },
         },
       ],
+      [rehypePrettyCode, rehypePrettyCodeOptions],
     ],
   },
 });

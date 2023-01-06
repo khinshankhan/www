@@ -2,6 +2,7 @@ import { createStitches } from "@stitches/react";
 import {
   resetStyles,
   bgStyles,
+  codeStyles,
   containerStyles,
   mediaStyles,
   normalizeStyles,
@@ -33,6 +34,12 @@ export const { styled, css, getCssText, createTheme, globalCss } = createStitche
   media,
   theme: {
     ...foundations,
+    display: {
+      codeLight: "block",
+      inlineCodeLight: "inline-block",
+      codeDark: "none",
+      inlineCodeDark: "none",
+    },
     colors: {
       ...colors,
       text: "$gray12",
@@ -50,6 +57,7 @@ export const { styled, css, getCssText, createTheme, globalCss } = createStitche
 
       navBg: "rgba(237, 242, 247, 0.99)",
       iconBg: "rgba(0, 0, 0, 0.12)",
+      codeBg: "hsla(0, 0%, 100%, 1)",
     },
     icons: {
       // https://yoksel.github.io/url-encoder/
@@ -64,6 +72,12 @@ export const { styled, css, getCssText, createTheme, globalCss } = createStitche
 });
 
 export const darkTheme = createTheme("dark", {
+  display: {
+    codeLight: "none",
+    inlineCodeLight: "none",
+    codeDark: "block",
+    inlineCodeDark: "inline-block",
+  },
   colors: {
     ...darkColors,
     background: "rgb(23, 25, 35)",
@@ -72,6 +86,7 @@ export const darkTheme = createTheme("dark", {
 
     navBg: "rgba(14, 14, 26, 0.99)",
     iconBg: "rgba(255, 255, 255, 0.12)",
+    codeBg: "#1A202C",
   },
   icons: {
     //plum8 #cf91d8
@@ -110,6 +125,7 @@ export const GlobalStyles = globalCss({
     ...bgStyles,
     ...containerStyles,
     ...typographyStyles,
+    ...codeStyles,
     ...normalizeStyles,
   },
 });
