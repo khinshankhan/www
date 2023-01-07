@@ -29,6 +29,7 @@ const Content = styled("article", {
       paddingTop: "24px",
       paddingLeft: "32px",
       paddingRight: "32px",
+      borderRadius: "12px 12px 0 0",
     },
   },
 });
