@@ -22,7 +22,7 @@ export const codeStyles = {
     paddingLeft: "0.5em",
     paddingRight: "0.5em",
   },
-  "div[data-rehype-pretty-code-title]":{
+  "div[data-rehype-pretty-code-title]": {
     textAlign: "left",
     backgroundColor: "$codeTitleBg",
     padding: "0.25rem 1.3125rem",
@@ -30,7 +30,7 @@ export const codeStyles = {
   },
   "div[data-rehype-pretty-code-fragment]": {
     marginBottom: "20px",
-  } ,
+  },
   "pre[data-language]": {
     whiteSpace: "pre",
     wordSpacing: "normal",
@@ -38,13 +38,13 @@ export const codeStyles = {
     wordWrap: "normal",
     overflowX: "auto",
     backgroundColor: "$codeBg",
-    padding: "0.25rem 1.3125rem 1.3125rem 1.3125rem",
-    borderRadius: "0 0 12px 12px",
-  },
-
-  ":not(div[data-rehype-pretty-code-title]) + pre[data-language]": {
     padding: "1.3125rem",
     borderRadius: "12px",
+  },
+
+  "div[data-rehype-pretty-code-title] ~ pre[data-language]": {
+    padding: "0.25rem 1.3125rem 1.3125rem 1.3125rem",
+    borderRadius: "0 0 12px 12px",
   },
 
   "pre[data-language] > code": {
