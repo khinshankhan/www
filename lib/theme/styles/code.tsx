@@ -16,13 +16,14 @@ export const codeStyles = {
     display: "$display$inlineCodeDark",
   },
 
-  // reset formatting for the block
+  // default formatting for the block
   "span[data-rehype-pretty-code-fragment] > code[data-language]": {
     backgroundColor: "$codeBg",
     paddingLeft: "0.5em",
     paddingRight: "0.5em",
   },
   "div[data-rehype-pretty-code-title]":{
+    textAlign: "left",
     backgroundColor: "$codeTitleBg",
     padding: "0.25rem 1.3125rem",
     borderRadius: "12px 12px 0 0",
@@ -31,7 +32,11 @@ export const codeStyles = {
     marginBottom: "20px",
   } ,
   "pre[data-language]": {
-    textAlign: "left",
+    whiteSpace: "pre",
+    wordSpacing: "normal",
+    wordBreak: "normal",
+    wordWrap: "normal",
+    overflowX: "auto",
     backgroundColor: "$codeBg",
     padding: "0.25rem 1.3125rem 1.3125rem 1.3125rem",
     borderRadius: "0 0 12px 12px",
