@@ -4,6 +4,8 @@ import { useState, useEffect, useRef, cloneElement } from "react";
 import Emoji from "components/Emoji";
 import Link from "components/Link";
 import Image from "components/Image";
+import { IconButton } from "lib/theme/components";
+import { CopyIcon, CheckIcon } from "@radix-ui/react-icons";
 
 const A: MDXComponents["a"] = ({ href = "#", ...props }) => <Link href={href} {...props} />;
 
@@ -25,11 +27,13 @@ const CopyToClipboardButton = ({ ctx }: { ctx: RefObject<HTMLElement> }) => {
     setClick(true);
   }
 
+  const Icon = clicked ? CheckIcon : CopyIcon;
   const text = clicked ? "Copied!" : "Click to copy code";
+  const color = clicked ? "$green10" : "$text";
   return (
-    <button aria-label={text} onClick={onClick} style={{ float: "right" }}>
-      {text}
-    </button>
+    <IconButton aria-label={text} onClick={onClick} css={{ float: "right", color }}>
+      <Icon style={{ color: "inherit" }} />
+    </IconButton>
   );
 };
 
