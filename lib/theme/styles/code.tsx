@@ -22,21 +22,35 @@ export const codeStyles = {
     paddingLeft: "0.5em",
     paddingRight: "0.5em",
   },
-  "div > pre[data-language]": {
+  "div[data-rehype-pretty-code-title]":{
+    backgroundColor: "$codeTitleBg",
+    padding: "0.25rem 1.3125rem",
+    borderRadius: "12px 12px 0 0",
+  },
+  "div[data-rehype-pretty-code-fragment]": {
+    marginBottom: "20px",
+  } ,
+  "pre[data-language]": {
     textAlign: "left",
-    padding: "1.3125rem",
     backgroundColor: "$codeBg",
+    padding: "0.25rem 1.3125rem 1.3125rem 1.3125rem",
+    borderRadius: "0 0 12px 12px",
   },
 
-  "div > pre[data-language] > code": {
+  ":not(div[data-rehype-pretty-code-title]) + pre[data-language]": {
+    padding: "1.3125rem",
+    borderRadius: "12px",
+  },
+
+  "pre[data-language] > code": {
     display: "grid",
   },
-  "div > pre[data-language] > code > span": {
+  "pre[data-language] > code > span": {
     display: "inline-block",
     width: "100%",
   },
 
-  "div > pre[data-language] > code[data-line-numbers]": {
+  "pre[data-language] > code[data-line-numbers]": {
     counterReset: "line",
     "& > .line::before": {
       counterIncrement: "line",
@@ -50,11 +64,11 @@ export const codeStyles = {
     },
   },
 
-  "div > pre[data-language] > code > span.line.highlighted": {
+  "pre[data-language] > code > span.line.highlighted": {
     backgroundColor: "$codeHighlightBg",
     borderLeft: "0.25em solid $amber6",
   },
-  "div > pre[data-language] > code > span.line:not(.highlighted)": {
+  "pre[data-language] > code > span.line:not(.highlighted)": {
     paddingLeft: "0.25em",
   },
 
