@@ -8,22 +8,23 @@ interface ICopyToClipboardToggleProps {
 }
 
 export const CopyToClipboardToggle = ({ ctx }: ICopyToClipboardToggleProps) => {
+  const [count, setCount] = useState(0);
   const [clicked, setClick] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setClick(false);
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timer);
-  }, [clicked, setClick]);
+  }, [count, clicked, setClick]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowTooltip(false);
-    }, 1750);
+    }, 850);
     return () => clearTimeout(timer);
-  }, [clicked, setShowTooltip]);
+  }, [count, clicked, setShowTooltip]);
 
   async function onClick() {
     // TODO: account for potential errors
@@ -31,6 +32,7 @@ export const CopyToClipboardToggle = ({ ctx }: ICopyToClipboardToggleProps) => {
     await navigator.clipboard.writeText(ctx.current?.textContent ?? "Failed to copy");
     setClick(true);
     setShowTooltip(true);
+    setCount((c) => c + 1);
   }
 
   const Icon = clicked ? CheckIcon : CopyIcon;
