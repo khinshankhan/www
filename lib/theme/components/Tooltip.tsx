@@ -16,6 +16,7 @@ const StyledContent = styled(TooltipPrimitive.Content, {
   backgroundColor: "$iconBg",
   borderRadius: "4px",
   padding: "5px 10px",
+  cursor: "pointer",
 
   variants: {
     multiline: {

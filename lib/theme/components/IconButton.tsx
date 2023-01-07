@@ -10,6 +10,7 @@ export const IconButton = styled("button", {
   "&:focus, &:focus-visible, &:hover": {
     background: "$iconBg",
   },
+  cursor: "pointer",
 });
 
 export default IconButton;
