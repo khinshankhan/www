@@ -2,7 +2,6 @@ import { makeSource } from "contentlayer/source-files";
 import * as documentTypes from "./lib/contentlayer/documents";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkUnwrapImages from "remark-unwrap-images";
 import type { Options } from "rehype-pretty-code";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -41,18 +40,6 @@ export default makeSource({
       return options;
     },
     remarkPlugins: [[remarkGfm], [remarkUnwrapImages]],
-    rehypePlugins: [
-      [rehypeSlug],
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: "wrap",
-          properties: {
-            className: ["anchor"],
-          },
-        },
-      ],
-      [rehypePrettyCode, rehypePrettyCodeOptions],
-    ],
+    rehypePlugins: [[rehypeSlug], [rehypePrettyCode, rehypePrettyCodeOptions]],
   },
 });

@@ -11,13 +11,15 @@ interface ILinkProps extends LinkProps {
   isInternal?: boolean | undefined;
   isExternal?: boolean | undefined;
   isFile?: boolean | undefined;
+  className?: string;
 }
 
 export const Link: FCC<ILinkProps> = ({
+  href,
   isInternal: isInternalProp = undefined,
   isExternal: isExternalProp = undefined,
   isFile: isFileProp = undefined,
-  href,
+  className = "",
   children,
   ...props
 }) => {
@@ -34,9 +36,11 @@ export const Link: FCC<ILinkProps> = ({
 
   if (!isExternal) {
     return (
-      <NextLink href={href} download={isFile} {...props}>
-        {children}
-        {!relative && VisualIcon}
+      <NextLink href={href} passHref legacyBehavior {...props}>
+        <a href={href.toString()} download={isFile} className={className} {...props}>
+          {children}
+          {!relative && VisualIcon}
+        </a>
       </NextLink>
     );
   }
@@ -46,6 +50,7 @@ export const Link: FCC<ILinkProps> = ({
       target="_blank"
       rel="noreferrer noopener"
       download={isFile}
+      className={className}
       {...props}
     >
       {children}
