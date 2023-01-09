@@ -6,7 +6,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["twemoji.maxcdn.com"],
+    domains: [
+      "twemoji.maxcdn.com",
+      // HACK: using discord as a cdn... temporarily... hopefully
+      "cdn.discordapp.com",
+    ],
   },
 };
 

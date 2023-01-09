@@ -7,6 +7,10 @@ import {
   grayDark,
   plumA,
   plumDarkA,
+  amber,
+  amberDark,
+  green,
+  greenDark,
 } from "@radix-ui/colors";
 
 // consider these to be mostly light theme
@@ -15,6 +19,8 @@ export const colors = {
   ...mauve,
   ...plumDark,
   ...plumDarkA,
+  ...amberDark,
+  ...green,
 };
 
 // override any light theme same key names
@@ -24,4 +30,6 @@ export const darkColors = {
   ...mauveDark,
   ...plum,
   ...plumA,
+  ...amber,
+  ...greenDark,
 };
