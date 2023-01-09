@@ -7,7 +7,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: [
-      "twemoji.maxcdn.com",
+      "cdnjs.cloudflare.com",
       // HACK: using discord as a cdn... temporarily... hopefully
       "cdn.discordapp.com",
     ],

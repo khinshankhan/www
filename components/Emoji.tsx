@@ -9,9 +9,9 @@ const Emoji = (props: IEmojiProps) => (
   <EmojiStyled
     options={{
       protocol: "https",
-      baseUrl: "//twemoji.maxcdn.com/2/",
+      baseUrl: "//cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/",
       ext: "png",
-      size: "72x72",
+      size: "",
     }}
     {...props}
   />
