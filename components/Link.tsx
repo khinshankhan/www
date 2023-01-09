@@ -34,10 +34,19 @@ export const Link: FCC<ILinkProps> = ({
     </Icon>
   );
 
+  const aProps = {
+    className: className,
+    download: isFile,
+    ...(isExternal && {
+      target: "_blank",
+      rel: "noreferrer noopener",
+    }),
+  };
+
   if (!isExternal) {
     return (
       <NextLink href={href} passHref legacyBehavior {...props}>
-        <a href={href.toString()} download={isFile} className={className} {...props}>
+        <a {...aProps}>
           {children}
           {!relative && VisualIcon}
         </a>
@@ -45,14 +54,7 @@ export const Link: FCC<ILinkProps> = ({
     );
   }
   return (
-    <a
-      href={href.toString()}
-      target="_blank"
-      rel="noreferrer noopener"
-      download={isFile}
-      className={className}
-      {...props}
-    >
+    <a href={href.toString()} {...aProps} {...props}>
       {children}
       {!relative && VisualIcon}
     </a>
