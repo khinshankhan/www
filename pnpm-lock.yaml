@@ -26,7 +26,7 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   react-emoji-render: ^1.2.4
-  rehype-pretty-code: ^0.6.0
+  rehype-pretty-code: ^0.7.0
   rehype-slug: ^5.1.0
   remark-gfm: ^3.0.1
   remark-unwrap-images: ^3.0.1
@@ -56,7 +56,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-emoji-render: 1.2.4_biqbaboplfbrettd7655fr4n2y
-  rehype-pretty-code: 0.6.0_shiki@0.12.1
+  rehype-pretty-code: 0.7.0_shiki@0.12.1
   rehype-slug: 5.1.0
   remark-gfm: 3.0.1
   remark-unwrap-images: 3.0.1
@@ -6080,8 +6080,8 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /rehype-pretty-code/0.6.0_shiki@0.12.1:
-    resolution: {integrity: sha512-VfntYoWYOBVURXYDdB8p/E1sZTm2W5ry89fJyY94WJAo1jUH/5sVhDC7cX5PPnksMyW9PYMxRLNfjkBpSgJrzQ==}
+  /rehype-pretty-code/0.7.0_shiki@0.12.1:
+    resolution: {integrity: sha512-dWdNYALc6ApIx6Qlyk+13JVrEdZiy73rIjRkZgNG05d2iHzfIWMMZ6NM/WsuS0KEAPq9vgulqRah98b9HFpPlw==}
     engines: {node: ^12.16.0 || >=13.2.0}
     peerDependencies:
       shiki: '*'

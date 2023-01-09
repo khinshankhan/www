@@ -13,7 +13,7 @@ const rehypePrettyCodeOptions: Partial<Options> = {
     light: "github-light",
     dark: "github-dark-dimmed",
   },
-  onVisitLine(node) {
+  onVisitLine: (node) => {
     // Prevent lines from collapsing in `display: grid` mode, and
     // allow empty lines to be copy/pasted
     if (node.children.length === 0) {
