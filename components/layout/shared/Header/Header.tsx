@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useMobile, useDisclosure } from "hooks";
 import { styled } from "lib/theme";
 import clsx from "clsx";
-import { ToggleHome, ToggleNavbarMenu } from "components/toggle";
+import { ToggleHome, ToggleNavbarMenu } from "components/toggles";
 import NavbarMenu from "./NavbarMenu";
 
 const SemanticHeader = styled("header", {

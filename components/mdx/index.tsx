@@ -4,7 +4,7 @@ import { useRef, cloneElement } from "react";
 import { Box } from "components/primitives";
 import Emoji from "components/Emoji";
 import { Link, FullImage } from "components/primitives";
-import { CopyToClipboardToggle } from "components/toggle";
+import { CopyToClipboardToggle } from "components/toggles";
 
 const A: MDXComponents["a"] = ({ href = "#", ...props }) => <Link href={href} {...props} />;
 

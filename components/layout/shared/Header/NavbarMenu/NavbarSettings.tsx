@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "lib/theme";
-import { ToggleTheme } from "components/toggle";
+import { ToggleTheme } from "components/toggles";
 
 const Ul = styled("ul", {
   display: "flex",

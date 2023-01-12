@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { styled } from "lib/theme";
-import type { ILogoProps } from "components/icon/Logo";
-import Logo from "components/icon/Logo";
+import type { ILogoProps } from "components/icons/Logo";
+import Logo from "components/icons/Logo";
 
 interface IHomeToggleProps extends ILogoProps {
   size?: number | string;
