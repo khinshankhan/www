@@ -1,4 +1,10 @@
 import { createStitches } from "@stitches/react";
+import { display, darkDisplay } from "./foundations/display";
+import { colors, darkColors } from "./foundations/colors";
+import { icons, darkIcons } from "./foundations/icons";
+import radii from "./foundations/radii";
+import typography from "./foundations/typography";
+import zIndices from "./foundations/z-index";
 import {
   resetStyles,
   bgStyles,
@@ -8,8 +14,6 @@ import {
   normalizeStyles,
   typographyStyles,
 } from "./styles";
-import foundations from "./foundations";
-import { colors, darkColors } from "./foundations/colors";
 
 export const media = {
   xs: "(min-width: 392px)",
@@ -33,71 +37,19 @@ export const { styled, css, getCssText, createTheme, globalCss } = createStitche
   prefix: "anchorage",
   media,
   theme: {
-    ...foundations,
-    display: {
-      codeLight: "block",
-      inlineCodeLight: "inline-block",
-      codeDark: "none",
-      inlineCodeDark: "none",
-    },
-    colors: {
-      ...colors,
-      text: "$gray12",
-      background: "$mauve2",
-
-      placeholder: "black",
-      border: "$gray12",
-
-      link: "$plum7",
-      linkActive: "$plum8",
-
-      logoFg: "$gray12",
-      logoBg: "transparent",
-      logoBorder: "$logoFg",
-
-      navBg: "rgba(237, 242, 247, 0.99)",
-      iconBg: "rgba(0, 0, 0, 0.12)",
-      codeTitleBg: "hsla(0, 0%, 85%, 1)",
-      codeBg: "hsla(0, 0%, 100%, 1)",
-      codeHighlightBg: "hsla(0, 0%, 95%, 0.95)",
-      codeWordHighlightBg: "$amber12",
-      codeWordHighlightFg: "$amber6",
-    },
-    icons: {
-      // https://yoksel.github.io/url-encoder/
-      // https://github.com/atisawd/boxicons/blob/master/svg/regular/bx-anchor.svg
-      /*
-         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m22 15-3-4-3 4h1.906c-.436 2.469-2.438 4.471-4.906 4.906V13h2v-2h-2V9.336c1.543-.459 2.714-1.923 2.714-3.621C15.714 3.666 14.048 2 12 2S8.286 3.666 8.286 5.715c0 1.698 1.171 3.162 2.714 3.621V11H9v2h2v6.906C8.531 19.471 6.529 17.469 6.094 15H8l-3-4-3 4h2.073c.511 3.885 3.929 7 7.927 7s7.416-3.115 7.927-7H22zM10.286 5.715C10.286 4.77 11.055 4 12 4s1.714.77 1.714 1.715c0 .951-.801 1.785-1.714 1.785s-1.714-.834-1.714-1.785z"/></svg>
-       */
-      // plum8 #883894
-      linkBefore: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath stroke='%23883894' fill='%23883894' d='m22 15-3-4-3 4h1.906c-.436 2.469-2.438 4.471-4.906 4.906V13h2v-2h-2V9.336c1.543-.459 2.714-1.923 2.714-3.621C15.714 3.666 14.048 2 12 2S8.286 3.666 8.286 5.715c0 1.698 1.171 3.162 2.714 3.621V11H9v2h2v6.906C8.531 19.471 6.529 17.469 6.094 15H8l-3-4-3 4h2.073c.511 3.885 3.929 7 7.927 7s7.416-3.115 7.927-7H22zM10.286 5.715C10.286 4.77 11.055 4 12 4s1.714.77 1.714 1.715c0 .951-.801 1.785-1.714 1.785s-1.714-.834-1.714-1.785z'/%3E%3C/svg%3E")`,
-    },
+    radii,
+    ...typography,
+    zIndices,
+    display,
+    colors,
+    icons,
   },
 });
 
 export const darkTheme = createTheme("dark", {
-  display: {
-    codeLight: "none",
-    inlineCodeLight: "none",
-    codeDark: "block",
-    inlineCodeDark: "inline-block",
-  },
-  colors: {
-    ...darkColors,
-    background: "rgb(23, 25, 35)",
-
-    placeholder: "white",
-
-    navBg: "rgba(14, 14, 26, 0.99)",
-    iconBg: "rgba(255, 255, 255, 0.12)",
-    codeTitleBg: "hsla(220, 26%, 25%, 1)",
-    codeBg: "hsla(220, 26%, 14%, 1)",
-    codeHighlightBg: "hsla(218, 23%, 20%, 0.95)",
-  },
-  icons: {
-    //plum8 #cf91d8
-    linkBefore: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath stroke='%23cf91d8' fill='%23cf91d8' d='m22 15-3-4-3 4h1.906c-.436 2.469-2.438 4.471-4.906 4.906V13h2v-2h-2V9.336c1.543-.459 2.714-1.923 2.714-3.621C15.714 3.666 14.048 2 12 2S8.286 3.666 8.286 5.715c0 1.698 1.171 3.162 2.714 3.621V11H9v2h2v6.906C8.531 19.471 6.529 17.469 6.094 15H8l-3-4-3 4h2.073c.511 3.885 3.929 7 7.927 7s7.416-3.115 7.927-7H22zM10.286 5.715C10.286 4.77 11.055 4 12 4s1.714.77 1.714 1.715c0 .951-.801 1.785-1.714 1.785s-1.714-.834-1.714-1.785z'/%3E%3C/svg%3E")`,
-  },
+  display: darkDisplay,
+  colors: darkColors,
+  icons: darkIcons,
 });
 
 export const GlobalStyles = globalCss({
@@ -106,10 +58,11 @@ export const GlobalStyles = globalCss({
 
   // apply website styles sanely
   body: {
+    // apply defaults
     background: "$background",
     color: "$text",
 
-    WzebkitFontSmoothing: "antialiased",
+    WebkitFontSmoothing: "antialiased",
     fontFamily: "$body",
     lineHeight: "$base",
     fontSize: "$lg", // 18px
