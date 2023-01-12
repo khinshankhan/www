@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text } from "lib/theme/components";
+import { Box, Text } from "components/primitives";
 
 const fullname = "Khinshan Khan";
 const startYear = 2017;

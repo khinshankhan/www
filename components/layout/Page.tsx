@@ -2,7 +2,7 @@ import type { FCC } from "types/react";
 import React, { Fragment } from "react";
 import { styled } from "lib/theme";
 import clsx from "clsx";
-import { Box, Flex } from "lib/theme/components";
+import { Box, Flex } from "components/primitives";
 import { Header, Footer } from "./shared";
 
 const ContentHeader = styled("header", {

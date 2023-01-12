@@ -22,7 +22,7 @@ const StyledImage = styled(NextImage, {
 
 type IImageProps = Omit<ImageProps, "title" | "alt"> & { title?: string; alt?: string };
 
-const FullImage: FCC<IImageProps> = ({ title, alt: altProp = "", src, ...props }) => {
+export const FullImage: FCC<IImageProps> = ({ title, alt: altProp = "", src, ...props }) => {
   const alt = altProp !== "" ? altProp : title ?? `This is an image from ${src}`;
 
   return (

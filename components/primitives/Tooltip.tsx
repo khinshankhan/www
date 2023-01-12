@@ -1,6 +1,6 @@
 // Based off https://github.com/radix-ui/design-system/blob/master/components/Tooltip.tsx
 import React from "react";
-import { styled } from "../stitches.config";
+import { styled } from "lib/theme";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { Box } from "./Box";
 
@@ -22,7 +22,7 @@ const StyledContent = styled(TooltipPrimitive.Content, {
     multiline: {
       true: {
         maxWidth: 250,
-        pb: 7,
+        paddingBottom: 7,
       },
     },
   },

@@ -1,16 +1,15 @@
 import type { MDXComponents } from "mdx/types";
 import type { DetailedHTMLProps, HTMLAttributes, ReactElement } from "react";
 import { useRef, cloneElement } from "react";
-import { Box } from "lib/theme/components";
+import { Box } from "components/primitives";
 import Emoji from "components/Emoji";
-import Link from "components/Link";
-import Image from "components/Image";
+import { Link, FullImage } from "components/primitives";
 import { CopyToClipboardToggle } from "components/toggle";
 
 const A: MDXComponents["a"] = ({ href = "#", ...props }) => <Link href={href} {...props} />;
 
 const Img: MDXComponents["img"] = ({ title, alt = "", src = "/placeholder.png" }) => (
-  <Image title={title} alt={alt} src={src} />
+  <FullImage title={title} alt={alt} src={src} />
 );
 
 const Pre = (props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>) => {

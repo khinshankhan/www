@@ -2,7 +2,7 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Page } from "contentlayer/generated";
 import { allPages } from "contentlayer/generated";
 import { useLiveReload, useMDXComponent } from "next-contentlayer/hooks";
-import { MdxComponents } from "lib/mdx";
+import { MdxComponents } from "components/mdx";
 import { Page as Layout } from "templates/Page";
 
 export const getStaticPaths = () => {

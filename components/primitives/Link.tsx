@@ -3,7 +3,7 @@ import React from "react";
 import type { LinkProps } from "next/link";
 import { default as NextLink } from "next/link";
 import clsx from "clsx";
-import { Icon } from "lib/theme/components";
+import { Icon } from "./Icon";
 import { ArrowTopRightIcon, DownloadIcon } from "@radix-ui/react-icons";
 import * as url from "lib/utils/url";
 
