@@ -58,6 +58,7 @@ export const normalizeStyles = {
   "#content > p:nth-of-type(1)::first-letter": {
     fontWeight: `$black`,
     "@xs": {
+      "fontFamily": "$heading",
       color: `$mauve12`,
       float: `left`,
       lineHeight: `3.375rem`,

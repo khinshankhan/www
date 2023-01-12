@@ -109,6 +109,7 @@ export const GlobalStyles = globalCss({
     background: "$background",
     color: "$text",
 
+    WzebkitFontSmoothing: "antialiased",
     fontFamily: "$body",
     lineHeight: "$base",
     fontSize: "$lg", // 18px
