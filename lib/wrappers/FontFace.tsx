@@ -27,45 +27,12 @@ export const createFontFace = ({
     .join(``);
 
 export const getFontFaceString = () => {
-  // https://gwfh.mranftl.com/fonts/noto-serif?subsets=latin,latin-ext
+  const Virgil = createFontFace({ name: `Virgil`, file: `/fonts/Virgil.woff2` });
+  const MonaSans = createFontFace({ name: `Mona Sans`, file: `/fonts/Mona-Sans.woff2` });
+
   return `
-/* noto-serif-regular - latin-ext_latin */
-@font-face {
-  font-family: 'Noto Serif';
-  font-style: normal;
-  font-weight: 400;
-  src: local(''),
-       url('/fonts/noto-serif-v21-latin-ext_latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/fonts/noto-serif-v21-latin-ext_latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* noto-serif-italic - latin-ext_latin */
-@font-face {
-  font-family: 'Noto Serif';
-  font-style: italic;
-  font-weight: 400;
-  src: local(''),
-       url('/fonts/noto-serif-v21-latin-ext_latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/fonts/noto-serif-v21-latin-ext_latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* noto-serif-700 - latin-ext_latin */
-@font-face {
-  font-family: 'Noto Serif';
-  font-style: normal;
-  font-weight: 700;
-  src: local(''),
-       url('/fonts/noto-serif-v21-latin-ext_latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/fonts/noto-serif-v21-latin-ext_latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* noto-serif-700italic - latin-ext_latin */
-@font-face {
-  font-family: 'Noto Serif';
-  font-style: italic;
-  font-weight: 700;
-  src: local(''),
-       url('/fonts/noto-serif-v21-latin-ext_latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/fonts/noto-serif-v21-latin-ext_latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-      `;
+${Virgil}
+${MonaSans}`;
 };
 
 export const FontFace = () => <style dangerouslySetInnerHTML={{ __html: getFontFaceString() }} />;

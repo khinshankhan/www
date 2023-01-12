@@ -39,8 +39,8 @@ const fontWeights = {
 };
 
 const fonts = {
-  heading: `Noto Serif`,
-  body: `Noto Serif`,
+  heading: `Virgil`,
+  body: `'Mona Sans'`,
 };
 
 // https://type-scale.com/

@@ -10,28 +10,14 @@ export default function Document() {
         <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssText() }} />
         <link
           rel="preload"
-          href="/fonts/noto-serif-v21-latin-ext_latin-700italic.woff2"
+          href="/fonts/Virgil.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="/fonts/noto-serif-v21-latin-ext_latin-700.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/noto-serif-v21-latin-ext_latin-italic.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/noto-serif-v21-latin-ext_latin-regular.woff2"
+          href="/fonts/Mona-Sans.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
