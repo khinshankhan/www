@@ -18,11 +18,13 @@ export const codeStyles = {
 
   // default formatting for the block
   "span[data-rehype-pretty-code-fragment] > code[data-language]": {
+    fontFamily: "$mono",
     backgroundColor: "$codeBg",
     paddingLeft: "0.5em",
     paddingRight: "0.5em",
   },
   "div[data-rehype-pretty-code-title]": {
+    fontFamily: "$mono",
     textAlign: "left",
     backgroundColor: "$codeTitleBg",
     padding: "0.25rem 1.3125rem",
@@ -32,6 +34,7 @@ export const codeStyles = {
     marginBottom: "20px",
   },
   "pre[data-language]": {
+    fontFamily: "$mono",
     whiteSpace: "pre",
     wordSpacing: "normal",
     wordBreak: "normal",

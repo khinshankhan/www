@@ -41,6 +41,7 @@ const fontWeights = {
 const fonts = {
   heading: `Virgil`,
   body: `'Mona Sans'`,
+  mono: `SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace`,
 };
 
 // https://type-scale.com/
