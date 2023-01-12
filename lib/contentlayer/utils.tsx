@@ -12,13 +12,8 @@ const getSlug = (prefix: string, chopPrefix = true) => {
 interface IFieldsProps {
   subtitle: string;
   status?: string;
-  intersect?: boolean;
 }
-export const getFields = ({
-  subtitle,
-  status = "published",
-  intersect = true,
-}: IFieldsProps): FieldDefs => ({
+export const getFields = ({ subtitle, status = "published" }: IFieldsProps): FieldDefs => ({
   title: {
     type: "string",
     required: true,
@@ -47,11 +42,6 @@ export const getFields = ({
     of: {
       type: "string",
     },
-  },
-
-  intersect: {
-    type: "boolean",
-    default: intersect,
   },
 });
 

@@ -5,7 +5,6 @@ import { PageLayout } from "components/layout";
 interface IArticleProps {
   title?: string;
   subtitle?: string;
-  intersect?: boolean;
 }
 
 export const Article: FCC<IArticleProps> = ({ children, ...props }) => {

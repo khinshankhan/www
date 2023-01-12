@@ -4,7 +4,7 @@ import Emoji from "components/Emoji";
 
 export default function Writing() {
   return (
-    <PageLayout title="Writing" subtitle="My thoughts and ideas" intersect={false}>
+    <PageLayout title="Writing" subtitle="My thoughts and ideas">
       Hello there <Emoji text=":smile:" />
     </PageLayout>
   );
