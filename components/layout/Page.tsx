@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import { styled } from "lib/theme";
 import { Box, Flex } from "components/primitives";
 import { Header, Footer } from "./shared";
+import { Sidebar } from "./Sidebar";
 
 const ContentHeader = styled("header", {
   textAlign: "center",
@@ -43,9 +44,10 @@ export const PageLayout: FCC<IPageLayoutProps> = ({
               {subtitle}
             </Box>
           </ContentHeader>
-          <Content id="article" className="page-container">
-            {children}
-          </Content>
+
+          <Sidebar direction="right">
+            <Content id="article">{children}</Content>
+          </Sidebar>
         </Box>
       </Flex>
       <Footer />
