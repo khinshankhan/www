@@ -23,15 +23,19 @@ const Pre = (props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreEle
   );
 };
 
-interface IAnchorHeadingProps
+export interface IAnchorHeadingProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }
-const AnchorHeading = ({ as = "h1", children, ref, ...props }: IAnchorHeadingProps) => {
+export const AnchorHeading = ({ as = "h1", children, ref, ...props }: IAnchorHeadingProps) => {
   const { id } = props;
 
   if (!id) {
-    return <Box {...props}>{children}</Box>;
+    return (
+      <Box as={as} {...props}>
+        {children}
+      </Box>
+    );
   }
   return (
     <Box as={as} {...props}>
