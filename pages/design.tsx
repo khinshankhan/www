@@ -17,6 +17,7 @@ export default function Design() {
       </p>
 
       <H3 id="typography">Typography</H3>
+
       <H4 id="headings">Headings</H4>
       <h1>Heading h1</h1>
       <h2>Heading h2</h2>
@@ -24,6 +25,7 @@ export default function Design() {
       <h4>Heading h4</h4>
       <h5>Heading h5</h5>
       <h6>Heading h6</h6>
+
       <H4 id="other-typography">Other Typography</H4>
       <p>
         This is <span className="main-nav">main nav</span>.
@@ -37,6 +39,55 @@ export default function Design() {
       <p>
         This is <span className="small-bottom">small bottom</span>.
       </p>
+
+      <H3 id="lists">Lists</H3>
+      <p>Ordered with nesting</p>
+      <ol>
+        <li>one</li>
+        <li>
+          two
+          <ol>
+            <li>one</li>
+            <li>two</li>
+          </ol>
+        </li>
+        <li>
+          three
+          <ol>
+            <li>
+              Deep
+              <ol>
+                <li>one</li>
+                <li>two</li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+
+      <p>Unordered with nesting</p>
+      <ul>
+        <li>one</li>
+        <li>
+          two
+          <ul>
+            <li>one</li>
+            <li>two</li>
+          </ul>
+        </li>
+        <li>
+          three
+          <ul>
+            <li>
+              Deep
+              <ul>
+                <li>one</li>
+                <li>two</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </Layout>
   );
 }
