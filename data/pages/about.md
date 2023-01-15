@@ -1,6 +1,6 @@
 ---
 title: About
-subtitle: Me, myself, and I
+subtitle: me, myself, and I
 
 tended: "2022-11-01"
 ---

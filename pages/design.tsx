@@ -9,7 +9,7 @@ const H4: FCC<IAnchorHeadingProps> = (props) => <AnchorHeading as="h3" {...props
 
 export default function Design() {
   return (
-    <Layout>
+    <Layout title="Design" subtitle="the not so secret sauce">
       <p>
         Hello there. This is a list of components, styles, and other design fun that I created and
         use across this website. It probably is not nicely formatted or anything, but should be
