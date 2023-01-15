@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import { useMobile, useDisclosure } from "hooks";
+import React from "react";
 import { styled } from "lib/theme";
 import clsx from "clsx";
 import { ToggleHome, ToggleNavbarMenu } from "components/toggles";
 import NavbarMenu from "./NavbarMenu";
+import { useMobileNav, useHeaderClass } from "./useHeaderHooks";
 
 const SemanticHeader = styled("header", {
   w: "100%",
@@ -27,19 +27,16 @@ const Nav = styled("nav", {
 });
 
 interface IHeaderProps {
-  className?: string;
+  initialHeaderClass?: string;
   logoSize?: string;
 }
-export function Header({ className = "nav-bg", logoSize = `50px` }: IHeaderProps) {
-  const { isMobile } = useMobile();
-  const { isOpen, onToggle, onClose } = useDisclosure({ defaultIsOpen: false });
 
-  useEffect(() => {
-    onClose();
-  }, [isMobile, onClose]);
+export function Header({ initialHeaderClass = "nav-bg", logoSize = `50px` }: IHeaderProps) {
+  const { isOpen, onToggle } = useMobileNav();
+  const { headerClass } = useHeaderClass(initialHeaderClass);
 
   return (
-    <SemanticHeader role="navigation" className={className}>
+    <SemanticHeader role="navigation" className={headerClass}>
       <Nav className="page-container">
         <ToggleHome size={logoSize} />
         <NavbarMenu className="hide-mobile" />
