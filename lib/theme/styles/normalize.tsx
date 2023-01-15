@@ -10,6 +10,12 @@ export const normalizeStyles = {
       textUnderlineOffset: "0.4em",
     },
   },
+  ".on": {
+    color: "$linkOn",
+    "&:hover": {
+      color: "$linkOn",
+    },
+  },
   ".anchor": {
     "&:after": {
       transition: "opacity 0.4s ease-in-out",

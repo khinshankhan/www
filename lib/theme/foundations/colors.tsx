@@ -30,6 +30,7 @@ export const colors = {
 
   link: "$plum7",
   linkActive: "$plum8",
+  linkOn: "$plum4",
 
   logoFg: "$gray12",
   logoBg: "transparent",
