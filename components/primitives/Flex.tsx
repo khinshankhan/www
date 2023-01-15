@@ -1,4 +1,4 @@
-import { styled } from "../stitches.config";
+import { styled } from "lib/theme";
 import { createProperties } from "./util";
 
 export const Flex = styled("div", {

@@ -1,6 +1,6 @@
 import React from "react";
 import { HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
-import { IconButton } from "lib/theme/components";
+import { IconButton } from "components/primitives";
 
 interface IToggleNavbarMenuProps {
   className?: string;

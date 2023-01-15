@@ -1,6 +1,6 @@
 import type { RefObject } from "react";
 import { useState, useEffect } from "react";
-import { IconButton, Tooltip } from "lib/theme/components";
+import { IconButton, Tooltip } from "components/primitives";
 import { CopyIcon, CheckIcon } from "@radix-ui/react-icons";
 
 interface ICopyToClipboardToggleProps {

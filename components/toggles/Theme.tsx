@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
-import { IconButton } from "lib/theme/components";
+import { IconButton } from "components/primitives";
 
 // TODO: move state to react context
 export const ToggleTheme = () => {

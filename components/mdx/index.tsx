@@ -1,16 +1,15 @@
 import type { MDXComponents } from "mdx/types";
 import type { DetailedHTMLProps, HTMLAttributes, ReactElement } from "react";
 import { useRef, cloneElement } from "react";
-import { Box } from "lib/theme/components";
+import { Box } from "components/primitives";
 import Emoji from "components/Emoji";
-import Link from "components/Link";
-import Image from "components/Image";
-import { CopyToClipboardToggle } from "components/toggle";
+import { Link, FullImage } from "components/primitives";
+import { CopyToClipboardToggle } from "components/toggles";
 
 const A: MDXComponents["a"] = ({ href = "#", ...props }) => <Link href={href} {...props} />;
 
 const Img: MDXComponents["img"] = ({ title, alt = "", src = "/placeholder.png" }) => (
-  <Image title={title} alt={alt} src={src} />
+  <FullImage title={title} alt={alt} src={src} />
 );
 
 const Pre = (props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>) => {
@@ -24,15 +23,19 @@ const Pre = (props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreEle
   );
 };
 
-interface IAnchorHeadingProps
+export interface IAnchorHeadingProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }
-const AnchorHeading = ({ as = "h1", children, ref, ...props }: IAnchorHeadingProps) => {
+export const AnchorHeading = ({ as = "h1", children, ref, ...props }: IAnchorHeadingProps) => {
   const { id } = props;
 
   if (!id) {
-    return <Box {...props}>{children}</Box>;
+    return (
+      <Box as={as} {...props}>
+        {children}
+      </Box>
+    );
   }
   return (
     <Box as={as} {...props}>

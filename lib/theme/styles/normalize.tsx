@@ -10,6 +10,12 @@ export const normalizeStyles = {
       textUnderlineOffset: "0.4em",
     },
   },
+  ".on": {
+    color: "$linkOn",
+    "&:hover": {
+      color: "$linkOn",
+    },
+  },
   ".anchor": {
     "&:after": {
       transition: "opacity 0.4s ease-in-out",
@@ -29,22 +35,25 @@ export const normalizeStyles = {
   "#content > p+:where(ol, ul)": {
     marginTop: "-20px",
   },
-  "#content > :where(ol, ul) > li > p": {
-    display: "inline-flex",
-    marginBottom: "20px",
-  },
-  "#content > ul, ol": {
+
+  "#content > :where(ul, ol)": {
     listStyle: "inside",
   },
-  "#content > :where(ul, ol) > li > ul, ol": {
+  "#content > :where(ul, ol) > li > :where(ul, ol)": {
     paddingLeft: "40px",
   },
-  "#content > :where(ul, ol) > li > :where(ul, ol) > li > ul, ol": {
+  "#content > :where(ul, ol) > li > :where(ul, ol) > li > :where(ul, ol)": {
     paddingLeft: "40px",
   },
 
   "#content > ol": {
     listStyleType: "decimal",
+  },
+  "#content > ol > li > ol": {
+    listStyleType: "lower-alpha",
+  },
+  "#content > ol > li > ol > li > ol": {
+    listStyleType: "lower-greek",
   },
   "#content > ul": {
     listStyleType: "disc",
@@ -55,17 +64,16 @@ export const normalizeStyles = {
   "#content > ul > li > ul > li > ul": {
     listStyleType: "square",
   },
+
   "#content > p:nth-of-type(1)::first-letter": {
     fontWeight: `$black`,
-    "@xs": {
-      "fontFamily": "$heading",
-      color: `$mauve12`,
-      float: `left`,
-      lineHeight: `3.375rem`,
-      fontSize: `5rem`,
-      "@lg": {
-        fontSize: `6rem`,
-      },
+    fontFamily: "$heading",
+    color: `$mauve12`,
+    float: `left`,
+    lineHeight: `3.375rem`,
+    fontSize: `5rem`,
+    "@lg": {
+      fontSize: `6rem`,
     },
   },
 };

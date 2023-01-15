@@ -1,4 +1,4 @@
-import { styled } from "../stitches.config";
+import { styled } from "lib/theme";
 
 export const IconButton = styled("button", {
   display: "inline-block",
