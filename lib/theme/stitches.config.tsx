@@ -61,6 +61,7 @@ export const GlobalStyles = globalCss({
     // apply defaults
     background: "$background",
     color: "$text",
+    transition: "all 0.4s ease-in-out",
 
     WebkitFontSmoothing: "antialiased",
     fontFamily: "$body",
