@@ -28,7 +28,7 @@ const Li = styled("li", {
 export type HeadingInfo = { id: string; level: number; content: string };
 
 export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings }) => {
-  const activeId = useScrollSpy(
+  const activeIds = useScrollSpy(
     [`[id="excerpt"]`,...headings.map(({ id }) => `[id="${id}"]`)],
     {
       rootMargin: "-20% 0% -80% 0%",
@@ -47,7 +47,7 @@ export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings }) => {
       </h2>
       <Flex as="ul" flexDirection="column">
         {headings.map(({ id, level, content }) => (
-          <Li key={id} data-level={level} data-active={activeId === id}>
+          <Li key={id} data-level={level} data-active={activeIds.includes(id)}>
             <Link href={`#${id}`}>{content}</Link>
           </Li>
         ))}

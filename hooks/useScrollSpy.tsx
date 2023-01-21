@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 
 export const useScrollSpy = (selectors: string[], options?: IntersectionObserverInit) => {
-  const [activeId, setActiveId] = useState<string>("");
+  const [activeIds, setActiveIds] = useState<string[]>([]);
 
   const observer = useRef<IntersectionObserver | null>(null);
   useEffect(() => {
@@ -10,11 +10,16 @@ export const useScrollSpy = (selectors: string[], options?: IntersectionObserver
 
     observer.current?.disconnect();
     observer.current = new IntersectionObserver((entries) => {
+      const newActiveIds: string[] = []
       entries.forEach((entry) => {
         if (entry?.isIntersecting) {
-          setActiveId(entry.target.getAttribute("id") ?? "");
+          newActiveIds.push(entry.target.getAttribute("id") ?? "")
         }
       });
+
+      if(newActiveIds.length > 0){
+        setActiveIds(newActiveIds)
+      }
     }, options);
 
     elements.forEach((el) => {
@@ -24,7 +29,7 @@ export const useScrollSpy = (selectors: string[], options?: IntersectionObserver
     return () => observer.current?.disconnect();
   }, [selectors, options]);
 
-  return activeId;
+  return activeIds;
 };
 
 export default useScrollSpy;
