@@ -4,8 +4,8 @@ import { allPages } from "contentlayer/generated";
 import { useLiveReload, useMDXComponent } from "next-contentlayer/hooks";
 import { MdxComponents } from "components/mdx";
 import { default as Layout } from "templates/Article";
-import type {HeadingInfo} from "components/sidebars"
-import {Toc} from "components/sidebars"
+import type { HeadingInfo } from "components/sidebars";
+import { Toc } from "components/sidebars";
 
 export const getStaticPaths = () => {
   const paths = allPages.map((p) => ({
@@ -48,7 +48,11 @@ export default function PageView({ page }: InferGetStaticPropsType<typeof getSta
   useLiveReload();
   const MDXContent = useMDXComponent(page?.body?.code || "");
   return (
-    <Layout title={page.title} subtitle={page.subtitle} sidebar={<Toc headings={page.headings as HeadingInfo[]} />}>
+    <Layout
+      title={page.title}
+      subtitle={page.subtitle}
+      sidebar={<Toc headings={page.headings as HeadingInfo[]} />}
+    >
       {MDXContent && <MDXContent components={MdxComponents} />}
     </Layout>
   );
