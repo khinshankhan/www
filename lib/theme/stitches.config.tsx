@@ -86,7 +86,10 @@ export const GlobalStyles = globalCss({
     },
 
     "*[id]": {
-      scrollMarginTop: "110px", // approximately sticky header
+      scrollMarginTop: "100px", // approximately sticky header, observer doesn't really matter on mobile
+      "@xl": {
+        scrollMarginTop: "165px", // approximately intersection observer margins
+      },
     },
 
     ...mediaStyles,
