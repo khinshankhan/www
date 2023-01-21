@@ -10,15 +10,15 @@ export const useScrollSpy = (selectors: string[], options?: IntersectionObserver
 
     observer.current?.disconnect();
     observer.current = new IntersectionObserver((entries) => {
-      const newActiveIds: string[] = []
+      const newActiveIds: string[] = [];
       entries.forEach((entry) => {
         if (entry?.isIntersecting) {
-          newActiveIds.push(entry.target.getAttribute("id") ?? "")
+          newActiveIds.push(entry.target.getAttribute("id") ?? "");
         }
       });
 
-      if(newActiveIds.length > 0){
-        setActiveIds(newActiveIds)
+      if (newActiveIds.length > 0) {
+        setActiveIds(newActiveIds);
       }
     }, options);
 

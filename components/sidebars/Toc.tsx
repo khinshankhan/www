@@ -6,16 +6,16 @@ import { useScrollSpy } from "hooks";
 
 const Li = styled("li", {
   paddingLeft: "8px",
-  "&[data-level='3']": {
+  "&[data-level='1']": {
     paddingLeft: "24px",
   },
-  "&[data-level='4']": {
+  "&[data-level='2']": {
     paddingLeft: "40px",
   },
-  "&[data-level='5']": {
+  "&[data-level='3']": {
     paddingLeft: "56px",
   },
-  "&[data-level='6']": {
+  "&[data-level='4']": {
     paddingLeft: "70px",
   },
 
@@ -27,12 +27,19 @@ const Li = styled("li", {
 
 export type HeadingInfo = { id: string; level: number; content: string };
 
-export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings }) => {
+export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings: headingsProp }) => {
+  // determine smallest heading, since headings go 1-6, 7 should be out of range
+  const minLevel =
+    headingsProp.length === 0
+      ? 0
+      : headingsProp.reduce((min, { level }) => Math.min(min, level), 7);
+
+  // add excerpt to allow for a better 'default' intersection
+  const headings = [{ id: "excerpt", level: minLevel, content: "Introduction" }, ...headingsProp];
+
   const activeIds = useScrollSpy(
-    [`[id="excerpt"]`,...headings.map(({ id }) => `[id="${id}"]`)],
-    {
-      rootMargin: "-20% 0% -80% 0%",
-    }
+    headings.map(({ id }) => `[id="${id}"]`),
+    { rootMargin: "-20% 0% -80% 0%" }
   );
 
   return (
@@ -47,7 +54,7 @@ export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings }) => {
       </h2>
       <Flex as="ul" flexDirection="column">
         {headings.map(({ id, level, content }) => (
-          <Li key={id} data-level={level} data-active={activeIds.includes(id)}>
+          <Li key={id} data-level={level - minLevel} data-active={activeIds.includes(id)}>
             <Link href={`#${id}`}>{content}</Link>
           </Li>
         ))}
