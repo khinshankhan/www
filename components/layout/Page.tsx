@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import { styled } from "lib/theme";
 import { Box, Flex } from "components/primitives";
 import { Header, Footer } from "./shared";
+import type { ISidebarProps } from "./Sidebar";
 import { Sidebar } from "./Sidebar";
 
 const ContentHeader = styled("header", {
@@ -23,7 +24,7 @@ const Content = styled("article", {
   flexGrow: 1,
 });
 
-interface IPageLayoutProps {
+export interface IPageLayoutProps extends ISidebarProps {
   title?: string;
   subtitle?: string;
 }
@@ -31,6 +32,8 @@ interface IPageLayoutProps {
 export const PageLayout: FCC<IPageLayoutProps> = ({
   title = "mhm yes",
   subtitle = "hello there",
+  direction = "right",
+  sidebar,
   children,
 }) => {
   return (
@@ -46,7 +49,7 @@ export const PageLayout: FCC<IPageLayoutProps> = ({
             </Box>
           </ContentHeader>
 
-          <Sidebar direction="right">
+          <Sidebar direction={direction} sidebar={sidebar}>
             <Content id="article">{children}</Content>
           </Sidebar>
         </Box>
