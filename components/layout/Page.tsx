@@ -3,8 +3,8 @@ import React, { Fragment } from "react";
 import { styled } from "lib/theme";
 import { Box, Flex } from "components/primitives";
 import { Header, Footer } from "./shared";
-import type { ISidebarProps } from "./Sidebar";
-import { Sidebar } from "./Sidebar";
+import type { ISidebarProps } from "components/sidebars";
+import { Sidebar } from "components/sidebars";
 
 const ContentHeader = styled("header", {
   textAlign: "center",
