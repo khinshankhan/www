@@ -60,17 +60,17 @@ export const GlobalStyles = globalCss({
   html: {
     scrollBehavior: "smooth",
     "*": {
-    WebkitFontSmoothing: "antialiased",
-    fontFamily: "$body",
-    lineHeight: "$base",
-    fontSize: "$lg", // 18px
-    "@lg": {
-      fontSize: "1.3125rem", // 21px
+      WebkitFontSmoothing: "antialiased",
+      fontFamily: "$body",
+      lineHeight: "$base",
+      fontSize: "$lg", // 18px
+      "@lg": {
+        fontSize: "1.3125rem", // 21px
+      },
+      "@2xl": {
+        fontSize: "1.43775rem", // ~23px, avg 21px and $xl
+      },
     },
-    "@2xl": {
-      fontSize: "1.43775rem", // ~23px, avg 21px and $xl
-    },
-    }
   },
   body: {
     // apply defaults

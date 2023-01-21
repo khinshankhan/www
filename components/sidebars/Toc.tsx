@@ -3,7 +3,7 @@ import React from "react";
 import { Button, Flex } from "components/primitives";
 import { styled } from "lib/theme";
 import { useScrollSpy } from "hooks";
-import {scrollToElement} from "lib/utils/scroll"
+import { scrollToElement } from "lib/utils/scroll";
 
 const Li = styled("li", {
   paddingLeft: "8px",
@@ -44,11 +44,11 @@ export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings: headingsProp }
   );
 
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const id = event.currentTarget.dataset.id
-    if(!id) return // too lazy to do type assertion
+    const id = event.currentTarget.dataset.id;
+    if (!id) return; // too lazy to do type assertion
     // TODO: might be sweet to toast 'successfully scroll to <content>'
-    scrollToElement(`[id="${id}"]`)
-  }
+    scrollToElement(`[id="${id}"]`);
+  };
 
   return (
     <>
@@ -63,7 +63,9 @@ export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings: headingsProp }
       <Flex as="ul" flexDirection="column">
         {headings.map(({ id, level, content }) => (
           <Li key={id} data-level={level - minLevel} data-active={activeIds.includes(id)}>
-            <Button variant="link" data-id={id} onClick={onClick}>{content}</Button>
+            <Button variant="link" data-id={id} onClick={onClick}>
+              {content}
+            </Button>
           </Li>
         ))}
       </Flex>

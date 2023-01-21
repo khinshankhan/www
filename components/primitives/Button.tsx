@@ -1,5 +1,5 @@
 import { styled } from "lib/theme";
-import {  normalizeStyles } from "lib/theme/styles"
+import { normalizeStyles } from "lib/theme/styles";
 
 export const Button = styled("button", {
   display: "block",
@@ -22,7 +22,7 @@ export const Button = styled("button", {
         "&:focus, &:focus-visible, &:hover": {
           background: "transparent",
         },
-      }
+      },
     },
   },
 });
