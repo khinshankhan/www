@@ -1,8 +1,9 @@
 import type { FCC } from "types/react";
 import React from "react";
-import { Flex } from "components/primitives";
+import { Button, Flex } from "components/primitives";
 import { styled } from "lib/theme";
 import { useScrollSpy } from "hooks";
+import {scrollToElement} from "lib/utils/scroll"
 
 const Li = styled("li", {
   paddingLeft: "8px",
@@ -42,6 +43,13 @@ export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings: headingsProp }
     { rootMargin: "-20% 0% -80% 0%" }
   );
 
+  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const id = event.currentTarget.dataset.id
+    if(!id) return // too lazy to do type assertion
+    // TODO: might be sweet to toast 'successfully scroll to <content>'
+    scrollToElement(`[id="${id}"]`)
+  }
+
   return (
     <>
       <h2
@@ -55,7 +63,7 @@ export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings: headingsProp }
       <Flex as="ul" flexDirection="column">
         {headings.map(({ id, level, content }) => (
           <Li key={id} data-level={level - minLevel} data-active={activeIds.includes(id)}>
-            <a href={`#${id}`}>{content}</a>
+            <Button variant="link" data-id={id} onClick={onClick}>{content}</Button>
           </Li>
         ))}
       </Flex>

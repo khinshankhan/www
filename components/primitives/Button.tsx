@@ -16,6 +16,7 @@ export const Button = styled("button", {
     variant: {
       link: {
         ...normalizeStyles.a,
+        textAlign: "left",
         padding: 0,
         borderRadius: 0,
         "&:focus, &:focus-visible, &:hover": {
