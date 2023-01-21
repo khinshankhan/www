@@ -1,6 +1,6 @@
 import type { FCC } from "types/react";
 import React from "react";
-import { Link, Flex } from "components/primitives";
+import { Flex } from "components/primitives";
 import { styled } from "lib/theme";
 import { useScrollSpy } from "hooks";
 
@@ -55,7 +55,7 @@ export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings: headingsProp }
       <Flex as="ul" flexDirection="column">
         {headings.map(({ id, level, content }) => (
           <Li key={id} data-level={level - minLevel} data-active={activeIds.includes(id)}>
-            <Link href={`#${id}`}>{content}</Link>
+            <a href={`#${id}`}>{content}</a>
           </Li>
         ))}
       </Flex>

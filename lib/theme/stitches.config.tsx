@@ -57,6 +57,9 @@ export const GlobalStyles = globalCss({
   ...resetStyles,
 
   // apply website styles sanely
+  html: {
+    scrollBehavior: "smooth",
+  },
   body: {
     // apply defaults
     background: "$background",
@@ -80,6 +83,10 @@ export const GlobalStyles = globalCss({
     "*, *::before, &::after": {
       borderColor: "$color$border",
       wordWrap: "break-word",
+    },
+
+    "*[id]": {
+      scrollMarginTop: "110px", // approximately sticky header
     },
 
     ...mediaStyles,
