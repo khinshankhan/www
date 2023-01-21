@@ -1,4 +1,4 @@
-import type { FCC } from "types/react";
+import type { FCC, ReactNode } from "types/react";
 import React from "react";
 import { styled } from "lib/theme";
 import { Flex } from "components/primitives";
@@ -54,28 +54,12 @@ const LayoutStack = styled("div", {
 
 interface ISidebarProps {
   direction?: "left" | "right";
+  sidebar?: ReactNode;
 }
 
-export const Sidebar: FCC<ISidebarProps> = ({ direction = `left`, children }) => (
+export const Sidebar: FCC<ISidebarProps> = ({ direction = `left`, sidebar, children }) => (
   <LayoutStack data-direction={direction} className="page-container">
-    <SidebarContainer>
-      <h2
-        className="h4"
-        style={{
-          textAlign: "center",
-        }}
-      >
-        Table of Contents
-      </h2>
-      <Flex flexDirection="column">
-        <a href="https://google.com">{`>`} Google</a>
-        <a href="https://google.com">{`>`} Google</a>
-        <a href="https://google.com">{`>>`} Google</a>
-        <a href="https://google.com">{`>`} Google</a>
-        <a href="https://google.com">{`>`} Testing a really long heading now</a>
-        <a href="https://google.com">{`>`} Google</a>
-      </Flex>
-    </SidebarContainer>
+    {sidebar && <SidebarContainer>{sidebar}</SidebarContainer>}
     {children}
   </LayoutStack>
 );
