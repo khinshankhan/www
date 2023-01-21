@@ -1,5 +1,8 @@
 export const normalizeStyles = {
   a: {
+    fontFamily: "inherit",
+    lineHeight: "inherit",
+    fontSize: "inherit",
     color: "$link",
     textDecoration: "underline 0 transparent",
     textUnderlineOffset: "0.4em",
