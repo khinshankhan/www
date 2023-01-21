@@ -4,7 +4,7 @@ import { getFields, getComputedFields } from "../fields";
 const fields = getFields({
   subtitle: `Doing my best ✍️`,
 });
-const computedFields = getComputedFields<"Page">({
+const computedFields = getComputedFields({
   prefix: `pages`,
 });
 

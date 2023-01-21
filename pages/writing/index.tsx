@@ -13,13 +13,15 @@ const Writing: NextPage<Props> = ({ articles }) => (
 );
 
 export const getStaticProps = async () => {
-  const articles = allPages.map((article) => ({
-    title: article.title,
-    subtitle: article.subtitle,
-    slug: article.slug,
-  }));
+  const articles = allPages.map((article) => {
 
-  /*   console.log({uno: allPages[0], dos: allPages[1].body.code}) */
+    return {
+      title: article.title,
+      subtitle: article.subtitle,
+      slug: article.slug,
+      categories: article.categories ?? [],
+    }
+  });
 
   return { props: { articles } };
 };

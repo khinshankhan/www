@@ -19,6 +19,10 @@ export const getFields = ({ subtitle, status = "published" }: IFieldsProps): Fie
     type: "string",
   },
 
+  planted: {
+    type: "date",
+    required: false,
+  },
   tended: {
     type: "date",
     required: true,
@@ -30,6 +34,12 @@ export const getFields = ({ subtitle, status = "published" }: IFieldsProps): Fie
     default: status,
   },
 
+  tags: {
+    type: "list",
+    of: {
+      type: "string",
+    },
+  },
   categories: {
     type: "list",
     of: {
@@ -42,21 +52,34 @@ interface IComputedFieldsProps {
   prefix: string;
   chopPrefix?: boolean;
 }
-export const getComputedFields = <T extends string>({
+export const getComputedFields = ({
   prefix,
   chopPrefix = true,
-}: IComputedFieldsProps): ComputedFields<T> => {
+}: IComputedFieldsProps): ComputedFields<"Page"> => {
   const cleanPath = chopOffWord(prefix, false);
 
   return {
+    frontmatter: {
+      type: "json",
+      resolve: (doc) => {
+        const resolved = {
+          title: doc.title,
+          subtitle: doc.subtitle,
+          // chop of tz info since it's wrong (Z)
+          planted: doc.planted?.slice(0, -1),
+          tended: doc.tended.slice(0, -1),
+        };
+        return resolved;
+      },
+    },
+
     slug: {
       type: "string",
       resolve: (doc) =>
-        doc.givenSlug ?? chopPrefix
+        doc?.givenSlug ?? chopPrefix
           ? cleanPath(doc._raw.flattenedPath).slice(1)
           : doc._raw.flattenedPath,
     },
-
     headings: {
       type: "json",
       resolve: (doc) => {
@@ -67,7 +90,7 @@ export const getComputedFields = <T extends string>({
         const regexHeadings = /^(?<tag>#{1,6})[ ](?<content>[^\n]+)/gm;
 
         if (!doc?.body?.raw) return [];
-        return [...(doc.body.raw as string).matchAll(regexHeadings)].map(([, tag, content]) => ({
+        return [...doc.body.raw.matchAll(regexHeadings)].map(([, tag, content]) => ({
           level: tag.length,
           content,
           id: slugs.slug(content, false),
