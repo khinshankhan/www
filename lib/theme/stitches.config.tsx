@@ -59,13 +59,7 @@ export const GlobalStyles = globalCss({
   // apply website styles sanely
   html: {
     scrollBehavior: "smooth",
-  },
-  body: {
-    // apply defaults
-    background: "$background",
-    color: "$text",
-    transition: "font-size 0.4s ease-in-out",
-
+    "*": {
     WebkitFontSmoothing: "antialiased",
     fontFamily: "$body",
     lineHeight: "$base",
@@ -76,6 +70,13 @@ export const GlobalStyles = globalCss({
     "@2xl": {
       fontSize: "1.43775rem", // ~23px, avg 21px and $xl
     },
+    }
+  },
+  body: {
+    // apply defaults
+    background: "$background",
+    color: "$text",
+    transition: "font-size 0.4s ease-in-out",
 
     "*::placeholder": {
       color: "$color$placeholder",
