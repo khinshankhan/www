@@ -1,5 +1,5 @@
 import { defineDocumentType } from "contentlayer/source-files";
-import { getFields, getComputedFields } from "../utils";
+import { getFields, getComputedFields } from "../fields";
 
 const fields = getFields({
   subtitle: `Doing my best ✍️`,

@@ -1,7 +1,7 @@
 import type { FCC } from "types/react";
+import type { ReactNode } from "react";
 import React from "react";
 import { styled } from "lib/theme";
-import { Flex } from "components/primitives";
 
 export const Aside = styled("aside", {
   position: "sticky",
@@ -25,6 +25,7 @@ export const AsideContent = styled("div", {
     marginTop: "1.8rem",
     maxWidth: `225px`,
   },
+  width: "100%",
   minWidth: "185px",
   overflow: "auto",
   alignItems: "flex-start",
@@ -52,30 +53,14 @@ const LayoutStack = styled("div", {
   gap: "5rem",
 });
 
-interface ISidebarProps {
+export interface ISidebarProps {
   direction?: "left" | "right";
+  sidebar?: ReactNode;
 }
 
-export const Sidebar: FCC<ISidebarProps> = ({ direction = `left`, children }) => (
+export const Sidebar: FCC<ISidebarProps> = ({ direction = "left", sidebar, children }) => (
   <LayoutStack data-direction={direction} className="page-container">
-    <SidebarContainer>
-      <h2
-        className="h4"
-        style={{
-          textAlign: "center",
-        }}
-      >
-        Table of Contents
-      </h2>
-      <Flex flexDirection="column">
-        <a href="https://google.com">{`>`} Google</a>
-        <a href="https://google.com">{`>`} Google</a>
-        <a href="https://google.com">{`>>`} Google</a>
-        <a href="https://google.com">{`>`} Google</a>
-        <a href="https://google.com">{`>`} Testing a really long heading now</a>
-        <a href="https://google.com">{`>`} Google</a>
-      </Flex>
-    </SidebarContainer>
+    {sidebar && <SidebarContainer>{sidebar}</SidebarContainer>}
     {children}
   </LayoutStack>
 );

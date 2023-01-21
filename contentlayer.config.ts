@@ -5,6 +5,7 @@ import rehypeSlug from "rehype-slug";
 import remarkUnwrapImages from "remark-unwrap-images";
 import type { Options } from "rehype-pretty-code";
 import rehypePrettyCode from "rehype-pretty-code";
+import rehypeMarkExcerpt from "./lib/rehype/rehypeMarkExcerpt";
 
 let count = 0;
 const rehypePrettyCodeOptions: Partial<Options> = {
@@ -40,6 +41,6 @@ export default makeSource({
       return options;
     },
     remarkPlugins: [[remarkGfm], [remarkUnwrapImages]],
-    rehypePlugins: [[rehypeSlug], [rehypePrettyCode, rehypePrettyCodeOptions]],
+    rehypePlugins: [[rehypeSlug], [rehypePrettyCode, rehypePrettyCodeOptions], [rehypeMarkExcerpt]],
   },
 });

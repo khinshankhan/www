@@ -57,22 +57,26 @@ export const GlobalStyles = globalCss({
   ...resetStyles,
 
   // apply website styles sanely
+  html: {
+    scrollBehavior: "smooth",
+    "*": {
+      WebkitFontSmoothing: "antialiased",
+      fontFamily: "$body",
+      lineHeight: "$base",
+      fontSize: "$lg", // 18px
+      "@lg": {
+        fontSize: "1.3125rem", // 21px
+      },
+      "@2xl": {
+        fontSize: "1.43775rem", // ~23px, avg 21px and $xl
+      },
+    },
+  },
   body: {
     // apply defaults
     background: "$background",
     color: "$text",
     transition: "font-size 0.4s ease-in-out",
-
-    WebkitFontSmoothing: "antialiased",
-    fontFamily: "$body",
-    lineHeight: "$base",
-    fontSize: "$lg", // 18px
-    "@lg": {
-      fontSize: "1.3125rem", // 21px
-    },
-    "@2xl": {
-      fontSize: "1.43775rem", // ~23px, avg 21px and $xl
-    },
 
     "*::placeholder": {
       color: "$color$placeholder",
@@ -80,6 +84,13 @@ export const GlobalStyles = globalCss({
     "*, *::before, &::after": {
       borderColor: "$color$border",
       wordWrap: "break-word",
+    },
+
+    "*[id]": {
+      scrollMarginTop: "100px", // approximately sticky header, observer doesn't really matter on mobile
+      "@xl": {
+        scrollMarginTop: "165px", // approximately intersection observer margins
+      },
     },
 
     ...mediaStyles,

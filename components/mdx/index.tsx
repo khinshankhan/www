@@ -39,9 +39,9 @@ export const AnchorHeading = ({ as = "h1", children, ref, ...props }: IAnchorHea
   }
   return (
     <Box as={as} {...props}>
-      <Link href={`#${id}`} className="anchor" isInternal={true} isFile={false}>
+      <a href={`#${id}`} className="anchor">
         {children}
-      </Link>
+      </a>
     </Box>
   );
 };

@@ -1,13 +1,9 @@
 import type { FCC } from "types/react";
 import React from "react";
+import type { IPageLayoutProps } from "components/layout";
 import { PageLayout } from "components/layout";
 
-interface IArticleProps {
-  title?: string;
-  subtitle?: string;
-}
-
-export const Article: FCC<IArticleProps> = ({ children, ...props }) => {
+export const Article: FCC<IPageLayoutProps> = ({ children, ...props }) => {
   return (
     <PageLayout {...props}>
       <article id="content">{children}</article>
