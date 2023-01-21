@@ -29,7 +29,7 @@ export type HeadingInfo = { id: string; level: number; content: string };
 
 export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings }) => {
   const activeId = useScrollSpy(
-    headings.map(({ id }) => `[id="${id}"]`),
+    [`[id="excerpt"]`,...headings.map(({ id }) => `[id="${id}"]`)],
     {
       rootMargin: "-20% 0% -80% 0%",
     }
