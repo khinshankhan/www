@@ -16,9 +16,9 @@ type IArticleCardProps = Article & {
 };
 
 export const ArticleCard: FC<IArticleCardProps> = ({ title, subtitle, slug, ...props }) => (
-  <Box {...props}>
+  <Box className="link-box" {...props}>
     <h3>
-      <Link isInternal isFile={false} href={slug}>
+      <Link isInternal isFile={false} href={slug} className="link-overlay">
         {title}
       </Link>
     </h3>
