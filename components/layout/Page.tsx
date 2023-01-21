@@ -20,6 +20,7 @@ const Content = styled("article", {
   "@sm": {
     paddingTop: "8px",
   },
+  flexGrow: 1,
 });
 
 interface IPageLayoutProps {
