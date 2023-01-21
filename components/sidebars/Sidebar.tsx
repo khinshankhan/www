@@ -25,6 +25,7 @@ export const AsideContent = styled("div", {
     marginTop: "1.8rem",
     maxWidth: `225px`,
   },
+  width: "100%",
   minWidth: "185px",
   overflow: "auto",
   alignItems: "flex-start",
