@@ -51,7 +51,7 @@ export default function PageView({ page }: InferGetStaticPropsType<typeof getSta
     <Layout
       title={page.title}
       subtitle={page.subtitle}
-      sidebar={<Toc headings={page.headings as HeadingInfo[]} />}
+      sidebar={<Toc headings={page.computed.headings as HeadingInfo[]} />}
     >
       {MDXContent && <MDXContent components={MdxComponents} />}
     </Layout>

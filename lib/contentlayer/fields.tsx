@@ -80,7 +80,7 @@ export const getComputedFields = <T extends string>({
           ? cleanPath(doc._raw.flattenedPath).slice(1)
           : doc._raw.flattenedPath,
     },
-    headings: {
+    computed: {
       type: "json",
       resolve: (doc) => {
         // use same package as rehypeSlug so toc and sluggified headings match
@@ -88,13 +88,15 @@ export const getComputedFields = <T extends string>({
         const slugs = new Slugger();
 
         const regexHeadings = /^(?<tag>#{1,6})[ ](?<content>[^\n]+)/gm;
-
-        if (!doc?.body?.raw) return [];
-        return [...doc.body.raw.matchAll(regexHeadings)].map(([, tag, content]) => ({
-          level: tag.length,
-          content,
-          id: slugs.slug(content, false),
-        }));
+        return {
+          headings: !doc?.body?.raw
+            ? []
+            : [...doc.body.raw.matchAll(regexHeadings)].map(([, tag, content]) => ({
+                level: tag.length,
+                content,
+                id: slugs.slug(content, false),
+              })),
+        };
       },
     },
   };
