@@ -1,6 +1,6 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { Page } from "contentlayer/generated";
-import { allPages as pages } from "contentlayer/generated";
+import type { Writing } from "contentlayer/generated";
+import { allWritingArticles as pages } from "lib/contentlayer";
 import { useLiveReload, useMDXComponent } from "next-contentlayer/hooks";
 import { MdxComponents } from "components/mdx";
 import { default as Layout } from "templates/Article";
@@ -19,7 +19,7 @@ export const getStaticPaths = () => {
 };
 
 export const getStaticProps: GetStaticProps<{
-  page: Page;
+  page: Writing;
 }> = async ({ params }) => {
   // unknown case
   if (!params?.slug) {

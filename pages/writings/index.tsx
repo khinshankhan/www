@@ -7,7 +7,7 @@ import ArticleList from "components/lists/Article";
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const Writing: NextPage<Props> = ({ articles }) => (
-  <Layout title="Writing" subtitle="my thoughts and ideas">
+  <Layout title="Writings" subtitle="my thoughts and ideas">
     <ArticleList articles={articles} />
   </Layout>
 );
@@ -18,7 +18,7 @@ export const getStaticProps = async () => {
       title: article.title,
       subtitle: article.subtitle,
       slug: article.slug,
-      categories: article.categories ?? [],
+      tags: article.tags,
     };
   });
 

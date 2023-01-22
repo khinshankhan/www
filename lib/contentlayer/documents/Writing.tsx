@@ -7,7 +7,7 @@ const fields = getFields({
 const computedFields = getComputedFields<"Writing">({
   prefix: "writings",
   chopPrefix: false,
-})
+});
 
 export const Writing = defineDocumentType(() => ({
   name: "Writing",
