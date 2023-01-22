@@ -52,10 +52,10 @@ interface IComputedFieldsProps {
   prefix: string;
   chopPrefix?: boolean;
 }
-export const getComputedFields = ({
+export const getComputedFields = <T extends string>({
   prefix,
   chopPrefix = true,
-}: IComputedFieldsProps): ComputedFields<"Page"> => {
+}: IComputedFieldsProps): ComputedFields<T> => {
   const cleanPath = chopOffWord(prefix, false);
 
   return {

@@ -4,9 +4,10 @@ import { getFields, getComputedFields } from "../fields";
 const fields = getFields({
   subtitle: "A little surprise reading :blushing:",
 });
-const computedFields = getComputedFields({
+const computedFields = getComputedFields<"Writing">({
   prefix: "writings",
-});
+  chopPrefix: false,
+})
 
 export const Writing = defineDocumentType(() => ({
   name: "Writing",
