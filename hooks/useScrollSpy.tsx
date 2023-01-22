@@ -1,7 +1,11 @@
 // based off https://github.com/chakra-ui/chakra-ui-docs/blob/main/src/hooks/use-scrollspy.ts
 import { useState, useRef, useEffect } from "react";
 
-export const useScrollSpy = (selectors: string[], options?: IntersectionObserverInit) => {
+export const useScrollSpy = (
+  selectors: string[],
+  options?: IntersectionObserverInit,
+  retain = true
+) => {
   const [activeIds, setActiveIds] = useState<string[]>([]);
 
   const observer = useRef<IntersectionObserver | null>(null);
@@ -17,7 +21,9 @@ export const useScrollSpy = (selectors: string[], options?: IntersectionObserver
         }
       });
 
-      if (newActiveIds.length > 0) {
+      if (!retain) {
+        setActiveIds(newActiveIds);
+      } else if (newActiveIds.length > 0) {
         setActiveIds(newActiveIds);
       }
     }, options);
