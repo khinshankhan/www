@@ -12,7 +12,7 @@ export const getFields = ({ subtitle, status = "published" }: IFieldsProps): Fie
     required: true,
   },
   subtitle: {
-    type: "mdx",
+    type: "string",
     default: subtitle,
   },
   givenSlug: {

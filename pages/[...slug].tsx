@@ -2,7 +2,7 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Page } from "contentlayer/generated";
 import { allPages as pages } from "contentlayer/generated";
 import { useLiveReload, useMDXComponent } from "next-contentlayer/hooks";
-import { MdxComponents } from "components/mdx";
+import { MdxComponents, EmojiFauxRehype } from "components/mdx";
 import { default as Layout } from "templates/Article";
 import type { HeadingInfo } from "components/sidebars";
 import { Toc } from "components/sidebars";
@@ -50,7 +50,7 @@ export default function PageView({ page }: InferGetStaticPropsType<typeof getSta
   return (
     <Layout
       title={page.title}
-      subtitle={page.subtitle.code}
+      subtitle={EmojiFauxRehype(page.subtitle)}
       sidebar={<Toc headings={page.computed.headings as HeadingInfo[]} />}
     >
       {MDXContent && <MDXContent components={MdxComponents} />}
