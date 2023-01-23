@@ -1,6 +1,8 @@
 import type { MDXComponents } from "mdx/types";
 import type { DetailedHTMLProps, HTMLAttributes, ReactElement } from "react";
 import { useRef, cloneElement } from "react";
+import { braidArrays } from "lib/utils/array";
+import { extractEmoji } from "lib/utils/regex";
 import { Box } from "components/primitives";
 import Emoji from "components/Emoji";
 import { Link, FullImage } from "components/primitives";
@@ -59,11 +61,29 @@ export const MdxComponents: MDXComponents = {
   h6: (props) => <AnchorHeading as="h6" {...props} />,
 };
 
+// HACK: weird unicode I'll probably never use
+const weird = `⏧`;
 // subtitles aren't too fancy, one liner + possible emoji
-// the default paragraph wrapper should be a span instead though
-export const SubtitleMDXComponents: MDXComponents = {
-  Emoji,
-  p: ({ id, ...props }) => <span {...props} />,
+export const EmojiFauxRehype = (subtitle: string, jsx = true) => {
+  const matches = [...subtitle.matchAll(extractEmoji)];
+
+  const emptied = matches
+    .reduce((str, match) => str.replace(match[1], weird), subtitle)
+    .split(weird)
+    // NOTE: consective emoji should have a space between them
+    .filter((str) => str !== "");
+  const texts = jsx
+    ? emptied.map((text, index) => (
+        <span key={`text-${index}`} dangerouslySetInnerHTML={{ __html: text }} />
+      ))
+    : emptied;
+
+  const replaceWith = matches.map((match, index) =>
+    jsx ? <Emoji key={`emoji-${index}`} text={match[2]} /> : match[2]
+  );
+
+  const braided = braidArrays(texts, replaceWith);
+  return jsx ? braided : braided.join("");
 };
 
 export default MdxComponents;
