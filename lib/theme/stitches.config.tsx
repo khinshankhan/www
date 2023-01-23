@@ -93,6 +93,12 @@ export const GlobalStyles = globalCss({
       },
     },
 
+    span: {
+      fontFamily: "inherit",
+      lineHeight: "inherit",
+      fontSize: "inherit",
+    },
+
     ...mediaStyles,
     ...bgStyles,
     ...containerStyles,

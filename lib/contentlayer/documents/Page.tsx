@@ -2,7 +2,7 @@ import { defineDocumentType } from "contentlayer/source-files";
 import { getFields, getComputedFields } from "../fields";
 
 const fields = getFields({
-  subtitle: "Doing my best :writing_hand:",
+  subtitle: `Doing my best <Emoji text=":writing_hand:" />`,
 });
 const computedFields = getComputedFields<"Page">({
   prefix: "pages",

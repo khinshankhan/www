@@ -16,7 +16,7 @@ export const getStaticProps = async () => {
   const articles = listedWritings.map((article) => {
     return {
       title: article.title,
-      subtitle: article.subtitle,
+      subtitle: article.subtitle.code,
       slug: article.slug,
       tags: article.computed.tags as string[],
     };

@@ -1,4 +1,5 @@
 import type { FCC } from "types/react";
+import { ReactNode } from "react";
 import React, { Fragment } from "react";
 import { styled } from "lib/theme";
 import { Box, Flex } from "components/primitives";
@@ -26,7 +27,7 @@ const Content = styled("article", {
 
 export interface IPageLayoutProps extends ISidebarProps {
   title?: string;
-  subtitle?: string;
+  subtitle?: string | ReactNode;
 }
 
 export const PageLayout: FCC<IPageLayoutProps> = ({

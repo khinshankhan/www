@@ -1,6 +1,5 @@
 ---
 title: Een
-subtitle: Uno een
 
 tended: "1901-12-13"
 planted: "1901-12-13"

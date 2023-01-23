@@ -59,4 +59,11 @@ export const MdxComponents: MDXComponents = {
   h6: (props) => <AnchorHeading as="h6" {...props} />,
 };
 
+// subtitles aren't too fancy, one liner + possible emoji
+// the default paragraph wrapper should be a span instead though
+export const SubtitleMDXComponents: MDXComponents = {
+  Emoji,
+  p: ({ id, ...props }) => <span {...props} />,
+};
+
 export default MdxComponents;
