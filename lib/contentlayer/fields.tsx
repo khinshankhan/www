@@ -89,6 +89,7 @@ export const getComputedFields = <T extends string>({
 
         const regexHeadings = /^(?<tag>#{1,6})[ ](?<content>[^\n]+)/gm;
         return {
+          tags: [...new Set(doc?.tags as string[] | null)].sort(),
           headings: !doc?.body?.raw
             ? []
             : [...doc.body.raw.matchAll(regexHeadings)].map(([, tag, content]) => ({

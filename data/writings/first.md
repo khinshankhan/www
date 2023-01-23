@@ -7,6 +7,7 @@ planted: "1901-12-13"
 tags:
   - first
   - sweet
+  - so weird
 ---
 
 This is the first post. Cupcake ipsum dolor sit amet croissant. I love sugar plum caramels I love wafer. Sweet halvah

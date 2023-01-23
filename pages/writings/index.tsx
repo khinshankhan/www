@@ -18,7 +18,7 @@ export const getStaticProps = async () => {
       title: article.title,
       subtitle: article.subtitle,
       slug: article.slug,
-      tags: article.tags,
+      tags: article.computed.tags as string[],
     };
   });
 
