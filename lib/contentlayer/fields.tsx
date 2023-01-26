@@ -19,6 +19,10 @@ export const getFields = ({ subtitle, status = "published" }: IFieldsProps): Fie
     type: "string",
   },
 
+  planted: {
+    type: "date",
+    required: false,
+  },
   tended: {
     type: "date",
     required: true,
@@ -30,6 +34,12 @@ export const getFields = ({ subtitle, status = "published" }: IFieldsProps): Fie
     default: status,
   },
 
+  tags: {
+    type: "list",
+    of: {
+      type: "string",
+    },
+  },
   categories: {
     type: "list",
     of: {
@@ -49,15 +59,28 @@ export const getComputedFields = <T extends string>({
   const cleanPath = chopOffWord(prefix, false);
 
   return {
+    frontmatter: {
+      type: "json",
+      resolve: (doc) => {
+        const resolved = {
+          title: doc.title,
+          subtitle: doc.subtitle,
+          // chop of tz info since it's wrong (Z)
+          planted: doc.planted?.slice(0, -1),
+          tended: doc.tended.slice(0, -1),
+        };
+        return resolved;
+      },
+    },
+
     slug: {
       type: "string",
       resolve: (doc) =>
-        doc.givenSlug ?? chopPrefix
+        doc?.givenSlug ?? chopPrefix
           ? cleanPath(doc._raw.flattenedPath).slice(1)
           : doc._raw.flattenedPath,
     },
-
-    headings: {
+    computed: {
       type: "json",
       resolve: (doc) => {
         // use same package as rehypeSlug so toc and sluggified headings match
@@ -65,13 +88,16 @@ export const getComputedFields = <T extends string>({
         const slugs = new Slugger();
 
         const regexHeadings = /^(?<tag>#{1,6})[ ](?<content>[^\n]+)/gm;
-
-        if (!doc?.body?.raw) return [];
-        return [...(doc.body.raw as string).matchAll(regexHeadings)].map(([, tag, content]) => ({
-          level: tag.length,
-          content,
-          id: slugs.slug(content, false),
-        }));
+        return {
+          tags: [...new Set(doc?.tags as string[] | null)].sort(),
+          headings: !doc?.body?.raw
+            ? []
+            : [...doc.body.raw.matchAll(regexHeadings)].map(([, tag, content]) => ({
+                level: tag.length,
+                content,
+                id: slugs.slug(content, false),
+              })),
+        };
       },
     },
   };

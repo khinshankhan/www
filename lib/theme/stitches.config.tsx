@@ -93,6 +93,19 @@ export const GlobalStyles = globalCss({
       },
     },
 
+    "span, u, s, b, i, em": {
+      fontFamily: "inherit",
+      lineHeight: "inherit",
+      fontSize: "inherit",
+    },
+
+    "b, strong": {
+      fontWeight: "$bold",
+    },
+    "i, em": {
+      fontStyle: "italic",
+    },
+
     ...mediaStyles,
     ...bgStyles,
     ...containerStyles,

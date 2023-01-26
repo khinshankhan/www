@@ -37,6 +37,8 @@ export const colors = {
   logoBorder: "$logoFg",
 
   navBg: "rgba(237, 242, 247, 0.99)",
+  buttonBg: "$plumA7",
+  buttonHoverBg: "$plumA5",
   iconBg: "rgba(0, 0, 0, 0.12)",
   codeTitleBg: "hsla(0, 0%, 85%, 1)",
   codeBg: "hsla(0, 0%, 100%, 1)",
