@@ -3,6 +3,7 @@ import type * as Stitches from "@stitches/react";
 export type { VariantProps } from "@stitches/react";
 import { colors, darkColors } from "./foundations/colors";
 import typography from "./foundations/typography";
+import { icons, darkIcons } from "./foundations/icons";
 
 export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes, config } =
   createStitches({
@@ -24,11 +25,13 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
       },
       colors,
       ...typography,
+      icons,
     },
   });
 
 export const darkTheme = createTheme("dark", {
   colors: darkColors,
+  icons: darkIcons,
 });
 
 export type CSS = Stitches.CSS<typeof config>;
