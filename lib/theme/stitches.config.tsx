@@ -2,6 +2,7 @@ import { createStitches } from "@stitches/react";
 import type * as Stitches from "@stitches/react";
 export type { VariantProps } from "@stitches/react";
 import { colors, darkColors } from "./foundations/colors";
+import typography from "./foundations/typography";
 
 export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes, config } =
   createStitches({
@@ -22,6 +23,7 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
         vh: "100vh",
       },
       colors,
+      ...typography,
     },
   });
 

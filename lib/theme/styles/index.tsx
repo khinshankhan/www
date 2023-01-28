@@ -25,5 +25,6 @@ export const GlobalStyles = globalCss({
   // apply defaults
   body: {
     background: theme.colors.bg,
+    fontFamily: theme.fonts.body,
   },
 });
