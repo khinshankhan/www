@@ -5,6 +5,17 @@ import typographyStyles from "./typography";
 import normalizeStyles from "./normalize";
 
 export const GlobalStyles = globalCss({
+  ".hide-mobile": {
+    [media("isMobile")]: {
+      display: "none",
+    },
+  },
+  ".hide-desktop": {
+    [media("isDesktop")]: {
+      display: "none",
+    },
+  },
+
   ...polyfillStyles,
   ...typographyStyles,
   ...normalizeStyles,
