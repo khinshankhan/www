@@ -2,10 +2,12 @@ import { globalCss, theme } from "lib/theme/stitches.config";
 import { media } from "lib/theme/selectors";
 import polyfillStyles from "./polyfill";
 import typographyStyles from "./typography";
+import normalizeStyles from "./normalize";
 
 export const GlobalStyles = globalCss({
   ...polyfillStyles,
   ...typographyStyles,
+  ...normalizeStyles,
 
   // apply defaults
   body: {

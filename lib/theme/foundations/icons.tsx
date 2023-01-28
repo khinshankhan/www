@@ -6,12 +6,12 @@ const anchorIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="2
 
 export const icons = {
   linkBefore: `url("data:image/svg+xml,${encodeSVG(
-    anchorIcon.replaceAll("currentColor", getColor("linkActive"))
+    anchorIcon.replaceAll("currentColor", getColor("link"))
   )}")`,
 };
 
 export const darkIcons = {
   linkBefore: `url("data:image/svg+xml,${encodeSVG(
-    anchorIcon.replaceAll("currentColor", getDarkColor("linkActive"))
+    anchorIcon.replaceAll("currentColor", getDarkColor("link"))
   )}")`,
 };

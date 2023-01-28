@@ -5,7 +5,7 @@ const palette = {
   white: "#FFFFFF",
   ...slate,
   ...gray,
-  ...plum,
+  ...plumDark,
 };
 
 const key = (key: keyof typeof palette) => `$${key}`;
@@ -26,13 +26,15 @@ export const colors = {
 const darkPalette = {
   ...slateDark,
   ...grayDark,
-  ...plumDark,
+  ...plum,
 };
 
 export const darkColors = {
   ...darkPalette,
 
+  link: key("plum8"),
   linkActive: key("plum7"),
+  linkOn: key("plum4"),
 };
 
 const getValue = <T extends Record<string, string>>(config: T, key: keyof T): string =>
