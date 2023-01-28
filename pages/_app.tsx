@@ -1,5 +1,17 @@
 import type { AppProps } from "next/app";
+import { ThemeProvider } from "next-themes";
+import { GlobalStyles, darkTheme } from "lib/theme";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  GlobalStyles();
+
+  return (
+    <ThemeProvider
+      attribute="data-theme"
+      defaultTheme="system"
+      value={{ light: "light", dark: darkTheme.className }}
+    >
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
 }
