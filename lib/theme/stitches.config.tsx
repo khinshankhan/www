@@ -18,6 +18,9 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
       isDesktop: "not (max-width: 768px)",
     },
     theme: {
+      sizes: {
+        vh: "100vh",
+      },
       colors,
     },
   });
