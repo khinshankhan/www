@@ -1,6 +1,7 @@
 import { createStitches } from "@stitches/react";
 import type * as Stitches from "@stitches/react";
 export type { VariantProps } from "@stitches/react";
+import { colors, darkColors } from "./foundations/colors";
 
 export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes, config } =
   createStitches({
@@ -17,13 +18,12 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
       isDesktop: "not (max-width: 768px)",
     },
     theme: {
-      colors: {
-        white: "#FFFFFF",
-        black: "#000000",
-      },
+      colors,
     },
   });
 
-export const darkTheme = createTheme("dark", {});
+export const darkTheme = createTheme("dark", {
+  colors: darkColors,
+});
 
 export type CSS = Stitches.CSS<typeof config>;

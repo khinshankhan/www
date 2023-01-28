@@ -34,10 +34,11 @@ export const mediaSelectors = {
   ...pseudoSelectors,
   at: combineSelectors(pseudoSelectors.active, pseudoSelectors.hover, pseudoSelectors.focus),
 
-  // paco next-themes
-  // NOTE: only usable in global css since html property gets data-theme
-  light: `[data-theme='light']`,
-  dark: `[data-theme='dark']`,
+  // based off paco next-themes in pages/_app.tsx
+  // NOTE: only usable in global css on html since html property gets data-theme
+  // I suppose some components could have controllable light dark variants(?)
+  light: `.light, &.light`,
+  dark: `.dark, &.dark`,
 };
 
 // like combineMedia but restrict to selectors

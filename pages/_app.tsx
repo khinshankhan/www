@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider
-      attribute="data-theme"
+      attribute="class"
       defaultTheme="system"
       value={{ light: "light", dark: darkTheme.className }}
     >
