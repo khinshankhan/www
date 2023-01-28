@@ -1,5 +1,7 @@
 import { globalCss, theme } from "../stitches.config";
 
+export * from "./reset";
+
 const root = ":root";
 
 export const GlobalStyles = globalCss({
@@ -26,5 +28,14 @@ export const GlobalStyles = globalCss({
   body: {
     background: theme.colors.bg,
     fontFamily: theme.fonts.body,
+
+    lineHeight: "$base",
+    fontSize: "$lg", // 18px
+    "@lg": {
+      fontSize: "1.3125rem", // 21px
+    },
+    "@2xl": {
+      fontSize: "1.43775rem", // ~23px, avg 21px and $xl
+    },
   },
 });
