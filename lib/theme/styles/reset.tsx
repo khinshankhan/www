@@ -1,4 +1,4 @@
-import { globalCss, theme } from "../stitches.config";
+import { globalCss, theme } from "lib/theme/stitches.config";
 
 // Reset browser defaults which may differ across browsers reducing inconsistencies
 // From https://meyerweb.com/eric/tools/css/reset/
