@@ -13,11 +13,16 @@ import {
   plumDark,
   red,
   redDark,
+  sky,
+  skyDark,
   slate,
   slateDark,
+  tomato,
+  tomatoDark,
   yellow,
   yellowDark,
 } from "@radix-ui/colors";
+import { changeObjectKeys } from "lib/utils/object"
 
 // I tried, oh well
 const bluegray = {
@@ -39,10 +44,12 @@ const palette = {
   black: "#000000",
   white: "#FFFFFF",
 
-  ...amber,
+  ...changeObjectKeys(grass, "grass", "success"),
+  ...changeObjectKeys(amber, "amber", "warning"),
+  ...changeObjectKeys(tomato, "tomato", "error"),
+  ...changeObjectKeys(sky, "sky", "info"),
   ...bluegray,
   ...gold,
-  ...grass,
   ...gray,
   ...mauve,
   ...plumDark,
@@ -68,9 +75,11 @@ export const colors = {
 // override any light theme same key names
 // try to keep shared colors within colors
 const darkPalette = {
-  ...amberDark,
+  ...changeObjectKeys(grassDark, "grass", "success"),
+  ...changeObjectKeys(amberDark, "amber", "warning"),
+  ...changeObjectKeys(tomatoDark, "tomato", "error"),
+  ...changeObjectKeys(skyDark, "sky", "info"),
   ...goldDark,
-  ...grassDark,
   ...grayDark,
   ...mauveDark,
   ...plum,
