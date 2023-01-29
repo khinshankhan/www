@@ -10,7 +10,7 @@ export const Container = styled("div", {
   maxWidth: "60ch",
 
   variants: {
-    varient: {
+    variant: {
       page: {
         paddingLeft: 0,
         paddingRight: 0,

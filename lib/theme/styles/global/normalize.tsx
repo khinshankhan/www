@@ -7,7 +7,7 @@ export const normalizeStyles = {
     fontFamily: "inherit",
     lineHeight: "inherit",
     fontSize: "inherit",
-    color: "$link",
+    color: theme.colors.link,
     textDecoration: "none",
     // link underline animation based off https://tobiasahlin.com/blog/css-trick-animating-link-underlines/
     [selectMedia("before")]: {
@@ -23,20 +23,20 @@ export const normalizeStyles = {
       transition: "transform 0.3s ease",
     },
     [selectMedia("hover")]: {
-      color: "$linkActive",
+      color: theme.colors.linkActive,
       [selectMedia("before")]: {
         transform: "scaleX(1)",
       },
     },
 
     "&.on": {
-      color: "$linkOn",
+      color: theme.colors.linkOn,
       [selectMedia("before")]: {
         transform: "scaleX(1)",
         backgroundColor: theme.colors.link,
       },
       [selectMedia("hover")]: {
-        color: "$linkOn",
+        color: theme.colors.linkOn,
         [selectMedia("before")]: {
           backgroundColor: theme.colors.linkActive,
         },
