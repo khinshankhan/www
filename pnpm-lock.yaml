@@ -32,6 +32,7 @@ specifiers:
   remark-gfm: ^3.0.1
   remark-unwrap-images: ^3.0.1
   shiki: ^0.12.1
+  ts-toolbelt: ^9.6.0
   typescript: 4.9.4
   unist-util-visit: ^4.1.1
 
@@ -71,6 +72,7 @@ devDependencies:
   '@types/jest': 29.2.5
   '@types/node': 18.11.17
   prettier: 2.8.1
+  ts-toolbelt: 9.6.0
 
 packages:
 
@@ -6634,6 +6636,10 @@ packages:
   /ts-pattern/4.0.6:
     resolution: {integrity: sha512-sFHQYD4KoysBi7e7a2mzDPvRBeqA4w+vEyRE+P5MU9VLq8eEYxgKCgD9RNEAT+itGRWUTYN+hry94GDPLb1/Yw==}
     dev: false
+
+  /ts-toolbelt/9.6.0:
+    resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
+    dev: true
 
   /tsconfig-paths/3.14.1:
     resolution: {integrity: sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==}
