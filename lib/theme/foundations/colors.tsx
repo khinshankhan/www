@@ -90,7 +90,7 @@ export const colors = {
 
   logoFg: key("gray12"),
   logoBg: key("transparent"),
-  logoBorder: "$logoFg",
+  logoBorder: key("transparent"),
 
   link: key("plum8"),
   linkActive: key("plum6"),
@@ -108,8 +108,6 @@ export const darkColors = {
   navBg: "hsla(240, 30%, 8%, 0.85)",
   navOpaqueBg: "hsla(240, 30%, 8%, 0.99)",
   contentBg: key("bluegray9"),
-
-  logoFg: key("gray12"),
 
   link: key("plum8"),
   linkActive: key("plum6"),

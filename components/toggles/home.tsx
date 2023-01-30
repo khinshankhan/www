@@ -5,12 +5,28 @@ import { styled, theme, selectMedia, config } from "lib/theme";
 import type { ILogoProps } from "components/icons";
 import { Logo } from "components/icons";
 
+const getSizeParts = (sizeProp: number | string | undefined = undefined) => {
+  const defaultSize = sizeProp?.toString() ?? `50px`;
+
+  const re = /([-0-9]+)(.*)/g;
+  const parts = [...defaultSize.matchAll(re)][0];
+  const unit = parts[2].toString();
+  return {
+    size: Number(parts[1]),
+    unit: unit === "" ? "px" : unit,
+  };
+};
+
 interface IHomeToggleProps extends ILogoProps {
   size?: number | string;
+  scalable?: boolean;
 }
 
 // TODO: replace purple with theme primary
 const LogoLink = styled(Link, {
+  ".border": {
+    transition: "all 1s ease",
+  },
   [selectMedia("at")]: {
     ".fg": {
       transform: `translate(-50px,-50px) scale(1.25)`,
@@ -27,18 +43,22 @@ const LogoLink = styled(Link, {
   },
 });
 
-export const HomeToggle = ({ size: sizeProp = undefined, ...props }: IHomeToggleProps) => {
-  const defaultSize = sizeProp ?? `50px`;
-  const [size, setSize] = useState(defaultSize);
+export const HomeToggle = ({
+  size: sizeProp = undefined,
+  scalable = true,
+  ...props
+}: IHomeToggleProps) => {
+  const { size: defaultSize, unit } = getSizeParts(sizeProp);
+  const [size, setSize] = useState(defaultSize.toString() + unit);
   const increasedSize = useMediaQuery(config.media.lg);
 
   useEffect(() => {
-    if (increasedSize && sizeProp === undefined) {
-      setSize(`55px`);
+    if (scalable && increasedSize) {
+      setSize((defaultSize * 1.1).toString() + unit);
     } else {
-      setSize(defaultSize);
+      setSize(defaultSize.toString() + unit);
     }
-  }, [increasedSize]);
+  }, [scalable, increasedSize, defaultSize, unit]);
 
   return (
     <LogoLink href="/" aria-label="Navigate to homepage">
