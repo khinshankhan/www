@@ -1,22 +1,24 @@
 import { globalCss, theme } from "lib/theme/stitches.config";
 import { media } from "lib/theme/selectors";
 import polyfillStyles from "./polyfill";
+import containerStyles from "./container";
 import typographyStyles from "./typography";
 import normalizeStyles from "./normalize";
 
 export const GlobalStyles = globalCss({
-  ".hide-mobile": {
-    [media("isMobile")]: {
-      display: "none",
+  [media("isMobile")]: {
+    ".hide-mobile": {
+      display: "none !important",
     },
   },
-  ".hide-desktop": {
-    [media("isDesktop")]: {
-      display: "none",
+  [media("isDesktop")]: {
+    ".hide-desktop": {
+      display: "none !important",
     },
   },
 
   ...polyfillStyles,
+  ...containerStyles,
   ...typographyStyles,
   ...normalizeStyles,
 

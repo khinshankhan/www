@@ -1,4 +1,17 @@
 export const containerStyles = {
+  ".collapsible": {
+    transition: "visibility 0s, opacity 0.5s ease-in-out, max-height 0.5s ease-in-out",
+    visibility: "visible",
+    opacity: 1,
+    "&[class*='closed']": {
+      transition: "visibility 0.5s, opacity 0.5s ease-in-out, max-height 0.5s ease-in-out",
+      visibility: "collapse",
+      opacity: 0,
+      maxHeight: 0,
+      overflow: "hidden",
+    },
+  },
+
   // based off https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/layout/src/link-box.tsx
   ".link-overlay": {
     position: "static",
