@@ -3,6 +3,7 @@ import type * as Stitches from "@stitches/react";
 export type { VariantProps } from "@stitches/react";
 import { colors, darkColors } from "./foundations/colors";
 import typography from "./foundations/typography";
+import radii from "./foundations/radii";
 import zIndices from "./foundations/z-index";
 import { icons, darkIcons } from "./foundations/icons";
 
@@ -26,6 +27,7 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
       },
       colors,
       ...typography,
+      radii,
       zIndices,
       icons,
     },

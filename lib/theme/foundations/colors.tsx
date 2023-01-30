@@ -41,6 +41,7 @@ const bluegray = {
 };
 
 const palette = {
+  transparent: "transparent",
   black: "#000000",
   white: "#FFFFFF",
 
@@ -66,6 +67,11 @@ export const colors = {
 
   bg: key("mauve9"),
   contentBg: key("mauve1"),
+  ghostBg: "rgba(0, 0, 0, 0.12)",
+
+  logoFg: key("gray12"),
+  logoBg: key("transparent"),
+  logoBorder: "$logoFg",
 
   link: key("plum8"),
   linkActive: key("plum7"),
@@ -95,6 +101,7 @@ export const darkColors = {
 
   bg: key("bluegray12"),
   contentBg: key("bluegray9"),
+  ghostBg: "rgba(255, 255, 255, 0.12)",
 
   link: key("plum8"),
   linkActive: key("plum7"),

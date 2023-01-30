@@ -32,7 +32,12 @@ const pseudoSelectors = {
 
 export const mediaSelectors = {
   ...pseudoSelectors,
-  at: combineSelectors(pseudoSelectors.active, pseudoSelectors.hover, pseudoSelectors.focus),
+  at: combineSelectors(
+    pseudoSelectors.active,
+    pseudoSelectors.hover,
+    pseudoSelectors.focus,
+    pseudoSelectors.focusVisible
+  ),
 
   // based off paco next-themes in pages/_app.tsx
   // NOTE: only usable in global css on html since html property gets data-theme
