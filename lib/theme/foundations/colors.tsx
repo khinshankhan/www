@@ -59,30 +59,7 @@ const palette = {
   ...yellow,
 };
 
-const key = (key: keyof typeof palette) => `$${key}`;
-export const colors = {
-  ...palette,
-  placeholder: key("black"),
-  border: key("gray12"),
-
-  bg: key("mauve9"),
-  // TODO
-  navBg: "hsla(240, 30%, 8%, 0.85)", // bg with transparency
-  navOpaqueBg: "hsla(240, 30%, 8%, 0.99)",
-  contentBg: key("mauve1"),
-  ghostBg: "rgba(0, 0, 0, 0.12)",
-
-  logoFg: key("gray12"),
-  logoBg: key("transparent"),
-  logoBorder: "$logoFg",
-
-  link: key("plum8"),
-  linkActive: key("plum7"),
-  linkOn: key("plum4"),
-};
-
 // override any light theme same key names
-// try to keep shared colors within colors
 const darkPalette = {
   ...changeObjectKeys(grassDark, "grass", "success"),
   ...changeObjectKeys(amberDark, "amber", "warning"),
@@ -97,19 +74,45 @@ const darkPalette = {
   ...yellowDark,
 };
 
+const key = (key: keyof typeof palette) => `$${key}`;
+export const colors = {
+  ...palette,
+  placeholder: key("black"),
+  border: key("gray12"),
+
+  bg: key("mauve4"),
+  ghostBg: "rgba(0, 0, 0, 0.12)",
+
+  // TODO
+  navBg: "hsla(289, 4.7%, 93.3%, .85)", // bg with transparency
+  navOpaqueBg: "hsla(289, 4.7%, 93.3%, .99)",
+  contentBg: key("mauve1"),
+
+  logoFg: key("gray12"),
+  logoBg: key("transparent"),
+  logoBorder: "$logoFg",
+
+  link: key("plum8"),
+  linkActive: key("plum6"),
+  linkOn: key("plum4"),
+};
+
+// try to keep shared colors within colors
 export const darkColors = {
   ...darkPalette,
   placeholder: key("white"),
   border: key("gray1"),
+  ghostBg: "rgba(255, 255, 255, 0.12)",
 
   bg: key("bluegray12"),
   navBg: "hsla(240, 30%, 8%, 0.85)",
   navOpaqueBg: "hsla(240, 30%, 8%, 0.99)",
   contentBg: key("bluegray9"),
-  ghostBg: "rgba(255, 255, 255, 0.12)",
+
+  logoFg: key("gray12"),
 
   link: key("plum8"),
-  linkActive: key("plum7"),
+  linkActive: key("plum6"),
   linkOn: key("plum4"),
 };
 

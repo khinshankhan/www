@@ -6,6 +6,7 @@ export const IconButton = styled("button", {
   borderWidth: 0,
   padding: "10px",
   borderRadius: theme.radii.pill,
+  color: theme.colors.logoFg,
   background: theme.colors.transparent,
   [selectMedia("at")]: {
     background: theme.colors.ghostBg,
