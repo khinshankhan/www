@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "lib/theme";
+import { media, styled } from "lib/theme";
 import { ThemeToggle } from "components/toggles";
 
 const Ul = styled("ul", {
@@ -7,7 +7,7 @@ const Ul = styled("ul", {
 
   flexDirection: "row",
   alignItems: "center",
-  "@isDesktop": {
+  [media("isDesktop")]: {
     flexDirection: "flex-end",
   },
 });
@@ -16,7 +16,7 @@ const Li = styled("li", {
   display: "inline-block",
   // t r b l
   margin: "12px 4px 12px 4px",
-  "@lg": {
+  [media("lg")]: {
     margin: "16px 4px 16px 4px",
   },
   textAlign: "center",

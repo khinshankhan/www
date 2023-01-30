@@ -16,7 +16,6 @@ const SemanticHeader = styled("header", {
 });
 
 const Nav = styled(Container, {
-  backgroundColor: theme.colors.bg,
   w: "100%",
   minHeight: "55px",
   paddingTop: "16px",

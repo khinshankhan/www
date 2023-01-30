@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "lib/theme";
+import { media, selectMedia, styled } from "lib/theme";
 import clsx from "clsx";
 import Links from "./links";
 import Settings from "./settings";
@@ -11,19 +11,19 @@ const NavMenu = styled("menu", {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  "@isDesktop": {
+  [media("isDesktop")]: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
   },
 
-  "@isMobile": {
+  [media("isMobile")]: {
     position: "relative",
     paddingBottom: "20px",
     "&[class*='closed']": {
       paddingBottom: "2px",
     },
-    "&:before": {
+    [selectMedia("before")]: {
       content: "''",
       position: "absolute",
       margin: "auto",

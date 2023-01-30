@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { styled } from "lib/theme";
+import { media, styled } from "lib/theme";
 import clsx from "clsx";
 
 // TODO: move this out to config
@@ -15,7 +15,7 @@ const Ul = styled("ul", {
   display: "flex",
 
   flexDirection: "column",
-  "@isDesktop": {
+  [media("isDesktop")]: {
     flexDirection: "row",
   },
 });
