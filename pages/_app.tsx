@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
 import { ResetStyles, GlobalStyles, darkTheme } from "lib/theme";
+import { BaseLayout as Layout } from "components/layouts";
 
 export default function App({ Component, pageProps }: AppProps) {
   ResetStyles();
@@ -12,7 +13,9 @@ export default function App({ Component, pageProps }: AppProps) {
       defaultTheme="system"
       value={{ light: "light", dark: darkTheme.className }}
     >
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   );
 }

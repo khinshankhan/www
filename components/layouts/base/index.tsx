@@ -1,16 +1,11 @@
 import type { FCC } from "types/react";
-import type { ReactNode } from "react";
 import React, { Fragment } from "react";
-import { Flex, Container } from "components/primitives";
+import { Flex } from "components/primitives";
 import Headroom from "react-headroom";
 import Header from "./header";
 import Footer from "./footer";
 
-interface IBaseLayoutProps {
-  pastMin?: ReactNode;
-}
-
-export const BaseLayout: FCC<IBaseLayoutProps> = ({ pastMin = null, children }) => {
+export const BaseLayout: FCC = ({ children }) => {
   return (
     <Fragment>
       <Flex flexDirection="column" css={{ minHeight: "96vh" }}>
@@ -18,11 +13,8 @@ export const BaseLayout: FCC<IBaseLayoutProps> = ({ pastMin = null, children }) 
           <Header />
         </Headroom>
 
-        <Container variant="page" as="main">
-          {children}
-        </Container>
+        {children}
       </Flex>
-      {pastMin}
       <Footer />
     </Fragment>
   );

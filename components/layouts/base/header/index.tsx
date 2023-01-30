@@ -6,7 +6,7 @@ import { Container } from "components/primitives";
 import { HomeToggle, MenuToggle } from "components/toggles";
 import Menu from "./menu";
 
-const SemanticHeader = styled(Container, {
+const SemanticHeader = styled("header", {
   backgroundColor: theme.colors.navOpaqueBg,
   "@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none))": {
     backgroundColor: theme.colors.navBg,
@@ -15,7 +15,8 @@ const SemanticHeader = styled(Container, {
   },
 });
 
-const Nav = styled("nav", {
+const Nav = styled(Container, {
+  backgroundColor: theme.colors.bg,
   w: "100%",
   minHeight: "55px",
   paddingTop: "16px",
@@ -40,8 +41,8 @@ export function Header({ logoSize = undefined }: IHeaderProps) {
   }, [isMobile, onClose]);
 
   return (
-    <SemanticHeader variant="page" as="header" role="navigation">
-      <Nav>
+    <SemanticHeader role="navigation">
+      <Nav as="nav" variant="page">
         <HomeToggle size={logoSize} />
         <Menu className="hide-mobile" />
         <MenuToggle className="hide-desktop" isOpen={isOpen} onClick={onToggle} />
