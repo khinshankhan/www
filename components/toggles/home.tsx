@@ -27,6 +27,9 @@ const LogoLink = styled(Link, {
   svg: {
     boxShadow: `0px 0px 10px 1px ${theme.colors.logoFg}`,
   },
+  ".fg": {
+    transition: "transform 0.3s ease-in-out",
+  },
   ".border": {
     transition: "all 1s ease",
   },
