@@ -22,7 +22,7 @@ import {
   yellow,
   yellowDark,
 } from "@radix-ui/colors";
-import { changeObjectKeys } from "lib/utils/object"
+import { changeObjectKeys } from "lib/utils/object";
 
 // I tried, oh well
 const bluegray = {
