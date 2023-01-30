@@ -22,8 +22,8 @@ export const GlobalStyles = globalCss({
   ...typographyStyles,
   ...normalizeStyles,
 
-  // apply defaults
   body: {
+    color: theme.colors.placeholder,
     background: theme.colors.bg,
     fontFamily: theme.fonts.body,
 
