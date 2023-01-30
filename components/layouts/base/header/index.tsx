@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useMobile, useDisclosure } from "hooks";
 import { styled, theme } from "lib/theme";
 import clsx from "clsx";
@@ -27,23 +27,17 @@ const Nav = styled("nav", {
   alignItems: "center",
 });
 
-function useMobileNav() {
+interface IHeaderProps {
+  logoSize?: string;
+}
+
+export function Header({ logoSize = undefined }: IHeaderProps) {
   const { isMobile } = useMobile();
   const { isOpen, onToggle, onClose } = useDisclosure({ defaultIsOpen: false });
 
   useEffect(() => {
     onClose();
   }, [isMobile, onClose]);
-
-  return { isOpen, onToggle };
-}
-
-interface IHeaderProps {
-  logoSize?: string;
-}
-
-export function Header({ logoSize = `50px` }: IHeaderProps) {
-  const { isOpen, onToggle } = useMobileNav();
 
   return (
     <SemanticHeader variant="page" as="header" role="navigation">

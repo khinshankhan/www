@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useMediaQuery } from "hooks";
 import Link from "next/link";
-import { styled, theme, selectMedia } from "lib/theme";
+import { styled, theme, selectMedia, config } from "lib/theme";
 import type { ILogoProps } from "components/icons";
 import { Logo } from "components/icons";
 
@@ -26,7 +27,19 @@ const LogoLink = styled(Link, {
   },
 });
 
-export const HomeToggle = ({ size = 50, ...props }: IHomeToggleProps) => {
+export const HomeToggle = ({ size: sizeProp = undefined, ...props }: IHomeToggleProps) => {
+  const defaultSize = sizeProp ?? `50px`;
+  const [size, setSize] = useState(defaultSize);
+  const increasedSize = useMediaQuery(config.media.lg);
+
+  useEffect(() => {
+    if (increasedSize && sizeProp === undefined) {
+      setSize(`55px`);
+    } else {
+      setSize(defaultSize);
+    }
+  }, [increasedSize]);
+
   return (
     <LogoLink href="/" aria-label="Navigate to homepage">
       <Logo
