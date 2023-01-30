@@ -7,11 +7,7 @@ interface IMenuToggleProps {
   isOpen?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
-export const MenuToggle = ({
-  className = "",
-  isOpen,
-  onClick = () => {},
-}: IMenuToggleProps) => {
+export const MenuToggle = ({ className = "", isOpen, onClick = () => {} }: IMenuToggleProps) => {
   const MenuIcon = isOpen ? Cross1Icon : HamburgerMenuIcon;
   const action = isOpen ? "Close" : "Open";
 

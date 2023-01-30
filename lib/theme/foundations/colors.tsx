@@ -66,6 +66,9 @@ export const colors = {
   border: key("gray12"),
 
   bg: key("mauve9"),
+  // TODO
+  navBg: "hsla(240, 30%, 8%, 0.85)", // bg with transparency
+  navOpaqueBg: "hsla(240, 30%, 8%, 0.99)",
   contentBg: key("mauve1"),
   ghostBg: "rgba(0, 0, 0, 0.12)",
 
@@ -100,6 +103,8 @@ export const darkColors = {
   border: key("gray1"),
 
   bg: key("bluegray12"),
+  navBg: "hsla(240, 30%, 8%, 0.85)",
+  navOpaqueBg: "hsla(240, 30%, 8%, 0.99)",
   contentBg: key("bluegray9"),
   ghostBg: "rgba(255, 255, 255, 0.12)",
 

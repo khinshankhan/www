@@ -1,14 +1,17 @@
 import type { FCC } from "types/react";
 import React, { Fragment } from "react";
-import { Box, Flex } from "components/primitives";
+import { Flex, Container } from "components/primitives";
+import Header from "./header";
 
-export const BaseLayout: FCC = () => {
+export const BaseLayout: FCC = ({ children }) => {
   return (
     <Fragment>
       <Flex flexDirection="column" css={{ minHeight: "96vh" }}>
-        <div>header</div>
+        <Header />
 
-        <Box as="main">page</Box>
+        <Container variant="page" as="main">
+          {children}
+        </Container>
       </Flex>
       <div>Footer</div>
     </Fragment>
