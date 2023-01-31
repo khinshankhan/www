@@ -6,6 +6,11 @@ import typographyStyles from "./typography";
 import normalizeStyles from "./normalize";
 
 export const GlobalStyles = globalCss({
+  [media("xl")]: {
+    ".hide-xl": {
+      display: "none !important",
+    },
+  },
   [media("isMobile")]: {
     ".hide-mobile": {
       display: "none !important",

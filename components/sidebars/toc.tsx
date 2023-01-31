@@ -1,9 +1,12 @@
 import type { FCC } from "types/react";
-import React from "react";
-import { Button, Flex } from "components/primitives";
+import React, { useEffect } from "react";
 import { styled } from "lib/theme";
-import { useScrollSpy } from "hooks";
+import clsx from "clsx";
+import { useScrollSpy, useIsBreakpoint, useDisclosure } from "hooks";
 import { scrollToElement } from "lib/utils/scroll";
+import { ChevronDownIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import { Button, Flex } from "components/primitives";
+import { MenuToggle } from "components/toggles";
 
 const Li = styled("li", {
   paddingLeft: "8px",
@@ -50,17 +53,37 @@ export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings: headingsProp }
     scrollToElement(`[id="${id}"]`);
   };
 
+  const { xl: isXl } = useIsBreakpoint("xl");
+  const { isOpen, onToggle, onClose, onOpen } = useDisclosure({ defaultIsOpen: true });
+
+  useEffect(() => {
+    if (isXl) {
+      onClose();
+    } else {
+      onOpen();
+    }
+  }, [isXl, onClose, onOpen]);
+
   return (
     <>
-      <h2
-        className="h4"
-        style={{
-          textAlign: "center",
-        }}
+      <Flex justifyContent="space-between" alignItems="center" style={{ width: "100%" }}>
+        <h2 className="h4" style={{ textAlign: "center" }}>
+          Table of Contents
+        </h2>
+        <MenuToggle
+          className="hide-xl"
+          isOpen={isOpen}
+          onClick={onToggle}
+          OpenIcon={<ChevronRightIcon />}
+          ClosedIcon={<ChevronDownIcon />}
+        />
+      </Flex>
+      <Flex
+        as="ul"
+        flexDirection="column"
+        style={{ overflow: "hidden", maxHeight: !isOpen ? 0 : 35 * headings.length }}
+        className={clsx("collapsible", !isOpen && "closed")}
       >
-        Table of Contents
-      </h2>
-      <Flex as="ul" flexDirection="column">
         {headings.map(({ id, level, content }) => (
           <Li key={id} data-level={level - minLevel} data-active={activeIds.includes(id)}>
             <Button variant="link" data-id={id} onClick={onClick}>
