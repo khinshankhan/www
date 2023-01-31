@@ -1,7 +1,10 @@
 import type { FCC } from "types/react";
+import type { ReactNode } from "react";
 import React from "react";
 import { theme, media, styled } from "lib/theme";
 import { Box, Container } from "components/primitives";
+import { ISidebarProps } from "./sidebar";
+import Sidebar from "./sidebar";
 
 const ContentHeader = styled("header", {
   textAlign: "center",
@@ -24,14 +27,17 @@ const Content = styled("article", {
   flexGrow: 1,
 });
 
-interface IPageSkeletonLayoutProps {
+interface IPageSkeletonLayoutProps extends ISidebarProps {
   title: string;
   subtitle: string;
+  sidebar?: ReactNode;
 }
 
 export const PageSkeletonLayout: FCC<IPageSkeletonLayoutProps> = ({
   title,
   subtitle,
+  sidebar,
+  direction,
   children,
 }) => {
   return (
@@ -42,9 +48,9 @@ export const PageSkeletonLayout: FCC<IPageSkeletonLayoutProps> = ({
       </ContentHeader>
 
       <PageWrapper>
-        <Container variant="page">
+        <Sidebar sidebar={sidebar} direction={direction}>
           <Content id="article">{children}</Content>
-        </Container>
+        </Sidebar>
       </PageWrapper>
     </Box>
   );
