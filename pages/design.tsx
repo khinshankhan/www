@@ -1,15 +1,22 @@
 import React from "react";
 import { PageSkeletonLayout as Layout } from "components/layouts";
 import { Box } from "components/primitives";
+import type { HeadingInfo } from "components/sidebars";
+import { Toc } from "components/sidebars";
 
 const H3 = (props) => <h3 {...props} />;
 const H4 = (props) => <h4 {...props} />;
 
 export default function Design() {
   return (
-    <Layout title="Design" subtitle="The not so secret sauce">
+    <Layout
+      title="Design"
+      subtitle="The not so secret sauce"
+      sidebar={<Toc headings={[] as HeadingInfo[]} />}
+      direction="right"
+    >
       <Box className="list-style">
-        <p>
+        <p id="excerpt">
           Hello there. This is a list of components, styles, and other design fun that I created and
           use across this website. It probably is not nicely formatted or anything, but should be
           interesting in one page. Feel free to take a gander.
