@@ -24,6 +24,14 @@ export const Button = styled("button", {
           background: "transparent",
         },
       },
+      ghost: {
+        color: theme.colors.logoFg,
+        background: theme.colors.transparent,
+        [selectMedia("at")]: {
+          background: theme.colors.ghostBg,
+        },
+        cursor: "pointer",
+      },
     },
   },
 });

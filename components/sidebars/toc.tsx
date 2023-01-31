@@ -5,8 +5,31 @@ import clsx from "clsx";
 import { useScrollSpy, useIsBreakpoint, useDisclosure } from "hooks";
 import { scrollToElement } from "lib/utils/scroll";
 import { ChevronDownIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { Button, Flex } from "components/primitives";
-import { MenuToggle } from "components/toggles";
+import { Button, Flex, IconButton } from "components/primitives";
+import type { IMenuToggleProps } from "components/toggles";
+
+const TocToggle = ({ className = "", isOpen, onClick = () => {}, ...props }: IMenuToggleProps) => {
+  const MenuIcon = isOpen ? ChevronDownIcon : ChevronRightIcon;
+  const action = isOpen ? "Close" : "Open";
+
+  return (
+    <Button
+      variant="ghost"
+      className={className}
+      css={{ width: "100%" }}
+      aria-label={`${action} navigation menu`}
+      onClick={onClick}
+      {...props}
+    >
+      <Flex as="span" justifyContent="space-between" alignItems="center" style={{ width: "100%" }}>
+        <span>Table of Contents</span>
+        <IconButton as="span">
+          <MenuIcon />
+        </IconButton>
+      </Flex>
+    </Button>
+  );
+};
 
 const Li = styled("li", {
   paddingLeft: "8px",
@@ -53,31 +76,22 @@ export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings: headingsProp }
     scrollToElement(`[id="${id}"]`);
   };
 
-  const { xl: isXl } = useIsBreakpoint("xl");
+  const { xl: isBelowXl } = useIsBreakpoint("xl");
   const { isOpen, onToggle, onClose, onOpen } = useDisclosure({ defaultIsOpen: true });
 
   useEffect(() => {
-    if (isXl) {
+    if (isBelowXl) {
       onClose();
     } else {
       onOpen();
     }
-  }, [isXl, onClose, onOpen]);
+  }, [isBelowXl, onClose, onOpen]);
 
   return (
     <>
-      <Flex justifyContent="space-between" alignItems="center" style={{ width: "100%" }}>
-        <h2 className="h4" style={{ textAlign: "center" }}>
-          Table of Contents
-        </h2>
-        <MenuToggle
-          className="hide-xl"
-          isOpen={isOpen}
-          onClick={onToggle}
-          OpenIcon={<ChevronRightIcon />}
-          ClosedIcon={<ChevronDownIcon />}
-        />
-      </Flex>
+      <h2 className="h4" style={{ textAlign: "center", width: "100%" }}>
+        {isBelowXl ? <TocToggle isOpen={isOpen} onClick={onToggle} /> : <>Table of Contents</>}
+      </h2>
       <Flex
         as="ul"
         flexDirection="column"
