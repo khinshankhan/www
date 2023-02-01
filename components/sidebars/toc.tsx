@@ -1,6 +1,6 @@
 import type { FCC } from "types/react";
 import React, { useEffect } from "react";
-import { styled } from "lib/theme";
+import { styled, media } from "lib/theme";
 import clsx from "clsx";
 import { useScrollSpy, useIsBreakpoint, useDisclosure } from "hooks";
 import { scrollToElement } from "lib/utils/scroll";
@@ -21,7 +21,16 @@ const TocToggle = ({ className = "", isOpen, onClick = () => {}, ...props }: IMe
       onClick={onClick}
       {...props}
     >
-      <Flex as="span" justifyContent="space-between" alignItems="center" style={{ width: "100%" }}>
+      <Flex
+        as="span"
+        justifyContent="space-between"
+        alignItems="center"
+        flexDirection={{
+          [media("initial")]: "column",
+          [media("xs")]: "row",
+        }}
+        style={{ width: "100%" }}
+      >
         <span>Table of Contents</span>
         <span style={{ display: "inline-block" }}>
           <MenuIcon />

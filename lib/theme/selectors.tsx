@@ -1,7 +1,7 @@
 import { config } from "./stitches.config";
 
 // type safe way of using media queries
-export const media = (token: keyof typeof config.media) => `@${token}`;
+export const media = (token: keyof typeof config.media | "initial") => `@${token}`;
 
 // use multiple media tokens together
 export const combineSelectors = (...media: string[]) => media.filter(Boolean).join(", ");
