@@ -23,9 +23,9 @@ const TocToggle = ({ className = "", isOpen, onClick = () => {}, ...props }: IMe
     >
       <Flex as="span" justifyContent="space-between" alignItems="center" style={{ width: "100%" }}>
         <span>Table of Contents</span>
-        <IconButton as="span">
+        <span style={{ display: "inline-block" }}>
           <MenuIcon />
-        </IconButton>
+        </span>
       </Flex>
     </Button>
   );

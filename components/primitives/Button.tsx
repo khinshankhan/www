@@ -25,12 +25,21 @@ export const Button = styled("button", {
         },
       },
       ghost: {
+        cursor: "pointer",
         color: theme.colors.logoFg,
         background: theme.colors.transparent,
-        [selectMedia("at")]: {
-          background: theme.colors.ghostBg,
+
+        // based off https://codepen.io/finnhvman/pen/jLXKJw
+        backgroundPosition: "center",
+        transition: "background 0.8s",
+        [selectMedia("hover")]: {
+          background: `${theme.colors.ghostBg} radial-gradient(circle, transparent 1%, ${theme.colors.ghostBg} 1%) center/15000%`,
         },
-        cursor: "pointer",
+        [selectMedia("active")]: {
+          backgroundColor: theme.colors.ghostBg,
+          backgroundSize: "100%",
+          transition: "background 0s",
+        },
       },
     },
   },
