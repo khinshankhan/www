@@ -1,11 +1,15 @@
+import { FCC } from "types/react";
 import React from "react";
 import { PageSkeletonLayout as Layout } from "components/layouts";
 import { Box } from "components/primitives";
 import type { HeadingInfo } from "components/sidebars";
 import { Toc } from "components/sidebars";
 
-const H3 = (props) => <h3 {...props} />;
-const H4 = (props) => <h4 {...props} />;
+interface HeadingProps {
+  id?: string;
+}
+const H3: FCC<HeadingProps> = (props) => <h3 {...props} />;
+const H4: FCC<HeadingProps> = (props) => <h4 {...props} />;
 
 export default function Design() {
   return (
@@ -15,7 +19,7 @@ export default function Design() {
       sidebar={<Toc headings={[] as HeadingInfo[]} />}
       direction="right"
     >
-      <Box className="list-style">
+      <Box id="content">
         <p id="excerpt">
           Hello there. This is a list of components, styles, and other design fun that I created and
           use across this website. It probably is not nicely formatted or anything, but should be
