@@ -1,17 +1,18 @@
 import type { FCC } from "types/react";
 import React, { useEffect } from "react";
-import { styled, media } from "lib/theme";
+import { styled, css, theme, media } from "lib/theme";
 import clsx from "clsx";
 import { useScrollSpy, useIsBreakpoint, useDisclosure } from "hooks";
 import { scrollToElement } from "lib/utils/scroll";
 import { ChevronDownIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { Button, Flex, IconButton } from "components/primitives";
+import { Button, Flex } from "components/primitives";
 import type { IMenuToggleProps } from "components/toggles";
 
 const TocToggle = ({ className = "", isOpen, onClick = () => {}, ...props }: IMenuToggleProps) => {
   const MenuIcon = isOpen ? ChevronDownIcon : ChevronRightIcon;
   const action = isOpen ? "Close" : "Open";
 
+  // https://validator.w3.org/nu/#textarea
   return (
     <Button
       variant="ghost"
@@ -27,11 +28,11 @@ const TocToggle = ({ className = "", isOpen, onClick = () => {}, ...props }: IMe
         alignItems="center"
         flexDirection={{
           [media("initial")]: "column",
-          [media("xs")]: "row",
+          [media("xss")]: "row",
         }}
         style={{ width: "100%" }}
       >
-        <span>Table of Contents</span>
+        <span>On this page</span>
         <span style={{ display: "inline-block" }}>
           <MenuIcon />
         </span>
@@ -41,7 +42,7 @@ const TocToggle = ({ className = "", isOpen, onClick = () => {}, ...props }: IMe
 };
 
 const Li = styled("li", {
-  paddingLeft: "8px",
+  paddingLeft: "10px",
   "&[data-level='1']": {
     paddingLeft: "24px",
   },
@@ -56,8 +57,17 @@ const Li = styled("li", {
   },
 
   transition: "box-shadow 0.4s ease-in-out",
-  "&[data-active='true']": {
-    boxShadow: "inset 4px 0px 0px 0px $colors$linkActive",
+  [media("xl")]: {
+    "&[data-active='true']": {
+      boxShadow: `inset 4px 0px 0px 0px ${theme.colors.linkActive}`,
+    },
+  },
+});
+
+const TocHeading = styled("h2", {
+  width: "100%",
+  [media("xlMax")]: {
+    marginBottom: "10px",
   },
 });
 
@@ -98,9 +108,9 @@ export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings: headingsProp }
 
   return (
     <>
-      <h2 className="h4" style={{ textAlign: "center", width: "100%" }}>
-        {isBelowXl ? <TocToggle isOpen={isOpen} onClick={onToggle} /> : <>Table of Contents</>}
-      </h2>
+      <TocHeading className={"h4"}>
+        {isBelowXl ? <TocToggle isOpen={isOpen} onClick={onToggle} /> : <>On this page</>}
+      </TocHeading>
       <Flex
         as="ul"
         flexDirection="column"

@@ -2,14 +2,14 @@ import type { FCC } from "types/react";
 import type { ReactNode } from "react";
 import React from "react";
 import { media, styled } from "lib/theme";
-import { Box, Container } from "components/primitives";
+import { Container } from "components/primitives";
 
 export const Aside = styled("aside", {
   position: "sticky",
   maxHeight: "unset",
   top: "unset",
   marginTop: "24px",
-  marginBottom: "16px",
+  marginBottom: 0,
   [media("xl")]: {
     maxHeight: `300px`,
     top: "80px",
@@ -24,10 +24,14 @@ export const AsideContent = styled("div", {
   maxWidth: "100%",
   [media("xl")]: {
     marginTop: "1.8rem",
+    minWidth: `200px`,
     maxWidth: `225px`,
   },
+  [media("2xl")]: {
+    minWidth: `225px`,
+    maxWidth: `275px`,
+  },
   width: "100%",
-  minWidth: "185px",
   overflow: "auto",
   alignItems: "flex-start",
 });
