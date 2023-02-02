@@ -1,5 +1,5 @@
 import { selectMedia, theme, styled } from "lib/theme";
-import normalizeStyles from "lib/theme/styles/global/normalize";
+import { linkStyles } from "lib/theme/styles/global";
 
 export const Button = styled("button", {
   display: "block",
@@ -16,7 +16,7 @@ export const Button = styled("button", {
     variant: {
       link: {
         backgroundColor: "transparent",
-        ...normalizeStyles.a,
+        ...linkStyles,
         textAlign: "left",
         padding: 0,
         borderRadius: 0,
