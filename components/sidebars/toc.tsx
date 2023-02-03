@@ -1,7 +1,8 @@
 import type { FCC } from "types/react";
 import React, { useEffect } from "react";
-import { styled, css, theme, media } from "lib/theme";
+import { styled, theme, media } from "lib/theme";
 import clsx from "clsx";
+import type { Computed } from "lib/contentlayer";
 import { useScrollSpy, useIsBreakpoint, useDisclosure } from "hooks";
 import { scrollToElement } from "lib/utils/scroll";
 import { ChevronDownIcon, ChevronRightIcon } from "@radix-ui/react-icons";
@@ -42,6 +43,7 @@ const TocToggle = ({ className = "", isOpen, onClick = () => {}, ...props }: IMe
 };
 
 const Li = styled("li", {
+  wordBreak: "break-all",
   paddingLeft: "10px",
   "&[data-level='1']": {
     paddingLeft: "24px",
@@ -71,9 +73,7 @@ const TocHeading = styled("h2", {
   },
 });
 
-export type HeadingInfo = { id: string; level: number; content: string };
-
-export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings: headingsProp }) => {
+export const Toc: FCC<{ headings: Computed["headings"] }> = ({ headings: headingsProp }) => {
   // determine smallest heading, since headings go 1-6, 7 should be out of range
   const minLevel =
     headingsProp.length === 0
@@ -106,6 +106,15 @@ export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings: headingsProp }
     }
   }, [isBelowXl, onClose, onOpen]);
 
+  const maxHeight = headings
+    .map((heading) => {
+      // account for left padding causing less characters per line
+      const paddedContent = heading.content.length + (heading.level - minLevel);
+      const lines = Math.floor(paddedContent / 18) + 1;
+      return lines * 35;
+    })
+    .reduce((a, b) => a + b, 0);
+
   return (
     <>
       <TocHeading className={"h4"}>
@@ -114,7 +123,7 @@ export const Toc: FCC<{ headings: HeadingInfo[] }> = ({ headings: headingsProp }
       <Flex
         as="ul"
         flexDirection="column"
-        style={{ overflow: "hidden", maxHeight: !isOpen ? 0 : 35 * headings.length }}
+        style={{ overflow: "hidden", maxHeight: !isOpen ? 0 : maxHeight }}
         className={clsx("collapsible", !isOpen && "closed")}
       >
         {headings.map(({ id, level, content }) => (

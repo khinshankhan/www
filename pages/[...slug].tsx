@@ -2,6 +2,7 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Page } from "contentlayer/generated";
 import type { Computed } from "lib/contentlayer";
 import { allPages as pages } from "contentlayer/generated";
+import { useLiveReload, useMDXComponent } from "next-contentlayer/hooks";
 import { Prose } from "components/layouts";
 
 export const getStaticPaths = () => {
@@ -42,7 +43,10 @@ export const getStaticProps: GetStaticProps<{
 };
 
 export default function PageView({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
+  useLiveReload();
+  const MDXContent = useMDXComponent(page?.body?.code || "");
+
   const computed = page.computed as Computed;
   console.log({ computed });
-  return <Prose>hello</Prose>;
+  return <Prose {...computed}>{MDXContent && <MDXContent components={{}} />}</Prose>;
 }
