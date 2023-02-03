@@ -17,9 +17,9 @@ export const Footer = () => {
       {showSeparator && (
         <Container
           css={{
+            backgroundColor: theme.colors.logoFg,
             width: "70%",
             height: "2px",
-            backgroundColor: theme.colors.logoFg,
             marginTop: "20px",
           }}
           role="presentation"
@@ -29,6 +29,7 @@ export const Footer = () => {
         as="footer"
         className="nav-bg"
         css={{
+          backgroundColor: theme.colors.bg,
           marginTop: showSeparator ? "0px" : "20px",
           paddingTop: "28px",
           paddingBottom: "35px",

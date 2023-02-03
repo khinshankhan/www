@@ -1,12 +1,16 @@
 import type { FCC } from "types/react";
 import React, { Fragment } from "react";
-import { media } from "lib/theme";
+import { useRouter } from "next/router";
+import { media, theme } from "lib/theme";
 import { Flex } from "components/primitives";
 import Headroom from "react-headroom";
 import Header from "./header";
 import Footer from "./footer";
 
 export const BaseLayout: FCC = ({ children }) => {
+  const router = useRouter();
+  const contentBg = router.pathname !== "/";
+
   return (
     <Fragment>
       <Flex
@@ -16,9 +20,14 @@ export const BaseLayout: FCC = ({ children }) => {
           [media("xsMax")]: {
             minHeight: "87vh",
           },
+          backgroundColor: contentBg ? theme.colors.contentBg : theme.colors.bg,
         }}
       >
-        <Headroom>
+        <Headroom
+          wrapperStyle={{
+            backgroundColor: theme.colors.bg.toString(),
+          }}
+        >
           <Header />
         </Headroom>
 

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { media, styled } from "lib/theme";
 import clsx from "clsx";
@@ -28,14 +29,10 @@ const Li = styled("li", {
 });
 
 export function Links() {
-  const [onLink, setOnLink] = useState("");
-  useEffect(() => {
-    const initialRender = () => {
-      setOnLink(window.location.pathname);
-    };
-
-    initialRender();
-  }, []);
+  const { pathname, query, isReady } = useRouter();
+  // NOTE: be sure to use slug for all dynamic paths
+  const link = isReady ? (query as { slug: string[] }).slug ?? pathname : pathname;
+  const onLink = Array.isArray(link) ? `/${link.join("/")}` : link;
 
   return (
     <Ul>

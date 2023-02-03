@@ -2,7 +2,7 @@ import type { FCC } from "types/react";
 import type { ReactNode } from "react";
 import React from "react";
 import { theme, media, styled } from "lib/theme";
-import { Box, Container } from "components/primitives";
+import { Box } from "components/primitives";
 import { ISidebarProps } from "./sidebar";
 import Sidebar from "./sidebar";
 
@@ -10,6 +10,7 @@ const ContentHeader = styled("header", {
   textAlign: "center",
   paddingTop: "56px",
   paddingBottom: "56px",
+  backgroundColor: theme.colors.bg,
 });
 
 const PageWrapper = styled("div", {
