@@ -19,6 +19,8 @@ import {
   slateDark,
   tomato,
   tomatoDark,
+  violet,
+  violetDark,
   yellow,
   yellowDark,
 } from "@radix-ui/colors";
@@ -56,6 +58,7 @@ const palette = {
   ...plumDark,
   ...red,
   ...slate,
+  ...violet,
   ...yellow,
 };
 
@@ -71,6 +74,7 @@ const darkPalette = {
   ...plum,
   ...redDark,
   ...slateDark,
+  ...violetDark,
   ...yellowDark,
 };
 
@@ -95,6 +99,9 @@ export const colors = {
   link: key("plum8"),
   linkActive: key("plum6"),
   linkOn: key("plum4"),
+
+  lightAccent: key("violet11"),
+  subtitle: key("bluegray7"),
 };
 
 // try to keep shared colors within colors
@@ -112,6 +119,9 @@ export const darkColors = {
   link: key("plum8"),
   linkActive: key("plum6"),
   linkOn: key("plum4"),
+
+  lightAccent: key("violet11"),
+  subtitle: key("bluegray7"),
 };
 
 const getValue = <T extends Record<string, string>>(config: T, key: keyof T): string =>
