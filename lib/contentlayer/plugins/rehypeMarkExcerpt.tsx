@@ -1,6 +1,6 @@
 import { visit, SKIP, EXIT } from "unist-util-visit";
 
-export default function rehypeMarkExcerpt() {
+export function rehypeMarkExcerpt() {
   return (tree: any) => {
     visit(tree, "element", (node) => {
       if (node.tagName != "p") return [SKIP];
@@ -10,3 +10,5 @@ export default function rehypeMarkExcerpt() {
     });
   };
 }
+
+export default rehypeMarkExcerpt;

@@ -47,6 +47,5 @@ export default function PageView({ page }: InferGetStaticPropsType<typeof getSta
   const MDXContent = useMDXComponent(page?.body?.code || "");
 
   const computed = page.computed as Computed;
-  console.log({ computed });
   return <Prose {...computed}>{MDXContent && <MDXContent components={{}} />}</Prose>;
 }
