@@ -49,6 +49,12 @@ export const getFields = ({ subtitle, status = "published" }: IFieldsProps): Fie
 });
 
 export interface Computed {
+  frontmatter: {
+    title: string;
+    subtitle: string;
+    planted: string;
+    tended: string;
+  };
   tags: string[];
   headings: {
     level: number;
@@ -95,6 +101,13 @@ export const getComputedFields = <T extends string>({
             }));
 
         return {
+          frontmatter: {
+            title: doc.title,
+            subtitle: doc.subtitle,
+            // chop of tz info since it's wrong (Z)
+            planted: doc.planted?.slice(0, -1) ?? "",
+            tended: doc.tended.slice(0, -1),
+          },
           tags,
           headings,
         } satisfies Computed;
