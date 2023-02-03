@@ -17,10 +17,12 @@ export const Footer = () => {
       {showSeparator && (
         <Container
           css={{
+            width: "70%",
             height: "2px",
             backgroundColor: theme.colors.logoFg,
             marginTop: "20px",
           }}
+          role="presentation"
         />
       )}
       <Box
