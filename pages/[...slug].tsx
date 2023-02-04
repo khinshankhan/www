@@ -1,6 +1,6 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { Page } from "contentlayer/generated";
 import type { Computed } from "lib/contentlayer";
+import type { Page } from "contentlayer/generated";
 import { allPages as pages } from "contentlayer/generated";
 import { useLiveReload, useMDXComponent } from "next-contentlayer/hooks";
 import { Prose } from "components/layouts";

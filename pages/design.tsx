@@ -1,8 +1,8 @@
 import { FCC } from "types/react";
 import React from "react";
+import type { Computed } from "lib/contentlayer";
 import { PageSkeletonLayout as Layout } from "components/layouts";
 import { Box } from "components/primitives";
-import type { HeadingInfo } from "components/sidebars";
 import { Toc } from "components/sidebars";
 
 interface HeadingProps {
@@ -16,7 +16,7 @@ export default function Design() {
     <Layout
       title="Design"
       subtitle="The not so secret sauce"
-      sidebar={<Toc headings={[] as HeadingInfo[]} />}
+      sidebar={<Toc headings={[] as Computed["headings"]} />}
       direction="right"
     >
       <Box id="content">
