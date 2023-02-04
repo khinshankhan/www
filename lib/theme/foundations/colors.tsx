@@ -115,7 +115,7 @@ export const colors = {
   codeTitle: key("bluegray7"),
   codeTitleBg: key("mauve5"),
   codeHighlight: key("mauve6"),
-  codeHighlightLeft: key("mauve10"),
+  codeHighlightLeft: key("violet10"),
 };
 
 // try to keep shared colors within colors
@@ -141,7 +141,7 @@ export const darkColors = {
   codeTitle: key("bluegray6"),
   codeTitleBg: key("bluegray11"),
   codeHighlight: key("blueA3"),
-  codeHighlightLeft: key("blueA10"),
+  codeHighlightLeft: key("violet10"),
 };
 
 const getValue = <T extends Record<string, string>>(config: T, key: keyof T): string =>
