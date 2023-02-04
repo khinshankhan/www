@@ -134,6 +134,14 @@ export const GlobalStyles = globalCss({
       zIndex: 0,
       width: "100%",
       height: "100%",
+      transform: "scaleX(1) !important",
+      backgroundColor: theme.colors.transparent,
+      transition: "transform 0.3s ease",
+    },
+    [selectMedia("at")]: {
+      textDecoration: "underline",
+      textUnderlineOffset: "0.4em",
+      textDecorationColor: theme.colors.linkActive,
     },
   },
   ".link-box": {
