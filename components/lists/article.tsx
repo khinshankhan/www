@@ -31,15 +31,20 @@ export const ArticleCard: FC<IArticleCardProps> = ({ slug, frontmatter, ...props
 // this styles the actual card
 const Li = styled("li", {
   border: `1px solid ${theme.colors.link.toString()}`,
-  borderRadius: "16px",
   padding: "12px",
-  marginBottom: "20px",
+  marginBottom: "40px",
+  transition: `
+background-color 0.3s ease,
+border 0.3s ease,
+box-shadow 0.3s ease,
+transform 0.5s linear`,
   [selectMedia("at")]: {
     backgroundColor: theme.colors.ghostBg,
     border: `1px solid ${theme.colors.linkActive.toString()}`,
     boxShadow: `
 rgb(255 255 255 / 20%) 0px 0px 15px,
 rgb(255 255 255 / 15%) 0px 0px 3px 1px`,
+    transform: "translateY(-15px)",
   },
 });
 

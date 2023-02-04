@@ -20,6 +20,7 @@ export const linkStyles = {
   fontSize: "inherit",
   color: theme.colors.link,
   textDecoration: "none",
+
   // link underline animation based off https://tobiasahlin.com/blog/css-trick-animating-link-underlines/
   [selectMedia("before")]: {
     content: "''",
@@ -124,7 +125,7 @@ export const GlobalStyles = globalCss({
   // based off https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/layout/src/link-box.tsx
   ".link-overlay": {
     position: "static",
-    "&:before": {
+    "&:after": {
       content: "''",
       cursor: "inherit",
       display: "block",
@@ -134,10 +135,10 @@ export const GlobalStyles = globalCss({
       zIndex: 0,
       width: "100%",
       height: "100%",
-      transform: "scaleX(1) !important",
-      backgroundColor: theme.colors.transparent,
       transition: "transform 0.3s ease",
     },
+    transition: "text-decoration-color 0.75s ease, text-underline-offset 0.5s ease",
+    textDecorationColor: theme.colors.transparent,
     [selectMedia("at")]: {
       textDecoration: "underline",
       textUnderlineOffset: "0.4em",
