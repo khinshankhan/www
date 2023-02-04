@@ -275,6 +275,12 @@ export const GlobalStyles = globalCss({
       fontSize: "1.43775rem", // ~23px, avg 21px and $xl
     },
   },
+  "*[id]": {
+    scrollMarginTop: "100px", // approximately sticky header, observer doesn't really matter on mobile
+    "@xl": {
+      scrollMarginTop: "165px", // approximately intersection observer margins
+    },
+  },
   a: linkStyles,
 
   // content normalize
