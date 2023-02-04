@@ -249,6 +249,18 @@ export const GlobalStyles = globalCss({
   },
 
   // global normalize
+  html: {
+    [selectMedia("dark")]: {
+      "[data-theme='light']": {
+        display: "none",
+      },
+    },
+    [selectMedia("light")]: {
+      "[data-theme='dark']": {
+        display: "none",
+      },
+    },
+  },
   body: {
     color: theme.colors.placeholder,
     background: theme.colors.bg,
@@ -303,5 +315,73 @@ export const GlobalStyles = globalCss({
   },
   ":is(#content, .list-style) :is(ul, ol) li :is(ul, ol) li :is(ul, ol)": {
     paddingLeft: "40px",
+  },
+
+  // codeblock
+  "pre, code": {
+    fontFamily: theme.fonts.mono,
+    backgroundColor: theme.colors.codeBg,
+  },
+  "pre > code": {
+    display: "grid",
+  },
+  "span[data-rehype-pretty-code-fragment] > code[data-language]": {
+    paddingLeft: "0.5em",
+    paddingRight: "0.5em",
+  },
+  "div[data-rehype-pretty-code-title]": {
+    fontFamily: theme.fonts.mono,
+    textAlign: "left",
+    color: theme.colors.codeTitle,
+    backgroundColor: theme.colors.codeTitleBg,
+    padding: "0.25rem 1.3125rem",
+    borderRadius: "12px 12px 0 0",
+  },
+  "div[data-rehype-pretty-code-fragment]": {
+    marginBottom: "20px",
+  },
+  "pre[data-language]": {
+    whiteSpace: "pre",
+    wordSpacing: "normal",
+    wordBreak: "normal",
+    wordWrap: "normal",
+    overflowX: "auto",
+    padding: "1.3125rem",
+    borderRadius: "12px",
+  },
+
+  "div[data-rehype-pretty-code-title] ~ pre[data-language]": {
+    padding: "0.25rem 1.3125rem 1.3125rem 1.3125rem",
+    borderRadius: "0 0 12px 12px",
+  },
+
+  "pre[data-language] > code": {
+    display: "grid",
+  },
+  "pre[data-language] > code > span": {
+    display: "inline-block",
+    width: "100%",
+  },
+
+  "pre[data-language] > code[data-line-numbers]": {
+    counterReset: "line",
+    "& > .line::before": {
+      counterIncrement: "line",
+      content: "counter(line)",
+
+      display: "inline-block",
+      width: "1rem",
+      marginRight: "2rem",
+      textAlign: "right",
+      color: "gray",
+    },
+  },
+
+  "pre[data-language] > code > span.line.highlighted": {
+    backgroundColor: theme.colors.codeHighlight,
+    borderLeft: `0.25em solid ${theme.colors.codeHighlightLeft}`,
+  },
+  "pre[data-language] > code > span.line:not(.highlighted)": {
+    paddingLeft: "0.25em",
   },
 });

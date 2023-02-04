@@ -9,6 +9,8 @@ import {
   grayDark,
   mauve,
   mauveDark,
+  mauveA,
+  mauveDarkA,
   plum,
   plumDark,
   red,
@@ -23,6 +25,8 @@ import {
   violetDark,
   yellow,
   yellowDark,
+  blueA,
+  blueDarkA,
 } from "@radix-ui/colors";
 import { changeObjectKeys } from "lib/utils/object";
 
@@ -33,8 +37,8 @@ const bluegray = {
   bluegray10: "hsl(232, 25%, 10%)",
   bluegray9: "hsl(230, 21%, 11%)",
   bluegray8: `hsl(230, 25%, 13%)`,
-  bluegray7: `hsl(230, 25%, 78%)`,
-  bluegray6: `hsl(230, 25%, 85%)`,
+  bluegray7: `hsl(230, 25%, 34%)`,
+  bluegray6: `hsl(230, 25%, 78%)`,
   bluegray5: `hsl(230, 25%, 90%)`,
   bluegray4: `hsl(230, 25%, 92%)`,
   bluegray3: `hsl(230, 25%, 96%)`,
@@ -55,11 +59,13 @@ const palette = {
   ...gold,
   ...gray,
   ...mauve,
+  ...mauveA,
   ...plumDark,
   ...red,
   ...slate,
   ...violet,
   ...yellow,
+  ...blueA,
 };
 
 // override any light theme same key names
@@ -71,11 +77,13 @@ const darkPalette = {
   ...goldDark,
   ...grayDark,
   ...mauveDark,
+  ...mauveDarkA,
   ...plum,
   ...redDark,
   ...slateDark,
   ...violetDark,
   ...yellowDark,
+  ...blueDarkA,
 };
 
 const key = (key: keyof typeof palette) => `$${key}`;
@@ -101,7 +109,13 @@ export const colors = {
   linkOn: key("plum4"),
 
   lightAccent: key("violet11"),
-  subtitle: key("bluegray7"),
+  subtitle: key("bluegray6"),
+
+  codeBg: key("mauve3"),
+  codeTitle: key("bluegray7"),
+  codeTitleBg: key("mauve5"),
+  codeHighlight: key("mauve6"),
+  codeHighlightLeft: key("mauve10"),
 };
 
 // try to keep shared colors within colors
@@ -121,7 +135,13 @@ export const darkColors = {
   linkOn: key("plum4"),
 
   lightAccent: key("violet11"),
-  subtitle: key("bluegray7"),
+  subtitle: key("bluegray6"),
+
+  codeBg: key("bluegray8"),
+  codeTitle: key("bluegray6"),
+  codeTitleBg: key("bluegray11"),
+  codeHighlight: key("blueA3"),
+  codeHighlightLeft: key("blueA10"),
 };
 
 const getValue = <T extends Record<string, string>>(config: T, key: keyof T): string =>
