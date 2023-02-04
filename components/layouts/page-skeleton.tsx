@@ -30,7 +30,7 @@ const Content = styled("article", {
 
 interface IPageSkeletonLayoutProps extends ISidebarProps {
   title: string;
-  subtitle: string;
+  subtitle: string | ReactNode;
   sidebar?: ReactNode;
 }
 
