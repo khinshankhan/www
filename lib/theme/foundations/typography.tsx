@@ -1,6 +1,6 @@
 import { Inter } from "@next/font/google";
 
-const inter = Inter();
+const inter = Inter({ subsets: ["latin", "greek"] });
 
 const letterSpacings = {
   tighter: `-0.05em`,
