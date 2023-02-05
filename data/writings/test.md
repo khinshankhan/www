@@ -87,5 +87,5 @@ function MyComponent() {
     const[name, setName] = useState('Taylor')
     // ...
 
-console.log("hello")
+console.log("bye")
 ```

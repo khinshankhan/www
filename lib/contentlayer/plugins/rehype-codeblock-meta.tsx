@@ -25,8 +25,7 @@ export function rehypeCodeblockFilename() {
         }
       }
 
-      properties["data-raw"] = node.children[0].children[0].value;
-
+      properties["data-raw"] = toString(node);
       const codeblockMetaNode = {
         type: "element",
         tagName: "div",
@@ -41,5 +40,26 @@ export function rehypeCodeblockFilename() {
 }
 
 export function rehypeCodeblockMeta() {
-  return (tree: any) => {};
+  return (tree: any) => {
+    visit(tree, "element", (node, i, parent) => {
+      const index = i as number;
+      if (
+        node.type !== "element" ||
+        node?.tagName !== "div" ||
+        !("codeblock" in node?.properties ?? {})
+      ) {
+        return;
+      }
+
+      const pre1 = node.children[0].children[0];
+      const pre2 = node.children[0].children[1];
+
+      const rootProperties = node.properties;
+      pre1.properties = { ...pre1.properties, ...rootProperties };
+      pre2.properties = { ...pre2.properties, ...rootProperties };
+
+      parent.children.splice(index, 1, pre1, pre2);
+      return [SKIP, index + 1];
+    });
+  };
 }
