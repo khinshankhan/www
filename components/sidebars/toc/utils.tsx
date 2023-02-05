@@ -12,16 +12,20 @@ export const getHeadingsInfo = (headingsProp: Computed["headings"]) => {
   // add excerpt to allow for a better 'default' intersection
   const headings = [{ id: "excerpt", level: minLevel, content: "Introduction" }, ...headingsProp];
 
-  const maxHeight = headings
+  const maxHeights = headings
     .map((heading) => {
       // account for left padding causing less characters per line
       const paddedContent = heading.content.length + (heading.level - minLevel);
       const lines = Math.floor(paddedContent / 18) + 1;
-      return lines * 35;
+      return [lines * 35, lines * 40];
     })
-    .reduce((a, b) => a + b, 0);
+    .reduce(([a1, a2], [b1, b2]) => [a1 + b1, a2 + b2], [0, 0]);
 
-  return { minLevel, headings, maxHeight };
+  return {
+    minLevel,
+    headings,
+    maxHeights,
+  };
 };
 
 export const scrollToHeading = (event: React.MouseEvent<HTMLButtonElement>) => {

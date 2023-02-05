@@ -36,7 +36,8 @@ const Li = styled("li", {
 });
 
 export const Toc: FCC<{ headings: Computed["headings"] }> = ({ headings: headingsProp }) => {
-  const { minLevel, headings, maxHeight } = getHeadingsInfo(headingsProp);
+  const { minLevel, headings, maxHeights } = getHeadingsInfo(headingsProp);
+  const [maxHeightMobile, maxHeightDesktop] = maxHeights;
 
   const activeIds = useScrollSpy(
     headings.map(({ id }) => `[id="${id}"]`),
@@ -60,7 +61,10 @@ export const Toc: FCC<{ headings: Computed["headings"] }> = ({ headings: heading
       <Flex
         as="ul"
         flexDirection="column"
-        style={{ overflow: "hidden", maxHeight: !isOpen ? 0 : maxHeight }}
+        style={{
+          overflow: "hidden",
+          maxHeight: !isOpen ? 0 : isBelowXl ? maxHeightMobile : maxHeightDesktop,
+        }}
         className={clsx("collapsible", !isOpen && "closed")}
       >
         {headings.map(({ id, level, content }) => (
