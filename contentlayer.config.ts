@@ -5,9 +5,9 @@ import rehypeSlug from "rehype-slug";
 import remarkUnwrapImages from "remark-unwrap-images";
 import type { Options } from "rehype-pretty-code";
 import rehypePrettyCode from "rehype-pretty-code";
-import rehypeMarkExcerpt from "./lib/rehype/rehypeMarkExcerpt";
+import { rehypeMarkExcerpt, rehypeCodeblockMeta } from "./lib/contentlayer/plugins";
+import { extractFilenameFromMeta } from "./lib/utils/regex";
 
-let count = 0;
 const rehypePrettyCodeOptions: Partial<Options> = {
   // Use one of Shiki's packaged themes
   theme: {
@@ -20,16 +20,11 @@ const rehypePrettyCodeOptions: Partial<Options> = {
     if (node.children.length === 0) {
       node.children = [{ type: "text", value: " " }];
     }
-    count = 0;
   },
   onVisitHighlightedLine: (node) => {
     node.properties.className.push("highlighted");
   },
-  onVisitHighlightedWord: (node) => {
-    node.properties.style = ""; // inline has more specificity than class names, so just reset
-    node.properties.className = [`word-highlighted-${count}`];
-    count += 1;
-  },
+  filterMetaString: (string) => string.replace(extractFilenameFromMeta, ""),
 };
 
 export default makeSource({
@@ -41,6 +36,11 @@ export default makeSource({
       return options;
     },
     remarkPlugins: [[remarkGfm], [remarkUnwrapImages]],
-    rehypePlugins: [[rehypeSlug], [rehypePrettyCode, rehypePrettyCodeOptions], [rehypeMarkExcerpt]],
+    rehypePlugins: [
+      [rehypeSlug],
+      [rehypePrettyCode, rehypePrettyCodeOptions],
+      [rehypeMarkExcerpt],
+      [rehypeCodeblockMeta],
+    ],
   },
 });

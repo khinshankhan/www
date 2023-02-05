@@ -1,4 +1,3 @@
-export * from "./CopyToClipboard";
-export * from "./Home";
-export * from "./MobileNavbar";
-export * from "./Theme";
+export * from "./home";
+export * from "./menu";
+export * from "./theme";

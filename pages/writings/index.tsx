@@ -1,28 +1,31 @@
 import type { NextPage, InferGetStaticPropsType } from "next";
 import React from "react";
-import { PageLayout as Layout } from "components/layout";
+import type { Computed } from "lib/contentlayer";
 import { listedWritings } from "lib/contentlayer";
-import ArticleList from "components/lists/Article";
+import { Listing as Layout } from "components/layouts";
+import type { IArticleListProps } from "components/lists";
+import { ArticleList } from "components/lists";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Writing: NextPage<Props> = ({ articles }) => (
-  <Layout title="Writings" subtitle="my thoughts and ideas">
-    <ArticleList articles={articles} />
-  </Layout>
-);
-
 export const getStaticProps = async () => {
   const articles = listedWritings.map((article) => {
+    const computed = article.computed as Computed;
     return {
-      title: article.title,
-      subtitle: article.subtitle,
       slug: article.slug,
-      tags: article.computed.tags as string[],
-    };
+      ...computed,
+    } satisfies IArticleListProps as IArticleListProps;
   });
 
   return { props: { articles } };
+};
+
+const Writing: NextPage<Props> = ({ articles }) => {
+  return (
+    <Layout title="Writings" subtitle={`My thoughts and ideas <Emoji text=":blush:" />`}>
+      <ArticleList articles={articles} />
+    </Layout>
+  );
 };
 
 export default Writing;

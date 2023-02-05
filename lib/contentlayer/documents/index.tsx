@@ -1,2 +1,2 @@
-export { Page } from "./Page";
-export { Writing } from "./Writing";
+export { Page } from "./page";
+export { Writing } from "./writing";

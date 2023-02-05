@@ -1,11 +1,10 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { Computed } from "lib/contentlayer";
 import type { Writing } from "contentlayer/generated";
 import { allWritingArticles as pages } from "lib/contentlayer";
 import { useLiveReload, useMDXComponent } from "next-contentlayer/hooks";
-import { MdxComponents, EmojiFauxRehype } from "components/mdx";
-import { default as Layout } from "templates/Article";
-import type { HeadingInfo } from "components/sidebars";
-import { Toc } from "components/sidebars";
+import { Prose } from "components/layouts";
+import { MdxComponents } from "components/mdx";
 
 const prefix = `writings`;
 
@@ -52,13 +51,7 @@ export const getStaticProps: GetStaticProps<{
 export default function PageView({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
   useLiveReload();
   const MDXContent = useMDXComponent(page?.body?.code || "");
-  return (
-    <Layout
-      title={page.title}
-      subtitle={EmojiFauxRehype(page.subtitle)}
-      sidebar={<Toc headings={page.computed.headings as HeadingInfo[]} />}
-    >
-      {MDXContent && <MDXContent components={MdxComponents} />}
-    </Layout>
-  );
+
+  const computed = page.computed as Computed;
+  return <Prose {...computed}>{MDXContent && <MDXContent components={MdxComponents} />}</Prose>;
 }

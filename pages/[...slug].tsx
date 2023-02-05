@@ -1,11 +1,10 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { Computed } from "lib/contentlayer";
 import type { Page } from "contentlayer/generated";
 import { allPages as pages } from "contentlayer/generated";
 import { useLiveReload, useMDXComponent } from "next-contentlayer/hooks";
-import { MdxComponents, EmojiFauxRehype } from "components/mdx";
-import { default as Layout } from "templates/Article";
-import type { HeadingInfo } from "components/sidebars";
-import { Toc } from "components/sidebars";
+import { Prose } from "components/layouts";
+import { MdxComponents } from "components/mdx";
 
 export const getStaticPaths = () => {
   const paths = pages.map((p) => ({
@@ -47,13 +46,7 @@ export const getStaticProps: GetStaticProps<{
 export default function PageView({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
   useLiveReload();
   const MDXContent = useMDXComponent(page?.body?.code || "");
-  return (
-    <Layout
-      title={page.title}
-      subtitle={EmojiFauxRehype(page.subtitle)}
-      sidebar={<Toc headings={page.computed.headings as HeadingInfo[]} />}
-    >
-      {MDXContent && <MDXContent components={MdxComponents} />}
-    </Layout>
-  );
+
+  const computed = page.computed as Computed;
+  return <Prose {...computed}>{MDXContent && <MDXContent components={MdxComponents} />}</Prose>;
 }

@@ -1,4 +1,5 @@
 import { allWritings } from "contentlayer/generated";
+export * from "./fields";
 
 const isProd = process.env.NODE_ENV === "production";
 

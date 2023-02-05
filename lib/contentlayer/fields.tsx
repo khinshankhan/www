@@ -48,6 +48,21 @@ export const getFields = ({ subtitle, status = "published" }: IFieldsProps): Fie
   },
 });
 
+export interface Computed {
+  frontmatter: {
+    title: string;
+    subtitle: string;
+    planted: string;
+    tended: string;
+  };
+  tags: string[];
+  headings: {
+    level: number;
+    content: string;
+    id: string;
+  }[];
+}
+
 interface IComputedFieldsProps {
   prefix: string;
   chopPrefix?: boolean;
@@ -59,20 +74,6 @@ export const getComputedFields = <T extends string>({
   const cleanPath = chopOffWord(prefix, false);
 
   return {
-    frontmatter: {
-      type: "json",
-      resolve: (doc) => {
-        const resolved = {
-          title: doc.title,
-          subtitle: doc.subtitle,
-          // chop of tz info since it's wrong (Z)
-          planted: doc.planted?.slice(0, -1),
-          tended: doc.tended.slice(0, -1),
-        };
-        return resolved;
-      },
-    },
-
     slug: {
       type: "string",
       resolve: (doc) =>
@@ -80,24 +81,36 @@ export const getComputedFields = <T extends string>({
           ? cleanPath(doc._raw.flattenedPath).slice(1)
           : doc._raw.flattenedPath,
     },
+
     computed: {
       type: "json",
       resolve: (doc) => {
+        const tags = [...new Set((doc?.tags ?? []) as string[])].sort();
+
         // use same package as rehypeSlug so toc and sluggified headings match
         // https://github.com/rehypejs/rehype-slug/blob/main/package.json#L36
         const slugs = new Slugger();
-
         const regexHeadings = /^(?<tag>#{1,6})[ ](?<content>[^\n]+)/gm;
+
+        const headings = !doc?.body?.raw
+          ? []
+          : [...doc.body.raw.matchAll(regexHeadings)].map(([, tag, content]) => ({
+              level: (tag as string).length,
+              content: content as string,
+              id: slugs.slug(content, false),
+            }));
+
         return {
-          tags: [...new Set(doc?.tags as string[] | null)].sort(),
-          headings: !doc?.body?.raw
-            ? []
-            : [...doc.body.raw.matchAll(regexHeadings)].map(([, tag, content]) => ({
-                level: tag.length,
-                content,
-                id: slugs.slug(content, false),
-              })),
-        };
+          frontmatter: {
+            title: doc.title,
+            subtitle: doc.subtitle,
+            // chop of tz info since it's wrong (Z)
+            planted: doc.planted?.slice(0, -1) ?? "",
+            tended: doc.tended.slice(0, -1),
+          },
+          tags,
+          headings,
+        } satisfies Computed;
       },
     },
   };

@@ -1,25 +1,20 @@
+import { globalCss, theme } from "lib/theme/stitches.config";
+
 // Reset browser defaults which may differ across browsers reducing inconsistencies
 // From https://meyerweb.com/eric/tools/css/reset/
-export const resetStyles = {
-  "html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video":
-    {
-      margin: "0",
-      padding: "0",
-      border: "0",
-      fontSize: "100%",
-      font: "inherit",
-      verticalAlign: "baseline",
-    },
+// And apply sane-ness, based off https://www.joshwcomeau.com/css/custom-css-reset/
+// more based on https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/css-reset/src/css-reset.tsx
+// the rest will be set in normalize since some styles are only meant for content
+export const ResetStyles = globalCss({
   /* HTML5 display-role reset for older browsers */
   "article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section": {
     display: "block",
   },
-  body: {
-    lineHeight: "1",
-  },
+
   "ol, ul": {
     listStyle: "none",
   },
+
   "blockquote, q": {
     quotes: "none",
   },
@@ -29,10 +24,64 @@ export const resetStyles = {
       content: "none",
     },
   },
+
   table: {
     borderCollapse: "collapse",
     borderSpacing: "0",
   },
-};
 
-export default resetStyles;
+  "*": {
+    margin: 0,
+    padding: 0,
+    border: 0,
+    font: "inherit",
+  },
+
+  "*, *::before, *::after": {
+    borderColor: theme.colors.border,
+    borderWidth: 0,
+    borderStyle: "solid",
+    // https://css-tricks.com/international-box-sizing-awareness-day/
+    WebkitBoxSizing: "border-box",
+    MozBoxSizing: "border-box",
+    boxSizing: "border-box",
+  },
+
+  html: {
+    height: "100%",
+    WebkitTextSizeAdjust: "100%",
+    WebkitFontSmoothing: "antialiased",
+    textRendering: "optimizeLegibility",
+    MozOsxFontSmoothing: "grayscale",
+    touchAction: "manipulation",
+    scrollBehavior: "smooth",
+  },
+
+  body: {
+    height: "100%",
+    position: "relative",
+    minHeight: "100%",
+
+    WebkitFontFeatureSettings: "'kern'",
+    MozFontFeatureSettings: "'kern'",
+    fontFeatureSettings: "'kern'",
+  },
+
+  "img, picture, svg, video, canvas, audio, iframe, embed, object": {
+    display: "block",
+    maxWidth: "100%",
+    height: "auto",
+  },
+
+  "input, button, textarea, select": {
+    font: "inherit",
+  },
+
+  "p, h1, h2, h3, h4, h5, h6": {
+    overflowWrap: "break-word",
+  },
+
+  "#root, #__next": {
+    isolation: "isolate",
+  },
+});
