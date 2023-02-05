@@ -21,6 +21,7 @@ specifiers:
   github-slugger: ^2.0.0
   jest: ^29.3.1
   jest-environment-jsdom: ^29.3.1
+  mdast-util-to-string: ^3.1.1
   next: 13.1.6
   next-contentlayer: ^0.3.0
   next-themes: ^0.2.1
@@ -56,6 +57,7 @@ dependencies:
   github-slugger: 2.0.0
   jest: 29.3.1_@types+node@18.11.17
   jest-environment-jsdom: 29.3.1
+  mdast-util-to-string: 3.1.1
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
   next-contentlayer: 0.3.0_3vryta7zmbcsw4rrqf4axjqggm
   next-themes: 0.2.1_3vryta7zmbcsw4rrqf4axjqggm
@@ -4949,7 +4951,7 @@ packages:
       '@types/mdast': 3.0.10
       '@types/unist': 2.0.6
       decode-named-character-reference: 1.0.2
-      mdast-util-to-string: 3.1.0
+      mdast-util-to-string: 3.1.1
       micromark: 3.1.0
       micromark-util-decode-numeric-character-reference: 1.0.0
       micromark-util-decode-string: 1.0.2
@@ -5093,14 +5095,16 @@ packages:
       '@types/mdast': 3.0.10
       '@types/unist': 2.0.6
       longest-streak: 3.1.0
-      mdast-util-to-string: 3.1.0
+      mdast-util-to-string: 3.1.1
       micromark-util-decode-string: 1.0.2
       unist-util-visit: 4.1.1
       zwitch: 2.0.4
     dev: false
 
-  /mdast-util-to-string/3.1.0:
-    resolution: {integrity: sha512-n4Vypz/DZgwo0iMHLQL49dJzlp7YtAJP+N07MZHpjPf/5XJuHUWstviF4Mn2jEiR/GNmtnRRqnwsXExk3igfFA==}
+  /mdast-util-to-string/3.1.1:
+    resolution: {integrity: sha512-tGvhT94e+cVnQt8JWE9/b3cUQZWS732TJxXHktvP+BYo62PpYD53Ls/6cC60rW21dW+txxiM4zMdc6abASvZKA==}
+    dependencies:
+      '@types/mdast': 3.0.10
     dev: false
 
   /mdx-bundler/9.2.1_esbuild@0.17.5:

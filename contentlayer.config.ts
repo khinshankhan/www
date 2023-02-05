@@ -5,7 +5,7 @@ import rehypeSlug from "rehype-slug";
 import remarkUnwrapImages from "remark-unwrap-images";
 import type { Options } from "rehype-pretty-code";
 import rehypePrettyCode from "rehype-pretty-code";
-import { rehypeMarkExcerpt } from "./lib/contentlayer/plugins";
+import { rehypeMarkExcerpt, rehypeCodeblockMeta } from "./lib/contentlayer/plugins";
 
 const rehypePrettyCodeOptions: Partial<Options> = {
   // Use one of Shiki's packaged themes
@@ -23,6 +23,7 @@ const rehypePrettyCodeOptions: Partial<Options> = {
   onVisitHighlightedLine: (node) => {
     node.properties.className.push("highlighted");
   },
+  filterMetaString: (string) => string.replace(/filename="[.]*"/, ""),
 };
 
 export default makeSource({
@@ -34,6 +35,11 @@ export default makeSource({
       return options;
     },
     remarkPlugins: [[remarkGfm], [remarkUnwrapImages]],
-    rehypePlugins: [[rehypeSlug], [rehypePrettyCode, rehypePrettyCodeOptions], [rehypeMarkExcerpt]],
+    rehypePlugins: [
+      [rehypeSlug],
+      [rehypePrettyCode, rehypePrettyCodeOptions],
+      [rehypeMarkExcerpt],
+      [rehypeCodeblockMeta],
+    ],
   },
 });
