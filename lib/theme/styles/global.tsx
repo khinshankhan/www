@@ -344,14 +344,6 @@ export const GlobalStyles = globalCss({
     paddingLeft: "0.5em",
     paddingRight: "0.5em",
   },
-  "div[data-rehype-pretty-code-title]": {
-    fontFamily: theme.fonts.mono,
-    textAlign: "left",
-    color: theme.colors.codeTitle,
-    backgroundColor: theme.colors.codeTitleBg,
-    padding: "0.25rem 1.3125rem",
-    borderRadius: "12px 12px 0 0",
-  },
   "div[data-rehype-pretty-code-fragment]": {
     marginBottom: "20px",
   },
@@ -363,6 +355,24 @@ export const GlobalStyles = globalCss({
     overflowX: "auto",
     padding: "1.3125rem",
     borderRadius: "12px",
+  },
+  "div[data-rehype-pretty-code-title]": {
+    fontFamily: theme.fonts.mono,
+    textAlign: "left",
+    color: theme.colors.codeTitle,
+    backgroundColor: theme.colors.codeTitleBg,
+    padding: "0.25rem 1.3125rem",
+    borderRadius: "12px 12px 0 0",
+  },
+  "div[data-rehype-pretty-code-meta]": {
+    fontFamily: theme.fonts.mono,
+    textAlign: "left",
+    color: theme.colors.codeTitle,
+    backgroundColor: theme.colors.codeTitleBg,
+    padding: "0.25rem 1.3125rem",
+  },
+  "div[data-rehype-pretty-code-meta] ~ pre[data-language]": {
+    padding: "0.25rem 1.3125rem 1.3125rem 1.3125rem",
   },
 
   "div[data-rehype-pretty-code-title] ~ pre[data-language]": {
