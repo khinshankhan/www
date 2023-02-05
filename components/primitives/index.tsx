@@ -6,3 +6,4 @@ export * from "./Icon";
 export * from "./IconButton";
 export * from "./Link";
 export * from "./Text";
+export * from "./Tooltip";
