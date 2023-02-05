@@ -64,7 +64,7 @@ This following is a list:
 
 This is an array `[1, 2, 3]{:js}` of numbers 1 through 3.
 
-And this is from the docs
+And this is an example codeblock:
 
 ```js showLineNumbers {3,5} filename="components/MyComponent.jsx"
 import { useState } from 'react';
@@ -73,4 +73,19 @@ function MyComponent() {
     const[age, setAge] = useState(42)
     const[name, setName] = useState('Taylor')
     // ...
+
+console.log("hello")
+```
+
+Also codeblock with no filename:
+
+```js showLineNumbers {3,5}
+import { useState } from 'react';
+
+function MyComponent() {
+    const[age, setAge] = useState(42)
+    const[name, setName] = useState('Taylor')
+    // ...
+
+console.log("hello")
 ```

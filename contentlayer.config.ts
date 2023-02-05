@@ -6,6 +6,7 @@ import remarkUnwrapImages from "remark-unwrap-images";
 import type { Options } from "rehype-pretty-code";
 import rehypePrettyCode from "rehype-pretty-code";
 import { rehypeMarkExcerpt, rehypeCodeblockMeta } from "./lib/contentlayer/plugins";
+import { extractFilenameFromMeta } from "./lib/utils/regex";
 
 const rehypePrettyCodeOptions: Partial<Options> = {
   // Use one of Shiki's packaged themes
@@ -23,7 +24,7 @@ const rehypePrettyCodeOptions: Partial<Options> = {
   onVisitHighlightedLine: (node) => {
     node.properties.className.push("highlighted");
   },
-  filterMetaString: (string) => string.replace(/filename="[.]*"/, ""),
+  filterMetaString: (string) => string.replace(extractFilenameFromMeta, ""),
 };
 
 export default makeSource({
