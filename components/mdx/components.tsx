@@ -1,6 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
-import { Box, Link } from "components/primitives";
+import { Box, Flex, Link } from "components/primitives";
 import Emoji from "components/emoji";
 
 const A: MDXComponents["a"] = ({ href = "#", ...props }) => <Link href={href} {...props} />;
@@ -10,11 +10,28 @@ const Img: MDXComponents["img"] = ({ title, alt = "", src = "/placeholder.png" }
 );
 
 const Pre = (props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>) => {
+  // @ts-expect-error
+  const lang = props["data-language"]
+  // @ts-expect-error
+  const theme = props["data-theme"]
+
   return (
-    <pre {...props}>
-      <div>Hello</div>
-      {props.children}
-    </pre>
+    <>
+      <Flex
+        data-rehype-pretty-code-title
+        data-language={lang}
+        data-theme={theme}
+        flexDirection="row"
+        justifyContent="space-between"
+        alignItems="flex-start"
+      >
+        <span>{lang}</span>
+        <span>{lang}</span>
+      </Flex>
+      <pre {...props}>
+        {props.children}
+      </pre>
+    </>
   );
 };
 
