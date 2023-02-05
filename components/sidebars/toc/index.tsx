@@ -9,7 +9,10 @@ import TocHeading from "./heading";
 import { getHeadingsInfo, scrollToHeading } from "./utils";
 
 const Li = styled("li", {
-  wordBreak: "break-all",
+  WebkitHyphens: "auto",
+  MozHyphens: "auto",
+  MsHyphens: "auto",
+  hyphens: "auto",
   paddingLeft: "10px",
   "&[data-level='1']": {
     paddingLeft: "24px",
