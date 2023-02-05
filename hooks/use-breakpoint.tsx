@@ -1,5 +1,5 @@
 import { config } from "lib/theme";
-import { useMediaQuery } from "./useMediaQuery";
+import { useMediaQuery } from "./use-media-query";
 
 export const useIsBreakpoint = (bp: keyof typeof config.media) => {
   const match = useMediaQuery(config.media[bp]);

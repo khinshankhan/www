@@ -3,7 +3,7 @@ import React from "react";
 import { styled } from "lib/theme";
 import { theme } from "lib/theme";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import { Box } from "./Box";
+import { Box } from "./box";
 
 type TooltipPrimitiveProps = React.ComponentProps<typeof TooltipPrimitive.Root>;
 type TooltipProps = TooltipPrimitiveProps &

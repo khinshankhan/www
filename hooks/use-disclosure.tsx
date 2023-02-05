@@ -1,6 +1,6 @@
 // https://chakra-ui.com/docs/hooks/use-disclosure
 import { useState, useCallback } from "react";
-import { useCallbackRef } from "./useCallbackRef";
+import { useCallbackRef } from "./use-callback-ref";
 
 interface UseDisclosureProps {
   defaultIsOpen?: boolean;
