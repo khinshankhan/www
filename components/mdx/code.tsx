@@ -1,5 +1,5 @@
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
-import { Flex } from "components/primitives";
+import { Box, Flex } from "components/primitives";
 import { CopyToClipboardToggle } from "components/toggles";
 
 export const Pre = (props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>) => {
@@ -18,9 +18,21 @@ export const Pre = (props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTM
 
   const Title = () =>
     filename ? (
-      <div data-filename={filename} data-rehype-pretty-code-title="" data-theme={theme}>
-        {filename}
-      </div>
+      <Box
+        data-filename={filename}
+        data-rehype-pretty-code-title=""
+        data-theme={theme}
+        css={{
+          wordWrap: "break-word",
+          overflowWrap: "break-word",
+          WebkitHyphens: "auto",
+          MozHyphens: "auto",
+          MsHyphens: "auto",
+          hyphens: "auto",
+        }}
+      >
+        <span> {filename}</span>
+      </Box>
     ) : (
       <Flex
         data-rehype-pretty-code-title=""

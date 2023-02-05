@@ -358,7 +358,6 @@ export const GlobalStyles = globalCss({
   },
   "div[data-rehype-pretty-code-title]": {
     fontFamily: theme.fonts.mono,
-    textAlign: "left",
     color: theme.colors.codeTitle,
     backgroundColor: theme.colors.codeTitleBg,
     padding: "0.25rem 1.3125rem",
