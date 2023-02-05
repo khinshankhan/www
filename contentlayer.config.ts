@@ -5,7 +5,11 @@ import rehypeSlug from "rehype-slug";
 import remarkUnwrapImages from "remark-unwrap-images";
 import type { Options } from "rehype-pretty-code";
 import rehypePrettyCode from "rehype-pretty-code";
-import { rehypeMarkExcerpt, rehypeCodeblockMeta } from "./lib/contentlayer/plugins";
+import {
+  rehypeMarkExcerpt,
+  rehypeCodeblockFilename,
+  rehypeCodeblockMeta,
+} from "./lib/contentlayer/plugins";
 import { extractFilenameFromMeta } from "./lib/utils/regex";
 
 const rehypePrettyCodeOptions: Partial<Options> = {
@@ -38,9 +42,11 @@ export default makeSource({
     remarkPlugins: [[remarkGfm], [remarkUnwrapImages]],
     rehypePlugins: [
       [rehypeSlug],
+      // NOTE: order of rehype plugins matter
+      [rehypeCodeblockFilename],
       [rehypePrettyCode, rehypePrettyCodeOptions],
-      [rehypeMarkExcerpt],
       [rehypeCodeblockMeta],
+      [rehypeMarkExcerpt],
     ],
   },
 });
