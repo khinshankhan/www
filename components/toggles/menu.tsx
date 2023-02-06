@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import React from "react";
 import { CSS } from "lib/theme";
 import { HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";

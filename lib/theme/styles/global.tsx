@@ -294,7 +294,7 @@ export const GlobalStyles = globalCss({
 
   // content normalize
   // gap between elements
-  "#content :is(h2, h3, h4, h5, h6, p, ol, ul)": {
+  "#content :is(h2, h3, h4, h5, h6, p, ol, ul, pre)": {
     marginBottom: "20px",
   },
   "#content p+:is(ol, ul)": {
@@ -343,9 +343,6 @@ export const GlobalStyles = globalCss({
   "span[data-rehype-pretty-code-fragment] > code[data-language]": {
     paddingLeft: "0.5em",
     paddingRight: "0.5em",
-  },
-  "div[data-rehype-pretty-code-fragment]": {
-    marginBottom: "20px",
   },
   "pre[data-language]": {
     whiteSpace: "pre",

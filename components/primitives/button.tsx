@@ -6,7 +6,7 @@ export const Button = styled("button", {
   borderWidth: 0,
   padding: "4px 6px",
   borderRadius: "8px",
-  backgroundColor: theme.colors.link,
+  backgroundColor: theme.colors.violet7,
   [selectMedia("at")]: {
     background: theme.colors.ghostBg,
   },
