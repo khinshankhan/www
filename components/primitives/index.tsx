@@ -5,5 +5,6 @@ export * from "./flex";
 export * from "./icon";
 export * from "./icon-button";
 export * from "./link";
+export * from "./popover";
 export * from "./text";
 export * from "./tooltip";

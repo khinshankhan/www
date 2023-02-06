@@ -1,6 +1,9 @@
 import {
   amber,
   amberDark,
+  blackA,
+  blueA,
+  blueDarkA,
   gold,
   goldDark,
   grass,
@@ -23,10 +26,9 @@ import {
   tomatoDark,
   violet,
   violetDark,
+  whiteA,
   yellow,
   yellowDark,
-  blueA,
-  blueDarkA,
 } from "@radix-ui/colors";
 import { changeObjectKeys } from "lib/utils/object";
 
@@ -50,6 +52,8 @@ const palette = {
   transparent: "transparent",
   black: "#000000",
   white: "#FFFFFF",
+  ...blackA,
+  ...whiteA,
 
   ...changeObjectKeys(grass, "grass", "success"),
   ...changeObjectKeys(amber, "amber", "warning"),
@@ -94,10 +98,11 @@ export const colors = {
 
   bg: key("mauve4"),
   ghostBg: "rgba(0, 0, 0, 0.12)",
+  ghostOpaqueBg: "rgba(255, 255, 255, 0.99)",
 
   // TODO
-  navBg: "hsla(289, 4.7%, 93.3%, .85)", // bg with transparency
-  navOpaqueBg: "hsla(289, 4.7%, 93.3%, .99)",
+  navBg: "hsla(289, 4.7%, 93.3%, 0.85)", // bg with transparency
+  navOpaqueBg: "hsla(289, 4.7%, 93.3%, 0.99)",
   contentBg: key("mauve1"),
 
   logoFg: key("gray12"),
@@ -124,6 +129,7 @@ export const darkColors = {
   placeholder: key("white"),
   border: key("gray1"),
   ghostBg: "rgba(255, 255, 255, 0.12)",
+  ghostOpaqueBg: "rgba(0, 0, 0, 0.90)",
 
   bg: key("bluegray12"),
   navBg: "hsla(240, 30%, 8%, 0.85)",
