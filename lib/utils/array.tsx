@@ -8,3 +8,12 @@ export const braidArrays = <T,>(...arrays: T[][]) => {
   }
   return braided;
 };
+
+// useful for forcing filter types to remove null and undefined
+export const existPredicate = <T,>(item: T | undefined | null): item is T => {
+  return item !== null && item !== undefined;
+};
+
+export const uniquePredicate = <T,>(item: T, index: number, array: T[]) => {
+  return array.indexOf(item) === index;
+};
