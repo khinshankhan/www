@@ -1,6 +1,11 @@
+import type { FCC } from "types/react";
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
-import { Box, Flex } from "components/primitives";
+import React, { Children, useState } from "react";
+import clsx from "clsx";
+import * as Popover from "@radix-ui/react-popover";
+import { Button, Box, Flex, SimplePopover } from "components/primitives";
 import { CopyToClipboardToggle } from "components/toggles";
+import { existPredicate, uniquePredicate } from "lib/utils/array";
 
 export const Pre = (props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>) => {
   // @ts-expect-error
@@ -68,6 +73,70 @@ export const Pre = (props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTM
       <pre {...filenameProps} data-language={lang} data-theme={theme}>
         {props.children}
       </pre>
+    </>
+  );
+};
+
+export const Codex: FCC = ({ children }) => {
+  const filenames = Children.toArray(children)
+    .map((child) => {
+      // @ts-expect-error
+      const filename: string | null = child?.props?.["data-filename"] ?? null;
+      return filename;
+    })
+    .filter(existPredicate)
+    .filter(uniquePredicate);
+
+  const [selected, setSelected] = useState(filenames[0]);
+  const changeSelectedFile = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const filename = event.currentTarget.dataset.filename;
+    if (filename) {
+      setSelected(filename);
+    }
+  };
+
+  const activeAttribute = `[data-filename]:not([data-filename="${selected}"])`;
+  return (
+    <>
+      <SimplePopover
+        trigger={
+          <Button
+            aria-label="Choose different displayed code block"
+            css={{
+              marginBottom: "10px",
+            }}
+          >
+            Choose file
+          </Button>
+        }
+      >
+        <ul>
+          {filenames.map((filename) => (
+            <li key={filename}>
+              <Button
+                as={Popover.Close}
+                data-filename={filename}
+                onClick={changeSelectedFile}
+                variant="link"
+                className={clsx(selected === filename && "on")}
+              >
+                {filename}
+              </Button>
+            </li>
+          ))}
+        </ul>
+      </SimplePopover>
+      <Box
+        data-codex=""
+        data-active-filename={""}
+        css={{
+          [activeAttribute]: {
+            display: "none",
+          },
+        }}
+      >
+        {children}
+      </Box>
     </>
   );
 };

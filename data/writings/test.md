@@ -89,3 +89,41 @@ function MyComponent() {
 
 console.log("bye")
 ```
+
+Trying out codex?
+
+
+<Codex>
+```js showLineNumbers {3,5} filename="components/Hello.jsx"
+import { useState } from 'react';
+
+function MyComponent() {
+    const[age, setAge] = useState(42)
+    const[name, setName] = useState('Taylor')
+    // ...
+
+console.log("hello")
+```
+
+```js showLineNumbers {3,5} filename="components/Bye.jsx"
+import { useState } from 'react';
+
+function MyComponent() {
+    const[age, setAge] = useState(42)
+    const[name, setName] = useState('Taylor')
+    // ...
+
+console.log("bye")
+```
+
+```js showLineNumbers {3,5} filename="components/Third.jsx"
+import { useState } from 'react';
+
+function MyComponent() {
+    const[age, setAge] = useState(42)
+    const[name, setName] = useState('Taylor')
+    // ...
+
+console.log("third")
+```
+</Codex>

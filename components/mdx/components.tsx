@@ -2,7 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
 import { Box, Link } from "components/primitives";
 import Emoji from "components/emoji";
-import { Pre } from "./code";
+import { Pre, Codex } from "./code";
 
 const A: MDXComponents["a"] = ({ href = "#", ...props }) => <Link href={href} {...props} />;
 
@@ -39,6 +39,7 @@ export const MdxComponents: MDXComponents = {
   a: A,
   img: Img,
   pre: Pre,
+  Codex,
   h1: (props) => <AnchorHeading as="h1" {...props} />,
   h2: (props) => <AnchorHeading as="h2" {...props} />,
   h3: (props) => <AnchorHeading as="h3" {...props} />,
