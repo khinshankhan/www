@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root,
+.light {
+  --bg: hsl(0, 0%, 78%);
+  --text: hsl(0, 100%, 0%);
+}
+
+.dark {
+  --bg: hsl(0, 100%, 0%);
+  --text: hsl(0, 100%, 100%);
+}
+
 body {
-  @apply text-sky-700;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+button {
+  @apply bg-gray-400;
 }
