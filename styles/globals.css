@@ -1,23 +1,170 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind variants;
 
-:root,
-.light {
-  --bg: hsl(0, 0%, 78%);
-  --text: hsl(0, 100%, 0%);
-}
+@layer base {
+  /* color palette */
+  :root,
+  .light {
+    --black: 0, 100%, 0%;
+    --white: 0, 100%, 100%;
 
-.dark {
-  --bg: hsl(0, 100%, 0%);
-  --text: hsl(0, 100%, 100%);
-}
+    --gray1: 0, 0%, 99%;
+    --gray2: 0, 0%, 97.3%;
+    --gray3: 0, 0%, 95.1%;
+    --gray4: 0, 0%, 93%;
+    --gray5: 0, 0%, 90.9%;
+    --gray6: 0, 0%, 88.7%;
+    --gray7: 0, 0%, 85.8%;
+    --gray8: 0, 0%, 78%;
+    --gray9: 0, 0%, 56.1%;
+    --gray10: 0, 0%, 52.3%;
+    --gray11: 0, 0%, 43.5%;
+    --gray12: 0, 0%, 9%;
 
-body {
-  background-color: var(--bg);
-  color: var(--text);
-}
+    --mauve1: 300, 20%, 99%;
+    --mauve2: 300, 7.7%, 97.5%;
+    --mauve3: 294, 5.5%, 95.3%;
+    --mauve4: 289, 4.7%, 93.3%;
+    --mauve5: 283, 4.4%, 91.3%;
+    --mauve6: 278, 4.1%, 89.1%;
+    --mauve7: 271, 3.9%, 86.3%;
+    --mauve8: 255, 3.7%, 78.8%;
+    --mauve9: 252, 4%, 57.3%;
+    --mauve10: 253, 3.5%, 53.5%;
+    --mauve11: 252, 4%, 44.8%;
+    --mauve12: 260, 25%, 11%;
 
-button {
-  @apply bg-gray-400;
+    --plum1: 301, 20%, 9.4%;
+    --plum2: 300, 29.8%, 11.2%;
+    --plum3: 298, 34.4%, 15.3%;
+    --plum4: 297, 36.8%, 18.3%;
+    --plum5: 296, 38.5%, 21.1%;
+    --plum6: 295, 40.4%, 24.7%;
+    --plum7: 294, 42.7%, 30.6%;
+    --plum8: 292, 45.1%, 40%;
+    --plum9: 292, 45%, 51%;
+    --plum10: 295, 50%, 55.4%;
+    --plum11: 300, 60%, 62%;
+    --plum12: 296, 74%, 95.7%;
+
+    --violet1: 255, 65%, 99.4%;
+    --violet2: 252, 100%, 99%;
+    --violet3: 252, 96.9%, 97.4%;
+    --violet4: 252, 91.5%, 95.5%;
+    --violet5: 252, 85.1%, 93%;
+    --violet6: 252, 77.8%, 89.4%;
+    --violet7: 252, 71%, 83.7%;
+    --violet8: 252, 68.6%, 76.3%;
+    --violet9: 252, 56%, 57.5%;
+    --violet10: 251, 48.1%, 53.5%;
+    --violet11: 250, 43%, 48%;
+    --violet12: 254, 60%, 18.5%;
+
+    /* custom colors */
+    /* I tried, oh well */
+    --bluegray1: 225, 20%, 99%;
+    --bluegray2: 230, 25%, 98%;
+    --bluegray3: 230, 25%, 96%;
+    --bluegray4: 230, 25%, 92%;
+    --bluegray5: 230, 25%, 90%;
+    --bluegray6: 230, 25%, 78%;
+    --bluegray7: 230, 25%, 34%;
+    --bluegray8: 230, 25%, 13%;
+    --bluegray9: 230, 21%, 11%;
+    --bluegray10: 232, 25%, 10%;
+    --bluegray11: 235, 27%, 9%;
+    --bluegray12: 240, 30%, 8%;
+  }
+
+  .dark {
+    --gray1: 0, 0%, 8.5%;
+    --gray2: 0, 0%, 11%;
+    --gray3: 0, 0%, 13.6%;
+    --gray4: 0, 0%, 15.8%;
+    --gray5: 0, 0%, 17.9%;
+    --gray6: 0, 0%, 20.5%;
+    --gray7: 0, 0%, 24.3%;
+    --gray8: 0, 0%, 31.2%;
+    --gray9: 0, 0%, 43.9%;
+    --gray10: 0, 0%, 49.4%;
+    --gray11: 0, 0%, 62.8%;
+    --gray12: 0, 0%, 93%;
+
+    --mauve1: 246, 6%, 9%;
+    --mauve2: 240, 5.1%, 11.6%;
+    --mauve3: 241, 5%, 14.3%;
+    --mauve4: 242, 4.9%, 16.5%;
+    --mauve5: 243, 4.9%, 18.8%;
+    --mauve6: 244, 4.9%, 21.5%;
+    --mauve7: 245, 4.9%, 25.4%;
+    --mauve8: 247, 4.8%, 32.5%;
+    --mauve9: 252, 4%, 45.2%;
+    --mauve10: 247, 3.4%, 50.7%;
+    --mauve11: 253, 4%, 63.7%;
+    --mauve12: 256, 6%, 93.2%;
+
+    --plum1: 292, 90%, 99.4%;
+    --plum2: 300, 100%, 98.6%;
+    --plum3: 299, 71.2%, 96.4%;
+    --plum4: 299, 62%, 93.8%;
+    --plum5: 298, 56.1%, 90.5%;
+    --plum6: 296, 51.3%, 85.8%;
+    --plum7: 295, 48.2%, 78.9%;
+    --plum8: 292, 47.7%, 70.8%;
+    --plum9: 292, 45%, 51%;
+    --plum10: 292, 50.2%, 46.9%;
+    --plum11: 292, 60%, 42.5%;
+    --plum12: 291, 66%, 14%;
+
+    --violet1: 250, 20%, 10.2%;
+    --violet2: 255, 30.3%, 12.9%;
+    --violet3: 253, 37%, 18.4%;
+    --violet4: 252, 40.1%, 22.5%;
+    --violet5: 252, 42.2%, 26.2%;
+    --violet6: 251, 44.3%, 31.1%;
+    --violet7: 250, 46.8%, 38.9%;
+    --violet8: 250, 51.8%, 51.2%;
+    --violet9: 252, 56%, 57.5%;
+    --violet10: 251, 63.2%, 63.2%;
+    --violet11: 250, 95%, 76.8%;
+    --violet12: 252, 87%, 96.4%;
+  }
+
+  /* semantic tokens */
+  :root,
+  .light {
+    --placeholder: var(--black);
+
+    --bg: var(--mauve4);
+    --content-bg: var(--mauve1);
+
+    --logo-fg: var(--gray12);
+    --logo-bg: theme(colors.transparent);
+    --logo-border: theme(colors.transparent);
+
+    --link: var(--plum8);
+    --link-active: var(--plum6);
+    --link-on: var(--plum4);
+
+    --accent: var(--violet11);
+    --muted: var(--bluegray6);
+  }
+
+  .dark {
+    --placeholder: var(--white);
+
+    --bg: var(--bluegray12);
+    --content-bg: var(--bluegray9);
+  }
+
+  /* global styles */
+  body {
+    @apply bg-theme-bg text-theme-placeholder;
+  }
+
+  button {
+    @apply bg-gray-400;
+  }
 }
