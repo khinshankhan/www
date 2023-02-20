@@ -24,6 +24,25 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
+    zIndex: {
+      hide: -1,
+      auto: "auto",
+      base: 0,
+      docked: 10,
+      dropdown: 1000,
+      sticky: 1100,
+      banner: 1200,
+      overlay: 1300,
+      modal: 1400,
+      popover: 1500,
+      skipLink: 1600,
+      toast: 1700,
+      tooltip: 1800,
+      // although generally the semantic tokens should be used for zindices
+      // 1 and 2 are acceptable if scoped properly imho
+      up1: 1,
+      up2: 2,
+    },
     extend: {
       colors: {
         gray: hslaN({ variable: "gray", n: 12 }),
