@@ -24,6 +24,19 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
+    screens: {
+      xss: "320px",
+      xs: "392px",
+      sm: "640px",
+      md: "768px",
+      lg: "1150px",
+      xl: "1325px",
+      "2xl": "1536px",
+
+      // usually I think in terms of this for design
+      isMobile: { max: "768px" },
+      isDesktop: "768px",
+    },
     zIndex: {
       hide: -1,
       auto: "auto",
