@@ -51,7 +51,7 @@ export default function Page() {
         {narray(100).map((v) => {
           return (
             <p key={v}>
-              Hello there, this is some random gibberish. It's not meant to have any meaning, it
+              Hello there, this is some random gibberish. It is not meant to have any meaning, it
               sounds like gibberish because it is gibberish.
             </p>
           )
