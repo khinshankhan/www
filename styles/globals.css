@@ -159,9 +159,38 @@
     --content-bg: var(--bluegray9);
   }
 
-  /* global styles */
-  body {
-    @apply bg-theme-bg text-theme-placeholder;
+  /* global styles
+     - font sizes
+       vaguely https://type-scale.com/ -- 1.250 Major Third Type Scale, base 16 px
+ */
+  html {
+    /* could be applied to body tag but whatever
+       fonts are: 18px -> 21px -> ~23px (avg 21px and xl)
+   */
+    @apply bg-theme-bg font-body text-lg text-theme-placeholder lg:text-[1.3125rem] 2xl:text-[1.43775rem];
+  }
+
+  h1 {
+    @apply font-heading text-3xl font-semibold tracking-wider sm:text-4xl 2xl:text-5xl;
+  }
+  h2 {
+    @apply font-heading text-2xl font-semibold tracking-wider sm:text-3xl 2xl:text-4xl;
+  }
+  h3 {
+    @apply font-heading text-xl font-semibold tracking-wide sm:text-2xl 2xl:text-3xl;
+  }
+  h4 {
+    @apply font-heading text-lg font-semibold tracking-wide sm:text-xl 2xl:text-2xl;
+  }
+  h5 {
+    @apply font-heading text-base font-semibold tracking-wide sm:text-lg 2xl:text-xl;
+  }
+  h6 {
+    @apply font-heading text-sm font-semibold tracking-wide sm:text-base 2xl:text-lg;
+  }
+  .main-nav {
+    /* lg is avg lg and xl */
+    @apply font-heading text-lg font-medium tracking-wide lg:text-[1.344rem];
   }
 
   button {

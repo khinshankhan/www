@@ -11,7 +11,7 @@ function Header() {
         zIndex: 1200, // banner z index
       }}
     >
-      <div className="nav-bg">header</div>
+      <div className="nav-bg main-nav">header</div>
     </Headroom>
   )
 }
@@ -38,6 +38,15 @@ export default function Page() {
       <div>
         <p className="text-sky-400">hello there and lorem ipsum</p>
         <ThemeToggle />
+
+        <h1>Heading 1</h1>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <h4>Heading 4</h4>
+        <h5>Heading 5</h5>
+        <h6>Heading 6</h6>
+        <p className="main-nav">main nav</p>
+        <p>paragraph</p>
 
         {narray(100).map((v) => {
           return (
