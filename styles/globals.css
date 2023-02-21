@@ -168,3 +168,15 @@
     @apply bg-gray-400;
   }
 }
+
+@layer utilities {
+  .nav-bg {
+    @apply bg-theme-bg/[.99];
+  }
+
+  @supports (backdrop-filter: blur(1px)) {
+    .nav-bg {
+      @apply bg-theme-bg/[.85] backdrop-blur-sm;
+    }
+  }
+}
