@@ -193,12 +193,49 @@
     @apply font-heading text-lg font-medium tracking-wide lg:text-[1.344rem];
   }
 
+  /* link styles
+     link underline animation based off https://tobiasahlin.com/blog/css-trick-animating-link-underlines/
+ */
+  a {
+    @apply relative text-link-base;
+    font-family: inherit;
+    line-height: inherit;
+    font-size: inherit;
+  }
+  a:before {
+    @apply absolute bottom-0 left-0 block h-px w-full scale-x-0 bg-link-active content-[''];
+    transition: transform 0.3s ease;
+  }
+  a:hover {
+    @apply text-link-active before:scale-x-100;
+  }
+
+  a.on {
+    @apply text-link-on;
+  }
+  a.on:before {
+    @apply scale-x-100 bg-link-base;
+  }
+  a.on:hover {
+    @apply text-link-on before:bg-link-active;
+  }
+
+  /* TODO: replace # with my anchor icon */
+  a.anchor:after {
+    @apply ml-[0.125em] align-middle opacity-0 content-['#'];
+    transition: opacity 0.4s ease-in-out;
+  }
+  a.anchor:hover {
+    @apply after:opacity-100 after:content-['#'];
+  }
+
   button {
     @apply bg-gray-400;
   }
 }
 
 @layer utilities {
+  /* give nav bg a lot of transparency when backdrop filter isn't available */
   .nav-bg {
     @apply bg-theme-bg/[.99];
   }

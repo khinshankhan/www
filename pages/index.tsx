@@ -38,7 +38,6 @@ export default function Page() {
       <div>
         <p className="text-sky-400">hello there and lorem ipsum</p>
         <ThemeToggle />
-
         <h1>Heading 1</h1>
         <h2>Heading 2</h2>
         <h3>Heading 3</h3>
@@ -47,7 +46,11 @@ export default function Page() {
         <h6>Heading 6</h6>
         <p className="main-nav">main nav</p>
         <p>paragraph</p>
-
+        This is a link
+        <a className="" href="https://google.com">
+          Google link
+        </a>
+        and it goes to google.
         {narray(100).map((v) => {
           return (
             <p key={v}>
