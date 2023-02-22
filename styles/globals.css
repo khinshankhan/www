@@ -143,7 +143,7 @@
     --bg: var(--mauve4);
     --content-bg: var(--mauve1);
 
-    --logo-fg: var(--gray12);
+    --logo-fg: black;
     --logo-bg: theme(colors.transparent);
     --logo-border: theme(colors.transparent);
 
@@ -157,6 +157,8 @@
 
   .dark {
     --placeholder: var(--white);
+
+    --logo-fg: white;
 
     --bg: var(--bluegray12);
     --content-bg: var(--bluegray9);
