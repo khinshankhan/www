@@ -2,24 +2,42 @@ import React, { Fragment, useState, type ReactNode } from "react"
 import * as Collapsible from "@radix-ui/react-collapsible"
 import Headroom from "react-headroom"
 
-import { narray } from "lib/utils"
-import { ThemeToggle } from "components/toggles"
+import { cx, narray } from "lib/utils"
+import { HomeToggle, ThemeToggle } from "components/toggles"
+
+function Menu({ className = "" }: { className?: string }) {
+  return (
+    <menu
+      className={cx(
+        "flex flex-col items-center justify-center isDesktop:flex-row isDesktop:items-end isDesktop:justify-between",
+        className
+      )}
+    >
+      <div>one</div>
+      <div>two</div>
+    </menu>
+  )
+}
 
 function Navbar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <Collapsible.Root className="w-[300px]" open={open} onOpenChange={setOpen}>
-      <div className="flex flex-row">
-        <span>Hello there</span>
-
-        <Collapsible.Trigger asChild>
-          <button className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full">
-            {open ? "x" : "+"}
-          </button>
-        </Collapsible.Trigger>
-      </div>
-      <Collapsible.Content className="animated-collapsible">Hi there</Collapsible.Content>
+    <Collapsible.Root className="w-full" open={open} onOpenChange={setOpen}>
+      <header role="navigation" className="nav-bg main-nav min-h-[55px]">
+        <nav className="flex w-full flex-row items-center justify-between pt-4 pb-2.5">
+          <HomeToggle />
+          <Menu className="hide-mobile" />
+          <Collapsible.Trigger asChild>
+            <button className="hide-desktop inline-flex h-[25px] w-[25px] items-center justify-center rounded-full">
+              {open ? "x" : "+"}
+            </button>
+          </Collapsible.Trigger>
+        </nav>
+        <Collapsible.Content className="animated-collapsible">
+          <Menu className="hide-desktop" />
+        </Collapsible.Content>
+      </header>
     </Collapsible.Root>
   )
 }
@@ -31,9 +49,7 @@ function Header() {
         zIndex: 1200, // banner z index
       }}
     >
-      <div className="nav-bg main-nav">
-        <Navbar />
-      </div>
+      <Navbar />
     </Headroom>
   )
 }

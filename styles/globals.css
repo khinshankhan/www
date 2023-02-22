@@ -248,6 +248,13 @@
 }
 
 @layer utilities {
+  .hide-mobile {
+    @apply isMobile:hidden !important;
+  }
+  .hide-desktop {
+    @apply isDesktop:hidden !important;
+  }
+
   /* give nav bg a lot of transparency when backdrop filter isn't available */
   .nav-bg {
     @apply bg-theme-bg/[.99];
