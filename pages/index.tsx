@@ -2,6 +2,7 @@ import React, { Fragment, useState, type ReactNode } from "react"
 import * as Collapsible from "@radix-ui/react-collapsible"
 import Headroom from "react-headroom"
 
+import { zIndex } from "lib/theme"
 import { cx, narray } from "lib/utils"
 import { HomeToggle, ThemeToggle } from "components/toggles"
 
@@ -46,7 +47,7 @@ function Header() {
   return (
     <Headroom
       style={{
-        zIndex: 1200, // banner z index
+        zIndex: zIndex.banner,
       }}
     >
       <Navbar />

@@ -1,3 +1,5 @@
+const config = require("./lib/theme/config")
+
 function hsla(variable) {
   return `hsla(var(--${variable}), <alpha-value>)`
 }
@@ -24,82 +26,9 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
-    screens: {
-      xss: "320px",
-      xs: "392px",
-      sm: "640px",
-      md: "768px",
-      lg: "1150px",
-      xl: "1325px",
-      "2xl": "1536px",
-
-      // usually I think in terms of this for design
-      isMobile: { max: "768px" },
-      isDesktop: "768px",
-    },
-    zIndex: {
-      hide: -1,
-      auto: "auto",
-      base: 0,
-      docked: 10,
-      dropdown: 1000,
-      sticky: 1100,
-      banner: 1200,
-      overlay: 1300,
-      modal: 1400,
-      popover: 1500,
-      skipLink: 1600,
-      toast: 1700,
-      tooltip: 1800,
-      // although generally the semantic tokens should be used for zindices
-      // 1 and 2 are acceptable if scoped properly imho
-      up1: 1,
-      up2: 2,
-    },
-    fontFamily: {
-      heading: [
-        "ui-sans-serif",
-        "system-ui",
-        "-apple-system",
-        "BlinkMacSystemFont",
-        '"Segoe UI"',
-        "Roboto",
-        '"Helvetica Neue"',
-        "Arial",
-        '"Noto Sans"',
-        "sans-serif",
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
-      ],
-      body: [
-        "ui-sans-serif",
-        "system-ui",
-        "-apple-system",
-        "BlinkMacSystemFont",
-        '"Segoe UI"',
-        "Roboto",
-        '"Helvetica Neue"',
-        "Arial",
-        '"Noto Sans"',
-        "sans-serif",
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
-      ],
-      mono: [
-        "ui-monospace",
-        "SFMono-Regular",
-        "Menlo",
-        "Monaco",
-        "Consolas",
-        '"Liberation Mono"',
-        '"Courier New"',
-        "monospace",
-      ],
-    },
+    screens: config.screens,
+    zIndex: config.zIndex,
+    fontFamily: config.fontFamily,
     extend: {
       colors: {
         gray: hslaN({ variable: "gray", n: 12 }),
