@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import * as Collapsible from "@radix-ui/react-collapsible"
+import { useBreakpoint } from "hooks"
 import Headroom from "react-headroom"
 
 import { zIndex } from "lib/theme"
@@ -22,12 +23,13 @@ function Menu({ className = "" }: { className?: string }) {
 
 function Navbar({ showing }: { showing: boolean }) {
   const [open, setOpen] = useState(false)
+  const isMobile = useBreakpoint("isMobile")
 
   useEffect(() => {
-    if (!showing) {
+    if (!showing || !isMobile) {
       setOpen(false)
     }
-  }, [showing])
+  }, [showing, isMobile])
 
   return (
     <Collapsible.Root className="w-full" open={open} onOpenChange={setOpen}>
