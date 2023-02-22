@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import * as Collapsible from "@radix-ui/react-collapsible"
 import Headroom from "react-headroom"
 
@@ -20,8 +20,14 @@ function Menu({ className = "" }: { className?: string }) {
   )
 }
 
-function Navbar() {
+function Navbar({ showing }: { showing: boolean }) {
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (!showing) {
+      setOpen(false)
+    }
+  }, [showing])
 
   return (
     <Collapsible.Root className="w-full" open={open} onOpenChange={setOpen}>
@@ -43,15 +49,29 @@ function Navbar() {
   )
 }
 
+const PosMap = {
+  PINNED: "PINNED",
+  UNPINNED: "UNPINNED",
+  DEFAULT: "DEFAULT",
+}
+
 function Header() {
+  const [pos, setPos] = useState(PosMap.DEFAULT)
+  const showing = pos !== PosMap.UNPINNED
+
   return (
-    <Headroom
-      style={{
-        zIndex: zIndex.banner,
-      }}
-    >
-      <Navbar />
-    </Headroom>
+    <>
+      <Headroom
+        style={{
+          zIndex: zIndex.banner,
+        }}
+        onPin={() => setPos(PosMap.PINNED)}
+        onUnpin={() => setPos(PosMap.UNPINNED)}
+        onUnfix={() => setPos(PosMap.DEFAULT)}
+      >
+        <Navbar showing={showing} />
+      </Headroom>
+    </>
   )
 }
 
