@@ -10,11 +10,7 @@ interface IHomeToggleProps extends ILogoProps {
 }
 
 // TODO: build out link wrapper
-export function HomeToggle({
-  size: sizeProp = undefined,
-  scalable = true,
-  ...props
-}: IHomeToggleProps) {
+export function HomeToggle(props: IHomeToggleProps) {
   const size = "50px"
   return <Logo width={size} height={size} {...props} />
 }
