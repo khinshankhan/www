@@ -46,11 +46,12 @@ export default function Page() {
         <h6>Heading 6</h6>
         <p className="main-nav">main nav</p>
         <p>paragraph</p>
-        This is a link
-        <a className="" href="https://google.com">
-          Google link
-        </a>
-        and it goes to google.
+        <h3>
+          <a className="anchor" href="https://google.com">
+            Anchored Link
+          </a>
+        </h3>
+        This is a link <a href="https://google.com">Google link</a> and it goes to google.
         {narray(100).map((v) => {
           return (
             <p key={v}>
