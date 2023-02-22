@@ -1,8 +1,28 @@
-import React, { Fragment, type ReactNode } from "react"
+import React, { Fragment, useState, type ReactNode } from "react"
+import * as Collapsible from "@radix-ui/react-collapsible"
 import Headroom from "react-headroom"
 
 import { narray } from "lib/utils"
 import { ThemeToggle } from "components/toggles"
+
+function Navbar() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Collapsible.Root className="w-[300px]" open={open} onOpenChange={setOpen}>
+      <div className="flex flex-row">
+        <span>Hello there</span>
+
+        <Collapsible.Trigger asChild>
+          <button className="inline-flex h-[25px] w-[25px] items-center justify-center rounded-full">
+            {open ? "x" : "+"}
+          </button>
+        </Collapsible.Trigger>
+      </div>
+      <Collapsible.Content className="animated-collapsible">Hi there</Collapsible.Content>
+    </Collapsible.Root>
+  )
+}
 
 function Header() {
   return (
@@ -11,7 +31,9 @@ function Header() {
         zIndex: 1200, // banner z index
       }}
     >
-      <div className="nav-bg main-nav">header</div>
+      <div className="nav-bg main-nav">
+        <Navbar />
+      </div>
     </Headroom>
   )
 }

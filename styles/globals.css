@@ -258,4 +258,33 @@
       @apply bg-theme-bg/[.85] backdrop-blur-sm;
     }
   }
+
+  /* styles.css */
+  .animated-collapsible {
+    overflow: hidden;
+  }
+  .animated-collapsible[data-state="open"] {
+    animation: collapsibleSlideDown 300ms ease-out;
+  }
+  .animated-collapsible[data-state="closed"] {
+    animation: collapsibleSlideUp 300ms ease-out;
+  }
+
+  @keyframes collapsibleSlideDown {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+    }
+  }
+
+  @keyframes collapsibleSlideUp {
+    from {
+      height: var(--radix-collapsible-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
 }
