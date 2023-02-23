@@ -1,11 +1,63 @@
 import React, { useEffect, useState } from "react"
+import Link from "next/link"
+import { useRouter } from "next/router"
 import * as Collapsible from "@radix-ui/react-collapsible"
 import { useBreakpoint } from "hooks"
 import Headroom from "react-headroom"
 
 import { zIndex } from "lib/theme"
 import { cx } from "lib/utils"
-import { HomeToggle } from "components/toggles"
+import { HomeToggle, ThemeToggle } from "components/toggles"
+
+// TODO: move this out to config
+const links = [
+  { title: "About", to: "/about" },
+  { title: "Writings", to: "/writings" },
+  { title: "Projects", to: "/projects" },
+  { title: "Contact", to: "/contact" },
+]
+function Links() {
+  const { pathname, query, isReady } = useRouter()
+  const link = isReady ? (query as { slug: string[] }).slug ?? pathname : pathname
+  const onLink = Array.isArray(link) ? `/${link.join("/")}` : link
+
+  return (
+    <ul className="flex flex-col isDesktop:flex-row">
+      {links.map(({ title, to }) => {
+        return (
+          <li key={to} className=" m-4 inline-block text-center">
+            <Link
+              className={cx("main-nav", onLink === to && "on")}
+              href={to}
+              aria-label={`Navigate to ${title}.`}
+            >
+              {title}
+            </Link>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+const settings = [
+  { id: 0, node: <ThemeToggle /> },
+  // for testing multiple icons
+  // { id: 1, node: <ThemeToggle /> },
+]
+function Settings() {
+  return (
+    <ul className="flex flex-row items-center isDesktop:items-end">
+      {settings.map(({ id, node }) => {
+        return (
+          <li key={id} className="my-3 mx-1 inline-block text-center lg:my-4">
+            {node}
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
 
 function Menu({ className = "" }: { className?: string }) {
   return (
@@ -15,8 +67,8 @@ function Menu({ className = "" }: { className?: string }) {
         className
       )}
     >
-      <div>one</div>
-      <div>two</div>
+      <Links />
+      <Settings />
     </menu>
   )
 }
@@ -33,7 +85,7 @@ function Navbar({ showing }: { showing: boolean }) {
 
   return (
     <Collapsible.Root className="w-full" open={open} onOpenChange={setOpen}>
-      <header role="navigation" className="nav-bg main-nav min-h-[55px]">
+      <header role="navigation" className="nav-bg min-h-[55px]">
         <nav className="flex w-full flex-row items-center justify-between pt-4 pb-2.5">
           <HomeToggle />
           <Menu className="hide-mobile" />
