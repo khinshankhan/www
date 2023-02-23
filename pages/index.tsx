@@ -8,6 +8,7 @@ export default function Page() {
   return (
     <Layout>
       <div>
+        <Lorem n={5} />
         <p className="text-sky-400">hello there and lorem ipsum</p>
         <ThemeToggle />
         <h1>Heading 1</h1>
@@ -24,15 +25,23 @@ export default function Page() {
           </a>
         </h3>
         This is a link <a href="https://google.com">Google link</a> and it goes to google.
-        {narray(100).map((v) => {
-          return (
-            <p key={v}>
-              Hello there, this is some random gibberish. It is not meant to have any meaning, it
-              sounds like gibberish because it is gibberish.
-            </p>
-          )
-        })}
       </div>
+      <Lorem />
     </Layout>
+  )
+}
+
+function Lorem({ n = 50 }) {
+  return (
+    <>
+      {narray(n).map((v) => {
+        return (
+          <p key={v}>
+            Hello there, this is some random gibberish. It is not meant to have any meaning, it
+            sounds like gibberish because it is gibberish.
+          </p>
+        )
+      })}
+    </>
   )
 }

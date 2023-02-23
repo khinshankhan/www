@@ -87,7 +87,7 @@ function Navbar({ showing }: { showing: boolean }) {
   return (
     <Collapsible.Root className="w-full" open={open} onOpenChange={setOpen}>
       <header role="navigation" className="nav-bg min-h-[55px]">
-        <nav className="flex w-full flex-row items-center justify-between pt-4 pb-2.5">
+        <nav className="page-container flex w-full flex-row items-center justify-between pt-4 pb-2.5">
           <HomeToggle />
           <Menu className="hide-mobile" />
           <div className={"hide-desktop flex flex-row"}>
