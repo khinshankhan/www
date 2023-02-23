@@ -206,42 +206,43 @@
     font-family: inherit;
     line-height: inherit;
     font-size: inherit;
-  }
-  a:before {
-    @apply absolute bottom-0 left-0 block h-px w-full scale-x-0 bg-link-active content-[''];
-    transition: transform 0.3s ease;
-  }
-  a:hover {
-    @apply text-link-active before:scale-x-100;
-  }
 
-  a.on {
-    @apply text-link-on;
-  }
-  a.on:before {
-    @apply scale-x-100 bg-link-base;
-  }
-  a.on:hover {
-    @apply text-link-on before:bg-link-active;
-  }
+    &:before {
+      @apply absolute bottom-0 left-0 block h-px w-full scale-x-0 bg-link-active content-[''];
+      transition: transform 0.3s ease;
+    }
+    &:hover {
+      @apply text-link-active before:scale-x-100;
+    }
 
-  /* TODO: replace # with my anchor icon */
-  a.anchor:after {
-    /*
+    &.on {
+      @apply text-link-on;
+    }
+    &.on:before {
+      @apply scale-x-100 bg-link-base;
+    }
+    &.on:hover {
+      @apply text-link-on before:bg-link-active;
+    }
+
+    /* TODO: replace # with my anchor icon */
+    &.anchor:after {
+      /*
       since color of url in content can't easily be adjusted, use the mask trick instead https://stackoverflow.com/a/66093928/7413060
-   */
-    content: "";
-    mask-image: var(--icons-anchor);
-    padding: 0 0.5em;
-    margin: 0 0.125em;
-    mask-repeat: no-repeat;
-    mask-position: center;
-    clip-path: padding-box inset(0.28125em 0);
-    background-color: transparent;
-    transition: background-color 0.4s ease-in-out;
-  }
-  a.anchor:hover:after {
-    background-color: currentColor;
+     */
+      content: "";
+      mask-image: var(--icons-anchor);
+      padding: 0 0.5em;
+      margin: 0 0.125em;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      clip-path: padding-box inset(0.28125em 0);
+      background-color: transparent;
+      transition: background-color 0.4s ease-in-out;
+    }
+    &.anchor:hover:after {
+      background-color: currentColor;
+    }
   }
 
   button {
@@ -271,12 +272,13 @@
   /* radix animations */
   .animated-collapsible {
     overflow: hidden;
-  }
-  .animated-collapsible[data-state="open"] {
-    animation: collapsibleSlideDown 300ms ease-out;
-  }
-  .animated-collapsible[data-state="closed"] {
-    animation: collapsibleSlideUp 300ms ease-out;
+
+    &[data-state="open"] {
+      animation: collapsibleSlideDown 300ms ease-out;
+    }
+    &[data-state="closed"] {
+      animation: collapsibleSlideUp 300ms ease-out;
+    }
   }
 
   @keyframes collapsibleSlideDown {
