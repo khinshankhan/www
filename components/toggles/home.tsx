@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import Link from "next/link"
 
 import { Logo, type ILogoProps } from "components/icons"
 
@@ -12,5 +13,9 @@ interface IHomeToggleProps extends ILogoProps {
 // TODO: build out link wrapper
 export function HomeToggle(props: IHomeToggleProps) {
   const size = "50px"
-  return <Logo width={size} height={size} {...props} />
+  return (
+    <Link href="/" aria-label="Navigate to homepage." className="home-link">
+      <Logo width={size} height={size} {...props} />
+    </Link>
+  )
 }

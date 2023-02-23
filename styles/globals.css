@@ -245,6 +245,31 @@
     }
   }
 
+  .home-link {
+    & svg {
+      box-shadow: 0px 0px 10px 1px var(--logo-fg);
+    }
+    & .fg {
+      transition: transform 0.3s ease-in-out;
+    }
+    & .border {
+      transition: all 1s ease;
+    }
+
+    &:is(:hover, :focus, :focus-visible) {
+      & .fg {
+        transform: translate(-50px, -50px) scale(1.25);
+      }
+      & .bg {
+        /* TODO: replace with ghostbg */
+        fill: theme(colors.transparent);
+      }
+      & .border {
+        stroke: hsl(var(--link-active));
+      }
+    }
+  }
+
   button {
     @apply bg-gray-400;
   }
