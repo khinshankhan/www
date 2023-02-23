@@ -4,8 +4,9 @@ import React, { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 
 import { Moon, Sun } from "components/icons"
+import { IconButton } from "components/ui"
 
-export function ThemeToggle() {
+export function ThemeToggle({ className = "" }: { className?: string }) {
   const [mounted, setMounted] = useState(false)
   const { setTheme, resolvedTheme } = useTheme()
 
@@ -20,8 +21,12 @@ export function ThemeToggle() {
   const toggleTheme = () => setTheme(oppositeTheme)
 
   return (
-    <button aria-label={`Switch to ${oppositeTheme} mode`} onClick={toggleTheme}>
+    <IconButton
+      aria-label={`Switch to ${oppositeTheme} mode`}
+      onClick={toggleTheme}
+      className={className}
+    >
       <ColorIcon />
-    </button>
+    </IconButton>
   )
 }

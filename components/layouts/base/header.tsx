@@ -7,7 +7,7 @@ import Headroom from "react-headroom"
 
 import { zIndex } from "lib/theme"
 import { cx } from "lib/utils"
-import { HomeToggle, ThemeToggle } from "components/toggles"
+import { HomeToggle, MenuToggle, ThemeToggle } from "components/toggles"
 
 // TODO: move this out to config
 const links = [
@@ -25,7 +25,7 @@ function Links() {
     <ul className="flex flex-col isDesktop:flex-row">
       {links.map(({ title, to }) => {
         return (
-          <li key={to} className=" m-4 inline-block text-center">
+          <li key={to} className="m-4 inline-block text-center">
             <Link
               className={cx("main-nav", onLink === to && "on")}
               href={to}
@@ -41,16 +41,17 @@ function Links() {
 }
 
 const settings = [
-  { id: 0, node: <ThemeToggle /> },
+  { id: 0, node: <ThemeToggle className="mx-0 my-4 px-0 py-[3px] lg:py-[7.75px]" /> },
+  // { id: 1, node: "hello" },
   // for testing multiple icons
   // { id: 1, node: <ThemeToggle /> },
 ]
-function Settings() {
+function Settings({ className = "" }: { className?: string }) {
   return (
-    <ul className="flex flex-row items-center isDesktop:items-end">
+    <ul className={cx("flex flex-row items-center isDesktop:mr-4 isDesktop:items-end", className)}>
       {settings.map(({ id, node }) => {
         return (
-          <li key={id} className="my-3 mx-1 inline-block text-center lg:my-4">
+          <li key={id} className="mx-1 my-0 inline-block text-center">
             {node}
           </li>
         )
@@ -68,7 +69,7 @@ function Menu({ className = "" }: { className?: string }) {
       )}
     >
       <Links />
-      <Settings />
+      <Settings className="hide-mobile" />
     </menu>
   )
 }
@@ -89,11 +90,12 @@ function Navbar({ showing }: { showing: boolean }) {
         <nav className="flex w-full flex-row items-center justify-between pt-4 pb-2.5">
           <HomeToggle />
           <Menu className="hide-mobile" />
-          <Collapsible.Trigger asChild>
-            <button className="hide-desktop inline-flex h-[25px] w-[25px] items-center justify-center rounded-full">
-              {open ? "x" : "+"}
-            </button>
-          </Collapsible.Trigger>
+          <div className={"hide-desktop flex flex-row"}>
+            <Settings className="hide-desktop" />
+            <Collapsible.Trigger asChild>
+              <MenuToggle isOpen={open} />
+            </Collapsible.Trigger>
+          </div>
         </nav>
         <Collapsible.Content className="animated-collapsible">
           <Menu className="hide-desktop" />
