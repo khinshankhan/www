@@ -79,12 +79,21 @@ function Menu({ className = "" }: { className?: string }) {
 function Navbar({ showing }: { showing: boolean }) {
   const [open, setOpen] = useState(false)
   const isMobile = useBreakpoint("isMobile")
+  const router = useRouter()
 
   useEffect(() => {
     if (!showing || !isMobile) {
       setOpen(false)
     }
   }, [showing, isMobile])
+
+  const closeMenu = () => setOpen(false)
+  useEffect(() => {
+    router.events.on("routeChangeStart", closeMenu)
+    return () => {
+      router.events.off("routeChangeStart", closeMenu)
+    }
+  }, [])
 
   return (
     <Collapsible.Root className="w-full" open={open} onOpenChange={setOpen}>
@@ -117,14 +126,34 @@ function Header() {
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
+  const [, setCount] = useState(0)
+  const forceRecalculateSize = () => {
+    // 'frames' for a smoother transition
+    setTimeout(() => setCount((prev) => prev + 1), 1)
+    // the menu animates for 300 ms
+    setTimeout(() => setCount((prev) => prev + 1), 301)
+  }
+
+  const router = useRouter()
+  useEffect(() => {
+    forceRecalculateSize()
+
+    router.events.on("routeChangeStart", forceRecalculateSize)
+    return () => {
+      router.events.off("routeChangeStart", forceRecalculateSize)
+    }
+  }, [])
+
   const [pos, setPos] = useState(PosMap.DEFAULT)
   const showing = pos !== PosMap.UNPINNED
 
+  if (!mounted) return null
   return (
     <>
       <Headroom
         style={{
           zIndex: zIndex.banner,
+          transition: "all 10ms ease-in-out",
         }}
         onPin={() => setPos(PosMap.PINNED)}
         onUnpin={() => setPos(PosMap.UNPINNED)}
