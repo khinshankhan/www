@@ -2,8 +2,8 @@
 
 import React, { forwardRef, type HTMLProps } from "react"
 
-import { Hamburger, XMark } from "components/icons"
 import { IconButton } from "components/ui"
+import { Hamburger, XMark } from "components/icons"
 
 type ButtonProps = HTMLProps<HTMLButtonElement>
 export interface MenuToggleProps extends ButtonProps {

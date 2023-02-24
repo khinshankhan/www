@@ -4,11 +4,12 @@ import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import * as Collapsible from "@radix-ui/react-collapsible"
-import { useBreakpoint } from "hooks"
 import Headroom from "react-headroom"
 
 import { zIndex } from "lib/theme"
 import { cx } from "lib/utils"
+import { useBreakpoint } from "hooks"
+
 import { HomeToggle, MenuToggle, ThemeToggle } from "components/toggles"
 
 // TODO: move this out to config

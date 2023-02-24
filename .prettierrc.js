@@ -1,3 +1,5 @@
+const m = (s) => `^(${s}/(.*)$)|^(${s}$)`
+
 /** @type {import('prettier').Config} */
 module.exports = {
   arrowParens: "always",
@@ -8,16 +10,21 @@ module.exports = {
   tabWidth: 2,
   trailingComma: "es5",
   importOrder: [
-    "^(react/(.*)$)|^(react$)",
-    "^(next/(.*)$)|^(next$)",
+    m("react"),
+    m("next"),
     "<THIRD_PARTY_MODULES>",
     "",
-    "^types$",
-    "^local/(.*)$",
-    "^config/(.*)$",
-    "^lib/(.*)$",
-    "^components/(.*)$",
-    "^styles/(.*)$",
+    m("types"),
+    m("config"),
+    m("constants"),
+    m("lib/theme"),
+    m("lib"),
+    m("stores"),
+    m("hooks"),
+    "",
+    m("styles"),
+    m("components/ui"),
+    m("components"),
     "^[./]",
   ],
   importOrderSeparation: false,

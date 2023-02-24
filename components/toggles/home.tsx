@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
+
 import { useBreakpoint } from "hooks"
 
 import { Logo, type ILogoProps } from "components/icons"

@@ -1,6 +1,7 @@
 import React from "react"
 
 import { narray } from "lib/utils"
+
 import { ThemeToggle } from "components/toggles"
 
 export default function Page() {
