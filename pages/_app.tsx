@@ -6,6 +6,10 @@ import "styles/globals.css"
 import { BaseLayout as Layout } from "components/layouts"
 
 export default function App({ Component, pageProps }: AppProps) {
+  // I'm confident I'll use it for homepage at least
+  // @ts-ignore
+  const isHero = Component?.isHero ?? false
+
   return (
     <>
       <Head>
@@ -17,7 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <Layout>
+        <Layout isHero={isHero}>
           <Component {...pageProps} />
         </Layout>
       </ThemeProvider>

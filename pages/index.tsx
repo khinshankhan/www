@@ -30,6 +30,8 @@ export default function Page() {
   )
 }
 
+Page.isHero = true
+
 function Lorem({ n = 50 }) {
   return (
     <>
