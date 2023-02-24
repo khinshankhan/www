@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import * as Collapsible from "@radix-ui/react-collapsible"
 import Headroom from "react-headroom"
 
 import { zIndex } from "lib/theme"
 import { cx } from "lib/utils"
 import { useBreakpoint } from "hooks"
 
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "components/ui"
 import { HomeToggle, MenuToggle, ThemeToggle } from "components/toggles"
 
 // TODO: move this out to config
@@ -97,23 +97,23 @@ function Navbar({ showing }: { showing: boolean }) {
   }, [])
 
   return (
-    <Collapsible.Root className="w-full" open={open} onOpenChange={setOpen}>
+    <Collapsible className="w-full" open={open} onOpenChange={setOpen}>
       <header role="navigation" className="nav-bg min-h-[55px]">
         <nav className="page-container flex w-full flex-row items-center justify-between pt-4 pb-2.5">
           <HomeToggle />
           <Menu className="hide-mobile" />
           <div className={"hide-desktop flex flex-row"}>
             <Settings className="hide-desktop" />
-            <Collapsible.Trigger asChild>
+            <CollapsibleTrigger asChild>
               <MenuToggle isOpen={open} />
-            </Collapsible.Trigger>
+            </CollapsibleTrigger>
           </div>
         </nav>
-        <Collapsible.Content className="animated-collapsible">
+        <CollapsibleContent className="animated-collapsible">
           <Menu className="hide-desktop" />
-        </Collapsible.Content>
+        </CollapsibleContent>
       </header>
-    </Collapsible.Root>
+    </Collapsible>
   )
 }
 
