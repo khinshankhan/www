@@ -168,12 +168,13 @@
      - font sizes
        vaguely https://type-scale.com/ -- 1.250 Major Third Type Scale, base 16 px
  */
-  html {
-    /* could be applied to body tag but whatever
-       fonts are: 18px -> 21px -> ~23px (avg 21px and xl)
-   */
-    @apply bg-theme-bg font-body text-lg text-theme-placeholder lg:text-[1.3125rem] 2xl:text-[1.43775rem];
+  html * {
+    font-size: 16px;
     transition: all 0.4s ease-in-out;
+  }
+  body {
+    /* fonts are: 18px -> 21px -> ~23px (avg 21px and xl) */
+    @apply bg-theme-bg font-body text-lg text-theme-placeholder lg:text-[1.3125rem] 2xl:text-[1.43775rem];
   }
 
   .page-container {
