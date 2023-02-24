@@ -3,6 +3,7 @@ import Head from "next/head"
 
 import { ThemeProvider } from "components/providers"
 import "styles/globals.css"
+import { BaseLayout as Layout } from "components/layouts"
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -16,7 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </>
   )

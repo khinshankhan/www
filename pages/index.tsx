@@ -1,12 +1,11 @@
 import React from "react"
 
 import { narray } from "lib/utils"
-import { BaseLayout as Layout } from "components/layouts"
 import { ThemeToggle } from "components/toggles"
 
 export default function Page() {
   return (
-    <Layout>
+    <>
       <div>
         <Lorem n={5} />
         <p className="text-sky-400">hello there and lorem ipsum</p>
@@ -27,7 +26,7 @@ export default function Page() {
         This is a link <a href="https://google.com">Google link</a> and it goes to google.
       </div>
       <Lorem />
-    </Layout>
+    </>
   )
 }
 
