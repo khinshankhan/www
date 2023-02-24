@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -112,6 +114,9 @@ const PosMap = {
 }
 
 function Header() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
   const [pos, setPos] = useState(PosMap.DEFAULT)
   const showing = pos !== PosMap.UNPINNED
 
