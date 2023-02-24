@@ -145,6 +145,16 @@ function Header() {
     }
   }, [])
 
+  const isXss = useBreakpoint("xss")
+  const isXs = useBreakpoint("xs")
+  const isSm = useBreakpoint("sm")
+  const isMd = useBreakpoint("md")
+  const isLg = useBreakpoint("lg")
+  const isXl = useBreakpoint("xl")
+  const is2xl = useBreakpoint("2xl")
+
+  useEffect(() => forceRecalculateSize(), [isXss, isXs, isSm, isMd, isLg, isXl, is2xl])
+
   const [pos, setPos] = useState(PosMap.DEFAULT)
   const showing = pos !== PosMap.UNPINNED
 
