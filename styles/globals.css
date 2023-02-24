@@ -303,28 +303,10 @@
     overflow: hidden;
 
     &[data-state="open"] {
-      animation: collapsibleSlideDown 300ms ease-out;
+      @apply animate-collapsibleOpen;
     }
     &[data-state="closed"] {
-      animation: collapsibleSlideUp 300ms ease-out;
-    }
-  }
-
-  @keyframes collapsibleSlideDown {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-collapsible-content-height);
-    }
-  }
-
-  @keyframes collapsibleSlideUp {
-    from {
-      height: var(--radix-collapsible-content-height);
-    }
-    to {
-      height: 0;
+      @apply animate-collapsibleClose;
     }
   }
 }

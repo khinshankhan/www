@@ -35,6 +35,8 @@ module.exports = {
       ping: "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite",
       pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       bounce: "bounce 1s infinite",
+      collapsibleOpen: "collapsibleSlideDown 300ms ease-out",
+      collapsibleClose: "collapsibleSlideUp 300ms ease-out",
     },
     keyframes: {
       spin: {
@@ -61,6 +63,22 @@ module.exports = {
         "50%": {
           transform: "none",
           animationTimingFunction: "cubic-bezier(0,0,0.2,1)",
+        },
+      },
+      collapsibleSlideUp: {
+        from: {
+          height: "var(--radix-collapsible-content-height)",
+        },
+        to: {
+          height: "0",
+        },
+      },
+      collapsibleSlideDown: {
+        from: {
+          height: "0",
+        },
+        to: {
+          height: "var(--radix-collapsible-content-height)",
         },
       },
     },
