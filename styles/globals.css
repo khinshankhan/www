@@ -173,6 +173,7 @@
        fonts are: 18px -> 21px -> ~23px (avg 21px and xl)
    */
     @apply bg-theme-bg font-body text-lg text-theme-placeholder lg:text-[1.3125rem] 2xl:text-[1.43775rem];
+    transition: all 0.4s ease-in-out;
   }
 
   .page-container {
