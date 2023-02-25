@@ -168,10 +168,26 @@
      - font sizes
        vaguely https://type-scale.com/ -- 1.250 Major Third Type Scale, base 16 px
  */
-  html * {
+  html {
     font-size: 16px;
-    transition: all 0.4s ease-in-out;
   }
+
+  /*help hide some weird effects, apparently all is bad so declare each property explicitly */
+  html * {
+    transition: background-color 0.4s ease-in-out, height 0.4s ease-in-out,
+      max-width 0.4s ease-in-out;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  .main-nav {
+    transition: font-size 0.4s ease-in-out, display 0.4s ease-in-out;
+  }
+
   body {
     /* fonts are: 18px -> 21px -> ~23px (avg 21px and xl) */
     @apply bg-theme-bg font-body text-lg text-theme-placeholder lg:text-[1.3125rem] 2xl:text-[1.43775rem];
