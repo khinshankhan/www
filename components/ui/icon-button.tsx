@@ -8,7 +8,10 @@ interface IconButtonProps extends ButtonProps {
   isRound?: boolean
   className?: string
 }
-export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
+  props,
+  ref
+) {
   const { className = "", isRound = true, children, type: buttonType, ...rest } = props
   return (
     <button

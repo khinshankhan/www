@@ -12,7 +12,10 @@ export interface MenuToggleProps extends ButtonProps {
   isOpen?: boolean
 }
 
-export const MenuToggle = forwardRef<HTMLButtonElement, MenuToggleProps>((props, ref) => {
+export const MenuToggle = forwardRef<HTMLButtonElement, MenuToggleProps>(function MenuToggle(
+  props,
+  ref
+) {
   const { className = "", isOpen, type: buttonType, ...rest } = props
   const MenuIcon = isOpen ? XMark : Hamburger
   const action = isOpen ? "Close" : "Open"
