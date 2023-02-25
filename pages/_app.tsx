@@ -7,7 +7,7 @@ import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion"
 
 import { BaseLayout as Layout } from "components/layouts"
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
   // I'm confident I'll use it for homepage at least
   // @ts-ignore
   const isHero = Component?.isHero ?? false
@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Layout isHero={isHero}>
           <LazyMotion features={domAnimation} strict>
             <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
-              <Component {...pageProps} />
+              <Component key={router.asPath} {...pageProps} />
             </AnimatePresence>
           </LazyMotion>
         </Layout>

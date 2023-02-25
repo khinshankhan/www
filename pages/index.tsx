@@ -5,6 +5,8 @@ export default function Page() {
   return (
     <m.div
       className="page-container text-center"
+      layout
+      key="home-page"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
