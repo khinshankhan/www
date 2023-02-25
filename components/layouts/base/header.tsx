@@ -90,11 +90,13 @@ function Navbar({ showing }: { showing: boolean }) {
 
   const closeMenu = () => setOpen(false)
   useEffect(() => {
+    closeMenu()
+
     router.events.on("routeChangeStart", closeMenu)
     return () => {
       router.events.off("routeChangeStart", closeMenu)
     }
-  }, [])
+  }, [router.events])
 
   return (
     <Collapsible className="w-full" open={open} onOpenChange={setOpen}>
@@ -143,7 +145,7 @@ function Header() {
     return () => {
       router.events.off("routeChangeStart", forceRecalculateSize)
     }
-  }, [])
+  }, [router.events])
 
   const isXss = useBreakpoint("xss")
   const isXs = useBreakpoint("xs")
