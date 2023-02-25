@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import Link from "next/link"
 import { useRouter } from "next/router"
 import Headroom from "react-headroom"
 
@@ -9,7 +8,7 @@ import { zIndex } from "lib/theme"
 import { cx } from "lib/utils"
 import { useBreakpoint } from "hooks"
 
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "components/ui"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger, Link } from "components/ui"
 import { HomeToggle, MenuToggle, ThemeToggle } from "components/toggles"
 
 // TODO: move this out to config
