@@ -1,26 +1,20 @@
 import React, { Fragment, type ReactNode } from "react"
 
-import { cx } from "lib/utils"
-
 import Footer from "./footer"
 import Header from "./header"
 
 interface BaseLayoutProps {
+  // TODO: utilize isHero to create visual separators between layout
   isHero?: boolean
   children: ReactNode
 }
 
-export function BaseLayout({ isHero = false, children }: BaseLayoutProps) {
+export function BaseLayout({ children }: BaseLayoutProps) {
   return (
     <Fragment>
-      <div
-        className={cx(
-          "relative z-base flex min-h-[87vh] flex-col xs:min-h-[96vh]",
-          !isHero && "bg-theme-contentBg"
-        )}
-      >
+      <div className={"relative z-base flex min-h-[87vh] flex-col xs:min-h-[96vh]"}>
         <Header />
-        <div className="page-container">{children}</div>
+        {children}
       </div>
       <Footer />
     </Fragment>

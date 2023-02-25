@@ -2,9 +2,12 @@ import React from "react"
 
 import { narray } from "lib/utils"
 
+import { PageSkeletonLayout } from "components/layouts/page-skeleton"
+
 export default function Page() {
   return (
-    <div>
+    <PageSkeletonLayout title="About" subtitle="Me, myself, and I">
+      <Lorem n={20} />
       <p className="text-sky-400">hello there and lorem ipsum</p>
       <h1>Heading 1</h1>
       <h2>Heading 2</h2>
@@ -20,7 +23,15 @@ export default function Page() {
         </a>
       </h3>
       This is a link <a href="https://google.com">Google link</a> and it goes to google.
-      {narray(100).map((v) => {
+      <Lorem />
+    </PageSkeletonLayout>
+  )
+}
+
+function Lorem({ n = 50 }) {
+  return (
+    <>
+      {narray(n).map((v) => {
         return (
           <p key={v}>
             Hello there, this is some random gibberish. It is not meant to have any meaning, it
@@ -28,6 +39,6 @@ export default function Page() {
           </p>
         )
       })}
-    </div>
+    </>
   )
 }
