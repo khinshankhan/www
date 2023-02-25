@@ -14,22 +14,32 @@ export function PageSkeletonLayout({ title, subtitle, children }: PageSkeletonLa
     <main>
       <m.header
         className="bg-theme-bg py-14 text-center"
-        initial={{ marginTop: "150vh" }}
-        animate={{ marginTop: 0 }}
-        exit={{ marginTop: "150vh" }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
+        layout
+        key="page-info-header"
+        initial={{ transform: "translateX(120vw)" }}
+        animate={{ transform: "translateX(0)" }}
+        exit={{ transform: "translateX(-120vw)" }}
+        transition={{ duration: 0.4, type: "spring" }}
       >
         <h1 style={{ paddingBottom: "24px" }}>{title}</h1>
         <p className="main-nav">{subtitle}</p>
       </m.header>
 
-      <div className="bg-theme-contentBg py-5">
+      <m.div
+        className="bg-theme-contentBg py-5"
+        layout
+        key="page-content"
+        initial={{ marginTop: "150vh" }}
+        animate={{ marginTop: 0 }}
+        exit={{ marginTop: "150vh" }}
+        transition={{ delay: 0.35, duration: 1, type: "spring" }}
+      >
         <div className="page-container">
           <article id="article" className="mt-6 pt-0 sm:pt-2">
             {children}
           </article>
         </div>
-      </div>
+      </m.div>
     </main>
   )
 }
