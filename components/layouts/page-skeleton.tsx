@@ -1,4 +1,5 @@
 import React, { type ReactNode } from "react"
+import { motion as m } from "framer-motion"
 
 interface PageSkeletonLayoutProps {
   title: string
@@ -11,10 +12,16 @@ export function PageSkeletonLayout({ title, subtitle, children }: PageSkeletonLa
   // move page container up to sidebar when implemented
   return (
     <main>
-      <header className="bg-theme-bg py-14 text-center">
+      <m.header
+        className="bg-theme-bg py-14 text-center"
+        initial={{ marginTop: "150vh" }}
+        animate={{ marginTop: 0 }}
+        exit={{ marginTop: "150vh" }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
         <h1 style={{ paddingBottom: "24px" }}>{title}</h1>
         <p className="main-nav">{subtitle}</p>
-      </header>
+      </m.header>
 
       <div className="bg-theme-contentBg py-5">
         <div className="page-container">
