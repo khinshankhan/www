@@ -3,7 +3,7 @@ import Head from "next/head"
 
 import { ThemeProvider } from "components/providers"
 import "styles/globals.css"
-import { AnimatePresence } from "framer-motion"
+import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion"
 
 import { BaseLayout as Layout } from "components/layouts"
 
@@ -24,9 +24,11 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <Layout isHero={isHero}>
-          <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
-            <Component {...pageProps} />
-          </AnimatePresence>
+          <LazyMotion features={domAnimation} strict>
+            <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
+              <Component {...pageProps} />
+            </AnimatePresence>
+          </LazyMotion>
         </Layout>
       </ThemeProvider>
     </>

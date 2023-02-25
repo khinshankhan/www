@@ -1,5 +1,5 @@
 import React, { type ReactNode } from "react"
-import { motion as m } from "framer-motion"
+import { m } from "framer-motion"
 
 interface PageSkeletonLayoutProps {
   title: string
