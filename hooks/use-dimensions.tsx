@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const useDimensions = (): { [key: string]: number | null } => {
+export const useDimensions = () => {
   const [innerWidth, setW] = useState(typeof window !== `undefined` ? window.innerWidth : null)
   const [innerHeight, setH] = useState(typeof window !== `undefined` ? window.innerHeight : null)
 
