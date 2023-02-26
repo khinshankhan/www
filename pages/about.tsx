@@ -10,7 +10,11 @@ export default function Page() {
       title="About"
       subtitle="Me, myself, and I"
       direction="right"
-      sidebar={<>hi there</>}
+      sidebar={
+        <>
+          <Lorem n={10} />
+        </>
+      }
     >
       <Lorem n={20} />
       <p className="text-sky-400">hello there and lorem ipsum</p>
