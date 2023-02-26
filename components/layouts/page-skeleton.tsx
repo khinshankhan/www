@@ -1,13 +1,21 @@
 import React, { type ReactNode } from "react"
 import { m } from "framer-motion"
 
-interface PageSkeletonLayoutProps {
+import { WithSidebar, type WithSidebarProps } from "./sidebar"
+
+interface PageSkeletonLayoutProps extends WithSidebarProps {
   title: string
   subtitle: string | ReactNode
   children: ReactNode
 }
 
-export function PageSkeletonLayout({ title, subtitle, children }: PageSkeletonLayoutProps) {
+export function PageSkeletonLayout({
+  title,
+  subtitle,
+  direction,
+  sidebar,
+  children,
+}: PageSkeletonLayoutProps) {
   // TODO: add flex grow to article when wrapping it with sidebar
   // move page container up to sidebar when implemented
   return (
@@ -34,11 +42,9 @@ export function PageSkeletonLayout({ title, subtitle, children }: PageSkeletonLa
         transition={{ delay: 0.3, duration: 1 }}
         exit={{ marginTop: "150vh", transition: { delay: 0, duration: 0.5 } }}
       >
-        <div className="page-container">
-          <article id="article" className="mt-6 pt-0 sm:pt-2">
-            {children}
-          </article>
-        </div>
+        <WithSidebar direction={direction} sidebar={sidebar}>
+          {children}
+        </WithSidebar>
       </m.div>
     </main>
   )

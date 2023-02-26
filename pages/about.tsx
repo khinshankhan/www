@@ -6,7 +6,12 @@ import { PageSkeletonLayout } from "components/layouts/page-skeleton"
 
 export default function Page() {
   return (
-    <PageSkeletonLayout title="About" subtitle="Me, myself, and I">
+    <PageSkeletonLayout
+      title="About"
+      subtitle="Me, myself, and I"
+      direction="right"
+      sidebar={<>hi there</>}
+    >
       <Lorem n={20} />
       <p className="text-sky-400">hello there and lorem ipsum</p>
       <h1>Heading 1</h1>
