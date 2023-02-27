@@ -19,6 +19,9 @@ module.exports = {
       version: "detect",
     },
   },
+  globals: {
+    JSX: "readonly",
+  },
   rules: {
     "no-console": ["warn", { allow: ["error"] }],
     "no-trailing-spaces": ["warn", {}],
