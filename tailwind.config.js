@@ -1,7 +1,10 @@
 const config = require("./lib/theme/config")
 
+function rawHsla(variable, alpha) {
+  return `hsla(var(--${variable}), ${alpha})`
+}
 function hsla(variable) {
-  return `hsla(var(--${variable}), <alpha-value>)`
+  return rawHsla(variable, "<alpha-value>")
 }
 
 function hslaN({ variable, n, scale = 1 }) {
@@ -107,7 +110,12 @@ module.exports = {
           on: hsla("link-on"),
         },
       },
+
+      boxShadow: {
+        tocBase: `inset 4px 0px 0px 0px ${rawHsla("link", 1)}`,
+        tocOn: `inset 4px 0px 0px 0px ${rawHsla("link-on", 1)}`,
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-hyphens")],
 }

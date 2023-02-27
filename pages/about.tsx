@@ -2,6 +2,7 @@ import React from "react"
 
 import { narray } from "lib/utils"
 
+import { Toc } from "components/layouts"
 import { PageSkeletonLayout } from "components/layouts/page-skeleton"
 
 export default function Page() {
@@ -10,11 +11,7 @@ export default function Page() {
       title="About"
       subtitle="Me, myself, and I"
       direction="right"
-      sidebar={
-        <>
-          <Lorem n={10} />
-        </>
-      }
+      sidebar={<Toc headings={testHeadings} />}
     >
       <Lorem n={20} />
       <p className="text-sky-400">hello there and lorem ipsum</p>
@@ -51,3 +48,41 @@ function Lorem({ n = 50 }) {
     </>
   )
 }
+
+const testHeadings = [
+  {
+    id: "0",
+    level: 2,
+    content: "Super long needlessly useless sidebar toc overflow",
+  },
+  {
+    id: "1",
+    level: 1,
+    content: "een",
+  },
+  {
+    id: "2",
+    level: 2,
+    content: "twee",
+  },
+  {
+    id: "3",
+    level: 3,
+    content: "drie",
+  },
+  {
+    id: "4",
+    level: 4,
+    content: "vier",
+  },
+  {
+    id: "5",
+    level: 5,
+    content: "vijf",
+  },
+  {
+    id: "6",
+    level: 6,
+    content: "zes",
+  },
+]
