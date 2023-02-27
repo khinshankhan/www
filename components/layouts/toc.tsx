@@ -4,6 +4,7 @@ import { cx } from "lib/utils"
 import { useBreakpoint } from "hooks"
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "components/ui"
+import { ListBullet } from "components/icons"
 import { MenuToggle } from "components/toggles"
 
 interface TocProps {
@@ -32,7 +33,7 @@ export function Toc({ headings: headingsProp }: TocProps) {
         <button className="w-full">
           <span className="flex items-center justify-between">
             <span>On this page</span>
-            <MenuToggle isOpen={open} />
+            <MenuToggle isOpen={open} openIcon={ListBullet} />
           </span>
         </button>
       </CollapsibleTrigger>
