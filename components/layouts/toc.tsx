@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react"
 
 import { cx } from "lib/utils"
-import { useBreakpoint } from "hooks"
+import { useBreakpoint, useMounted } from "hooks"
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "components/ui"
-import { ListBullet } from "components/icons"
-import { MenuToggle } from "components/toggles"
+import { ChevronDown } from "components/icons"
 
 interface TocProps {
   headings: { id: string; level: number; content: string }[]
 }
 export function Toc({ headings: headingsProp }: TocProps) {
+  const mounted = useMounted()
   const [open, setOpen] = useState(true)
-  const isXl = useBreakpoint("xl")
+  const action = open ? "Close" : "Open"
 
+  const isXl = useBreakpoint("xl")
   useEffect(() => {
     if (isXl) {
       setOpen(true)
@@ -27,13 +28,20 @@ export function Toc({ headings: headingsProp }: TocProps) {
 
   const headings = [{ id: "excerpt", level: minLevel, content: "Introduction" }, ...headingsProp]
 
+  if (!mounted) {
+    return null
+  }
+
   return (
     <Collapsible className="w-full" open={open} onOpenChange={setOpen}>
       <CollapsibleTrigger asChild>
-        <button className="w-full">
-          <span className="flex items-center justify-between">
+        <button className="group w-full" aria-label={`${action} table of contents.`}>
+          <span className="group flex items-center justify-between">
             <span>On this page</span>
-            <MenuToggle isOpen={open} openIcon={ListBullet} />
+            <ChevronDown
+              className="text-violet10 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=closed]:-rotate-90"
+              aria-hidden
+            />
           </span>
         </button>
       </CollapsibleTrigger>

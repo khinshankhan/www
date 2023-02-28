@@ -6,6 +6,13 @@ export const isBrowser = !isServer
 // https://usehooks-ts.com/react-hook/use-isomorphic-layout-effect
 export const useIsomorphicEffect = isBrowser ? useLayoutEffect : useEffect
 
+export function useMounted() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
+  return mounted
+}
+
 export function useMediaQuery(query: string, defaultValue: boolean = false) {
   const [matches, setMatches] = useState(() => defaultValue)
 
