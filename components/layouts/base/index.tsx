@@ -17,8 +17,8 @@ export function BaseLayout({ children }: BaseLayoutProps) {
         <Header />
         {children}
       </div>
-      <Footer />
       <ScrollToTop />
+      <Footer />
     </Fragment>
   )
 }

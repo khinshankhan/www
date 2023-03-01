@@ -23,13 +23,13 @@ export default function App({ Component, pageProps, router }: AppProps) {
         />
       </Head>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <Layout isHero={isHero}>
-          <LazyMotion features={domAnimation} strict>
-            <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
+        <LazyMotion features={domAnimation} strict>
+          <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
+            <Layout isHero={isHero}>
               <Component key={router.asPath} {...pageProps} />
-            </AnimatePresence>
-          </LazyMotion>
-        </Layout>
+            </Layout>
+          </AnimatePresence>
+        </LazyMotion>
       </ThemeProvider>
     </>
   )
