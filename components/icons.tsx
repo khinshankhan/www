@@ -1,4 +1,4 @@
-import React from "react"
+import React, { type SVGProps } from "react"
 
 import { cx } from "lib/utils"
 
@@ -42,11 +42,11 @@ export function Logo({
   )
 }
 
-export interface RawIconProps {
+export interface RawIconProps extends SVGProps<SVGSVGElement> {
   className?: string
 }
 
-export function Moon({ className = "" }: RawIconProps) {
+export function Moon({ className = "", ...props }: RawIconProps) {
   return (
     <svg
       className={cx("h-6 w-6", className)}
@@ -55,6 +55,7 @@ export function Moon({ className = "" }: RawIconProps) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -65,7 +66,7 @@ export function Moon({ className = "" }: RawIconProps) {
   )
 }
 
-export function Sun({ className = "" }: RawIconProps) {
+export function Sun({ className = "", ...props }: RawIconProps) {
   return (
     <svg
       className={cx("h-6 w-6", className)}
@@ -74,6 +75,7 @@ export function Sun({ className = "" }: RawIconProps) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -84,7 +86,7 @@ export function Sun({ className = "" }: RawIconProps) {
   )
 }
 
-export function Hamburger({ className = "" }: RawIconProps) {
+export function Hamburger({ className = "", ...props }: RawIconProps) {
   return (
     <svg
       className={cx("h-6 w-6", className)}
@@ -93,6 +95,7 @@ export function Hamburger({ className = "" }: RawIconProps) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -103,7 +106,7 @@ export function Hamburger({ className = "" }: RawIconProps) {
   )
 }
 
-export function XMark({ className = "" }: RawIconProps) {
+export function XMark({ className = "", ...props }: RawIconProps) {
   return (
     <svg
       className={cx("h-6 w-6", className)}
@@ -112,13 +115,14 @@ export function XMark({ className = "" }: RawIconProps) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
+      {...props}
     >
       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
   )
 }
 
-export function ChevronDown({ className = "" }: RawIconProps) {
+export function ChevronDown({ className = "", ...props }: RawIconProps) {
   return (
     <svg
       className={cx("h-6 w-6", className)}
@@ -127,13 +131,14 @@ export function ChevronDown({ className = "" }: RawIconProps) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
+      {...props}
     >
       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
     </svg>
   )
 }
 
-export function ArrowUp({ className = "" }: RawIconProps) {
+export function ArrowUp({ className = "", ...props }: RawIconProps) {
   return (
     <svg
       className={cx("h-6 w-6", className)}
@@ -142,6 +147,7 @@ export function ArrowUp({ className = "" }: RawIconProps) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
+      {...props}
     >
       <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
     </svg>

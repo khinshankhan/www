@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { m, useAnimationControls, useScroll } from "framer-motion"
+import { m, useScroll } from "framer-motion"
 
 import { isBrowser, useMounted } from "hooks"
 
@@ -23,7 +23,7 @@ function ScrollToTopButton() {
     return scrollYProgress.on("change", (latestValue) => {
       setShow(latestValue > 0.05)
     })
-  }, [])
+  }, [scrollYProgress])
 
   // TODO: add focus ring
   // TODO: switch to linear for reduced motion?
@@ -40,7 +40,7 @@ function ScrollToTopButton() {
         className="rounded-full border-2 border-theme-placeholder bg-theme-bg/60 p-2 md:p-2.5 xl:p-3"
         onClick={scrollToTop}
       >
-        <ArrowUp />
+        <ArrowUp aria-hidden />
       </button>
     </m.span>
   )
