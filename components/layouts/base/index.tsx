@@ -10,7 +10,7 @@ interface BaseLayoutProps {
   children: ReactNode
 }
 
-export function BaseLayout({ children }: BaseLayoutProps) {
+export function BaseLayout({ isHero, children }: BaseLayoutProps) {
   return (
     <Fragment>
       <div className={"relative z-base flex min-h-[87vh] flex-col xs:min-h-[96vh]"}>
@@ -18,7 +18,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
         {children}
       </div>
       <ScrollToTop />
-      <Footer />
+      <Footer isHero={isHero} />
     </Fragment>
   )
 }
