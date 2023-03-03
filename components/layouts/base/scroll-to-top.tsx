@@ -27,9 +27,10 @@ function ScrollToTopButton() {
 
   // TODO: add focus ring
   // TODO: switch to linear for reduced motion?
+  // radial progress is based off https://www.framer.com/motion/use-scroll/
   return (
     <m.span
-      className="fixed bottom-5 right-5"
+      className="fixed bottom-5 right-5 md:bottom-6 md:right-6 xl:bottom-7 xl:right-7"
       variants={ScrollToTopContainerVariants}
       initial="hide"
       animate={show ? "visible" : "hidden"}
@@ -37,10 +38,20 @@ function ScrollToTopButton() {
     >
       <button
         aria-label="Scroll to top."
-        className="rounded-full border-2 border-theme-placeholder bg-theme-bg/60 p-2 md:p-2.5 xl:p-3"
+        className="p-0.25 rounded-full bg-transparent md:scale-125 xl:scale-150"
         onClick={scrollToTop}
       >
-        <ArrowUp aria-hidden />
+        <svg aria-hidden className="h-8 w-8">
+          <m.circle
+            className="h-8 w-8 translate-y-8 -rotate-90 fill-theme-bg/60 stroke-violet-8 stroke-2"
+            cx="50%"
+            cy="50%"
+            r="15"
+            pathLength="1"
+            style={{ pathLength: scrollYProgress }}
+          />
+          <ArrowUp aria-hidden viewBox="-3 -3 30 30" />
+        </svg>
       </button>
     </m.span>
   )
