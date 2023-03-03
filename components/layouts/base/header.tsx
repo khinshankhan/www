@@ -6,7 +6,7 @@ import Headroom from "react-headroom"
 
 import { zIndex } from "lib/theme"
 import { cx } from "lib/utils"
-import { useBreakpoint } from "hooks"
+import { useBreakpoint, useMounted } from "hooks"
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, Link } from "components/ui"
 import { HomeToggle, MenuToggle, ThemeToggle } from "components/toggles"
@@ -125,8 +125,7 @@ const PosMap = {
 }
 
 function Header() {
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+  const mounted = useMounted()
 
   const [, setCount] = useState(0)
   const forceRecalculateSize = () => {
