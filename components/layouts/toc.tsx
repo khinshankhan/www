@@ -45,7 +45,7 @@ export function Toc({ headings: headingsProp }: TocProps) {
           </span>
         </button>
       </CollapsibleTrigger>
-      <CollapsibleContent className="animated-collapsible">
+      <CollapsibleContent className="motion-safe:animated-collapsible">
         <ul className="mt-4">
           {headings.map(({ id, level, content }) => {
             // TODO: use a scrollspy to determine active

@@ -110,7 +110,7 @@ function Navbar({ showing }: { showing: boolean }) {
             </CollapsibleTrigger>
           </div>
         </nav>
-        <CollapsibleContent className="animated-collapsible">
+        <CollapsibleContent className="motion-safe:animated-collapsible">
           <Menu className="hide-desktop" />
         </CollapsibleContent>
       </header>

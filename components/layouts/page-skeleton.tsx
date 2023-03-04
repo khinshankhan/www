@@ -1,5 +1,5 @@
 import React, { type ReactNode } from "react"
-import { m } from "framer-motion"
+import { m, useReducedMotion } from "framer-motion"
 
 import { WithSidebar, type WithSidebarProps } from "./sidebar"
 
@@ -16,6 +16,7 @@ export function PageSkeletonLayout({
   sidebar,
   children,
 }: PageSkeletonLayoutProps) {
+  const shouldReduceMotion = useReducedMotion()
   // TODO: add flex grow to article when wrapping it with sidebar
   // move page container up to sidebar when implemented
   return (
@@ -26,7 +27,7 @@ export function PageSkeletonLayout({
         key="page-info-header"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.25, ease: "easeInOut" }}
+        transition={{ duration: shouldReduceMotion ? 0 : 1.25, ease: "easeInOut" }}
         exit={{ opacity: 0, transition: { duration: 0 } }}
       >
         <h1 className="pb-6">{title}</h1>
@@ -39,7 +40,7 @@ export function PageSkeletonLayout({
         key="page-content"
         initial={{ marginTop: "150vh" }}
         animate={{ marginTop: 0 }}
-        transition={{ delay: 0.3, duration: 1 }}
+        transition={{ delay: shouldReduceMotion ? 0 : 0.3, duration: shouldReduceMotion ? 0 : 1 }}
         exit={{ marginTop: "150vh", transition: { delay: 0, duration: 0.5 } }}
       >
         <WithSidebar direction={direction} sidebar={sidebar}>

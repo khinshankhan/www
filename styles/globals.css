@@ -318,13 +318,6 @@
 
   /* radix animations */
   .animated-collapsible {
-    overflow: hidden;
-
-    &[data-state="open"] {
-      @apply animate-collapsibleOpen;
-    }
-    &[data-state="closed"] {
-      @apply animate-collapsibleClose;
-    }
+    @apply overflow-hidden data-[state=open]:animate-collapsibleOpen data-[state=closed]:animate-collapsibleClose;
   }
 }
