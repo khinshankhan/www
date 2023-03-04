@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@ianvs/prettier-plugin-sort-imports': ^3.7.1
+  '@next/font': ^13.2.3
   '@radix-ui/react-collapsible': ^1.0.1
   '@types/node': ^18.14.0
   '@types/react': ^18.0.28
@@ -30,6 +31,7 @@ specifiers:
 
 dependencies:
   '@ianvs/prettier-plugin-sort-imports': 3.7.1_prettier@2.8.4
+  '@next/font': 13.2.3
   '@radix-ui/react-collapsible': 1.0.1_biqbaboplfbrettd7655fr4n2y
   clsx: 1.2.1
   framer-motion: 10.0.0_biqbaboplfbrettd7655fr4n2y
@@ -358,6 +360,10 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
+
+  /@next/font/13.2.3:
+    resolution: {integrity: sha512-7EHzk0f7FVYICLUZTpyPk93IfcTUao++Xt1Sgb+Zk5dVOCYHabqLtlF5ywSoXIqyFlo0qlshEBxsrzHAGTWkDw==}
+    dev: false
 
   /@next/swc-android-arm-eabi/13.1.6:
     resolution: {integrity: sha512-F3/6Z8LH/pGlPzR1AcjPFxx35mPqjE5xZcf+IL+KgbW9tMkp7CYi1y7qKrEWU7W4AumxX/8OINnDQWLiwLasLQ==}

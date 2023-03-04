@@ -174,8 +174,7 @@
 
   /*help hide some weird effects, apparently all is bad so declare each property explicitly */
   html * {
-    transition: background-color 0.4s ease-in-out, height 0.4s ease-in-out,
-      max-width 0.4s ease-in-out;
+    transition: background-color 0.4s ease-in-out, height 0.4s ease-in-out;
   }
   h1,
   h2,
@@ -190,7 +189,12 @@
 
   body {
     /* fonts are: 18px -> 21px -> ~23px (avg 21px and xl) */
-    @apply bg-theme-bg font-body text-lg text-theme-placeholder lg:text-[1.3125rem] 2xl:text-[1.43775rem];
+    @apply bg-theme-bg text-lg text-theme-placeholder lg:text-[1.3125rem] 2xl:text-[1.43775rem];
+  }
+
+  /* special div wrapping everything with fonts in _app */
+  #fonts {
+    @apply font-body;
   }
 
   .page-container {
@@ -292,8 +296,13 @@
     }
   }
 
-  button {
-    @apply bg-gray-400;
+  #article {
+    & :is(h2, h3, h4, h5, h6, p, ol, ul) {
+      margin-bottom: 20px;
+    }
+    & p + :is(ol, ul) {
+      margin-top: -20px;
+    }
   }
 }
 
