@@ -19,8 +19,11 @@ export function PageSkeletonLayout({
   const shouldReduceMotion = useReducedMotion()
   // TODO: add flex grow to article when wrapping it with sidebar
   // move page container up to sidebar when implemented
+
+  // the flex grow applies to the base layout's min-h flex div. this keeps any negative space between content to footer
+  // (within the min-h) the content bg color, accounting for potentially shorter content
   return (
-    <main>
+    <main className="flex grow flex-col">
       <m.header
         className="bg-theme-bg py-14 text-center"
         layout
@@ -35,7 +38,7 @@ export function PageSkeletonLayout({
       </m.header>
 
       <m.div
-        className="bg-theme-contentBg py-5"
+        className="grow bg-theme-contentBg py-5"
         layout
         key="page-content"
         initial={{ marginTop: "150vh" }}
