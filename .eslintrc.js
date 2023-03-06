@@ -4,8 +4,9 @@ module.exports = {
     browser: true,
     es2022: true,
     node: true,
+    "jest/globals": true,
   },
-  plugins: ["prettier", "react-hooks"],
+  plugins: ["jest", "prettier", "react-hooks"],
   extends: ["eslint:recommended", "plugin:prettier/recommended", "next/core-web-vitals"],
   parserOptions: {
     ecmaFeatures: {
