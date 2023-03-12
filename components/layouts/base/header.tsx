@@ -31,6 +31,7 @@ function Links() {
             <Link
               className={cx("main-nav", onLink === to && "on")}
               href={to}
+              isInternal
               aria-label={`Navigate to ${title}.`}
             >
               {title}

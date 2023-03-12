@@ -2,6 +2,7 @@ import React from "react"
 
 import { narray } from "lib/utils"
 
+import { Link } from "components/ui"
 import { PageSkeletonLayout } from "components/layouts/page-skeleton"
 
 export default function Page() {
@@ -18,12 +19,13 @@ export default function Page() {
       <p className="main-nav">main nav</p>
       <p>paragraph</p>
       <h3>
-        <a className="anchor" href="https://google.com">
+        <Link className="anchor" href="/">
           Anchored Link
-        </a>
+        </Link>
       </h3>
-      This is a link <a href="https://google.com">Google link</a> and it goes to google.
-      <Lorem />
+      This is a link <Link href="https://google.com">Google link</Link> and it goes to google. And
+      this is a fake file <Link href="/hello.pdf">Google file</Link> lol.
+      <Lorem n={5} />
     </PageSkeletonLayout>
   )
 }

@@ -55,12 +55,16 @@ export function Link({
   // # means same page, but use normal anchor tag for smoother scroll
   // ideally the icon will be the anchor icon, however it'll have to be placed in the mdx logic to avoid adding the icon for toc
   if (href.startsWith("#")) {
-    return <a {...props}>{children}</a>
+    return (
+      <a href={href} {...props}>
+        {children}
+      </a>
+    )
   }
 
   // external link
   return (
-    <a target="_blank" rel="noopener noreferrer" {...props}>
+    <a target="_blank" rel="noopener noreferrer" href={href} {...props}>
       {children}
       {VisualIcon}
     </a>
