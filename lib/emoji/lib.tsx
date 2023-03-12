@@ -27,13 +27,14 @@ export interface EmojiInfo {
 export function createEmojiLookup<
   EmojiPack extends readonly EmojiInfoTemplate[],
   Key extends `:${EmojiPack[number]["names"][number]}:`
->(emojiPacks: EmojiPack[]) {
+>(emojiPacks: EmojiPack[], overwrite = false) {
   const lookup = new Map<Key, EmojiInfo>()
   emojiPacks.forEach((emojiPack) => {
     emojiPack.forEach((rawEmojiInfo) => {
       rawEmojiInfo.names.forEach((name) => {
         const key = `:${name}:` as Key
-        if (lookup.has(key)) {
+
+        if (!overwrite && lookup.has(key)) {
           throw new DuplicateEmojiException(`Lookup already has ${key}`)
         }
 
