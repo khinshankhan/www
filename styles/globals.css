@@ -176,6 +176,10 @@
   html * {
     transition: background-color 0.4s ease-in-out, height 0.4s ease-in-out;
   }
+  textarea {
+    transition: background-color 0.5s, height 0s;
+  }
+
   h1,
   h2,
   h3,
@@ -201,27 +205,51 @@
     @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1280px] 2xl:max-w-[1325px];
   }
 
-  h1 {
+  h1,
+  .h1 {
     @apply font-heading text-3xl font-semibold tracking-wider sm:text-4xl 2xl:text-5xl;
   }
-  h2 {
+  h2,
+  .h2 {
     @apply font-heading text-2xl font-semibold tracking-wider sm:text-3xl 2xl:text-4xl;
   }
-  h3 {
+  h3,
+  .h3 {
     @apply font-heading text-xl font-semibold tracking-wide sm:text-2xl 2xl:text-3xl;
   }
-  h4 {
+  h4,
+  .h4 {
     @apply font-heading text-lg font-semibold tracking-wide sm:text-xl 2xl:text-2xl;
   }
-  h5 {
+  h5,
+  .h5 {
     @apply font-heading text-base font-semibold tracking-wide sm:text-lg 2xl:text-xl;
   }
-  h6 {
+  h6,
+  .h6 {
     @apply font-heading text-sm font-semibold tracking-wide sm:text-base 2xl:text-lg;
   }
   .main-nav {
     /* lg is avg lg and xl */
     @apply font-heading text-lg font-medium tracking-wide lg:text-[1.344rem];
+  }
+  small,
+  .small {
+    @apply text-xs md:text-sm 2xl:text-base;
+  }
+
+  label {
+    @apply h4 appearance-none;
+  }
+  label ~ span {
+    @apply small text-red-700 opacity-[0.8] dark:text-red-400;
+  }
+  input,
+  textarea {
+    @apply box-border inline-flex w-full appearance-none items-center justify-center rounded bg-theme-bg/80 py-2 px-2.5 font-heading shadow-subtleRing shadow-theme-placeholder outline-none focus:shadow-ring focus:shadow-violet-8 data-[invalid]:shadow-ring data-[invalid]:shadow-red-500;
+  }
+  .formfield {
+    @apply flex flex-col gap-3;
   }
 
   /* link styles
