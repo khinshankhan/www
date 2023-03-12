@@ -15,13 +15,7 @@ export function Toc({ headings: headingsProp }: TocProps) {
   const action = open ? "Close" : "Open"
 
   const isXl = useBreakpoint("xl")
-  useEffect(() => {
-    if (isXl) {
-      setOpen(true)
-    } else {
-      setOpen(false)
-    }
-  }, [isXl])
+  useEffect(() => setOpen(isXl), [isXl])
 
   const minLevel =
     headingsProp.length === 0 ? 0 : headingsProp.reduce((min, { level }) => Math.min(min, level), 7)

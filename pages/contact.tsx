@@ -8,12 +8,12 @@ export default function Page() {
   return (
     <PageSkeletonLayout title="Contact" subtitle="Getting in touch. Boop :point_up_2:">
       <p>
-        I'm always happy to chat. If you have any concerns/ thoughts about the website or content or
+        {`I'm always happy to chat. If you have any concerns/ thoughts about the website or content or
         just want to talk with me, you can get in touch with me either through the contact form
-        below or one of my{" "}
+        below or one of my`}{" "}
         <Link href="/links" isInternal>
           links
-        </Link>{" "}
+        </Link>
         .
       </p>
 
@@ -22,7 +22,7 @@ export default function Page() {
           Say hi.
         </Link>
       </h2>
-      <p>Or say low. I'm not your mom.</p>
+      <p>{`Or say low. I'm not your mom.`}</p>
 
       <Form.Root
         className="flex w-full flex-col gap-5"
@@ -46,14 +46,7 @@ export default function Page() {
 
         <Form.Field className="formfield" name="email">
           <div className="flex items-baseline justify-between">
-            <Form.Label>
-              <span>Contactable Email</span>
-              <br />
-              <span className="small">
-                This won't be abused, it's just to reach back. Not much of a discussion if it's just
-                one-sided.
-              </span>
-            </Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Message match="valueMissing">Please enter your email</Form.Message>
             <Form.Message match="typeMismatch">Please provide a valid email</Form.Message>
           </div>
