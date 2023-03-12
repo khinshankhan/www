@@ -279,17 +279,17 @@
       @apply text-link-on before:bg-link-active;
     }
 
-    /* TODO: replace # with my anchor icon */
+    /* since color of url in content can't easily be adjusted, use the mask trick instead https://stackoverflow.com/a/66093928/7413060 */
     &.anchor:after {
-      /*
-      since color of url in content can't easily be adjusted, use the mask trick instead https://stackoverflow.com/a/66093928/7413060
-     */
       content: "";
-      mask-image: var(--icons-anchor);
-      padding: 0 0.5em;
+      display: inline-block;
       margin: 0 0.125em;
-      mask-repeat: no-repeat;
-      mask-position: center;
+      width: 1em;
+      height: 1em;
+      /* these are kind of magic numbers based off a few trial and errors on one machine */
+      transform: scale(0.85) translateY(0.15em);
+      mask-image: var(--icons-anchor);
+      mask-size: cover;
       background-color: transparent;
       transition: background-color 0.4s ease-in-out;
     }
