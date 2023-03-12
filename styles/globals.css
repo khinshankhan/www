@@ -246,7 +246,7 @@
   }
   input,
   textarea {
-    @apply box-border inline-flex w-full appearance-none items-center justify-center rounded bg-theme-bg/80 py-2 px-2.5 font-heading shadow-subtleRing shadow-theme-placeholder outline-none focus:shadow-ring focus:shadow-violet-8 data-[invalid]:shadow-ring data-[invalid]:shadow-red-500;
+    @apply box-border inline-flex w-full appearance-none items-center justify-center rounded bg-theme-bg/80 py-2 px-2.5 shadow-subtleRing shadow-theme-placeholder outline-none focus:shadow-ring focus:shadow-violet-8 data-[invalid]:shadow-ring data-[invalid]:shadow-red-500;
   }
   .formfield {
     @apply flex flex-col gap-3;

@@ -1,20 +1,33 @@
-import React from "react"
+import React, { type ReactNode } from "react"
 import * as Form from "@radix-ui/react-form"
 
 import { Link } from "components/ui"
+import Emoji from "components/emoji"
 import { PageSkeletonLayout } from "components/layouts/page-skeleton"
+
+function FieldInfo({ children }: { children: ReactNode }) {
+  return <div className="flex flex-col items-baseline justify-between md:flex-row">{children}</div>
+}
 
 export default function Page() {
   return (
-    <PageSkeletonLayout title="Contact" subtitle="Getting in touch. Boop :point_up_2:">
+    <PageSkeletonLayout
+      title="Contact"
+      subtitle={
+        <span>
+          {`Getting in touch. Boop`} <Emoji name=":point_up_2:" />
+        </span>
+      }
+    >
       <p>
         {`I'm always happy to chat. If you have any concerns/ thoughts about the website or content or
-        just want to talk with me, you can get in touch with me either through the contact form
-        below or one of my`}{" "}
+        just want to talk with me, you can get in touch with me either through one of my`}{" "}
         <Link href="/links" isInternal>
           links
-        </Link>
-        .
+        </Link>{" "}
+        {`(feel free to dm, start the first message with`} <code>01</code>{" "}
+        {`and I'll at least take a looksie) or better yet use the contact form below`}{" "}
+        <Emoji name=":point_down:" />
       </p>
 
       <h2 id="#say-hi">
@@ -35,31 +48,31 @@ export default function Page() {
         }}
       >
         <Form.Field className="formfield" name="name">
-          <div className="flex items-baseline justify-between">
+          <FieldInfo>
             <Form.Label>Your name</Form.Label>
             <Form.Message match="valueMissing">Please enter your name or moniker</Form.Message>
-          </div>
+          </FieldInfo>
           <Form.Control asChild>
             <input type="text" required placeholder="shan" />
           </Form.Control>
         </Form.Field>
 
         <Form.Field className="formfield" name="email">
-          <div className="flex items-baseline justify-between">
+          <FieldInfo>
             <Form.Label>Email</Form.Label>
             <Form.Message match="valueMissing">Please enter your email</Form.Message>
             <Form.Message match="typeMismatch">Please provide a valid email</Form.Message>
-          </div>
+          </FieldInfo>
           <Form.Control asChild>
             <input type="email" required placeholder="shan@uptogood.dev" />
           </Form.Control>
         </Form.Field>
 
         <Form.Field className="formfield" name="message">
-          <div className="flex items-baseline justify-between">
+          <FieldInfo>
             <Form.Label>Message</Form.Label>
             <Form.Message match="valueMissing">Please enter a message</Form.Message>
-          </div>
+          </FieldInfo>
           <Form.Control asChild>
             <textarea className="" required placeholder="I decided to say low. Low :)" />
           </Form.Control>
