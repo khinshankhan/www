@@ -3,7 +3,7 @@ import Head from "next/head"
 
 import { ThemeProvider } from "components/providers"
 import "styles/globals.css"
-import { Montserrat, Nobile } from "@next/font/google"
+import { Montserrat, Open_Sans, Source_Code_Pro } from "@next/font/google"
 import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion"
 
 import { cx } from "lib/utils"
@@ -13,11 +13,17 @@ import { BaseLayout as Layout } from "components/layouts"
 const headingFont = Montserrat({
   subsets: ["latin"],
   variable: "--font-heading",
+  display: "swap",
 })
-const bodyFont = Nobile({
+const bodyFont = Open_Sans({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["400", "500", "700"],
+  display: "swap",
+})
+const monoFont = Source_Code_Pro({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
 })
 
 export default function App({ Component, pageProps, router }: AppProps) {
@@ -35,7 +41,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
           content="viewport-fit=cover, width=device-width, initial-scale=1, shrink-to-fit=no"
         />
       </Head>
-      <div id="fonts" className={cx(headingFont.variable, bodyFont.variable)}>
+      <div id="fonts" className={cx(headingFont.variable, bodyFont.variable, monoFont.variable)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <LazyMotion features={domAnimation} strict>
             <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
