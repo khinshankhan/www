@@ -25,8 +25,7 @@ export default function Page() {
         <Link href="/links" isInternal>
           links
         </Link>{" "}
-        {`(feel free to dm, start the first message with`} <code>01</code>{" "}
-        {`and I'll at least take a looksie) or better yet use the contact form below`}{" "}
+        {`(feel free to dm, I'll take a looksie eventually) or better yet use the contact form below`}{" "}
         <Emoji name=":point_down:" />
       </p>
 
@@ -35,7 +34,9 @@ export default function Page() {
           Say hi.
         </Link>
       </h2>
-      <p>{`Or say low. I'm not your mom.`}</p>
+      <p>
+        {`Or say low. I'm not your mom`} <Emoji name=":akkoShrug:" />
+      </p>
 
       <Form.Root
         className="flex w-full flex-col gap-5"

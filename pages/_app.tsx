@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app"
 import Head from "next/head"
 
-import { ThemeProvider } from "components/providers"
+import { ThemeProvider, TooltipProvider } from "components/providers"
 import "styles/globals.css"
 import { Montserrat, Open_Sans, Source_Code_Pro } from "@next/font/google"
 import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion"
@@ -43,13 +43,15 @@ export default function App({ Component, pageProps, router }: AppProps) {
       </Head>
       <div id="fonts" className={cx(headingFont.variable, bodyFont.variable, monoFont.variable)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <LazyMotion features={domAnimation} strict>
-            <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
-              <Layout isHero={isHero}>
-                <Component key={router.asPath} {...pageProps} />
-              </Layout>
-            </AnimatePresence>
-          </LazyMotion>
+          <TooltipProvider>
+            <LazyMotion features={domAnimation} strict>
+              <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
+                <Layout isHero={isHero}>
+                  <Component key={router.asPath} {...pageProps} />
+                </Layout>
+              </AnimatePresence>
+            </LazyMotion>
+          </TooltipProvider>
         </ThemeProvider>
       </div>
     </>
