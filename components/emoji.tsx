@@ -14,8 +14,9 @@ export function Emoji({ name }: { name: EmojiKey }) {
     <span>
       <Tooltip>
         <TooltipTrigger>
+          {/* eslint-disable @next/next/no-img-element */}
           <img
-            className="inline aspect-auto w-[1em]"
+            className="inline aspect-auto h-[1em]"
             src={emojiInfo.url}
             alt={emojiInfo.char || emojiInfo.alt}
             aria-label={emojiInfo.alt}
