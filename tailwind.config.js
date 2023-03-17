@@ -119,5 +119,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-hyphens")],
+  plugins: [require("tailwindcss-animate"), require("tailwindcss-hyphens")],
 }

@@ -23,7 +23,7 @@ const TooltipContent = React.forwardRef<
     )}
     {...props}
   >
-    <span>{children}</span>
+    {children}
     <TooltipPrimitive.Arrow className="fill-white dark:fill-slate-800" width={11} height={5} />
   </TooltipPrimitive.Content>
 ))

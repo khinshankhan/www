@@ -2,7 +2,7 @@ import React from "react"
 
 import { InvalidEmojiException, emojiLookup, type EmojiKey } from "lib/emoji"
 
-import { Tooltip, TooltipContent, TooltipTrigger } from "components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipTrigger } from "components/ui"
 
 export function Emoji({ name }: { name: EmojiKey }) {
   const emojiInfo = emojiLookup.get(name)
@@ -24,7 +24,9 @@ export function Emoji({ name }: { name: EmojiKey }) {
             draggable="false"
           />
         </TooltipTrigger>
-        <TooltipContent>{emojiInfo.alt}</TooltipContent>
+        <TooltipContent>
+          <span>{emojiInfo.alt}</span>
+        </TooltipContent>
       </Tooltip>
     </span>
   )
