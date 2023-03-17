@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
+import * as Portal from "@radix-ui/react-portal"
 import Headroom from "react-headroom"
 
 import { zIndex } from "lib/theme"
@@ -10,6 +11,7 @@ import { useBreakpoint, useMounted } from "hooks"
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, Link } from "components/ui"
 import { HomeToggle, MenuToggle, ThemeToggle } from "components/toggles"
+import ScrollToTop from "./scroll-to-top"
 
 // TODO: move this out to config
 const links = [
@@ -173,6 +175,10 @@ function Header() {
       >
         <Navbar showing={showing} />
       </Headroom>
+
+      <Portal.Root>
+        <ScrollToTop show={pos !== PosMap.DEFAULT} />
+      </Portal.Root>
     </>
   )
 }

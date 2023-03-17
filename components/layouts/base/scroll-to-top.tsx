@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { m, useScroll } from "framer-motion"
 
 import { isBrowser, useMounted } from "hooks"
@@ -15,15 +15,8 @@ const ScrollToTopContainerVariants = {
   visible: { opacity: 1, y: 0 },
 }
 
-function ScrollToTopButton() {
+function ScrollToTopButton({ show = false }: { show: boolean }) {
   const { scrollYProgress } = useScroll()
-  const [show, setShow] = useState(false)
-
-  useEffect(() => {
-    return scrollYProgress.on("change", (latestValue) => {
-      setShow(latestValue > 0.05)
-    })
-  }, [scrollYProgress])
 
   // TODO: add focus ring
   // TODO: switch to linear for reduced motion?
@@ -57,11 +50,11 @@ function ScrollToTopButton() {
   )
 }
 
-export function ScrollToTop() {
+export function ScrollToTop({ show = false }: { show: boolean }) {
   const mounted = useMounted()
 
   if (!mounted || !isBrowser) return null
-  return <ScrollToTopButton />
+  return <ScrollToTopButton show={show} />
 }
 
 export default ScrollToTop
