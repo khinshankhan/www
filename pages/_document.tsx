@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html lang="en" suppressHydrationWarning>
       <Head>
-        <link rel="icon" href="/logo.svg" />
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
       </Head>
       <body>
         <Main />
