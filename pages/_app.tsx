@@ -41,7 +41,10 @@ export default function App({ Component, pageProps, router }: AppProps) {
           content="viewport-fit=cover, width=device-width, initial-scale=1, shrink-to-fit=no"
         />
       </Head>
-      <div id="fonts" className={cx(headingFont.variable, bodyFont.variable, monoFont.variable)}>
+      <div
+        id="fonts"
+        className={cx(headingFont.variable, bodyFont.variable, monoFont.variable, "font-body")}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TooltipProvider>
             <LazyMotion features={domAnimation} strict>
