@@ -32,10 +32,7 @@ export function Toc({ headings: headingsProp }: TocProps) {
         <button className="group w-full" aria-label={`${action} table of contents.`}>
           <span className="group flex items-center justify-between">
             <span>On this page</span>
-            <ChevronDown
-              className="text-violet10 ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=closed]:-rotate-90"
-              aria-hidden
-            />
+            <ChevronDown className="text-violet10 animated-arrow" aria-hidden />
           </span>
         </button>
       </CollapsibleTrigger>

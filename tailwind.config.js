@@ -32,6 +32,9 @@ module.exports = {
     screens: config.screens,
     zIndex: config.zIndex,
     fontFamily: config.fontFamily,
+    transitionTimingFunction: {
+      "arrow-ease": "cubic-bezier(0.87, 0, 0.13, 1)",
+    },
     animation: {
       none: "none",
       spin: "spin 1s linear infinite",

@@ -319,7 +319,7 @@
   }
 
   #article {
-    & :is(h2, h3, h4, h5, h6, p, ol, ul) {
+    & > * {
       margin-bottom: 20px;
     }
     & p + :is(ol, ul) {
@@ -350,5 +350,9 @@
   /* radix animations */
   .animated-collapsible {
     @apply overflow-hidden data-[state=open]:animate-collapsibleOpen data-[state=closed]:animate-collapsibleClose;
+  }
+
+  .animated-arrow {
+    @apply transition-transform duration-300 ease-arrow-ease group-data-[state=closed]:-rotate-90;
   }
 }
