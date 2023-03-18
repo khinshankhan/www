@@ -170,6 +170,13 @@
  */
   html {
     font-size: 16px;
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
+    scroll-behavior: smooth;
   }
 
   /*help hide some weird effects, apparently all is bad so declare each property explicitly */
