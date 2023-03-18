@@ -47,6 +47,7 @@ export function Toc({ headings: headingsProp }: TocProps) {
                 key={id}
                 className={cx(
                   "hyphens-auto",
+                  "last:pb-0.5",
                   active ? "shadow-tocOn" : "shadow-tocBase",
                   // this should be exhaustive for h1-6
                   indents === 0 && "pl-4",

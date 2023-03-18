@@ -1,4 +1,5 @@
 import type { ComputedFields, FieldDefs } from "contentlayer/source-files"
+import Slugger from "github-slugger"
 
 import { chopOffWord } from "../../utils"
 
@@ -56,6 +57,11 @@ export interface Computed {
     tended: string
   }
   tags: string[]
+  headings: {
+    level: number
+    content: string
+    id: string
+  }[]
 }
 
 interface IComputedFieldsProps {
@@ -82,6 +88,19 @@ export const getComputedFields = <T extends string>({
       resolve: (doc) => {
         const tags = [...new Set((doc?.tags ?? []) as string[])].sort()
 
+        // use same package as rehypeSlug so toc and sluggified headings match
+        // https://github.com/rehypejs/rehype-slug/blob/main/package.json#L36
+        const slugs = new Slugger()
+        const regexHeadings = /^(?<tag>#{1,6})[ ](?<content>[^\n]+)/gm
+
+        const headings = !doc?.body?.raw
+          ? []
+          : [...doc.body.raw.matchAll(regexHeadings)].map(([, tag, content]) => ({
+              level: (tag as string).length,
+              content: content as string,
+              id: slugs.slug(content, false),
+            }))
+
         return {
           frontmatter: {
             title: doc.title,
@@ -91,6 +110,7 @@ export const getComputedFields = <T extends string>({
             tended: doc.tended.slice(0, -1),
           },
           tags,
+          headings,
         } satisfies Computed
       },
     },
