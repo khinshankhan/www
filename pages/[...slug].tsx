@@ -5,6 +5,7 @@ import { useLiveReload, useMDXComponent } from "next-contentlayer/hooks"
 import { type Computed } from "lib/contentlayer"
 
 import { PageSkeletonLayout } from "components/layouts/page-skeleton"
+import { MdxComponents } from "components/mdx"
 
 export const getStaticPaths = () => {
   const paths = pages.map((p) => ({
@@ -50,7 +51,7 @@ export default function PageView({ page }: InferGetStaticPropsType<typeof getSta
   const computed = page.computed as Computed
   return (
     <PageSkeletonLayout title={computed.frontmatter.title} subtitle={computed.frontmatter.subtitle}>
-      {MDXContent && <MDXContent components={{}} />}
+      {MDXContent && <MDXContent components={MdxComponents} />}
     </PageSkeletonLayout>
   )
 }

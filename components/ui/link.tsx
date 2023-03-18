@@ -26,7 +26,7 @@ interface LinkProps extends NextLinkProps {
   isExternal?: boolean
   isFile?: boolean
   className?: string
-  children: ReactNode
+  children?: ReactNode
 }
 
 export function Link({
@@ -34,7 +34,7 @@ export function Link({
   isInternal: isInternalProp = undefined,
   isExternal: isExternalProp = undefined,
   isFile: isFileProp = undefined,
-  children,
+  children = "",
   ...props
 }: LinkProps) {
   const isExternal = (isInternalProp && !isInternalProp) ?? isExternalProp ?? !url.isRelative(href)
