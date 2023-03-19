@@ -7,16 +7,16 @@ import { ArrowDownTray, ArrowUpRight } from "components/icons"
 
 function ExternalIcon() {
   return (
-    <span className="align-super">
-      <ArrowUpRight className="inline h-4 w-4" />
+    <span className="inline-flex items-center">
+      <ArrowUpRight className="inline h-4 w-4 pb-1" />
     </span>
   )
 }
 
 function FileIcon() {
   return (
-    <span className="align-sub">
-      <ArrowDownTray className="inline h-4 w-4" />
+    <span className="inline-flex items-center">
+      <ArrowDownTray className="inline h-4 w-4 pt-1" />
     </span>
   )
 }

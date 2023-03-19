@@ -42,6 +42,8 @@ This is an [internal link to about](/about).
 
 This is an [external link to Google](https://google.com).
 
+This is a [link to a file](/logo.svg).
+
 ### Lists
 
 ### Etc
