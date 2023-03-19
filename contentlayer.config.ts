@@ -17,7 +17,10 @@ export default makeSource({
     remarkPlugins: [[remarkGfm]],
     rehypePlugins: [
       [rehypeSlug],
-      [rehypeAutolinkHeadings, { behavior: "wrap", properties: { className: ["anchor"] } }],
+      [
+        rehypeAutolinkHeadings,
+        { behavior: "wrap", properties: { className: ["anchor h-[1em] w-[1em]"] } },
+      ],
       [rehypeMarkExcerpt],
     ],
   },
