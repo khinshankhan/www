@@ -46,9 +46,8 @@ export function Toc({ headings: headingsProp }: TocProps) {
               <li
                 key={id}
                 className={cx(
-                  "hyphens-auto",
-                  "last:pb-0.5",
-                  active ? "shadow-tocOn" : "shadow-tocBase",
+                  "pointer-events-none border-l-2 border-link-base pb-0.5 hyphens-auto last:pb-1 focus-within:border-link-on hover:border-link-on",
+                  active && "border-link-active",
                   // this should be exhaustive for h1-6
                   indents === 0 && "pl-4",
                   indents === 1 && "pl-10",

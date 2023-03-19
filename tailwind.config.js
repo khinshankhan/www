@@ -100,6 +100,8 @@ module.exports = {
           bg: hsla("bg"),
           contentBg: hsla("content-bg"),
           placeholder: hsla("placeholder"),
+          accent: hsla("accent"),
+          muted: hsla("muted"),
         },
 
         logo: {
@@ -115,8 +117,6 @@ module.exports = {
       },
 
       boxShadow: {
-        tocBase: `inset 4px 0px 0px 0px ${rawHsla("link", 1)}`,
-        tocOn: `inset 4px 0px 0px 0px ${rawHsla("link-on", 1)}`,
         subtleRing: `0px 0px 0px 1.5px`,
         ring: `0px 0px 0px 2px`,
       },
