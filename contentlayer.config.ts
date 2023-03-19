@@ -4,6 +4,7 @@ import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
 
 import * as documentTypes from "./lib/contentlayer/documents"
+import { rehypeMarkExcerpt } from "./lib/contentlayer/plugins"
 
 export default makeSource({
   contentDirPath: "data",
@@ -17,6 +18,7 @@ export default makeSource({
     rehypePlugins: [
       [rehypeSlug],
       [rehypeAutolinkHeadings, { behavior: "wrap", properties: { className: ["anchor"] } }],
+      [rehypeMarkExcerpt],
     ],
   },
 })

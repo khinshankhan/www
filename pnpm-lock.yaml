@@ -45,6 +45,7 @@ specifiers:
   tailwindcss-animate: ^1.0.5
   tailwindcss-hyphens: ^0.1.0
   typescript: ^4.9.5
+  unist-util-visit: ^4.1.2
 
 dependencies:
   '@ianvs/prettier-plugin-sort-imports': 3.7.1_prettier@2.8.4
@@ -68,6 +69,7 @@ dependencies:
   remark-gfm: 3.0.1
   tailwind-merge: 1.10.0
   tailwindcss-hyphens: 0.1.0
+  unist-util-visit: 4.1.2
 
 devDependencies:
   '@testing-library/jest-dom': 5.16.5
