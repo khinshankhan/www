@@ -26,6 +26,9 @@ module.exports = {
 
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx}",
+
+    // mdx files
+    "./data/**/*.{md,mdx}",
   ],
   darkMode: "class",
   theme: {
