@@ -3,7 +3,7 @@ import { defineDocumentType } from "contentlayer/source-files"
 import { getComputedFields, getFields } from "./utils"
 
 const fields = getFields({
-  subtitle: `Doing my best :writing_hand:`,
+  subtitle: "Doing my best :writing_hand:",
 })
 const computedFields = getComputedFields<"RootPage">({
   prefix: "pages",
