@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 import { cx, scrollToElement } from "lib/utils"
-import { useBreakpoint, useMounted } from "hooks"
+import { useBreakpoint, useMounted, useScrollSpy } from "hooks"
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "components/ui"
 import { ChevronDown } from "components/icons"
@@ -29,6 +29,11 @@ export function Toc({ headings: headingsProp }: TocProps) {
 
   const headings = [{ id: "excerpt", level: minLevel, content: "Introduction" }, ...headingsProp]
 
+  const activeIds = useScrollSpy(
+    headings.map(({ id }) => `[id="${id}"]`),
+    { rootMargin: "-20% 0% -80% 0%" }
+  )
+
   if (!mounted) {
     return null
   }
@@ -46,9 +51,9 @@ export function Toc({ headings: headingsProp }: TocProps) {
       <CollapsibleContent className="motion-safe:animated-collapsible">
         <ul className="mt-4">
           {headings.map(({ id, level, content }) => {
-            // TODO: use a scrollspy to determine active
-            const active = level === 2
+            const active = activeIds.includes(id)
             const indents = level - minLevel
+
             return (
               <li
                 key={id}
