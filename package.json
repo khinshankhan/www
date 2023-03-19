@@ -34,6 +34,7 @@
     "react-headroom": "^3.2.1",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-slug": "^5.1.0",
+    "remark-gfm": "^3.0.1",
     "tailwind-merge": "^1.10.0",
     "tailwindcss-hyphens": "^0.1.0"
   },
