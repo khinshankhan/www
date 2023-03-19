@@ -257,7 +257,8 @@
   /* link styles
      link underline animation based off https://tobiasahlin.com/blog/css-trick-animating-link-underlines/
  */
-  a {
+  a,
+  .link {
     @apply relative text-link-base;
     font-family: inherit;
     line-height: inherit;

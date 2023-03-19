@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react"
 
-import { cx } from "lib/utils"
+import { cx, scrollToElement } from "lib/utils"
 import { useBreakpoint, useMounted } from "hooks"
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "components/ui"
 import { ChevronDown } from "components/icons"
+
+export function scrollToHeading(event: React.MouseEvent<HTMLButtonElement>) {
+  const id = event.currentTarget.dataset.id
+  if (!id) return // too lazy to do type assertion
+  // TODO: might be sweet to toast 'successfully scroll to <content>'
+  scrollToElement(`[id="${id}"]`)
+}
 
 interface TocProps {
   headings: { id: string; level: number; content: string }[]
@@ -40,7 +47,7 @@ export function Toc({ headings: headingsProp }: TocProps) {
         <ul className="mt-4">
           {headings.map(({ id, level, content }) => {
             // TODO: use a scrollspy to determine active
-            const active = false
+            const active = level === 2
             const indents = level - minLevel
             return (
               <li
@@ -57,7 +64,9 @@ export function Toc({ headings: headingsProp }: TocProps) {
                   indents === 5 && "pl-36"
                 )}
               >
-                <a href="#">{content}</a>
+                <button data-id={id} onClick={scrollToHeading} className="link pointer-events-auto">
+                  {content}
+                </button>
               </li>
             )
           })}
