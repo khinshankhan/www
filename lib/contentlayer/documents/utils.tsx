@@ -1,10 +1,7 @@
 import type { ComputedFields, FieldDefs } from "contentlayer/source-files"
 import Slugger from "github-slugger"
-import rehypeStringify from "rehype-stringify"
+import { bundleMDX } from "mdx-bundler"
 import remarkGfm from "remark-gfm"
-import remarkParse from "remark-parse"
-import remarkRehype from "remark-rehype"
-import { unified } from "unified"
 
 import { chopOffWord } from "../../utils"
 import { remarkSetExcerpt } from "../plugins"
@@ -108,15 +105,17 @@ export const getComputedFields = <T extends string>({
               id: slugs.slug(content, false),
             }))
 
-        const excerpt = String(
-          await unified()
-            .use(remarkParse)
-            .use(remarkSetExcerpt)
-            .use(remarkGfm)
-            .use(remarkRehype)
-            .use(rehypeStringify)
-            .process(doc.body.raw ?? "")
-        )
+        const result = await bundleMDX({
+          source: doc.body.raw ?? "",
+          mdxOptions(options) {
+            options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkSetExcerpt, remarkGfm]
+            options.rehypePlugins = [...(options.rehypePlugins ?? [])]
+
+            return options
+          },
+        })
+
+        const { code: excerpt } = result
 
         return {
           frontmatter: {
