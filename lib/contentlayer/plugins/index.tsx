@@ -7,6 +7,20 @@ import { EXIT, SKIP, visit } from "unist-util-visit"
 
 import { braidArrays, extractEmoji } from "../../utils"
 
+function createTextNode(value: string) {
+  return { type: "text", value }
+}
+
+function createMdxNode(name: string, attributes: { name: string; value: string }[]) {
+  return {
+    type: "mdxJsxTextElement",
+    name,
+    attributes: attributes.map(({ name, value }) => ({ type: "mdxJsxAttribute", name, value })),
+    children: [],
+    data: { _mdxExplicitJsx: true },
+  }
+}
+
 // TODO: add types
 export function rehypeMarkExcerpt(): Transformer<HastRoot, HastRoot> {
   return (tree) => {
@@ -39,7 +53,6 @@ export function remarkSimpleEmoji(
       if (!node.value) return
 
       const matches = [...node.value.matchAll(extractEmoji)]
-
       if (matches.length === 0) return
 
       const emptied = [...matches].reverse().reduce(
@@ -52,32 +65,15 @@ export function remarkSimpleEmoji(
         [node.value]
       )
 
-      const baseTexts = emptied.map((text) => {
-        return {
-          type: "text",
-          value: text,
-        }
-      })
+      const baseTexts = emptied.map((text) => createTextNode(text))
 
-      const intertwineWith = matches.map((match) => {
-        return options.jsx
-          ? {
-              type: "mdxJsxTextElement",
-              name: options.jsxElement,
-              attributes: [
-                { type: "mdxJsxAttribute", name: options.jsxAttribute, value: match[0] },
-              ],
-              children: [],
-              data: { _mdxExplicitJsx: true },
-            }
-          : {
-              type: "text",
-              value: options.lookup(match[0]),
-            }
-      })
+      const intertwineWith = matches.map((match) =>
+        options.jsx
+          ? createMdxNode(options.jsxElement, [{ name: options.jsxAttribute, value: match[0] }])
+          : createTextNode(options.lookup(match[0]))
+      )
 
       const newNodes = braidArrays(baseTexts, intertwineWith)
-
       // replace text node with the injected emoji nodes
       parent.children.splice(index, 1, ...newNodes)
       return [SKIP, index]
