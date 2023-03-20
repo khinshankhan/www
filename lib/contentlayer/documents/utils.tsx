@@ -1,7 +1,13 @@
 import type { ComputedFields, FieldDefs } from "contentlayer/source-files"
 import Slugger from "github-slugger"
+import rehypeStringify from "rehype-stringify"
+import remarkGfm from "remark-gfm"
+import remarkParse from "remark-parse"
+import remarkRehype from "remark-rehype"
+import { unified } from "unified"
 
 import { chopOffWord } from "../../utils"
+import { remarkSetExcerpt } from "../plugins"
 
 interface IFieldsProps {
   subtitle: string
@@ -57,6 +63,7 @@ export interface Computed {
     tended: string
   }
   tags: string[]
+  excerpt: string
   headings: {
     level: number
     content: string
@@ -85,7 +92,7 @@ export const getComputedFields = <T extends string>({
 
     computed: {
       type: "json",
-      resolve: (doc) => {
+      resolve: async (doc) => {
         const tags = [...new Set((doc?.tags ?? []) as string[])].sort()
 
         // use same package as rehypeSlug so toc and sluggified headings match
@@ -101,6 +108,16 @@ export const getComputedFields = <T extends string>({
               id: slugs.slug(content, false),
             }))
 
+        const excerpt = String(
+          await unified()
+            .use(remarkParse)
+            .use(remarkSetExcerpt)
+            .use(remarkGfm)
+            .use(remarkRehype)
+            .use(rehypeStringify)
+            .process(doc.body.raw ?? "")
+        )
+
         return {
           frontmatter: {
             title: doc.title,
@@ -110,6 +127,7 @@ export const getComputedFields = <T extends string>({
             tended: doc.tended.slice(0, -1),
           },
           tags,
+          excerpt,
           headings,
         } satisfies Computed
       },
