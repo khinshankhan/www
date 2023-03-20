@@ -4,7 +4,7 @@ import { bundleMDX } from "mdx-bundler"
 import remarkGfm from "remark-gfm"
 
 import { chopOffWord } from "../../utils"
-import { remarkSetExcerpt } from "../plugins"
+import { remarkSetExcerpt, remarkSimpleEmoji } from "../plugins"
 
 interface IFieldsProps {
   subtitle: string
@@ -60,7 +60,10 @@ export interface Computed {
     tended: string
   }
   tags: string[]
-  excerpt: string
+  mdx: {
+    subtitle: string
+    excerpt: string
+  }
   headings: {
     level: number
     content: string
@@ -105,17 +108,28 @@ export const getComputedFields = <T extends string>({
               id: slugs.slug(content, false),
             }))
 
-        const result = await bundleMDX({
-          source: doc.body.raw ?? "",
+        const { code: mdxSubtitle } = await bundleMDX({
+          source: doc.subtitle ?? "",
           mdxOptions(options) {
-            options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkSetExcerpt, remarkGfm]
+            options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkSimpleEmoji]
             options.rehypePlugins = [...(options.rehypePlugins ?? [])]
-
             return options
           },
         })
 
-        const { code: excerpt } = result
+        const { code: mdxExcerpt } = await bundleMDX({
+          source: doc.body.raw ?? "",
+          mdxOptions(options) {
+            options.remarkPlugins = [
+              ...(options.remarkPlugins ?? []),
+              remarkSetExcerpt,
+              remarkSimpleEmoji,
+              remarkGfm,
+            ]
+            options.rehypePlugins = [...(options.rehypePlugins ?? [])]
+            return options
+          },
+        })
 
         return {
           frontmatter: {
@@ -126,7 +140,10 @@ export const getComputedFields = <T extends string>({
             tended: doc.tended.slice(0, -1),
           },
           tags,
-          excerpt,
+          mdx: {
+            subtitle: mdxSubtitle,
+            excerpt: mdxExcerpt,
+          },
           headings,
         } satisfies Computed
       },

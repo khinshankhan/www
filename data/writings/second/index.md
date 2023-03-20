@@ -8,6 +8,6 @@ tended: "2023-05-07"
 tags: []
 ---
 
-Backdating is ~~bad~~ _ugly_ **good** weird but necessary.
+Backdating is ~~bad~~ _ugly_ **good** weird but necessary. :nod: hehe
 
 Yada yada yada
