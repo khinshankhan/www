@@ -1,46 +1,43 @@
 import React from "react"
+import { allWritings as pages, type Writing } from "contentlayer/generated"
 
-import { narray } from "lib/utils"
+import { type Computed } from "lib/contentlayer"
 
 import { Link } from "components/ui"
-import { PageSkeletonLayout } from "components/layouts/page-skeleton"
+import { Prose } from "components/layouts"
 
-export default function Page() {
+function Card({ slug, computed }: Writing) {
+  const { frontmatter, excerpt } = computed as Computed
   return (
-    <PageSkeletonLayout title="Writings" subtitle="Rambling and stuff">
-      <Lorem n={20} />
-      <p className="text-sky-400">hello there and lorem ipsum</p>
-      <h1>Heading 1</h1>
-      <h2>Heading 2</h2>
-      <h3>Heading 3</h3>
-      <h4>Heading 4</h4>
-      <h5>Heading 5</h5>
-      <h6>Heading 6</h6>
-      <p className="main-nav">main nav</p>
-      <p>paragraph</p>
-      <h3>
-        <Link className="anchor" href="/">
-          Anchored Link
-        </Link>
-      </h3>
-      This is a link <Link href="https://google.com">Google link</Link> and it goes to google. And
-      this is a fake file <Link href="/hello.pdf">Google file</Link> lol.
-      <Lorem n={5} />
-    </PageSkeletonLayout>
+    <li className="mb-8 flex flex-col flex-col-reverse rounded bg-slate-200 dark:bg-slate-800 md:flex-row md:flex-row md:flex-row">
+      <div className="flex flex-1 flex-col p-4">
+        <h3>
+          <Link isInternal isFile={false} href={`/${slug}`} className="link-overlay">
+            {frontmatter.title}
+          </Link>
+        </h3>
+        <h4 className="text-theme-muted">{frontmatter.subtitle}</h4>
+        <div dangerouslySetInnerHTML={{ __html: excerpt }} />
+      </div>
+      <div>img</div>
+    </li>
   )
 }
 
-function Lorem({ n = 50 }) {
+function List({ pages }: { pages: Writing[] }) {
   return (
-    <>
-      {narray(n).map((v) => {
-        return (
-          <p key={v}>
-            Hello there, this is some random gibberish. It is not meant to have any meaning, it
-            sounds like gibberish because it is gibberish.
-          </p>
-        )
-      })}
-    </>
+    <ul>
+      {pages.map((page) => (
+        <Card key={page._id} {...page} />
+      ))}
+    </ul>
+  )
+}
+
+export default function Page() {
+  return (
+    <Prose title="Writings" subtitle="Rambling and stuff">
+      <List pages={pages} />
+    </Prose>
   )
 }
