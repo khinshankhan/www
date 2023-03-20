@@ -49,5 +49,13 @@ export default function PageView({ page }: InferGetStaticPropsType<typeof getSta
   const MDXContent = useMDXComponent(page?.body?.code || "")
 
   const computed = page.computed as Computed
-  return <Prose {...computed}>{MDXContent && <MDXContent components={MdxComponents} />}</Prose>
+  return (
+    <Prose
+      title={computed.frontmatter.title}
+      subtitle={computed.frontmatter.subtitle}
+      {...computed}
+    >
+      {MDXContent && <MDXContent components={MdxComponents} />}
+    </Prose>
+  )
 }

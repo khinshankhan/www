@@ -4,7 +4,7 @@ import { useLiveReload, useMDXComponent } from "next-contentlayer/hooks"
 
 import type { Computed } from "lib/contentlayer"
 
-import { Prose } from "components/layouts"
+import { Article } from "components/layouts"
 import { MdxComponents } from "components/mdx"
 
 const prefix = `writings`
@@ -54,5 +54,5 @@ export default function PageView({ page }: InferGetStaticPropsType<typeof getSta
   const MDXContent = useMDXComponent(page?.body?.code || "")
 
   const computed = page.computed as Computed
-  return <Prose {...computed}>{MDXContent && <MDXContent components={MdxComponents} />}</Prose>
+  return <Article {...computed}>{MDXContent && <MDXContent components={MdxComponents} />}</Article>
 }

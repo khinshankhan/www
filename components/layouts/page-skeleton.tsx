@@ -2,7 +2,7 @@ import React, { type ReactNode } from "react"
 
 import { WithSidebar, type WithSidebarProps } from "./sidebar"
 
-interface PageSkeletonLayoutProps extends WithSidebarProps {
+export interface PageSkeletonLayoutProps extends WithSidebarProps {
   title: string
   subtitle: string | ReactNode
   children: ReactNode

@@ -1,24 +1,13 @@
-import React, { type ReactNode } from "react"
+import React from "react"
 
-import type { Computed } from "lib/contentlayer"
+import { PageSkeletonLayout as Layout, type PageSkeletonLayoutProps } from "../page-skeleton"
 
-import { PageSkeletonLayout as Layout } from "../page-skeleton"
-import { Toc } from "../toc"
+// TODO: add seo
+interface ProseProps extends PageSkeletonLayoutProps {}
 
-interface ProseProps extends Computed {
-  children: ReactNode
-}
-
-export const Prose = ({ frontmatter, headings, children }: ProseProps) => {
-  const { title, subtitle } = frontmatter
-
+export const Prose = ({ children, ...props }: ProseProps) => {
   return (
-    <Layout
-      title={title}
-      subtitle={subtitle}
-      sidebar={<Toc headings={headings} />}
-      direction="right"
-    >
+    <Layout {...props}>
       <div id="content">{children}</div>
     </Layout>
   )
