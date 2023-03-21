@@ -51,6 +51,7 @@
     "@testing-library/react": "^14.0.0",
     "@types/hast": "^2.3.4",
     "@types/jest": "^29.4.0",
+    "@types/lodash": "^4.14.191",
     "@types/mdast": "^3.0.10",
     "@types/mdx": "^2.0.3",
     "@types/node": "^18.14.0",

@@ -71,11 +71,7 @@ export default function Page() {
 
 // NOTE: this will be updated to filter based on search params later
 function getRelevantPages(pages: Writing[]) {
-  let relevantPages: Writing[] = orderBy(
-    pages,
-    ["tended", "planted", "title"],
-    ["desc", "desc", "desc"]
-  )
+  let relevantPages = orderBy(pages, ["tended", "planted", "title"], ["desc", "desc", "desc"])
 
   return relevantPages
 }
