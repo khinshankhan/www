@@ -181,7 +181,8 @@
 
   /*help hide some weird effects, apparently all is bad so declare each property explicitly */
   html * {
-    transition: background-color 0.4s ease-in-out, height 0.4s ease-in-out;
+    transition: background-color 0.4s ease-in-out, height 0.4s ease-in-out,
+      max-height 0.4s ease-in-out, max-width 0.4s ease-in-out;
   }
   textarea {
     transition: background-color 0.5s, height 0s;
@@ -333,6 +334,11 @@
     & p + :is(ol, ul) {
       margin-top: -20px;
     }
+  }
+
+  /* credits to xetera */
+  .clip-list-image {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
   }
 }
 

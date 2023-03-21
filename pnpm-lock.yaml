@@ -7,6 +7,7 @@ specifiers:
   '@radix-ui/react-form': ^0.0.2
   '@radix-ui/react-portal': ^1.0.2
   '@radix-ui/react-tooltip': ^1.0.5
+  '@tailwindcss/line-clamp': ^0.4.2
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^14.0.0
   '@types/hast': ^2.3.4
@@ -85,6 +86,7 @@ dependencies:
   unist-util-visit: 4.1.2
 
 devDependencies:
+  '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.7
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
   '@types/hast': 2.3.4
@@ -1953,6 +1955,14 @@ packages:
     dependencies:
       tslib: 2.5.0
     dev: false
+
+  /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.2.7:
+    resolution: {integrity: sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
+    dependencies:
+      tailwindcss: 3.2.7_postcss@8.4.21
+    dev: true
 
   /@testing-library/dom/9.0.0:
     resolution: {integrity: sha512-+/TLgKNFsYUshOY/zXsQOk+PlFQK+eyJ9T13IDVNJEi+M+Un7xlJK+FZKkbGSnf0+7E1G6PlDhkSYQ/GFiruBQ==}
