@@ -25,7 +25,7 @@ function ScrollToTopButton({ show = false }: { show: boolean }) {
     <m.span
       className="fixed bottom-5 right-5 md:bottom-6 md:right-6 xl:bottom-7 xl:right-7"
       variants={ScrollToTopContainerVariants}
-      initial="hide"
+      initial="hidden"
       animate={show ? "visible" : "hidden"}
       transition={{ type: "bounce" }}
     >

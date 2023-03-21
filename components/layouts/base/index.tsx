@@ -12,7 +12,7 @@ interface BaseLayoutProps {
 export function BaseLayout({ isHero, children }: BaseLayoutProps) {
   return (
     <Fragment>
-      <div className={"relative z-base flex min-h-[87vh] flex-col xs:min-h-[96vh]"}>
+      <div className={"z-base relative flex min-h-[87vh] flex-col xs:min-h-[96vh]"}>
         <Header />
         {children}
       </div>
