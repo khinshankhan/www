@@ -153,6 +153,9 @@
 
     --accent: var(--violet11);
     --muted: var(--bluegray6);
+    --stark: 0, 0, 0;
+    --ghost-bg: rgba(var(--stark), 0.12);
+    --card-bg: var(--mauve3);
   }
 
   .dark {
@@ -162,9 +165,12 @@
 
     --bg: var(--bluegray12);
     --content-bg: var(--bluegray9);
+    --stark: 255, 255, 255;
+    --ghost-bg: rgba(var(--stark), 0.12);
+    --card-bg: var(--bluegray8);
   }
 
-  /* global styles
+  /* global styles0, 0, 0
      - font sizes
        vaguely https://type-scale.com/ -- 1.250 Major Third Type Scale, base 16 px
  */
@@ -299,6 +305,41 @@
     }
     &.anchor:hover:after {
       background-color: currentColor;
+    }
+  }
+
+  /* based off https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/layout/src/link-box.tsx */
+  .link-overlay {
+    position: static;
+    &:after {
+      content: "";
+      cursor: "inherit";
+      transition: transform 0.3s ease;
+      @apply absolute left-0 top-0 z-0 block h-full w-full;
+    }
+    transition: text-decoration-color 0.75s ease, text-underline-offset 0.5s ease;
+    text-decoration-color: transparent;
+    &:is(:hover, :focus, :focus-visible) {
+      text-underline-offset: 0.2em;
+      @apply underline decoration-link-active;
+    }
+  }
+
+  .link-box {
+    @apply relative isolate;
+    /* elevate elements that are interactable also give special linkbox-elevate class privledge as a catchall */
+    & :is(a[href]:not(.link-overlay), button, .linkbox-elevate) {
+      @apply relative z-1;
+    }
+  }
+
+  .card-link {
+    transition: background-color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease,
+      transform 0.5s linear;
+    @apply border border-solid border-link-base;
+    &:is(:hover, :focus, :focus-visible) {
+      @apply -translate-y-3.5 border-link-active bg-theme-ghostBg;
+      box-shadow: rgb(var(--stark), 20%) 0px 0px 15px, rgb(var(--stark), 15%) 0px 0px 3px 1px;
     }
   }
 

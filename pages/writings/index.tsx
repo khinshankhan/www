@@ -21,17 +21,15 @@ function Card({ slug, computed, _id }: Writing) {
   // TODO: remove after demo
   const imgsrc = _id === "writings/first/index.md" ? src0 : src1
 
-  // TODO: change bg color and shadowing
-  // TODO: add in linkbox linkoverlay logic
   return (
-    <li className="link-box card-link mx-auto mb-8 flex w-full flex-col flex-col-reverse overflow-hidden rounded bg-theme-bg shadow-md md:flex-row">
+    <li className="link-box card-link mx-auto mb-8 flex w-full flex-col flex-col-reverse overflow-hidden rounded bg-theme-cardBg md:flex-row">
       <div className="flex-1 p-4 md:p-8">
         <h3>
           <Link isInternal isFile={false} href={`/${slug}`} className="link-overlay">
             {frontmatter.title}
           </Link>
         </h3>
-        <h4 className="text-theme-muted">
+        <h4 className="text-theme-accent">
           {MDXSubtitle && <MDXSubtitle components={MdxComponents} />}
         </h4>
         <div className="line-clamp-1 xl:line-clamp-4 2xl:line-clamp-5 xmd:line-clamp-2 slg:line-clamp-3">
@@ -39,9 +37,10 @@ function Card({ slug, computed, _id }: Writing) {
         </div>
       </div>
 
+      {/* honestly this is magic at this point, result of trial and error while testing responsive sizes */}
       <div className="round -z-1 max-w-full md:max-w-[375px] lg:max-w-[450px] 2xl:max-w-[500px] xmd:max-w-[400px] xmd:max-w-[425px] slg:max-w-[475px]">
         <img
-          className="md:clip-list-image aspect-video h-full w-full object-cover isMobile:max-h-[100px] xs:isMobile:max-h-[150px] sm:isMobile:max-h-[200px]"
+          className="md:clip-list-image aspect-video h-full w-full object-cover object-center isMobile:max-h-[100px] xs:isMobile:max-h-[150px] sm:isMobile:max-h-[200px]"
           src={imgsrc}
           alt="Testing 123"
         />

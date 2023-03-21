@@ -105,6 +105,9 @@ module.exports = {
           placeholder: hsla("placeholder"),
           accent: hsla("accent"),
           muted: hsla("muted"),
+          stark: hsla("stark"),
+          ghostBg: "var(--ghost-bg)", // has specific alpha value
+          cardBg: hsla("card-bg"),
         },
 
         logo: {
