@@ -27,6 +27,7 @@
     "esbuild": "^0.17.12",
     "framer-motion": "^10.0.0",
     "github-slugger": "^2.0.0",
+    "lodash": "^4.17.21",
     "mdast-util-to-string": "^3.1.1",
     "mdx-bundler": "^9.2.1",
     "next": "^13.1.6",

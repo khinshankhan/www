@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { allWritings as pages, type Writing } from "contentlayer/generated"
+import orderBy from "lodash/orderBy"
 import { useMDXComponent } from "next-contentlayer/hooks"
 
 import { type Computed } from "lib/contentlayer"
@@ -49,20 +50,32 @@ function Card({ slug, computed, _id }: Writing) {
   )
 }
 
-function List({ pages }: { pages: Writing[] }) {
+export default function Page() {
+  // TODO: move initial getRelevantPages call to static props?
+  const [relevantPages, setRelevantPages] = useState(getRelevantPages(pages))
+
+  useEffect(() => {
+    setRelevantPages(getRelevantPages(pages))
+  }, [])
+
   return (
-    <ul>
-      {pages.map((page) => (
-        <Card key={page._id} {...page} />
-      ))}
-    </ul>
+    <Prose title="Writings" subtitle="Rambling and stuff">
+      <ul>
+        {relevantPages.map((page) => (
+          <Card key={page._id} {...page} />
+        ))}
+      </ul>
+    </Prose>
   )
 }
 
-export default function Page() {
-  return (
-    <Prose title="Writings" subtitle="Rambling and stuff">
-      <List pages={pages} />
-    </Prose>
+// NOTE: this will be updated to filter based on search params later
+function getRelevantPages(pages: Writing[]) {
+  let relevantPages: Writing[] = orderBy(
+    pages,
+    ["tended", "planted", "title"],
+    ["desc", "desc", "desc"]
   )
+
+  return relevantPages
 }
