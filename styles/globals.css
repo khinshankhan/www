@@ -368,6 +368,20 @@
     }
   }
 
+  .icon-button {
+    /* based off https://codepen.io/finnhvman/pen/jLXKJw */
+    transition: background 1s;
+    &:hover {
+      background: var(--ghost-bg) radial-gradient(circle, transparent 1%, var(--ghost-bg) 1%)
+        center/15000%;
+    }
+    &:active {
+      background-color: var(--ghost-bg);
+      background-size: 100%;
+      transition: background 0s;
+    }
+  }
+
   :is(#article, #content) {
     & > * {
       margin-bottom: 20px;

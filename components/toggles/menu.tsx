@@ -2,6 +2,7 @@
 
 import React, { forwardRef, type HTMLProps } from "react"
 
+import { Icon, IconButton } from "components/ui"
 import { Hamburger, XMark } from "components/icons"
 
 type ButtonProps = HTMLProps<HTMLButtonElement>
@@ -21,14 +22,18 @@ export const MenuToggle = forwardRef<HTMLButtonElement, MenuToggleProps>(functio
   const action = isOpen ? "Close" : "Open"
 
   return (
-    <button
+    <IconButton
       className={className}
       aria-label={`${action} navigation menu.`}
       type={buttonType}
+      // this should work but ts is being annoying
+      // @ts-ignore
       ref={ref}
       {...rest}
     >
-      <MenuIcon />
-    </button>
+      <Icon>
+        <MenuIcon />
+      </Icon>
+    </IconButton>
   )
 })

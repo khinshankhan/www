@@ -46,15 +46,16 @@ function Menu({ className = "" }: { className?: string }) {
 }
 
 const settings = [
-  { id: 0, node: <ThemeToggle className="inline align-top" /> },
-  // { id: 1, node: <ThemeToggle className="inline align-top" /> },
+  // 4 - 1.5 since the buttons have a padding of 1.5
+  { id: 0, node: <ThemeToggle className="mt-2.5 mb-2.5 inline align-top" /> },
+  // { id: 1, node: <ThemeToggle className="mt-2.5 mb-2.5 inline align-top" /> },
 ]
 function Settings({ className = "" }: { className?: string }) {
   return (
-    <ul className={cx("flex flex-row space-x-4", className)}>
+    <ul className={cx("flex flex-row space-x-1", className)}>
       {settings.map(({ id, node }) => {
         return (
-          <li key={id} className={cx("mt-4 mb-4 inline-block text-center")}>
+          <li key={id} className={cx("inline-block text-center")}>
             <span>{node}</span>
           </li>
         )
@@ -113,7 +114,7 @@ function Navbar({ position }: { position: keyof typeof HeadroomPositions }) {
                 {/* rhs on mobile view */}
                 <div className="hide-desktop main-nav flex flex-row">
                   <CollapsibleTrigger asChild>
-                    <MenuToggle isOpen={open} className="m-4 inline-block text-center" />
+                    <MenuToggle isOpen={open} className="m-2.5 inline-block text-center" />
                   </CollapsibleTrigger>
                 </div>
               </nav>
