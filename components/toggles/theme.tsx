@@ -5,7 +5,6 @@ import { useTheme } from "next-themes"
 
 import { useMounted } from "hooks"
 
-import { IconButton } from "components/ui"
 import { Moon, Sun } from "components/icons"
 
 export function ThemeToggle({ className = "" }: { className?: string }) {
@@ -21,12 +20,12 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   const toggleTheme = () => setTheme(oppositeTheme)
 
   return (
-    <IconButton
-      aria-label={`Switch to ${oppositeTheme} mode`}
+    <button
       onClick={toggleTheme}
+      aria-label={`Switch to ${oppositeTheme} mode`}
       className={className}
     >
       <ColorIcon />
-    </IconButton>
+    </button>
   )
 }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
 
 import { screens, type Screens } from "lib/theme"
 
@@ -66,50 +66,9 @@ export const useDimensions = () => {
   useEffect(() => {
     if (typeof window === "undefined") return undefined
 
-    window.addEventListener(`resize`, windowResizeHandler)
-    return () => window.removeEventListener(`resize`, windowResizeHandler)
+    window.addEventListener("resize", windowResizeHandler)
+    return () => window.removeEventListener("resize", windowResizeHandler)
   }, [])
 
   return { innerWidth, innerHeight }
-}
-
-export function useHeadroom(options = { upTolerance: 0, downTolerance: 0 }) {
-  const [position, setPosition] = useState<"PINNED" | "UNPINNED" | "DEFAULT">("DEFAULT")
-  const startY = useRef<number>(0)
-
-  function getScrollY() {
-    if (window.pageYOffset) {
-      return window.pageYOffset
-    }
-
-    return (document.documentElement || document.body.parentNode || document.body).scrollTop
-  }
-
-  const handleScroll = () => {
-    const newY = getScrollY()
-    const difference = newY - startY.current
-
-    if (difference > 0 && difference > options.upTolerance) {
-      startY.current = newY
-      setPosition(() => "UNPINNED")
-    }
-
-    if (difference < 0 && difference < options.upTolerance) {
-      startY.current = newY
-      setPosition(() => (newY <= options.downTolerance ? "DEFAULT" : "PINNED"))
-    }
-  }
-
-  const onScroll = useCallback(() => {
-    requestAnimationFrame(() => handleScroll())
-  }, [handleScroll])
-
-  useIsomorphicEffect(() => {
-    if (isServer) return undefined
-
-    window.addEventListener("scroll", onScroll)
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [isServer])
-
-  return { position }
 }

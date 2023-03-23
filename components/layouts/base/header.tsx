@@ -1,11 +1,11 @@
 "use client"
 
-import React, { useEffect, useState, type Dispatch, type SetStateAction } from "react"
+import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import * as Portal from "@radix-ui/react-portal"
 
 import { cx } from "lib/utils"
-import { useBreakpoint, useHeadroom, useMounted } from "hooks"
+import { HeadroomPositions, useBreakpoint, useHeadroom, useMounted } from "hooks"
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, Link } from "components/ui"
 import { HomeToggle, MenuToggle, ThemeToggle } from "components/toggles"
@@ -18,68 +18,58 @@ const links = [
   { title: "Projects", to: "/projects" },
   { title: "Contact", to: "/contact" },
 ]
-function Links() {
+function Menu({ className = "" }: { className?: string }) {
   const { pathname, query, isReady } = useRouter()
   const link = isReady ? (query as { slug: string[] }).slug ?? pathname : pathname
   const onLink = Array.isArray(link) ? `/${link.join("/")}` : link
 
   return (
-    <ul className="flex flex-col isDesktop:flex-row">
-      {links.map(({ title, to }) => {
-        return (
-          <li key={to} className="m-4 inline-block text-center">
-            <Link
-              className={cx("main-nav", onLink === to && "on")}
-              href={to}
-              isInternal
-              aria-label={`Navigate to ${title}.`}
-            >
-              {title}
-            </Link>
-          </li>
-        )
-      })}
-    </ul>
-  )
-}
-
-const settings = [
-  { id: 0, node: <ThemeToggle className="mx-0 my-4 px-0 py-[3px] lg:py-[7.75px]" /> },
-  // { id: 1, node: "hello" },
-  // for testing multiple icons
-  // { id: 1, node: <ThemeToggle /> },
-]
-function Settings({ className = "" }: { className?: string }) {
-  return (
-    <ul className={cx("flex flex-row items-center isDesktop:mr-4 isDesktop:items-end", className)}>
-      {settings.map(({ id, node }) => {
-        return (
-          <li key={id} className="mx-1 my-0 inline-block text-center">
-            {node}
-          </li>
-        )
-      })}
-    </ul>
-  )
-}
-
-function Menu({ className = "" }: { className?: string }) {
-  return (
-    <menu
-      className={cx(
-        "flex flex-col items-center justify-center isDesktop:flex-row isDesktop:items-end isDesktop:justify-between",
-        className
-      )}
-    >
-      <Links />
-      <Settings className="hide-mobile" />
+    <menu className={cx("flex flex-col md:flex-row", className)}>
+      <ul className="flex flex-col md:flex-row">
+        {links.map(({ title, to }) => {
+          return (
+            <li key={to} className="m-4 inline-block text-center">
+              <Link
+                className={cx("main-nav", onLink === to && "on")}
+                href={to}
+                isInternal
+                aria-label={`Navigate to ${title}.`}
+              >
+                {title}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
     </menu>
   )
 }
 
-function Navbar({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetStateAction<boolean>> }) {
+const settings = [
+  { id: 0, node: <ThemeToggle className="inline align-top" /> },
+  // { id: 1, node: <ThemeToggle className="inline align-top" /> },
+]
+function Settings({ className = "" }: { className?: string }) {
+  return (
+    <ul className={cx("flex flex-row space-x-4", className)}>
+      {settings.map(({ id, node }) => {
+        return (
+          <li key={id} className={cx("mt-4 mb-4 inline-block text-center")}>
+            <span>{node}</span>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+function Navbar({ position }: { position: keyof typeof HeadroomPositions }) {
+  const showing = position !== HeadroomPositions.UNPINNED
+
   const isMobile = useBreakpoint("isMobile")
   const router = useRouter()
+
+  const [open, setOpen] = useState(() => false)
 
   useEffect(() => {
     if (!isMobile) {
@@ -88,6 +78,7 @@ function Navbar({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetStateAc
   }, [isMobile, setOpen])
 
   const closeMenu = () => setOpen(() => false)
+
   useEffect(() => {
     closeMenu()
 
@@ -95,71 +86,74 @@ function Navbar({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetStateAc
     return () => {
       router.events.off("routeChangeStart", closeMenu)
     }
-  }, [router.events, closeMenu])
+  }, [router.events])
 
   return (
-    <Collapsible className="w-full" open={open} onOpenChange={setOpen}>
-      <header role="navigation" className="min-h-[55px]">
-        <div className="w-full bg-theme-bg/[.85] backdrop-blur-sm">
-          <nav className="page-container flex w-full flex-row items-center justify-between pt-4 pb-2.5">
-            <HomeToggle />
-            <Menu className="hide-mobile" />
-            <div className={"hide-desktop flex flex-row"}>
-              <Settings className="hide-desktop" />
-              <CollapsibleTrigger asChild>
-                <MenuToggle isOpen={open} />
-              </CollapsibleTrigger>
-            </div>
-          </nav>
-        </div>
-        <CollapsibleContent className="motion-safe:animated-collapsible bg-theme-bg/[.85] backdrop-blur-sm">
-          <Menu className="hide-desktop" />
-          <div className="hide-desktop flex flex-row justify-center">
-            <CollapsibleTrigger asChild>
-              <MenuToggle isOpen={true} />
-            </CollapsibleTrigger>
-          </div>
-          <div
-            role="presentation"
-            className="hide-desktop page-container mb-6 h-0.5 w-[70%] bg-theme-placeholder"
-          />
-        </CollapsibleContent>
-      </header>
-    </Collapsible>
-  )
-}
+    <div className="h-[88px] lg:h-[97.5px]">
+      <div
+        className={cx(
+          "ease-in-out top-0 left-0 right-0 z-banner transition duration-200",
+          position === HeadroomPositions.DEFAULT ? "relative" : "fixed",
+          showing || open ? "translate-y-0" : "-translate-y-full"
+        )}
+      >
+        <Collapsible className="w-full" open={open} onOpenChange={setOpen}>
+          <header role="navigation" className="min-h-[55px]">
+            <div className="w-full bg-theme-bg/[.85] backdrop-blur-sm">
+              <nav className="page-container flex w-full flex-row items-center justify-between pt-4 pb-2.5">
+                {/* lhs on desktop view */}
+                <HomeToggle />
 
-const PositionMap = {
-  PINNED: "PINNED",
-  UNPINNED: "UNPINNED",
-  DEFAULT: "DEFAULT",
+                {/* rhs on desktop view */}
+                <div className="hide-mobile main-nav flex flex-row">
+                  <Menu />
+                  <Settings />
+                </div>
+
+                {/* rhs on mobile view */}
+                <div className="hide-desktop main-nav flex flex-row">
+                  <CollapsibleTrigger asChild>
+                    <MenuToggle isOpen={open} className="m-4 inline-block text-center" />
+                  </CollapsibleTrigger>
+                </div>
+              </nav>
+            </div>
+
+            {/* mobile dropdown content */}
+            <CollapsibleContent className="motion-safe:animated-collapsible hide-desktop bg-theme-bg/[.85] backdrop-blur-sm">
+              <Menu />
+              <Settings className="justify-center" />
+
+              {/* playing around the idea of users being able to easily close menu by keyboard? */}
+              <div className="hide-desktop flex flex-row justify-center">
+                <CollapsibleTrigger asChild>
+                  <MenuToggle isOpen={true} />
+                </CollapsibleTrigger>
+              </div>
+
+              <div
+                role="presentation"
+                className="hide-desktop page-container mt-4 mb-6 h-0.5 w-[70%] bg-theme-placeholder"
+              />
+            </CollapsibleContent>
+          </header>
+        </Collapsible>
+      </div>
+    </div>
+  )
 }
 
 function Header() {
   const mounted = useMounted()
-
   const { position } = useHeadroom()
-  const showing = position !== PositionMap.UNPINNED
-
-  const [open, setOpen] = useState(() => false)
 
   if (!mounted) return null
   return (
     <>
-      <div className="h-[88px] lg:h-[97.5px]">
-        <div
-          className={cx(
-            "ease-in-out top-0 left-0 right-0 z-banner transition duration-200",
-            position === PositionMap.DEFAULT ? "relative" : "fixed",
-            showing || open ? "translate-y-0" : "-translate-y-full"
-          )}
-        >
-          <Navbar open={open} setOpen={setOpen}></Navbar>
-        </div>
-      </div>
+      <Navbar position={position}></Navbar>
 
       <Portal.Root>
-        <ScrollToTop show={position !== PositionMap.DEFAULT} />
+        <ScrollToTop show={position !== HeadroomPositions.DEFAULT} />
       </Portal.Root>
     </>
   )
