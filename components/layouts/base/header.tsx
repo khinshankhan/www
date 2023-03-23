@@ -1,13 +1,11 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, type Dispatch, type SetStateAction } from "react"
 import { useRouter } from "next/router"
 import * as Portal from "@radix-ui/react-portal"
-import Headroom from "react-headroom"
 
-import { zIndex } from "lib/theme"
 import { cx } from "lib/utils"
-import { useBreakpoint, useMounted } from "hooks"
+import { useBreakpoint, useHeadroom, useMounted } from "hooks"
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, Link } from "components/ui"
 import { HomeToggle, MenuToggle, ThemeToggle } from "components/toggles"
@@ -79,18 +77,17 @@ function Menu({ className = "" }: { className?: string }) {
   )
 }
 
-function Navbar({ showing }: { showing: boolean }) {
-  const [open, setOpen] = useState(false)
+function Navbar({ open, setOpen }: { open: boolean; setOpen: Dispatch<SetStateAction<boolean>> }) {
   const isMobile = useBreakpoint("isMobile")
   const router = useRouter()
 
   useEffect(() => {
-    if (!showing || !isMobile) {
-      setOpen(false)
+    if (!isMobile) {
+      setOpen(() => false)
     }
-  }, [showing, isMobile])
+  }, [isMobile, setOpen])
 
-  const closeMenu = () => setOpen(false)
+  const closeMenu = () => setOpen(() => false)
   useEffect(() => {
     closeMenu()
 
@@ -98,30 +95,41 @@ function Navbar({ showing }: { showing: boolean }) {
     return () => {
       router.events.off("routeChangeStart", closeMenu)
     }
-  }, [router.events])
+  }, [router.events, closeMenu])
 
   return (
     <Collapsible className="w-full" open={open} onOpenChange={setOpen}>
-      <header role="navigation" className="nav-bg min-h-[55px]">
-        <nav className="page-container flex w-full flex-row items-center justify-between pt-4 pb-2.5">
-          <HomeToggle />
-          <Menu className="hide-mobile" />
-          <div className={"hide-desktop flex flex-row"}>
-            <Settings className="hide-desktop" />
+      <header role="navigation" className="min-h-[55px]">
+        <div className="w-full bg-theme-bg/[.85] backdrop-blur-sm">
+          <nav className="page-container flex w-full flex-row items-center justify-between pt-4 pb-2.5">
+            <HomeToggle />
+            <Menu className="hide-mobile" />
+            <div className={"hide-desktop flex flex-row"}>
+              <Settings className="hide-desktop" />
+              <CollapsibleTrigger asChild>
+                <MenuToggle isOpen={open} />
+              </CollapsibleTrigger>
+            </div>
+          </nav>
+        </div>
+        <CollapsibleContent className="motion-safe:animated-collapsible bg-theme-bg/[.85] backdrop-blur-sm">
+          <Menu className="hide-desktop" />
+          <div className="hide-desktop flex flex-row justify-center">
             <CollapsibleTrigger asChild>
-              <MenuToggle isOpen={open} />
+              <MenuToggle isOpen={true} />
             </CollapsibleTrigger>
           </div>
-        </nav>
-        <CollapsibleContent className="motion-safe:animated-collapsible">
-          <Menu className="hide-desktop" />
+          <div
+            role="presentation"
+            className="hide-desktop page-container mb-6 h-0.5 w-[70%] bg-theme-placeholder"
+          />
         </CollapsibleContent>
       </header>
     </Collapsible>
   )
 }
 
-const PosMap = {
+const PositionMap = {
   PINNED: "PINNED",
   UNPINNED: "UNPINNED",
   DEFAULT: "DEFAULT",
@@ -130,54 +138,28 @@ const PosMap = {
 function Header() {
   const mounted = useMounted()
 
-  const [, setCount] = useState(0)
-  const forceRecalculateSize = () => {
-    // 'frames' for a smoother transition
-    setTimeout(() => setCount((prev) => prev + 1), 1)
-    // the menu animates for 300 ms
-    setTimeout(() => setCount((prev) => prev + 1), 301)
-  }
+  const { position } = useHeadroom()
+  const showing = position !== PositionMap.UNPINNED
 
-  const router = useRouter()
-  useEffect(() => {
-    forceRecalculateSize()
-
-    router.events.on("routeChangeStart", forceRecalculateSize)
-    return () => {
-      router.events.off("routeChangeStart", forceRecalculateSize)
-    }
-  }, [router.events])
-
-  const isXss = useBreakpoint("xss")
-  const isXs = useBreakpoint("xs")
-  const isSm = useBreakpoint("sm")
-  const isMd = useBreakpoint("md")
-  const isLg = useBreakpoint("lg")
-  const isXl = useBreakpoint("xl")
-  const is2xl = useBreakpoint("2xl")
-
-  useEffect(() => forceRecalculateSize(), [isXss, isXs, isSm, isMd, isLg, isXl, is2xl])
-
-  const [pos, setPos] = useState(PosMap.DEFAULT)
-  const showing = pos !== PosMap.UNPINNED
+  const [open, setOpen] = useState(() => false)
 
   if (!mounted) return null
   return (
     <>
-      <Headroom
-        style={{
-          zIndex: zIndex.banner,
-          transition: "all 10ms ease-in-out",
-        }}
-        onPin={() => setPos(PosMap.PINNED)}
-        onUnpin={() => setPos(PosMap.UNPINNED)}
-        onUnfix={() => setPos(PosMap.DEFAULT)}
-      >
-        <Navbar showing={showing} />
-      </Headroom>
+      <div className="h-[88px] lg:h-[97.5px]">
+        <div
+          className={cx(
+            "ease-in-out top-0 left-0 right-0 z-banner transition duration-200",
+            position === PositionMap.DEFAULT ? "relative" : "fixed",
+            showing || open ? "translate-y-0" : "-translate-y-full"
+          )}
+        >
+          <Navbar open={open} setOpen={setOpen}></Navbar>
+        </div>
+      </div>
 
       <Portal.Root>
-        <ScrollToTop show={pos !== PosMap.DEFAULT} />
+        <ScrollToTop show={position !== PositionMap.DEFAULT} />
       </Portal.Root>
     </>
   )
