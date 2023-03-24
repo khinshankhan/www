@@ -17,9 +17,7 @@ const links = [
   { title: "Contact", to: "/contact" },
 ]
 function Menu({ className = "" }: { className?: string }) {
-  const { pathname, query, isReady } = useRouter()
-  const link = isReady ? (query as { slug: string[] }).slug ?? pathname : pathname
-  const onLink = Array.isArray(link) ? `/${link.join("/")}` : link
+  const { asPath } = useRouter()
 
   return (
     <menu className={cx("flex flex-col md:flex-row", className)}>
@@ -28,7 +26,7 @@ function Menu({ className = "" }: { className?: string }) {
           return (
             <li key={to} className="m-4 inline-block text-center">
               <Link
-                className={cx("main-nav", onLink === to && "on")}
+                className={cx("main-nav", asPath === to && "on")}
                 href={to}
                 isInternal
                 aria-label={`Navigate to ${title}.`}
