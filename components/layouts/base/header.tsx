@@ -89,9 +89,9 @@ function Navbar({ position }: { position: keyof typeof HeadroomPositions }) {
     <div className="h-[88px] lg:h-[97.5px]">
       <div
         className={cx(
-          "ease-in-out top-0 left-0 right-0 z-banner transition duration-200",
-          position === HeadroomPositions.DEFAULT ? "relative" : "fixed",
-          showing || open ? "translate-y-0" : "-translate-y-full"
+          "ease-in-out relative top-0 left-0 right-0 z-banner translate-y-0 transition duration-200",
+          position !== HeadroomPositions.DEFAULT && "fixed",
+          !showing && !open && "-translate-y-full"
         )}
       >
         <Collapsible className="w-full" open={open} onOpenChange={setOpen}>
