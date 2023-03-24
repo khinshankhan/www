@@ -1,7 +1,7 @@
 import React from "react"
 import { m, useScroll } from "framer-motion"
 
-import { isBrowser, useMounted } from "hooks"
+import { HeadroomPositions, isBrowser, useHeadroom, useMounted } from "hooks"
 
 import { ArrowUp } from "components/icons"
 
@@ -50,11 +50,12 @@ function ScrollToTopButton({ show = false }: { show: boolean }) {
   )
 }
 
-export function ScrollToTop({ show = false }: { show: boolean }) {
+export function ScrollToTop() {
   const mounted = useMounted()
+  const { position } = useHeadroom()
 
   if (!mounted || !isBrowser) return null
-  return <ScrollToTopButton show={show} />
+  return <ScrollToTopButton show={position !== HeadroomPositions.DEFAULT} />
 }
 
 export default ScrollToTop

@@ -2,14 +2,12 @@
 
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import * as Portal from "@radix-ui/react-portal"
 
 import { cx } from "lib/utils"
-import { HeadroomPositions, useBreakpoint, useHeadroom, useMounted } from "hooks"
+import { HeadroomPositions, useBreakpoint, useHeadroom } from "hooks"
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger, Link } from "components/ui"
 import { HomeToggle, MenuToggle, ThemeToggle } from "components/toggles"
-import ScrollToTop from "./scroll-to-top"
 
 // TODO: move this out to config
 const links = [
@@ -145,19 +143,9 @@ function Navbar({ position }: { position: keyof typeof HeadroomPositions }) {
 }
 
 function Header() {
-  const mounted = useMounted()
   const { position } = useHeadroom()
 
-  if (!mounted) return null
-  return (
-    <>
-      <Navbar position={position}></Navbar>
-
-      <Portal.Root>
-        <ScrollToTop show={position !== HeadroomPositions.DEFAULT} />
-      </Portal.Root>
-    </>
-  )
+  return <Navbar position={position} />
 }
 
 export default Header

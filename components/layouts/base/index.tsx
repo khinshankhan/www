@@ -2,6 +2,7 @@ import React, { Fragment, type ReactNode } from "react"
 
 import Footer from "./footer"
 import Header from "./header"
+import ScrollToTop from "./scroll-to-top"
 
 interface BaseLayoutProps {
   // TODO: utilize isHero to create visual separators between layout
@@ -17,6 +18,8 @@ export function BaseLayout({ isHero, children }: BaseLayoutProps) {
         {children}
       </div>
       <Footer isHero={isHero} />
+
+      <ScrollToTop />
     </Fragment>
   )
 }
