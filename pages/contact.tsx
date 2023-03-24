@@ -48,34 +48,46 @@ export default function Page() {
           alert(JSON.stringify(data))
         }}
       >
-        <Form.Field className="formfield" name="name">
+        <div className="flex w-full flex-col gap-5 md:flex-row">
+          <Form.Field className="formfield w-full" name="name">
+            <FieldInfo>
+              <Form.Label>Your name</Form.Label>
+              <Form.Message match="valueMissing">Please enter your name</Form.Message>
+            </FieldInfo>
+            <Form.Control asChild>
+              <input type="text" required placeholder="shan" />
+            </Form.Control>
+          </Form.Field>
+
+          <Form.Field className="formfield w-full" name="email">
+            <FieldInfo>
+              <Form.Label>Email</Form.Label>
+              <Form.Message match="valueMissing">Please enter your email</Form.Message>
+              <Form.Message match="typeMismatch">Please provide a valid email</Form.Message>
+            </FieldInfo>
+            <Form.Control asChild>
+              <input type="email" required placeholder="shan@uptogood.dev" />
+            </Form.Control>
+          </Form.Field>
+        </div>
+
+        <Form.Field className="formfield w-full" name="subject">
           <FieldInfo>
-            <Form.Label>Your name</Form.Label>
-            <Form.Message match="valueMissing">Please enter your name or moniker</Form.Message>
+            <Form.Label>Subject</Form.Label>
+            <Form.Message match="valueMissing">Please enter a subject</Form.Message>
           </FieldInfo>
           <Form.Control asChild>
-            <input type="text" required placeholder="shan" />
+            <input type="text" required placeholder="Objection" />
           </Form.Control>
         </Form.Field>
 
-        <Form.Field className="formfield" name="email">
-          <FieldInfo>
-            <Form.Label>Email</Form.Label>
-            <Form.Message match="valueMissing">Please enter your email</Form.Message>
-            <Form.Message match="typeMismatch">Please provide a valid email</Form.Message>
-          </FieldInfo>
-          <Form.Control asChild>
-            <input type="email" required placeholder="shan@uptogood.dev" />
-          </Form.Control>
-        </Form.Field>
-
-        <Form.Field className="formfield" name="message">
+        <Form.Field className="formfield w-full" name="message">
           <FieldInfo>
             <Form.Label>Message</Form.Label>
             <Form.Message match="valueMissing">Please enter a message</Form.Message>
           </FieldInfo>
           <Form.Control asChild>
-            <textarea className="" required placeholder="I decided to say low. Low :)" />
+            <textarea className="" rows={5} required placeholder="I decided to say low. Low :)" />
           </Form.Control>
         </Form.Field>
 
