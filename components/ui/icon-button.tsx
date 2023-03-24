@@ -16,7 +16,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(functio
   return (
     <button
       className={cx(
-        "icon-button inline-block border-0 bg-transparent bg-center p-1.5 leading-[0] text-logo-fg",
+        "ghost-button inline-block border-0 bg-transparent p-1.5 leading-[0] text-logo-fg",
         isRound ? "rounded-full" : "rounded-md",
         className
       )}

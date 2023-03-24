@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import { cx, scrollToElement } from "lib/utils"
 import { useBreakpoint, useMounted, useScrollSpy } from "hooks"
 
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "components/ui"
+import { Button, Collapsible, CollapsibleContent, CollapsibleTrigger, Icon } from "components/ui"
 import { ChevronDown } from "components/icons"
 
 export function scrollToHeading(event: React.MouseEvent<HTMLButtonElement>) {
@@ -41,12 +41,18 @@ export function Toc({ headings: headingsProp }: TocProps) {
   return (
     <Collapsible className="w-full" open={open} onOpenChange={setOpen}>
       <CollapsibleTrigger asChild>
-        <button className="group w-full" aria-label={`${action} table of contents.`}>
+        <Button
+          aria-label={`${action} table of contents.`}
+          variant="ghost"
+          className="group w-full"
+        >
           <span className="group flex items-center justify-between">
             <span>On this page</span>
-            <ChevronDown className="text-violet10 animated-arrow" aria-hidden />
+            <Icon>
+              <ChevronDown className="text-violet10 animated-arrow" aria-hidden />
+            </Icon>
           </span>
-        </button>
+        </Button>
       </CollapsibleTrigger>
       <CollapsibleContent className="motion-safe:animated-collapsible">
         <ul className="mt-4">

@@ -1,7 +1,7 @@
 import React, { type ReactNode } from "react"
 import * as Form from "@radix-ui/react-form"
 
-import { Link } from "components/ui"
+import { Button, Link } from "components/ui"
 import Emoji from "components/emoji"
 import { PageSkeletonLayout } from "components/layouts/page-skeleton"
 
@@ -81,9 +81,9 @@ export default function Page() {
 
         <div className="mt-2 flex w-full flex-row justify-end">
           <Form.Submit asChild>
-            <button className="bg-violet-9 p-2.5 text-white hover:bg-violet-11 focus:bg-violet-11 dark:bg-violet-8 dark:text-theme-placeholder dark:hover:bg-violet-10 dark:focus:bg-violet-10">
+            <Button className="bg-violet-9 text-white hover:bg-violet-11 focus:bg-violet-11 dark:bg-violet-8 dark:text-theme-placeholder dark:hover:bg-violet-10 dark:focus:bg-violet-10">
               Send message
-            </button>
+            </Button>
           </Form.Submit>
         </div>
       </Form.Root>

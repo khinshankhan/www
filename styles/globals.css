@@ -368,8 +368,9 @@
     }
   }
 
-  .icon-button {
+  .ghost-button {
     /* based off https://codepen.io/finnhvman/pen/jLXKJw */
+    background-position: center;
     transition: background 1s;
     &:hover {
       background: var(--ghost-bg) radial-gradient(circle, transparent 1%, var(--ghost-bg) 1%)

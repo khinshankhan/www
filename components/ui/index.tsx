@@ -1,3 +1,4 @@
+export * from "./button"
 export * from "./collapsible"
 export * from "./icon"
 export * from "./icon-button"
