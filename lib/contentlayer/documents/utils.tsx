@@ -9,8 +9,13 @@ import { remarkSetExcerpt, remarkSimpleEmoji } from "../plugins"
 interface IFieldsProps {
   subtitle: string
   status?: "draft" | "published"
+  toc?: boolean
 }
-export const getFields = ({ subtitle, status = "published" }: IFieldsProps): FieldDefs => ({
+export const getFields = ({
+  subtitle,
+  status = "published",
+  toc = true,
+}: IFieldsProps): FieldDefs => ({
   title: {
     type: "string",
     required: true,
@@ -49,6 +54,11 @@ export const getFields = ({ subtitle, status = "published" }: IFieldsProps): Fie
     of: {
       type: "string",
     },
+  },
+
+  toc: {
+    type: "boolean",
+    default: toc,
   },
 })
 

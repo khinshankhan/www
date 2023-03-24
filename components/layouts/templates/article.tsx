@@ -6,15 +6,16 @@ import { Toc } from "../toc"
 import { Prose as Layout, type ProseProps } from "./prose"
 
 interface ArticleProps extends ProseProps, Computed {
+  toc?: boolean
   children: ReactNode
 }
 
-export const Article = ({ title, subtitle, headings, children }: ArticleProps) => {
+export const Article = ({ title, subtitle, toc = true, headings, children }: ArticleProps) => {
   return (
     <Layout
       title={title}
       subtitle={subtitle}
-      sidebar={<Toc headings={headings} />}
+      sidebar={toc && <Toc headings={headings} />}
       direction="right"
     >
       {children}
