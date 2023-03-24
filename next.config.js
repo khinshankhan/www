@@ -6,7 +6,6 @@ const { withContentlayer } = require("next-contentlayer")
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: "export",
 }
 
 const compose = (initial, fns) => fns.reduce((acc, fn) => fn(acc), initial)

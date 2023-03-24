@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^3.7.1",
-    "@next/font": "^13.2.4",
     "@radix-ui/react-collapsible": "^1.0.2",
     "@radix-ui/react-form": "^0.0.2",
     "@radix-ui/react-portal": "^1.0.2",

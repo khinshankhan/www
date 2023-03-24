@@ -3,7 +3,7 @@ import Head from "next/head"
 
 import { ThemeProvider, TooltipProvider } from "components/providers"
 import "styles/globals.css"
-import { Montserrat, Open_Sans, Source_Code_Pro } from "@next/font/google"
+import { Montserrat, Open_Sans, Source_Code_Pro } from "next/font/google"
 import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion"
 
 import { cx } from "lib/utils"
