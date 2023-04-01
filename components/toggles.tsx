@@ -2,11 +2,7 @@
 
 import React from "react"
 import { useTheme } from "next-themes"
-
 import { useMounted } from "hooks"
-
-import { Icon, IconButton } from "components/ui"
-import { Moon, Sun } from "components/icons"
 
 export function ThemeToggle({ className = "" }: { className?: string }) {
   const mounted = useMounted()
@@ -16,19 +12,12 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
 
   const isLight = resolvedTheme === `light`
   const oppositeTheme = isLight ? `dark` : `light`
-  const ColorIcon = isLight ? Moon : Sun
+  const text = `Switch to ${oppositeTheme} mode`
 
   const toggleTheme = () => setTheme(oppositeTheme)
-
   return (
-    <IconButton
-      onClick={toggleTheme}
-      aria-label={`Switch to ${oppositeTheme} mode`}
-      className={className}
-    >
-      <Icon>
-        <ColorIcon />
-      </Icon>
-    </IconButton>
+    <button onClick={toggleTheme} aria-label={text} className={className}>
+      {text}
+    </button>
   )
 }

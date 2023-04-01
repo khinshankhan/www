@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer base {
+  /* help hide some weird effects, apparently all is bad so declare each property explicitly */
+  html * {
+    transition: background-color 0.4s ease-in-out, height 0.4s ease-in-out,
+      max-height 0.4s ease-in-out, max-width 0.4s ease-in-out;
+  }
+  textarea {
+    transition: background-color 0.5s, height 0s;
+  }
+}

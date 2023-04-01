@@ -1,4 +1,4 @@
-const m = (s) => `^(${s}/(.*)$)|^(${s}$)`
+const m = (s) => `^(@/)?(${s}/(.*)$)|^(@/)?(${s}$)`
 
 /** @type {import('prettier').Config} */
 module.exports = {
@@ -13,7 +13,6 @@ module.exports = {
     m("react"),
     m("next"),
     "<THIRD_PARTY_MODULES>",
-    "",
     m("types"),
     m("config"),
     m("constants"),
@@ -21,8 +20,8 @@ module.exports = {
     m("lib"),
     m("stores"),
     m("hooks"),
-    "",
     m("styles"),
+    m("@radix-ui"),
     m("components/ui"),
     m("components"),
     "^[./]",
