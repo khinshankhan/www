@@ -143,7 +143,7 @@
     --bg: var(--mauve4);
     --content-bg: var(--mauve1);
 
-    --logo-fg: black;
+    --logo-fg: var(--black);
     --logo-bg: theme(colors.transparent);
     --logo-border: theme(colors.transparent);
 
@@ -161,7 +161,7 @@
   .dark {
     --placeholder: var(--white);
 
-    --logo-fg: white;
+    --logo-fg: var(--white);
 
     --bg: var(--bluegray12);
     --content-bg: var(--bluegray9);
@@ -181,6 +181,10 @@
 
   .page-container {
     @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1280px] 2xl:max-w-[1325px];
+  }
+
+  .typography-transition {
+    transition: font-size 0.4s ease-in-out, display 0.4s ease-in-out;
   }
 }
 
