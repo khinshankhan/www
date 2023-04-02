@@ -207,6 +207,11 @@
     }
   }
 
+  .ripple-bg {
+    background: var(--ghost-bg) radial-gradient(circle, transparent 1%, var(--ghost-bg) 1%)
+      center/15000%;
+  }
+
   /* radix animations */
   .animated-collapsible {
     @apply data-[state=open]:animate-collapsible-open data-[state=closed]:animate-collapsible-close overflow-hidden;

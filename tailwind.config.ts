@@ -94,6 +94,12 @@ export default {
         "collapsible-open": "collapsible-slide-down 300ms ease-out",
         "collapsible-close": "collapsible-slide-up 300ms ease-out",
       },
+      transitionProperty: {
+        background: "background",
+      },
+      backgroundSize: {
+        full: "100%",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
