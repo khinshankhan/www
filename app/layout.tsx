@@ -4,6 +4,8 @@ import type { Metadata } from "next"
 import { Montserrat, Open_Sans, Source_Code_Pro } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { ThemeProvider, TooltipProvider } from "components/providers"
+import Footer from "./footer"
+import Header from "./header"
 
 const headingFont = Montserrat({
   subsets: ["latin"],
@@ -50,9 +52,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TooltipProvider>
-            <div className="z-base page-container relative flex min-h-[96vh] flex-col">
+            <div className="z-base relative flex min-h-[96vh] flex-col">
+              <Header />
               {children}
             </div>
+            <Footer />
           </TooltipProvider>
         </ThemeProvider>
       </body>
