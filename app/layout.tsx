@@ -45,11 +45,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           headingFont.variable,
           bodyFont.variable,
           monoFont.variable,
-          "font-body h-full w-full bg-green-200 dark:bg-green-600"
+          "font-body bg-theme text-theme-placeholder h-full w-full text-lg lg:text-[1.3125rem] 2xl:text-[1.43775rem]"
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <TooltipProvider>{children}</TooltipProvider>
+          <TooltipProvider>
+            <div className="z-base page-container relative flex min-h-[96vh] flex-col">
+              {children}
+            </div>
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
