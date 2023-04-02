@@ -13,3 +13,5 @@ export const screens = {
   isMobile: { max: "767px" },
   isDesktop: "768px",
 }
+
+export type Screens = typeof screens
