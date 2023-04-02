@@ -146,6 +146,7 @@
     --logo-fg: var(--black);
     --logo-bg: theme(colors.transparent);
     --logo-border: theme(colors.transparent);
+    --logo-shadow: var(--gray11);
 
     --link: var(--plum8);
     --link-active: var(--plum6);
@@ -162,6 +163,7 @@
     --placeholder: var(--white);
 
     --logo-fg: var(--white);
+    --logo-shadow: var(--white);
 
     --bg: var(--bluegray12);
     --content-bg: var(--bluegray9);
@@ -207,7 +209,7 @@
 
   .home-link {
     & svg {
-      box-shadow: 0px 0px 10px 1px hsl(var(--logo-fg));
+      box-shadow: 0px 0px 10px 1px hsl(var(--logo-shadow));
     }
     & .fg {
       transition: transform 0.3s ease-in-out;

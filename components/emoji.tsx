@@ -12,7 +12,7 @@ export function Emoji({ name }: { name: EmojiKey }) {
   return (
     <span>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           {/* eslint-disable @next/next/no-img-element */}
           <img
             className="inline aspect-auto h-[1em]"

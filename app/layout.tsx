@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           headingFont.variable,
           bodyFont.variable,
           monoFont.variable,
-          "font-body bg-theme text-theme-placeholder h-full w-full text-lg lg:text-[1.3125rem] 2xl:text-[1.43775rem]"
+          "font-body bg-theme text-theme-placeholder h-full w-full hyphens-auto text-lg lg:text-[1.3125rem] 2xl:text-[1.43775rem]"
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

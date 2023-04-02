@@ -86,14 +86,14 @@ function Navbar({ position }: { position: keyof typeof HeadroomPositions }) {
       <div
         className={cn(
           "z-banner relative left-0 right-0 top-0 translate-y-0 transition duration-200 ease-in-out",
-          position !== HeadroomPositions.DEFAULT && "fixed",
+          position !== HeadroomPositions.DEFAULT && "dark:slate-950 fixed shadow-md",
           !showing && !open && "-translate-y-full"
         )}
       >
         <Collapsible className="w-full" open={open} onOpenChange={setOpen}>
           <header role="navigation" className="min-h-[55px]">
             <div className="bg-theme/[.85] w-full backdrop-blur-sm">
-              <nav className="page-container flex w-full flex-row items-center justify-between pb-2.5 pt-4">
+              <nav className="page-container xss:flex-row flex w-full flex-col items-center justify-between pb-2.5 pt-4">
                 {/* lhs on desktop view */}
                 <HomeToggle />
 

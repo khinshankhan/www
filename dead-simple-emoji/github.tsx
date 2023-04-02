@@ -17,13 +17,13 @@ export const githubEmoji = [
     description: "Input Numbers",
   },
   {
-    names: ["thumbs_up"],
+    names: ["thumbs_up", "+1"],
     url: "https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8",
     char: "👍",
     description: "Thumbs Up",
   },
   {
-    names: ["thumbs_down"],
+    names: ["thumbs_down", "-1"],
     url: "https://github.githubassets.com/images/icons/emoji/unicode/1f44e.png?v8",
     char: "👎",
     description: "Thumbs Down",

@@ -17,5 +17,5 @@ export const customEmoji = [
   },
 ] as const satisfies readonly EmojiInfoTemplate[]
 
-export const emojiLookup = createEmojiLookup([githubEmoji, customEmoji], true)
+export const emojiLookup = createEmojiLookup([githubEmoji, customEmoji], true, true)
 export type EmojiKey = MapKey<typeof emojiLookup>
