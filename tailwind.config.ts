@@ -81,13 +81,13 @@ export default {
       },
 
       keyframes: {
-        "collapsible-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-collapsible-content-height)" },
-        },
-        "collapsible-up": {
+        "collapsible-slide-up": {
           from: { height: "var(--radix-collapsible-content-height)" },
           to: { height: "0" },
+        },
+        "collapsible-slide-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-collapsible-content-height)" },
         },
       },
       animation: {
