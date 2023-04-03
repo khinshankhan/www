@@ -1,21 +1,27 @@
 import React from "react"
 import { InvalidEmojiException } from "@/dead-simple-emoji"
 import { emojiLookup, type EmojiKey } from "@/lib/emoji"
+import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui"
 
-export function Emoji({ name }: { name: EmojiKey }) {
+interface EmojiProps {
+  name: EmojiKey
+  className?: string
+  wrapperClassName?: string
+}
+export function Emoji({ name, className = "", wrapperClassName = "" }: EmojiProps) {
   const emojiInfo = emojiLookup.get(name)
   if (emojiInfo === undefined) {
     throw new InvalidEmojiException(`Emoji not found ${name}`)
   }
 
   return (
-    <span>
+    <span className={wrapperClassName}>
       <Tooltip>
         <TooltipTrigger asChild>
           {/* eslint-disable @next/next/no-img-element */}
           <img
-            className="inline aspect-auto h-[1em]"
+            className={cn("inline aspect-auto h-[1em]", className)}
             src={emojiInfo.url}
             alt={emojiInfo.char || emojiInfo.alt}
             aria-label={emojiInfo.alt}
