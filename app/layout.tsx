@@ -3,9 +3,10 @@ import React, { type ReactNode } from "react"
 import type { Metadata } from "next"
 import { Montserrat, Open_Sans, Source_Code_Pro } from "next/font/google"
 import { cn } from "@/lib/utils"
-import { ThemeProvider, TooltipProvider } from "components/providers"
+import { FramerMotionProvider, ThemeProvider, TooltipProvider } from "components/providers"
 import Footer from "./footer"
 import Header from "./header"
+import ScrollToTop from "./scroll-to-top"
 
 const headingFont = Montserrat({
   subsets: ["latin"],
@@ -50,15 +51,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           "font-body bg-theme text-theme-placeholder h-full w-full hyphens-auto text-lg lg:text-[1.3125rem] 2xl:text-[1.43775rem]"
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <TooltipProvider>
-            <div className="z-base relative flex min-h-[96vh] flex-col">
-              <Header />
-              {children}
-            </div>
-            <Footer />
-          </TooltipProvider>
-        </ThemeProvider>
+        <FramerMotionProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <TooltipProvider>
+              <div className="z-base relative flex min-h-[96vh] flex-col">
+                <Header />
+                {children}
+              </div>
+              <Footer />
+              <ScrollToTop />
+            </TooltipProvider>
+          </ThemeProvider>
+        </FramerMotionProvider>
       </body>
     </html>
   )
