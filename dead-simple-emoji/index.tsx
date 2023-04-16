@@ -25,7 +25,7 @@ export class InvalidEmojiException extends Error {
 export function createEmojiLookup<
   EmojiPack extends readonly EmojiInfoTemplate[],
   Key extends `:${EmojiPack[number]["names"][number]}:`
->(emojiPacks: EmojiPack[], overwrite = false, supressOverwriteWarnings = false) {
+>(emojiPacks: EmojiPack[], overwrite = false, merge = false, supressOverwriteWarnings = false) {
   const lookup = new Map<Key, { alt: Key; url: string; char?: string | undefined }>()
 
   emojiPacks.forEach((emojiPack) => {
@@ -42,11 +42,14 @@ export function createEmojiLookup<
           }
         }
 
-        lookup.set(key, {
+        const prevInfo = lookup.get(key) ?? {}
+        const newInfo = {
           alt: key,
           url: rawEmojiInfo.url,
           char: rawEmojiInfo?.char,
-        })
+        }
+
+        lookup.set(key, !merge ? newInfo : { ...prevInfo, ...newInfo })
       })
     })
   })

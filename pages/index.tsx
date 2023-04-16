@@ -57,5 +57,5 @@ function EggText() {
 }
 
 function Wave() {
-  return <Emoji name=":waving_hand:" className="animate-wave" />
+  return <Emoji name=":wave:" className="animate-wave" />
 }
