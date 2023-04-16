@@ -1,16 +1,10 @@
-"use client"
-
 import React from "react"
-import { usePathname } from "next/navigation"
 import { info } from "@/config"
 import { cn } from "@/lib/utils"
 
-function Footer() {
-  const pathname = usePathname()
-  const isHero = pathname === "/"
-
+export function Footer({ isHero }: { isHero: boolean }) {
   return (
-    <div className="bg-theme">
+    <>
       {isHero && (
         <div role="presentation" className="page-container bg-theme-placeholder h-0.5 w-[70%]" />
       )}
@@ -19,7 +13,7 @@ function Footer() {
           &copy; {info.startYear}+, {info.fullname}. All rights reserved.
         </p>
       </footer>
-    </div>
+    </>
   )
 }
 

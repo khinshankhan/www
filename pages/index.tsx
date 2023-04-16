@@ -1,12 +1,11 @@
 import React from "react"
-import { H1, H2, Link, typographyVariants } from "@/components/ui"
-import EggText from "./egg-text"
-import Wave from "./wave"
+import { Button, H1, H2, Link, typographyVariants } from "@/components/ui"
+import Emoji from "@/components/emoji"
 
 export default function Page() {
   return (
-    <main className="text-center">
-      <H1 className="mt-20 flex flex-col">
+    <div className="text-center">
+      <H1 className="mt-20 flex flex-col lg:mt-16">
         <span>
           Hello there <Wave />
         </span>
@@ -15,7 +14,7 @@ export default function Page() {
         </span>
       </H1>
 
-      <H2 className="mt-10">I am a writer.</H2>
+      <H2 className="mt-10">I am a software engineer.</H2>
 
       <div className="page-container mt-10">
         <p
@@ -38,6 +37,25 @@ export default function Page() {
       <p className={typographyVariants({ variant: "main-nav", className: "page-container mt-10" })}>
         Also, here are some nice projects you can check out:
       </p>
-    </main>
+    </div>
   )
+}
+
+Page.isHero = true
+
+// TODO: get back to this...
+function EggText() {
+  return (
+    <p className={typographyVariants({ variant: "main-nav", className: "page-container" })}>
+      this site currently has{" "}
+      <Button className="p-0">
+        <span className="text-theme-accent">0</span> easter eggs
+      </Button>{" "}
+      !
+    </p>
+  )
+}
+
+function Wave() {
+  return <Emoji name=":waving_hand:" className="animate-wave" />
 }

@@ -9,7 +9,7 @@ const linkStyles =
 export const typographyVariants = cva("typography-transition", {
   variants: {
     variant: {
-      default: "",
+      default: "text-lg lg:text-[1.3125rem] 2xl:text-[1.43775rem]",
       h1: "font-heading text-3xl font-semibold tracking-wider sm:text-4xl 2xl:text-5xl",
       h2: "font-heading text-2xl font-semibold tracking-wider sm:text-3xl 2xl:text-4xl",
       h3: "font-heading text-xl font-semibold tracking-wide sm:text-2xl 2xl:text-3xl",

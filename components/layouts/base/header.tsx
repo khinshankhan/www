@@ -1,9 +1,9 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
+import { useRouter } from "next/router"
 import { cn } from "@/lib/utils"
-import { HeadroomPositions, useBreakpoint, useHeadroom } from "@/hooks"
+import { useBreakpoint } from "@/hooks"
 import {
   Collapsible,
   CollapsibleContent,
@@ -21,7 +21,7 @@ const links = [
   { title: "Contact", to: "/contact" },
 ]
 function Menu({ className = "" }: { className?: string }) {
-  const pathname = usePathname()
+  const { asPath } = useRouter()
   const mainNavClasses = typographyVariants({ variant: "main-nav" })
 
   return (
@@ -31,9 +31,9 @@ function Menu({ className = "" }: { className?: string }) {
           return (
             <li key={to} className="m-4 inline-block text-center">
               <Link
-                variant={pathname === to ? "link-on" : "link"}
                 className={mainNavClasses}
                 href={to}
+                variant={asPath === to ? "link-on" : "link"}
                 isInternal
                 aria-label={`Navigate to ${title}.`}
               >
@@ -66,10 +66,9 @@ function Settings({ className = "" }: { className?: string }) {
   )
 }
 
-function Navbar({ position }: { position: keyof typeof HeadroomPositions }) {
-  const showing = position !== HeadroomPositions.UNPINNED
-  const pathname = usePathname()
+function Navbar() {
   const isMobile = useBreakpoint("isMobile")
+  const router = useRouter()
 
   const [open, setOpen] = useState(() => false)
 
@@ -79,32 +78,51 @@ function Navbar({ position }: { position: keyof typeof HeadroomPositions }) {
     }
   }, [isMobile, setOpen])
 
-  useEffect(() => setOpen(() => false), [pathname, setOpen])
+  const closeMenu = () => setOpen(() => false)
+
+  useEffect(() => {
+    closeMenu()
+
+    router.events.on("routeChangeStart", closeMenu)
+    return () => {
+      router.events.off("routeChangeStart", closeMenu)
+    }
+  }, [router.events])
 
   return (
     <div className="h-[88px] lg:h-[97.5px]">
       <div
         className={cn(
-          "z-banner relative left-0 right-0 top-0 translate-y-0 transition duration-200 ease-in-out",
-          position !== HeadroomPositions.DEFAULT && "dark:slate-950 fixed shadow-md",
-          !showing && !open && "-translate-y-full"
+          "z-banner relative left-0 right-0 top-0 translate-y-0 transition duration-200 ease-in-out"
+          // position !== HeadroomPositions.DEFAULT && "fixed",
+          // !showing && !open && "-translate-y-full"
         )}
       >
         <Collapsible className="w-full" open={open} onOpenChange={setOpen}>
           <header role="navigation" className="min-h-[55px]">
-            <div className="bg-theme/[.85] w-full backdrop-blur-sm">
-              <nav className="page-container xss:flex-row flex w-full flex-col items-center justify-between pb-2.5 pt-4">
+            <div className="bg-theme-bg/[.85] w-full backdrop-blur-sm">
+              <nav className="page-container flex w-full flex-row items-center justify-between pb-2.5 pt-4">
                 {/* lhs on desktop view */}
                 <HomeToggle />
 
                 {/* rhs on desktop view */}
-                <div className="hide-mobile main-nav flex flex-row">
+                <div
+                  className={typographyVariants({
+                    variant: "main-nav",
+                    className: "hide-mobile flex flex-row",
+                  })}
+                >
                   <Menu />
                   <Settings />
                 </div>
 
                 {/* rhs on mobile view */}
-                <div className="hide-desktop main-nav flex flex-row">
+                <div
+                  className={typographyVariants({
+                    variant: "main-nav",
+                    className: "hide-desktop flex flex-row",
+                  })}
+                >
                   <CollapsibleTrigger asChild>
                     <MenuToggle isOpen={open} className="m-2.5 inline-block text-center" />
                   </CollapsibleTrigger>
@@ -113,7 +131,7 @@ function Navbar({ position }: { position: keyof typeof HeadroomPositions }) {
             </div>
 
             {/* mobile dropdown content */}
-            <CollapsibleContent className="motion-safe:animated-collapsible hide-desktop bg-theme/[.85] backdrop-blur-sm">
+            <CollapsibleContent className="motion-safe:animated-collapsible hide-desktop bg-theme-bg/[.85] backdrop-blur-sm">
               <Menu />
               <Settings className="justify-center" />
 
@@ -137,9 +155,7 @@ function Navbar({ position }: { position: keyof typeof HeadroomPositions }) {
 }
 
 function Header() {
-  const { position } = useHeadroom()
-
-  return <Navbar position={position} />
+  return <Navbar />
 }
 
 export default Header

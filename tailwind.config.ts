@@ -21,7 +21,7 @@ function hslaN({ variable = "", n = 1, scale = 1 }) {
 
 export default {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./data/**/*.{md,mdx}",
   ],
