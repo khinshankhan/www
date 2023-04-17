@@ -100,7 +100,7 @@ function Navbar() {
       >
         <Collapsible className="w-full" open={open} onOpenChange={setOpen}>
           <header role="navigation" className="min-h-[55px]">
-            <div className="bg-theme-bg/[.85] w-full backdrop-blur-sm">
+            <div className="bg-theme/[.85] w-full backdrop-blur-sm">
               <nav className="page-container flex w-full flex-row items-center justify-between pb-2.5 pt-4">
                 {/* lhs on desktop view */}
                 <HomeToggle />
@@ -131,7 +131,7 @@ function Navbar() {
             </div>
 
             {/* mobile dropdown content */}
-            <CollapsibleContent className="motion-safe:animated-collapsible hide-desktop bg-theme-bg/[.85] backdrop-blur-sm">
+            <CollapsibleContent className="motion-safe:animated-collapsible hide-desktop bg-theme/[.85] backdrop-blur-sm">
               <Menu />
               <Settings className="justify-center" />
 
