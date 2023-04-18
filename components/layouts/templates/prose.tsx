@@ -7,7 +7,9 @@ export type ProseProps = PageSkeletonLayoutProps
 export const Prose = ({ children, ...props }: ProseProps) => {
   return (
     <Layout {...props}>
-      <div id="content">{children}</div>
+      <div id="content" tabIndex={-1}>
+        {children}
+      </div>
     </Layout>
   )
 }

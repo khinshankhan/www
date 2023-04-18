@@ -21,11 +21,12 @@ function FileIcon() {
 }
 
 interface LinkProps extends NextLinkProps {
+  id?: string
   isInternal?: boolean
   isExternal?: boolean
   isFile?: boolean
   className?: string
-  variant?: "link" | "link-on"
+  variant?: "link" | "link-on" | "default"
   children?: ReactNode
 }
 

@@ -2,7 +2,7 @@ import React, { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "re
 import { VariantProps, cva } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
-const buttonVariants = cva(
+export const buttonVariants = cva(
   cn(
     "ghost-button text-logo-fg inline-block border-0 bg-transparent",
     /* animation is based off https://codepen.io/finnhvman/pen/jLXKJw */
