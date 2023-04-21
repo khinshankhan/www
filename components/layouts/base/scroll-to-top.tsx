@@ -4,6 +4,7 @@ import React from "react"
 import { m, useScroll } from "framer-motion"
 import { HeadroomPositions, isBrowser, useHeadroom, useMounted } from "hooks"
 import { ArrowUp } from "components/icons"
+import { yieldSkipNav } from "./skip-nav"
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" })
@@ -32,7 +33,10 @@ function ScrollToTopButton({ show = false }: { show: boolean }) {
       <button
         aria-label="Scroll to top."
         className="p-0.25 rounded-full bg-transparent md:scale-125 xl:scale-150"
-        onClick={scrollToTop}
+        onClick={() => {
+          scrollToTop()
+          yieldSkipNav()
+        }}
       >
         <svg aria-hidden className="h-8 w-8">
           <m.circle

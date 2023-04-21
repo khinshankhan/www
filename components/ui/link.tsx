@@ -21,13 +21,17 @@ function FileIcon() {
 }
 
 interface LinkProps extends NextLinkProps {
+  // no idea why next link doesn't provide these props
   id?: string
+  title?: string
+  className?: string
+  children?: ReactNode
+  // styling mostly, provide default for possibly using link with other styling
+  variant?: "link" | "link-on" | "default"
+  // custom options
   isInternal?: boolean
   isExternal?: boolean
   isFile?: boolean
-  className?: string
-  variant?: "link" | "link-on" | "default"
-  children?: ReactNode
 }
 
 export function Link({

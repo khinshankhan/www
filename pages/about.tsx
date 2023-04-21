@@ -1,11 +1,12 @@
 import React from "react"
+import { Link } from "@/components/ui"
 import { Prose } from "@/components/layouts"
 
 export default function Page() {
   return (
     <Prose title="About" subtitle="Me, myself, and I">
       it me
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((e) => (
+      {[0].map((e) => (
         <L key={e} />
       ))}
     </Prose>
@@ -60,29 +61,29 @@ const L = () => (
     <nav>
       <ul>
         <li>
-          <a href="#nowhere" title="Lorum ipsum dolor sit amet">
+          <Link href="#lorem" title="Lorum ipsum dolor sit amet">
             Lorem
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#nowhere" title="Aliquam tincidunt mauris eu risus">
+          <Link href="#aliquam" title="Aliquam tincidunt mauris eu risus">
             Aliquam
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#nowhere" title="Morbi in sem quis dui placerat ornare">
+          <Link href="#morbi" title="Morbi in sem quis dui placerat ornare">
             Morbi
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#nowhere" title="Praesent dapibus, neque id cursus faucibus">
+          <Link href="#praesent" title="Praesent dapibus, neque id cursus faucibus">
             Praesent
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#nowhere" title="Pellentesque fermentum dolor">
+          <Link href="#pellentesque" title="Pellentesque fermentum dolor">
             Pellentesque
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

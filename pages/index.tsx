@@ -4,7 +4,7 @@ import Emoji from "@/components/emoji"
 
 export default function Page() {
   return (
-    <div id="content" tabIndex={-1} className="text-center">
+    <div id="content" className="text-center">
       <H1 className="mt-20 flex flex-col lg:mt-16">
         <span>
           Hello there <Wave />
