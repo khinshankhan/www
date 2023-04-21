@@ -47,7 +47,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
           typographyVariants()
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <TooltipProvider>
             <LazyMotion features={domAnimation} strict>
               <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>

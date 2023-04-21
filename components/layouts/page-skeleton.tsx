@@ -44,15 +44,15 @@ export function PageSkeletonLayout({
   // the flex grow applies to the base layout's min-h flex div. this keeps any negative space between content to footer
   // (within the min-h) the content bg color, accounting for potentially shorter content
   return (
-    <main className="flex grow flex-col">
-      <header className="bg-theme-bg py-14 text-center">
+    <main className="bg-theme-contentBg flex grow flex-col">
+      <header className="bg-theme py-14 text-center">
         <h1 className={typographyVariants({ variant: "h1" })}>{title}</h1>
         <span className={typographyVariants({ variant: "main-nav", className: "block pt-6" })}>
           {subtitle}
         </span>
       </header>
 
-      <div className="bg-theme-contentBg grow py-5">
+      <div className="grow py-5">
         <WithSidebar direction={direction} sidebar={sidebar}>
           {children}
         </WithSidebar>

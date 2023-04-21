@@ -242,12 +242,12 @@
 
   /* give nav bg a lot of transparency when backdrop filter isn't available */
   .nav-bg {
-    @apply bg-theme-bg/[.99];
+    @apply bg-theme/[.99];
   }
 
   @supports (backdrop-filter: blur(1px)) {
     .nav-bg {
-      @apply bg-theme-bg/[.85] backdrop-blur-sm;
+      @apply bg-theme/[.85] backdrop-blur-sm;
     }
   }
 
