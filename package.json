@@ -2,8 +2,19 @@
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "@types/node": "^20.1.2",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "next": "^13.4.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.0.4"
+  }
 }
