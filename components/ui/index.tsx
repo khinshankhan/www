@@ -1,5 +1,0 @@
-export * from "./button"
-export * from "./collapsible"
-export * from "./link"
-export * from "./tooltip"
-export * from "./typography"
