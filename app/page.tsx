@@ -1,5 +1,3 @@
-import React from "react";
-
-export default function Page() {
-  return <h1>Hello, Next.js!</h1>;
+export default function Home() {
+  return <main className="">hi </main>;
 }
