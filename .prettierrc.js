@@ -1,4 +1,4 @@
-const m = (s) => `^(@/)?(${s}/(.*)$)|^(@/)?(${s}$)`;
+const m = (s) => `^(@/)?(${s}/(.*)$)|^(@/)?(${s}$)`
 
 /** @type {import('prettier').Config} */
 module.exports = {
@@ -32,8 +32,5 @@ module.exports = {
   importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
   importOrderMergeDuplicateImports: true,
   importOrderCombineTypeAndValueImports: true,
-  plugins: [
-    "@ianvs/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss",
-  ],
-};
+  plugins: ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
+}

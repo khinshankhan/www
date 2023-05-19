@@ -7,11 +7,7 @@ module.exports = {
     "jest/globals": true,
   },
   plugins: ["jest", "prettier", "react-hooks"],
-  extends: [
-    "eslint:recommended",
-    "plugin:prettier/recommended",
-    "next/core-web-vitals",
-  ],
+  extends: ["eslint:recommended", "plugin:prettier/recommended", "next/core-web-vitals"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -33,4 +29,4 @@ module.exports = {
     "react-hooks/rules-of-hooks": `error`,
     "react-hooks/exhaustive-deps": `warn`,
   },
-};
+}
