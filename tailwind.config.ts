@@ -70,7 +70,7 @@ export default {
         shadow: hsla("logo-shadow"),
       },
       link: {
-        DEFAULT: hsla("link"),
+        base: hsla("link-base"),
         active: hsla("link-active"),
         on: hsla("link-on"),
       },

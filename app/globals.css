@@ -149,7 +149,7 @@
     --logo-border: var(--transparent);
     --logo-shadow: var(--gray11);
 
-    --link: var(--plum8);
+    --link-base: var(--plum8);
     --link-active: var(--plum6);
     --link-on: var(--plum4);
   }

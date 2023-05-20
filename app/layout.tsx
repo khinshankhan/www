@@ -48,7 +48,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           headingFont.variable,
           bodyFont.variable,
           monoFont.variable,
-          "h-full w-full hyphens-auto bg-theme-primary font-body text-lg text-theme-stark"
+          "h-full w-full hyphens-auto bg-theme-primary font-body text-theme-stark"
         )}
       >
         <Providers>
