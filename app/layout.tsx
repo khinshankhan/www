@@ -11,7 +11,6 @@ export const metadata: Metadata = {
     viewportFit: "cover",
     width: "device-width",
     initialScale: 1,
-    maximumScale: 1,
   },
   title: {
     default: "Khinshan Khan",
