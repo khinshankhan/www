@@ -108,6 +108,8 @@ export default {
         background: "background",
       },
       backgroundSize: {
+        "link-hide": "0% 0.05em",
+        "link-show": "100% 0.05em",
         full: "100%",
       },
     },
