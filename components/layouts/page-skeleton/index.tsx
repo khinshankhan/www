@@ -29,6 +29,7 @@ export function WithSidebar({ direction = "left", sidebar, children }: WithSideb
 export interface PageSkeletonLayoutProps extends WithSidebarProps {
   title: string
   subtitle: ReactNode
+  path: string
   children: ReactNode
 }
 
@@ -37,6 +38,7 @@ export function PageSkeletonLayout({
   subtitle,
   direction = "left",
   sidebar,
+  path: ghPath,
   children,
 }: PageSkeletonLayoutProps) {
   // the flex grow applies to the base layout's min-h flex div. this keeps any negative space between content to footer
@@ -56,6 +58,16 @@ export function PageSkeletonLayout({
             {children}
           </article>
         </WithSidebar>
+      </div>
+
+      <div className="bg-theme-primary py-6">
+        <div className="page-container">
+          <div className="flex flex-row-reverse">
+            <Link href={`https://github.com/khinshankhan/anchorage/tree/main${ghPath}`}>
+              View page on GitHub
+            </Link>
+          </div>
+        </div>
       </div>
     </main>
   )
