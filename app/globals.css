@@ -213,13 +213,13 @@
     @apply isDesktop:hidden !important;
   }
 
-  /* give nav bg a lot of transparency when backdrop filter isn't available */
+  /* give nav bg less transparency when backdrop filter isn't available */
   .nav-bg {
-    background-color: hsla(--theme-primary, 99%);
+    background-color: hsla(var(--theme-primary), 99%);
   }
   @supports (backdrop-filter: blur(1px)) {
     .nav-bg {
-      background-color: hsla(--theme-primary, 85%);
+      background-color: hsla(var(--theme-primary), 85%);
       backdrop-filter: blur(4px);
     }
   }
