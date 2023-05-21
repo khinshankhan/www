@@ -64,6 +64,8 @@ export default {
         content: hsla("theme-content"),
         muted: hsla("theme-muted"),
         card: hsla("theme-card"),
+        popover: hsla("theme-popover"),
+        tooltip: hsla("theme-tooltip"),
       },
       logo: {
         fg: hsla("logo-fg"),

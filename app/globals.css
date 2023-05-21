@@ -145,6 +145,8 @@
     --theme-content: var(--mauve1);
     --theme-muted: var(--bluegray7);
     --theme-card: var(--mauve1);
+    --theme-popover: var(--mauve6);
+    --theme-tooltip: var(--theme-popover);
 
     --logo-fg: var(--theme-stark);
     --logo-bg: var(--transparent);
@@ -162,6 +164,7 @@
     --theme-content: var(--bluegray9);
     --theme-muted: var(--bluegray6);
     --theme-card: var(--bluegray8);
+    --theme-popover: var(--bluegray7);
 
     --logo-shadow: var(--white);
   }
