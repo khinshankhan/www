@@ -5,4 +5,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export * from "./array"
+export * from "./scroll"
 export * from "./url"

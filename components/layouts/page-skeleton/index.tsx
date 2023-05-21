@@ -54,7 +54,7 @@ export function PageSkeletonLayout({
 
       <div className="grow py-5">
         <WithSidebar direction={direction} sidebar={sidebar}>
-          <article id="article" className="mt-6 grow pt-0 sm:pt-2">
+          <article id="article" className="my-6 grow pt-0 sm:pt-2">
             {children}
           </article>
         </WithSidebar>

@@ -80,6 +80,9 @@ export default {
       },
     },
     extend: {
+      transitionTimingFunction: {
+        "arrow-ease": "cubic-bezier(0.87, 0, 0.13, 1)",
+      },
       keyframes: {
         "collapsible-slide-up": {
           from: { height: "var(--radix-collapsible-content-height)" },
