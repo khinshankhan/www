@@ -62,6 +62,8 @@ export default {
         ghost: "var(--ghost)", // NOTE:has specific alpha value
         primary: hsla("theme-primary"),
         content: hsla("theme-content"),
+        muted: hsla("theme-muted"),
+        card: hsla("theme-card"),
       },
       logo: {
         fg: hsla("logo-fg"),

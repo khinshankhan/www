@@ -143,6 +143,8 @@
     --ghost: hsla(var(--theme-stark), 0.12);
     --theme-primary: var(--mauve4);
     --theme-content: var(--mauve1);
+    --theme-muted: var(--bluegray7);
+    --theme-card: var(--mauve1);
 
     --logo-fg: var(--theme-stark);
     --logo-bg: var(--transparent);
@@ -158,13 +160,15 @@
     --theme-stark: var(--white);
     --theme-primary: var(--bluegray12);
     --theme-content: var(--bluegray9);
+    --theme-muted: var(--bluegray6);
+    --theme-card: var(--bluegray8);
 
     --logo-shadow: var(--white);
   }
 
   /* help hide some weird effects, apparently all is bad so declare each property explicitly */
   html * {
-    transition: background-color 0.4s ease-in-out, height 0.4s ease-in-out,
+    transition: background-color 0.4s ease-in-out, height 0.4s ease-in-out, width 0.4s ease-in-out,
       max-height 0.4s ease-in-out, max-width 0.4s ease-in-out;
   }
 
@@ -178,6 +182,36 @@
 
   .typography-transition {
     transition: font-size 0.4s ease-in-out, display 0.4s ease-in-out;
+  }
+
+  /* based off https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/layout/src/link-box.tsx */
+  .link-overlay {
+    position: static;
+    &:after {
+      content: "";
+      cursor: inherit;
+      transition: transform 0.3s ease;
+      @apply absolute left-0 top-0 z-0 block h-full w-full;
+    }
+  }
+
+  .link-box {
+    @apply relative isolate;
+    /* elevate elements that are interactable also give special linkbox-elevate class privledge as a catchall */
+    & :is(a[href]:not(.link-overlay), button, .linkbox-elevate) {
+      @apply relative z-1;
+    }
+  }
+
+  .card-link {
+    transition: background-color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease,
+      transform 0.5s linear;
+    @apply border border-solid border-link-base;
+    &:is(:hover, :focus, :focus-visible) {
+      @apply -translate-y-3.5 border-link-active bg-theme-primary;
+      box-shadow: hsla(var(--theme-stark), 20%) 0px 0px 15px,
+        hsla(var(--theme-stark), 15%) 0px 0px 3px 1px;
+    }
   }
 
   .home-link {
@@ -226,6 +260,11 @@
 
   .ripple-bg {
     background: var(--ghost) radial-gradient(circle, transparent 1%, var(--ghost) 1%) center/15000%;
+  }
+
+  /* credits to xetera */
+  .clip-list-image {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
   }
 
   /* radix animations */
