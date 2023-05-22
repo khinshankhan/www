@@ -64,7 +64,7 @@ export function Toc({ headings: headingsProp = [], showExcerpt = true }: TocProp
         <Button
           aria-label={`${action} table of contents.`}
           variant="ghost"
-          className="pl group w-full"
+          className="group w-full pl-0 xl:pl-2.5"
         >
           <span className="group flex items-center justify-between">
             <span>On this page</span>

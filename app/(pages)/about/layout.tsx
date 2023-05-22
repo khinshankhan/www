@@ -8,6 +8,7 @@ export default function PagesLayout({ children }: { children: ReactNode }) {
       subtitle="Me, myself, and I"
       path="/pages/about.tsx"
       sidebar={<Toc />}
+      direction="right"
     >
       {children}
     </PageSkeletonLayout>
