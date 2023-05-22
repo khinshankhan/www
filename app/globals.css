@@ -242,7 +242,7 @@
   }
 
   /* normalize content globally */
-  :is(#article, #content) {
+  .normalize {
     /* general spacing of content */
     & > * {
       margin-bottom: 1.25em;

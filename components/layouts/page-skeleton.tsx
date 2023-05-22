@@ -31,6 +31,7 @@ export interface PageSkeletonLayoutProps extends WithSidebarProps {
   subtitle: ReactNode
   path: string
   children: ReactNode
+  className?: string
 }
 
 export function PageSkeletonLayout({
@@ -40,6 +41,7 @@ export function PageSkeletonLayout({
   sidebar,
   path: ghPath,
   children,
+  className = "",
 }: PageSkeletonLayoutProps) {
   // the flex grow applies to the base layout's min-h flex div. this keeps any negative space between content to footer
   // (within the min-h) the content bg color, accounting for potentially shorter content
@@ -54,7 +56,7 @@ export function PageSkeletonLayout({
 
       <div className="grow py-5">
         <WithSidebar direction={direction} sidebar={sidebar}>
-          <article id="article" className="my-6 grow pt-0 sm:pt-2">
+          <article id="article" className={cn("my-6 grow pt-0 sm:pt-2", className)}>
             {children}
           </article>
         </WithSidebar>

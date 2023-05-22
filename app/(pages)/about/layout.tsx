@@ -9,6 +9,7 @@ export default function PagesLayout({ children }: { children: ReactNode }) {
       path="/pages/about.tsx"
       sidebar={<Toc />}
       direction="right"
+      className="normalize"
     >
       {children}
     </PageSkeletonLayout>

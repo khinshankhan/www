@@ -25,9 +25,9 @@ const posts = [
 
 export default function Writings() {
   return (
-    <main className="space-y-8">
+    <ul className="space-y-8 ">
       {posts.map((post) => (
-        <div key={post.id} className="card-link link-box flex w-full bg-theme-card">
+        <li key={post.id} className="card-link link-box flex w-full bg-theme-card">
           <div className="flex h-full w-full flex-col flex-col-reverse md:flex-row">
             <div className="p-6">
               <h3 className={typographyVariants({ variant: "h3" })}>
@@ -48,8 +48,8 @@ export default function Writings() {
               />
             </div>
           </div>
-        </div>
+        </li>
       ))}
-    </main>
+    </ul>
   )
 }
