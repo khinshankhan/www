@@ -245,11 +245,11 @@
   .normalize {
     /* general spacing of content */
     & > * {
-      margin-bottom: 1.25em;
+      /* 1.25em based on paragraph size text-lg lg:text-[1.3125rem] 2xl:text-[1.43775rem], due to spacing for headings */
+      @apply mb-[1.40625rem] lg:mb-[1.640625rem] 2xl:mb-[1.7971875rem];
     }
     & > :is(ol, ul) {
       margin-top: 1em;
-      margin-bottom: 1em;
     }
 
     /* lists */

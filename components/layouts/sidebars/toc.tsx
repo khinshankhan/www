@@ -43,11 +43,12 @@ export function Toc({ headings: headingsProp = [], showExcerpt = true }: TocProp
 
   const headings = [
     showExcerpt && { id: "excerpt", level: minLevel, content: "Introduction" },
+    ...headingsProp,
   ].filter(truthyPredicate)
 
   const activeIds = useScrollSpy(
     headings.map(({ id }) => `[id="${id}"]`),
-    { rootMargin: "-15% 0% -80% 0%" }
+    { rootMargin: "0px 0px -65% 0px" }
   )
 
   if (!mounted) {
