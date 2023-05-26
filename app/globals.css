@@ -250,11 +250,11 @@
     }
     & > :is(ol, ul) {
       margin-top: 1em;
+      margin-left: 1.05em;
     }
 
     /* lists */
     & :is(ol, ul) {
-      list-style-position: inside;
       @apply space-y-[0.5em];
     }
 
