@@ -1,4 +1,6 @@
 import { makeSource } from "contentlayer/source-files"
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypeSlug from "rehype-slug"
 import { Page } from "./lib/contentlayer/documents"
 
 export default makeSource({
@@ -10,6 +12,17 @@ export default makeSource({
       return options
     },
     remarkPlugins: [],
-    rehypePlugins: [],
+    rehypePlugins: [
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: "wrap",
+          properties: {
+            className: ["anchor"],
+          },
+        },
+      ],
+    ],
   },
 })

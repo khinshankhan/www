@@ -96,7 +96,11 @@ export function Toc({ headings: headingsProp = [], showExcerpt = true }: TocProp
                   indents === 5 && "pl-36"
                 )}
               >
-                <button data-id={id} onClick={scrollToHeading} className="pointer-events-auto">
+                <button
+                  data-id={id}
+                  onClick={scrollToHeading}
+                  className="pointer-events-auto text-left"
+                >
                   <span className={typographyVariants({ variant: active ? "link-on" : "link" })}>
                     {content}
                   </span>
