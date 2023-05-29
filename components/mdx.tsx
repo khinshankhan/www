@@ -1,6 +1,7 @@
 import type { MDXComponents } from "mdx/types"
 import { useMDXComponent } from "next-contentlayer/hooks"
 import { Link, typographyVariants } from "@/components/ui"
+import Emoji from "@/components/emoji"
 
 const A: MDXComponents["a"] = ({ href = "#", ...props }) => <Link href={href} {...props} />
 const getHeading = (variant: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") => {
@@ -20,6 +21,7 @@ const MdxComponents: MDXComponents = {
   h4: getHeading("h4"),
   h5: getHeading("h5"),
   h6: getHeading("h6"),
+  Emoji,
 }
 
 interface MdxProps {

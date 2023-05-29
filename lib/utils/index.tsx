@@ -6,7 +6,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export * from "./array"
-export * from "./map"
 export * from "./scroll"
 export * from "./string"
 export * from "./url"
