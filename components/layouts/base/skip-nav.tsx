@@ -18,6 +18,8 @@ export function SkipNav() {
   const pathname = usePathname()
 
   useEffect(() => {
+    if (typeof window === "undefined") return undefined
+    if (!!window.location.hash) return undefined
     focusSkipNav(true)
   }, [pathname])
 
