@@ -6,6 +6,7 @@ specifiers:
   '@radix-ui/react-tooltip': ^1.0.5
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^14.0.0
+  '@types/hast': ^2.3.4
   '@types/jest': ^29.5.1
   '@types/mdx': ^2.0.5
   '@types/node': 20.1.2
@@ -39,6 +40,8 @@ specifiers:
   tailwindcss: 3.3.2
   tailwindcss-animate: ^1.0.5
   typescript: 5.0.4
+  unified: ^10.1.2
+  unist-util-visit: ^4.1.2
 
 dependencies:
   '@ianvs/prettier-plugin-sort-imports': 3.7.2_prettier@2.8.8
@@ -46,6 +49,7 @@ dependencies:
   '@radix-ui/react-tooltip': 1.0.5_tqcjxml4rosq5qpg5cznikfcd4
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
+  '@types/hast': 2.3.4
   '@types/jest': 29.5.1
   '@types/mdx': 2.0.5
   '@types/node': 20.1.2
@@ -79,6 +83,8 @@ dependencies:
   tailwindcss: 3.3.2
   tailwindcss-animate: 1.0.5_tailwindcss@3.3.2
   typescript: 5.0.4
+  unified: 10.1.2
+  unist-util-visit: 4.1.2
 
 packages:
 
