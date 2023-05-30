@@ -5,7 +5,15 @@ import Link from "next/link"
 import { useTheme } from "next-themes"
 import { useBreakpoint, useMounted } from "@/hooks"
 import { Icon, IconButton } from "@/components/ui"
-import { Hamburger, Logo, Moon, Sun, XMark, type ILogoProps } from "@/components/icons"
+import {
+  Hamburger,
+  Logo,
+  Moon,
+  Sun,
+  TheaterMasks,
+  XMark,
+  type ILogoProps,
+} from "@/components/icons"
 
 const getSizeParts = (sizeProp?: number | string) => {
   const defaultSize = sizeProp?.toString() ?? `50px`
@@ -57,7 +65,13 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   const mounted = useMounted()
   const { setTheme, resolvedTheme } = useTheme()
 
-  if (!mounted) return null
+  if (!mounted) {
+    ;<IconButton className={className}>
+      <Icon>
+        <TheaterMasks />
+      </Icon>
+    </IconButton>
+  }
 
   const isLight = resolvedTheme === `light`
   const oppositeTheme = isLight ? `dark` : `light`
