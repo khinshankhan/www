@@ -18,7 +18,7 @@ export default makeSource({
       [
         remarkSimpleEmoji,
         {
-          validate: (name: string) => !!emojiLookup.get(name as EmojiKey),
+          validate: (name: string) => emojiLookup.get(name as EmojiKey),
           lookup: (name: string) => {
             const emoji = emojiLookup.get(name as EmojiKey)
             // NOTE: this should be guranteed due to validate
