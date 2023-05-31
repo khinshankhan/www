@@ -55,6 +55,7 @@ export default {
       mauve: hslaN({ variable: "mauve", n: 12 }),
       plum: hslaN({ variable: "plum", n: 12 }),
       violet: hslaN({ variable: "violet", n: 12 }),
+      sky: hslaN({ variable: "sky", n: 12 }),
       bluegray: hslaN({ variable: "bluegray", n: 12 }),
 
       theme: {
@@ -62,6 +63,7 @@ export default {
         ghost: "var(--ghost)", // NOTE:has specific alpha value
         primary: hsla("theme-primary"),
         content: hsla("theme-content"),
+        accent: hsla("theme-accent"),
         muted: hsla("theme-muted"),
         card: hsla("theme-card"),
         popover: hsla("theme-popover"),
