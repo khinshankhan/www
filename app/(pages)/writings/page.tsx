@@ -35,7 +35,7 @@ export default function Writings() {
                   {post.title}
                 </Link>
               </h2>
-              <h3 className={typographyVariants({ variant: "h3" })}>{post.subtitle}</h3>
+              <span className={typographyVariants({ variant: "h4" })}>{post.subtitle}</span>
               <span className="line-clamp-3 text-theme-muted">{post.excerpt}</span>
             </div>
 
