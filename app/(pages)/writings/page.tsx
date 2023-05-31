@@ -25,17 +25,17 @@ const posts = [
 
 export default function Writings() {
   return (
-    <ul className="space-y-8 ">
+    <ul className="mt-2 space-y-8">
       {posts.map((post) => (
         <li key={post.id} className="card-link link-box flex w-full bg-theme-card">
           <div className="flex h-full w-full flex-col flex-col-reverse md:flex-row">
             <div className="p-6">
-              <h3 className={typographyVariants({ variant: "h3" })}>
+              <h2 className={typographyVariants({ variant: "h2" })}>
                 <Link className="link-overlay" href={post.slug}>
                   {post.title}
                 </Link>
-              </h3>
-              <h4 className={typographyVariants({ variant: "h4" })}>{post.subtitle}</h4>
+              </h2>
+              <h3 className={typographyVariants({ variant: "h3" })}>{post.subtitle}</h3>
               <span className="line-clamp-3 text-theme-muted">{post.excerpt}</span>
             </div>
 
