@@ -33,7 +33,8 @@ export type CalloutProps = {
   children: ReactNode
 } & CalloutVariants
 
-type SvgFn = (_props: RawIconProps) => React.JSX.Element
+// eslint-disable-next-line no-unused-vars
+type SvgFn = (props: RawIconProps) => React.JSX.Element
 const calloutIcons: Record<NonNullable<CalloutVariants["variant"]>, SvgFn> = {
   info: InformationCircle,
   error: XCircle,

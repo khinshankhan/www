@@ -1,9 +1,13 @@
-import React from "react"
+import React, { type ReactNode } from "react"
 import { Link } from "@/components/ui"
 import { Callout, CalloutProps } from "@/components/callout"
 import Emoji from "@/components/emoji"
 
-export default function MigrationNotice({ children, ...props }: CalloutProps) {
+interface MigrationProps extends Omit<CalloutProps, "children"> {
+  children?: ReactNode
+}
+
+export default function MigrationNotice({ children, ...props }: MigrationProps) {
   return (
     <div className="align-center flex w-full flex-row justify-center text-left">
       <div className="w-[60ch]">
