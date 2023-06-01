@@ -48,6 +48,8 @@ export default {
       mono: ["var(--font-mono)", ...defaultTheme.fontFamily.mono],
     },
     colors: {
+      inherit: "inherit",
+      current: "currentColor",
       transparent: "transparent",
       black: hsla("black"),
       white: hsla("white"),
@@ -55,7 +57,10 @@ export default {
       mauve: hslaN({ variable: "mauve", n: 12 }),
       plum: hslaN({ variable: "plum", n: 12 }),
       violet: hslaN({ variable: "violet", n: 12 }),
-      sky: hslaN({ variable: "sky", n: 12 }),
+      info: hslaN({ variable: "sky", n: 12 }),
+      error: hslaN({ variable: "tomato", n: 12 }),
+      warn: hslaN({ variable: "amber", n: 12 }),
+      success: hslaN({ variable: "mint", n: 12 }),
       bluegray: hslaN({ variable: "bluegray", n: 12 }),
 
       theme: {
