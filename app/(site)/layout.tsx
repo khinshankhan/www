@@ -29,9 +29,9 @@ export const metadata: Metadata = {
     siteName: "Khinshan Khan",
     images: [
       {
-        url: "https://www.khinshankhan.com/og.png?v=2",
-        width: 1125,
-        height: 590,
+        url: "https://www.khinshankhan.com/og.png?v=3",
+        width: 1920,
+        height: 1080,
       },
     ],
     locale: "en-US",
