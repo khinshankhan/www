@@ -21,13 +21,22 @@ export const metadata: Metadata = {
   icons: {
     shortcut: "/favicon.ico",
   },
-  images: [
-    {
-      url: "https://khinshankhan.com/og.png?v=1",
-      width: 1200,
-      height: 630,
-    },
-  ],
+  openGraph: {
+    title: 'Khinshan Khan',
+  description:
+    "Hello! Welcome to my digital garden, where I share my thoughts and musings. You may or may not learn something, but at least it'll be fun!",
+    url: 'https://www.khinshankhan.com',
+    siteName: 'Khinshan Khan',
+    images: [
+      {
+        url: 'https://www.khinshankhan.com/og.png?v=1',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en-US',
+    type: 'website',
+  },
 }
 
 const headingFont = Montserrat({
