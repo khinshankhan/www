@@ -1,26 +1,24 @@
-import React, { Fragment, type ReactNode } from "react"
+import React, { type ReactNode } from "react"
+import { typographyVariants } from "@/components/ui"
 import Footer from "./footer"
 import Header from "./header"
-import ScrollToTop from "./scroll-to-top"
+import Main from "./main"
 import SkipNav from "./skip-nav"
 
 interface BaseLayoutProps {
-  // TODO: utilize isHero to create visual separators between layout
-  isHero?: boolean
   children: ReactNode
 }
 
-export function BaseLayout({ isHero, children }: BaseLayoutProps) {
+export function BaseLayout({ children }: BaseLayoutProps) {
   return (
-    <Fragment>
+    <div className={typographyVariants()}>
       <SkipNav />
-      <div className={"z-base xs:min-h-[96vh] relative flex min-h-[87vh] flex-col"}>
+      <div className="z-base relative flex min-h-[87vh] flex-col xs:min-h-[96vh]">
         <Header />
-        {children}
+        <Main>{children}</Main>
       </div>
-      <Footer isHero={isHero ?? false} />
-      <ScrollToTop />
-    </Fragment>
+      <Footer />
+    </div>
   )
 }
 

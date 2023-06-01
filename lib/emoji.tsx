@@ -1,6 +1,7 @@
-import { createEmojiLookup, type EmojiInfoTemplate } from "@/dead-simple-emoji"
-import githubEmoji from "@/dead-simple-emoji/github"
-import { type MapKey } from "@/lib/utils"
+import { createEmojiLookup, type EmojiInfoTemplate } from "../@khinshankhan/emoji-helper/core"
+import githubEmoji from "../@khinshankhan/emoji-helper/github"
+
+type MapKey<T> = T extends Map<infer K, any> ? K : never
 
 export const customEmoji = [
   {

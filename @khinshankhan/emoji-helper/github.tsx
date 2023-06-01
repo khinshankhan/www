@@ -1,5 +1,6 @@
-import { type EmojiInfoTemplate } from "./index"
+import { type EmojiInfoTemplate } from "./core"
 
+// TODO: create and publish a script
 /*
    Generated off of https://api.github.com/emojis
 
@@ -8,6 +9,7 @@ import { type EmojiInfoTemplate } from "./index"
    })
  */
 
+// TODO: add in character equivalents for the applicable emoji
 export const githubEmoji = [
   {
     names: ["100"],

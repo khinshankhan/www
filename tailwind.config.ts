@@ -20,12 +20,8 @@ function hslaN({ variable = "", n = 1, scale = 1 }) {
 }
 
 export default {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./data/**/*.{md,mdx}",
-  ],
-  darkMode: "class",
+  darkMode: ["class"],
+  content: ["./components/**/*.{js,ts,md,jsx,tsx,mdx}", "./app/**/*.{js,ts,md,jsx,tsx,mdx}"],
   theme: {
     screens,
     zIndex: {
@@ -51,35 +47,49 @@ export default {
       body: ["var(--font-body)", ...defaultTheme.fontFamily.sans],
       mono: ["var(--font-mono)", ...defaultTheme.fontFamily.mono],
     },
-    extend: {
-      colors: {
-        gray: hslaN({ variable: "gray", n: 12 }),
-        mauve: hslaN({ variable: "mauve", n: 12 }),
-        plum: hslaN({ variable: "plum", n: 12 }),
-        violet: hslaN({ variable: "violet", n: 12 }),
-        bluegray: hslaN({ variable: "bluegray", n: 12 }),
-        theme: {
-          DEFAULT: hsla("bg"),
-          contentBg: hsla("content-bg"),
-          placeholder: hsla("placeholder"),
-          accent: hsla("accent"),
-          muted: hsla("muted"),
-          stark: hsla("stark"),
-          ghostBg: "var(--ghost-bg)", // has specific alpha value
-          cardBg: hsla("card-bg"),
-        },
-        logo: {
-          fg: hsla("logo-fg"),
-          bg: hsla("logo-bg"),
-          border: hsla("logo-border"),
-        },
-        link: {
-          base: hsla("link"),
-          active: hsla("link-active"),
-          on: hsla("link-on"),
-        },
-      },
+    colors: {
+      inherit: "inherit",
+      current: "currentColor",
+      transparent: "transparent",
+      black: hsla("black"),
+      white: hsla("white"),
+      gray: hslaN({ variable: "gray", n: 12 }),
+      mauve: hslaN({ variable: "mauve", n: 12 }),
+      plum: hslaN({ variable: "plum", n: 12 }),
+      violet: hslaN({ variable: "violet", n: 12 }),
+      info: hslaN({ variable: "sky", n: 12 }),
+      error: hslaN({ variable: "tomato", n: 12 }),
+      warn: hslaN({ variable: "amber", n: 12 }),
+      success: hslaN({ variable: "mint", n: 12 }),
+      bluegray: hslaN({ variable: "bluegray", n: 12 }),
 
+      theme: {
+        stark: hsla("theme-stark"),
+        ghost: "var(--ghost)", // NOTE:has specific alpha value
+        primary: hsla("theme-primary"),
+        content: hsla("theme-content"),
+        accent: hsla("theme-accent"),
+        muted: hsla("theme-muted"),
+        card: hsla("theme-card"),
+        popover: hsla("theme-popover"),
+        tooltip: hsla("theme-tooltip"),
+      },
+      logo: {
+        fg: hsla("logo-fg"),
+        bg: hsla("logo-bg"),
+        border: hsla("logo-border"),
+        shadow: hsla("logo-shadow"),
+      },
+      link: {
+        base: hsla("link-base"),
+        active: hsla("link-active"),
+        on: hsla("link-on"),
+      },
+    },
+    extend: {
+      transitionTimingFunction: {
+        "arrow-ease": "cubic-bezier(0.87, 0, 0.13, 1)",
+      },
       keyframes: {
         "collapsible-slide-up": {
           from: { height: "var(--radix-collapsible-content-height)" },
@@ -112,6 +122,8 @@ export default {
         background: "background",
       },
       backgroundSize: {
+        "link-hide": "0% 0.05em",
+        "link-show": "100% 0.05em",
         full: "100%",
       },
     },

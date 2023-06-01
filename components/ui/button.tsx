@@ -6,14 +6,14 @@ export const buttonVariants = cva(
   cn(
     "ghost-button text-logo-fg inline-block border-0 bg-transparent",
     /* animation is based off https://codepen.io/finnhvman/pen/jLXKJw */
-    "transition-background active:bg-ghostBg active:bg-full hover:ripple-bg bg-center duration-1000 active:duration-0"
+    "transition-background active:bg-theme-ghost active:bg-full hover:ripple-bg bg-center duration-1000 active:duration-0"
   ),
   {
     variants: {
       variant: {
         ghost: "",
         primary:
-          "bg-violet-9 hover:bg-violet-11 focus:bg-violet-11 dark:bg-violet-8 dark:text-theme-placeholder dark:hover:bg-violet-10 dark:focus:bg-violet-10 text-white",
+          "bg-violet-9 hover:bg-violet-11 focus:bg-violet-11 dark:bg-violet-8 dark:text-theme-stark dark:hover:bg-violet-10 dark:focus:bg-violet-10 text-white",
       },
       isIcon: {
         true: "p-1.5 leading-[0]",

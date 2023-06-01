@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { useRouter } from "next/router"
+import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { useBreakpoint } from "@/hooks"
 import {
@@ -21,7 +21,7 @@ const links = [
   { title: "Contact", to: "/contact" },
 ]
 function Menu({ className = "" }: { className?: string }) {
-  const { asPath } = useRouter()
+  const pathname = usePathname()
   const mainNavClasses = typographyVariants({ variant: "main-nav" })
 
   return (
@@ -33,7 +33,7 @@ function Menu({ className = "" }: { className?: string }) {
               <Link
                 className={mainNavClasses}
                 href={to}
-                variant={asPath === to ? "link-on" : "link"}
+                variant={pathname === to ? "link-on" : "link"}
                 isInternal
                 aria-label={`Navigate to ${title}.`}
               >
@@ -67,8 +67,8 @@ function Settings({ className = "" }: { className?: string }) {
 }
 
 function Navbar() {
+  const pathname = usePathname()
   const isMobile = useBreakpoint("isMobile")
-  const router = useRouter()
 
   const [open, setOpen] = useState(() => false)
 
@@ -82,18 +82,13 @@ function Navbar() {
 
   useEffect(() => {
     closeMenu()
-
-    router.events.on("routeChangeStart", closeMenu)
-    return () => {
-      router.events.off("routeChangeStart", closeMenu)
-    }
-  }, [router.events])
+  }, [pathname])
 
   return (
     <div className="h-[88px] lg:h-[97.5px]">
       <div
         className={cn(
-          "z-banner relative left-0 right-0 top-0 translate-y-0 transition duration-200 ease-in-out"
+          "relative left-0 right-0 top-0 z-banner translate-y-0 transition duration-200 ease-in-out"
           // position !== HeadroomPositions.DEFAULT && "fixed",
           // !showing && !open && "-translate-y-full"
         )}
@@ -144,7 +139,7 @@ function Navbar() {
 
               <div
                 role="presentation"
-                className="hide-desktop page-container bg-theme-placeholder mb-6 mt-4 h-0.5 w-[70%]"
+                className="hide-desktop page-container mb-6 mt-4 h-0.5 w-[70%] bg-theme-stark"
               />
             </CollapsibleContent>
           </header>

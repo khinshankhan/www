@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect } from "react"
-import { useRouter } from "next/router"
+import { usePathname } from "next/navigation"
 import { Link, buttonVariants } from "@/components/ui"
 
 export function focusSkipNav(blur = false) {
@@ -14,22 +14,21 @@ export function focusSkipNav(blur = false) {
   }
 }
 
-export function yieldSkipNav() {
-  focusSkipNav(true)
-}
-
 export function SkipNav() {
-  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
-    router.events.on("routeChangeComplete", yieldSkipNav)
-    return () => {
-      router.events.off("routeChangeComplete", yieldSkipNav)
-    }
-  }, [router.events])
+    if (typeof window === "undefined") return undefined
+    if (window.location.hash) return undefined
+    focusSkipNav(true)
+  }, [pathname])
 
   return (
-    <div id="skip-nav" tabIndex={-1} className="-z-1 focus-within:z-skipLink fixed mt-6 w-full">
+    <div
+      id="skip-nav"
+      tabIndex={-1}
+      className="absolute -top-96 -z-1 mt-6 w-full focus-within:top-0 focus-within:z-skipLink"
+    >
       <div className="page-container">
         <Link
           id="skip-to-content"

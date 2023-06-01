@@ -1,20 +1,24 @@
 import React from "react"
-import { Button, H1, H2, Link, typographyVariants } from "@/components/ui"
+import { Link, typographyVariants } from "@/components/ui"
 import Emoji from "@/components/emoji"
+import MigrationNotice from "@/components/migration-notice"
+import EggText from "./egg-text"
 
-export default function Page() {
+export default function Home() {
   return (
-    <div id="content" className="text-center">
-      <H1 className="mt-20 flex flex-col lg:mt-16">
+    <main id="content" className="text-center">
+      <h1
+        className={typographyVariants({ variant: "h1", className: "mt-20 flex flex-col lg:mt-16" })}
+      >
         <span>
-          Hello there <Wave />
+          Hello there <Emoji name=":wave:" className="animate-wave" />
         </span>
         <span>
-          I’m <span className="accent hyphens-auto">Khinshan</span>!
+          I’m <span className="text-theme-accent">Khinshan</span>!
         </span>
-      </H1>
+      </h1>
 
-      <H2 className="mt-10">I am a software engineer.</H2>
+      <h2 className={typographyVariants({ variant: "h2", className: "mt-10" })}>I am a writer.</h2>
 
       <div className="page-container mt-10">
         <p
@@ -37,25 +41,8 @@ export default function Page() {
       <p className={typographyVariants({ variant: "main-nav", className: "page-container mt-10" })}>
         Also, here are some nice projects you can check out:
       </p>
-    </div>
+
+      <MigrationNotice className="mt-10" />
+    </main>
   )
-}
-
-Page.isHero = true
-
-// TODO: get back to this...
-function EggText() {
-  return (
-    <p className={typographyVariants({ variant: "main-nav", className: "page-container" })}>
-      this site currently has{" "}
-      <Button className="p-0">
-        <span className="text-theme-accent">0</span> easter eggs
-      </Button>{" "}
-      !
-    </p>
-  )
-}
-
-function Wave() {
-  return <Emoji name=":wave:" className="animate-wave" />
 }

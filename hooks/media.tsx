@@ -49,25 +49,3 @@ export function useBreakpoint(bp: Bp, defaultValue: boolean = false) {
   const match = useMediaQuery(mediaQuery, defaultValue)
   return match
 }
-
-// mostly for debugging purposes
-export const useDimensions = () => {
-  const [innerWidth, setW] = useState(typeof window !== "undefined" ? window.innerWidth : null)
-  const [innerHeight, setH] = useState(typeof window !== "undefined" ? window.innerHeight : null)
-
-  function windowResizeHandler() {
-    if (typeof window !== "undefined") {
-      setW(window.innerWidth)
-      setH(window.innerHeight)
-    }
-  }
-
-  useEffect(() => {
-    if (typeof window === "undefined") return undefined
-
-    window.addEventListener("resize", windowResizeHandler)
-    return () => window.removeEventListener("resize", windowResizeHandler)
-  }, [])
-
-  return { innerWidth, innerHeight }
-}

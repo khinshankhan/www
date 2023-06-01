@@ -1,2 +1,3 @@
 export * from "./base"
-export * from "./templates"
+export * from "./page-skeleton"
+export * from "./sidebars"
