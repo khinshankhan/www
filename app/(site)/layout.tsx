@@ -22,20 +22,20 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   openGraph: {
-    title: 'Khinshan Khan',
+    title: "Khinshan Khan",
   description:
     "Hello! Welcome to my digital garden, where I share my thoughts and musings. You may or may not learn something, but at least it'll be fun!",
-    url: 'https://www.khinshankhan.com',
-    siteName: 'Khinshan Khan',
+    url: "https://www.khinshankhan.com",
+    siteName: "Khinshan Khan",
     images: [
       {
-        url: 'https://www.khinshankhan.com/og.png?v=1',
+        url: "https://www.khinshankhan.com/og.png?v=1",
         width: 1200,
         height: 630,
       },
     ],
-    locale: 'en-US',
-    type: 'website',
+    locale: "en-US",
+    type: "website",
   },
 }
 
