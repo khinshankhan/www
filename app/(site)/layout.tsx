@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Khinshan Khan",
-  description:
-    "Hello! Welcome to my digital garden, where I share my thoughts and musings. You may or may not learn something, but at least it'll be fun!",
+    description:
+      "Hello! Welcome to my digital garden, where I share my thoughts and musings. You may or may not learn something, but at least it'll be fun!",
     url: "https://www.khinshankhan.com",
     siteName: "Khinshan Khan",
     images: [
