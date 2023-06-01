@@ -33,7 +33,7 @@ export type CalloutProps = {
   children: ReactNode
 } & CalloutVariants
 
-type SvgFn = (props: RawIconProps) => React.JSX.Element
+type SvgFn = (_props: RawIconProps) => React.JSX.Element
 const calloutIcons: Record<NonNullable<CalloutVariants["variant"]>, SvgFn> = {
   info: InformationCircle,
   error: XCircle,
