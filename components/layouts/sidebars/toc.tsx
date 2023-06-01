@@ -67,7 +67,12 @@ export function Toc({ headings: headingsProp = [], showExcerpt = true }: TocProp
           variant="ghost"
           className="group w-full pl-0 xl:pl-2.5"
         >
-          <span className="group flex items-center justify-between">
+          <span
+            className={cn(
+              typographyVariants({ variant: "h3" }),
+              "group flex items-center justify-between"
+            )}
+          >
             <span>On this page</span>
             <Icon>
               <ChevronDown className="text-violet10 animated-arrow" aria-hidden />
