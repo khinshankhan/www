@@ -11,7 +11,7 @@ export default function PagesLayout({ children }: { children: ReactNode }) {
           <span>{`Some work. Almost a portfolio`}</span> <Emoji name=":dancer:" />
         </>
       }
-      path="/app/(pages)/projects/page.tsx"
+      path="/app/(site)/(pages)/projects/page.tsx"
     >
       {children}
     </PageSkeletonLayout>

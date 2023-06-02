@@ -11,7 +11,7 @@ export default function PagesLayout({ children }: { children: ReactNode }) {
           <span>{`Getting in touch. Boop`}</span> <Emoji name=":point_up_2:" />
         </>
       }
-      path="/app/(pages)/contact/page.tsx"
+      path="/app/(site)/(pages)/contact/page.tsx"
     >
       {children}
     </PageSkeletonLayout>

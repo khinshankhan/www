@@ -11,7 +11,7 @@ export default function PagesLayout({ children }: { children: ReactNode }) {
           <span>{`My thoughts and ideas`}</span> <Emoji name=":thought_balloon:" />
         </>
       }
-      path="/app/(pages)/writings/page.tsx"
+      path="/app/(site)/(pages)/writings/page.tsx"
     >
       {children}
     </PageSkeletonLayout>
