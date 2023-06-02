@@ -22,20 +22,35 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   openGraph: {
+    siteName: "Khinshan Khan",
     title: "Khinshan Khan",
     description:
       "Hello! Welcome to my digital garden, where I share my thoughts and musings. You may or may not learn something, but at least it'll be fun!",
     url: "https://www.khinshankhan.com",
-    siteName: "Khinshan Khan",
     images: [
       {
-        url: "https://www.khinshankhan.com/og.png?v=5",
+        url: "https://www.khinshankhan.com/og.png?v=6",
         width: 1125,
         height: 590,
       },
     ],
     locale: "en-US",
     type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  twitter: {
+    title: "Khinshan Khan",
+    card: "summary_large_image",
   },
 }
 
