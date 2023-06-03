@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next"
-import { allPages as pages } from "contentlayer/generated"
+import { allPages } from "contentlayer/generated"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // NOTE: this list is manually maintained for any page that isn't generated via contentlayer
@@ -8,10 +8,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date().toISOString().split("T")[0],
   }))
 
-  const pageRoutes = pages.map((page) => ({
+  const generatedRoutes = [...allPages].map((page) => ({
     url: `https://www.khinshankhan.com/${page.slug}`,
     lastModified: page.tended,
   }))
 
-  return [...routes, ...pageRoutes]
+  return [...routes, ...generatedRoutes]
 }
