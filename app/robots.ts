@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/private/", "/drafts/"],
       },
     ],
-    sitemap: "https://khinshankhan.com/sitemap.xml",
-    host: "https://khinshankhan.com",
+    sitemap: "https://www.khinshankhan.com/sitemap.xml",
+    host: "https://www.khinshankhan.com",
   }
 }
