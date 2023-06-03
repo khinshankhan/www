@@ -3,10 +3,13 @@ import Slugger from "github-slugger"
 import { chopOffWord } from "../utils/string"
 
 interface IFieldsProps {
-  subtitle: string
+  subtitle?: string
   status?: string
 }
-const getFields = ({ subtitle, status = "published" }: IFieldsProps): FieldDefs => ({
+const getFields = ({
+  subtitle = "Doing my best :writing_hand:",
+  status = "published",
+}: IFieldsProps): FieldDefs => ({
   title: {
     type: "string",
     required: true,
@@ -17,6 +20,7 @@ const getFields = ({ subtitle, status = "published" }: IFieldsProps): FieldDefs 
   },
   givenSlug: {
     type: "string",
+    required: false,
   },
 
   planted: {
@@ -39,12 +43,19 @@ const getFields = ({ subtitle, status = "published" }: IFieldsProps): FieldDefs 
     of: {
       type: "string",
     },
+    required: false,
   },
   categories: {
     type: "list",
     of: {
       type: "string",
     },
+    required: false,
+  },
+
+  cover: {
+    type: "json",
+    required: false,
   },
 })
 
@@ -54,6 +65,10 @@ export interface Computed {
     subtitle: string
     planted: string
     tended: string
+    cover: {
+      img: string
+      alt: string
+    }
   }
   tags: string[]
   headings: {
@@ -68,7 +83,7 @@ interface IComputedFieldsProps {
   chopPrefix?: boolean
 }
 // NOTE: T extends union of documents types
-const getComputedFields = <T extends "Page">({
+const getComputedFields = <T extends "Page" | "Writing">({
   prefix,
   chopPrefix = false,
 }: IComputedFieldsProps): ComputedFields<T> => {
@@ -114,6 +129,18 @@ const getComputedFields = <T extends "Page">({
           })
         )
 
+        let cover = {} as Computed["frontmatter"]["cover"]
+        if (doc.cover?.img) {
+          cover.img = doc.cover.img
+        } else {
+          cover.img =
+            // TODO: replace with decent cover image
+            // TODO: replace based on path?
+            "https://images.unsplash.com/photo-1636193535246-a07cd0aa6fcb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+        }
+
+        cover.alt = doc.cover?.alt ? doc.cover.alt : `Cover image for ${doc.title}`
+
         return {
           frontmatter: {
             title: doc.title,
@@ -121,6 +148,7 @@ const getComputedFields = <T extends "Page">({
             // chop of tz info since it's wrong (Z)
             planted: doc.planted?.slice(0, -1) ?? "",
             tended: doc.tended.slice(0, -1),
+            cover,
           },
           tags,
           headings,
@@ -134,11 +162,20 @@ export const Page = defineDocumentType(() => ({
   name: "Page",
   contentType: "mdx",
   filePathPattern: "pages/**/*.md",
-  fields: getFields({
-    subtitle: `Doing my best :writing_hand:`,
-  }),
+  fields: getFields({}),
   computedFields: getComputedFields<"Page">({
     prefix: "pages",
     chopPrefix: true,
+  }),
+}))
+
+export const Writing = defineDocumentType(() => ({
+  name: "Writing",
+  contentType: "mdx",
+  filePathPattern: "writings/**/*.md",
+  fields: getFields({}),
+  computedFields: getComputedFields<"Writing">({
+    prefix: "writings",
+    chopPrefix: false,
   }),
 }))
