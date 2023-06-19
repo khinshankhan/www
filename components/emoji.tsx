@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import { InvalidEmojiException } from "@/@khinshankhan/emoji-helper/core"
+import { InvalidEmojiException } from "@khinshankhan/emoji-helper-core"
 import { emojiLookup, type EmojiKey } from "@/lib/emoji"
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui"

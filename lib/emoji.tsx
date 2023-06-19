@@ -1,5 +1,5 @@
-import { createEmojiLookup, type EmojiInfoTemplate } from "../@khinshankhan/emoji-helper/core"
-import githubEmoji from "../@khinshankhan/emoji-helper/github"
+import { createEmojiLookup, type EmojiInfoTemplate } from "@khinshankhan/emoji-helper-core"
+import githubEmoji from "@khinshankhan/emoji-helper-pack-github"
 
 type MapKey<T> = T extends Map<infer K, any> ? K : never
 

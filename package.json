@@ -16,6 +16,9 @@
   },
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
+    "@khinshankhan/emoji-helper-core": "^0.0.1",
+    "@khinshankhan/emoji-helper-pack-github": "^0.0.1",
+    "@khinshankhan/emoji-helper-remark": "^0.0.1",
     "@radix-ui/react-collapsible": "^1.0.2",
     "@radix-ui/react-tooltip": "^1.0.5",
     "@testing-library/jest-dom": "^5.16.5",
