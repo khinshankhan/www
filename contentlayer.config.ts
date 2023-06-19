@@ -2,13 +2,13 @@ import { makeSource } from "contentlayer/source-files"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
 import { remarkSimpleEmoji } from "./@khinshankhan/emoji-helper/remark"
-import { Page } from "./lib/contentlayer/documents"
+import { Page, Writing } from "./lib/contentlayer/documents"
 import { rehypeMarkExcerpt } from "./lib/contentlayer/plugins"
 import { EmojiKey, emojiLookup } from "./lib/emoji"
 
 export default makeSource({
   contentDirPath: "data",
-  documentTypes: [Page],
+  documentTypes: [Page, Writing],
   mdx: {
     esbuildOptions(options) {
       options.target = "esnext"
