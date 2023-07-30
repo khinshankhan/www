@@ -14,8 +14,8 @@ const getHeading = (variant: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") => {
 }
 
 // TODO: add in placeholder image
-const Image: MDXComponents["img"] = ({ src, ...props }) => (
-  <FullImage src={src ?? "/placeholder.png"} {...props} />
+const Image: MDXComponents["img"] = ({ src, alt, title }) => (
+  <FullImage src={src ?? "/placeholder.png"} alt={alt ?? ""} title={title} />
 )
 
 // TODO: get back to this
@@ -39,6 +39,7 @@ const MdxComponents: MDXComponents = {
   pre: Pre,
   code: Code,
   img: Image,
+  FullImage,
   LocalImage,
   Emoji,
 }

@@ -9,7 +9,7 @@ export function FullImage({ src, alt, title, height, width, ...props }: ImagePro
   const imageAlt = alt !== "" ? alt : title ?? `This is an image from ${src}`
   const classes = props?.className ?? ""
 
-  const [h, setH] = useState(height ?? 1000)
+  const [h, setH] = useState(height ?? 120)
   const [w, setW] = useState(width ?? 9999)
 
   const status = useImage({
@@ -30,8 +30,8 @@ export function FullImage({ src, alt, title, height, width, ...props }: ImagePro
         <div
           className="flex max-w-full items-center justify-center rounded-lg bg-gray-11"
           style={{
-            height: "396px",
-            width: "100%",
+            height: `${h}px`,
+            width: w === 9999 ? `100%` : `${w}px`,
           }}
         >
           <svg
