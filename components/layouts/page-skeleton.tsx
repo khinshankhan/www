@@ -37,7 +37,7 @@ export interface PageSkeletonLayoutProps extends WithSidebarProps {
 export function PageSkeletonLayout({
   title,
   subtitle,
-  direction = "left",
+  direction = "right",
   sidebar,
   path: ghPath,
   children,
@@ -56,7 +56,7 @@ export function PageSkeletonLayout({
 
       <div className="grow py-5">
         <WithSidebar direction={direction} sidebar={sidebar}>
-          <article id="article" className={cn("my-6 grow pt-0 sm:pt-2", className)}>
+          <article id="article" className={cn("my-6 flex flex-1 flex-col pt-0 sm:pt-2", className)}>
             {children}
           </article>
         </WithSidebar>
