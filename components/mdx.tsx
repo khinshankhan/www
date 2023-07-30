@@ -1,6 +1,6 @@
 import type { MDXComponents } from "mdx/types"
 import { useMDXComponent } from "next-contentlayer/hooks"
-import { Link, typographyVariants } from "@/components/ui"
+import { FullImage, Link, LocalImage, typographyVariants } from "@/components/ui"
 import Emoji from "@/components/emoji"
 
 const A: MDXComponents["a"] = ({ href = "#", ...props }) => <Link href={href} {...props} />
@@ -12,6 +12,11 @@ const getHeading = (variant: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") => {
   )
   return Heading
 }
+
+// TODO: add in placeholder image
+const Image: MDXComponents["img"] = ({ src, ...props }) => (
+  <FullImage src={src ?? "/placeholder.png"} {...props} />
+)
 
 // TODO: get back to this
 const Pre: MDXComponents["pre"] = ({ children }) => (
@@ -33,6 +38,8 @@ const MdxComponents: MDXComponents = {
   h6: getHeading("h6"),
   pre: Pre,
   code: Code,
+  img: Image,
+  LocalImage,
   Emoji,
 }
 
