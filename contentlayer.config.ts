@@ -2,6 +2,7 @@ import { remarkSimpleEmoji } from "@khinshankhan/emoji-helper-remark"
 import { makeSource } from "contentlayer/source-files"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
+import remarkGfm from "remark-gfm"
 import { Page, Writing } from "./lib/contentlayer/documents"
 import { rehypeMarkExcerpt } from "./lib/contentlayer/plugins"
 import { EmojiKey, emojiLookup } from "./lib/emoji"
@@ -26,6 +27,7 @@ export default makeSource({
           },
         },
       ],
+      [remarkGfm],
     ],
     rehypePlugins: [
       rehypeMarkExcerpt,
