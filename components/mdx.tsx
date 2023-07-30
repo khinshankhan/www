@@ -13,6 +13,16 @@ const getHeading = (variant: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") => {
   return Heading
 }
 
+// TODO: get back to this
+const Pre: MDXComponents["pre"] = ({ children }) => (
+  <div className="flex-shrink">
+    <pre className="whitespace-pre-wrap break-words">{children}</pre>
+  </div>
+)
+
+// TODO: get back to this
+const Code: MDXComponents["code"] = ({ children }) => <code>{children}</code>
+
 const MdxComponents: MDXComponents = {
   a: A,
   h1: getHeading("h1"),
@@ -21,6 +31,8 @@ const MdxComponents: MDXComponents = {
   h4: getHeading("h4"),
   h5: getHeading("h5"),
   h6: getHeading("h6"),
+  pre: Pre,
+  code: Code,
   Emoji,
 }
 
