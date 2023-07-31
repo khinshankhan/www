@@ -5,10 +5,27 @@ import { default as NextImage, type ImageProps, type StaticImageData } from "nex
 import { cn } from "@/lib/utils"
 import { shouldShowFallbackImage, useImage } from "./use-image"
 
-export function FullImage({ src, alt, title, height, width, ...props }: ImageProps) {
+export function Figure({ src, alt, title, className = "", ...props }: ImageProps) {
   const imageAlt = alt !== "" ? alt : title ?? `This is an image from ${src}`
-  const classes = props?.className ?? ""
 
+  return (
+    <figure className="relative flex w-full flex-col items-center justify-center">
+      <NextImage
+        src={src}
+        alt={imageAlt}
+        title={title || ""}
+        {...props}
+        className={cn("h-auto w-auto max-w-full rounded-lg", className)}
+      />
+
+      {(title || alt) && (
+        <figcaption className="mt-4 text-center text-theme-muted">{title || alt}</figcaption>
+      )}
+    </figure>
+  )
+}
+
+export function FullImage({ src, alt, height, width, ...props }: ImageProps) {
   const [h, setH] = useState(height ?? 120)
   const [w, setW] = useState(width ?? 9999)
 
@@ -23,10 +40,7 @@ export function FullImage({ src, alt, title, height, width, ...props }: ImagePro
   if (showFallbackImage) {
     // credits https://flowbite.com/docs/components/skeleton/
     return (
-      <div
-        role="status"
-        className="flex w-full animate-pulse flex-col items-center justify-center space-y-8 md:space-x-8 md:space-y-0"
-      >
+      <div role="status" className="flex w-full animate-pulse flex-col items-center justify-center">
         <div
           className="flex max-w-full items-center justify-center rounded-lg bg-gray-11"
           style={{
@@ -50,30 +64,21 @@ export function FullImage({ src, alt, title, height, width, ...props }: ImagePro
   }
 
   return (
-    <figure className="relative flex w-full flex-col items-center justify-center">
-      <NextImage
-        src={src}
-        alt={imageAlt}
-        title={title || ""}
-        height={h}
-        width={w}
-        {...props}
-        onLoad={({ target, ...rest }) => {
-          const { naturalHeight, naturalWidth } = target as HTMLImageElement
-          setH(naturalHeight)
-          setW(naturalWidth)
+    <Figure
+      src={src}
+      alt={alt}
+      height={h}
+      width={w}
+      onLoad={({ target, ...rest }) => {
+        const { naturalHeight, naturalWidth } = target as HTMLImageElement
+        if (!height) setH(naturalHeight)
+        if (!width) setW(naturalWidth)
 
-          if (props?.onLoad) {
-            props.onLoad({ target, ...rest })
-          }
-        }}
-        className={cn("h-auto w-auto max-w-full rounded-lg", classes)}
-      />
-
-      {(title || alt) && (
-        <figcaption className="mt-4 text-center text-theme-muted">{title || alt}</figcaption>
-      )}
-    </figure>
+        if (props?.onLoad) {
+          props.onLoad({ target, ...rest })
+        }
+      }}
+    />
   )
 }
 
