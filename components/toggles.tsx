@@ -3,6 +3,7 @@
 import React, { forwardRef, useEffect, useState, type HTMLProps } from "react"
 import Link from "next/link"
 import { useTheme } from "next-themes"
+import { getSizeParts } from "@/lib/utils"
 import { useBreakpoint, useMounted } from "@/hooks"
 import { Icon, IconButton } from "@/components/ui"
 import {
@@ -15,22 +16,6 @@ import {
   type ILogoProps,
 } from "@/components/icons"
 
-const getSizeParts = (sizeProp?: number | string) => {
-  const defaultSize = sizeProp?.toString() ?? `50px`
-
-  // matches consecutive number, then the rest is the second capture group
-  const re = /([-0-9]+)(.*)/g
-  // @ts-ignore
-  const parts = [...defaultSize.matchAll(re)][0] // only interested in the 0th group
-
-  const size = Number(parts[1])
-  const unit = parts[2].toString()
-  return {
-    size,
-    unit: unit === "" ? "px" : unit, // unit could just be a number, idc use px as default
-  }
-}
-
 interface IHomeToggleProps extends ILogoProps {
   size?: number | string
   scalable?: boolean
@@ -41,7 +26,11 @@ export function HomeToggle({
   scalable = true,
   ...props
 }: IHomeToggleProps) {
-  const { size: defaultSize, unit } = getSizeParts(sizeProp)
+  const { size: defaultSize, unit } = getSizeParts({
+    size: sizeProp,
+    unit: "px",
+    fallbackSize: 50,
+  })
   const [size, setSize] = useState(defaultSize.toString() + unit)
 
   // increase the size to match the main nav on lg bp

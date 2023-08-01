@@ -8,4 +8,5 @@ export function cn(...inputs: ClassValue[]) {
 export * from "./array"
 export * from "./scroll"
 export * from "./string"
+export * from "./unit"
 export * from "./url"
