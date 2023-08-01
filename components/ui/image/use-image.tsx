@@ -66,6 +66,10 @@ export function useImage(props: UseImageProps) {
 
   const [status, setStatus] = useState<Status>("pending")
 
+  // preemptively  fetch natural dimensions of image
+  const [naturalHeight, setNaturalHeight] = useState(0)
+  const [naturalWidth, setNaturalWidth] = useState(0)
+
   useEffect(() => {
     setStatus(src ? "loading" : "pending")
   }, [src])
@@ -88,6 +92,8 @@ export function useImage(props: UseImageProps) {
       flush()
       setStatus("loaded")
       onLoad?.(event as unknown as ImageEvent)
+      setNaturalHeight(img.naturalHeight)
+      setNaturalWidth(img.naturalWidth)
     }
     img.onerror = (error) => {
       flush()
@@ -125,7 +131,7 @@ export function useImage(props: UseImageProps) {
    * If user opts out of the fallback/placeholder
    * logic, let's just return 'loaded'
    */
-  return ignoreFallback ? "loaded" : status
+  return { status: ignoreFallback ? "loaded" : status, naturalHeight, naturalWidth }
 }
 
 export const shouldShowFallbackImage = (status: Status, fallbackStrategy: FallbackStrategy) =>
