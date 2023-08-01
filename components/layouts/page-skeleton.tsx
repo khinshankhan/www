@@ -1,27 +1,44 @@
 import React, { type ReactNode } from "react"
 import { cn } from "@/lib/utils"
-import { Link, typographyVariants } from "@/components/ui"
+import { Link, SmartImage, typographyVariants } from "@/components/ui"
 
 export interface WithSidebarProps {
   direction?: "left" | "right"
   sidebar?: ReactNode
+
+  before?: ReactNode
   children: ReactNode
+  after?: ReactNode
 }
 
-export function WithSidebar({ direction = "left", sidebar, children }: WithSidebarProps) {
+export function WithSidebar({
+  direction = "left",
+  sidebar,
+  before,
+  children,
+  after,
+}: WithSidebarProps) {
   return (
-    <div
-      className={cn(
-        "page-container flex-col gap-20 xl:flex",
-        direction === "left" ? "xl:flex-row xl:justify-start" : "xl:flex-row-reverse xl:justify-end"
-      )}
-    >
-      {sidebar && (
-        <aside className="top-6 mt-6 pt-0 sm:top-2 sm:pt-2 xl:sticky xl:min-w-[225px] xl:max-w-[225px] xl:self-start 2xl:min-w-[275px] 2xl:max-w-[275px]">
-          {sidebar}
-        </aside>
-      )}
-      {children}
+    <div className="page-container flex flex-col gap-10">
+      {before}
+
+      <div
+        className={cn(
+          "flex-col gap-20 xl:flex",
+          direction === "left"
+            ? "xl:flex-row xl:justify-start"
+            : "xl:flex-row-reverse xl:justify-end"
+        )}
+      >
+        {sidebar && (
+          <aside className="top-6 mt-6 pt-0 sm:top-2 sm:pt-2 xl:sticky xl:min-w-[225px] xl:max-w-[225px] xl:self-start 2xl:min-w-[275px] 2xl:max-w-[275px]">
+            {sidebar}
+          </aside>
+        )}
+        {children}
+      </div>
+
+      {after}
     </div>
   )
 }
@@ -42,6 +59,8 @@ export function PageSkeletonLayout({
   path: ghPath,
   children,
   className = "",
+  before,
+  after,
 }: PageSkeletonLayoutProps) {
   // the flex grow applies to the base layout's min-h flex div. this keeps any negative space between content to footer
   // (within the min-h) the content bg color, accounting for potentially shorter content
@@ -55,7 +74,7 @@ export function PageSkeletonLayout({
       </header>
 
       <div className="grow py-5">
-        <WithSidebar direction={direction} sidebar={sidebar}>
+        <WithSidebar direction={direction} sidebar={sidebar} before={before} after={after}>
           <article id="article" className={cn("my-6 flex flex-1 flex-col pt-0 sm:pt-2", className)}>
             {children}
           </article>
