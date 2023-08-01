@@ -1,51 +1,32 @@
 "use client"
 
-import React, { useState } from "react"
-import { default as NextImage, type ImageProps, type StaticImageData } from "next/image"
+import React from "react"
 import { cn } from "@/lib/utils"
+import { Figure, FigureWithCaption, getImageAlt, type FigureProps } from "./figure"
+import { images } from "./lookup"
 import { shouldShowFallbackImage, useImage } from "./use-image"
 
-export function Figure({ src, alt, title, className = "", ...props }: ImageProps) {
-  const imageAlt = alt !== "" ? alt : title ?? `This is an image from ${src}`
-
-  return (
-    <figure className="relative flex w-full flex-col items-center justify-center">
-      <NextImage
-        src={src}
-        alt={imageAlt}
-        title={title || ""}
-        {...props}
-        className={cn("h-auto w-auto max-w-full rounded-lg", className)}
-      />
-
-      {(title || alt) && (
-        <figcaption className="mt-4 text-center text-theme-muted">{title || alt}</figcaption>
-      )}
-    </figure>
-  )
+interface SkeletonImageProps {
+  height: string | number
+  width: string | number
+  className?: string
+  alt?: string
+  title?: string
 }
-
-export function FullImage({ src, alt, height, width, ...props }: ImageProps) {
-  const [h, setH] = useState(height ?? 120)
-  const [w, setW] = useState(width ?? 9999)
-
-  const status = useImage({
-    src: typeof src === "string" ? src : "/fallback.png",
-    ...props,
-    crossOrigin: props.crossOrigin,
-    ignoreFallback: false,
-  })
-  const showFallbackImage = shouldShowFallbackImage(status, "beforeLoadOrError")
-
-  if (showFallbackImage) {
-    // credits https://flowbite.com/docs/components/skeleton/
-    return (
+// credits https://flowbite.com/docs/components/skeleton/
+export function SkeletonImage({ height, width, className = "", alt, title }: SkeletonImageProps) {
+  return (
+    <FigureWithCaption alt={getImageAlt({ src: "Skeletal loading image", alt, title })}>
       <div role="status" className="flex w-full animate-pulse flex-col items-center justify-center">
         <div
-          className="flex max-w-full items-center justify-center rounded-lg bg-gray-11"
+          className={cn(
+            "flex h-auto max-w-full items-center justify-center rounded-lg bg-gray-11",
+            className,
+            className.includes("aspect-") && "!h-auto"
+          )}
           style={{
-            height: `${h}px`,
-            width: w === 9999 ? `100%` : `${w}px`,
+            height: height,
+            width: width,
           }}
         >
           <svg
@@ -60,6 +41,31 @@ export function FullImage({ src, alt, height, width, ...props }: ImageProps) {
         </div>
         <span className="sr-only">Loading...</span>
       </div>
+    </FigureWithCaption>
+  )
+}
+
+export function FullImage({ src, alt, height, width, title, ...props }: FigureProps) {
+  const h = height ?? 400 // good default
+  const w = width ?? 9999
+
+  const { status, naturalHeight, naturalWidth } = useImage({
+    src: typeof src === "string" ? src : "/fallback.png",
+    ...props,
+    crossOrigin: props.crossOrigin,
+    ignoreFallback: false,
+  })
+  const showFallbackImage = shouldShowFallbackImage(status, "beforeLoadOrError")
+
+  if (showFallbackImage) {
+    return (
+      <SkeletonImage
+        height={h}
+        width={w === 9999 ? "100%" : w}
+        alt={alt}
+        title={title}
+        className={props?.className}
+      />
     )
   }
 
@@ -67,21 +73,24 @@ export function FullImage({ src, alt, height, width, ...props }: ImageProps) {
     <Figure
       src={src}
       alt={alt}
-      height={h}
-      width={w}
-      onLoad={({ target, ...rest }) => {
-        const { naturalHeight, naturalWidth } = target as HTMLImageElement
-        if (!height) setH(naturalHeight)
-        if (!width) setW(naturalWidth)
-
-        if (props?.onLoad) {
-          props.onLoad({ target, ...rest })
-        }
-      }}
+      title={title}
+      height={height ?? naturalHeight}
+      width={width ?? naturalWidth}
+      {...props}
     />
   )
 }
 
-export function LocalImage({ src, alt }: { src: StaticImageData; alt: string }) {
-  return <NextImage src={src} alt={alt} />
+export function SmartImage({ src, height, width, ...props }: FigureProps) {
+  // @ts-ignore
+  const lookupInfo = images?.[src]
+
+  return (
+    <FullImage
+      src={lookupInfo?.src ?? src}
+      height={lookupInfo?.height ?? height}
+      width={lookupInfo?.width ?? width}
+      {...props}
+    />
+  )
 }

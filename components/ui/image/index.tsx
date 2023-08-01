@@ -1,1 +1,2 @@
-export { FullImage, LocalImage } from "./image"
+export { Figure } from "./figure"
+export { SmartImage } from "./image"
