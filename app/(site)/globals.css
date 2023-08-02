@@ -290,7 +290,7 @@
   }
 
   .page-container {
-    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1280px] 2xl:max-w-[1325px];
+    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[800px] 2xl:max-w-[1000px];
   }
 
   .typography-transition {
@@ -414,6 +414,12 @@
       padding-left: 0.75em;
       list-style: none;
     }
+  }
+
+  .sparkly {
+    background-image: radial-gradient(circle at 6px 24px, #404458 1%, transparent 1%),
+      radial-gradient(circle at 47px 53px, #3f4356 1%, transparent 1%);
+    background-size: 79px 60px;
   }
 }
 

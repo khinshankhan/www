@@ -1,6 +1,6 @@
 import React, { type ReactNode } from "react"
 import { cn } from "@/lib/utils"
-import { Link, SmartImage, typographyVariants } from "@/components/ui"
+import { Link, typographyVariants } from "@/components/ui"
 
 export interface WithSidebarProps {
   direction?: "left" | "right"
@@ -24,17 +24,17 @@ export function WithSidebar({
 
       <div
         className={cn(
-          "flex-col gap-20 xl:flex",
-          direction === "left"
-            ? "xl:flex-row xl:justify-start"
-            : "xl:flex-row-reverse xl:justify-end"
+          "flex w-full flex-col xl:justify-end xl:gap-16",
+          direction === "left" ? "xl:flex-row" : "xl:flex-row-reverse"
         )}
       >
-        {sidebar && (
-          <aside className="top-6 mt-6 pt-0 sm:top-2 sm:pt-2 xl:sticky xl:min-w-[225px] xl:max-w-[225px] xl:self-start 2xl:min-w-[275px] 2xl:max-w-[275px]">
-            {sidebar}
-          </aside>
-        )}
+        <aside>
+          {sidebar && (
+            <aside className="top-6 mt-6 pt-0 sm:top-2 sm:pt-2 xl:sticky xl:min-w-[200px] xl:max-w-[200px] xl:self-start 2xl:min-w-[225px] 2xl:max-w-[225px]">
+              {sidebar}
+            </aside>
+          )}
+        </aside>
         {children}
       </div>
 
@@ -77,7 +77,10 @@ export function PageSkeletonLayout({
 
       <div className="grow py-5">
         <WithSidebar direction={direction} sidebar={sidebar} before={before} after={after}>
-          <article id="article" className={cn("my-6 flex flex-1 flex-col pt-0 sm:pt-2", className)}>
+          <article
+            id="article"
+            className={cn("my-6 flex min-w-full flex-1 flex-col pt-0 sm:pt-2", className)}
+          >
             {children}
           </article>
         </WithSidebar>
