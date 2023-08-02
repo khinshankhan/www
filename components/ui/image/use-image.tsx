@@ -1,5 +1,5 @@
 // https://github.com/chakra-ui/chakra-ui/tree/main/packages/components/image
-import { useCallback, useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useIsomorphicEffect } from "hooks"
 
 type NativeImageProps = React.ImgHTMLAttributes<HTMLImageElement>

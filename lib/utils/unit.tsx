@@ -20,7 +20,7 @@ export function getSizeParts({
   // matches consecutive number, then the rest is the second capture group
   const re = /([-0-9]+)(.*)/g
   // @ts-ignore
-  const parts = [...defaultSize.matchAll(re)][0] // only interested in the 0th group
+  const parts = [...size.matchAll(re)][0] // only interested in the 0th group
 
   const sizeNumber = Number(parts[1])
   const sizeUnit = parts[2].toString()
