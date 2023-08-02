@@ -12,16 +12,23 @@ export interface FigureWithCaptionProps {
   alt?: string
   title?: string
   showCaption?: boolean
+  figureProps?: Record<string, any>
   children: ReactNode
 }
 export function FigureWithCaption({
   alt,
   title,
+  figureProps = {},
   showCaption = true,
   children,
 }: FigureWithCaptionProps) {
+  const figureClassName = figureProps?.className
+
   return (
-    <figure className="relative flex w-full flex-col items-center justify-center">
+    <figure
+      className={cn("relative flex w-full flex-col items-center justify-center", figureClassName)}
+      {...figureProps}
+    >
       {children}
 
       {showCaption && (title || alt) && (
@@ -37,6 +44,7 @@ export type FigureProps = Omit<ImageProps, "title" | "alt" | "height" | "width">
   height?: string | number
   width?: string | number
   showCaption?: boolean
+  figureProps?: Record<string, any>
 }
 export function Figure({
   src,
@@ -45,6 +53,7 @@ export function Figure({
   height,
   width,
   className = "",
+  figureProps = {},
   showCaption = true,
   ...props
 }: FigureProps) {
@@ -54,7 +63,12 @@ export function Figure({
   const imageAlt = getImageAlt({ src: typeof src === "string" ? src : "local", alt, title })
 
   return (
-    <FigureWithCaption alt={imageAlt} title={title} showCaption={showCaption}>
+    <FigureWithCaption
+      alt={imageAlt}
+      title={title}
+      showCaption={showCaption}
+      figureProps={figureProps}
+    >
       <NextImage
         src={src}
         alt={imageAlt}
