@@ -19,7 +19,7 @@ export function WithSidebar({
   after,
 }: WithSidebarProps) {
   return (
-    <div className="page-container flex flex-col gap-10">
+    <div className="content-container flex flex-col gap-10">
       {before}
 
       <div
