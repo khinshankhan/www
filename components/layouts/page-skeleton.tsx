@@ -47,6 +47,7 @@ export interface PageSkeletonLayoutProps extends WithSidebarProps {
   title: string
   subtitle: ReactNode
   path: string
+  extendedSpace?: boolean
   children: ReactNode
   className?: string
 }
@@ -57,6 +58,7 @@ export function PageSkeletonLayout({
   direction = "right",
   sidebar,
   path: ghPath,
+  extendedSpace = false,
   children,
   className = "",
   before,
@@ -66,7 +68,7 @@ export function PageSkeletonLayout({
   // (within the min-h) the content bg color, accounting for potentially shorter content
   return (
     <main className="flex grow flex-col">
-      <header className="bg-theme-primary py-14 text-center">
+      <header className={cn("bg-theme-primary pb-14 pt-14 text-center", extendedSpace && "pb-52")}>
         <h1 className={typographyVariants({ variant: "h1" })}>{title}</h1>
         <span className={typographyVariants({ variant: "main-nav", className: "block pt-6" })}>
           {subtitle}

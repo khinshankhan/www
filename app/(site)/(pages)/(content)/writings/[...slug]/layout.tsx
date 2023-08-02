@@ -27,8 +27,18 @@ export default async function PagesLayout({ children, params }: PageLayoutProps)
       path={`/data/${page._raw.sourceFilePath}`}
       sidebar={<Toc headings={computed.headings} />}
       className="normalize"
+      extendedSpace={true}
       before={
-        cover && <SmartImage src={cover.img} alt={cover.alt} className="aspect-video md:!w-[75%]" />
+        cover && (
+          <div className="-mt-40 flex flex-col gap-10">
+            <SmartImage
+              src={cover.img}
+              alt={cover.alt}
+              className="aspect-video md:!w-[75%]"
+              showCaption={false}
+            />
+          </div>
+        )
       }
       after={
         tags?.length !== 0 && (
