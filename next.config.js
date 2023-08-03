@@ -6,6 +6,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   output: "export",
+  images: {
+    unoptimized: true,
+  },
 }
 
 const compose = (initial, fns) => fns.reduce((acc, fn) => fn(acc), initial)

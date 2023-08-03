@@ -69,7 +69,7 @@ export function Toc({ headings: headingsProp = [], showExcerpt = true }: TocProp
         >
           <span
             className={cn(
-              typographyVariants({ variant: "h3" }),
+              typographyVariants({ variant: "h4" }),
               "group flex items-center justify-between"
             )}
           >

@@ -22,7 +22,7 @@ export default function Writings() {
           const computed = page.computed as Computed
 
           return (
-            <li key={page._id} className="card-link link-box flex w-full bg-theme-card">
+            <li key={page._id} className="card-link link-box flex w-full rounded-lg bg-theme-card">
               <div className="flex h-full w-full flex-col flex-col-reverse md:flex-row">
                 <div className="grow p-6">
                   <h3 className={typographyVariants({ variant: "h3" })}>
@@ -41,7 +41,7 @@ export default function Writings() {
                     // TODO: replace
                     src={computed.frontmatter.cover.img}
                     alt={computed.frontmatter.cover.alt}
-                    className="md:clip-list-image relative inset-0 h-full w-full object-cover md:absolute"
+                    className="md:clip-list-image relative inset-0 h-full w-full rounded-t-lg object-cover md:absolute md:rounded-r-lg"
                   />
                 </div>
               </div>

@@ -21,7 +21,11 @@ function hslaN({ variable = "", n = 1, scale = 1 }) {
 
 export default {
   darkMode: ["class"],
-  content: ["./components/**/*.{js,ts,md,jsx,tsx,mdx}", "./app/**/*.{js,ts,md,jsx,tsx,mdx}"],
+  content: [
+    "./components/**/*.{js,ts,md,jsx,tsx,mdx}",
+    "./data/**/*.{js,ts,md,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,md,jsx,tsx,mdx}",
+  ],
   theme: {
     screens,
     zIndex: {
@@ -87,6 +91,9 @@ export default {
       },
     },
     extend: {
+      transitionProperty: {
+        background: "background",
+      },
       transitionTimingFunction: {
         "arrow-ease": "cubic-bezier(0.87, 0, 0.13, 1)",
       },
@@ -117,9 +124,6 @@ export default {
         "collapsible-open": "collapsible-slide-down 300ms ease-out",
         "collapsible-close": "collapsible-slide-up 300ms ease-out",
         wave: "waving 2.5s infinite",
-      },
-      transitionProperty: {
-        background: "background",
       },
       backgroundSize: {
         "link-hide": "0% 0.05em",

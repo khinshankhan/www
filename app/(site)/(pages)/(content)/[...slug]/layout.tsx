@@ -23,7 +23,6 @@ export default async function PagesLayout({ children, params }: PageLayoutProps)
       subtitle={computed.frontmatter.subtitle}
       path={`/data/${page._raw.sourceFilePath}`}
       sidebar={<Toc headings={computed.headings} />}
-      direction="left"
       className="normalize"
     >
       {children}

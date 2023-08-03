@@ -1,6 +1,8 @@
+"use client"
+
 import type { MDXComponents } from "mdx/types"
 import { useMDXComponent } from "next-contentlayer/hooks"
-import { Link, typographyVariants } from "@/components/ui"
+import { Link, SmartImage, Video, typographyVariants } from "@/components/ui"
 import Emoji from "@/components/emoji"
 
 const A: MDXComponents["a"] = ({ href = "#", ...props }) => <Link href={href} {...props} />
@@ -13,6 +15,21 @@ const getHeading = (variant: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") => {
   return Heading
 }
 
+// TODO: add in placeholder image
+const Image: MDXComponents["img"] = ({ src, alt, title }) => (
+  <SmartImage src={src ?? "/placeholder.png"} alt={alt ?? ""} title={title} />
+)
+
+// TODO: get back to this
+const Pre: MDXComponents["pre"] = ({ children }) => (
+  <div className="flex-shrink">
+    <pre className="whitespace-pre-wrap break-words">{children}</pre>
+  </div>
+)
+
+// TODO: get back to this
+const Code: MDXComponents["code"] = ({ children }) => <code>{children}</code>
+
 const MdxComponents: MDXComponents = {
   a: A,
   h1: getHeading("h1"),
@@ -21,6 +38,11 @@ const MdxComponents: MDXComponents = {
   h4: getHeading("h4"),
   h5: getHeading("h5"),
   h6: getHeading("h6"),
+  pre: Pre,
+  code: Code,
+  img: Image,
+  SmartImage,
+  Video,
   Emoji,
 }
 
