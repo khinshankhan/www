@@ -1,7 +1,7 @@
 import React, { type ReactNode } from "react"
 import { notFound } from "next/navigation"
 import { Computed } from "@/lib/contentlayer/documents"
-import { Link, SmartImage } from "@/components/ui"
+import { SmartImage } from "@/components/ui"
 import { PageSkeletonLayout, Toc } from "@/components/layouts"
 import { getPageFromParams, type PageProps } from "./utils"
 
@@ -17,8 +17,8 @@ export default async function PagesLayout({ children, params }: PageLayoutProps)
   }
 
   const computed = page.computed as Computed
+  // TODO: cover img should have dimensions of image
   const cover = computed.frontmatter.cover
-  const tags = computed.tags
 
   return (
     <PageSkeletonLayout
@@ -38,25 +38,6 @@ export default async function PagesLayout({ children, params }: PageLayoutProps)
               showCaption={false}
             />
           </div>
-        )
-      }
-      after={
-        tags?.length !== 0 && (
-          <>
-            <div className="flex flex-row items-center justify-center">
-              <div className="md:w-[70%]">
-                <hr />
-              </div>
-            </div>
-
-            <div className="flex flex-row items-center justify-center gap-2">
-              {tags.map((e) => (
-                <Link key={e} href="/">
-                  {e}
-                </Link>
-              ))}
-            </div>
-          </>
         )
       }
     >
