@@ -18,7 +18,7 @@ interface Attribute {
   name: string
   value: string
 }
-function createMdxNode(name: string, attributes: Attribute[]) {
+function createMdxNode(name: string, attributes: Attribute[], children = []) {
   return {
     type: "mdxJsxTextElement",
     name,
@@ -27,7 +27,7 @@ function createMdxNode(name: string, attributes: Attribute[]) {
       name,
       value,
     })),
-    children: [],
+    children,
     data: { _mdxExplicitJsx: true },
   }
 }
@@ -35,7 +35,7 @@ function createMdxNode(name: string, attributes: Attribute[]) {
 export type MdastNode = MdastRoot | MdastContent
 
 interface RemarkJsxifyElement {
-  matcher: (node: MdastNode) => boolean
+  matcher: (node: MdastNode) => boolean // eslint-disable-line no-unused-vars
   jsxName: string
 }
 export function remarkJsxifyElements(
@@ -49,7 +49,9 @@ export function remarkJsxifyElements(
       const newNode = createMdxNode(
         foundElement.jsxName,
         // @ts-expect-error
-        (node.attributes as Attribute[]) ?? []
+        (node.attributes as Attribute[]) ?? [],
+        // @ts-expect-error
+        node?.children ?? []
       )
 
       // TODO: this might break on certain node types
