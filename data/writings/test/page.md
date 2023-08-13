@@ -4,7 +4,7 @@ subtitle: This is a test
 tended: 2023-06-19
 planted: 2023-06-19
 cover:
-  img: "https://images.unsplash.com/photo-1500576992153-0271099def59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
+  img: "https://images.unsplash.com/photo-1460563594877-adf295bdf0ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwyMDg0NDc5fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=700&q=60"
   alt: "Image of hello"
 tags:
   [
@@ -68,7 +68,9 @@ Mauris id purus ut purus ullamcorper commodo id et urna. Etiam vehicula nisi id 
 
 Testing out https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Video_and_audio_APIs
 
-<Video src="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/rabbit320.mp4" type="video/mp4" />
+<video>
+    <source src="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/rabbit320.mp4" type="video/mp4"/>
+</video>
 
 # Youtube Test
 
