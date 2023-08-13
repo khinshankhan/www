@@ -40,6 +40,12 @@ export default makeSource({
                 (node?.name as string) === "img",
               jsxName: "SmartImage",
             },
+            {
+              matcher: (node: MdastNode) =>
+                // @ts-expect-error
+                (node?.name as string) === "video",
+              jsxName: "Video",
+            },
           ],
         },
       ],
