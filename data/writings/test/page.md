@@ -68,7 +68,7 @@ Mauris id purus ut purus ullamcorper commodo id et urna. Etiam vehicula nisi id 
 
 Testing out https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Video_and_audio_APIs
 
-<video>
+<video width="320" height="240">
     <source src="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/rabbit320.mp4" type="video/mp4"/>
 </video>
 
