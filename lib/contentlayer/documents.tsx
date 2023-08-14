@@ -68,6 +68,8 @@ export interface Computed {
     cover: {
       img: string
       alt: string
+      width: number
+      height: number
     }
   }
   tags: string[]
@@ -137,6 +139,8 @@ const getComputedFields = <T extends "Page" | "Writing">({
             // TODO: replace with decent cover image
             // TODO: replace based on path?
             "https://images.unsplash.com/photo-1636193535246-a07cd0aa6fcb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+          cover.width = 1740
+          cover.height = 1160
         }
 
         cover.alt = doc.cover?.alt ? doc.cover.alt : `Cover image for ${doc.title}`

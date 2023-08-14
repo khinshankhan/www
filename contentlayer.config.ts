@@ -5,7 +5,7 @@ import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
 import remarkUnwrapImages from "remark-unwrap-images"
 import { Page, Writing } from "./lib/contentlayer/documents"
-import { rehypeMarkExcerpt, remarkJsxifyElements } from "./lib/contentlayer/plugins"
+import { rehypeMarkExcerpt, remarkJsxifyElements, type MdastNode } from "./lib/contentlayer/plugins"
 import { EmojiKey, emojiLookup } from "./lib/emoji"
 
 export default makeSource({
@@ -30,7 +30,25 @@ export default makeSource({
       ],
       [remarkGfm],
       [remarkUnwrapImages],
-      [remarkJsxifyElements, { elements: [{ name: "img", jsxName: "SmartImage" }] }],
+      [
+        remarkJsxifyElements,
+        {
+          elements: [
+            {
+              matcher: (node: MdastNode) =>
+                // @ts-expect-error
+                (node?.name as string) === "img",
+              jsxName: "SmartImage",
+            },
+            {
+              matcher: (node: MdastNode) =>
+                // @ts-expect-error
+                (node?.name as string) === "video",
+              jsxName: "Video",
+            },
+          ],
+        },
+      ],
     ],
     rehypePlugins: [
       rehypeMarkExcerpt,

@@ -1,5 +1,5 @@
 import { type Root as HastRoot } from "hast"
-import type { Root as MdastRoot } from "mdast"
+import type { Content as MdastContent, Root as MdastRoot } from "mdast"
 import type { Transformer } from "unified"
 import { EXIT, SKIP, visit } from "unist-util-visit"
 
@@ -18,7 +18,7 @@ interface Attribute {
   name: string
   value: string
 }
-function createMdxNode(name: string, attributes: Attribute[]) {
+function createMdxNode(name: string, attributes: Attribute[], children = []) {
   return {
     type: "mdxJsxTextElement",
     name,
@@ -27,13 +27,15 @@ function createMdxNode(name: string, attributes: Attribute[]) {
       name,
       value,
     })),
-    children: [],
+    children,
     data: { _mdxExplicitJsx: true },
   }
 }
 
+export type MdastNode = MdastRoot | MdastContent
+
 interface RemarkJsxifyElement {
-  name: string
+  matcher: (node: MdastNode) => boolean // eslint-disable-line no-unused-vars
   jsxName: string
 }
 export function remarkJsxifyElements(
@@ -41,16 +43,15 @@ export function remarkJsxifyElements(
 ): Transformer<MdastRoot, MdastRoot> {
   return function (tree) {
     visit(tree, (node, index, parent) => {
-      const foundElement = options.elements.find(
-        // @ts-expect-error
-        (element) => element.name === (node?.name as string)
-      )
+      const foundElement = options.elements.find((element) => element.matcher(node))
       if (parent === null || index === null || !foundElement) return
 
       const newNode = createMdxNode(
         foundElement.jsxName,
         // @ts-expect-error
-        (node.attributes as Attribute[]) ?? []
+        (node.attributes as Attribute[]) ?? [],
+        // @ts-expect-error
+        node?.children ?? []
       )
 
       // TODO: this might break on certain node types

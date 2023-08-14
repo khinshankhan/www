@@ -34,6 +34,8 @@ export default async function PagesLayout({ children, params }: PageLayoutProps)
             <SmartImage
               src={cover.img}
               alt={cover.alt}
+              width={cover.width}
+              height={cover.height}
               className="aspect-video md:!w-[75%]"
               showCaption={false}
             />
