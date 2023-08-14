@@ -1,8 +1,8 @@
 ---
 title: About
 subtitle: Me, myself, and I
-tended: 2023-05-26
-planted: 2023-05-26
+tended: 2023-07-26
+planted: 2017-05-01
 ---
 
 Hello hello :wave: I'm Khinshan, feel free to call me Shan. I wear several hats but I'm mostly a software engineer :upside_down_face: Though I have a knack for backend development, I tend to work fullstack as a jack of all trades. Recently, I've been diving into the realm of accessibility and crafting captivating user experiences. Feel free to explore my [work](/projects)! Or better yet read some of my [thoughts and ideas](/writings).
