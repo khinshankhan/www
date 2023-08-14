@@ -15,11 +15,6 @@ const getHeading = (variant: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") => {
   return Heading
 }
 
-// TODO: add in placeholder image
-const Image: MDXComponents["img"] = ({ src, alt, title }) => (
-  <SmartImage src={src ?? "/placeholder.png"} alt={alt ?? ""} title={title} />
-)
-
 // TODO: get back to this
 const Pre: MDXComponents["pre"] = ({ children }) => (
   <div className="flex-shrink">
@@ -40,7 +35,6 @@ const MdxComponents: MDXComponents = {
   h6: getHeading("h6"),
   pre: Pre,
   code: Code,
-  img: Image,
   SmartImage,
   Video,
   Emoji,

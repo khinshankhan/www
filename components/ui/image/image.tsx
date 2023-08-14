@@ -1,6 +1,6 @@
 "use client"
 
-import React, { type CSSProperties, type ReactNode } from "react"
+import React, { type CSSProperties } from "react"
 import { default as NextImage, type ImageProps } from "next/image"
 import { cn, getSizeParts } from "@/lib/utils"
 import { shouldShowFallbackImage, useImage } from "./use-image"
