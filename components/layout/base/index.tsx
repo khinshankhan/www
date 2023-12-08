@@ -1,4 +1,5 @@
 import React from "react";
+import { Divider } from "components/primitives";
 
 function Navbar() {
   return <nav>Navbar</nav>;
@@ -7,7 +8,7 @@ function Navbar() {
 function Footer() {
   return (
     <>
-      <hr />
+      <Divider lineClassName="w-[87%]" />
       <footer className="text-center mt-4">Footer</footer>
     </>
   );
