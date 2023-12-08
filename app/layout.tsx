@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { cn } from "lib/utils";
-import Link from "next/link";
-import { BaseLayout } from "components/layout/base";
+import { cn } from "@/lib/utils";
+import { BaseLayout } from "@/components/layout/base";
 
 export const metadata: Metadata = {};
 

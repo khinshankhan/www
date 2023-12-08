@@ -1,5 +1,5 @@
 import React from "react";
-import { Divider } from "components/primitives";
+import { Divider } from "@/components/primitives";
 
 function Navbar() {
   return <nav>Navbar</nav>;
