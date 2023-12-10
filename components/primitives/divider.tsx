@@ -13,14 +13,16 @@ export function Divider({
       <div
         className={cn(
           "w-full h-px mx-auto bg-gradient-to-r from-slate-950/0 via-slate-950/30 to-slate-950/0 dark:from-white/0 dark:via-white/30 dark:to-white/0",
-          lineClassName
+          lineClassName,
         )}
       ></div>
 
       {text && (
         <div className="flex justify-center -translate-y-3">
           <div className="px-2 bg-white dark:bg-slate-950">
-            <span className="text-xs uppercase transform">{text}</span>
+            <span className="text-xs uppercase transform text-slate-950 dark:text-white">
+              {text}
+            </span>
           </div>
         </div>
       )}
