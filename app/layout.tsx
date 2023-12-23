@@ -4,6 +4,11 @@ import { Divider } from "@/components/primitives/divider";
 
 export const metadata: Metadata = {};
 
+const info = {
+  fullname: "Khinshan Khan",
+  startYear: 2017,
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -24,9 +29,11 @@ export default function RootLayout({
           </div>
         </div>
 
-        <footer className="grow min-h-[120px] pt-4">
+        <footer className="grow min-h-[160px] pt-10 container mx-auto">
           <Divider />
-          <span>Footer goes here</span>
+          <p className="text-center pt-6">
+            &copy; {info.startYear}+, {info.fullname}. All rights reserved.
+          </p>
         </footer>
       </body>
     </html>
