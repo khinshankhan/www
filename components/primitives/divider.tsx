@@ -6,7 +6,7 @@ export function Divider({
   width = "w-full",
   gradient = "from-zinc-950/0 via-zinc-950/30 to-zinc-950/0 dark:from-white/0 dark:via-white/30 dark:to-white/0",
   bg = "bg-white dark:bg-zinc-950",
-  textColor = "text-zinc-950 dark:text-white",
+  textColor = "",
 }: {
   text?: React.ReactNode;
   width?: string;
