@@ -1,7 +1,9 @@
-export default function Page() {
+import { ContentPageLayout } from "@/components/layouts/content";
+
+export default async function Page() {
   return (
-    <main className="">
-      <h1 className="">Writings? Yay.</h1>
-    </main>
+    <ContentPageLayout>
+      <main className="">Content goes here</main>
+    </ContentPageLayout>
   );
 }
