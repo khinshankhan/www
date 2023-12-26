@@ -8,9 +8,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",
     "autoprefixer": "^10.4.16",
     "clsx": "^2.0.0",
+    "globby": "^14.0.0",
+    "gray-matter": "^4.0.3",
     "next": "^14.0.4",
     "postcss": "^8.4.32",
     "react": "^18.2.0",
