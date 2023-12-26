@@ -9,22 +9,30 @@ const contentDir = path.join(projectRoot, "content");
 // eg page.es.md will be spanish
 const contentPattern = ["**/page.md"];
 
+export function getContentData(filePath: string) {
+  const absFilePath = path.join(contentDir, filePath);
+  if (!fs.existsSync(absFilePath)) {
+    return null;
+  }
+
+  const fileContent = fs.readFileSync(absFilePath, "utf-8");
+
+  const slug = filePath.split("/").slice(0, -1).join("/");
+  const { data, content } = matter(fileContent);
+
+  return {
+    absFilePath,
+    rawContent: fileContent,
+    slug,
+    frontmatter: data,
+    content,
+  };
+}
+
 export function getAllContentData() {
   const filePaths = globbySync(contentPattern, { cwd: contentDir });
 
   return filePaths.map((filePath) => {
-    const absFilePath = path.join(contentDir, filePath);
-    const fileContent = fs.readFileSync(absFilePath, "utf-8");
-
-    const slug = filePath.split("/").slice(0, -1).join("/");
-    const { data, content } = matter(fileContent);
-
-    return {
-      absFilePath,
-      rawContent: fileContent,
-      slug,
-      frontmatter: data,
-      content,
-    };
+    return getContentData(filePath)!;
   });
 }
