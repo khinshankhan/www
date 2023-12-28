@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { ThemeProvider } from "next-themes";
 
 let AutoRefresh = function AutoRefresh({
   children,
@@ -38,5 +39,11 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  return <AutoRefresh>{children}</AutoRefresh>;
+  return (
+    <AutoRefresh>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        {children}
+      </ThemeProvider>
+    </AutoRefresh>
+  );
 }

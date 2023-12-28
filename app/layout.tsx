@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export const metadata: Metadata = {};
 
@@ -15,13 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="flex flex-col bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 min-h-screen relative">
+    <html lang="en" suppressHydrationWarning>
+      <body className="flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 min-h-screen relative">
         <Providers>
           <div className="flex flex-col min-h-[87vh] relative isolate">
             <nav className="sticky top-0 bg-zinc-50 dark:bg-zinc-950/[75%] backdrop-blur-sm z-1 pb-1 h-[80px]">
-              <div className="container mx-auto">
+              <div className="container mx-auto flex flex-row justify-between">
                 <p>Header goes here</p>
+                <ThemeToggle />
               </div>
             </nav>
 

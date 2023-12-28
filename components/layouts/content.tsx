@@ -15,7 +15,7 @@ export function ContentPageLayout({
   return (
     <>
       <main>
-        <header className="bg-zinc-950 py-14 text-center">
+        <header className="bg-zinc-50 dark:bg-zinc-950 py-14 text-center">
           <h1 className="">{title}</h1>
           <span>{subtitle}</span>
         </header>
