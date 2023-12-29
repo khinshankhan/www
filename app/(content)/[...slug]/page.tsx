@@ -1,6 +1,8 @@
 import { getAllContentData, getContentData } from "@/lib/mdx";
 import { ContentPageLayout } from "@/components/layouts/content";
 import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { Divider } from "@/components/primitives/divider";
 
 export const dynamicParams = false;
 
@@ -37,6 +39,19 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
       <main className="">
         <div>Content goes here for {fullFilePath}</div>
         <div>{contentData.content}</div>
+
+        <Divider className="my-10" />
+
+        <MDXRemote
+          source={contentData.content}
+          options={{
+            mdxOptions: {
+              useDynamicImport: true,
+              remarkPlugins: [],
+              rehypePlugins: [],
+            },
+          }}
+        />
       </main>
     </ContentPageLayout>
   );
