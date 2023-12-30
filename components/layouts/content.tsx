@@ -19,7 +19,14 @@ export function ContentPageLayout({
           <h1 className="">{title}</h1>
           <span>{subtitle}</span>
         </header>
-        <div className="container mx-auto pt-6">{children}</div>
+        <div className="container mx-auto pt-6 flex flex-col md:flex-row-reverse gap-6">
+          <div className="h-body w-full md:w-[220px] xl:w-[260px]">
+            abc def ghi jkl mno pqr stu vwx ynz
+          </div>
+          <div className="w-full md:w-0 flex md:flex-1 flex-col">
+            {children}
+          </div>
+        </div>
       </main>
 
       {filePath && (
@@ -27,8 +34,11 @@ export function ContentPageLayout({
           <div className="container mx-auto">
             <Divider />
             <div className="my-10 text-center md:text-right">
-              Edit on GitHub:{" "}
-              {`https://github.com/khinshankhan/www/blob/main/${filePath}`}
+              <a
+                href={`https://github.com/khinshankhan/www/blob/main/${filePath}`}
+              >
+                Edit on GitHub
+              </a>
             </div>
             <Divider />
           </div>
