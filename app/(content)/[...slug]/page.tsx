@@ -4,8 +4,6 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Divider } from "@/components/primitives/divider";
 
-export const dynamicParams = false;
-
 export async function generateStaticParams() {
   const slugsParts = getAllContentData().map((contentData) => {
     return {
