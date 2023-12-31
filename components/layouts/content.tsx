@@ -6,6 +6,7 @@ interface ContentPageLayoutProps {
   filePath?: string;
   children: React.ReactNode;
 }
+
 export function ContentPageLayout({
   title,
   subtitle,
@@ -19,11 +20,13 @@ export function ContentPageLayout({
           <h1 className="">{title}</h1>
           <span>{subtitle}</span>
         </header>
-        <div className="container mx-auto pt-6 flex flex-col md:flex-row-reverse gap-6">
-          <div className="h-body w-full md:w-[220px] xl:w-[260px]">
-            abc def ghi jkl mno pqr stu vwx ynz
+
+        <div className="container mx-auto pt-6 flex flex-col lg:flex-row-reverse gap-6 isolate relative pb-6">
+          <div className="h-full lg:sticky md:top-28">
+            <div>sidebar stuff</div>
+            <div>abc def ghi jkl mno pqr stu vwx ynz xx</div>
           </div>
-          <div className="w-full md:w-0 flex md:flex-1 flex-col">
+          <div className="w-full lg:w-0 flex lg:flex-1 flex-col">
             {children}
           </div>
         </div>
