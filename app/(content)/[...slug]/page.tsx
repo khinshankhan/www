@@ -1,4 +1,4 @@
-import { getAllContentData, getContentData } from "@/lib/mdx";
+import { getAllContentData, getContentData } from "@/lib/content";
 import { ContentPageLayout } from "@/components/layouts/content";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
