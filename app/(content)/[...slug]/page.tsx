@@ -3,6 +3,7 @@ import { ContentPageLayout } from "@/components/layouts/content";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Divider } from "@/components/primitives/divider";
+import { getToc } from "@/lib/toc";
 
 export async function generateStaticParams() {
   const slugsParts = getAllContentData().map((contentData) => {
@@ -28,16 +29,21 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     notFound();
   }
 
+  const toc = await getToc(contentData.content);
+
   return (
     <ContentPageLayout
       title={contentData.frontmatter.title}
       subtitle={contentData.frontmatter.subtitle}
       filePath={fullFilePath}
+      toc={toc}
+      showToc={
+        // TODO: determine via frontmatter
+        true
+      }
     >
       <main className="">
         <div>Content goes here for {fullFilePath}</div>
-        <div>{contentData.content}</div>
-
         <Divider className="my-10" />
 
         <MDXRemote
