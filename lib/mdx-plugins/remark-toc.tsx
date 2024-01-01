@@ -7,7 +7,7 @@ import { toString } from "mdast-util-to-string";
 export interface TocItem {
   id: string;
   text: string;
-  level: number;
+  level: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 // only need one slugger instance for the entire build
