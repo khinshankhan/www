@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Divider } from "@/components/primitives/divider";
 import { getToc } from "@/lib/toc";
+import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt";
 
 export async function generateStaticParams() {
   const slugsParts = getAllContentData().map((contentData) => {
@@ -50,8 +51,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
           source={contentData.content}
           options={{
             mdxOptions: {
-              useDynamicImport: true,
-              remarkPlugins: [],
+              remarkPlugins: [[remarkMarkFirstParagraph, { id: "excerpt" }]],
               rehypePlugins: [],
             },
           }}

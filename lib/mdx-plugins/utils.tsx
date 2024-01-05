@@ -7,12 +7,10 @@ export function setNodeProperty<T extends MdastNode>(
   value: string,
 ) {
   node.data = node.data || {};
-  // @ts-expect-error: hProperties is not in the mdast types
   node.data.hProperties = node.data.hProperties || {};
 
   // @ts-expect-error: [attribute] does not exist on node since we're adding it
   node.data[attribute] = value;
-  // @ts-expect-error: hProperties is not in the mdast types
   node.data.hProperties[attribute] = value;
 
   return node;
