@@ -51,7 +51,10 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
           source={contentData.content}
           options={{
             mdxOptions: {
-              remarkPlugins: [[remarkMarkFirstParagraph, { id: "excerpt" }]],
+              remarkPlugins: [
+                // @ts-expect-error: v2 vs v3 woes https://github.com/hashicorp/next-mdx-remote/issues/423
+                [remarkMarkFirstParagraph, { id: "excerpt" }],
+              ],
               rehypePlugins: [],
             },
           }}
