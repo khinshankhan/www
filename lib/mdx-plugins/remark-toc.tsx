@@ -1,5 +1,5 @@
 import Slugger from "github-slugger";
-import type { Root as MdastRoot } from "mdast";
+import type { Root as MdastRoot, Heading } from "mdast";
 import type { Transformer } from "unified";
 import { SKIP, visit } from "unist-util-visit";
 import { toString } from "mdast-util-to-string";
@@ -7,7 +7,7 @@ import { toString } from "mdast-util-to-string";
 export interface TocItem {
   id: string;
   text: string;
-  level: 1 | 2 | 3 | 4 | 5 | 6;
+  level: Heading["depth"];
 }
 
 // only need one slugger instance for the entire build
@@ -31,7 +31,7 @@ export function remarkTocExport(): Transformer<MdastRoot, MdastRoot> {
       const value = toString(node, { includeImageAlt: false });
 
       toc.push({
-        id: `#${slugger.slug(value)}`,
+        id: slugger.slug(value),
         text: value,
         level: node.depth,
       });
