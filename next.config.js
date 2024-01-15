@@ -4,6 +4,7 @@
 const nextConfig = {
   reactStrictMode: true,
   output: "export",
+  trailingSlash: true,
 }
 
 const compose = (initial, fns) => fns.reduce((acc, fn) => fn(acc), initial)
