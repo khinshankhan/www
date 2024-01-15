@@ -1,42 +1,22 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { Providers } from "./providers";
-import { ThemeToggle } from "@/components/theme-toggle";
+import "./globals.css"
+import type { Metadata } from "next"
+import { BaseLayout } from "@/components/layouts/base"
+import { Providers } from "@/components/providers"
 
-export const metadata: Metadata = {};
+export const metadata: Metadata = {}
 
-const info = {
-  fullname: "Khinshan Khan",
-  startYear: 2017,
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 min-h-screen relative">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="h-full w-full bg-primary-background text-primary-foreground"
+    >
+      <body className="flex min-h-screen w-full flex-col">
         <Providers>
-          <div className="flex flex-col min-h-[87vh] relative isolate">
-            <nav className="sticky top-0 bg-zinc-50 dark:bg-zinc-950/[75%] backdrop-blur-sm z-1 pb-1 h-[80px]">
-              <div className="container mx-auto flex flex-row justify-between">
-                <p>Header goes here</p>
-                <ThemeToggle />
-              </div>
-            </nav>
-
-            {children}
-          </div>
-
-          <footer className="grow container mx-auto pt-10">
-            <p className="text-center mt-10 mb-28">
-              &copy; {info.startYear}+, {info.fullname}. All rights reserved.
-            </p>
-          </footer>
+          <BaseLayout>{children}</BaseLayout>
         </Providers>
       </body>
     </html>
-  );
+  )
 }
