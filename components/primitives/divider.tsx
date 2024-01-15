@@ -1,5 +1,5 @@
-import React from "react";
-import { cn } from "@/lib/utils";
+import React from "react"
+import { cn } from "@/lib/utils"
 
 export function Divider({
   text,
@@ -9,33 +9,24 @@ export function Divider({
   bg = "bg-white dark:bg-zinc-950",
   textColor = "",
 }: {
-  text?: React.ReactNode;
-  gradient?: string;
-  width?: string;
-  className?: string;
-  bg?: string;
-  textColor?: string;
+  text?: React.ReactNode
+  gradient?: string
+  width?: string
+  className?: string
+  bg?: string
+  textColor?: string
 }) {
   return (
     <div role="separator" className="relative">
-      <div
-        className={cn(
-          "h-px mx-auto bg-gradient-to-r",
-          gradient,
-          width,
-          className,
-        )}
-      ></div>
+      <div className={cn("mx-auto h-px bg-gradient-to-r", gradient, width, className)}></div>
 
       {text && (
-        <div className="flex justify-center -translate-y-3">
+        <div className="flex -translate-y-3 justify-center">
           <div className={cn("px-2", bg)}>
-            <span className={cn("text-xs uppercase transform", textColor)}>
-              {text}
-            </span>
+            <span className={cn("transform text-xs uppercase", textColor)}>{text}</span>
           </div>
         </div>
       )}
     </div>
-  );
+  )
 }

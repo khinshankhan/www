@@ -1,25 +1,25 @@
-import Slugger from "github-slugger";
-import type { Root as MdastRoot, Heading } from "mdast";
-import type { Transformer } from "unified";
-import { SKIP, visit } from "unist-util-visit";
-import { toString } from "mdast-util-to-string";
+import Slugger from "github-slugger"
+import type { Heading, Root as MdastRoot } from "mdast"
+import { toString } from "mdast-util-to-string"
+import type { Transformer } from "unified"
+import { SKIP, visit } from "unist-util-visit"
 
 export interface TocItem {
-  id: string;
-  text: string;
-  level: Heading["depth"];
+  id: string
+  text: string
+  level: Heading["depth"]
 }
 
 // only need one slugger instance for the entire build
-const slugger = new Slugger();
+const slugger = new Slugger()
 
 export function remarkTocExport(): Transformer<MdastRoot, MdastRoot> {
   return function transformer(tree, vfile) {
-    const toc: TocItem[] = [];
-    vfile.data.toc = toc;
+    const toc: TocItem[] = []
+    vfile.data.toc = toc
 
     // slugger is reset per file so that the same heading text in different files can have the same slug
-    slugger.reset();
+    slugger.reset()
 
     /**
      * NOTE:
@@ -28,17 +28,17 @@ export function remarkTocExport(): Transformer<MdastRoot, MdastRoot> {
      * At the mdast level, <h1>, <h2>, <h3>, etc. are considered "html" nodes, and this plugin won't support them.
      */
     visit(tree, "heading", function (node) {
-      const value = toString(node, { includeImageAlt: false });
+      const value = toString(node, { includeImageAlt: false })
 
       toc.push({
         id: slugger.slug(value),
         text: value,
         level: node.depth,
-      });
+      })
 
-      return SKIP;
-    });
+      return SKIP
+    })
 
-    vfile.data.toc = toc;
-  };
+    vfile.data.toc = toc
+  }
 }

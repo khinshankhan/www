@@ -1,4 +1,5 @@
 import "./globals.css"
+
 import type { Metadata } from "next"
 import { BaseLayout } from "@/components/layouts/base"
 import { Providers } from "@/components/providers"
