@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+import defaultTheme from "tailwindcss/defaultTheme"
 
 function rawHsla(variable: string, alpha: string) {
   return `hsla(var(--${variable}), ${alpha})`
@@ -25,6 +26,11 @@ export default {
     "./content/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      heading: ["var(--font-heading)", ...defaultTheme.fontFamily.sans],
+      body: ["var(--font-body)", ...defaultTheme.fontFamily.sans],
+      mono: ["var(--font-mono)", ...defaultTheme.fontFamily.mono],
+    },
     extend: {
       colors: {
         primary: {
