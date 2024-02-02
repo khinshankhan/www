@@ -4,6 +4,7 @@ import React from "react"
 import NextLink from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { typographyVariants } from "@/components/primitives/typography"
 
 // TODO: get back to this to style
 export function NavItem({ route, name }: { route: string; name: string }) {
@@ -14,7 +15,9 @@ export function NavItem({ route, name }: { route: string; name: string }) {
       <NextLink
         href={route}
         className={cn(
-          route === pathname && "underline decoration-zinc-700 decoration-4 underline-offset-4"
+          typographyVariants({ variant: "nav" }),
+          "text-gray-400 hover:text-white",
+          route === pathname && "text-gray-900 dark:text-white"
         )}
       >
         {name}
