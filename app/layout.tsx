@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Nunito, Source_Code_Pro } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { typographyVariants } from "@/components/primitives/typography";
 
 export const metadata: Metadata = {
   title: {
@@ -43,7 +44,7 @@ export default function RootLayout({
           headingFont.variable,
           bodyFont.variable,
           monoFont.variable,
-          "font-body antialiased",
+          typographyVariants({ variant: "default" }),
         )}
       >
         {children}
