@@ -48,7 +48,24 @@
   }
 }
 
+@layer components {
+  .page-container {
+    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1280px] 2xl:max-w-[1325px];
+  }
+
+  .content-container {
+    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[800px] 2xl:max-w-[1000px];
+  }
+}
+
 @layer utilities {
+  .hide-mobile {
+    @apply isMobile:hidden !important;
+  }
+  .hide-desktop {
+    @apply isDesktop:hidden !important;
+  }
+
   .text-balance {
     text-wrap: balance;
   }
