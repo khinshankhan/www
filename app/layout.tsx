@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
-import { Montserrat, Nunito, Source_Code_Pro } from "next/font/google";
-import { cn } from "@/lib/utils";
-import "./globals.css";
-import { typographyVariants } from "@/components/primitives/typography";
+import type { Metadata } from "next"
+import { Montserrat, Nunito, Source_Code_Pro } from "next/font/google"
+import { cn } from "@/lib/utils"
+
+import "./globals.css"
+
+import { typographyVariants } from "@/components/primitives/typography"
 
 export const metadata: Metadata = {
   title: {
@@ -14,28 +16,28 @@ export const metadata: Metadata = {
   icons: {
     shortcut: "/favicon.ico",
   },
-};
+}
 
 const headingFont = Montserrat({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
-});
+})
 const bodyFont = Nunito({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
-});
+})
 const monoFont = Source_Code_Pro({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",
-});
+})
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -44,11 +46,11 @@ export default function RootLayout({
           headingFont.variable,
           bodyFont.variable,
           monoFont.variable,
-          typographyVariants({ variant: "default" }),
+          typographyVariants({ variant: "default" })
         )}
       >
         {children}
       </body>
     </html>
-  );
+  )
 }

@@ -1,10 +1,9 @@
-import { cva, VariantProps } from "class-variance-authority";
+import { cva, VariantProps } from "class-variance-authority"
 
 export const typographyVariants = cva("", {
   variants: {
     variant: {
-      default:
-        "font-body antialiased text-base tracking-wider md:text-lg lg:text-xl",
+      default: "font-body text-base tracking-wider antialiased md:text-lg lg:text-xl",
       h1: "font-heading text-3xl font-semibold tracking-wider md:text-4xl lg:text-5xl",
       h2: "font-heading text-2xl font-semibold tracking-wide md:text-3xl lg:text-4xl",
       h3: "font-heading text-xl font-semibold tracking-wide md:text-2xl lg:text-3xl",
@@ -18,6 +17,6 @@ export const typographyVariants = cva("", {
   defaultVariants: {
     variant: "default",
   },
-});
+})
 
-export type TypographyVariants = VariantProps<typeof typographyVariants>;
+export type TypographyVariants = VariantProps<typeof typographyVariants>
