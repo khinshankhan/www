@@ -1,13 +1,17 @@
 import React, { type ReactNode } from "react"
 import { cn } from "@/lib/utils"
 import { typographyVariants } from "@/components/primitives/typography"
+import { HomeToggle } from "@/components/toggles"
 
 export function Header() {
   return (
-    <header role="navigation" className="sticky top-0 z-banner bg-red-200">
+    <header
+      role="navigation"
+      className="sticky top-0 z-banner flex min-h-[60px] items-center bg-red-200 md:min-h-[70px] lg:min-h-[80px]"
+    >
       <nav className="page-container flex w-full flex-row items-center justify-between">
         {/* lhs on all views */}
-        <div>K</div>
+        <HomeToggle />
 
         {/* rhs on desktop view */}
         <div className={cn(typographyVariants({ variant: "nav" }), "hide-mobile flex flex-row")}>

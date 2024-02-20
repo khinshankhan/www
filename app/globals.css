@@ -3,6 +3,19 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --transparent: transparent;
+    --black: 0, 100%, 0%;
+    --white: 0, 100%, 100%;
+
+    --theme-stark: var(--black);
+
+    --logo-fg: var(--theme-stark);
+    --logo-bg: var(--transparent);
+    --logo-border: var(--transparent);
+    --logo-shadow: 0, 0%, 43.5%;
+  }
+
   /* normalize content globally */
   .normalize {
     /* general spacing of content */
@@ -55,6 +68,30 @@
 
   .content-container {
     @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[800px] 2xl:max-w-[1000px];
+  }
+
+  .home-link {
+    & svg {
+      box-shadow: 0px 0px 10px 1px hsl(var(--logo-shadow));
+    }
+    & .fg {
+      transition: transform 0.3s ease-in-out;
+    }
+    & .border {
+      transition: all 1s ease;
+    }
+
+    &:is(:hover, :focus, :focus-visible) {
+      & .fg {
+        transform: translate(-50px, -50px) scale(1.25);
+      }
+      & .bg {
+        fill: var(var(--transparent));
+      }
+      & .border {
+        stroke: hsl(var(--link-active));
+      }
+    }
   }
 }
 
