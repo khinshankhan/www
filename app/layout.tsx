@@ -1,9 +1,9 @@
+import "./globals.css"
+
 import type { Metadata } from "next"
 import { Montserrat, Nunito, Source_Code_Pro } from "next/font/google"
 import { cn } from "@/lib/utils"
-
-import "./globals.css"
-
+import { BaseLayout } from "@/components/layouts"
 import { typographyVariants } from "@/components/primitives/typography"
 
 export const metadata: Metadata = {
@@ -46,10 +46,11 @@ export default function RootLayout({
           headingFont.variable,
           bodyFont.variable,
           monoFont.variable,
-          typographyVariants({ variant: "default" })
+          typographyVariants({ variant: "default" }),
+          "flex flex-col"
         )}
       >
-        {children}
+        <BaseLayout>{children}</BaseLayout>
       </body>
     </html>
   )
