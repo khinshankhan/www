@@ -1,8 +1,27 @@
 import React, { type ReactNode } from "react"
-import { info } from "@/config"
+import Link from "next/link"
+import { headerLinks, info } from "@/config"
 import { cn } from "@/lib/utils"
 import { typographyVariants } from "@/components/primitives/typography"
 import { HomeToggle } from "@/components/toggles"
+
+export function NavLinks({ className = "" }: { className?: string }) {
+  return (
+    <ul
+      className={cn(
+        typographyVariants({ variant: "nav" }),
+        "flex flex-col gap-4 md:flex-row",
+        className
+      )}
+    >
+      {headerLinks.map((link) => (
+        <li key={link.href}>
+          <Link href={link.href}>{link.label}</Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
 
 export function Header() {
   return (
@@ -15,10 +34,7 @@ export function Header() {
         <HomeToggle />
 
         {/* rhs on desktop view */}
-        <div className={cn(typographyVariants({ variant: "nav" }), "hide-mobile flex flex-row")}>
-          <div>Links</div>
-          <div>Settings</div>
-        </div>
+        <NavLinks className="hide-mobile" />
 
         {/* rhs on mobile view */}
         <div className={cn(typographyVariants({ variant: "nav" }), "hide-desktop flex flex-row")}>

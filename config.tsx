@@ -4,8 +4,8 @@ export const info = {
 }
 
 export const headerLinks = [
-  { title: "About", to: "/about" },
-  { title: "Writings", to: "/writings" },
-  { title: "Projects", to: "/projects" },
-  { title: "Connect", to: "/connect" },
+  { label: "About", href: "/about/" },
+  { label: "Writings", href: "/writings/" },
+  { label: "Projects", href: "/projects/" },
+  { label: "Connect", href: "/connect/" },
 ]
