@@ -69,8 +69,13 @@ export function PageSkeletonLayout({
   return (
     <main className="flex grow flex-col">
       <header className={cn("bg-sky-200 pb-14 pt-14 text-center", extendedSpace && "pb-52")}>
-        <h1 className={typographyVariants({ variant: "h1" })}>{title}</h1>
-        <span className={cn(typographyVariants({ variant: "h4" }), "block pt-6 font-medium")}>
+        <h1 className={cn(typographyVariants({ variant: "h1" }), "text-balance")}>{title}</h1>
+        <span
+          className={cn(
+            typographyVariants({ variant: "h4" }),
+            "block text-balance pt-6 font-medium"
+          )}
+        >
           {subtitle}
         </span>
       </header>

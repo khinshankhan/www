@@ -1,4 +1,5 @@
 import React, { type ReactNode } from "react"
+import { info } from "@/config"
 import { cn } from "@/lib/utils"
 import { typographyVariants } from "@/components/primitives/typography"
 import { HomeToggle } from "@/components/toggles"
@@ -7,7 +8,7 @@ export function Header() {
   return (
     <header
       role="navigation"
-      className="sticky top-0 z-banner flex min-h-[60px] items-center bg-red-200 md:min-h-[70px] lg:min-h-[80px]"
+      className="z-banner flex min-h-[60px] items-center bg-red-200 md:min-h-[70px] lg:min-h-[80px]"
     >
       <nav className="page-container flex w-full flex-row items-center justify-between">
         {/* lhs on all views */}
@@ -28,15 +29,10 @@ export function Header() {
   )
 }
 
-export const info = {
-  fullname: "Khinshan Khan",
-  startYear: 2017,
-}
-
 export function Footer() {
   return (
     <footer>
-      <p className="text-center">
+      <p className="pb-28 pt-16 text-center">
         &copy; {info.startYear}+, {info.fullname}. All rights reserved.
       </p>
     </footer>

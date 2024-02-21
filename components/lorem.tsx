@@ -19,7 +19,7 @@ export function Lorem() {
         <li>linguistics</li>
         <li>puzzles & fallacies</li>
         <li>(video | board | *)games</li>
-        <li>interactivity (think ux but broader)</li>
+        <li>interactivity (think ux but a bit more open-mindedly)</li>
         <li>unordered lists</li>
       </ul>
 

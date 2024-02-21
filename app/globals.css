@@ -22,8 +22,8 @@
     & > * {
       @apply mb-[1.25rem] md:mb-[1.375rem] lg:mb-[1.5rem];
     }
+
     & > :is(ol, ul) {
-      margin-top: 1em;
       margin-left: 1.05em;
     }
 
