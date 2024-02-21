@@ -8,15 +8,33 @@
     --black: 0, 100%, 0%;
     --white: 0, 100%, 100%;
 
-    --theme-stark: var(--black);
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
 
-    --logo-fg: var(--theme-stark);
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+
+    --border: 214.3 31.8% 91.4%;
+
+    --logo-fg: var(--foreground);
     --logo-bg: var(--transparent);
     --logo-border: var(--transparent);
     --logo-shadow: 0, 0%, 43.5%;
   }
+}
 
-  /* normalize content globally */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+
   .normalize {
     /* general spacing of content */
     & > * {

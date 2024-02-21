@@ -47,6 +47,17 @@ const config: Config = {
       1: "1",
       2: "2",
     },
+    extend: {
+      colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        border: "hsl(var(--border))",
+      },
+    },
   },
   plugins: [],
 }
