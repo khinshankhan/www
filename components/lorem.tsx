@@ -13,14 +13,42 @@ export function Lorem() {
         tart pastry marshmallow.
       </p>
 
-      <p>Some things I like that you may like:</p>
+      <p>And then a short lists test</p>
       <ul>
-        <li>cooking</li>
-        <li>linguistics</li>
-        <li>puzzles & fallacies</li>
-        <li>(video | board | *)games</li>
-        <li>interactivity (think ux but a bit more open-mindedly)</li>
-        <li>unordered lists</li>
+        <li>OJ</li>
+        <li>
+          <ul>
+            <li>Coffee</li>
+            <li>Tea</li>
+            <li>
+              <ul>
+                <li>Black</li>
+                <li>Green</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Milk</li>
+        <li>
+          Testing a super long list item wrapping. This will be nonsense, as lorem ipsum tends to
+          be. I love donut soufflé oat cake cake pastry marzipan I love. Cake bear claw bear claw
+          marzipan gummies jujubes fruitcake. Cheesecake cookie marshmallow marshmallow macaroon
+          tart pastry marshmallow.
+        </li>
+        <li>Testing weird double p tag in single list item:</li>
+        <li>
+          <p>Okay One</p>
+          <p>Okay Two?</p>
+        </li>
+        <li>Now nested:</li>
+        <li>
+          <ul>
+            <li>
+              <p>Okay One</p>
+              <p>Okay Two?</p>
+            </li>
+          </ul>
+        </li>
       </ul>
 
       <p>
