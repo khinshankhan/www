@@ -80,7 +80,7 @@ export function PageSkeletonLayout({
         </span>
       </header>
 
-      <div className="grow py-5">
+      <div className="grow bg-background py-5">
         <WithSidebar direction={direction} sidebar={sidebar} before={before} after={after}>
           <article
             id="article"
