@@ -68,7 +68,7 @@ export function PageSkeletonLayout({
   // (within the min-h) the content bg color, accounting for potentially shorter content
   return (
     <main className="flex grow flex-col">
-      <header className={cn("bg-sky-200 pb-14 pt-14 text-center", extendedSpace && "pb-52")}>
+      <header className={cn("bg-nav pb-14 pt-14 text-center", extendedSpace && "pb-52")}>
         <h1 className={cn(typographyVariants({ variant: "h1" }), "text-balance")}>{title}</h1>
         <span
           className={cn(
@@ -91,7 +91,7 @@ export function PageSkeletonLayout({
         </WithSidebar>
       </div>
 
-      <div className="py-6">
+      <div className="bg-nav py-6">
         <div className="page-container">
           <div className="flex flex-row-reverse">
             <a href={`https://github.com/khinshankhan/www/tree/main${ghPath}`}>

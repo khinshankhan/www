@@ -13,8 +13,8 @@ export interface ILogoProps {
 export function Logo({
   width = 460,
   height = 460,
-  bgColor = "var(--logo-bg)",
-  fgColor = "hsl(var(--logo-fg))",
+  bgColor = "var(--logo)",
+  fgColor = "hsl(var(--logo-foreground))",
   borderColor = "var(--logo-border)",
   className = "",
 }: ILogoProps) {

@@ -1,6 +1,13 @@
 import type { Config } from "tailwindcss"
 import defaultTheme from "tailwindcss/defaultTheme"
 
+function rawHsla(variable: string, alpha: string) {
+  return `hsla(var(--${variable}), ${alpha})`
+}
+function hsla(variable: string) {
+  return rawHsla(variable, "<alpha-value>")
+}
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -49,13 +56,22 @@ const config: Config = {
     },
     extend: {
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        background: hsla("background"),
+        foreground: hsla("foreground"),
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: hsla("popover"),
+          foreground: hsla("popover-foreground"),
         },
-        border: "hsl(var(--border))",
+        border: hsla("border"),
+        nav: {
+          DEFAULT: hsla("nav"),
+        },
+        logo: {
+          DEFAULT: hsla("logo"),
+          foreground: hsla("logo-foreground"),
+          border: hsla("logo-border"),
+          shadow: hsla("logo-shadow"),
+        },
       },
     },
   },

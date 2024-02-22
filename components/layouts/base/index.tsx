@@ -27,7 +27,7 @@ export function Header() {
   return (
     <header
       role="navigation"
-      className="z-banner flex min-h-[60px] items-center bg-red-200 md:min-h-[70px] lg:min-h-[80px]"
+      className="z-banner flex min-h-[60px] items-center bg-nav md:min-h-[70px] lg:min-h-[80px]"
     >
       <nav className="page-container flex w-full flex-row items-center justify-between">
         {/* lhs on all views */}
@@ -48,7 +48,7 @@ export function Header() {
 export function Footer() {
   return (
     <footer>
-      <p className="pb-28 pt-16 text-center">
+      <p className="bg-nav pb-28 pt-16 text-center">
         &copy; {info.startYear}+, {info.fullname}. All rights reserved.
       </p>
     </footer>
