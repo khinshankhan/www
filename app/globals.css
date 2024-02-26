@@ -62,9 +62,12 @@
     --background: var(--celestial-50);
     --foreground: var(--celestial-950);
 
+    /* TODO: convert to dark mode */
     --popover: 0, 0%, 100%;
+    /* TODO: convert to dark mode */
     --popover-foreground: 222.2, 47.4%, 11.2%;
 
+    /* TODO: convert to dark mode */
     --border: 214.3, 31.8%, 91.4%;
 
     --nav: var(--celestial-200);
@@ -77,6 +80,26 @@
     --link-base: var(--plum8);
     --link-active: var(--plum6);
     --link-on: var(--plum4);
+  }
+
+  .dark {
+    --plum1: 292, 90%, 99.4%;
+    --plum2: 300, 100%, 98.6%;
+    --plum3: 299, 71.2%, 96.4%;
+    --plum4: 299, 62%, 93.8%;
+    --plum5: 298, 56.1%, 90.5%;
+    --plum6: 296, 51.3%, 85.8%;
+    --plum7: 295, 48.2%, 78.9%;
+    --plum8: 292, 47.7%, 70.8%;
+    --plum9: 292, 45%, 51%;
+    --plum10: 292, 50.2%, 46.9%;
+    --plum11: 292, 60%, 42.5%;
+    --plum12: 291, 66%, 14%;
+
+    --background: var(--celestial-900);
+    --foreground: var(--celestial-50);
+
+    --nav: var(--celestial-950);
   }
 }
 
