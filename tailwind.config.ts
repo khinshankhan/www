@@ -72,6 +72,11 @@ const config: Config = {
           border: hsla("logo-border"),
           shadow: hsla("logo-shadow"),
         },
+        link: {
+          base: hsla("link-base"),
+          active: hsla("link-active"),
+          on: hsla("link-on"),
+        },
       },
     },
   },

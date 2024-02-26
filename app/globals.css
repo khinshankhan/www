@@ -46,8 +46,21 @@
     --celestial-900: 240, 30%, 14%;
     --celestial-950: 240, 30%, 8%;
 
+    --plum1: 301, 20%, 9.4%;
+    --plum2: 300, 29.8%, 11.2%;
+    --plum3: 298, 34.4%, 15.3%;
+    --plum4: 297, 36.8%, 18.3%;
+    --plum5: 296, 38.5%, 21.1%;
+    --plum6: 295, 40.4%, 24.7%;
+    --plum7: 294, 42.7%, 30.6%;
+    --plum8: 292, 45.1%, 40%;
+    --plum9: 292, 45%, 51%;
+    --plum10: 295, 50%, 55.4%;
+    --plum11: 300, 60%, 62%;
+    --plum12: 296, 74%, 95.7%;
+
     --background: var(--celestial-50);
-    --foreground: 222.2, 47.4%, 11.2%;
+    --foreground: var(--celestial-950);
 
     --popover: 0, 0%, 100%;
     --popover-foreground: 222.2, 47.4%, 11.2%;
@@ -60,6 +73,10 @@
     --logo-foreground: var(--foreground);
     --logo-border: var(--transparent);
     --logo-shadow: 0, 0%, 43.5%;
+
+    --link-base: var(--plum8);
+    --link-active: var(--plum6);
+    --link-on: var(--plum4);
   }
 }
 
