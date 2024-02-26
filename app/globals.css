@@ -34,19 +34,19 @@
     --emerald-950: 150, 5%, 8%;
    */
 
-    --peri-50: 240, 30%, 98%;
-    --peri-100: 240, 30%, 96%;
-    --peri-200: 240, 30%, 94%;
-    --peri-300: 240, 30%, 87%;
-    --peri-400: 240, 30%, 68%;
-    --peri-500: 240, 30%, 50%;
-    --peri-600: 240, 30%, 38%;
-    --peri-700: 240, 30%, 30%;
-    --peri-800: 240, 30%, 20%;
-    --peri-900: 240, 30%, 14%;
-    --peri-950: 240, 30%, 8%;
+    --celestial-50: 240, 30%, 98%;
+    --celestial-100: 240, 30%, 96%;
+    --celestial-200: 240, 30%, 94%;
+    --celestial-300: 240, 30%, 87%;
+    --celestial-400: 240, 30%, 68%;
+    --celestial-500: 240, 30%, 50%;
+    --celestial-600: 240, 30%, 38%;
+    --celestial-700: 240, 30%, 30%;
+    --celestial-800: 240, 30%, 20%;
+    --celestial-900: 240, 30%, 14%;
+    --celestial-950: 240, 30%, 8%;
 
-    --background: var(--peri-50);
+    --background: var(--celestial-50);
     --foreground: 222.2, 47.4%, 11.2%;
 
     --popover: 0, 0%, 100%;
@@ -54,7 +54,7 @@
 
     --border: 214.3, 31.8%, 91.4%;
 
-    --nav: var(--peri-200);
+    --nav: var(--celestial-200);
 
     --logo: var(--transparent);
     --logo-foreground: var(--foreground);
