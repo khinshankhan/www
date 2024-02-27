@@ -58,6 +58,10 @@ const config: Config = {
       colors: {
         background: hsla("background"),
         foreground: hsla("foreground"),
+        muted: {
+          DEFAULT: hsla("muted"),
+          foreground: hsla("muted-foreground"),
+        },
         popover: {
           DEFAULT: hsla("popover"),
           foreground: hsla("popover-foreground"),

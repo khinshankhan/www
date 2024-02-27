@@ -73,7 +73,7 @@ export function PageSkeletonLayout({
         <span
           className={cn(
             typographyVariants({ variant: "h4" }),
-            "block text-balance pt-6 font-medium"
+            "block text-balance pt-6 font-medium text-muted-foreground"
           )}
         >
           {subtitle}

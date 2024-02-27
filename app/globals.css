@@ -36,6 +36,9 @@
     --background: var(--celestial-50);
     --foreground: var(--celestial-950);
 
+    --muted: var(--celestial-100);
+    --muted-foreground: var(--celestial-700);
+
     /* TODO: convert to dark mode */
     --popover: 0, 0%, 100%;
     /* TODO: convert to dark mode */
@@ -72,6 +75,9 @@
 
     --background: var(--celestial-900);
     --foreground: var(--celestial-50);
+
+    --muted: var(--celestial-800);
+    --muted-foreground: var(--celestial-400);
 
     --nav: var(--celestial-950);
   }
