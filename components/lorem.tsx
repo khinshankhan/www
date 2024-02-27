@@ -1,3 +1,5 @@
+import { Link } from "@/components/primitives/link"
+
 export function Lorem() {
   return (
     <>
@@ -70,9 +72,11 @@ export function Lorem() {
         chocolate cake icing gummies I love. Bear claw cake cotton candy donut icing pudding
         chocolate cake topping. Carrot cake lemon drops lollipop I love sesame snaps soufflé. Toffee
         cake powder toffee oat cake carrot cake lollipop. Sweet liquorice dragée pudding pudding
-        marshmallow candy canes carrot cake gummi bears. Sweet tootsie roll biscuit powder candy
-        canes. Jelly beans cookie sugar plum sweet roll carrot cake. I love bonbon cake cake donut
-        wafer. Cupcake I love tiramisu cake gummi bears powder.
+        marshmallow candy canes{" "}
+        <Link href="https://www.inspiredtaste.net/25753/carrot-cake-recipe/">carrot cake</Link>{" "}
+        gummi bears. Sweet tootsie roll biscuit powder candy canes. Jelly beans cookie sugar plum
+        sweet roll carrot cake. I love bonbon cake cake donut wafer. Cupcake I love tiramisu cake
+        gummi bears powder.
       </p>
       <p>
         Cake cake tootsie roll cotton candy croissant icing. Caramels halvah danish carrot cake

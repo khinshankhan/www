@@ -54,9 +54,9 @@
     --logo-border: var(--transparent);
     --logo-shadow: 0, 0%, 43.5%;
 
-    --link-base: var(--plum8);
-    --link-active: var(--plum6);
-    --link-on: var(--plum4);
+    --link-base: var(--plum7);
+    --link-active: var(--plum5);
+    --link-on: var(--plum3);
   }
 
   .dark {
@@ -80,6 +80,10 @@
     --muted-foreground: var(--celestial-400);
 
     --nav: var(--celestial-950);
+
+    --link-base: var(--plum8);
+    --link-active: var(--plum6);
+    --link-on: var(--plum4);
   }
 }
 
