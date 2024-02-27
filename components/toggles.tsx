@@ -1,7 +1,7 @@
 import React from "react"
-import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Logo, type ILogoProps } from "@/components/icons"
+import { Link } from "@/components/primitives/link"
 
 interface IHomeToggleProps extends ILogoProps {
   size?: number | string

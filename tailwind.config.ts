@@ -55,6 +55,9 @@ const config: Config = {
       2: "2",
     },
     extend: {
+      transitionProperty: {
+        background: "background",
+      },
       colors: {
         background: hsla("background"),
         foreground: hsla("foreground"),
@@ -81,6 +84,11 @@ const config: Config = {
           active: hsla("link-active"),
           on: hsla("link-on"),
         },
+      },
+      backgroundSize: {
+        "link-hide": "0% 0.05em",
+        "link-show": "100% 0.05em",
+        full: "100%",
       },
     },
   },
