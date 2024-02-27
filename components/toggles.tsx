@@ -16,13 +16,7 @@ export function HomeToggle({
 }: IHomeToggleProps) {
   return (
     <Link href="/" aria-label="Navigate to homepage." className="home-link">
-      <Logo
-        className={cn(
-          "h-[42px] w-[42px] md:h-[48px] md:w-[48px] lg:h-[55px] lg:w-[55px]",
-          className
-        )}
-        {...props}
-      />
+      <Logo className={cn("size:h-[55px] size-[42px] md:size-[48px]", className)} {...props} />
     </Link>
   )
 }
