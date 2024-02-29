@@ -16,6 +16,7 @@ const config: Config = {
     "./content/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   darkMode: ["class"],
+  safelist: ["dark"],
   theme: {
     screens: {
       xss: "320px",

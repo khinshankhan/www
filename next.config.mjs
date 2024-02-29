@@ -7,9 +7,9 @@
 /** @type {NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: "standalone",
+  output: "export",
   trailingSlash: true,
-};
+}
 
 /**
  * Composes the configuration with a series of functions.
@@ -17,12 +17,12 @@ const nextConfig = {
  * @param {((config: NextConfig) => NextConfig)[]} fns The array of functions to compose.
  * @returns {NextConfig} The composed configuration.
  */
-const compose = (initial, fns) => fns.reduce((acc, fn) => fn(acc), initial);
+const compose = (initial, fns) => fns.reduce((acc, fn) => fn(acc), initial)
 
 // Using ESM syntax for exporting the configuration.
 export default () => {
-  const plugins = [];
-  const config = compose(nextConfig, plugins);
+  const plugins = []
+  const config = compose(nextConfig, plugins)
 
-  return config;
-};
+  return config
+}
