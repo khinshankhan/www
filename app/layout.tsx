@@ -5,6 +5,7 @@ import { Montserrat, Nunito, Source_Code_Pro } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { BaseLayout } from "@/components/layouts"
 import { typographyVariants } from "@/components/primitives/typography"
+import { ThemeProvider } from "./providers"
 
 export const metadata: Metadata = {
   title: {
@@ -50,7 +51,9 @@ export default function RootLayout({
           "flex flex-col"
         )}
       >
-        <BaseLayout>{children}</BaseLayout>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <BaseLayout>{children}</BaseLayout>
+        </ThemeProvider>
       </body>
     </html>
   )
