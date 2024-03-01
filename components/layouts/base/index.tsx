@@ -3,8 +3,8 @@ import { info } from "@/config"
 import { cn } from "@/lib/utils"
 import { HamburgerMenuIcon } from "@radix-ui/react-icons"
 import { typographyVariants } from "@/components/primitives/typography"
-import { HomeToggle, ModeToggle } from "@/components/toggles"
-import { NavLinks } from "./nav-links"
+import { HomeLink, NavLinks } from "./links"
+import { ModeToggleDesktop, ModeToggleMobile } from "./toggles"
 
 export function Header() {
   return (
@@ -14,7 +14,7 @@ export function Header() {
     >
       <nav className="page-container flex w-full flex-row items-center justify-between">
         {/* lhs on all views */}
-        <HomeToggle />
+        <HomeLink />
 
         {/* rhs on desktop view */}
         <div
@@ -24,14 +24,14 @@ export function Header() {
           )}
         >
           <NavLinks />
-          <ModeToggle />
+          <ModeToggleDesktop />
         </div>
 
         {/* rhs on mobile view */}
         <div
           className={cn(typographyVariants({ variant: "nav" }), "hide-desktop flex flex-row gap-2")}
         >
-          <ModeToggle />
+          <ModeToggleMobile />
           <HamburgerMenuIcon className="block size-[1.2rem]" />
         </div>
       </nav>
