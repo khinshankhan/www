@@ -58,7 +58,7 @@ export function NavLinks({
         <li key={link.href}>
           <Link
             href={link.href}
-            className={typographyVariants({ variant: pathname === link.href ? "link-on" : "link" })}
+            variant={pathname === link.href ? "on" : "default"}
             onClick={onClick ?? (() => {})}
           >
             {link.label}
