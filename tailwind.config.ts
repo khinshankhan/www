@@ -61,18 +61,26 @@ const config: Config = {
         background: "background",
       },
       colors: {
+        transparent: hsla("transparent"),
         black: hsla("black"),
         white: hsla("white"),
-        transparent: hsla("transparent"),
         background: hsla("background"),
         foreground: hsla("foreground"),
-        muted: {
-          DEFAULT: hsla("muted"),
-          foreground: hsla("muted-foreground"),
-        },
         popover: {
           DEFAULT: hsla("popover"),
           foreground: hsla("popover-foreground"),
+        },
+        primary: {
+          DEFAULT: hsla("primary"),
+          foreground: hsla("primary-foreground"),
+        },
+        secondary: {
+          DEFAULT: hsla("secondary"),
+          foreground: hsla("secondary-foreground"),
+        },
+        muted: {
+          DEFAULT: hsla("muted"),
+          foreground: hsla("muted-foreground"),
         },
         accent: {
           DEFAULT: hsla("accent"),

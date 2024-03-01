@@ -33,14 +33,20 @@
     --plum11: 300, 60%, 62%;
     --plum12: 296, 74%, 95.7%;
 
-    --background: var(--celestial-50);
+    --background: var(--white);
     --foreground: var(--celestial-950);
-
-    --muted: var(--celestial-100);
-    --muted-foreground: var(--celestial-700);
 
     --popover: var(--white);
     --popover-foreground: var(--celestial-950);
+
+    --primary: var(--celestial-900);
+    --primary-foreground: var(--celestial-50);
+
+    --secondary: var(--celestial-100);
+    --secondary-foreground: var(--celestial-900);
+
+    --muted: var(--celestial-100);
+    --muted-foreground: var(--celestial-700);
 
     --accent: var(--celestial-100);
     --accent-foreground: var(--celestial-900);
@@ -76,11 +82,17 @@
     --background: var(--celestial-900);
     --foreground: var(--celestial-50);
 
-    --muted: var(--celestial-800);
-    --muted-foreground: var(--celestial-400);
-
     --popover: var(--celestial-950);
     --popover-foreground: var(--celestial-50);
+
+    --primary: var(--celestial-50);
+    --primary-foreground: var(--celestial-900);
+
+    --secondary: var(--celestial-800);
+    --secondary-foreground: var(--celestial-50);
+
+    --muted: var(--celestial-800);
+    --muted-foreground: var(--celestial-400);
 
     --accent: var(--celestial-800);
     --accent-foreground: var(--celestial-50);
