@@ -38,7 +38,7 @@ ModeButton.displayName = "ModeButton"
 /* NOTE: normally mode toggle would be 1 component but since the usage is split up, might as well */
 
 export function ModeToggleMobile() {
-  const { setTheme, theme } = useTheme()
+  const { setTheme, theme, systemTheme } = useTheme()
 
   return (
     <Drawer shouldScaleBackground>
@@ -59,8 +59,18 @@ export function ModeToggleMobile() {
                     variant="outline"
                     disabled={theme === themeOption}
                     onClick={() => setTheme(themeOption)}
+                    className="flex justify-between"
                   >
                     {capitalize(themeOption)}
+
+                    {(themeOption === "light" ||
+                      (themeOption === "system" && systemTheme === "light")) && (
+                      <SunIcon className="size-[1.2rem]" />
+                    )}
+                    {(themeOption === "dark" ||
+                      (themeOption === "system" && systemTheme === "dark")) && (
+                      <MoonIcon className="size-[1.2rem]" />
+                    )}
                   </Button>
                 </DrawerClose>
               ))}
@@ -73,7 +83,7 @@ export function ModeToggleMobile() {
 }
 
 export function ModeToggleDesktop() {
-  const { setTheme, theme } = useTheme()
+  const { setTheme, theme, systemTheme } = useTheme()
 
   return (
     <DropdownMenu modal={false}>
@@ -86,8 +96,16 @@ export function ModeToggleDesktop() {
             key={themeOption}
             disabled={theme === themeOption}
             onClick={() => setTheme(themeOption)}
+            className="flex justify-between"
           >
             {capitalize(themeOption)}
+
+            {(themeOption === "light" || (themeOption === "system" && systemTheme === "light")) && (
+              <SunIcon className="size-[1.2rem]" />
+            )}
+            {(themeOption === "dark" || (themeOption === "system" && systemTheme === "dark")) && (
+              <MoonIcon className="size-[1.2rem]" />
+            )}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
