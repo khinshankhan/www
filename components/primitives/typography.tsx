@@ -10,7 +10,7 @@ export const typographyVariants = cva("", {
       h4: "font-heading text-lg font-semibold tracking-wide md:text-xl lg:text-2xl",
       h5: "font-heading text-base font-semibold tracking-wide md:text-lg lg:text-xl",
       h6: "font-heading text-sm font-semibold tracking-wide md:text-base lg:text-lg",
-      nav: "font-body text-sm font-medium tracking-wide md:text-base lg:text-lg",
+      nav: "font-body text-base font-medium tracking-wide md:text-lg lg:text-xl",
       small: "font-body text-xs md:text-sm lg:text-base",
       /* animated link decorations
        *

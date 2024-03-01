@@ -11,8 +11,8 @@ export interface ILogoProps {
   className?: string
 }
 export function Logo({
-  width = 460,
-  height = 460,
+  width = 42,
+  height = 42,
   bgColor = "var(--logo)",
   fgColor = "hsl(var(--logo-foreground))",
   borderColor = "var(--logo-border)",

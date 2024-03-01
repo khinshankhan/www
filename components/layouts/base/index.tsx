@@ -10,7 +10,7 @@ export function Header() {
   return (
     <header
       role="navigation"
-      className="z-banner flex min-h-[60px] items-center bg-nav md:min-h-[70px] lg:min-h-[80px]"
+      className="z-banner flex min-h-[68px] items-center bg-nav md:min-h-[78px] lg:min-h-[88px]"
     >
       <nav className="page-container flex w-full flex-row items-center justify-between">
         {/* lhs on all views */}
@@ -20,7 +20,7 @@ export function Header() {
         <div
           className={cn(
             typographyVariants({ variant: "nav" }),
-            "hide-mobile flex flex-row items-center gap-2"
+            "hide-mobile flex flex-row items-center gap-4"
           )}
         >
           <NavLinks />

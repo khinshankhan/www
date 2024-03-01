@@ -15,12 +15,12 @@ interface IHomeToggleProps extends ILogoProps {
 export function HomeToggle({
   size: sizeProp = undefined,
   scalable = true,
-  className = "",
+  className = "size-[42px] md:size-[45px] lg:size-[55px]",
   ...props
 }: IHomeToggleProps) {
   return (
     <Link href="/" aria-label="Navigate to homepage." className="home-link">
-      <Logo className={cn("size:h-[55px] size-[42px] md:size-[48px]", className)} {...props} />
+      <Logo className={cn("", className)} {...props} />
     </Link>
   )
 }
