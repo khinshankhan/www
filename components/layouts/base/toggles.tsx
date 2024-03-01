@@ -4,6 +4,7 @@ import React from "react"
 import { useTheme } from "next-themes"
 import { capitalize } from "@/lib/utils"
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
+import { Button } from "@/components/primitives/button"
 import {
   Drawer,
   DrawerClose,
@@ -25,11 +26,11 @@ const themeOptionsList = ["light", "dark", "system"]
 
 const ModeButton = React.forwardRef<HTMLButtonElement, {}>((props, ref) => {
   return (
-    <button ref={ref} {...props}>
+    <Button variant="ghost" size="icon" ref={ref} {...props}>
       <SunIcon className="block size-[1.2rem] dark:hidden" />
       <MoonIcon className="hidden size-[1.2rem] dark:block" />
       <span className="sr-only">Toggle theme</span>
-    </button>
+    </Button>
   )
 })
 ModeButton.displayName = "ModeButton"
@@ -54,9 +55,13 @@ export function ModeToggleMobile() {
             <DrawerFooter>
               {themeOptionsList.map((themeOption) => (
                 <DrawerClose key={themeOption} asChild>
-                  <button disabled={theme === themeOption} onClick={() => setTheme(themeOption)}>
+                  <Button
+                    variant="outline"
+                    disabled={theme === themeOption}
+                    onClick={() => setTheme(themeOption)}
+                  >
                     {capitalize(themeOption)}
-                  </button>
+                  </Button>
                 </DrawerClose>
               ))}
             </DrawerFooter>

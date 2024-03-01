@@ -6,6 +6,7 @@ import { headerLinks } from "@/config"
 import { cn } from "@/lib/utils"
 import { HamburgerMenuIcon } from "@radix-ui/react-icons"
 import { Logo, type ILogoProps } from "@/components/icons"
+import { Button } from "@/components/primitives/button"
 import {
   Drawer,
   DrawerClose,
@@ -73,9 +74,9 @@ export function HamburgerMenu() {
   return (
     <Drawer shouldScaleBackground>
       <DrawerTrigger asChild>
-        <button>
+        <Button variant="ghost" size="icon">
           <HamburgerMenuIcon className="block size-[1.2rem]" />
-        </button>
+        </Button>
       </DrawerTrigger>
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm">
