@@ -4,7 +4,18 @@ import React from "react"
 import { usePathname } from "next/navigation"
 import { headerLinks } from "@/config"
 import { cn } from "@/lib/utils"
+import { HamburgerMenuIcon } from "@radix-ui/react-icons"
 import { Logo, type ILogoProps } from "@/components/icons"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/primitives/drawer"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
 
@@ -55,5 +66,32 @@ export function NavLinks({
         </li>
       ))}
     </ul>
+  )
+}
+
+export function HamburgerMenu() {
+  return (
+    <Drawer shouldScaleBackground>
+      <DrawerTrigger asChild>
+        <button>
+          <HamburgerMenuIcon className="block size-[1.2rem]" />
+        </button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <div className="mx-auto w-full max-w-sm">
+          <DrawerHeader className="text-center sm:text-center">
+            <DrawerTitle>Navigation</DrawerTitle>
+            <DrawerDescription>Take a journey to another page.</DrawerDescription>
+          </DrawerHeader>
+          <div className="p-4 pb-0">
+            <DrawerFooter>
+              <DrawerClose asChild>
+                <NavLinks className="text-center" />
+              </DrawerClose>
+            </DrawerFooter>
+          </div>
+        </div>
+      </DrawerContent>
+    </Drawer>
   )
 }

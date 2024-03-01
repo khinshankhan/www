@@ -1,9 +1,8 @@
 import React, { type ReactNode } from "react"
 import { info } from "@/config"
 import { cn } from "@/lib/utils"
-import { HamburgerMenuIcon } from "@radix-ui/react-icons"
 import { typographyVariants } from "@/components/primitives/typography"
-import { HomeLink, NavLinks } from "./links"
+import { HamburgerMenu, HomeLink, NavLinks } from "./links"
 import { ModeToggleDesktop, ModeToggleMobile } from "./toggles"
 
 export function Header() {
@@ -32,7 +31,7 @@ export function Header() {
           className={cn(typographyVariants({ variant: "nav" }), "hide-desktop flex flex-row gap-2")}
         >
           <ModeToggleMobile />
-          <HamburgerMenuIcon className="block size-[1.2rem]" />
+          <HamburgerMenu />
         </div>
       </nav>
     </header>
