@@ -1,8 +1,9 @@
 import React, { type ReactNode } from "react"
 import { info } from "@/config"
 import { cn } from "@/lib/utils"
+import { HamburgerMenuIcon } from "@radix-ui/react-icons"
 import { typographyVariants } from "@/components/primitives/typography"
-import { HomeToggle } from "@/components/toggles"
+import { HomeToggle, ModeToggle } from "@/components/toggles"
 import { NavLinks } from "./nav-links"
 
 export function Header() {
@@ -23,12 +24,15 @@ export function Header() {
           )}
         >
           <NavLinks />
-          <p>Henlo</p>
+          <ModeToggle />
         </div>
 
         {/* rhs on mobile view */}
-        <div className={cn(typographyVariants({ variant: "nav" }), "hide-desktop flex flex-row")}>
-          <div>menu</div>
+        <div
+          className={cn(typographyVariants({ variant: "nav" }), "hide-desktop flex flex-row gap-2")}
+        >
+          <ModeToggle />
+          <HamburgerMenuIcon className="block size-[1.2rem]" />
         </div>
       </nav>
     </header>
