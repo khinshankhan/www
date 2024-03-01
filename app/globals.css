@@ -39,13 +39,13 @@
     --muted: var(--celestial-100);
     --muted-foreground: var(--celestial-700);
 
-    /* TODO: convert to dark mode */
-    --popover: 0, 0%, 100%;
-    /* TODO: convert to dark mode */
-    --popover-foreground: 222.2, 47.4%, 11.2%;
+    --popover: var(--white);
+    --popover-foreground: var(--celestial-950);
 
-    /* TODO: convert to dark mode */
-    --border: 214.3, 31.8%, 91.4%;
+    --accent: var(--celestial-100);
+    --accent-foreground: var(--celestial-900);
+
+    --border: var(--celestial-200);
 
     --nav: var(--celestial-200);
 
@@ -78,6 +78,14 @@
 
     --muted: var(--celestial-800);
     --muted-foreground: var(--celestial-400);
+
+    --popover: var(--celestial-950);
+    --popover-foreground: var(--celestial-50);
+
+    --accent: var(--celestial-800);
+    --accent-foreground: var(--celestial-50);
+
+    --border: var(--celestial-200);
 
     --nav: var(--celestial-950);
 

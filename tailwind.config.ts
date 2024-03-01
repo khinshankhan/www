@@ -71,6 +71,10 @@ const config: Config = {
           DEFAULT: hsla("popover"),
           foreground: hsla("popover-foreground"),
         },
+        accent: {
+          DEFAULT: hsla("accent"),
+          foreground: hsla("accent-foreground"),
+        },
         border: hsla("border"),
         nav: {
           DEFAULT: hsla("nav"),
