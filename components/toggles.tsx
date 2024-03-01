@@ -2,7 +2,7 @@
 
 import React from "react"
 import { useTheme } from "next-themes"
-import { cn } from "@/lib/utils"
+import { capitalize, cn } from "@/lib/utils"
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import { Logo, type ILogoProps } from "@/components/icons"
 import {
@@ -55,34 +55,22 @@ export function ModeToggle() {
               <span className="sr-only">Toggle theme</span>
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="center">
-            <DropdownMenuItem
-              disabled={theme === "light"}
-              onClick={() => setTheme("light")}
-              className="flex justify-center"
-            >
-              Light
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              disabled={theme === "dark"}
-              onClick={() => setTheme("dark")}
-              className="flex justify-center"
-            >
-              Dark
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              disabled={theme === "system"}
-              onClick={() => setTheme("system")}
-              className="flex justify-center"
-            >
-              System
-            </DropdownMenuItem>
+          <DropdownMenuContent align="end">
+            {["light", "dark", "system"].map((themeType) => (
+              <DropdownMenuItem
+                key={themeType}
+                disabled={theme === themeType}
+                onClick={() => setTheme(themeType)}
+              >
+                {capitalize(themeType)}
+              </DropdownMenuItem>
+            ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
 
       <div className="block md:hidden">
-        <Drawer>
+        <Drawer shouldScaleBackground={true}>
           <DrawerTrigger asChild>
             <button>
               <SunIcon className="block size-[1.2rem] dark:hidden" />
@@ -98,21 +86,13 @@ export function ModeToggle() {
               </DrawerHeader>
               <div className="p-4 pb-0">
                 <DrawerFooter>
-                  <DrawerClose asChild>
-                    <button disabled={theme === "light"} onClick={() => setTheme("light")}>
-                      Light
-                    </button>
-                  </DrawerClose>
-                  <DrawerClose asChild>
-                    <button disabled={theme === "dark"} onClick={() => setTheme("dark")}>
-                      Dark
-                    </button>
-                  </DrawerClose>
-                  <DrawerClose asChild>
-                    <button disabled={theme === "system"} onClick={() => setTheme("system")}>
-                      System
-                    </button>
-                  </DrawerClose>
+                  {["light", "dark", "system"].map((themeType) => (
+                    <DrawerClose key={themeType} asChild>
+                      <button disabled={theme === themeType} onClick={() => setTheme(themeType)}>
+                        {capitalize(themeType)}
+                      </button>
+                    </DrawerClose>
+                  ))}
                 </DrawerFooter>
               </div>
             </div>

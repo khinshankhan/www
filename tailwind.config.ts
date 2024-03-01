@@ -61,6 +61,9 @@ const config: Config = {
         background: "background",
       },
       colors: {
+        black: hsla("black"),
+        white: hsla("white"),
+        transparent: hsla("transparent"),
         background: hsla("background"),
         foreground: hsla("foreground"),
         muted: {

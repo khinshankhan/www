@@ -56,7 +56,10 @@ interface BaseLayoutProps {
 export function BaseLayout({ children }: BaseLayoutProps) {
   return (
     <>
-      <div className="relative z-0 flex min-h-[87vh] flex-col xs:min-h-[96vh]">
+      <div
+        vaul-drawer-wrapper=""
+        className="relative z-0 flex min-h-[87vh] flex-col xs:min-h-[96vh]"
+      >
         <Header />
         <main className="flex grow flex-col">{children}</main>
       </div>
