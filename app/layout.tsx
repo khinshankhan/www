@@ -3,6 +3,7 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Montserrat, Nunito, Source_Code_Pro } from "next/font/google"
 import { cn } from "@/lib/utils"
+import { BreakpointsIndicator } from "@/components/indicators"
 import { BaseLayout } from "@/components/layouts"
 import { typographyVariants } from "@/components/primitives/typography"
 import { ThemeProvider } from "./providers"
@@ -54,6 +55,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <BaseLayout>{children}</BaseLayout>
         </ThemeProvider>
+        <BreakpointsIndicator />
       </body>
     </html>
   )
