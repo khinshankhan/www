@@ -52,6 +52,8 @@
     --accent-foreground: var(--celestial-900);
 
     --border: var(--celestial-200);
+    --input: var(--celestial-200);
+    --ring: var(--celestial-950);
 
     --nav: var(--celestial-200);
 
@@ -98,6 +100,8 @@
     --accent-foreground: var(--celestial-50);
 
     --border: var(--celestial-200);
+    --input: var(--celestial-800);
+    --ring: var(--celestial-300);
 
     --nav: var(--celestial-950);
 

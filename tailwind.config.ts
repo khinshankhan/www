@@ -87,6 +87,8 @@ const config: Config = {
           foreground: hsla("accent-foreground"),
         },
         border: hsla("border"),
+        input: hsla("input"),
+        ring: hsla("ring"),
         nav: {
           DEFAULT: hsla("nav"),
         },
