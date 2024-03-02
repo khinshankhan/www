@@ -51,7 +51,12 @@ export function NavLinks({ className = "" }: { className?: string }) {
     >
       {headerLinks.map((link) => (
         <li key={link.href}>
-          <Link href={link.href} variant={pathname === link.href ? "on" : "default"}>
+          <Link
+            href={link.href}
+            variant={pathname === link.href ? "on" : "default"}
+            nav={true}
+            underline={false}
+          >
             {link.label}
           </Link>
         </li>
@@ -80,7 +85,12 @@ export function HamburgerMenu() {
             <DrawerFooter>
               {headerLinks.map((link) => (
                 <DrawerClose key={link.href} asChild>
-                  <Link href={link.href} variant={pathname === link.href ? "disabled" : "default"}>
+                  <Link
+                    href={link.href}
+                    variant={pathname === link.href ? "disabled" : "default"}
+                    nav={true}
+                    underline={false}
+                  >
                     <Button
                       variant="outline"
                       disabled={pathname === link.href}

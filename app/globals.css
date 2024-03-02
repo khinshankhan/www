@@ -177,6 +177,45 @@
 }
 
 @layer components {
+  .animated-link {
+    position: relative;
+    padding-bottom: 0px; /* space for the underline */
+    text-decoration: none; /* remove default underline */
+    overflow: hidden; /* ensures pseudo-elements don't extend beyond text area */
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: calc(1px);
+      background-color: hsl(var(--link-base)); /* initial underline color */
+      transform: scaleX(0); /* start scaled to 0 (invisible) */
+      transform-origin: bottom right;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &::after {
+      background-color: hsl(var(--link-on)); /* hover underline color */
+      transform-origin: bottom left;
+    }
+
+    &::before {
+      transform: scaleX(1); /* initially appear */
+    }
+    &:hover::before {
+      transform: scaleX(0); /* disappear on hover */
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &:hover::after {
+      transform: scaleX(1); /* appear on hover after delay */
+      transition: transform 0.3s ease-in-out 0.3s; /* delayed start = before animation time */
+    }
+  }
+
   .page-container {
     @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1280px] 2xl:max-w-[1325px];
   }
