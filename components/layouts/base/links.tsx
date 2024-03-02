@@ -4,7 +4,7 @@ import React from "react"
 import { usePathname } from "next/navigation"
 import { headerLinks } from "@/config"
 import { cn } from "@/lib/utils"
-import { HamburgerMenuIcon } from "@radix-ui/react-icons"
+import { ArrowRightIcon, HamburgerMenuIcon } from "@radix-ui/react-icons"
 import { Logo, type ILogoProps } from "@/components/icons"
 import { Button } from "@/components/primitives/button"
 import {
@@ -32,19 +32,13 @@ export function HomeLink({
   ...props
 }: IHomeLinkProps) {
   return (
-    <Link href="/" aria-label="Navigate to homepage." className="home-link">
+    <Link href="/" aria-label="Navigate to homepage." underline={false} className="home-link">
       <Logo className={cn("", className)} {...props} />
     </Link>
   )
 }
 
-export function NavLinks({
-  className = "",
-  onClick,
-}: {
-  className?: string
-  onClick?: () => void
-}) {
+export function NavLinks({ className = "" }: { className?: string }) {
   const pathname = usePathname()
 
   return (
@@ -57,11 +51,7 @@ export function NavLinks({
     >
       {headerLinks.map((link) => (
         <li key={link.href}>
-          <Link
-            href={link.href}
-            variant={pathname === link.href ? "on" : "default"}
-            onClick={onClick ?? (() => {})}
-          >
+          <Link href={link.href} variant={pathname === link.href ? "on" : "default"}>
             {link.label}
           </Link>
         </li>
@@ -71,6 +61,8 @@ export function NavLinks({
 }
 
 export function HamburgerMenu() {
+  const pathname = usePathname()
+
   return (
     <Drawer shouldScaleBackground>
       <DrawerTrigger asChild>
@@ -86,9 +78,20 @@ export function HamburgerMenu() {
           </DrawerHeader>
           <div className="p-4 pb-0">
             <DrawerFooter>
-              <DrawerClose asChild>
-                <NavLinks className="text-center" />
-              </DrawerClose>
+              {headerLinks.map((link) => (
+                <DrawerClose key={link.href} asChild>
+                  <Link href={link.href} variant={pathname === link.href ? "disabled" : "default"}>
+                    <Button
+                      variant="outline"
+                      disabled={pathname === link.href}
+                      className="flex w-full justify-between"
+                    >
+                      {link.label}
+                      <ArrowRightIcon className="block size-[1.2rem]" />
+                    </Button>
+                  </Link>
+                </DrawerClose>
+              ))}
             </DrawerFooter>
           </div>
         </div>
