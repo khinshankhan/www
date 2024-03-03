@@ -7,8 +7,9 @@
 /** @type {NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: "export",
   trailingSlash: true,
+  output: "export",
+  images: { unoptimized: true },
 }
 
 /**
