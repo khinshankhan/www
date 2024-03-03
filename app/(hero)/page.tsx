@@ -1,12 +1,15 @@
+import Image from "next/image"
 import { Link } from "@/components/primitives/link"
 import { EggText } from "./egg-text"
 
 function Wave() {
   return (
-    <img
+    <Image
       alt=":wave:"
+      width={16}
+      height={16}
       src="https://github.githubassets.com/images/icons/emoji/unicode/1f44b.png?v8"
-      className="animate-wave inline aspect-auto h-[1em] w-[1em]"
+      className="animate-wave inline aspect-auto size-[1em]"
     />
   )
 }
@@ -15,16 +18,16 @@ export default function Home() {
   return (
     <section className="container mx-auto my-8 flex flex-col items-center justify-center space-y-20">
       <section className="flex flex-col items-center justify-center gap-4 md:flex-row-reverse">
-        <img
+        <Image
           alt="Profile Image"
           className="rounded-full md:ml-8"
-          height="256"
+          width={256}
+          height={256}
           src="https://github.com/khinshankhan.png"
           style={{
             aspectRatio: "256/256",
             objectFit: "cover",
           }}
-          width="256"
         />
 
         <section className="flex flex-col items-center space-y-6 text-center md:items-end md:text-right">
@@ -32,7 +35,7 @@ export default function Home() {
             <h1 className="font-heading text-5xl font-bold md:whitespace-nowrap md:text-7xl">
               Hello there <Wave />
             </h1>
-            <h2 className="font-heading text-3xl font-bold md:text-5xl">I'm Khinshan Khan</h2>
+            <h2 className="font-heading text-3xl font-bold md:text-5xl">{"I'm"} Khinshan Khan</h2>
           </section>
           <h3 className="mx-auto max-w-[700px] hyphens-auto text-balance text-3xl sm:hyphens-none">
             Welcome to my corner of the internet to explore the intersections of creativity and
@@ -51,11 +54,11 @@ export default function Home() {
 
       <section className="mx-auto max-w-[1400px] hyphens-auto text-balance text-center text-3xl sm:hyphens-none">
         <p>
-          I {`wasn't`} really sure what to put here, especially since I have an{" "}
+          I {"wasn't"} really sure what to put here, especially since I have an{" "}
           <Link href="/about/" nav={true} underline={false}>
             about
           </Link>{" "}
-          page which has the most of what I {`would've`} thrown here. So I put something which would
+          page which has the most of what I {"would've"} thrown here. So I put something which would
           interest me:
         </p>
         <p>
