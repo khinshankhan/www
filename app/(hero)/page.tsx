@@ -1,6 +1,8 @@
 import Image from "next/image"
 import { wordToMobileKey } from "@/lib/misc"
+import { cn } from "@/lib/utils"
 import { Link } from "@/components/primitives/link"
+import { typographyVariants } from "@/components/primitives/typography"
 import { EggText } from "./egg-text"
 
 function Wave() {
@@ -14,7 +16,6 @@ function Wave() {
     />
   )
 }
-
 export default function Home() {
   return (
     <section className="page-container mx-auto mt-8 flex flex-col items-center justify-center space-y-20 md:mt-20">
@@ -33,12 +34,26 @@ export default function Home() {
 
         <section className="flex flex-col items-center space-y-6 text-center md:items-end md:text-right">
           <section>
-            <h1 className="font-heading text-5xl font-bold md:whitespace-nowrap md:text-7xl">
+            <h1
+              className={cn(
+                typographyVariants({ variant: "h1", className: "font-bold md:whitespace-nowrap" })
+              )}
+            >
               Hello there <Wave />
             </h1>
-            <h2 className="font-heading text-3xl font-bold md:text-5xl">{"I'm"} Khinshan Khan</h2>
+            <h2 className={cn(typographyVariants({ variant: "h2", className: "font-bold" }))}>
+              {"I'm"} Khinshan Khan
+            </h2>
           </section>
-          <h3 className="mx-auto max-w-[700px] hyphens-auto text-balance text-3xl sm:hyphens-none">
+          <h3
+            className={cn(
+              typographyVariants({
+                variant: "h3",
+                className:
+                  "mx-auto max-w-[700px] hyphens-auto text-balance font-normal sm:hyphens-none",
+              })
+            )}
+          >
             Welcome to my corner of the internet to explore the intersections of creativity and
             technology
           </h3>
@@ -53,8 +68,16 @@ export default function Home() {
         </section>
       </section>
 
-      <section className="mx-auto max-w-[1400px] space-y-8 hyphens-auto text-balance text-center text-3xl sm:hyphens-none">
-        <section>
+      <section
+        className={cn(
+          typographyVariants({
+            variant: "h4",
+            className:
+              "mx-auto max-w-[1400px] space-y-8 hyphens-auto text-center font-normal sm:hyphens-none",
+          })
+        )}
+      >
+        <section className="text-balance">
           <p>
             I {"wasn't"} really sure what to put here, especially since I have an{" "}
             <Link href="/about/" nav={true} underline={false}>
@@ -68,27 +91,39 @@ export default function Home() {
           </p>
         </section>
 
-        <p>
-          {"Here's"} a hint: {"it's"} just the {wordToMobileKey("konami komando")}. Might be harder
-          than another hint on the website so maybe look for that. Happy hunting!
+        <p className="text-balance md:text-wrap">
+          {"Here's"} a hint: one is just the {wordToMobileKey("konami komando")}. Might be harder
+          than another hint to the same egg on the website, so maybe look for that. Happy hunting!
         </p>
       </section>
 
-      <section className="mx-auto max-w-[1400px] hyphens-auto text-balance text-center text-3xl sm:hyphens-none">
-        In the meantime, you can check out my{" "}
-        <Link href="/writings/" nav={true} underline={false}>
-          writings
-        </Link>{" "}
-        or{" "}
-        <Link href="/projects/" nav={true} underline={false}>
-          projects
-        </Link>
-        . I put in a fair amount of effort into them so I hope you find them interesting. If you
-        want to get in touch, you can{" "}
-        <Link href="/connect/" nav={true} underline={false}>
-          connect with me
-        </Link>
-        . Hopefully you find something interesting here. Have fun and happy exploring!
+      <section
+        className={cn(
+          typographyVariants({
+            variant: "h4",
+            className:
+              "mx-auto max-w-[1400px] space-y-8 hyphens-auto text-center font-normal sm:hyphens-none",
+          })
+        )}
+      >
+        <p>
+          In the meantime, you can check out my{" "}
+          <Link href="/writings/" nav={true} underline={false}>
+            writings
+          </Link>{" "}
+          or{" "}
+          <Link href="/projects/" nav={true} underline={false}>
+            projects
+          </Link>
+          . I put in a fair amount of effort into them so I hope you find them interesting. If you
+          want to get in touch, you can{" "}
+          <Link href="/connect/" nav={true} underline={false}>
+            connect with me
+          </Link>
+          . Hopefully you find something intriguing here.
+        </p>
+
+        <p>Have fun and happy exploring!</p>
       </section>
     </section>
   )
