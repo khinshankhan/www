@@ -16,7 +16,7 @@ function Wave() {
 
 export default function Home() {
   return (
-    <section className="container mx-auto my-8 flex flex-col items-center justify-center space-y-20">
+    <section className="page-container mx-auto my-8 flex flex-col items-center justify-center space-y-20">
       <section className="flex flex-col items-center justify-center gap-4 md:flex-row-reverse">
         <Image
           alt="Profile Image"

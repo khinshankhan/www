@@ -87,8 +87,8 @@ export function HamburgerMenu() {
                 <DrawerClose key={link.href} asChild>
                   <Link
                     href={link.href}
-                    variant={pathname === link.href ? "disabled" : "default"}
-                    nav={true}
+                    variant={pathname === link.href ? "on" : "default"}
+                    nav={false}
                     underline={false}
                   >
                     <Button
