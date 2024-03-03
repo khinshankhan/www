@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { wordToMobileKey } from "@/lib/misc"
 import { Link } from "@/components/primitives/link"
 import { EggText } from "./egg-text"
 
@@ -16,7 +17,7 @@ function Wave() {
 
 export default function Home() {
   return (
-    <section className="page-container mx-auto my-8 flex flex-col items-center justify-center space-y-20">
+    <section className="page-container mx-auto mt-8 flex flex-col items-center justify-center space-y-20 md:mt-20">
       <section className="flex flex-col items-center justify-center gap-4 md:flex-row-reverse">
         <Image
           alt="Profile Image"
@@ -52,17 +53,24 @@ export default function Home() {
         </section>
       </section>
 
-      <section className="mx-auto max-w-[1400px] hyphens-auto text-balance text-center text-3xl sm:hyphens-none">
+      <section className="mx-auto max-w-[1400px] space-y-8 hyphens-auto text-balance text-center text-3xl sm:hyphens-none">
+        <section>
+          <p>
+            I {"wasn't"} really sure what to put here, especially since I have an{" "}
+            <Link href="/about/" nav={true} underline={false}>
+              about
+            </Link>{" "}
+            page which has the most of what I {"would've"} thrown here. So I put something which
+            would interest me:
+          </p>
+          <p>
+            This website currently has <EggText /> easter eggs. Can you find them all?
+          </p>
+        </section>
+
         <p>
-          I {"wasn't"} really sure what to put here, especially since I have an{" "}
-          <Link href="/about/" nav={true} underline={false}>
-            about
-          </Link>{" "}
-          page which has the most of what I {"would've"} thrown here. So I put something which would
-          interest me:
-        </p>
-        <p>
-          This website currently has <EggText /> easter eggs. Can you find them all?
+          {"Here's"} a hint: {"it's"} just the {wordToMobileKey("konami komando")}. Might be harder
+          than another hint on the website so maybe look for that. Happy hunting!
         </p>
       </section>
 
@@ -75,7 +83,8 @@ export default function Home() {
         <Link href="/projects/" nav={true} underline={false}>
           projects
         </Link>
-        . I put in a fair amount of effort into them. If you want to get in touch, you can{" "}
+        . I put in a fair amount of effort into them so I hope you find them interesting. If you
+        want to get in touch, you can{" "}
         <Link href="/connect/" nav={true} underline={false}>
           connect with me
         </Link>
