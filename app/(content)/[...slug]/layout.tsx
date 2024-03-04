@@ -1,16 +1,32 @@
 import React, { type ReactNode } from "react"
+import { getContentData } from "@/lib/content"
 import { PageSkeletonLayout } from "@/components/layouts"
 
-export default function PagesLayout({ children }: { children: ReactNode }) {
+export default function PagesLayout({
+  params,
+  children,
+}: {
+  params: { slug: string[] }
+  children: ReactNode
+}) {
+  const { slug } = params
+  const slugPath = slug.join("/")
+
+  // TODO: turn this to support `"**/page*.mdx"` when dealing with i18n
+  // eg page.es.mdx will be spanish
+  const filePath = `${slugPath}/page.mdx`
+
+  const contentData = getContentData(filePath)
+
   return (
     <PageSkeletonLayout
-      title="Aboutti"
+      title={contentData?.frontmatter?.title}
       subtitle={
         <>
-          <span>{`Me me and me`}</span>
+          <span>{contentData?.frontmatter?.subtitle}</span>
         </>
       }
-      path="/app/content/about/page.mdx"
+      path={`content/${slugPath}/page.tsx`}
     >
       {children}
     </PageSkeletonLayout>
