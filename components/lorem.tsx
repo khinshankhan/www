@@ -15,44 +15,6 @@ export function Lorem() {
         tart pastry marshmallow.
       </p>
 
-      <p>And then a short lists test</p>
-      <ul>
-        <li>OJ</li>
-        <li>
-          <ul>
-            <li>Coffee</li>
-            <li>Tea</li>
-            <li>
-              <ul>
-                <li>Black</li>
-                <li>Green</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li>Milk</li>
-        <li>
-          Testing a super long list item wrapping. This will be nonsense, as lorem ipsum tends to
-          be. I love donut soufflé oat cake cake pastry marzipan I love. Cake bear claw bear claw
-          marzipan gummies jujubes fruitcake. Cheesecake cookie marshmallow marshmallow macaroon
-          tart pastry marshmallow.
-        </li>
-        <li>Testing weird double p tag in single list item:</li>
-        <li>
-          <p>Okay One</p>
-          <p>Okay Two?</p>
-        </li>
-        <li>Now nested:</li>
-        <li>
-          <ul>
-            <li>
-              <p>Okay One</p>
-              <p>Okay Two?</p>
-            </li>
-          </ul>
-        </li>
-      </ul>
-
       <p>
         Muffin biscuit gummi bears toffee lemon drops soufflé donut powder. Jelly-o I love sugar
         plum donut lemon drops. Dessert wafer chocolate cake apple pie chocolate carrot cake pie.

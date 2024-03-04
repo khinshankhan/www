@@ -146,13 +146,11 @@
       padding-left: 0.375em;
     }
     /* NOTE: this assumes nested lists will be wrapped in a listitem */
-    & :is(ol, ul) li:has(> :is(ol, ul)) {
-      list-style: none;
+    & :is(ol, ul) li > :is(ol, ul) {
       padding-left: 0.75em;
     }
-    & :is(ol, ul) :is(ol, ul) li:has(> :is(ol, ul)) {
+    & :is(ol, ul) :is(ol, ul) li > :is(ol, ul) {
       padding-left: 1.125em;
-      list-style: none;
     }
 
     & :is(ol, ul) {
