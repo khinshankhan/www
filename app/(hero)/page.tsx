@@ -12,7 +12,7 @@ function Wave() {
       width={16}
       height={16}
       src="https://github.githubassets.com/images/icons/emoji/unicode/1f44b.png?v8"
-      className="animate-wave inline aspect-auto size-[1em]"
+      className="inline aspect-auto size-[1em] animate-wave"
     />
   )
 }
