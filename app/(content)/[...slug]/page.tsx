@@ -3,10 +3,6 @@ import { notFound } from "next/navigation"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { getAllContentData, getContentData } from "@/lib/content"
 
-export function getAllContentDatas() {
-  return [{ slug: "about" }]
-}
-
 export async function generateStaticParams() {
   const slugsParts = getAllContentData().map((contentData) => {
     return {
