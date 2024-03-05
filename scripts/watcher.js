@@ -1,26 +1,33 @@
 // Full credit to https://github.com/gaearon/overreacted.io/pull/797
-const { WebSocketServer } = require("ws");
-const chokidar = require("chokidar");
+const chokidar = require("chokidar")
+const WebSocket = require("ws")
 
-const wss = new WebSocketServer({ port: 3001 });
-const watchCallbacks = [];
+const port = 3001
 
-chokidar.watch("./content").on("all", (event) => {
-  if (event === "change") {
-    watchCallbacks.forEach((cb) => cb());
-  }
-});
+const wss = new WebSocket.Server({ port })
+let watcherCallbacks = []
+
+chokidar.watch("./content", { persistent: true }).on("all", (event, path) => {
+  console.log("[watcher.js]", event, path)
+  watcherCallbacks.forEach((cb) => cb && cb())
+})
+
+wss.on("listening", function connection() {
+  console.log(`[watcher.js] WebSocket server listening on ws://localhost:${port}`)
+})
 
 wss.on("connection", function connection(ws) {
-  ws.on("error", console.error);
+  ws.on("error", console.error)
 
-  watchCallbacks.push(onChange);
+  watcherCallbacks.push(onChange)
+  let index = watcherCallbacks.length - 1
+
   ws.on("close", function close() {
-    const index = watchCallbacks.findIndex(onChange);
-    watchCallbacks.splice(index, 1);
-  });
+    console.log("[watcher.js] closing")
+    watcherCallbacks[index] = null
+  })
 
   function onChange() {
-    ws.send("refresh");
+    ws.send("refresh")
   }
-});
+})
