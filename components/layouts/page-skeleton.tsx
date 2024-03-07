@@ -1,5 +1,6 @@
 import React, { type ReactNode } from "react"
 import { cn } from "@/lib/utils"
+import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
 
 export interface WithSidebarProps {
@@ -94,9 +95,9 @@ export function PageSkeletonLayout({
       <div className="bg-nav py-6">
         <div className="page-container">
           <div className="flex flex-row-reverse">
-            <a href={`https://github.com/khinshankhan/www/tree/main${ghPath}`}>
+            <Link href={`https://github.com/khinshankhan/www/tree/main${ghPath}`}>
               View page on GitHub
-            </a>
+            </Link>
           </div>
         </div>
       </div>
