@@ -103,6 +103,31 @@ const config: Config = {
           active: hsla("link-active"),
           on: hsla("link-on"),
         },
+        info: {
+          DEFAULT: hsla("info"),
+          foreground: hsla("info-foreground"),
+          border: hsla("info-border"),
+        },
+        success: {
+          DEFAULT: hsla("success"),
+          foreground: hsla("success-foreground"),
+          border: hsla("success-border"),
+        },
+        critical: {
+          DEFAULT: hsla("critical"),
+          foreground: hsla("critical-foreground"),
+          border: hsla("critical-border"),
+        },
+        warning: {
+          DEFAULT: hsla("warning"),
+          foreground: hsla("warning-foreground"),
+          border: hsla("warning-border"),
+        },
+        danger: {
+          DEFAULT: hsla("danger"),
+          foreground: hsla("danger-foreground"),
+          border: hsla("danger-border"),
+        },
       },
       backgroundSize: {
         "link-hide": "0% 0.05em",
