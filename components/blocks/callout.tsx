@@ -22,6 +22,7 @@ export type CalloutVariants = VariantProps<typeof calloutVariants>
 
 interface CalloutProps extends React.HTMLAttributes<HTMLDivElement>, CalloutVariants {
   variant?: NonNullable<CalloutVariants["variant"]>
+  heading?: string
   children: ReactNode
   className?: string
 }
@@ -34,12 +35,19 @@ const calloutIcons: Record<NonNullable<CalloutProps["variant"]>, SVGIconNames> =
   caution: "shield-exclamation",
 }
 
-export function Callout({ variant = "note", className = "", children }: CalloutProps) {
+export function Callout({
+  variant = "note",
+  heading = undefined,
+  className = "",
+  children,
+}: CalloutProps) {
+  const calloutHeading = heading ?? capitalize(variant)
+
   return (
     <div className={cn(calloutVariants({ variant, className }))}>
       <p className="flex flex-row items-center gap-2 pb-2 font-semibold">
-        <SvgIcon id={calloutIcons[variant]} className="" />
-        <span style={{ fontSize: "120%" }}>{capitalize(variant)}</span>
+        <SvgIcon id={calloutIcons[variant]} />
+        <span style={{ fontSize: "120%" }}>{calloutHeading}</span>
       </p>
       {children}
     </div>
