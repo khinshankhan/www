@@ -1,7 +1,11 @@
 import React from "react"
+import { getContentDataBySource } from "@/lib/content"
 import { Callout } from "@/components/blocks/callout"
+import { Link } from "@/components/primitives/link"
 
 export default function Writings() {
+  const allContentData = getContentDataBySource("writings")
+
   return (
     <main>
       <Callout variant="note" heading="Work in Progress">
@@ -11,6 +15,16 @@ export default function Writings() {
           trinkle in slowly but {"it'll"} all be up eventually... soon <sup>TM</sup>
         </p>
       </Callout>
+
+      <ul className="mt-4">
+        {allContentData.map((contentData) => {
+          return (
+            <li key={contentData.slug}>
+              <Link href={`/${contentData.slug}`}>{contentData.frontmatter.title}</Link>
+            </li>
+          )
+        })}
+      </ul>
     </main>
   )
 }

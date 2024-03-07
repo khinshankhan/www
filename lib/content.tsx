@@ -9,6 +9,13 @@ const contentDir = path.join(projectRoot, "content")
 // eg page.es.mdx will be spanish
 const contentPattern = ["**/*.mdx"]
 
+type ContentSource = "root" | "writings" | "projects"
+function getContentSource(slug: string): ContentSource {
+  if (slug.startsWith("writings")) return "writings"
+  if (slug.startsWith("projects")) return "projects"
+  return "root"
+}
+
 export function getContentData(filePath: string) {
   const absFilePath = path.join(contentDir, filePath)
   if (!fs.existsSync(absFilePath)) {
@@ -24,6 +31,7 @@ export function getContentData(filePath: string) {
     absFilePath,
     rawContent: fileContent,
     slug,
+    source: getContentSource(slug),
     frontmatter: data,
     content,
   }
@@ -35,4 +43,9 @@ export function getAllContentData() {
   return filePaths.map((filePath) => {
     return getContentData(filePath)!
   })
+}
+
+export function getContentDataBySource(source: ContentSource) {
+  const contentData = getAllContentData()
+  return contentData.filter((content) => content.source === source)
 }
