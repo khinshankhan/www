@@ -4,13 +4,13 @@ import { PageSkeletonLayout } from "@/components/layouts"
 export default function PagesLayout({ children }: { children: ReactNode }) {
   return (
     <PageSkeletonLayout
-      title="Writings"
+      title="Projects"
       subtitle={
         <>
-          <span>{`My thoughts and ideas`}</span>
+          <span>{`Some work. Almost a portfolio?`}</span>
         </>
       }
-      path="/app/(content)/writings/page.tsx"
+      path="/app/(content)/projects/page.tsx"
     >
       {children}
     </PageSkeletonLayout>
