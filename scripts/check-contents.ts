@@ -1,47 +1,37 @@
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
-import { ContentFrontmatterSchema } from "../schemas/content"
+import { z } from "zod"
+import { getAllContentData, getContentData } from "../lib/content"
 
-// Function to validate frontmatter using Zod schema
-function validateFrontmatter(frontmatter: any) {
+let triedFilePaths: string[] = []
+function getContentDataWrapper(filePath: string) {
   try {
-    ContentFrontmatterSchema.parse(frontmatter)
-    return true // Frontmatter is valid
-  } catch (error) {
-    console.error("Frontmatter validation error:", error)
-    return false // Frontmatter is invalid
+    triedFilePaths.push(filePath)
+    return getContentData(filePath)
+  } catch (err) {
+    if (!(err instanceof z.ZodError)) throw err
+
+    err.errors.forEach((err) => {
+      console.error(
+        `[INVALID CONTENT] error parsing content data for ${filePath}: ${
+          err.message
+        } - Path: [content.${err.path.join(".")}]`
+      )
+    })
+
+    throw err
   }
 }
 
-// Recursive function to process markdown files
-function processMarkdownFiles(directory: string) {
-  const files = fs.readdirSync(directory)
+function checkContents() {
+  const validContentData = getAllContentData(getContentDataWrapper)
 
-  for (const file of files) {
-    const filePath = path.join(directory, file)
-    const stat = fs.statSync(filePath)
-
-    if (stat.isDirectory()) {
-      // Recursively process subdirectory
-      processMarkdownFiles(filePath)
-    } else if (file.endsWith(".md")) {
-      // Process markdown file
-      const fileContent = fs.readFileSync(filePath, "utf-8")
-      const { data } = matter(fileContent)
-
-      // Validate frontmatter
-      if (validateFrontmatter(data)) {
-        console.log(`Frontmatter in ${filePath} is valid.`)
-      } else {
-        console.log(`Frontmatter in ${filePath} is invalid.`)
-      }
-    }
+  if (triedFilePaths.length != validContentData.length) {
+    console.log(
+      `[INVALID CONTENT] detected ${triedFilePaths.length - validContentData.length} bad files`
+    )
   }
 }
 
-// Example usage
-const markdownDirectory = "../content"
-processMarkdownFiles(markdownDirectory)
-
-console.log("hello there homes")
+checkContents()

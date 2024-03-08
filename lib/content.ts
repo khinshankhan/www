@@ -1,15 +1,15 @@
 import fs from "fs"
 import path from "path"
-import { ContentDataSchema, type ContentSource } from "@/schemas/content"
-import { globbySync } from "globby"
+import { globSync } from "fast-glob"
 import matter from "gray-matter"
+import { ContentDataSchema, type ContentSource } from "../schemas/content"
 import { existPredicate } from "./utils"
 
 const projectRoot = process.cwd()
 const contentDir = path.join(projectRoot, "content")
 // TODO: turn this into `"**/page*.mdx"` when dealing with i18n
 // eg page.es.mdx will be spanish
-const contentPattern = ["**/*.mdx"]
+const contentPatterns = ["**/*.md", "**/*.mdx"]
 
 function getContentSource(slug: string): ContentSource {
   if (slug.startsWith("writings")) return "writings"
@@ -39,11 +39,11 @@ export function getContentData(filePath: string) {
   return contentData
 }
 
-export function getAllContentData() {
-  const filePaths = globbySync(contentPattern, { cwd: contentDir })
+export function getAllContentData(getContentDataFromFilePath = getContentData) {
+  const filePaths = globSync(contentPatterns, { cwd: contentDir })
   const allContentData = filePaths.map((filePath) => {
     try {
-      return getContentData(filePath)
+      return getContentDataFromFilePath(filePath)
     } catch (err) {
       return null
     }
