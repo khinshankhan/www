@@ -3,14 +3,16 @@
   "private": true,
   "scripts": {
     "next-dev": "next dev --turbo",
-    "watch-content": "node ./scripts/watcher.js",
-    "dev": "run-p next-dev watch-content",
+    "check-contents": "pnpx ts-node scripts/check-contents.ts",
+    "watch-contents": "pnpx ts-node scripts/check-contents.ts --watch",
+    "refresh-from-content": "node ./scripts/autorefresher.js",
+    "monitor-content": "run-p refresh-from-content watch-contents",
+    "dev": "run-p next-dev monitor-content",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
-    "check-contents": "pnpx ts-node scripts/check-contents.ts"
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.0.6",

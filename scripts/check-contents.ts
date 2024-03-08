@@ -1,37 +1,52 @@
 import fs from "fs"
 import path from "path"
+import chokidar from "chokidar"
 import matter from "gray-matter"
 import { z } from "zod"
 import { getAllContentData, getContentData } from "../lib/content"
 
-let triedFilePaths: string[] = []
-function getContentDataWrapper(filePath: string) {
-  try {
-    triedFilePaths.push(filePath)
-    return getContentData(filePath)
-  } catch (err) {
-    if (!(err instanceof z.ZodError)) throw err
+function checkContents(watchFlag: boolean = false) {
+  let triedFilePaths: string[] = []
 
-    err.errors.forEach((err) => {
-      console.error(
-        `[INVALID CONTENT] error parsing content data for ${filePath}: ${
-          err.message
-        } - Path: [content.${err.path.join(".")}]`
-      )
-    })
+  function getContentDataWrapper(filePath: string) {
+    try {
+      triedFilePaths.push(filePath)
+      return getContentData(filePath)
+    } catch (err) {
+      if (!(err instanceof z.ZodError)) throw err
 
-    throw err
+      err.errors.forEach((err) => {
+        console.error(
+          `[INVALID CONTENT] ${filePath}: ${err.message} - [content.${err.path.join(".")}]`
+        )
+      })
+
+      throw err
+    }
   }
-}
 
-function checkContents() {
   const validContentData = getAllContentData(getContentDataWrapper)
 
-  if (triedFilePaths.length != validContentData.length) {
-    console.log(
-      `[INVALID CONTENT] detected ${triedFilePaths.length - validContentData.length} bad files`
-    )
+  const invalidFilesCount = triedFilePaths.length - validContentData.length
+  if (invalidFilesCount > 0) {
+    const errorMessage = `[INVALID CONTENT] detected ${invalidFilesCount} bad files`
+    console.log(errorMessage)
+
+    // if not watching, don't let ci cd build pass
+    if (!watchFlag) {
+      throw new Error(errorMessage)
+    }
   }
 }
 
-checkContents()
+const watchFlag = process.argv.includes("--watch")
+if (watchFlag) {
+  chokidar.watch("./content", { persistent: true }).on("all", (event, path) => {
+    if (["add", "change"].includes(event)) {
+      console.log("[check-contents.ts]", event, path)
+      checkContents(watchFlag)
+    }
+  })
+} else {
+  checkContents(watchFlag)
+}
