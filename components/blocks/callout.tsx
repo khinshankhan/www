@@ -6,11 +6,11 @@ import { SvgIcon, SVGIconNames } from "@/components/icons"
 export const calloutVariants = cva("w-full rounded-md border-2 px-4 py-2", {
   variants: {
     variant: {
-      note: "border-info-border bg-info text-info-foreground",
-      tip: "border-success-border bg-success text-success-foreground",
-      important: "border-critical-border bg-critical text-critical-foreground",
-      warning: "border-warning-border bg-warning text-warning-foreground",
-      caution: "border-danger-border bg-danger text-danger-foreground",
+      note: "border-info-border bg-info/60 text-info-foreground",
+      tip: "border-success-border bg-success/60 text-success-foreground",
+      important: "border-critical-border bg-critical/60 text-critical-foreground",
+      warning: "border-warning-border bg-warning/60 text-warning-foreground",
+      caution: "border-danger-border bg-danger/60 text-danger-foreground",
     },
   },
   defaultVariants: {
