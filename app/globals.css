@@ -20,6 +20,18 @@
     --celestial-900: 240, 47.4%, 11.2%;
     --celestial-950: 240, 84%, 4.9%;
 
+    --brand-50: var(--celestial-50);
+    --brand-100: var(--celestial-100);
+    --brand-200: var(--celestial-200);
+    --brand-300: var(--celestial-300);
+    --brand-400: var(--celestial-400);
+    --brand-500: var(--celestial-500);
+    --brand-600: var(--celestial-600);
+    --brand-700: var(--celestial-700);
+    --brand-800: var(--celestial-800);
+    --brand-900: var(--celestial-900);
+    --brand-950: var(--celestial-950);
+
     --sky-50: 204, 100%, 97.1%;
     --sky-100: 204, 93.8%, 93.7%;
     --sky-200: 200.6, 94.4%, 86.1%;
@@ -93,29 +105,28 @@
     --plum11: 300, 60%, 62%;
     --plum12: 296, 74%, 95.7%;
 
+    --nav: var(--brand-200);
     --background: var(--white);
-    --foreground: var(--celestial-950);
+    --foreground: var(--brand-950);
 
     --popover: var(--white);
-    --popover-foreground: var(--celestial-950);
+    --popover-foreground: var(--brand-950);
 
-    --primary: var(--celestial-900);
-    --primary-foreground: var(--celestial-50);
+    --primary: var(--brand-900);
+    --primary-foreground: var(--brand-50);
 
-    --secondary: var(--celestial-100);
-    --secondary-foreground: var(--celestial-900);
+    --secondary: var(--brand-100);
+    --secondary-foreground: var(--brand-900);
 
-    --muted: var(--celestial-100);
-    --muted-foreground: var(--celestial-700);
+    --muted: var(--brand-100);
+    --muted-foreground: var(--brand-700);
 
-    --accent: var(--celestial-100);
-    --accent-foreground: var(--celestial-900);
+    --accent: var(--brand-100);
+    --accent-foreground: var(--brand-900);
 
-    --border: var(--celestial-200);
-    --input: var(--celestial-200);
-    --ring: var(--celestial-950);
-
-    --nav: var(--celestial-200);
+    --border: var(--brand-200);
+    --input: var(--brand-200);
+    --ring: var(--brand-950);
 
     --logo: var(--transparent);
     --logo-foreground: var(--foreground);
@@ -161,29 +172,28 @@
     --plum11: 292, 60%, 42.5%;
     --plum12: 291, 66%, 14%;
 
-    --background: var(--celestial-900);
-    --foreground: var(--celestial-50);
+    --nav: var(--brand-950);
+    --background: var(--brand-900);
+    --foreground: var(--brand-50);
 
-    --popover: var(--celestial-950);
-    --popover-foreground: var(--celestial-50);
+    --popover: var(--brand-950);
+    --popover-foreground: var(--brand-50);
 
-    --primary: var(--celestial-50);
-    --primary-foreground: var(--celestial-900);
+    --primary: var(--brand-50);
+    --primary-foreground: var(--brand-900);
 
-    --secondary: var(--celestial-800);
-    --secondary-foreground: var(--celestial-50);
+    --secondary: var(--brand-800);
+    --secondary-foreground: var(--brand-50);
 
-    --muted: var(--celestial-800);
-    --muted-foreground: var(--celestial-400);
+    --muted: var(--brand-800);
+    --muted-foreground: var(--brand-400);
 
-    --accent: var(--celestial-800);
-    --accent-foreground: var(--celestial-50);
+    --accent: var(--brand-800);
+    --accent-foreground: var(--brand-50);
 
-    --border: var(--celestial-200);
-    --input: var(--celestial-800);
-    --ring: var(--celestial-300);
-
-    --nav: var(--celestial-950);
+    --border: var(--brand-200);
+    --input: var(--brand-800);
+    --ring: var(--brand-300);
 
     --link-base: var(--plum8);
     --link-active: var(--plum6);

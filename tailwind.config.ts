@@ -64,6 +64,7 @@ const config: Config = {
         transparent: hsla("transparent"),
         black: hsla("black"),
         white: hsla("white"),
+        nav: hsla("nav"),
         background: hsla("background"),
         foreground: hsla("foreground"),
         popover: {
@@ -89,9 +90,6 @@ const config: Config = {
         border: hsla("border"),
         input: hsla("input"),
         ring: hsla("ring"),
-        nav: {
-          DEFAULT: hsla("nav"),
-        },
         logo: {
           DEFAULT: hsla("logo"),
           foreground: hsla("logo-foreground"),
