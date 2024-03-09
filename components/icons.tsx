@@ -69,7 +69,7 @@ export function SvgIcon({ className = "", id, ...props }: ISvgIconProps) {
       className={cn("size-6", className)}
       {...props}
     >
-      <use href={`/icons.svg#${id}`} />
+      <use href={`/icons.svg?v=1#${id}`} />
     </svg>
   )
 }
