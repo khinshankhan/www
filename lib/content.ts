@@ -35,8 +35,8 @@ export function getContentData(filePath: string) {
     content,
   }
 
-  ContentDataSchema.parse(contentData)
-  return contentData
+  const parsedContentData = ContentDataSchema.parse(contentData)
+  return parsedContentData
 }
 
 export function getAllContentData(getContentDataFromFilePath = getContentData) {
