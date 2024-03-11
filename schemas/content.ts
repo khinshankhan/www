@@ -5,6 +5,7 @@ export const ContentFrontmatterSchema = z.object({
   subtitle: z.string(),
   datePublished: z.instanceof(Date),
   dateModified: z.instanceof(Date),
+  description: z.string(),
   // tags: z.array(z.string()).optional().default([]),
   // draft: z.boolean().optional().default(false),
 })
