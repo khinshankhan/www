@@ -105,9 +105,13 @@
     --plum11: 300, 60%, 62%;
     --plum12: 296, 74%, 95.7%;
 
+    --knockout: var(--black);
     --nav: var(--brand-200);
     --background: var(--white);
     --foreground: var(--brand-950);
+
+    --card: var(--white);
+    --card-foreground: var(--brand-950);
 
     --popover: var(--white);
     --popover-foreground: var(--brand-950);
@@ -172,9 +176,13 @@
     --plum11: 292, 60%, 42.5%;
     --plum12: 291, 66%, 14%;
 
+    --knockout: var(--white);
     --nav: var(--brand-950);
     --background: var(--brand-900);
     --foreground: var(--brand-50);
+
+    --card: var(--brand-950);
+    --card-foreground: var(--brand-50);
 
     --popover: var(--brand-950);
     --popover-foreground: var(--brand-50);
@@ -329,11 +337,11 @@
   }
 
   .page-container {
-    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1280px] 2xl:max-w-[1325px];
+    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:px-[7.5rem] 2xl:max-w-[1450px];
   }
 
   .content-container {
-    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[800px] 2xl:max-w-[1000px];
+    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:px-[7.5rem] 2xl:max-w-[1450px];
   }
 
   .home-link {
@@ -356,6 +364,51 @@
       }
       & .border {
         stroke: hsl(var(--link-active));
+      }
+    }
+  }
+
+  /* based off https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/layout/src/link-box.tsx */
+  .link-overlay {
+    position: static;
+    &:after {
+      content: "";
+      cursor: inherit;
+      transition: transform 0.3s ease;
+      @apply absolute left-0 top-0 z-0 block h-full w-full;
+    }
+  }
+
+  .link-box {
+    @apply relative isolate;
+    /* elevate elements that are interactable also give special linkbox-elevate class privilege as a catchall */
+    & :is(a[href]:not(.link-overlay), button, .linkbox-elevate) {
+      @apply relative z-1;
+    }
+  }
+
+  .card-link {
+    transition:
+      background-color 0.3s ease,
+      border 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.5s linear;
+    @apply border border-solid border-link-base;
+    &:is(:hover, :focus, :focus-visible) {
+      @apply -translate-y-3.5 border-link-active bg-card/40;
+      box-shadow:
+        hsla(var(--knockout), 20%) 0px 0px 15px,
+        hsla(var(--knockout), 15%) 0px 0px 3px 1px;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: hsla(var(--link-active), 0.1);
+        z-index: -1;
       }
     }
   }

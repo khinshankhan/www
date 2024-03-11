@@ -64,9 +64,14 @@ const config: Config = {
         transparent: hsla("transparent"),
         black: hsla("black"),
         white: hsla("white"),
+        knockout: hsla("knockout"),
         nav: hsla("nav"),
         background: hsla("background"),
         foreground: hsla("foreground"),
+        card: {
+          DEFAULT: hsla("card"),
+          foreground: hsla("card-foreground"),
+        },
         popover: {
           DEFAULT: hsla("popover"),
           foreground: hsla("popover-foreground"),
