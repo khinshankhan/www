@@ -10,12 +10,12 @@ function WritingCard({ content }: { content: ContentData }) {
   return (
     <li
       key={content.slug}
-      className="card-link link-box flex w-full flex-row rounded-lg bg-card p-4 text-card-foreground shadow-lg"
+      className="card-link link-box flex w-full flex-col gap-2 rounded-lg bg-card p-4 text-card-foreground shadow-lg md:flex-row"
     >
       <img
         alt=""
         src="https://hb.imgix.net/41ff19a5a115ce7c78207f166f069b3ab69ed00f.jpg?auto=compress,format&fit=crop&h=600&w=1200&s=bac8a397bb20bed183ded6fdb5b7ebb1"
-        className="h-[9.375rem]"
+        className="h-[9.5rem] w-full rounded-lg object-cover md:w-auto"
       />
       <div className="ml-4 flex flex-grow flex-col justify-between">
         <h3 className={typographyVariants({ variant: "h3" })}>
