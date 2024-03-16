@@ -45,6 +45,9 @@ export type LinkVariants = VariantProps<typeof linkVariants>
 interface LinkProps extends NextLinkProps, LinkVariants {
   children: ReactNode
   className?: string
+  // no idea why next link doesn't provide these props
+  id?: string
+  title?: string
 }
 
 export function Link({

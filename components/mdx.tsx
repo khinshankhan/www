@@ -4,6 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import { filter, onlyText } from "react-children-utilities"
 import { Callout, calloutIcons, type CalloutVariants } from "@/components/blocks/callout"
 import { Blockquote } from "@/components/primitives/components"
+import { Link } from "@/components/primitives/link"
 
 const mdxCalloutKeywords = Object.keys(calloutIcons).join("|").toUpperCase()
 const mdxCalloutRegex = new RegExp(`\\[\\!(${mdxCalloutKeywords})\\]\\s*(.*)`)
@@ -34,6 +35,11 @@ const baseComponents: MDXComponents = {
       </Callout>
     )
   },
+  a: ({ href = "#", children = null, ...props }) => (
+    <Link href={href} {...props}>
+      {children}
+    </Link>
+  ),
 }
 
 export function MDXContent({
