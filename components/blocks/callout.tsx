@@ -3,7 +3,7 @@ import { cva, VariantProps } from "class-variance-authority"
 import { capitalize, cn } from "@/lib/utils"
 import { SvgIcon, SVGIconNames } from "@/components/icons"
 
-export const calloutVariants = cva("w-full rounded-md border-2 px-4 py-2", {
+export const calloutVariants = cva("w-full rounded-md border-2 p-4", {
   variants: {
     variant: {
       note: "border-info-border bg-info/60 text-info-foreground",
@@ -27,7 +27,7 @@ interface CalloutProps extends React.HTMLAttributes<HTMLDivElement>, CalloutVari
   className?: string
 }
 
-const calloutIcons: Record<NonNullable<CalloutProps["variant"]>, SVGIconNames> = {
+export const calloutIcons: Record<NonNullable<CalloutProps["variant"]>, SVGIconNames> = {
   note: "information-circle",
   tip: "light-bulb",
   important: "star",

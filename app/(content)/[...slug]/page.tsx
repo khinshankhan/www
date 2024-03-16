@@ -1,7 +1,7 @@
 import React from "react"
 import { notFound } from "next/navigation"
-import { MDXRemote } from "next-mdx-remote/rsc"
 import { getAllContentData, getContentData } from "@/lib/content"
+import { MDXContent } from "@/components/mdx"
 
 export async function generateStaticParams() {
   const slugsParts = getAllContentData().map((contentData) => {
@@ -28,15 +28,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
   return (
     <main className="normalize">
-      <MDXRemote
-        source={contentData.content}
-        options={{
-          mdxOptions: {
-            remarkPlugins: [],
-            rehypePlugins: [],
-          },
-        }}
-      />
+      <MDXContent source={contentData.content} />
     </main>
   )
 }
