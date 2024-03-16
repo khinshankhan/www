@@ -1,7 +1,13 @@
 import React from "react"
 import { cn } from "@/lib/utils"
 
-interface BlockquoteProps extends React.HTMLProps<HTMLQuoteElement> {}
+interface BlockquoteProps
+  extends React.DetailedHTMLProps<
+    React.BlockquoteHTMLAttributes<HTMLQuoteElement>,
+    HTMLQuoteElement
+  > {
+  className?: string
+}
 
 export function Blockquote({ children, className = "", ...props }: BlockquoteProps) {
   return (

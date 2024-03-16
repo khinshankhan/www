@@ -10,15 +10,41 @@ import { typographyVariants } from "@/components/primitives/typography"
 
 const mdxCalloutKeywords = Object.keys(calloutIcons).join("|").toUpperCase()
 const mdxCalloutRegex = new RegExp(`\\[\\!(${mdxCalloutKeywords})\\]\\s*(.*)`)
+function isMDXCallout(children: React.ReactNode[]) {
+  if (!children?.length || children.length < 1) return { variant: null }
+
+  const text = onlyText(children[0]).trim()
+  const match = mdxCalloutRegex.exec(text)
+
+  if (!match) return { variant: null }
+  return {
+    variant: match?.[1]?.toLowerCase() as CalloutVariants["variant"],
+    heading: match?.[2] || undefined,
+  }
+}
 
 const baseComponents: MDXComponents = {
+  a: ({ href = "#", children = null, ...props }) => (
+    <Link href={href} {...props}>
+      {children}
+    </Link>
+  ),
+  h3: ({ className = "", ...props }) => (
+    <h3 {...props} className={cn(typographyVariants({ variant: "h3", className }))} />
+  ),
+  h4: ({ className = "", ...props }) => (
+    <h4 {...props} className={cn(typographyVariants({ variant: "h4", className }))} />
+  ),
+  h5: ({ className = "", ...props }) => (
+    <h5 {...props} className={cn(typographyVariants({ variant: "h5", className }))} />
+  ),
+  h6: ({ className = "", ...props }) => (
+    <h6 {...props} className={cn(typographyVariants({ variant: "h6", className }))} />
+  ),
   blockquote: (props) => {
     const children = filter(Children.toArray(props.children), (child) => typeof child !== "string")
 
-    const match = children.length > 1 && mdxCalloutRegex.exec(onlyText(children[0]).trim())
-    const variant = match && (match?.[1]?.toLowerCase() as CalloutVariants["variant"])
-    const heading = (match && match?.[2]) || undefined
-
+    const { variant, heading } = isMDXCallout(children)
     if (!variant) {
       return (
         <Blockquote {...props} data-variant="quote">
@@ -37,23 +63,6 @@ const baseComponents: MDXComponents = {
       </Callout>
     )
   },
-  a: ({ href = "#", children = null, ...props }) => (
-    <Link href={href} {...props}>
-      {children}
-    </Link>
-  ),
-  h3: ({ className = "", ...props }) => (
-    <h3 {...props} className={cn(typographyVariants({ variant: "h3", className }))} />
-  ),
-  h4: ({ className = "", ...props }) => (
-    <h4 {...props} className={cn(typographyVariants({ variant: "h4", className }))} />
-  ),
-  h5: ({ className = "", ...props }) => (
-    <h5 {...props} className={cn(typographyVariants({ variant: "h5", className }))} />
-  ),
-  h6: ({ className = "", ...props }) => (
-    <h6 {...props} className={cn(typographyVariants({ variant: "h6", className }))} />
-  ),
 }
 
 export function MDXContent({
