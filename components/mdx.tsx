@@ -3,23 +3,31 @@ import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { filter, onlyText } from "react-children-utilities"
 import { cn } from "@/lib/utils"
-import { Callout, calloutIcons, type CalloutVariants } from "@/components/blocks/callout"
+import { Callout, isCalloutKeyword } from "@/components/blocks/callout"
 import { Blockquote } from "@/components/primitives/components"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
 
-const mdxCalloutKeywords = Object.keys(calloutIcons).join("|").toUpperCase()
-const mdxCalloutRegex = new RegExp(`\\[\\!(${mdxCalloutKeywords})\\]\\s*(.*)`)
-function isMDXCallout(children: React.ReactNode[]) {
-  if (!children?.length || children.length < 1) return { variant: null }
+// match blockquotes `> [!variant] heading`
+const mdxBlockquoteMetaRegex = /\[!([^\]]+)\]\s*(.*)/
+
+function getBlockquoteInfo(children: React.ReactNode[]) {
+  const noMatch = { variant: undefined, heading: undefined, children }
+  if (!children?.length || children.length < 1) {
+    return noMatch
+  }
 
   const text = onlyText(children[0]).trim()
-  const match = mdxCalloutRegex.exec(text)
+  const match = mdxBlockquoteMetaRegex.exec(text)
+  if (!match) {
+    return noMatch
+  }
 
-  if (!match) return { variant: null }
   return {
-    variant: match?.[1]?.toLowerCase() as CalloutVariants["variant"],
+    variant: match?.[1]?.toLowerCase(),
     heading: match?.[2] || undefined,
+    // exclude the first child for callout since it has variant/ heading info
+    children: children.slice(1),
   }
 }
 
@@ -42,25 +50,26 @@ const baseComponents: MDXComponents = {
     <h6 {...props} className={cn(typographyVariants({ variant: "h6", className }))} />
   ),
   blockquote: (props) => {
-    const children = filter(Children.toArray(props.children), (child) => typeof child !== "string")
+    // blockquote seems to interweave newlines which mess with interpretting variants
+    // though the newline between the meta and actual quotation is necessary
+    const givenChildren = filter(Children.toArray(props.children), (child) => child !== "\n")
+    const { variant, heading, children } = getBlockquoteInfo(givenChildren)
 
-    const { variant, heading } = isMDXCallout(children)
-    if (!variant) {
+    if (variant && isCalloutKeyword(variant)) {
       return (
-        <Blockquote {...props} data-variant="quote">
-          {children}
-        </Blockquote>
+        <Callout variant={variant} heading={heading}>
+          <blockquote {...props} data-variant={variant} className="italic">
+            {children}
+          </blockquote>
+        </Callout>
       )
     }
 
-    // exclude the first child for callout since it has variant/ heading info
-    const trueChildren = children.slice(1)
+    let blockquoteVariant = variant ?? "blockquote"
     return (
-      <Callout variant={variant} heading={heading}>
-        <blockquote {...props} data-variant={variant} className="italic">
-          {trueChildren}
-        </blockquote>
-      </Callout>
+      <Blockquote {...props} data-variant={blockquoteVariant} variant={blockquoteVariant}>
+        {children}
+      </Blockquote>
     )
   },
 }

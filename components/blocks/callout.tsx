@@ -35,6 +35,13 @@ export const calloutIcons: Record<NonNullable<CalloutProps["variant"]>, SVGIconN
   caution: "shield-exclamation",
 }
 
+export const calloutKeywords = Object.keys(calloutIcons) as NonNullable<CalloutProps["variant"]>[]
+
+export function isCalloutKeyword(keyword: string): keyword is NonNullable<CalloutProps["variant"]> {
+  //@ts-expect-error: silly object can't be indexed by string error
+  return calloutKeywords.includes(keyword)
+}
+
 export function Callout({
   variant = "note",
   heading = undefined,
