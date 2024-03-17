@@ -1,6 +1,7 @@
 import React, { type ReactNode } from "react"
 import NextLink, { type LinkProps as NextLinkProps } from "next/link"
 import { cva, VariantProps } from "class-variance-authority"
+import { cn } from "@/lib/utils"
 
 export const linkVariants = cva("", {
   variants: {
@@ -59,7 +60,7 @@ export function Link({
   underline = true,
   ...props
 }: LinkProps) {
-  const classes = linkVariants({ variant, nav, underline, className })
+  const classes = cn(linkVariants({ variant, nav, underline, className }))
 
   // if href is a url obj it's a local link with state (probably), and / is totally local
   if (typeof href !== "string" || href.startsWith("/")) {
@@ -67,6 +68,14 @@ export function Link({
       <NextLink href={href} className={classes} {...props}>
         {children}
       </NextLink>
+    )
+  }
+
+  if (typeof href !== "string" || href.startsWith("#")) {
+    return (
+      <a href={href} className={cn("anchor-link", classes)} {...props}>
+        {children}
+      </a>
     )
   }
 
