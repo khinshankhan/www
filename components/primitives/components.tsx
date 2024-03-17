@@ -7,14 +7,35 @@ interface BlockquoteProps
     HTMLQuoteElement
   > {
   className?: string
+  variant?: string
 }
 
-export function Blockquote({ children, className = "", ...props }: BlockquoteProps) {
+export function Blockquote({
+  children,
+  className = "",
+  variant = "blockquote",
+  ...props
+}: BlockquoteProps) {
+  if (variant === "quote") {
+    return (
+      <blockquote
+        {...props}
+        className={cn(
+          // "italic text-muted-foreground before:text-[250%] before:font-bold before:content-['“'] after:font-bold after:content-['”'] [&>*]:inline",
+          "relative italic text-muted-foreground",
+          className
+        )}
+      >
+        {children}
+      </blockquote>
+    )
+  }
+
   return (
     <blockquote
       {...props}
       className={cn(
-        "relative my-4 border-l-4 border-muted-foreground py-2 pl-4 italic text-muted-foreground",
+        "my-4 border-l-4 border-muted-foreground py-2 pl-4 italic text-muted-foreground",
         className
       )}
     >
