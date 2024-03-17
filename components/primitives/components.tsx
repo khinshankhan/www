@@ -18,14 +18,7 @@ export function Blockquote({
 }: BlockquoteProps) {
   if (variant === "quote") {
     return (
-      <blockquote
-        {...props}
-        className={cn(
-          // "italic text-muted-foreground before:text-[250%] before:font-bold before:content-['“'] after:font-bold after:content-['”'] [&>*]:inline",
-          "relative italic text-muted-foreground",
-          className
-        )}
-      >
+      <blockquote {...props} className={cn("relative italic text-muted-foreground", className)}>
         {children}
       </blockquote>
     )

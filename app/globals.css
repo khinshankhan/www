@@ -439,13 +439,13 @@
       content: open-quote;
     }
     &:after {
-      bottom: -1.5rem;
-      right: 2rem;
+      bottom: -2.875rem;
+      right: 1.25rem;
       content: close-quote;
     }
 
     & + figcaption {
-      @apply -mt-2 text-balance text-center text-muted-foreground;
+      @apply text-balance text-center text-muted-foreground;
     }
   }
 
