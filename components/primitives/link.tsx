@@ -30,8 +30,7 @@ export const linkVariants = cva("", {
     {
       variant: "on",
       nav: true,
-      class:
-        "bg-gradient-to-r from-link-base to-link-base bg-link-show bg-[0%_100%] bg-no-repeat transition-[color,background-size] duration-500",
+      class: "bg-link-show bg-left-bottom",
     },
   ],
   defaultVariants: {
@@ -60,7 +59,7 @@ export function Link({
   underline = true,
   ...props
 }: LinkProps) {
-  const classes = linkVariants({ variant, nav, underline, className })
+  const classes = cn(linkVariants({ variant, nav, underline, className }))
 
   // if href is a url obj it's a local link with state (probably), and / is totally local
   if (typeof href !== "string" || href.startsWith("/")) {
