@@ -1,38 +1,14 @@
 import React, { Children } from "react"
-import type { Heading } from "mdast"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { filter, onlyText } from "react-children-utilities"
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypeSlug from "rehype-slug"
 import { cn } from "@/lib/utils"
 import { Callout, isCalloutKeyword } from "@/components/blocks/callout"
 import { Blockquote } from "@/components/primitives/components"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
-
-function createHeading(level: Heading["depth"]) {
-  const Component = `h${level}` as const
-
-  return function Heading({
-    className = "",
-    children,
-    ...props
-  }: React.HTMLProps<HTMLHeadingElement>) {
-    // TODO: use slugify instead of temporary testing solution
-    const slug = onlyText(children).toLowerCase().replace(/\s/g, "-")
-
-    return (
-      <Component
-        id={slug}
-        className={cn(typographyVariants({ variant: Component }), className)}
-        {...props}
-      >
-        <Link href={`#${slug}`} nav underline={false}>
-          {children}
-        </Link>
-      </Component>
-    )
-  }
-}
 
 // match blockquotes `> [!variant] heading`
 const mdxBlockquoteMetaRegex = /\[!([^\]]+)\]\s*(.*)/
@@ -63,10 +39,18 @@ const baseComponents: MDXComponents = {
       {children}
     </Link>
   ),
-  h3: createHeading(3),
-  h4: createHeading(4),
-  h5: createHeading(5),
-  h6: createHeading(6),
+  h3: ({ className = "", ...props }) => (
+    <h3 {...props} className={cn(typographyVariants({ variant: "h3", className }))} />
+  ),
+  h4: ({ className = "", ...props }) => (
+    <h4 {...props} className={cn(typographyVariants({ variant: "h4", className }))} />
+  ),
+  h5: ({ className = "", ...props }) => (
+    <h5 {...props} className={cn(typographyVariants({ variant: "h5", className }))} />
+  ),
+  h6: ({ className = "", ...props }) => (
+    <h6 {...props} className={cn(typographyVariants({ variant: "h6", className }))} />
+  ),
   blockquote: (props) => {
     // blockquote seems to interweave newlines which mess with interpretting variants
     // though the newline between the meta and actual quotation is necessary
@@ -108,7 +92,20 @@ export function MDXContent({
       options={{
         mdxOptions: {
           remarkPlugins: [],
-          rehypePlugins: [],
+          rehypePlugins: [
+            rehypeSlug,
+            [
+              rehypeAutolinkHeadings,
+              {
+                behavior: "wrap",
+                properties: {
+                  "data-nav": "true",
+                  "data-underline": "false",
+                  className: ["anchor-link"],
+                },
+              },
+            ],
+          ],
         },
       }}
     />

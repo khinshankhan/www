@@ -45,9 +45,13 @@ export type LinkVariants = VariantProps<typeof linkVariants>
 interface LinkProps extends NextLinkProps, LinkVariants {
   children: ReactNode
   className?: string
+  // TODO: use these props
   // no idea why next link doesn't provide these props
   id?: string
   title?: string
+  // for when you want to override the default variant but can only pass in via html props
+  "data-nav"?: "true" | "false"
+  "data-underline"?: "true" | "false"
 }
 
 export function Link({
@@ -57,9 +61,14 @@ export function Link({
   variant = "default",
   nav = false,
   underline = true,
+  "data-nav": dataNav = "false",
+  "data-underline": dataUnderline = "true",
   ...props
 }: LinkProps) {
-  const classes = cn(linkVariants({ variant, nav, underline, className }))
+  const isNav = nav || dataNav === "true"
+  const isUnderlined = underline && dataUnderline === "true"
+
+  const classes = cn(linkVariants({ variant, nav: isNav, underline: isUnderlined, className }))
 
   // if href is a url obj it's a local link with state (probably), and / is totally local
   if (typeof href !== "string" || href.startsWith("/")) {
