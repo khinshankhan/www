@@ -60,7 +60,7 @@ export function Link({
   underline = true,
   ...props
 }: LinkProps) {
-  const classes = cn(linkVariants({ variant, nav, underline, className }))
+  const classes = linkVariants({ variant, nav, underline, className })
 
   // if href is a url obj it's a local link with state (probably), and / is totally local
   if (typeof href !== "string" || href.startsWith("/")) {
