@@ -67,7 +67,7 @@ const baseComponents: MDXComponents = {
       )
     }
 
-    let blockquoteVariant = variant ?? "blockquote"
+    const blockquoteVariant = variant ?? "blockquote"
     return (
       <Blockquote {...props} data-variant={blockquoteVariant} variant={blockquoteVariant}>
         {children}

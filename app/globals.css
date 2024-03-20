@@ -426,8 +426,6 @@
       @apply my-12 text-center;
     }
 
-    & > * {
-    }
     &:before,
     &:after {
       position: absolute;
