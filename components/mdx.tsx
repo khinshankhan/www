@@ -4,6 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import { filter, onlyText } from "react-children-utilities"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
+import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { cn } from "@/lib/utils"
 import { Callout, isCalloutKeyword } from "@/components/blocks/callout"
 import { Blockquote } from "@/components/primitives/components"
@@ -91,7 +92,10 @@ export function MDXContent({
       components={allComponents}
       options={{
         mdxOptions: {
-          remarkPlugins: [],
+          remarkPlugins: [
+            // @ts-expect-error: silly compatibility issue
+            remarkMarkFirstParagraph,
+          ],
           rehypePlugins: [
             rehypeSlug,
             [
