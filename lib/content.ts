@@ -3,7 +3,7 @@ import path from "path"
 import { globSync } from "fast-glob"
 import matter from "gray-matter"
 import { remark } from "remark"
-import { ContentDataSchema, type ContentSource } from "../schemas/content"
+import { ContentFrontmatterSchema, type ContentData, type ContentSource } from "../schemas/content"
 import { remarkExtractFirstParagraph } from "./mdx-plugins/remark-excerpt"
 import { existPredicate } from "./utils"
 
@@ -19,7 +19,7 @@ function getContentSource(slug: string): ContentSource {
   return "root"
 }
 
-export function getContentData(filePath: string) {
+export function getContentData(filePath: string): ContentData {
   const absFilePath = path.join(contentDir, filePath)
   if (!fs.existsSync(absFilePath)) {
     throw new Error(`File path is missing: ${absFilePath}`)
@@ -31,22 +31,17 @@ export function getContentData(filePath: string) {
   const { data, content } = matter(fileContent)
 
   let computedData = remark().use(remarkExtractFirstParagraph).processSync(content)
-  // NOTE: this is guaranteed to be a string because of remarkExtractFirstParagraph
-  const excerpt = (computedData?.data?.excerpt ?? "") as string
 
-  const contentData = {
+  return {
+    content,
     slug,
     source: getContentSource(slug),
-    frontmatter: data,
     computed: {
-      excerpt,
+      // NOTE: this is guaranteed to be a string because of remarkExtractFirstParagraph
+      excerpt: (computedData?.data?.excerpt ?? "") as string,
     },
-    content,
+    frontmatter: ContentFrontmatterSchema.parse(data),
   }
-
-  const parsedContentData = ContentDataSchema.parse(contentData)
-  console.log({ parsedContentData })
-  return parsedContentData
 }
 
 export function getAllContentData(getContentDataFromFilePath = getContentData) {
