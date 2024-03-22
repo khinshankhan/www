@@ -24,9 +24,10 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"],
   "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
     "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs"
+      "target": "es6"
     }
   }
 }

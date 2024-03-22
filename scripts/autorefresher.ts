@@ -1,10 +1,14 @@
+// @ts-nocheck
 // Full credit to https://github.com/gaearon/overreacted.io/pull/797
-const chokidar = require("chokidar")
-const WebSocket = require("ws")
+
+import chokidar from "chokidar"
+import { WebSocketServer } from "ws"
 
 const port = 3001
 
-const wss = new WebSocket.Server({ port })
+// there is no ws.Server in the ESM version
+// https://github.com/websockets/ws/issues/1538
+const wss = new WebSocketServer({ port })
 let autorefresherCallbacks = []
 
 chokidar.watch("./content", { persistent: true }).on("all", (event, path) => {

@@ -6,7 +6,7 @@
     "next-dev": "next dev --turbo",
     "check-contents": "pnpx ts-node scripts/check-contents.ts",
     "watch-contents": "pnpx ts-node scripts/check-contents.ts --watch",
-    "refresh-from-content": "node ./scripts/autorefresher.js",
+    "refresh-from-content": "pnpx ts-node ./scripts/autorefresher.ts",
     "monitor-content": "run-p refresh-from-content watch-contents",
     "dev": "run-p next-dev monitor-content",
     "build": "next build",
