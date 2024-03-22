@@ -1,7 +1,4 @@
-import fs from "fs"
-import path from "path"
 import chokidar from "chokidar"
-import matter from "gray-matter"
 import { z } from "zod"
 import { getAllContentData, getContentData } from "../lib/content"
 

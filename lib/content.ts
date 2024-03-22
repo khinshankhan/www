@@ -1,6 +1,6 @@
 import fs from "fs"
 import path from "path"
-import { globSync } from "fast-glob"
+import { globbySync } from "globby"
 import matter from "gray-matter"
 import { remark } from "remark"
 import { ContentFrontmatterSchema, type ContentData, type ContentSource } from "../schemas/content"
@@ -30,7 +30,7 @@ export function getContentData(filePath: string): ContentData {
   const slug = filePath.split("/").slice(0, -1).join("/")
   const { data, content } = matter(fileContent)
 
-  let computedData = remark().use(remarkExtractFirstParagraph).processSync(content)
+  const computedData = remark().use(remarkExtractFirstParagraph).processSync(content)
 
   return {
     content,
@@ -45,7 +45,7 @@ export function getContentData(filePath: string): ContentData {
 }
 
 export function getAllContentData(getContentDataFromFilePath = getContentData) {
-  const filePaths = globSync(contentPatterns, { cwd: contentDir })
+  const filePaths = globbySync(contentPatterns, { cwd: contentDir })
   const allContentData = filePaths.map((filePath) => {
     try {
       return getContentDataFromFilePath(filePath)
