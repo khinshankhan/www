@@ -2,7 +2,9 @@ import fs from "fs"
 import path from "path"
 import { globSync } from "fast-glob"
 import matter from "gray-matter"
+import { remark } from "remark"
 import { ContentDataSchema, type ContentSource } from "../schemas/content"
+import { remarkExtractFirstParagraph } from "./mdx-plugins/remark-excerpt"
 import { existPredicate } from "./utils"
 
 const projectRoot = process.cwd()
@@ -28,14 +30,22 @@ export function getContentData(filePath: string) {
   const slug = filePath.split("/").slice(0, -1).join("/")
   const { data, content } = matter(fileContent)
 
+  let computedData = remark().use(remarkExtractFirstParagraph).processSync(content)
+  // NOTE: this is guaranteed to be a string because of remarkExtractFirstParagraph
+  const excerpt = (computedData?.data?.excerpt ?? "") as string
+
   const contentData = {
     slug,
     source: getContentSource(slug),
     frontmatter: data,
+    computed: {
+      excerpt,
+    },
     content,
   }
 
   const parsedContentData = ContentDataSchema.parse(contentData)
+  console.log({ parsedContentData })
   return parsedContentData
 }
 
