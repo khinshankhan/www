@@ -26,13 +26,17 @@ function checkContents(watchFlag: boolean = false) {
 
   const invalidFilesCount = triedFilePaths.length - validContentData.length
   if (invalidFilesCount > 0) {
-    const errorMessage = `[INVALID CONTENT] detected ${invalidFilesCount} bad files`
+    const errorMessage = `[INVALID CONTENT] detected ${invalidFilesCount} bad file(s)`
     console.log(errorMessage)
 
     // if not watching, don't let ci cd build pass
     if (!watchFlag) {
       throw new Error(errorMessage)
     }
+  }
+
+  if (!watchFlag) {
+    console.log(`[check-contents.ts] All ${validContentData.length} content file(s) are valid`)
   }
 }
 
