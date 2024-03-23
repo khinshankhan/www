@@ -10,8 +10,15 @@ export const ContentFrontmatterSchema = z.object({
   // draft: z.boolean().optional().default(false),
 })
 
+const TocSchema = z.object({
+  id: z.string(),
+  text: z.string(),
+  level: z.number().min(1).max(6),
+})
+
 export const ComputedDataSchema = z.object({
   excerpt: z.string(),
+  toc: z.array(TocSchema),
 })
 
 export type ContentFrontmatter = z.infer<typeof ContentFrontmatterSchema>
