@@ -4,7 +4,7 @@ import { globbySync } from "globby"
 import matter from "gray-matter"
 import { remark } from "remark"
 import { ContentFrontmatterSchema, type ContentData, type ContentSource } from "../schemas/content"
-import { remarkExtractFirstParagraph } from "./mdx-plugins/remark-excerpt"
+import { remarkExcerptExport } from "./mdx-plugins/remark-excerpt"
 import { remarkTocExport } from "./mdx-plugins/remark-toc"
 import { existPredicate } from "./utils"
 
@@ -31,18 +31,16 @@ export function getContentData(filePath: string): ContentData {
   const slug = filePath.split("/").slice(0, -1).join("/")
   const { data, content } = matter(fileContent)
 
-  const computedData = remark()
-    .use(remarkExtractFirstParagraph)
-    .use(remarkTocExport)
-    .processSync(content)
+  const computedData = remark().use(remarkExcerptExport).use(remarkTocExport).processSync(content)
 
   return {
     content,
     slug,
     source: getContentSource(slug),
     computed: {
-      // NOTE: this is guaranteed to be a string because of remarkExtractFirstParagraph
+      // NOTE: this is guaranteed because of remarkExcerptExport
       excerpt: (computedData?.data?.excerpt ?? "") as string,
+      // NOTE: this is guaranteed because of remarkTocExport
       toc: (computedData?.data?.toc ?? []) as ContentData["computed"]["toc"],
     },
     frontmatter: ContentFrontmatterSchema.parse(data),

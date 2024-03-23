@@ -23,7 +23,7 @@ export function remarkMarkFirstParagraph(options?: Options): Transformer<MdastRo
   }
 }
 
-export function remarkExtractFirstParagraph(): Transformer<MdastRoot, MdastRoot> {
+export function remarkExcerptExport(): Transformer<MdastRoot, MdastRoot> {
   return function transformer(tree, vfile) {
     vfile.data = vfile.data || {}
     vfile.data.excerpt = ""
