@@ -2,6 +2,9 @@ import { z } from "zod"
 
 const ImageSchema = z.object({ url: z.string(), alt: z.string() })
 
+export const ContentLdTypes = ["WebPage", "BlogPosting", "CollectionPage"] as const
+export type ContentLdType = (typeof ContentLdTypes)[number]
+
 export const ContentFrontmatterSchema = z.object({
   // required
   title: z.string(),
@@ -29,12 +32,11 @@ export const ContentFrontmatterSchema = z.object({
 
   ld: z
     .object({
-      type: z.enum(["WebPage", "BlogPosting", "CollectionPage"]).optional().default("WebPage"),
+      type: z.enum(ContentLdTypes).optional(),
       name: z.string().optional(),
       description: z.string().optional(),
     })
-    .optional()
-    .default({ type: "WebPage" }),
+    .optional(),
 
   // misc
   draft: z.boolean().optional().default(false),
