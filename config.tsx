@@ -12,4 +12,5 @@ export const headerLinks = [
 
 export const flags = {
   showBreakpointsIndicator: false,
+  banner: true,
 }
