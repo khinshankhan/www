@@ -1,14 +1,14 @@
-import type { Config } from "tailwindcss"
 import defaultTheme from "tailwindcss/defaultTheme"
 
-function rawHsla(variable: string, alpha: string) {
+function rawHsla(variable, alpha) {
   return `hsla(var(--${variable}), ${alpha})`
 }
-function hsla(variable: string) {
+function hsla(variable) {
   return rawHsla(variable, "<alpha-value>")
 }
 
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+const config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -160,4 +160,4 @@ const config: Config = {
   plugins: [require("tailwindcss-animate")],
 }
 
-export default config
+module.exports = config

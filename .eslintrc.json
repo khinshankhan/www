@@ -1,11 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc",
   "root": true,
-  "extends": [
-    "next/core-web-vitals",
-    "prettier",
-    "plugin:tailwindcss/recommended"
-  ],
+  "extends": ["next/core-web-vitals", "prettier", "plugin:tailwindcss/recommended"],
   "plugins": ["tailwindcss"],
   "rules": {
     "@next/next/no-html-link-for-pages": "off",
@@ -16,7 +12,7 @@
   "settings": {
     "tailwindcss": {
       "callees": ["cn", "cva"],
-      "config": "tailwind.config.ts"
+      "config": "tailwind.config.cjs"
     },
     "next": {
       "rootDir": true
