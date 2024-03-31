@@ -8,7 +8,7 @@
   "tabWidth": 2,
   "trailingComma": "es5",
   "plugins": ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
-  "tailwindConfig": "./tailwind.config.cjs",
+  "tailwindConfig": "./tailwind.config.mjs",
   "tailwindFunctions": ["cn", "cva"],
   "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
   "importOrderTypeScriptVersion": "5.3.3",

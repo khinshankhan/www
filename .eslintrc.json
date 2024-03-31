@@ -12,7 +12,7 @@
   "settings": {
     "tailwindcss": {
       "callees": ["cn", "cva"],
-      "config": "tailwind.config.cjs"
+      "config": "tailwind.config.mjs"
     },
     "next": {
       "rootDir": true

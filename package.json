@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "next-dev": "next dev --turbo",
+    "next-dev": "next dev",
     "check-contents": "pnpx ts-node scripts/check-contents.ts",
     "watch-contents": "pnpx ts-node scripts/check-contents.ts --watch",
     "refresh-from-content": "pnpx ts-node ./scripts/autorefresher.ts",
