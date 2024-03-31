@@ -1,7 +1,7 @@
 import "./globals.css"
 
 import type { Metadata } from "next"
-import { Inter, Manrope, Montserrat, Source_Code_Pro } from "next/font/google"
+import { Inter, Montserrat, Source_Code_Pro } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { BreakpointsIndicator } from "@/components/indicators"
 import { BaseLayout } from "@/components/layouts"
