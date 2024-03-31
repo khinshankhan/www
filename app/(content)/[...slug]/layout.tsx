@@ -1,6 +1,7 @@
 import React, { type ReactNode } from "react"
 import { getContentData } from "@/lib/content"
 import { PageSkeletonLayout } from "@/components/layouts"
+import { Toc } from "@/components/layouts/sidebars"
 
 export default function PagesLayout({
   params,
@@ -27,6 +28,10 @@ export default function PagesLayout({
         </>
       }
       path={`content/${slugPath}/page.tsx`}
+      sidebar={
+        contentData?.frontmatter?.showToc &&
+        contentData?.computed?.toc && <Toc headings={contentData.computed.toc} />
+      }
     >
       {children}
     </PageSkeletonLayout>

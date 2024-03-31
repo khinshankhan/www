@@ -31,6 +31,12 @@ const defaultContentType: Record<ContentSource, ContentLdType> = {
   projects: "CollectionPage",
 }
 
+const defaultShowToc = {
+  root: true,
+  writings: true,
+  projects: false,
+}
+
 export function getContentData(filePath: string): ContentData {
   const absFilePath = path.join(contentDir, filePath)
   if (!fs.existsSync(absFilePath)) {
@@ -44,6 +50,7 @@ export function getContentData(filePath: string): ContentData {
 
   const { data, content } = matter(fileContent)
   const prefilledData = {
+    showToc: defaultShowToc[source],
     ...data,
     ld: { type: defaultContentType[source], ...data.ld },
   }

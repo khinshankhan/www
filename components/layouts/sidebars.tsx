@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useState } from "react"
-import { useBreakpoints, useIsomorphicEffect, useMounted, useScrollSpy } from "@/hooks"
+import { useBreakpoints, useIsomorphicEffect, useScrollSpy } from "@/hooks"
 import { cn, scrollToElement, truthyPredicate } from "@/lib/utils"
+import { SvgIcon } from "@/components/icons"
 import { Button } from "@/components/primitives/button"
 import {
   Collapsible,
@@ -25,7 +26,6 @@ interface TocProps {
 }
 
 export function Toc({ headings: headingsProp = [], showExcerpt = true }: TocProps) {
-  const mounted = useMounted()
   const [open, setOpen] = useState(true)
   const action = open ? "Close" : "Open"
 
@@ -50,10 +50,6 @@ export function Toc({ headings: headingsProp = [], showExcerpt = true }: TocProp
     { rootMargin: "0px 0px -65% 0px" }
   )
 
-  if (!mounted) {
-    return null
-  }
-
   if (headingsProp.length === 0 && !showExcerpt) {
     return null
   }
@@ -68,11 +64,12 @@ export function Toc({ headings: headingsProp = [], showExcerpt = true }: TocProp
         >
           <span
             className={cn(
-              typographyVariants({ variant: "h4" }),
-              "group flex items-center justify-between"
+              typographyVariants({ variant: "h5" }),
+              "group flex w-full items-center justify-between"
             )}
           >
             <span>On this page</span>
+            <SvgIcon id="chevron-down" className="animated-arrow" aria-hidden />
           </span>
         </Button>
       </CollapsibleTrigger>
