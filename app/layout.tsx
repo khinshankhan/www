@@ -1,7 +1,7 @@
 import "./globals.css"
 
 import type { Metadata } from "next"
-import { Montserrat, Nunito, Source_Code_Pro } from "next/font/google"
+import { Inter, Manrope, Montserrat, Source_Code_Pro } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { BreakpointsIndicator } from "@/components/indicators"
 import { BaseLayout } from "@/components/layouts"
@@ -25,7 +25,7 @@ const headingFont = Montserrat({
   variable: "--font-heading",
   display: "swap",
 })
-const bodyFont = Nunito({
+const bodyFont = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",

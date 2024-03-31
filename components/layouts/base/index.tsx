@@ -42,7 +42,7 @@ export function Header() {
           <div
             className={cn(
               typographyVariants({ variant: "nav" }),
-              "hide-desktop flex flex-row gap-2"
+              "hide-desktop flex flex-col-reverse gap-2 xss:flex-row"
             )}
           >
             <ModeToggleMobile />

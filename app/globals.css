@@ -181,7 +181,7 @@
     --knockout: var(--white);
     --nav: var(--brand-950);
     --background: var(--brand-900);
-    --foreground: var(--brand-50);
+    --foreground: var(--brand-200);
 
     --card: var(--brand-950);
     --card-foreground: var(--brand-50);
@@ -344,11 +344,15 @@
   }
 
   .page-container {
-    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:px-[7.5rem] 2xl:max-w-[1450px];
+    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1280px] 2xl:max-w-[1450px];
   }
 
   .content-container {
-    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:px-[7.5rem] 2xl:max-w-[1450px];
+    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1050px] 2xl:max-w-[1200px];
+  }
+
+  .content-container-with-sidebar {
+    @apply max-w-full xl:max-w-[800px] 2xl:max-w-[950px];
   }
 
   .home-link {

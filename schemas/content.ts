@@ -38,6 +38,9 @@ export const ContentFrontmatterSchema = z.object({
     })
     .optional(),
 
+  // appearance
+  showToc: z.boolean().optional().default(true),
+
   // misc
   draft: z.boolean().optional().default(false),
   priority: z.number().optional().default(0),

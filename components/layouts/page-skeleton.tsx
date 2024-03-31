@@ -20,11 +20,12 @@ export function WithSidebar({
   after,
 }: WithSidebarProps) {
   return (
-    <div className="content-container flex flex-col gap-10">
+    <div className={"content-container flex flex-col gap-10"}>
       {before}
 
       <div
         className={cn(
+          sidebar && "content-container-with-sidebar",
           "flex w-full flex-col xl:justify-end xl:gap-16",
           direction === "left" ? "xl:flex-row" : "xl:flex-row-reverse"
         )}
