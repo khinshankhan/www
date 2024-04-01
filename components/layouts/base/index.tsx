@@ -3,6 +3,7 @@ import { flags, info } from "@/config"
 import { cn } from "@/lib/utils"
 import { typographyVariants } from "@/components/primitives/typography"
 import { HamburgerMenu, HomeLink, NavLinks } from "./links"
+import { SkipNav } from "./skip-nav"
 import { ModeToggleDesktop, ModeToggleMobile } from "./toggles"
 
 export function Header() {
@@ -75,6 +76,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
         vaul-drawer-wrapper=""
         className="relative z-0 flex min-h-[87vh] flex-col xs:min-h-[96vh]"
       >
+        <SkipNav />
         <Header />
         <main className="flex grow flex-col">{children}</main>
       </div>
