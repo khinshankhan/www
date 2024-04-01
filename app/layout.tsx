@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import { BreakpointsIndicator } from "@/components/indicators"
 import { BaseLayout } from "@/components/layouts"
 import { typographyVariants } from "@/components/primitives/typography"
-import { AutoRefresh, ThemeProvider } from "./providers"
+import { AutoRefresh, ThemeProvider, TooltipProvider } from "./providers"
 
 export const metadata: Metadata = {
   title: {
@@ -53,9 +53,11 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <AutoRefresh>
-            <BaseLayout>{children}</BaseLayout>
-          </AutoRefresh>
+          <TooltipProvider>
+            <AutoRefresh>
+              <BaseLayout>{children}</BaseLayout>
+            </AutoRefresh>
+          </TooltipProvider>
         </ThemeProvider>
         <BreakpointsIndicator />
       </body>

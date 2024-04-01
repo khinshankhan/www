@@ -4,6 +4,7 @@ import React, { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { ThemeProviderProps } from "next-themes/dist/types"
+import { TooltipProvider as PrimitiveTooltipProvider } from "@/components/primitives/tooltip"
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>
@@ -34,3 +35,5 @@ if (process.env.NODE_ENV === "development") {
     return children
   }
 }
+
+export const TooltipProvider = PrimitiveTooltipProvider
