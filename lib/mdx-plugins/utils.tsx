@@ -1,12 +1,17 @@
 import type { Node as MdastNode } from "mdast"
 
-// NOTE: types are dumb, hProperties is not in the mdast types
+// NOTE: types are dumb, Data represents information associated by the ecosystem with the node.
+// This space is guaranteed to never be specified by unist or specifications implementing unist.
+// Would be nice if the types were like Record<string, unknown> instead but it's not.
+// https://github.com/syntax-tree/unist/blob/main/readme.md#data
 export function setNodeProperty<T extends MdastNode>(node: T, attribute: string, value: string) {
   node.data = node.data || {}
+  // @ts-ignore: hProperties is not in the Data types
   node.data.hProperties = node.data.hProperties || {}
 
+  // @ts-ignore: variable attributes is not in the Data type
   node.data[attribute] = value
-  // @ts-expect-error: hProperties is not in the mdast types
+  // @ts-ignore: hProperties is not in the Data type
   node.data.hProperties[attribute] = value
 
   return node
