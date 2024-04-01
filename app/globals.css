@@ -300,6 +300,10 @@
     & ul li ul li ul {
       list-style-type: square;
     }
+
+    strong {
+      @apply font-semibold text-knockout;
+    }
   }
 }
 

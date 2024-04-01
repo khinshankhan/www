@@ -65,7 +65,7 @@ export function Toc({ headings: headingsProp = [], showExcerpt = true }: TocProp
           <span
             className={cn(
               typographyVariants({ variant: "h5" }),
-              "group flex w-full items-center justify-between"
+              "group flex w-full items-center justify-between text-knockout"
             )}
           >
             <span>On this page</span>
