@@ -488,9 +488,13 @@
     text-wrap: balance;
   }
 
-  /* credits to xetera for the idea */
+  /* credits to xetera for the initial idea */
+  /* resource: https://bennettfeely.com/clippy/ */
   .clip-list-image-left {
     clip-path: polygon(3% 0, 100% 0, 100% 100%, 20% 100%);
+  }
+  .clip-list-image-right {
+    clip-path: polygon(0 0, 97% 0, 80% 100%, 0 100%);
   }
 
   /* radix animations */
