@@ -27,7 +27,7 @@ function WritingCard({ content }: { content: ContentData }) {
             alt={content.frontmatter?.coverImage?.alt}
             src={content.frontmatter.coverImage.url}
             className={
-              "md:clip-list-image relative inset-0 h-full w-full rounded-t-lg object-cover md:absolute md:rounded-r-lg"
+              "md:clip-list-image-left relative inset-0 h-full w-full rounded-t-lg object-cover md:absolute md:rounded-r-lg"
             }
           />
         </div>
