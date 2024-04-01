@@ -1,5 +1,4 @@
 import React from "react"
-import Image from "next/image"
 import { ContentData } from "@/schemas/content"
 import { getContentDataBySource } from "@/lib/content"
 import { cn } from "@/lib/utils"
@@ -9,25 +8,29 @@ import { typographyVariants } from "@/components/primitives/typography"
 
 function WritingCard({ content }: { content: ContentData }) {
   return (
-    <li
-      key={content.slug}
-      className="card-link link-box flex w-full flex-col gap-2 rounded-lg bg-card p-4 text-card-foreground shadow-lg md:flex-row"
-    >
-      <Image
-        alt="games placeholder"
-        src="https://hb.imgix.net/41ff19a5a115ce7c78207f166f069b3ab69ed00f.jpg?auto=compress,format&fit=crop&h=600&w=1200&s=bac8a397bb20bed183ded6fdb5b7ebb1"
-        className="h-[9.5rem] w-full rounded-lg object-cover md:w-auto"
-        height={600}
-        width={1200}
-      />
-      <div className="ml-4 flex grow flex-col justify-between">
-        <h3 className={typographyVariants({ variant: "h3" })}>
-          <Link href={`/${content.slug}`} className="link-overlay" nav={true} underline={false}>
-            {content.frontmatter.title}
-          </Link>
-        </h3>
-        <p className={typographyVariants({ variant: "h4" })}>{content.frontmatter.subtitle}</p>
-        <p className="line-clamp-3">{content.frontmatter.description}</p>
+    <li className="card-link link-box flex w-full rounded-lg shadow-lg">
+      <div className={"flex h-full w-full flex-col flex-col-reverse md:flex-row"}>
+        <div className="flex grow flex-col gap-1 p-6">
+          <h3 className={typographyVariants({ variant: "h3" })}>
+            <Link href={`/${content.slug}`} className="link-overlay" nav={true} underline={false}>
+              {content.frontmatter.title}
+            </Link>
+          </h3>
+          <span className={typographyVariants({ variant: "h4" })}>
+            {content.frontmatter.subtitle}
+          </span>
+          <span className="text-theme-muted line-clamp-3">{content.frontmatter.description}</span>
+        </div>
+
+        <div className="relative -z-1 h-32 w-full flex-none sm:h-48 md:h-auto md:w-72 lg:w-96">
+          <img
+            alt={content.frontmatter?.coverImage?.alt}
+            src={content.frontmatter.coverImage.url}
+            className={
+              "md:clip-list-image relative inset-0 h-full w-full rounded-t-lg object-cover md:absolute md:rounded-r-lg"
+            }
+          />
+        </div>
       </div>
     </li>
   )

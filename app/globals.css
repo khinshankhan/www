@@ -488,6 +488,11 @@
     text-wrap: balance;
   }
 
+  /* credits to xetera for the idea */
+  .clip-list-image {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
+  }
+
   /* radix animations */
   .animated-collapsible {
     @apply overflow-hidden data-[state=closed]:animate-collapsible-close data-[state=open]:animate-collapsible-open;
