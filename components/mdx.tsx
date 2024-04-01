@@ -1,12 +1,15 @@
 import React, { Children } from "react"
+import { remarkSimpleEmoji } from "@khinshankhan/emoji-helper-remark"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { filter, onlyText } from "react-children-utilities"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
+import { EmojiKey, emojiLookup } from "@/lib/emoji"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { cn } from "@/lib/utils"
 import { Callout, isCalloutKeyword } from "@/components/blocks/callout"
+import { Emoji } from "@/components/emoji"
 import { Blockquote } from "@/components/primitives/components"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
@@ -77,6 +80,10 @@ const baseComponents: MDXComponents = {
   },
 }
 
+const customComponents: MDXComponents = {
+  Emoji,
+}
+
 export function MDXContent({
   source,
   components = {},
@@ -84,7 +91,7 @@ export function MDXContent({
   source: string
   components?: MDXComponents
 }) {
-  const allComponents = { ...baseComponents, ...components }
+  const allComponents = { ...baseComponents, ...customComponents, ...components }
 
   return (
     <MDXRemote
@@ -93,6 +100,18 @@ export function MDXContent({
       options={{
         mdxOptions: {
           remarkPlugins: [
+            [
+              // @ts-expect-error: silly compatibility issue
+              remarkSimpleEmoji,
+              {
+                validate: (name: string) => emojiLookup.get(name as EmojiKey),
+                lookup: (name: string) => {
+                  const emoji = emojiLookup.get(name as EmojiKey)
+                  // NOTE: this should be guranteed due to validate
+                  return emoji!.alt
+                },
+              },
+            ],
             // @ts-expect-error: silly compatibility issue
             remarkMarkFirstParagraph,
           ],

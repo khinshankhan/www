@@ -1,21 +1,15 @@
 import Image from "next/image"
 import { wordToMobileKey } from "@/lib/misc"
 import { cn } from "@/lib/utils"
+import { Emoji } from "@/components/emoji"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
 import { EggText } from "./egg-text"
 
 function Wave() {
-  return (
-    <Image
-      alt=":wave:"
-      width={16}
-      height={16}
-      src="https://github.githubassets.com/images/icons/emoji/unicode/1f44b.png?v8"
-      className="inline aspect-auto size-[1em] animate-wave"
-    />
-  )
+  return <Emoji name=":wave:" className="animate-wave" />
 }
+
 export default function Home() {
   return (
     <section className="page-container mx-auto mt-8 flex flex-col items-center justify-center space-y-20 md:mt-20">
