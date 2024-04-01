@@ -56,6 +56,7 @@ export const ContentFrontmatterSchema = z.object({
 export type ContentFrontmatter = z.infer<typeof ContentFrontmatterSchema>
 
 export const ComputedDataSchema = z.object({
+  baseName: z.string(),
   excerpt: z.string(),
   toc: z.array(z.object({ id: z.string(), text: z.string(), level: z.number().min(1).max(6) })),
   // TODO: undecided if I want to use these

@@ -1,7 +1,8 @@
 import React from "react"
 import { notFound } from "next/navigation"
-import { getAllContentData, getContentData } from "@/lib/content"
+import { getAllContentData } from "@/lib/content"
 import { MDXContent } from "@/components/mdx"
+import { getContentDataFromSlug } from "./utils"
 
 export async function generateStaticParams() {
   const slugsParts = getAllContentData().map((contentData) => {
@@ -15,13 +16,8 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const { slug } = params
-  const slugPath = slug.join("/")
 
-  // TODO: turn this to support `"**/page*.mdx"` when dealing with i18n
-  // eg page.es.mdx will be spanish
-  const filePath = `${slugPath}/page.mdx`
-
-  const contentData = getContentData(filePath)
+  const contentData = getContentDataFromSlug(slug)
   if (!contentData) {
     notFound()
   }

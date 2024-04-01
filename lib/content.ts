@@ -66,6 +66,7 @@ export function getContentData(filePath: string): ContentData {
       excerpt: (computedData?.data?.excerpt ?? "") as string,
       // NOTE: this is guaranteed because of remarkTocExport
       toc: (computedData?.data?.toc ?? []) as ContentData["computed"]["toc"],
+      baseName: path.basename(filePath),
     },
     frontmatter: ContentFrontmatterSchema.parse(prefilledData),
   }

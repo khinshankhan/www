@@ -1,7 +1,7 @@
 import React, { type ReactNode } from "react"
-import { getContentData } from "@/lib/content"
 import { PageSkeletonLayout } from "@/components/layouts"
 import { Toc } from "@/components/layouts/sidebars"
+import { getContentDataFromSlug } from "./utils"
 
 export default function PagesLayout({
   params,
@@ -11,13 +11,8 @@ export default function PagesLayout({
   children: ReactNode
 }) {
   const { slug } = params
-  const slugPath = slug.join("/")
 
-  // TODO: turn this to support `"**/page*.mdx"` when dealing with i18n
-  // eg page.es.mdx will be spanish
-  const filePath = `${slugPath}/page.mdx`
-
-  const contentData = getContentData(filePath)
+  const contentData = getContentDataFromSlug(slug)
 
   return (
     <PageSkeletonLayout
@@ -27,7 +22,7 @@ export default function PagesLayout({
           <span>{contentData?.frontmatter?.subtitle}</span>
         </>
       }
-      path={`content/${slugPath}/page.tsx`}
+      path={`/content/${contentData.slug}/${contentData.computed.baseName}`}
       sidebar={
         contentData?.frontmatter?.showToc &&
         contentData?.computed?.toc && <Toc headings={contentData.computed.toc} />
