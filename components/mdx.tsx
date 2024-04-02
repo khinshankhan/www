@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils"
 import { Callout, isCalloutKeyword } from "@/components/blocks/callout"
 import { Emoji } from "@/components/emoji"
 import { Blockquote } from "@/components/primitives/components"
+import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
 import { Video } from "@/components/primitives/video"
@@ -84,6 +85,7 @@ const baseComponents: MDXComponents = {
 
 const customComponents: MDXComponents = {
   Emoji,
+  SmartImage,
   Video,
 }
 
@@ -122,6 +124,12 @@ export function MDXContent({
               remarkJsxifyElements,
               {
                 elements: [
+                  {
+                    matcher: (node: MdastNode) =>
+                      // @ts-expect-error
+                      (node?.name as string) === "img",
+                    jsxName: "SmartImage",
+                  },
                   {
                     matcher: (node: MdastNode) =>
                       // @ts-expect-error
