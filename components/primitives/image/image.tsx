@@ -18,7 +18,7 @@ export function SkeletonImage({ height, width, className = "", style = {} }: Ske
     <div role="status" className="flex w-full animate-pulse flex-col items-center justify-center">
       <div
         className={cn(
-          "flex h-auto max-w-full items-center justify-center rounded-lg bg-gray-11",
+          "flex h-auto max-w-full items-center justify-center rounded-lg bg-muted-foreground",
           className,
           className.includes("aspect-") && "!h-auto"
         )}
@@ -29,7 +29,7 @@ export function SkeletonImage({ height, width, className = "", style = {} }: Ske
         }}
       >
         <svg
-          className="h-10 w-10 text-gray-12"
+          className="size-24 max-h-full max-w-full"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
@@ -99,7 +99,9 @@ export function Figure({
       />
 
       {showCaption && (title || imageAlt) && (
-        <figcaption className="mt-4 text-center text-theme-muted">{title || imageAlt}</figcaption>
+        <figcaption className="mt-4 text-center text-muted-foreground">
+          {title || imageAlt}
+        </figcaption>
       )}
     </figure>
   )
@@ -119,7 +121,7 @@ export function SmartImage({ src, className = "", ...props }: FigureProps) {
       {...props}
       src={src}
       className={cn(
-        "mx-auto h-auto max-h-[725px] w-auto max-w-full max-w-full rounded-lg",
+        "mx-auto size-auto max-h-[725px] max-w-full max-w-full rounded-lg",
         className,
         !className.includes("aspect-") && "!aspect-[var(--aspect-width)/var(--aspect-height)]"
       )}
