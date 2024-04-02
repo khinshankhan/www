@@ -7,12 +7,14 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
 import { EmojiKey, emojiLookup } from "@/lib/emoji"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
+import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { cn } from "@/lib/utils"
 import { Callout, isCalloutKeyword } from "@/components/blocks/callout"
 import { Emoji } from "@/components/emoji"
 import { Blockquote } from "@/components/primitives/components"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
+import { Video } from "@/components/primitives/video"
 
 // match blockquotes `> [!variant] heading`
 const mdxBlockquoteMetaRegex = /\[!([^\]]+)\]\s*(.*)/
@@ -82,6 +84,7 @@ const baseComponents: MDXComponents = {
 
 const customComponents: MDXComponents = {
   Emoji,
+  Video,
 }
 
 export function MDXContent({
@@ -114,6 +117,20 @@ export function MDXContent({
             ],
             // @ts-expect-error: silly compatibility issue
             remarkMarkFirstParagraph,
+            [
+              // @ts-expect-error: silly compatibility issue
+              remarkJsxifyElements,
+              {
+                elements: [
+                  {
+                    matcher: (node: MdastNode) =>
+                      // @ts-expect-error
+                      (node?.name as string) === "video",
+                    jsxName: "Video",
+                  },
+                ],
+              },
+            ],
           ],
           rehypePlugins: [
             rehypeSlug,
