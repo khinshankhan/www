@@ -81,6 +81,7 @@ const baseComponents: MDXComponents = {
       </Blockquote>
     )
   },
+  img: SmartImage,
 }
 
 const customComponents: MDXComponents = {
