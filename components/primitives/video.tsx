@@ -21,8 +21,6 @@ export function Video({ children, className = "", ...props }: VideoProps) {
 
   if (srcs.length < 1) throw new Error("Video has no source child!")
 
-  console.log({ srcs })
-
   return (
     <video controls className={cn("mx-auto max-h-[725px]", className)} {...props}>
       {children}
