@@ -23,7 +23,7 @@ export function Emoji({ name, className = "", wrapperClassName = "" }: EmojiProp
         <TooltipTrigger asChild>
           {/* eslint-disable @next/next/no-img-element */}
           <img
-            className={cn("inline aspect-auto h-[1em] w-[1em]", className)}
+            className={cn("inline aspect-auto size-[1em]", className)}
             src={emojiInfo.url}
             alt={emojiInfo.char || emojiInfo.alt}
             aria-label={emojiInfo.alt}

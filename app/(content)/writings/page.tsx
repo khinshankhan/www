@@ -13,7 +13,7 @@ function WritingCard({ content, right = true }: { content: ContentData; right?: 
     <li className="card-link link-box flex w-full rounded-lg shadow-lg">
       <div
         className={cn(
-          "flex h-full w-full flex-col flex-col-reverse",
+          "flex size-full flex-col-reverse",
           right ? "md:flex-row" : "md:flex-row-reverse"
         )}
       >
@@ -36,7 +36,7 @@ function WritingCard({ content, right = true }: { content: ContentData; right?: 
             alt={content.frontmatter?.coverImage?.alt}
             src={content.frontmatter.coverImage.url}
             className={cn(
-              "relative inset-0 h-full w-full rounded-t-lg object-cover md:absolute md:rounded-r-lg",
+              "relative inset-0 size-full rounded-t-lg object-cover md:absolute md:rounded-r-lg",
               right ? "md:clip-list-image-left" : "md:clip-list-image-right"
             )}
           />

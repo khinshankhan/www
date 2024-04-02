@@ -121,7 +121,7 @@ export function SmartImage({ src, className = "", ...props }: FigureProps) {
       {...props}
       src={src}
       className={cn(
-        "mx-auto size-auto max-h-[725px] max-w-full max-w-full rounded-lg",
+        "mx-auto size-auto max-h-[725px] max-w-full rounded-lg",
         className,
         !className.includes("aspect-") && "!aspect-[var(--aspect-width)/var(--aspect-height)]"
       )}
