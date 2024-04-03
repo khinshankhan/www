@@ -1,7 +1,8 @@
 import React, { type ReactNode } from "react"
 import NextLink, { type LinkProps as NextLinkProps } from "next/link"
 import { cva, VariantProps } from "class-variance-authority"
-import { cn } from "@/lib/utils"
+import { cn, isRelative, isUrlFile } from "@/lib/utils"
+import { SvgIcon } from "@/components/icons"
 
 export const linkVariants = cva("", {
   variants: {
@@ -42,6 +43,25 @@ export const linkVariants = cva("", {
 
 export type LinkVariants = VariantProps<typeof linkVariants>
 
+function VisualIcon({ isExternal, isFile }: { isExternal: boolean; isFile: boolean }) {
+  if (isExternal) {
+    return (
+      <span className="inline-flex items-center">
+        <SvgIcon id="arrow-up-right" className="inline h-4 w-4 pb-1" />
+      </span>
+    )
+  }
+  if (isFile) {
+    return (
+      <span className="inline-flex items-center">
+        <SvgIcon id="arrow-down-tray" className="inline h-4 w-4 pt-1" />
+      </span>
+    )
+  }
+
+  return null
+}
+
 interface LinkProps extends NextLinkProps, LinkVariants {
   children: ReactNode
   className?: string
@@ -52,6 +72,10 @@ interface LinkProps extends NextLinkProps, LinkVariants {
   // for when you want to override the default variant but can only pass in via html props
   "data-nav"?: "true" | "false"
   "data-underline"?: "true" | "false"
+  // custom options to optimize or else calculated on the fly
+  isInternal?: boolean
+  isExternal?: boolean
+  isFile?: boolean
 }
 
 export function Link({
@@ -63,6 +87,9 @@ export function Link({
   underline = true,
   "data-nav": dataNav = "false",
   "data-underline": dataUnderline = "true",
+  isInternal: isInternalProp = undefined,
+  isExternal: isExternalProp = undefined,
+  isFile: isFileProp = undefined,
   ...props
 }: LinkProps) {
   const isNav = nav || dataNav === "true"
@@ -70,16 +97,9 @@ export function Link({
 
   const classes = cn(linkVariants({ variant, nav: isNav, underline: isUnderlined, className }))
 
-  // if href is a url obj it's a local link with state (probably), and / is totally local
-  if (typeof href !== "string" || href.startsWith("/")) {
-    return (
-      <NextLink href={href} className={classes} {...props}>
-        {children}
-      </NextLink>
-    )
-  }
-
-  if (typeof href !== "string" || href.startsWith("#")) {
+  // # means same page, but use normal anchor tag for smoother scroll
+  // ideally the icon will be the anchor icon, however it'll have to be placed via css for styling purposes
+  if (typeof href === "string" && href.startsWith("#")) {
     return (
       <a href={href} className={cn("anchor-link", classes)} {...props}>
         {children}
@@ -87,9 +107,25 @@ export function Link({
     )
   }
 
+  // calculate values if not provided for visual icon
+  const isExternal = (isInternalProp && !isInternalProp) ?? isExternalProp ?? !isRelative(href)
+  const isFile = isFileProp ?? isUrlFile(href)
+
+  // if href is a url obj it's a local link with state (probably), and / is totally local
+  if (typeof href !== "string" || href.startsWith("/")) {
+    return (
+      <NextLink href={href} className={classes} {...props}>
+        {children}
+        <VisualIcon isExternal={isExternal} isFile={isFile} />
+      </NextLink>
+    )
+  }
+
+  // external link
   return (
     <a target="_blank" rel="noopener noreferrer" href={href} className={classes} {...props}>
       {children}
+      <VisualIcon isExternal={isExternal} isFile={isFile} />
     </a>
   )
 }

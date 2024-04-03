@@ -54,6 +54,8 @@ export type SVGIconNames =
   | "exclamation-triangle"
   | "shield-exclamation"
   | "chevron-down"
+  | "arrow-down-tray"
+  | "arrow-up-right"
 
 export interface ISvgIconProps extends React.SVGAttributes<SVGElement> {
   className?: string
