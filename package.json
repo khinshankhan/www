@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "next-dev": "next dev",
+    "typecheck": "tsc --noEmit",
     "check-contents": "pnpx ts-node scripts/check-contents.ts",
     "watch-contents": "pnpx ts-node scripts/check-contents.ts --watch",
     "refresh-from-content": "pnpx ts-node ./scripts/autorefresher.ts",
@@ -11,7 +12,8 @@
     "dev": "run-p next-dev monitor-content",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "next-lint": "next lint",
+    "lint": "pnpm run typecheck && pnpm run format:check && next lint",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache"
   },
