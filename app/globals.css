@@ -322,20 +322,6 @@
       background-image: linear-gradient(to right, hsl(var(--link-on)), hsl(var(--link-on)));
     }
   }
-  @keyframes underline-animation-reverse {
-    0% {
-      background-size: 100% 1px;
-      background-image: linear-gradient(to right, hsl(var(--link-on)), hsl(var(--link-on)));
-    }
-    50% {
-      background-size: 0% 1px;
-      background-image: linear-gradient(to right, hsl(var(--link-active)), hsl(var(--link-active)));
-    }
-    100% {
-      background-size: 100% 1px;
-      background-image: linear-gradient(to right, hsl(var(--link-base)), hsl(var(--link-base)));
-    }
-  }
 
   .animated-link {
     position: relative;
@@ -350,10 +336,8 @@
 
     animation-fill-mode: forwards;
     animation-duration: 1500ms !important;
-    animation: underline-animation-reverse 1500ms ease-in-out;
     @media (prefers-reduced-motion) {
       animation-duration: 0ms !important;
-      animation: underline-animation-reverse 0ms ease-in-out;
     }
 
     &:hover {
