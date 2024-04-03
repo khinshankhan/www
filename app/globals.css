@@ -308,42 +308,60 @@
 }
 
 @layer components {
+  @keyframes underline-animation {
+    0% {
+      background-size: 100% 1px;
+      background-image: linear-gradient(to right, hsl(var(--link-base)), hsl(var(--link-base)));
+    }
+    50% {
+      background-size: 0% 1px;
+      background-image: linear-gradient(to right, hsl(var(--link-active)), hsl(var(--link-active)));
+    }
+    100% {
+      background-size: 100% 1px;
+      background-image: linear-gradient(to right, hsl(var(--link-on)), hsl(var(--link-on)));
+    }
+  }
+  @keyframes underline-animation-reverse {
+    0% {
+      background-size: 100% 1px;
+      background-image: linear-gradient(to right, hsl(var(--link-on)), hsl(var(--link-on)));
+    }
+    50% {
+      background-size: 0% 1px;
+      background-image: linear-gradient(to right, hsl(var(--link-active)), hsl(var(--link-active)));
+    }
+    100% {
+      background-size: 100% 1px;
+      background-image: linear-gradient(to right, hsl(var(--link-base)), hsl(var(--link-base)));
+    }
+  }
+
   .animated-link {
     position: relative;
-    padding-bottom: 0px; /* space for the underline */
-    text-decoration: none; /* remove default underline */
-    overflow: hidden; /* ensures pseudo-elements don't extend beyond text area */
+    padding-bottom: 0px;
+    text-decoration: none;
+    overflow: hidden;
 
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: calc(1px);
-      background-color: hsl(var(--link-base)); /* initial underline color */
-      transform: scaleX(0); /* start scaled to 0 (invisible) */
-      transform-origin: bottom right;
-      transition: transform 0.3s ease-in-out;
+    background-position: 0 100%;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(to right, hsl(var(--link-base)), hsl(var(--link-base)));
+
+    animation-fill-mode: forwards;
+    animation-duration: 1500ms !important;
+    animation: underline-animation-reverse 1500ms ease-in-out;
+    @media (prefers-reduced-motion) {
+      animation-duration: 0ms !important;
+      animation: underline-animation-reverse 0ms ease-in-out;
     }
 
-    &::after {
-      background-color: hsl(var(--link-on)); /* hover underline color */
-      transform-origin: bottom left;
-    }
-
-    &::before {
-      transform: scaleX(1); /* initially appear */
-    }
-    &:hover::before {
-      transform: scaleX(0); /* disappear on hover */
-      transition: transform 0.3s ease-in-out;
-    }
-
-    &:hover::after {
-      transform: scaleX(1); /* appear on hover after delay */
-      transition: transform 0.3s ease-in-out 0.3s; /* delayed start = before animation time */
+    &:hover {
+      background-image: linear-gradient(to right, hsl(var(--link-on)), hsl(var(--link-on)));
+      animation: underline-animation 1500ms ease-in-out;
+      @media (prefers-reduced-motion) {
+        animation: underline-animation 0ms ease-in-out;
+      }
     }
   }
 
@@ -488,6 +506,14 @@
     text-wrap: balance;
   }
 
+  .animation-play-state-paused {
+    animation-play-state: paused;
+  }
+
+  .animation-play-state-running {
+    animation-play-state: running;
+  }
+
   /* credits to xetera for the initial idea */
   /* resource: https://bennettfeely.com/clippy/ */
   .clip-list-image-left {
@@ -497,7 +523,7 @@
     clip-path: polygon(0 0, 97% 0, 80% 100%, 0 100%);
   }
 
-  /* radix animations */
+  /* radix ui */
   .animated-collapsible {
     @apply overflow-hidden data-[state=closed]:animate-collapsible-close data-[state=open]:animate-collapsible-open;
   }
