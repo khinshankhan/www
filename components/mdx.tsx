@@ -81,6 +81,7 @@ const baseComponents: MDXComponents = {
       </Blockquote>
     )
   },
+  // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
   img: SmartImage,
 }
 
