@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from "react"
-import { screens, type Screens } from "@/lib/theme"
+import { useMediaQuery } from "react-responsive"
 
 export const isServer = typeof window === "undefined" || !window.navigator
 export const isBrowser = !isServer
@@ -14,38 +14,19 @@ export function useMounted() {
   return mounted
 }
 
-export function useMediaQuery(query: string, defaultValue: boolean = false) {
-  const [matches, setMatches] = useState(() => defaultValue)
+export function useBreakpoints() {
+  // NOTE: this is a hacky way to get the breakpoints for controlled components
+  // this needs to be kept in sync with the tailwind config
+  const isXss = useMediaQuery({ query: "(min-width: 320px)" })
+  const isXs = useMediaQuery({ query: "(min-width: 392px)" })
+  const isSm = useMediaQuery({ query: "(min-width: 640px)" })
+  const isMd = useMediaQuery({ query: "(min-width: 768px)" })
+  const isLg = useMediaQuery({ query: "(min-width: 1024px)" })
+  const isXl = useMediaQuery({ query: "(min-width: 1325px)" })
+  const is2xl = useMediaQuery({ query: "(min-width: 1536px)" })
 
-  useIsomorphicEffect(() => {
-    // if it's somehow server rendered, we can't match media
-    // use effect expects a cleanup fn or undefined
-    if (isServer) return undefined
+  const isMobile = useMediaQuery({ query: "(max-width: 767px)" })
+  const isDesktop = useMediaQuery({ query: "(min-width: 768px)" })
 
-    const media = window?.matchMedia(query)
-    if (media?.matches !== matches) {
-      setMatches(media.matches)
-    }
-
-    const listener = () => setMatches(media?.matches)
-    window.addEventListener("resize", listener)
-    return () => window.removeEventListener("resize", listener)
-  }, [isServer, matches, query])
-
-  return matches
-}
-
-type Bp = keyof Screens
-export function useBreakpoint(bp: Bp, defaultValue: boolean = false) {
-  function constructMediaQuery(bp: Bp) {
-    const size = screens[bp]
-    if (typeof size === "object" && size?.max) {
-      return `(max-width: ${size.max})`
-    }
-    return `(min-width: ${size})`
-  }
-
-  const mediaQuery = constructMediaQuery(bp)
-  const match = useMediaQuery(mediaQuery, defaultValue)
-  return match
+  return { isXss, isXs, isSm, isMd, isLg, isXl, is2xl, isMobile, isDesktop }
 }

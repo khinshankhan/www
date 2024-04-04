@@ -1,6 +1,7 @@
 import React, { type ReactNode } from "react"
 import { cn } from "@/lib/utils"
-import { Link, typographyVariants } from "@/components/ui"
+import { Link } from "@/components/primitives/link"
+import { typographyVariants } from "@/components/primitives/typography"
 
 export interface WithSidebarProps {
   direction?: "left" | "right"
@@ -19,11 +20,12 @@ export function WithSidebar({
   after,
 }: WithSidebarProps) {
   return (
-    <div className="content-container flex flex-col gap-10">
+    <div className={"content-container flex flex-col gap-10"}>
       {before}
 
       <div
         className={cn(
+          sidebar && "content-container-with-sidebar",
           "flex w-full flex-col xl:justify-end xl:gap-16",
           direction === "left" ? "xl:flex-row" : "xl:flex-row-reverse"
         )}
@@ -68,14 +70,19 @@ export function PageSkeletonLayout({
   // (within the min-h) the content bg color, accounting for potentially shorter content
   return (
     <main className="flex grow flex-col">
-      <header className={cn("bg-theme-primary pb-14 pt-14 text-center", extendedSpace && "pb-52")}>
-        <h1 className={typographyVariants({ variant: "h1" })}>{title}</h1>
-        <span className={typographyVariants({ variant: "main-nav", className: "block pt-6" })}>
+      <header className={cn("bg-nav py-14 text-center", extendedSpace && "pb-52")}>
+        <h1 className={cn(typographyVariants({ variant: "h1" }), "text-balance")}>{title}</h1>
+        <span
+          className={cn(
+            typographyVariants({ variant: "h4" }),
+            "block text-balance pt-6 font-medium text-muted-foreground"
+          )}
+        >
           {subtitle}
         </span>
       </header>
 
-      <div className="grow py-5">
+      <div className="grow bg-background py-5">
         <WithSidebar direction={direction} sidebar={sidebar} before={before} after={after}>
           <article
             id="article"
@@ -86,10 +93,10 @@ export function PageSkeletonLayout({
         </WithSidebar>
       </div>
 
-      <div className="bg-theme-primary py-6">
+      <div className="bg-nav py-6">
         <div className="page-container">
           <div className="flex flex-row-reverse">
-            <Link href={`https://github.com/khinshankhan/anchorage/tree/main${ghPath}`}>
+            <Link href={`https://github.com/khinshankhan/www/tree/main${ghPath}`}>
               View page on GitHub
             </Link>
           </div>
