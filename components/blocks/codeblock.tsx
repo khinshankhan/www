@@ -40,14 +40,15 @@ export const Code = React.forwardRef<HTMLElement, CodeProps>(function Code(
   { className, children, ...props },
   forwardedRef
 ) {
-  const codeHTML = highlight(children)
+  const shouldHighlight = className?.includes("language-")
+  const codeHTML = shouldHighlight ? highlight(children) : children
 
   return (
     <code
       ref={forwardedRef}
       suppressHydrationWarning
       dangerouslySetInnerHTML={{ __html: codeHTML }}
-      className={cn("rounded-lg bg-muted px-1 py-0.5 text-muted-foreground", className)}
+      className={cn("rounded-lg bg-critical px-1 py-0.5 text-critical-foreground", className)}
       {...props}
     />
   )
