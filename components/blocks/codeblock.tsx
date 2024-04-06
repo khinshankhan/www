@@ -13,7 +13,7 @@ export const Pre = React.forwardRef<HTMLPreElement, PreProps>(function Pre(
   const text = children?.props?.children ?? "Something went wrong, please contact support."
 
   return (
-    <div role="presentation" className="group relative flex w-full items-start justify-center">
+    <div className="group relative flex w-full items-start justify-center">
       <ScrollArea className="group mb-0.5 block size-full rounded-lg bg-muted" type="auto">
         <CopyToClipboardButton
           text={text}
