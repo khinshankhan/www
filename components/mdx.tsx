@@ -5,6 +5,7 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import { filter, onlyText } from "react-children-utilities"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
+import { highlight } from "sugar-high"
 import { EmojiKey, emojiLookup } from "@/lib/emoji"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
@@ -39,6 +40,47 @@ function getBlockquoteInfo(children: React.ReactNode[]) {
     children: children.slice(1),
   }
 }
+
+interface PreProps extends React.ComponentPropsWithoutRef<"pre"> {}
+const Pre = React.forwardRef<HTMLPreElement, PreProps>(function Pre(
+  { className, children, ...props },
+  forwardedRef
+) {
+  return (
+    <div role="presentation" className="relative flex w-full items-start justify-center">
+      <pre
+        ref={forwardedRef}
+        className="h-full w-full
+        overflow-x-scroll whitespace-pre rounded-lg bg-muted px-4 py-3 text-muted-foreground [&>code]:contents"
+        {...props}
+      >
+        {children}
+      </pre>
+    </div>
+  )
+})
+Pre.displayName = "CodeBlock.Pre"
+
+interface CodeProps extends React.ComponentPropsWithoutRef<"code"> {
+  children: string
+}
+const Code = React.forwardRef<HTMLElement, CodeProps>(function Code(
+  { className, children, ...props },
+  forwardedRef
+) {
+  const codeHTML = highlight(children)
+
+  return (
+    <code
+      ref={forwardedRef}
+      suppressHydrationWarning
+      dangerouslySetInnerHTML={{ __html: codeHTML }}
+      className={cn("rounded-lg bg-muted px-1 py-0.5 text-muted-foreground", className)}
+      {...props}
+    />
+  )
+})
+Code.displayName = "CodeBlock.Code"
 
 const baseComponents: MDXComponents = {
   a: ({ href = "#", children = null, ...props }) => (
@@ -81,6 +123,9 @@ const baseComponents: MDXComponents = {
       </Blockquote>
     )
   },
+  pre: Pre,
+  // @ts-ignore: not getting into the weeds of this
+  code: Code,
   // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
   img: SmartImage,
 }
