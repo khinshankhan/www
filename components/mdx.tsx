@@ -5,17 +5,16 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import { filter, onlyText } from "react-children-utilities"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
-import { highlight } from "sugar-high"
 import { EmojiKey, emojiLookup } from "@/lib/emoji"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { cn } from "@/lib/utils"
 import { Callout, isCalloutKeyword } from "@/components/blocks/callout"
+import { Code, Pre } from "@/components/blocks/codeblock"
 import { Emoji } from "@/components/emoji"
 import { Blockquote } from "@/components/primitives/components"
 import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
-import { ScrollArea, ScrollBar } from "@/components/primitives/scroll-area"
 import { typographyVariants } from "@/components/primitives/typography"
 import { Video } from "@/components/primitives/video"
 
@@ -41,50 +40,6 @@ function getBlockquoteInfo(children: React.ReactNode[]) {
     children: children.slice(1),
   }
 }
-
-interface PreProps extends React.ComponentPropsWithoutRef<"pre"> {}
-const Pre = React.forwardRef<HTMLPreElement, PreProps>(function Pre(
-  { className, children, ...props },
-  forwardedRef
-) {
-  return (
-    <div role="presentation" className="relative flex w-full items-start justify-center">
-      <ScrollArea className="mb-0.5 block h-full w-full rounded-lg bg-muted" type="auto">
-        <pre
-          ref={forwardedRef}
-          className="h-full
-w-full whitespace-pre rounded-lg bg-muted px-4 pb-6 pt-3 text-muted-foreground [&>code]:contents"
-          {...props}
-        >
-          {children}
-        </pre>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
-    </div>
-  )
-})
-Pre.displayName = "CodeBlock.Pre"
-
-interface CodeProps extends React.ComponentPropsWithoutRef<"code"> {
-  children: string
-}
-const Code = React.forwardRef<HTMLElement, CodeProps>(function Code(
-  { className, children, ...props },
-  forwardedRef
-) {
-  const codeHTML = highlight(children)
-
-  return (
-    <code
-      ref={forwardedRef}
-      suppressHydrationWarning
-      dangerouslySetInnerHTML={{ __html: codeHTML }}
-      className={cn("rounded-lg bg-muted px-1 py-0.5 text-muted-foreground", className)}
-      {...props}
-    />
-  )
-})
-Code.displayName = "CodeBlock.Code"
 
 const baseComponents: MDXComponents = {
   a: ({ href = "#", children = null, ...props }) => (
