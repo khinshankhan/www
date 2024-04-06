@@ -9,7 +9,7 @@ export const useIsomorphicEffect = isBrowser ? useLayoutEffect : useEffect
 
 export function useMounted() {
   const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+  useIsomorphicEffect(() => setMounted(true), [])
 
   return mounted
 }

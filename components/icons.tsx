@@ -56,6 +56,8 @@ export type SVGIconNames =
   | "chevron-down"
   | "arrow-down-tray"
   | "arrow-up-right"
+  | "check"
+  | "document-duplicate"
 
 export interface ISvgIconProps extends React.SVGAttributes<SVGElement> {
   className?: string
@@ -72,7 +74,7 @@ export function SvgIcon({ className = "", id, ...props }: ISvgIconProps) {
       className={cn("size-6", className)}
       {...props}
     >
-      <use href={`/icons.svg?v=1#${id}`} />
+      <use href={`/icons.svg?v=2#${id}`} />
     </svg>
   )
 }

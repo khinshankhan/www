@@ -10,6 +10,7 @@ import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { cn } from "@/lib/utils"
 import { Callout, isCalloutKeyword } from "@/components/blocks/callout"
+import { Code, Pre } from "@/components/blocks/codeblock"
 import { Emoji } from "@/components/emoji"
 import { Blockquote } from "@/components/primitives/components"
 import { SmartImage } from "@/components/primitives/image"
@@ -81,6 +82,9 @@ const baseComponents: MDXComponents = {
       </Blockquote>
     )
   },
+  pre: Pre,
+  // @ts-ignore: not getting into the weeds of this
+  code: Code,
   // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
   img: SmartImage,
 }
