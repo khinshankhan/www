@@ -15,6 +15,7 @@ import { Emoji } from "@/components/emoji"
 import { Blockquote } from "@/components/primitives/components"
 import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
+import { ScrollArea, ScrollBar } from "@/components/primitives/scroll-area"
 import { typographyVariants } from "@/components/primitives/typography"
 import { Video } from "@/components/primitives/video"
 
@@ -48,14 +49,17 @@ const Pre = React.forwardRef<HTMLPreElement, PreProps>(function Pre(
 ) {
   return (
     <div role="presentation" className="relative flex w-full items-start justify-center">
-      <pre
-        ref={forwardedRef}
-        className="h-full w-full
-        overflow-x-scroll whitespace-pre rounded-lg bg-muted px-4 py-3 text-muted-foreground [&>code]:contents"
-        {...props}
-      >
-        {children}
-      </pre>
+      <ScrollArea className="mb-0.5 block h-full w-full rounded-lg bg-muted" type="auto">
+        <pre
+          ref={forwardedRef}
+          className="h-full
+w-full whitespace-pre rounded-lg bg-muted px-4 pb-6 pt-3 text-muted-foreground [&>code]:contents"
+          {...props}
+        >
+          {children}
+        </pre>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
     </div>
   )
 })
