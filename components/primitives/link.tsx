@@ -47,14 +47,14 @@ function VisualIcon({ isExternal, isFile }: { isExternal: boolean; isFile: boole
   if (isExternal) {
     return (
       <span className="inline-flex items-center">
-        <SvgIcon id="arrow-up-right" className="inline h-4 w-4 pb-1" />
+        <SvgIcon id="arrow-up-right" className="inline size-4 pb-1" />
       </span>
     )
   }
   if (isFile) {
     return (
       <span className="inline-flex items-center">
-        <SvgIcon id="arrow-down-tray" className="inline h-4 w-4 pt-1" />
+        <SvgIcon id="arrow-down-tray" className="inline size-4 pt-1" />
       </span>
     )
   }

@@ -14,15 +14,14 @@ export const Pre = React.forwardRef<HTMLPreElement, PreProps>(function Pre(
 
   return (
     <div role="presentation" className="group relative flex w-full items-start justify-center">
-      <ScrollArea className="group mb-0.5 block h-full w-full rounded-lg bg-muted" type="auto">
+      <ScrollArea className="group mb-0.5 block size-full rounded-lg bg-muted" type="auto">
         <CopyToClipboardButton
           text={text}
           className="absolute right-2 top-2 opacity-0 group-focus-within:opacity-100 group-hover:opacity-100"
         />
         <pre
           ref={forwardedRef}
-          className="h-full
-w-full whitespace-pre rounded-lg bg-muted px-4 pb-6 pt-3 text-muted-foreground [&>code]:contents"
+          className="size-full whitespace-pre rounded-lg bg-muted px-4 pb-6 pt-3 text-muted-foreground [&>code]:contents"
           {...props}
         >
           {children}
