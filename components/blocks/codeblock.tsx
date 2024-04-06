@@ -13,9 +13,12 @@ export const Pre = React.forwardRef<HTMLPreElement, PreProps>(function Pre(
   const text = children?.props?.children ?? "Something went wrong, please contact support."
 
   return (
-    <div role="presentation" className="relative flex w-full items-start justify-center">
-      <ScrollArea className="mb-0.5 block h-full w-full rounded-lg bg-muted" type="auto">
-        <CopyToClipboardButton text={text} className="absolute right-2 top-2" />
+    <div role="presentation" className="group relative flex w-full items-start justify-center">
+      <ScrollArea className="group mb-0.5 block h-full w-full rounded-lg bg-muted" type="auto">
+        <CopyToClipboardButton
+          text={text}
+          className="absolute right-2 top-2 opacity-0 group-focus-within:opacity-100 group-hover:opacity-100"
+        />
         <pre
           ref={forwardedRef}
           className="h-full
