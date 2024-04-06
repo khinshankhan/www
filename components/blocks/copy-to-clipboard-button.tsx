@@ -27,7 +27,7 @@ export const CopyToClipboardButton = forwardRef<HTMLButtonElement, CopyToClipboa
     return (
       <Button
         ref={forwardedRef}
-        variant="ghost-active"
+        variant="ghost-contrast"
         className={cn("flex items-center gap-2", className)}
         onClick={handleCopy}
         {...props}
