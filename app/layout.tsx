@@ -5,6 +5,7 @@ import { Inter, Montserrat, Source_Code_Pro } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { BreakpointsIndicator } from "@/components/indicators"
 import { BaseLayout } from "@/components/layouts"
+import { Toaster } from "@/components/primitives/toaster"
 import { typographyVariants } from "@/components/primitives/typography"
 import { AutoRefresh, ThemeProvider, TooltipProvider } from "./providers"
 
@@ -56,6 +57,7 @@ export default function RootLayout({
           <TooltipProvider>
             <AutoRefresh>
               <BaseLayout>{children}</BaseLayout>
+              <Toaster richColors />
             </AutoRefresh>
           </TooltipProvider>
         </ThemeProvider>

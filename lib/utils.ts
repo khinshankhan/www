@@ -36,11 +36,16 @@ export function scrollToElement(selector: string) {
 /* clipboard utils */
 
 // from https://stackoverflow.com/a/65996386
-export async function copyToClipboard(text: string) {
+async function copyToClipboardGraceful(text: string): Promise<boolean> {
   // Navigator clipboard api needs a secure context (https)
   if (navigator.clipboard && window.isSecureContext) {
-    await navigator.clipboard.writeText(text)
-    return true
+    try {
+      await navigator.clipboard.writeText(text)
+      return true
+    } catch (error) {
+      console.error(error)
+      return false
+    }
   }
 
   // Use the 'out of viewport hidden text area' trick
@@ -60,12 +65,20 @@ export async function copyToClipboard(text: string) {
     return true
   } catch (error) {
     console.error(error)
+    return false
   } finally {
     textArea.remove()
   }
-
-  return false
 }
+
+export async function copyToClipboard(text: string): Promise<void> {
+  const success = await copyToClipboardGraceful(text)
+  if (!success) {
+    throw new Error("Failed to copy text to clipboard")
+  }
+}
+
+export async function copyToClipboardWithError(text: string) {}
 
 /* unit utils */
 
