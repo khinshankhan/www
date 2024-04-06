@@ -460,6 +460,7 @@
     &:after {
       position: absolute;
       font-size: 5rem;
+      color: hsl(var(--muted-foreground));
     }
     &:before {
       top: -1.5rem;

@@ -78,8 +78,6 @@ export async function copyToClipboard(text: string): Promise<void> {
   }
 }
 
-export async function copyToClipboardWithError(text: string) {}
-
 /* unit utils */
 
 interface GetSizePartsProps {
