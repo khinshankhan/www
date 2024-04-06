@@ -33,6 +33,40 @@ export function scrollToElement(selector: string) {
   el.scrollIntoView()
 }
 
+/* clipboard utils */
+
+// from https://stackoverflow.com/a/65996386
+export async function copyToClipboard(text: string) {
+  // Navigator clipboard api needs a secure context (https)
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text)
+    return true
+  }
+
+  // Use the 'out of viewport hidden text area' trick
+  const textArea = document.createElement("textarea")
+  textArea.value = text
+
+  // Move textarea out of the viewport so it's not visible
+  textArea.style.position = "absolute"
+  textArea.style.left = "-999999px"
+
+  document.body.prepend(textArea)
+  textArea.select()
+
+  try {
+    // NOTE: deprecated how it's literally for old browsers lol
+    document?.execCommand("copy")
+    return true
+  } catch (error) {
+    console.error(error)
+  } finally {
+    textArea.remove()
+  }
+
+  return false
+}
+
 /* unit utils */
 
 interface GetSizePartsProps {
