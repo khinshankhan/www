@@ -5,6 +5,7 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import { filter, onlyText } from "react-children-utilities"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
+import remarkUnwrapImages from "remark-unwrap-images"
 import { EmojiKey, emojiLookup } from "@/lib/emoji"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
@@ -131,9 +132,10 @@ export function MDXContent({
               {
                 elements: [
                   {
-                    matcher: (node: MdastNode) =>
+                    matcher: (node: MdastNode) => {
                       // @ts-expect-error
-                      (node?.name as string) === "img",
+                      return (node?.name as string) === "img" || node.type === "image"
+                    },
                     jsxName: "SmartImage",
                   },
                   {
@@ -145,6 +147,7 @@ export function MDXContent({
                 ],
               },
             ],
+            remarkUnwrapImages,
           ],
           rehypePlugins: [
             rehypeSlug,
