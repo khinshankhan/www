@@ -1,8 +1,10 @@
 "use client"
 
-import React, { type CSSProperties, type ReactNode } from "react"
+import React, { Fragment, type CSSProperties, type ReactNode } from "react"
 import { default as NextImage, type ImageProps } from "next/image"
+import { compileMDX } from "next-mdx-remote/rsc"
 import { cn, getSizeParts } from "@/lib/utils"
+import { Link } from "@/components/primitives/link"
 import { shouldShowFallbackImage, useImage } from "./use-image"
 
 interface SkeletonImageProps {
@@ -56,6 +58,11 @@ export function parseCaption(caption: boolean | ReactNode) {
   if (caption === "false") return false
   return caption
 }
+export function parseFigure(figure: boolean | string) {
+  if (figure === "true") return true
+  if (figure === "false") return false
+  return Boolean(figure)
+}
 
 type FigureProps = Omit<ImageProps, "title" | "alt" | "height" | "width"> & {
   src: string
@@ -67,6 +74,8 @@ type FigureProps = Omit<ImageProps, "title" | "alt" | "height" | "width"> & {
   loaded?: boolean
   className?: string
   style?: CSSProperties
+
+  figure?: boolean | string
   caption?: boolean | ReactNode
 
   children?: ReactNode
@@ -80,6 +89,7 @@ export function Figure({
   loaded = false,
   className = "",
   style = {},
+  figure = false,
   caption = false,
   children,
 }: FigureProps) {
@@ -88,11 +98,13 @@ export function Figure({
 
   const imageAlt = getImageAlt({ src: typeof src === "string" ? src : "local", alt, title })
   const captionValue = parseCaption(caption)
+  const isFigure = captionValue || parseFigure(figure)
 
   const Component = loaded ? SkeletonImage : NextImage
+  const Wrapper = isFigure ? "figure" : Fragment
 
   return (
-    <figure>
+    <Wrapper>
       <Component
         src={src}
         alt={imageAlt}
@@ -107,12 +119,12 @@ export function Figure({
         className={className}
       />
 
-      {captionValue && (
+      {isFigure && captionValue && (
         <figcaption>
-          {(typeof captionValue !== "boolean" && captionValue) || children || imageAlt}
+          {(typeof captionValue === "boolean" && imageAlt) || children || imageAlt}
         </figcaption>
       )}
-    </figure>
+    </Wrapper>
   )
 }
 
