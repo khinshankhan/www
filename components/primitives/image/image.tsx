@@ -98,11 +98,7 @@ export function Figure({
         className={className}
       />
 
-      {showCaption && (title || imageAlt) && (
-        <figcaption className="mt-4 text-center text-muted-foreground">
-          {title || imageAlt}
-        </figcaption>
-      )}
+      {showCaption && (title || imageAlt) && <figcaption>{title || imageAlt}</figcaption>}
     </figure>
   )
 }

@@ -472,10 +472,10 @@
       right: 1.25rem;
       content: close-quote;
     }
+  }
 
-    & + figcaption {
-      @apply text-balance text-center text-muted-foreground;
-    }
+  figcaption {
+    @apply mt-4 text-balance text-center text-muted-foreground;
   }
 
   .anchor-link {
