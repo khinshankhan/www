@@ -1,6 +1,6 @@
 "use client"
 
-import React, { type CSSProperties } from "react"
+import React, { type CSSProperties, type ReactNode } from "react"
 import { default as NextImage, type ImageProps } from "next/image"
 import { cn, getSizeParts } from "@/lib/utils"
 import { shouldShowFallbackImage, useImage } from "./use-image"
@@ -51,6 +51,11 @@ interface GetImageAltProps {
 export function getImageAlt({ src, alt, title }: GetImageAltProps) {
   return alt || title || `This is an image from ${src}`
 }
+export function parseCaption(caption: boolean | ReactNode) {
+  if (caption === "true") return true
+  if (caption === "false") return false
+  return caption
+}
 
 type FigureProps = Omit<ImageProps, "title" | "alt" | "height" | "width"> & {
   src: string
@@ -59,10 +64,12 @@ type FigureProps = Omit<ImageProps, "title" | "alt" | "height" | "width"> & {
   height: string | number
   width: string | number
 
-  showCaption?: boolean
   loaded?: boolean
   className?: string
   style?: CSSProperties
+  caption?: boolean | ReactNode
+
+  children?: ReactNode
 }
 export function Figure({
   src,
@@ -70,15 +77,17 @@ export function Figure({
   title,
   height,
   width,
-  showCaption = false,
   loaded = false,
   className = "",
   style = {},
+  caption = false,
+  children,
 }: FigureProps) {
   const { size: trueHeight } = getSizeParts({ size: height })
   const { size: trueWidth } = getSizeParts({ size: width })
 
   const imageAlt = getImageAlt({ src: typeof src === "string" ? src : "local", alt, title })
+  const captionValue = parseCaption(caption)
 
   const Component = loaded ? SkeletonImage : NextImage
 
@@ -98,7 +107,11 @@ export function Figure({
         className={className}
       />
 
-      {showCaption && (title || imageAlt) && <figcaption>{title || imageAlt}</figcaption>}
+      {captionValue && (
+        <figcaption>
+          {(typeof captionValue !== "boolean" && captionValue) || children || imageAlt}
+        </figcaption>
+      )}
     </figure>
   )
 }
