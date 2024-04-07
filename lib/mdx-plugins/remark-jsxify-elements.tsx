@@ -2,11 +2,11 @@ import type { RootContent as MdastContent, Root as MdastRoot } from "mdast"
 import type { Transformer } from "unified"
 import { SKIP, visit } from "unist-util-visit"
 
-interface Attribute {
+export interface Attribute {
   name: string
   value: string
 }
-function createMdxJsxFlowElement(name: string, attributes: Attribute[], children = []) {
+export function createMdxJsxFlowElement(name: string, attributes: Attribute[], children = []) {
   return {
     type: "mdxJsxFlowElement",
     name,
@@ -19,17 +19,34 @@ function createMdxJsxFlowElement(name: string, attributes: Attribute[], children
 
 export type MdastNode = MdastRoot | MdastContent
 
-interface RemarkJsxifyElement {
-  matcher: (node: MdastNode) => boolean // eslint-disable-line no-unused-vars
+export type MatchFunction = (node: MdastNode) => boolean
+export interface RemarkJsxifyElement {
+  matcher: MatchFunction // eslint-disable-line no-unused-vars
   jsxName: string
 }
 
+export interface RemarkJsxifyElementsOptions {
+  elements?: RemarkJsxifyElement[]
+  allowedModifications?: MatchFunction[]
+}
+
 export function remarkJsxifyElements(
-  options = { elements: [] as RemarkJsxifyElement[] }
+  options: RemarkJsxifyElementsOptions
 ): Transformer<MdastRoot, MdastRoot> {
+  const elements = options.elements
+  const allowedModifications = options.allowedModifications
+
   return function transformer(tree) {
     visit(tree, (node, index, parent) => {
-      const foundElement = options.elements.find((element) => element.matcher(node))
+      const foundElement = elements?.find((element) => element.matcher(node))
+      const allowModification = allowedModifications?.find((matcher) => matcher(node))
+
+      // @ts-ignore: maybe it exists
+      if (allowModification && node?.data?._mdxExplicitJsx) {
+        console.log({ node })
+        // @ts-ignore: definitely exists
+        node.data._mdxExplicitJsx = false
+      }
       if (!parent || !index || !foundElement) return
 
       // TODO: this might break on certain node types

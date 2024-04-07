@@ -130,18 +130,30 @@ export function MDXContent({
               // @ts-expect-error: silly compatibility issue
               remarkJsxifyElements,
               {
+                allowedModifications: [
+                  (node: MdastNode) => {
+                    return (
+                      // @ts-expect-error
+                      ["img", "video"].includes(node?.name as string) ||
+                      ["image", "video"].includes(node.type)
+                    )
+                  },
+                ],
                 elements: [
                   {
                     matcher: (node: MdastNode) => {
                       // @ts-expect-error
-                      return (node?.name as string) === "img" || node.type === "image"
+                      return ["img"].includes(node?.name as string) || ["image"].includes(node.type)
                     },
                     jsxName: "SmartImage",
                   },
                   {
-                    matcher: (node: MdastNode) =>
-                      // @ts-expect-error
-                      (node?.name as string) === "video",
+                    matcher: (node: MdastNode) => {
+                      return (
+                        // @ts-expect-error
+                        ["video"].includes(node?.name as string) || ["video"].includes(node.type)
+                      )
+                    },
                     jsxName: "Video",
                   },
                 ],
