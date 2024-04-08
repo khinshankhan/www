@@ -1,12 +1,221 @@
 ---
-title: Lorem Ipsum
-subtitle: Dolor sit amet
+title: Playground
+subtitle: Where Things are Perfectly Broken
 datePublished: 2017-05-01
 dateModified: 2024-05-01
-description: This is a description of the page.
+description: This is some description that's far too long to fit in one line when listed on a page.
 ---
 
-Start
+Hello there. This is where experiments sprout and blossom. Some even become features! Or they may become bugs that then
+become features. Or they... well yea, stuff happens.
+
+### Images
+
+#### Tenor?
+
+<img
+  alt="Stuffs"
+  src="https://media1.tenor.com/m/R3H7o7xRfUMAAAAC/it%27s-saturday.gif"
+  width="260px"
+  height="401px"
+  caption
+/>
+
+<img
+  alt="Saturday Vibes [(from Tenor)](https://tenor.com/view/fat-albert-saturday-gif-9828130470404483091)"
+  src="https://media1.tenor.com/m/iGSIl1am6BMAAAAC/fat-albert-saturday.gif"
+  width="498px"
+  height="381px"
+  caption
+/>
+
+<SmartImage
+  alt="Saturday Vibes (from Tenor)"
+  src="https://media1.tenor.com/m/iGSIl1am6BMAAAAC/fat-albert-saturday.gif"
+  width="498px"
+  height="381px"
+  caption
+>
+  <div>Saturday Vibes</div>
+  <div>[(from Tenor)](https://tenor.com/view/fat-albert-saturday-gif-9828130470404483091)</div>
+</SmartImage>
+
+<img
+  width="332"
+  height="332"
+  alt="Orange"
+  src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg"
+/>
+<img
+  width="3840"
+  height="2160"
+  alt="Pretty Stuff"
+  src="https://wallpaperaccess.com/full/6788153.jpg"
+  figure="false"
+/>
+
+### Callouts
+
+> [!NOTE]
+>
+> Highlights information that users should take into account, even when skimming.
+
+> [!TIP]
+>
+> Optional information to help a user be more successful.
+
+> [!IMPORTANT]
+>
+> Crucial information necessary for users to succeed.
+
+> [!WARNING]
+>
+> Critical content demanding immediate user attention due to potential risks.
+
+> [!CAUTION]
+>
+> Negative potential consequences of an action.
+
+and this continues the paragraph.
+
+> [!QUOTE]
+>
+> This is another quote that is long enough to be on multiple lines. Let's see how it looks. And just to make sure it's long enough, I'll add some more text. Just a bit more.
+
+but also without any variant
+
+> This is another quote that is long enough to be on multiple lines. Let's see how it looks. And just to make sure it's long enough, I'll add some more text. Just a bit more.
+
+and now a quote with a caption:
+
+<figure>
+
+> [!QUOTE]
+>
+> The truth may be puzzling. It may take some work to grapple with. It may be counterintuitive.
+> It may contradict deeply held prejudices. It may not be consonant with what we desperately
+> want to be true. But our preferences do not determine what's true. We have a method, and that
+> method helps us to reach not absolute truth, only asymptotic approaches to the truth — never
+> there, just closer and closer, always finding vast new oceans of undiscovered possibilities.
+> Cleverly designed experiments are the key.
+
+  <figcaption>
+    Carl Sagan, in "<cite>Wonder and Skepticism</cite>", from the <cite>Skeptical Inquirer</cite>{" "}
+    Volume 19, Issue 1 (January-February 1995)
+  </figcaption>
+</figure>
+
+### Formatting
+
+Okay so now we try _italics_ and **bold** and _underline_ and **_something_**. Seems something corrects from `***something***` to `**_something_**`.
+
+#### Spoilers
+
+Don't you just hate <Spoiler>spoilers</Spoiler>?
+
+Also, <Spoiler>this is some spoiler that's far too long to fit in one line when listed on a page.</Spoiler>
+
+How about with... markup? <Spoiler>this is _italics_ and **bold** and _underline_ and **_something_**</Spoiler>.
+
+TODO: absolutely failing --
+
+...how about a formatting spoiler? <Spoiler>a [link home](/) and [external link to Google](https://google.com)</Spoiler>
+
+### Links!
+
+1. [External link to Google](https://google.com)
+2. [Internal link to home](/)
+3. [External fake file from Google](https://google.com/foo.pdf)
+4. [Internal fake file](/foo.pdf)
+
+### Lists
+
+A short unordered list test (they may be wrong but think of it as lorem)
+
+- Coffee
+- Teas
+  - Black tea
+    1. Assam
+    2. Darjeeling
+    3. Earl Grey
+    4. Oolong Tea
+       1. Tieguanyin
+       2. Da Hong Pao
+       3. Wuyi Rock Tea
+  - Green Tea
+  - Red Tea
+    1. Rooibos
+    2. Hong Cha
+- Milk
+- Testing a super long list item wrapping. This will be nonsense, as lorem ipsum tends to
+  be. I love donut soufflé oat cake cake pastry marzipan I love. Cake bear claw bear claw
+  marzipan gummies jujubes fruitcake. Cheesecake cookie marshmallow marshmallow macaroon
+  tart pastry marshmallow.
+- Oj
+
+And now an ordered list which fails to loop :weary:
+
+1. Decimal
+   1. lower alpha
+      1. lower greek
+         1. Decimal
+            1. lower alpha
+               1. lower greek
+               1. lower greek
+            2. lower alpha?
+         2. Decimal ?
+      1. lower greek
+   1. lower alpha
+1. Decimal
+
+### Codeblocks
+
+#### Inline
+
+This is `inline` as opposed to not. And this is `absurdly long, should go over multiple lines yada yada stress testing`.
+
+#### GitHub
+
+```ruby
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
+
+#### Radix Tooltip
+
+```jsx
+import React from "react"
+import { PlusIcon } from "@radix-ui/react-icons"
+import * as Tooltip from "@radix-ui/react-tooltip"
+
+const TooltipDemo = () => {
+  return (
+    <Tooltip.Provider>
+      <Tooltip.Root>
+        <Tooltip.Trigger asChild>
+          <button className="text-violet11 shadow-blackA4 hover:bg-violet3 inline-flex h-[35px] w-[35px] items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
+            <PlusIcon />
+          </button>
+        </Tooltip.Trigger>
+        <Tooltip.Portal>
+          <Tooltip.Content
+            className="data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade text-violet11 select-none rounded-[4px] bg-white px-[15px] py-[10px] text-[15px] leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity]"
+            sideOffset={5}
+          >
+            Add to library
+            <Tooltip.Arrow className="fill-white" />
+          </Tooltip.Content>
+        </Tooltip.Portal>
+      </Tooltip.Root>
+    </Tooltip.Provider>
+  )
+}
+
+export default TooltipDemo
+```
+
+### Coup d'état
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse risus ante, egestas quis sapien sed, condimentum tincidunt tellus. Aenean pretium scelerisque interdum. Nam vehicula laoreet lorem, eget iaculis nulla ultrices sit amet. Cras non nisi in lacus placerat varius. Nullam non semper nulla, consectetur ornare dolor. Cras feugiat, nibh quis auctor commodo, velit nulla egestas est, non mollis nisl nisl vitae dolor. Suspendisse sed dolor sit amet magna accumsan luctus sit amet at nisl. Pellentesque ex arcu, sagittis sed felis sit amet, porta iaculis turpis. Vivamus nunc nibh, fermentum eget cursus vitae, accumsan id justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
 
@@ -44,6 +253,21 @@ Nunc a justo eget lacus laoreet tincidunt id eu leo. Mauris fringilla ultrices l
 
 ### Ein
 
-Silly repeat to test ids
+Silly repeat to test id
 
 Donec auctor feugiat ligula at facilisis. Integer ligula risus, gravida eget euismod ultrices, dictum non nisl. Etiam aliquam lobortis mattis. Vivamus eu viverra justo, eget aliquet turpis. Aenean hendrerit est nec facilisis consectetur. Vestibulum eros augue, venenatis at placerat vel, euismod sit amet urna. Maecenas et scelerisque eros. Pellentesque odio magna, sodales vitae nibh vel, blandit rutrum tellus. Maecenas quis arcu blandit, aliquet ipsum a, cursus mi. Aenean viverra, libero id aliquet scelerisque, felis justo eleifend diam, ac tincidunt lectus ante eu nisl. Vivamus facilisis scelerisque ex dictum accumsan.
+
+### TODO
+
+#### Extended Formatting?
+
+H_2_O
+
+X^2
+
+#### Table?
+
+| Syntax    | Description |
+| --------- | ----------- |
+| Header    | Title       |
+| Paragraph | Text        |
