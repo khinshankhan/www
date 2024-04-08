@@ -10,9 +10,9 @@ export const ContentFrontmatterSchema = z.object({
   title: z.string(),
   subtitle: z.string(),
 
-  dateCreated: z.instanceof(Date).optional(),
-  datePublished: z.instanceof(Date).optional(),
-  dateModified: z.instanceof(Date).optional(),
+  dateCreated: z.instanceof(Date),
+  datePublished: z.instanceof(Date),
+  dateModified: z.instanceof(Date),
 
   // seo
   description: z.string().optional(),
