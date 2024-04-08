@@ -16,6 +16,7 @@ import { Emoji } from "@/components/emoji"
 import { Blockquote } from "@/components/primitives/components"
 import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
+import { Spoiler } from "@/components/primitives/spoiler"
 import { typographyVariants } from "@/components/primitives/typography"
 import { Video } from "@/components/primitives/video"
 
@@ -91,6 +92,7 @@ const baseComponents: MDXComponents = {
 }
 
 const customComponents: MDXComponents = {
+  Spoiler,
   Emoji,
   SmartImage,
   Video,
