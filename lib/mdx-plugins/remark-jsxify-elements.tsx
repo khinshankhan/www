@@ -19,40 +19,36 @@ export function createMdxJsxFlowElement(name: string, attributes: Attribute[], c
 
 export type MdastNode = MdastRoot | MdastContent
 
-export type MatchFunction = (node: MdastNode) => boolean
-export interface RemarkJsxifyElement {
-  matcher: MatchFunction // eslint-disable-line no-unused-vars
-  jsxName: string
-}
+// eslint-disable-line no-unused-vars
+export type MatchFunction<T> = (node: MdastNode) => T
 
 export interface RemarkJsxifyElementsOptions {
-  elements?: RemarkJsxifyElement[]
-  allowedModifications?: MatchFunction[]
+  allowModifications?: MatchFunction<boolean>
+  replaceNodeName?: MatchFunction<string | null>
 }
 
 export function remarkJsxifyElements(
   options: RemarkJsxifyElementsOptions
 ): Transformer<MdastRoot, MdastRoot> {
-  const elements = options.elements
-  const allowedModifications = options.allowedModifications
+  const allowModifications = options.allowModifications ?? (() => false)
+  const replaceNodeName = options.replaceNodeName ?? (() => null)
 
   return function transformer(tree) {
     visit(tree, (node, index, parent) => {
-      const foundElement = elements?.find((element) => element.matcher(node))
-      const allowModification = allowedModifications?.find((matcher) => matcher(node))
-
+      const shouldModify = allowModifications(node)
       // @ts-ignore: maybe it exists
-      if (allowModification && node?.data?._mdxExplicitJsx) {
-        console.log({ node })
+      if (shouldModify && node?.data?._mdxExplicitJsx) {
         // @ts-ignore: definitely exists
         node.data._mdxExplicitJsx = false
       }
-      if (!parent || !index || !foundElement) return
+
+      const jsxName = replaceNodeName(node)
+      if (!parent || !index || !jsxName) return
 
       // TODO: this might break on certain node types
       // @ts-expect-error
       parent.children[index] = createMdxJsxFlowElement(
-        foundElement.jsxName,
+        jsxName,
         // @ts-expect-error
         (node.attributes as Attribute[]) ?? [],
         // @ts-expect-error

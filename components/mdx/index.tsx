@@ -132,33 +132,25 @@ export function MDXContent({
               // @ts-expect-error: silly compatibility issue
               remarkJsxifyElements,
               {
-                allowedModifications: [
-                  (node: MdastNode) => {
-                    return (
-                      // @ts-expect-error
-                      ["img", "video"].includes(node?.name as string) ||
-                      ["image", "video"].includes(node.type)
-                    )
-                  },
-                ],
-                elements: [
-                  {
-                    matcher: (node: MdastNode) => {
-                      // @ts-expect-error
-                      return ["img"].includes(node?.name as string) || ["image"].includes(node.type)
-                    },
-                    jsxName: "SmartImage",
-                  },
-                  {
-                    matcher: (node: MdastNode) => {
-                      return (
-                        // @ts-expect-error
-                        ["video"].includes(node?.name as string) || ["video"].includes(node.type)
-                      )
-                    },
-                    jsxName: "Video",
-                  },
-                ],
+                allowModifications: (node: MdastNode) => {
+                  return (
+                    // @ts-expect-error
+                    ["img", "video"].includes(node?.name as string) ||
+                    ["image", "video"].includes(node.type)
+                  )
+                },
+                replaceNodeName: (node: MdastNode) => {
+                  if (!node) return null
+                  // @ts-expect-error
+                  if (["img"].includes(node?.name as string) || ["image"].includes(node.type)) {
+                    return "SmartImage"
+                  }
+                  // @ts-expect-error
+                  if (["video"].includes(node?.name as string) || ["video"].includes(node.type)) {
+                    return "Video"
+                  }
+                  return null
+                },
               },
             ],
             remarkUnwrapImages,
