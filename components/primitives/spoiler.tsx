@@ -7,7 +7,7 @@ interface SpoilerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Spoiler({ children, ...props }: SpoilerProps) {
   return (
-    <div
+    <span
       data-variant="spoiler"
       {...props}
       className={cn(
@@ -17,6 +17,6 @@ export function Spoiler({ children, ...props }: SpoilerProps) {
       tabIndex={0}
     >
       {children}
-    </div>
+    </span>
   )
 }
