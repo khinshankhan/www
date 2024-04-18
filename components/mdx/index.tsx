@@ -1,45 +1,22 @@
-import React, { Children } from "react"
+import React from "react"
 import { remarkSimpleEmoji } from "@khinshankhan/emoji-helper-remark"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
-import { filter, onlyText } from "react-children-utilities"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
+import remarkUnwrapImages from "remark-unwrap-images"
 import { EmojiKey, emojiLookup } from "@/lib/emoji"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { cn } from "@/lib/utils"
-import { Callout, isCalloutKeyword } from "@/components/blocks/callout"
 import { Code, Pre } from "@/components/blocks/codeblock"
 import { Emoji } from "@/components/emoji"
-import { Blockquote } from "@/components/primitives/components"
 import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
+import { Spoiler } from "@/components/primitives/spoiler"
 import { typographyVariants } from "@/components/primitives/typography"
 import { Video } from "@/components/primitives/video"
-
-// match blockquotes `> [!variant] heading`
-const mdxBlockquoteMetaRegex = /\[!([^\]]+)\]\s*(.*)/
-
-function getBlockquoteInfo(children: React.ReactNode[]) {
-  const noMatch = { variant: undefined, heading: undefined, children }
-  if (!children?.length || children.length < 1) {
-    return noMatch
-  }
-
-  const text = onlyText(children[0]).trim()
-  const match = mdxBlockquoteMetaRegex.exec(text)
-  if (!match) {
-    return noMatch
-  }
-
-  return {
-    variant: match?.[1]?.toLowerCase(),
-    heading: match?.[2] || undefined,
-    // exclude the first child for callout since it has variant/ heading info
-    children: children.slice(1),
-  }
-}
+import { MDXBlockquote } from "./blockquote"
 
 const baseComponents: MDXComponents = {
   a: ({ href = "#", children = null, ...props }) => (
@@ -59,41 +36,24 @@ const baseComponents: MDXComponents = {
   h6: ({ className = "", ...props }) => (
     <h6 {...props} className={cn(typographyVariants({ variant: "h6", className }))} />
   ),
-  blockquote: (props) => {
-    // blockquote seems to interweave newlines which mess with interpretting variants
-    // though the newline between the meta and actual quotation is necessary
-    const givenChildren = filter(Children.toArray(props.children), (child) => child !== "\n")
-    const { variant, heading, children } = getBlockquoteInfo(givenChildren)
-
-    if (variant && isCalloutKeyword(variant)) {
-      return (
-        <Callout variant={variant} heading={heading}>
-          <blockquote {...props} data-variant={variant} className="italic">
-            {children}
-          </blockquote>
-        </Callout>
-      )
-    }
-
-    const blockquoteVariant = variant ?? "blockquote"
-    return (
-      <Blockquote {...props} data-variant={blockquoteVariant} variant={blockquoteVariant}>
-        {children}
-      </Blockquote>
-    )
-  },
+  blockquote: MDXBlockquote,
   pre: Pre,
   // @ts-ignore: not getting into the weeds of this
   code: Code,
   // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
   img: SmartImage,
-}
 
-const customComponents: MDXComponents = {
+  // custom components
+  Spoiler,
   Emoji,
   SmartImage,
   Video,
 }
+
+// @ts-expect-error
+const isImageMdastNode = (node: MdastNode) => node?.type === "image" || node?.name === "img"
+// @ts-expect-error
+const isVideoMdastNode = (node: MdastNode) => node?.type === "video" || node?.name === "video"
 
 export function MDXContent({
   source,
@@ -102,7 +62,7 @@ export function MDXContent({
   source: string
   components?: MDXComponents
 }) {
-  const allComponents = { ...baseComponents, ...customComponents, ...components }
+  const allComponents = { ...baseComponents, ...components }
 
   return (
     <MDXRemote
@@ -129,22 +89,21 @@ export function MDXContent({
               // @ts-expect-error: silly compatibility issue
               remarkJsxifyElements,
               {
-                elements: [
-                  {
-                    matcher: (node: MdastNode) =>
-                      // @ts-expect-error
-                      (node?.name as string) === "img",
-                    jsxName: "SmartImage",
-                  },
-                  {
-                    matcher: (node: MdastNode) =>
-                      // @ts-expect-error
-                      (node?.name as string) === "video",
-                    jsxName: "Video",
-                  },
-                ],
+                allowModifications: (node: MdastNode) =>
+                  [isImageMdastNode, isVideoMdastNode].some((fn) => fn(node)),
+                replaceNodeName: (node: MdastNode) => {
+                  if (isImageMdastNode(node)) {
+                    return "SmartImage"
+                  }
+                  if (isVideoMdastNode(node)) {
+                    return "Video"
+                  }
+
+                  return null
+                },
               },
             ],
+            remarkUnwrapImages,
           ],
           rehypePlugins: [
             rehypeSlug,

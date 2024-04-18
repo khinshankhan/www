@@ -26,7 +26,7 @@ interface TocProps {
 }
 
 export function Toc({ headings: headingsProp = [], showExcerpt = true }: TocProps) {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const action = open ? "Close" : "Open"
 
   const { isXl } = useBreakpoints()

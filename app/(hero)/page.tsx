@@ -3,6 +3,7 @@ import { wordToMobileKey } from "@/lib/misc"
 import { cn } from "@/lib/utils"
 import { Emoji } from "@/components/emoji"
 import { Link } from "@/components/primitives/link"
+import { Spoiler } from "@/components/primitives/spoiler"
 import { typographyVariants } from "@/components/primitives/typography"
 import { EggText } from "./egg-text"
 
@@ -26,7 +27,7 @@ export default function Home() {
           }}
         />
 
-        <section className="flex flex-col items-center space-y-6 text-center md:items-end md:text-right">
+        <section className="flex flex-col items-center space-y-8 text-center md:items-end md:text-right">
           <section>
             <h1
               className={cn(
@@ -48,8 +49,7 @@ export default function Home() {
               })
             )}
           >
-            Welcome to my corner of the internet to explore the intersections of creativity and
-            technology
+            Exploring the intersections of creativity and technology
           </h3>
 
           <Link
@@ -67,39 +67,22 @@ export default function Home() {
           typographyVariants({
             variant: "h4",
             className:
-              "mx-auto max-w-[1400px] space-y-8 hyphens-auto text-center font-normal sm:hyphens-none",
+              "mx-auto max-w-[1400px] space-y-16 hyphens-auto text-center font-normal sm:hyphens-none",
           })
         )}
       >
-        <section className="text-balance">
-          <p>
-            I {"wasn't"} really sure what to put here, especially since I have an{" "}
-            <Link href="/about/" nav={true} underline={false}>
-              about
-            </Link>{" "}
-            page which has the most of what I {"would've"} thrown here. So I put something which
-            would interest me:
-          </p>
-          <p>
-            This website currently has <EggText /> easter eggs. Can you find them all?
-          </p>
-        </section>
-
-        <p className="text-balance md:text-wrap">
-          {"Here's"} a hint: one is just the {wordToMobileKey("konami komando")}. Might be harder
-          than another hint to the same egg on the website, so maybe look for that. Happy hunting!
+        <p>
+          Welcome to my corner of the internet, where I share my thoughts and musings. You may or
+          may not learn something, but at least {`it'll`} be fun!
         </p>
-      </section>
 
-      <section
-        className={cn(
-          typographyVariants({
-            variant: "h4",
-            className:
-              "mx-auto max-w-[1400px] space-y-8 hyphens-auto text-center font-normal sm:hyphens-none",
-          })
-        )}
-      >
+        <p>
+          Landing pages are always a bit awkward, too much whitespace to deal with so a bit of an
+          engagement hook: this website currently has <EggText /> easter eggs. Can you find them
+          all? One is just the <Spoiler>{wordToMobileKey("konami komando")}</Spoiler>. Happy
+          hunting!
+        </p>
+
         <p>
           In the meantime, you can check out my{" "}
           <Link href="/writings/" nav={true} underline={false}>
@@ -109,12 +92,11 @@ export default function Home() {
           <Link href="/projects/" nav={true} underline={false}>
             projects
           </Link>
-          . I put in a fair amount of effort into them so I hope you find them interesting. If you
-          want to get in touch, you can{" "}
+          . If you want to get in touch, you can{" "}
           <Link href="/connect/" nav={true} underline={false}>
             connect with me
           </Link>
-          . Hopefully you find something intriguing here.
+          .
         </p>
 
         <p>Have fun and happy exploring!</p>
