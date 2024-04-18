@@ -73,7 +73,7 @@ export default function Home() {
       >
         <p>
           Welcome to my corner of the internet, where I share my thoughts and musings. You may or
-          may not learn something, but at least it'll be fun!
+          may not learn something, but at least {`it'll`} be fun!
         </p>
 
         <p>
