@@ -72,7 +72,6 @@ export function MDXContent({
         mdxOptions: {
           remarkPlugins: [
             [
-              // @ts-expect-error: silly compatibility issue
               remarkSimpleEmoji,
               {
                 validate: (name: string) => emojiLookup.get(name as EmojiKey),
@@ -83,10 +82,8 @@ export function MDXContent({
                 },
               },
             ],
-            // @ts-expect-error: silly compatibility issue
             remarkMarkFirstParagraph,
             [
-              // @ts-expect-error: silly compatibility issue
               remarkJsxifyElements,
               {
                 allowModifications: (node: MdastNode) =>
