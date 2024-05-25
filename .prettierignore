@@ -1,8 +1,0 @@
-pnpm-*
-public
-.cache
-.next
-dist
-node_modules
-.next
-build

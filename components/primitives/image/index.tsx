@@ -1,1 +1,0 @@
-export { SmartImage } from "./image"
