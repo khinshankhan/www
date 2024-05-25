@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --transparent: transparent;
+    --black: 0, 0%, 0%;
+    --white: 0, 100%, 100%;
+
+    --background: var(--white);
+    --foreground: var(--black);
+
+    --nav: var(--black);
+    --nav-foreground: var(--white);
+  }
+}
