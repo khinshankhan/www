@@ -11,16 +11,16 @@ const config = {
     "./content/**/*.{js,ts,jsx,tsx,mdx,md}",
   ],
   darkMode: ["class"],
-  safelist: ["dark"],
+  safelist: ["light", "dark"],
   plugins: [require("tailwindcss-animate")],
   theme: {
     extend: {
       colors: {
         background: hsla("background"),
         foreground: hsla("foreground"),
-        nav: {
-          DEFAULT: hsla("nav"),
-          foreground: hsla("nav-foreground"),
+        content: {
+          DEFAULT: hsla("content"),
+          foreground: hsla("content-foreground"),
         },
       },
     },
