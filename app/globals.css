@@ -109,4 +109,25 @@
     --content: var(--brand-900);
     --content-foreground: var(--brand-200);
   }
+
+  .page-container {
+    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1280px] 2xl:max-w-[1450px];
+  }
+
+  .content-container {
+    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1050px] 2xl:max-w-[1200px];
+  }
+
+  .content-container-with-sidebar {
+    @apply max-w-full xl:max-w-[800px] 2xl:max-w-[950px];
+  }
+}
+
+@layer utilities {
+  .hide-mobile {
+    @apply isMobile:hidden !important;
+  }
+  .hide-desktop {
+    @apply isDesktop:hidden !important;
+  }
 }
