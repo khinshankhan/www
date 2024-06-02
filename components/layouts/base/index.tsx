@@ -1,5 +1,4 @@
 import React from "react"
-import { ThemeToggle } from "./toggles"
 
 function Header() {
   return (
@@ -28,11 +27,16 @@ function Header() {
 
 export function BaseLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative flex h-screen flex-col">
-      <Header />
-      {/* NOTE: assumes pages will be wrapped in main tags with background color + grow */}
-      {children}
-      <footer>footer</footer>
+    <div>
+      <div
+        className="relative z-0 flex min-h-[87vh] flex-col xs:min-h-[96vh]"
+        vaul-drawer-wrapper=""
+      >
+        <Header />
+        {/* NOTE: assumes pages will be wrapped in main tags with background color + grow */}
+        {children}
+      </div>
+      <footer className="page-container py-16">footer</footer>
     </div>
   )
 }
