@@ -1,9 +1,11 @@
-import React, { Fragment } from "react"
+import React from "react"
+import { ContentLayout } from "@/components/layouts/content"
+import { Toc } from "@/components/layouts/sidebars/toc"
 
 export default function AboutLayout({ children }: { children: React.ReactNode }) {
   return (
-    <Fragment>
-      <div className="content-container grow bg-content text-content-foreground">{children}</div>
-    </Fragment>
+    <ContentLayout title="About" subtitle="Me, myself, and I" sidebar={<Toc />}>
+      {children}
+    </ContentLayout>
   )
 }
