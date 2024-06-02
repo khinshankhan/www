@@ -30,6 +30,8 @@ const config = {
       isDesktop: "768px",
     },
     colors: {
+      black: hsla("black"),
+      white: hsla("white"),
       background: hsla("background"),
       foreground: hsla("foreground"),
       content: {

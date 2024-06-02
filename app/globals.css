@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-  :root,
-  .light {
+  :root {
+    color-scheme: light dark;
+
     --inherit: inherit;
     --current: currentColor;
     --transparent: transparent;
@@ -94,7 +95,10 @@
     --brand-800: var(--celestial-800);
     --brand-900: var(--celestial-900);
     --brand-950: var(--celestial-950);
+  }
 
+  :root,
+  .light {
     --background: var(--brand-200);
     --foreground: var(--foreground);
 
@@ -102,7 +106,13 @@
     --content-foreground: var(--brand-950);
   }
 
+  .light {
+    color-scheme: light;
+  }
+
   .dark {
+    color-scheme: dark;
+
     --background: var(--brand-950);
     --foreground: var(--foreground);
 
