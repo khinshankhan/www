@@ -1,13 +1,14 @@
 import React from "react"
 import { cn } from "@/lib/utils"
+import { Divider } from "@/components/primitives/divider"
 
 export interface WithSidebarProps {
   direction?: "left" | "right"
-  sidebar?: ReactNode
+  sidebar?: React.ReactNode
 
-  before?: ReactNode
-  children: ReactNode
-  after?: ReactNode
+  before?: React.ReactNode
+  children: React.ReactNode
+  after?: React.ReactNode
 }
 
 export function WithSidebar({
@@ -66,6 +67,8 @@ export function ContentLayout({
           {subtitle}
         </span>
       </header>
+
+      <Divider width="w-full md:w-[80%]" />
 
       <div className="grow bg-content py-5 text-content-foreground">
         <WithSidebar direction={direction} sidebar={sidebar} before={before} after={after}>
