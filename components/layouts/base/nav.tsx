@@ -1,12 +1,26 @@
 "use client"
 
 import React from "react"
+import { cn } from "@/lib/utils"
+import { useHeadroom } from "@/hooks/scroll"
 
 export function Nav() {
+  const { positionStatus, isScrollingUp } = useHeadroom({
+    pinStart: 0,
+    initalIsScrollingUp: true,
+    upThreshold: 0,
+    downThreshold: 10,
+  })
+  const isAtZero = positionStatus === "before-start" || positionStatus === "at-start"
+
   return (
     <header
       role="navigation"
-      className="sticky top-0 z-50 h-16 border-b border-foreground/10 bg-background/50 backdrop-blur-md transition-colors"
+      className={cn(
+        "z-50 h-16 border-b bg-background/50 backdrop-blur-md transition-colors",
+        isAtZero ? "border-transparent" : "sticky top-0 border-foreground/10",
+        !isScrollingUp && !isAtZero && "invisible"
+      )}
     >
       <div className="bg-nav flex min-h-[68px] items-center pt-2 md:min-h-[78px] lg:min-h-[88px]">
         <nav className="page-container flex w-full flex-row items-center justify-between">
