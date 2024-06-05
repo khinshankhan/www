@@ -99,10 +99,11 @@
 
   :root,
   .light {
-    --background: var(--brand-200);
-    --foreground: var(--foreground);
+    --background: var(--brand-50);
+    --foreground: var(--brand-950);
+    --knockout: var(--brand-950);
 
-    --content: var(--white);
+    --content: var(--brand-50);
     --content-foreground: var(--brand-950);
   }
 
