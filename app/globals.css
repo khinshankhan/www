@@ -72,29 +72,29 @@
     --rose-900: 341.5, 75.5%, 30.4%;
     --rose-950: 343.1, 87.7%, 15.9%;
 
-    --celestial-50: 240, 40%, 98%;
-    --celestial-100: 240, 40%, 96.1%;
-    --celestial-200: 240, 31.8%, 91.4%;
-    --celestial-300: 240, 26.8%, 83.9%;
-    --celestial-400: 240, 20.2%, 65.1%;
-    --celestial-500: 240, 16.3%, 46.9%;
-    --celestial-600: 240, 19.3%, 34.5%;
-    --celestial-700: 240, 25%, 26.7%;
-    --celestial-800: 240, 32.6%, 17.5%;
-    --celestial-900: 240, 47.4%, 11.2%;
-    --celestial-950: 240, 84%, 4.9%;
+    --zinc-50: 0, 0%, 98%;
+    --zinc-100: 240, 4.8%, 95.9%;
+    --zinc-200: 240, 5.9%, 90%;
+    --zinc-300: 240, 4.9%, 83.9%;
+    --zinc-400: 240, 5%, 64.9%;
+    --zinc-500: 240, 3.8%, 46.1%;
+    --zinc-600: 240, 5.2%, 33.9%;
+    --zinc-700: 240, 5.3%, 26.1%;
+    --zinc-800: 240, 3.7%, 15.9%;
+    --zinc-900: 240, 5.9%, 10%;
+    --zinc-950: 240, 10%, 3.9%;
 
-    --brand-50: var(--celestial-50);
-    --brand-100: var(--celestial-100);
-    --brand-200: var(--celestial-200);
-    --brand-300: var(--celestial-300);
-    --brand-400: var(--celestial-400);
-    --brand-500: var(--celestial-500);
-    --brand-600: var(--celestial-600);
-    --brand-700: var(--celestial-700);
-    --brand-800: var(--celestial-800);
-    --brand-900: var(--celestial-900);
-    --brand-950: var(--celestial-950);
+    --brand-50: var(--zinc-50);
+    --brand-100: var(--zinc-100);
+    --brand-200: var(--zinc-200);
+    --brand-300: var(--zinc-300);
+    --brand-400: var(--zinc-400);
+    --brand-500: var(--zinc-500);
+    --brand-600: var(--zinc-600);
+    --brand-700: var(--zinc-700);
+    --brand-800: var(--zinc-800);
+    --brand-900: var(--zinc-900);
+    --brand-950: var(--zinc-950);
   }
 
   :root,
@@ -115,10 +115,11 @@
     color-scheme: dark;
 
     --background: var(--brand-950);
-    --foreground: var(--foreground);
+    --foreground: var(--brand-50);
+    --knockout: var(--brand-50);
 
-    --content: var(--brand-900);
-    --content-foreground: var(--brand-200);
+    --content: var(--brand-950);
+    --content-foreground: var(--brand-50);
   }
 
   .page-container {
