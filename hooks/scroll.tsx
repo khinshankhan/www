@@ -3,11 +3,13 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useIsomorphicEffect } from "./media"
 
+// TODO: add support for custom target
+type Target = (Window & typeof globalThis) | null
 const defaultTarget = typeof window !== "undefined" ? window : null
 
 interface UseScrollDirectionProps {
   initalIsScrollingUp?: boolean
-  target?: Node | Window | null
+  target?: Target
   upThreshold?: number
   downThreshold?: number
 }
@@ -27,8 +29,10 @@ export function useScrollDirection({
   const [isScrollingUp, setIsScrollingUp] = useState(initalIsScrollingUp)
 
   useIsomorphicEffect(() => {
+    if (!target) return
+
     const handleScrollUpdate = () => {
-      const currentScrollTop = target.pageYOffset || document.documentElement.scrollTop
+      const currentScrollTop = target.scrollY || document.documentElement.scrollTop
       const distanceScrolled = Math.abs(currentScrollTop - lastScrollTop)
 
       if (currentScrollTop < lastScrollTop && distanceScrolled > upThreshold) {
@@ -58,7 +62,7 @@ export function useScrollDirection({
 }
 
 interface UseHeadroomProps {
-  target?: Node | Window | null
+  target?: Target
   pinStart?: number
 }
 
@@ -69,17 +73,17 @@ interface UseHeadroomState {
 export function useHeadroom({
   target = defaultTarget,
   pinStart = 0,
-}: UseHeadroomProps): HeadroomState {
+}: UseHeadroomProps): UseHeadroomState {
   const [ticking, setTicking] = useState(false)
   const [lastScrollTop, setLastScrollTop] = useState(0)
   const [positionStatus, setPositionStatus] =
-    useState<HeadroomState["positionStatus"]>("before-start")
+    useState<UseHeadroomState["positionStatus"]>("before-start")
 
   useIsomorphicEffect(() => {
     if (!target) return
 
     const handleScrollUpdate = () => {
-      const currentScrollTop = target.pageYOffset
+      const currentScrollTop = target.scrollY
       setPositionStatus((_) => {
         if (currentScrollTop < pinStart) {
           return "before-start"
@@ -106,7 +110,7 @@ export function useHeadroom({
     return () => {
       target.removeEventListener("scroll", handleScroll)
     }
-  }, [lastScrollTop])
+  }, [target, lastScrollTop])
 
   return { positionStatus }
 }
