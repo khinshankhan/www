@@ -1,9 +1,9 @@
+"use client"
+
 import React, { useEffect, useRef, useState } from "react"
 import { useIsomorphicEffect } from "./media"
 
 const defaultTarget = typeof window !== "undefined" ? window : null
-const defaultUpThreshold = 0
-const defaultDownThreshold = 0
 
 interface UseScrollDirectionProps {
   initalIsScrollingUp?: boolean
@@ -12,17 +12,21 @@ interface UseScrollDirectionProps {
   downThreshold?: number
 }
 
+interface UseScrollDirectionState {
+  isScrollingUp: boolean
+}
+
 export function useScrollDirection({
   initalIsScrollingUp = false,
   target = defaultTarget,
-  upThreshold = defaultUpThreshold,
-  downThreshold = defaultDownThreshold,
-}: UseScrollDirectionProps): boolean {
+  upThreshold = 0,
+  downThreshold = 0,
+}: UseScrollDirectionProps): UseScrollDirectionState {
   const [ticking, setTicking] = useState(false)
   const [lastScrollTop, setLastScrollTop] = useState(0)
   const [isScrollingUp, setIsScrollingUp] = useState(initalIsScrollingUp)
 
-  useEffect(() => {
+  useIsomorphicEffect(() => {
     const handleScrollUpdate = () => {
       const currentScrollTop = target.pageYOffset || document.documentElement.scrollTop
       const distanceScrolled = Math.abs(currentScrollTop - lastScrollTop)
@@ -50,33 +54,24 @@ export function useScrollDirection({
     return () => target.removeEventListener("scroll", handleScroll)
   }, [target, lastScrollTop, upThreshold, downThreshold, ticking])
 
-  return isScrollingUp
+  return { isScrollingUp }
 }
 
-interface UseHeadroomProps extends UseScrollDirectionProps {
+interface UseHeadroomProps {
+  target?: Node | Window | null
   pinStart?: number
 }
 
 interface UseHeadroomState {
   positionStatus: "before-start" | "at-start" | "after-start"
-  isScrollingUp: boolean
 }
 
 export function useHeadroom({
   target = defaultTarget,
-  initalIsScrollingUp,
-  upThreshold = defaultUpThreshold,
-  downThreshold = defaultDownThreshold,
   pinStart = 0,
 }: UseHeadroomProps): HeadroomState {
   const [ticking, setTicking] = useState(false)
   const [lastScrollTop, setLastScrollTop] = useState(0)
-  const isScrollingUp = useScrollDirection({
-    initalIsScrollingUp,
-    target,
-    upThreshold,
-    downThreshold,
-  })
   const [positionStatus, setPositionStatus] =
     useState<HeadroomState["positionStatus"]>("before-start")
 
@@ -113,5 +108,5 @@ export function useHeadroom({
     }
   }, [lastScrollTop])
 
-  return { positionStatus, isScrollingUp }
+  return { positionStatus }
 }

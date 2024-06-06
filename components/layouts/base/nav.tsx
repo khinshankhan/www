@@ -2,14 +2,16 @@
 
 import React from "react"
 import { cn } from "@/lib/utils"
-import { useHeadroom } from "@/hooks/scroll"
+import { useHeadroom, useScrollDirection } from "@/hooks/scroll"
 
 export function Nav() {
-  const { positionStatus, isScrollingUp } = useHeadroom({
-    pinStart: 0,
+  const { isScrollingUp } = useScrollDirection({
     initalIsScrollingUp: true,
     upThreshold: 0,
     downThreshold: 10,
+  })
+  const { positionStatus } = useHeadroom({
+    pinStart: 0,
   })
   const isAtZero = positionStatus === "before-start" || positionStatus === "at-start"
 
