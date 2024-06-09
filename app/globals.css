@@ -105,6 +105,9 @@
 
     --content: var(--brand-50);
     --content-foreground: var(--brand-950);
+
+    --muted: var(--brand-100);
+    --muted-foreground: var(--brand-500);
   }
 
   .light {
@@ -120,6 +123,9 @@
 
     --content: var(--brand-950);
     --content-foreground: var(--brand-50);
+
+    --muted: var(--brand-800);
+    --muted-foreground: var(--brand-400);
   }
 
   .page-container {

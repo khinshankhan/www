@@ -40,6 +40,10 @@ const config = {
         DEFAULT: hsla("content"),
         foreground: hsla("content-foreground"),
       },
+      muted: {
+        DEFAULT: hsla("muted"),
+        foreground: hsla("muted-foreground"),
+      },
     },
   },
 }
