@@ -35,9 +35,10 @@ const config = {
       transparent: "transparent",
       black: hsla("black"),
       white: hsla("white"),
-      knockout: hsla("knockout"),
       background: hsla("background"),
       foreground: hsla("foreground"),
+      knockout: hsla("knockout"),
+      border: hsla("border"),
       content: {
         DEFAULT: hsla("content"),
         foreground: hsla("content-foreground"),

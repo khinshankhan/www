@@ -116,6 +116,7 @@
     --background: var(--brand-50);
     --foreground: var(--brand-950);
     --knockout: var(--brand-950);
+    --border: var(--brand-200);
 
     --content: var(--brand-50);
     --content-foreground: var(--brand-950);
@@ -125,6 +126,41 @@
 
     --link-border: var(--violet-600);
     --link-border-active: var(--violet-400);
+
+    --info-background: var(--sky-100);
+    --info-foreground: var(--sky-900);
+    --info-link-border: var(--sky-600);
+    --info-link-border-active: var(--sky-400);
+    --info-border: var(--sky-600);
+
+    --success-background: var(--emerald-100);
+    --success-foreground: var(--emerald-900);
+    --success-link-border: var(--emerald-600);
+    --success-link-border-active: var(--emerald-400);
+    --success-border: var(--emerald-600);
+
+    --critical-background: var(--indigo-100);
+    --critical-foreground: var(--indigo-900);
+    --critical-link-border: var(--indigo-600);
+    --critical-link-border-active: var(--indigo-400);
+    --critical-border: var(--indigo-600);
+
+    --warning-background: var(--amber-100);
+    --warning-foreground: var(--amber-900);
+    --warning-link-border: var(--amber-600);
+    --warning-link-border-active: var(--amber-400);
+    --warning-border: var(--amber-600);
+
+    --danger-background: var(--rose-100);
+    --danger-foreground: var(--rose-900);
+    --danger-link-border: var(--rose-600);
+    --danger-link-border-active: var(--rose-400);
+    --danger-border: var(--rose-600);
+
+    --logo: var(--transparent);
+    --logo-foreground: var(--foreground);
+    --logo-border: var(--transparent);
+    --logo-shadow: 0, 0%, 43.5%;
   }
 
   .light {
@@ -137,6 +173,7 @@
     --background: var(--brand-950);
     --foreground: var(--brand-50);
     --knockout: var(--brand-50);
+    --border: var(--brand-800);
 
     --content: var(--brand-950);
     --content-foreground: var(--brand-50);
@@ -146,6 +183,36 @@
 
     --link-border: var(--violet-400);
     --link-border-active: var(--violet-600);
+
+    --info-background: var(--sky-900);
+    --info-foreground: var(--sky-100);
+    --info-link-border: var(--sky-400);
+    --info-link-border-active: var(--sky-600);
+    --info-border: var(--sky-400);
+
+    --success-background: var(--emerald-900);
+    --success-foreground: var(--emerald-100);
+    --success-link-border: var(--emerald-400);
+    --success-link-border-active: var(--emerald-600);
+    --success-border: var(--emerald-400);
+
+    --critical-background: var(--indigo-900);
+    --critical-foreground: var(--indigo-100);
+    --critical-link-border: var(--indigo-400);
+    --critical-link-border-active: var(--indigo-600);
+    --critical-border: var(--indigo-400);
+
+    --warning-background: var(--amber-900);
+    --warning-foreground: var(--amber-100);
+    --warning-link-border: var(--amber-400);
+    --warning-link-border-active: var(--amber-600);
+    --warning-border: var(--amber-400);
+
+    --danger-background: var(--rose-900);
+    --danger-foreground: var(--rose-100);
+    --danger-link-border: var(--rose-400);
+    --danger-link-border-active: var(--rose-600);
+    --danger-border: var(--rose-400);
   }
 
   .page-container {
@@ -162,6 +229,30 @@
 }
 
 @layer components {
+  .home-link {
+    & svg {
+      box-shadow: 0px 0px 10px 1px hsl(var(--logo-shadow));
+    }
+    & .fg {
+      transition: transform 0.3s ease-in-out;
+    }
+    & .border {
+      transition: all 1s ease;
+    }
+
+    &:is(:hover, :focus, :focus-visible) {
+      & .fg {
+        transform: translate(-50px, -50px) scale(1.25);
+      }
+      & .bg {
+        fill: var(var(--transparent));
+      }
+      & .border {
+        stroke: hsl(var(--link-border));
+      }
+    }
+  }
+
   .anchor-link {
     /* since color of url in content can't easily be adjusted, use the mask trick instead https://stackoverflow.com/a/66093928/7413060 */
     &:after {
@@ -191,6 +282,46 @@
           margin 0.5s ease-in-out;
       }
     }
+  }
+
+  .info-theme {
+    --background: var(--info-background);
+    --foreground: var(--info-foreground);
+    --link-border: var(--info-link-border);
+    --link-border-active: var(--info-link-border-active);
+    --border: var(--info-border);
+  }
+
+  .success-theme {
+    --background: var(--success-background);
+    --foreground: var(--success-foreground);
+    --link-border: var(--success-link-border);
+    --link-border-active: var(--success-link-border-active);
+    --border: var(--success-border);
+  }
+
+  .critical-theme {
+    --background: var(--critical-background);
+    --foreground: var(--critical-foreground);
+    --link-border: var(--critical-link-border);
+    --link-border-active: var(--critical-link-border-active);
+    --border: var(--critical-border);
+  }
+
+  .warning-theme {
+    --background: var(--warning-background);
+    --foreground: var(--warning-foreground);
+    --link-border: var(--warning-link-border);
+    --link-border-active: var(--warning-link-border-active);
+    --border: var(--warning-border);
+  }
+
+  .danger-theme {
+    --background: var(--danger-background);
+    --foreground: var(--danger-foreground);
+    --link-border: var(--danger-link-border);
+    --link-border-active: var(--danger-link-border-active);
+    --border: var(--danger-border);
   }
 }
 
