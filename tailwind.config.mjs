@@ -1,7 +1,7 @@
 import tailwindcssAnimate from "tailwindcss-animate"
 
 function hsla(variable) {
-  return `hsla(var(--${variable}), <alpha-value>)`
+  return `hsla(var(--${variable}) / <alpha-value>)`
 }
 
 /** @type {import('tailwindcss').Config} */
