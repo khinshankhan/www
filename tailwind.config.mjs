@@ -48,8 +48,8 @@ const config = {
       },
       link: {
         foreground: hsla("link-foreground"),
-        "underline-off": hsla("link-underline-off"),
-        underline: hsla("link-underline"),
+        border: hsla("link-border"),
+        "border-active": hsla("link-border-active"),
       },
     },
     extend: {

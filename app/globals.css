@@ -123,8 +123,8 @@
     --muted: var(--brand-100);
     --muted-foreground: var(--brand-500);
 
-    --link-underline-off: var(--blue-400);
-    --link-underline: var(--blue-800);
+    --link-border: var(--violet-600);
+    --link-border-active: var(--violet-400);
   }
 
   .light {
@@ -144,8 +144,8 @@
     --muted: var(--brand-800);
     --muted-foreground: var(--brand-400);
 
-    --link-underline-off: var(--blue-700);
-    --link-underline: var(--blue-300);
+    --link-border: var(--violet-400);
+    --link-border-active: var(--violet-600);
   }
 
   .page-container {

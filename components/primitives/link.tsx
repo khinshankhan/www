@@ -7,18 +7,18 @@ export const linkVariants = cva("", {
   variants: {
     variant: {
       default:
-        "bg-gradient-to-r from-[hsl(var(--link-underline-off))] to-[hsl(var(--link-underline-off))] bg-subtle-underline bg-underline bg-no-repeat hover:from-[hsl(var(--link-underline))] hover:to-[hsl(var(--link-underline))] hover:bg-stark-underline",
-      nav: "bg-gradient-to-r from-[hsl(var(--link-underline-off))] to-[hsl(var(--link-underline-off))] bg-link-hide bg-right-bottom bg-no-repeat transition-[color,background-size] duration-500 hover:bg-link-show hover:bg-left-bottom",
+        "bg-gradient-to-r from-[hsl(var(--link-border))] to-[hsl(var(--link-border))] bg-subtle-underline bg-underline bg-no-repeat hover:from-[hsl(var(--link-border-active))] hover:to-[hsl(var(--link-border-active))] hover:bg-stark-underline",
+      nav: "bg-gradient-to-r from-[hsl(var(--link-border))] to-[hsl(var(--link-border))] bg-link-hide bg-right-bottom bg-no-repeat transition-[color,background-size] duration-500 hover:bg-link-show hover:bg-left-bottom",
       none: "",
     },
-    monochrome: {
-      false: "text-[hsl(var(--link-underline))] hover:text-[hsl(var(--link-underline-off))]",
+    isMonochrome: {
+      false: "hover:text-[hsl(var(--link-border))]",
       true: "",
     },
   },
   defaultVariants: {
     variant: "default",
-    monochrome: false,
+    isMonochrome: false,
   },
 })
 
@@ -31,10 +31,10 @@ interface LinkProps extends NextLinkProps, LinkVariants {
 
 export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
   (
-    { href = "", variant = "default", monochrome = false, className = "", children, ...props },
+    { href = "", variant = "default", isMonochrome = false, className = "", children, ...props },
     ref
   ) => {
-    const classes = cn(linkVariants({ variant, monochrome, className }))
+    const classes = cn(linkVariants({ variant, isMonochrome, className }))
     // if href is a url obj it's a local link with state (probably), and / is totally local
     if (typeof href !== "string" || href.startsWith("/")) {
       return (
