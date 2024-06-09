@@ -1,3 +1,5 @@
+import tailwindcssAnimate from "tailwindcss-animate"
+
 function hsla(variable) {
   return `hsla(var(--${variable}), <alpha-value>)`
 }
@@ -12,7 +14,7 @@ const config = {
   ],
   darkMode: ["class"],
   safelist: ["light", "dark"],
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
   theme: {
     screens: {
       xss: "320px",
@@ -43,6 +45,26 @@ const config = {
       muted: {
         DEFAULT: hsla("muted"),
         foreground: hsla("muted-foreground"),
+      },
+      link: {
+        foreground: hsla("link-foreground"),
+        "underline-off": hsla("link-underline-off"),
+        underline: hsla("link-underline"),
+      },
+    },
+    extend: {
+      transitionProperty: {
+        background: "background",
+      },
+      backgroundPosition: {
+        underline: "0 100%",
+      },
+      backgroundSize: {
+        "subtle-underline": "100% 0.0625em",
+        "stark-underline": "100% 0.078125em",
+        "link-hide": "0% 0.05em",
+        "link-show": "100% 0.05em",
+        full: "100%",
       },
     },
   },
