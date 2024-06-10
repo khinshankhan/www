@@ -3,7 +3,7 @@
 import React from "react"
 import { cn } from "@/lib/utils"
 import { useHeadroom, useScrollDirection } from "@/hooks/scroll"
-import { HomeLink } from "./links"
+import { HomeLink, NavLinks } from "./links"
 
 export function Nav() {
   const { isScrollingUp } = useScrollDirection({
@@ -38,8 +38,7 @@ export function Nav() {
 
           {/* rhs on desktop view */}
           <div className="hide-mobile flex flex-row items-center gap-4">
-            <div>desk</div>
-            <div>menu</div>
+            <NavLinks />
           </div>
 
           {/* rhs on mobile view */}
