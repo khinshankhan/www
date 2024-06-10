@@ -43,10 +43,25 @@ const config = {
         DEFAULT: hsla("content"),
         foreground: hsla("content-foreground"),
       },
+      primary: {
+        DEFAULT: hsla("primary"),
+        foreground: hsla("primary-foreground"),
+      },
+      secondary: {
+        DEFAULT: hsla("secondary"),
+        foreground: hsla("secondary-foreground"),
+      },
       muted: {
         DEFAULT: hsla("muted"),
         foreground: hsla("muted-foreground"),
       },
+      accent: {
+        DEFAULT: hsla("accent"),
+        foreground: hsla("accent-foreground"),
+      },
+      border: hsla("border"),
+      input: hsla("input"),
+      ring: hsla("ring"),
       popover: {
         DEFAULT: hsla("popover"),
         foreground: hsla("popover-foreground"),
@@ -55,6 +70,41 @@ const config = {
         foreground: hsla("link-foreground"),
         border: hsla("link-border"),
         "border-active": hsla("link-border-active"),
+      },
+      info: {
+        DEFAULT: hsla("info"),
+        foreground: hsla("info-foreground"),
+        "link-border": hsla("info-link-border"),
+        "link-border-active": hsla("info-link-border-active"),
+        border: hsla("info-border"),
+      },
+      success: {
+        DEFAULT: hsla("success-background"),
+        foreground: hsla("success-foreground"),
+        "link-border": hsla("success-link-border"),
+        "link-border-active": hsla("success-link-border-active"),
+        border: hsla("success-border"),
+      },
+      critical: {
+        DEFAULT: hsla("critical-background"),
+        foreground: hsla("critical-foreground"),
+        "link-border": hsla("critical-link-border"),
+        "link-border-active": hsla("critical-link-border-active"),
+        border: hsla("critical-border"),
+      },
+      warning: {
+        DEFAULT: hsla("warning-background"),
+        foreground: hsla("warning-foreground"),
+        "link-border": hsla("warning-link-border"),
+        "link-border-active": hsla("warning-link-border-active"),
+        border: hsla("warning-border"),
+      },
+      danger: {
+        DEFAULT: hsla("danger-background"),
+        foreground: hsla("danger-foreground"),
+        "link-border": hsla("danger-link-border"),
+        "link-border-active": hsla("danger-link-border-active"),
+        border: hsla("danger-border"),
       },
     },
     extend: {
