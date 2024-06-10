@@ -3,6 +3,7 @@
 import React from "react"
 import { cn } from "@/lib/utils"
 import { useHeadroom, useScrollDirection } from "@/hooks/scroll"
+import { HomeLink } from "./links"
 
 export function Nav() {
   const { isScrollingUp } = useScrollDirection({
@@ -14,20 +15,26 @@ export function Nav() {
     pinStart: 0,
   })
   const isAtZero = positionStatus === "before-start" || positionStatus === "at-start"
+  const isVisible = isScrollingUp || isAtZero
 
   return (
     <header
       role="navigation"
       className={cn(
-        "z-50 h-16 border-b bg-background/50 backdrop-blur-md transition-colors",
-        isAtZero ? "border-transparent" : "sticky top-0 border-foreground/10",
-        !isScrollingUp && !isAtZero && "invisible"
+        "z-50 h-16 h-auto bg-background/50 transition-colors",
+        !isVisible && "invisible",
+        !isAtZero && "sticky top-0"
       )}
     >
-      <div className="bg-nav flex min-h-[68px] items-center pt-2 md:min-h-[78px] lg:min-h-[88px]">
+      <div
+        className={cn(
+          "flex min-h-[68px] items-center border-b bg-background/50 pt-2 backdrop-blur-md md:min-h-[78px] lg:min-h-[88px]",
+          isAtZero ? "border-transparent" : "border-foreground/10"
+        )}
+      >
         <nav className="page-container flex w-full flex-row items-center justify-between">
           {/* lhs on all views */}
-          <div>home</div>
+          <HomeLink />
 
           {/* rhs on desktop view */}
           <div className="hide-mobile flex flex-row items-center gap-4">
