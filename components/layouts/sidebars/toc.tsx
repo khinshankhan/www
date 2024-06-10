@@ -2,7 +2,7 @@ import React from "react"
 
 export function Toc() {
   return (
-    <div className="content-container grow bg-content text-content-foreground">
+    <div className="grow bg-content text-content-foreground">
       <h1>Table of Contents</h1>
       <ul className="list-none">
         <li>

@@ -19,7 +19,7 @@ export function WithSidebar({
   after,
 }: WithSidebarProps) {
   return (
-    <div className={"content-container flex flex-col gap-10"}>
+    <div className="content-container flex flex-col gap-10">
       {before}
 
       <div
@@ -63,7 +63,7 @@ export function ContentLayout({
     <main className="flex grow flex-col">
       <header className="bg-background py-14 text-center text-foreground">
         <h1 className="text-balance">{title}</h1>
-        <span className="text-muted-foreground block text-balance pt-6 font-medium">
+        <span className="block text-balance pt-6 font-medium text-muted-foreground">
           {subtitle}
         </span>
       </header>
