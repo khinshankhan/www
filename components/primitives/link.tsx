@@ -25,7 +25,7 @@ export const linkVariants = cva("transition-[color,background-size] duration-500
 export type LinkVariants = VariantProps<typeof linkVariants>
 
 interface LinkProps extends NextLinkProps, LinkVariants {
-  className: string
+  className?: string
   children: ReactNode
 }
 
