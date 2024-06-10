@@ -47,6 +47,10 @@ const config = {
         DEFAULT: hsla("muted"),
         foreground: hsla("muted-foreground"),
       },
+      popover: {
+        DEFAULT: hsla("popover"),
+        foreground: hsla("popover-foreground"),
+      },
       link: {
         foreground: hsla("link-foreground"),
         border: hsla("link-border"),

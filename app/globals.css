@@ -124,6 +124,9 @@
     --muted: var(--brand-100);
     --muted-foreground: var(--brand-500);
 
+    --popover: var(--white);
+    --popover-foreground: var(--brand-950);
+
     --link-border: var(--violet-600);
     --link-border-active: var(--violet-400);
 
@@ -180,6 +183,9 @@
 
     --muted: var(--brand-800);
     --muted-foreground: var(--brand-400);
+
+    --popover: var(--brand-950);
+    --popover-foreground: var(--brand-50);
 
     --link-border: var(--violet-400);
     --link-border-active: var(--violet-600);
