@@ -84,36 +84,36 @@
     --rose-900: 341.5 75.5% 30.4%;
     --rose-950: 343.1 87.7% 15.9%;
 
-    --zinc-50: 0 0% 98%;
-    --zinc-100: 240 4.8% 95.9%;
-    --zinc-200: 240 5.9% 90%;
-    --zinc-300: 240 4.9% 83.9%;
-    --zinc-400: 240 5% 64.9%;
-    --zinc-500: 240 3.8% 46.1%;
-    --zinc-600: 240 5.2% 33.9%;
-    --zinc-700: 240 5.3% 26.1%;
-    --zinc-800: 240 3.7% 15.9%;
-    --zinc-900: 240 5.9% 10%;
-    --zinc-950: 240 10% 3.9%;
+    --celestial-50: 240 40% 98%;
+    --celestial-100: 240 40% 96.1%;
+    --celestial-200: 240 31.8% 91.4%;
+    --celestial-300: 240 26.8% 83.9%;
+    --celestial-400: 240 20.2% 65.1%;
+    --celestial-500: 240 16.3% 46.9%;
+    --celestial-600: 240 19.3% 34.5%;
+    --celestial-700: 240 25% 26.7%;
+    --celestial-800: 240 32.6% 17.5%;
+    --celestial-900: 240 47.4% 11.2%;
+    --celestial-950: 240 84% 4.9%;
 
-    --brand-50: var(--zinc-50);
-    --brand-100: var(--zinc-100);
-    --brand-200: var(--zinc-200);
-    --brand-300: var(--zinc-300);
-    --brand-400: var(--zinc-400);
-    --brand-500: var(--zinc-500);
-    --brand-600: var(--zinc-600);
-    --brand-700: var(--zinc-700);
-    --brand-800: var(--zinc-800);
-    --brand-900: var(--zinc-900);
-    --brand-950: var(--zinc-950);
+    --brand-50: var(--celestial-50);
+    --brand-100: var(--celestial-100);
+    --brand-200: var(--celestial-200);
+    --brand-300: var(--celestial-300);
+    --brand-400: var(--celestial-400);
+    --brand-500: var(--celestial-500);
+    --brand-600: var(--celestial-600);
+    --brand-700: var(--celestial-700);
+    --brand-800: var(--celestial-800);
+    --brand-900: var(--celestial-900);
+    --brand-950: var(--celestial-950);
 
     --icons-anchor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath stroke='currentColor' fill='currentColor' d='m22 15-3-4-3 4h1.906c-.436 2.469-2.438 4.471-4.906 4.906V13h2v-2h-2V9.336c1.543-.459 2.714-1.923 2.714-3.621C15.714 3.666 14.048 2 12 2S8.286 3.666 8.286 5.715c0 1.698 1.171 3.162 2.714 3.621V11H9v2h2v6.906C8.531 19.471 6.529 17.469 6.094 15H8l-3-4-3 4h2.073c.511 3.885 3.929 7 7.927 7s7.416-3.115 7.927-7H22zM10.286 5.715C10.286 4.77 11.055 4 12 4s1.714.77 1.714 1.715c0 .951-.801 1.785-1.714 1.785s-1.714-.834-1.714-1.785z'/%3E%3C/svg%3E");
   }
 
   :root,
   .light {
-    --background: var(--brand-50);
+    --background: var(--brand-100);
     --foreground: var(--brand-950);
     --knockout: var(--brand-950);
     --border: var(--brand-200);
@@ -124,7 +124,7 @@
     --primary: var(--brand-900);
     --primary-foreground: var(--brand-50);
 
-    --secondary: var(--brand-100);
+    --secondary: var(--brand-200);
     --secondary-foreground: var(--brand-900);
 
     --muted: var(--brand-100);
@@ -191,13 +191,13 @@
     --knockout: var(--brand-50);
     --border: var(--brand-800);
 
-    --content: var(--brand-950);
+    --content: var(--brand-900);
     --content-foreground: var(--brand-50);
 
     --primary: var(--brand-50);
-    --primary-foreground: var(--brand-900);
+    --primary-foreground: var(--brand-800);
 
-    --secondary: var(--brand-800);
+    --secondary: var(--brand-700);
     --secondary-foreground: var(--brand-50);
 
     --muted: var(--brand-800);

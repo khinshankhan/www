@@ -1,6 +1,5 @@
 import React from "react"
 import { cn } from "@/lib/utils"
-import { Divider } from "@/components/primitives/divider"
 import { typographyVariants } from "@/components/primitives/typography"
 
 export interface WithSidebarProps {
@@ -64,12 +63,15 @@ export function ContentLayout({
     <main className="flex grow flex-col">
       <header className="bg-background py-14 text-center text-foreground">
         <h1 className={cn(typographyVariants({ variant: "h1" }), "text-balance")}>{title}</h1>
-        <span className="block text-balance pt-6 font-medium text-muted-foreground">
+        <span
+          className={cn(
+            typographyVariants({ variant: "nav" }),
+            "block text-balance pt-6 font-medium text-muted-foreground"
+          )}
+        >
           {subtitle}
         </span>
       </header>
-
-      <Divider width="w-full md:w-[80%]" />
 
       <div className="grow bg-content py-5 text-content-foreground">
         <WithSidebar direction={direction} sidebar={sidebar} before={before} after={after}>
