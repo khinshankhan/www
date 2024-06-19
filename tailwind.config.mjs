@@ -31,6 +31,24 @@ const config = {
       isMobile: { max: "767px" },
       isDesktop: "768px",
     },
+    zIndex: {
+      auto: "auto",
+      docked: "10",
+      dropdown: "1000",
+      sticky: "1100",
+      banner: "1200",
+      overlay: "1300",
+      modal: "1400",
+      popover: "1500",
+      skipLink: "1600",
+      toast: "1700",
+      tooltip: "1800",
+      0: "0",
+      // although generally the semantic tokens should be used for zindices
+      // 1 and 2 are acceptable if scoped properly imho
+      1: "1",
+      2: "2",
+    },
     colors: {
       transparent: "transparent",
       black: hsla("black"),

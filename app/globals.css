@@ -247,6 +247,24 @@
     --danger-border: var(--rose-400);
   }
 
+  * {
+    @apply border-border;
+
+    /* help hide some weird effects, apparently all is bad so declare each property explicitly */
+    transition: background-color 0.4s ease-in-out;
+  }
+
+  html {
+    touch-action: manipulation;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+
   .page-container {
     @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1280px] 2xl:max-w-[1450px];
   }

@@ -60,8 +60,8 @@ export function ContentLayout({
   // the flex grow applies to the base layout's min-h flex div. this keeps any negative space between content to footer
   // (within the min-h) the content bg color, accounting for potentially shorter content
   return (
-    <main className="flex grow flex-col">
-      <header className="bg-background py-14 text-center text-foreground">
+    <main className="flex grow flex-col bg-background text-foreground">
+      <header className="py-14 text-center">
         <h1 className={cn(typographyVariants({ variant: "h1" }), "text-balance")}>{title}</h1>
         <span
           className={cn(
