@@ -73,7 +73,7 @@ export function ContentLayout({
         </span>
       </header>
 
-      <div className="grow bg-content py-5 text-content-foreground">
+      <div className="isolate grow bg-content py-5 text-content-foreground">
         <WithSidebar direction={direction} sidebar={sidebar} before={before} after={after}>
           <article className="my-6 flex min-w-full flex-1 flex-col pt-0 sm:pt-2">
             {children}
