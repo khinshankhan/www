@@ -382,4 +382,13 @@
   .hide-desktop {
     @apply isDesktop:hidden !important;
   }
+
+  /* animations */
+  .animated-collapsible {
+    @apply overflow-hidden data-[state=closed]:animate-collapsible-close data-[state=open]:animate-collapsible-open;
+  }
+
+  .animated-arrow {
+    @apply transition-transform duration-300 ease-arrow-ease group-data-[state=closed]:-rotate-90;
+  }
 }

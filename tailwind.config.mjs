@@ -139,6 +139,23 @@ const config = {
         "link-show": "100% 0.05em",
         full: "100%",
       },
+      transitionTimingFunction: {
+        "arrow-ease": "cubic-bezier(0.87, 0, 0.13, 1)",
+      },
+      keyframes: {
+        "collapsible-slide-up": {
+          from: { height: "var(--radix-collapsible-content-height)" },
+          to: { height: "0" },
+        },
+        "collapsible-slide-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-collapsible-content-height)" },
+        },
+      },
+      animation: {
+        "collapsible-open": "collapsible-slide-down 300ms ease-out",
+        "collapsible-close": "collapsible-slide-up 300ms ease-out",
+      },
     },
   },
 }
