@@ -108,6 +108,19 @@
     --brand-900: var(--celestial-900);
     --brand-950: var(--celestial-950);
 
+    --plum1: 301 20% 9.4%;
+    --plum2: 300 29.8% 11.2%;
+    --plum3: 298 34.4% 15.3%;
+    --plum4: 297 36.8% 18.3%;
+    --plum5: 296 38.5% 21.1%;
+    --plum6: 295 40.4% 24.7%;
+    --plum7: 294 42.7% 30.6%;
+    --plum8: 292 45.1% 40%;
+    --plum9: 292 45% 51%;
+    --plum10: 295 50% 55.4%;
+    --plum11: 300 60% 62%;
+    --plum12: 296 74% 95.7%;
+
     --icons-anchor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath stroke='currentColor' fill='currentColor' d='m22 15-3-4-3 4h1.906c-.436 2.469-2.438 4.471-4.906 4.906V13h2v-2h-2V9.336c1.543-.459 2.714-1.923 2.714-3.621C15.714 3.666 14.048 2 12 2S8.286 3.666 8.286 5.715c0 1.698 1.171 3.162 2.714 3.621V11H9v2h2v6.906C8.531 19.471 6.529 17.469 6.094 15H8l-3-4-3 4h2.073c.511 3.885 3.929 7 7.927 7s7.416-3.115 7.927-7H22zM10.286 5.715C10.286 4.77 11.055 4 12 4s1.714.77 1.714 1.715c0 .951-.801 1.785-1.714 1.785s-1.714-.834-1.714-1.785z'/%3E%3C/svg%3E");
   }
 
@@ -140,8 +153,8 @@
     --popover: var(--white);
     --popover-foreground: var(--brand-950);
 
-    --link-border: var(--violet-600);
-    --link-border-active: var(--violet-400);
+    --link-border: var(--plum7);
+    --link-border-active: var(--plum5);
 
     --info-background: var(--sky-100);
     --info-foreground: var(--sky-900);
@@ -186,6 +199,19 @@
   .dark {
     color-scheme: dark;
 
+    --plum1: 292 90% 99.4%;
+    --plum2: 300 100% 98.6%;
+    --plum3: 299 71.2% 96.4%;
+    --plum4: 299 62% 93.8%;
+    --plum5: 298 56.1% 90.5%;
+    --plum6: 296 51.3% 85.8%;
+    --plum7: 295 48.2% 78.9%;
+    --plum8: 292 47.7% 70.8%;
+    --plum9: 292 45% 51%;
+    --plum10: 292 50.2% 46.9%;
+    --plum11: 292 60% 42.5%;
+    --plum12: 291 66% 14%;
+
     --background: var(--brand-950);
     --foreground: var(--brand-50);
     --knockout: var(--brand-50);
@@ -213,8 +239,8 @@
     --popover: var(--brand-950);
     --popover-foreground: var(--brand-50);
 
-    --link-border: var(--violet-400);
-    --link-border-active: var(--violet-600);
+    --link-border: var(--plum8);
+    --link-border-active: var(--plum6);
 
     --info-background: var(--sky-900);
     --info-foreground: var(--sky-100);
