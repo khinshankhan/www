@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useState, type ReactNode } from "react"
+import React, { useRef, useState, type ReactNode } from "react"
+import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { useBreakpoint, useIsomorphicEffect } from "@/hooks/media"
 import { useScrollSpy } from "@/hooks/scroll"
@@ -79,42 +80,77 @@ function TocList({ headings = [] }: TocProps) {
 
   return (
     <ul className="isolate z-0 mt-4">
-      {headings.map(({ id, title, depth }, idx) => {
-        const isActive =
-          activeIds.includes(id) ||
-          // forcibly activate the first item if no other items are active
-          (activeIds.length === 0 && idx === 0)
-        const indents = depth - minDepth
-        const isFirstItem = idx === 0
-        const isLastItem = idx === length - 1
-
+      {headings.map((heading, idx) => {
         return (
-          <li key={id} data-active={isActive} className={cn("pointer-events-none relative")}>
-            <button
-              data-active={isActive}
-              className={cn(
-                linkVariants({ variant: "toc" }),
-                "pointer-events-auto text-left",
-                isFirstItem && "pb-1.5",
-                isLastItem && "pt-1.5",
-                !isFirstItem && !isLastItem && "py-1.5",
-                // this should be exhaustive for h1-6
-                indents === 0 && "ps-4",
-                indents === 1 && "ps-8",
-                indents === 2 && "ps-12",
-                indents === 3 && "ps-16",
-                indents === 4 && "ps-20",
-                indents === 5 && "ps-24"
-              )}
-            >
-              <span className={cn(typographyVariants({ variant: "small" }), "hyphens-auto")}>
-                {title}
-              </span>
-            </button>
-          </li>
+          <TocItem
+            key={heading.id}
+            heading={heading}
+            indents={heading.depth - minDepth}
+            isFirstItem={idx === 0}
+            isLastItem={idx === headings.length - 1}
+            isActive={
+              activeIds.includes(heading.id) ||
+              // forcibly activate the first item if no other items are active
+              (activeIds.length === 0 && idx === 0)
+            }
+          />
         )
       })}
     </ul>
+  )
+}
+
+function TocItem({
+  heading: { id, title },
+  indents,
+  isFirstItem,
+  isLastItem,
+  isActive,
+}: {
+  heading: TOCItemType
+  indents: number
+  isFirstItem: boolean
+  isLastItem: boolean
+  isActive: boolean
+}) {
+  const liRef = useRef<HTMLLIElement | null>(null)
+
+  return (
+    <li key={id} ref={liRef} data-active={isActive} className={cn("pointer-events-none relative")}>
+      {/* default sideline for the toc items */}
+      <span className="absolute z-1 h-full w-0.5 bg-muted duration-0" />
+
+      {/* sideline for the active toc item, visually above the default sideline */}
+      {isActive && (
+        <motion.div
+          layoutId="toc-sideline-on"
+          className="absolute z-sticky w-0.5 bg-link-border duration-0"
+          style={{ height: liRef.current?.offsetHeight ?? 0 }}
+        />
+      )}
+
+      <button
+        data-active={isActive}
+        className={cn(
+          linkVariants({ variant: "toc" }),
+          "pointer-events-auto text-left",
+          isFirstItem && "pb-1.5",
+          isLastItem && "pt-1.5",
+          !isFirstItem && !isLastItem && "py-1.5",
+          // this should be exhaustive for h1-6
+          indents === 0 && "ps-4",
+          indents === 1 && "ps-8",
+          indents === 2 && "ps-12",
+          indents === 3 && "ps-16",
+          indents === 4 && "ps-20",
+          indents === 5 && "ps-24"
+        )}
+      >
+        <span className={cn(typographyVariants({ variant: "small" }), "hyphens-auto")}>
+          {title}
+        </span>
+      </button>
+    </li>
   )
 }
 
