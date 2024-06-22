@@ -81,7 +81,7 @@ export function ContentLayout({
         </WithSidebar>
       </div>
 
-      <div className="bg-background py-6 text-foreground">
+      <div className="z-1 bg-background py-6 text-foreground">
         <div className="page-container">
           <div className="flex flex-row-reverse">
             <p>View page on GitHub</p>

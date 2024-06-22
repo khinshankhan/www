@@ -4,7 +4,7 @@ import { extendTailwindMerge } from "tailwind-merge"
 
 /* string utils */
 
-export const customTwMerge = extendTailwindMerge({
+const customTwMerge = extendTailwindMerge({
   extend: {
     classGroups: {
       "bg-position": [{ bg: Object.keys(tailwindConfig?.theme?.extend?.backgroundPosition ?? {}) }],
@@ -19,4 +19,18 @@ export function cn(...inputs: ClassValue[]) {
 
 export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+/* array utils */
+
+export function range(startOrEnd: number, end?: number, step: number = 1): number[] {
+  if (step === 0) {
+    throw new Error("Step cannot be zero.")
+  }
+
+  const actualStart = end === undefined ? 0 : startOrEnd
+  const actualEnd = end === undefined ? startOrEnd : end
+
+  const n = Math.max(Math.ceil((actualEnd - actualStart) / step), 0)
+  return Array.from({ length: n }, (_, index) => actualStart + index * step)
 }

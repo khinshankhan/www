@@ -409,6 +409,31 @@
     @apply isDesktop:hidden !important;
   }
 
+  .mask-gradient-reveal-from-left {
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 1) 50%),
+      linear-gradient(to top, transparent 0%, rgba(255, 255, 255, 1) 50%),
+      linear-gradient(to left, transparent 0%, rgba(255, 255, 255, 1) 40%);
+    mask-size: cover;
+    mask-composite: intersect;
+  }
+
+  .mask-gradient-reveal-from-right {
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 1) 50%),
+      linear-gradient(to top, transparent 0%, rgba(255, 255, 255, 1) 50%),
+      linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 1) 40%);
+    mask-size: cover;
+    mask-composite: intersect;
+  }
+
+  .mask-gradient-reveal-center {
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 1) 50%),
+      linear-gradient(to top, transparent 0%, rgba(255, 255, 255, 1) 50%),
+      linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 1) 40%),
+      linear-gradient(to left, transparent 0%, rgba(255, 255, 255, 1) 40%);
+    mask-size: cover;
+    mask-composite: intersect;
+  }
+
   /* animations */
   .animated-collapsible {
     @apply overflow-hidden data-[state=closed]:animate-collapsible-close data-[state=open]:animate-collapsible-open;
