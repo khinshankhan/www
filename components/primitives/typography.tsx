@@ -8,16 +8,15 @@ export const typographyVariants = cva("", {
   variants: {
     variant: {
       default: "",
-      h1: "text-balance text-5xl font-bold",
-      h2: "text-3xl font-bold",
-      h3: "text-2xl font-semibold",
-      h4: "text-xl font-medium",
-      h5: "text-lg font-medium",
-      h6: "text-base font-medium",
-      body: "text-base",
-      small: "text-sm",
-      caption: "text-xs",
-      nav: "text-2xl font-semibold tracking-wider",
+      nav: "font-body text-lg font-medium tracking-wide md:text-xl lg:text-2xl",
+      h1: "font-heading text-3xl font-semibold tracking-wider md:text-4xl lg:text-5xl",
+      h2: "font-heading text-2xl font-semibold tracking-wide md:text-3xl lg:text-4xl",
+      h3: "font-heading text-xl font-semibold tracking-wide md:text-2xl lg:text-3xl",
+      h4: "font-heading text-lg font-semibold tracking-wide md:text-xl lg:text-2xl",
+      h5: "font-heading text-base font-semibold tracking-wide md:text-lg lg:text-xl",
+      h6: "font-heading text-sm font-semibold tracking-wide md:text-base lg:text-lg",
+      body: "text-pretty font-body text-base tracking-wider antialiased md:text-lg lg:text-xl",
+      small: "font-body text-xs md:text-sm lg:text-base",
     },
   },
   defaultVariants: {
@@ -53,14 +52,14 @@ export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
 Heading.displayName = "Heading"
 
 interface AnchorHeadingProps extends HeadingProps {
-  href: string
+  id: string
 }
 // TODO: implement this
 export const AnchorHeading = React.forwardRef<HTMLHeadingElement, AnchorHeadingProps>(
-  ({ href, className = "", children, ...props }, ref) => {
+  ({ as: asProp, id, className = "", children, ...props }, ref) => {
     return (
-      <Heading className={cn(className)} ref={ref} {...props}>
-        <Link href={href} className="anchor-link text-xl" isMonochrome>
+      <Heading as={asProp} id={id} variant={asProp} className={cn(className)} ref={ref} {...props}>
+        <Link href={`#${id}`} className="anchor-link" isMonochrome>
           {children}
         </Link>
       </Heading>
