@@ -6,6 +6,16 @@ import { capitalize } from "@/lib/utils"
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/primitives/button"
 import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/primitives/drawer"
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -24,6 +34,51 @@ const ModeButton = React.forwardRef<HTMLButtonElement, {}>((props, ref) => {
   )
 })
 ModeButton.displayName = "ModeButton"
+
+export function ModeToggleMobile() {
+  const { setTheme, theme, systemTheme } = useTheme()
+
+  return (
+    <Drawer shouldScaleBackground>
+      <DrawerTrigger asChild>
+        <ModeButton />
+      </DrawerTrigger>
+      <DrawerContent>
+        <div className="mx-auto w-full max-w-sm">
+          <DrawerHeader className="text-center sm:text-center">
+            <DrawerTitle>Mode Toggle</DrawerTitle>
+            <DrawerDescription>Set your preferred theme.</DrawerDescription>
+          </DrawerHeader>
+          <div className="p-4 pb-0">
+            <DrawerFooter>
+              {themeOptionsList.map((themeOption) => (
+                <DrawerClose key={themeOption} asChild>
+                  <Button
+                    variant="outline"
+                    disabled={theme === themeOption}
+                    onClick={() => setTheme(themeOption)}
+                    className="flex justify-between"
+                  >
+                    {capitalize(themeOption)}
+
+                    {(themeOption === "light" ||
+                      (themeOption === "system" && systemTheme === "light")) && (
+                      <SunIcon className="size-[1.2rem]" />
+                    )}
+                    {(themeOption === "dark" ||
+                      (themeOption === "system" && systemTheme === "dark")) && (
+                      <MoonIcon className="size-[1.2rem]" />
+                    )}
+                  </Button>
+                </DrawerClose>
+              ))}
+            </DrawerFooter>
+          </div>
+        </div>
+      </DrawerContent>
+    </Drawer>
+  )
+}
 
 export function ModeToggleDesktop() {
   const { setTheme, theme, systemTheme } = useTheme()

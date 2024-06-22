@@ -1,8 +1,8 @@
 "use client"
 
 import React from "react"
-import { HomeLink, NavLinks } from "./links"
-import { ModeToggleDesktop } from "./toggles"
+import { HamburgerMenu, HomeLink, NavLinks } from "./links"
+import { ModeToggleDesktop, ModeToggleMobile } from "./toggles"
 
 export function Nav() {
   return (
@@ -20,8 +20,8 @@ export function Nav() {
 
           {/* rhs on mobile view */}
           <div className="hide-desktop flex flex-col-reverse gap-2 xss:flex-row">
-            <div>mobile</div>
-            <div>menu</div>
+            <ModeToggleMobile />
+            <HamburgerMenu />
           </div>
         </nav>
       </div>
