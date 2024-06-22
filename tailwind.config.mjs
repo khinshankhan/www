@@ -1,4 +1,5 @@
 import tailwindcssAnimate from "tailwindcss-animate"
+import defaultTheme from "tailwindcss/defaultTheme"
 
 function hsla(variable) {
   return `hsla(var(--${variable}) / <alpha-value>)`
@@ -30,6 +31,11 @@ const config = {
       // -1 so it doesn't encompass 768
       isMobile: { max: "767px" },
       isDesktop: "768px",
+    },
+    fontFamily: {
+      heading: ["var(--font-heading)", ...defaultTheme.fontFamily.sans],
+      body: ["var(--font-body)", ...defaultTheme.fontFamily.sans],
+      mono: ["var(--font-mono)", ...defaultTheme.fontFamily.mono],
     },
     zIndex: {
       auto: "auto",
