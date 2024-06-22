@@ -9,7 +9,9 @@ export function BaseLayout({ children }: { children: React.ReactNode }) {
         {/* NOTE: assumes pages will be wrapped in main tags with background color + grow */}
         {children}
       </div>
-      <footer className="page-container py-16">footer</footer>
+      <footer className="bg-background py-16">
+        <div className="page-container">footer</div>
+      </footer>
     </div>
   )
 }
