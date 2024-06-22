@@ -28,7 +28,7 @@ const breakpoints = {
 }
 
 // NOTE: this is a 'hacky way' to get the breakpoints for controlled components, rely on css as much a spossible
-export function useBreakpoint({ breakpoint }: { breakpoint: keyof typeof breakpoints }) {
+export function useBreakpoint(breakpoint: keyof typeof breakpoints) {
   const query = breakpoints[breakpoint]
   return useMediaQuery({ query })
 }
