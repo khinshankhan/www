@@ -23,7 +23,7 @@ export function Divider({
       {text && (
         <div className="flex -translate-y-3 justify-center">
           <div className={cn("px-2", bg)}>
-            <span className={cn("transform text-xs uppercase", textColor)}>{text}</span>
+            <span className={cn("text-xs uppercase", textColor)}>{text}</span>
           </div>
         </div>
       )}
