@@ -8,7 +8,7 @@ export const linkVariants = cva("transition-[color] duration-500", {
     variant: {
       default:
         "bg-gradient-to-r from-[hsl(var(--link-border))] to-[hsl(var(--link-border))] bg-subtle-underline bg-underline bg-no-repeat hover:from-[hsl(var(--link-border-active))] hover:to-[hsl(var(--link-border-active))] hover:bg-stark-underline",
-      nav: "bg-gradient-to-r from-[hsl(var(--link-border))] to-[hsl(var(--link-border))] bg-link-hide bg-right-bottom bg-no-repeat hover:bg-link-show hover:bg-left-bottom data-[active=true]:bg-link-show data-[active=true]:bg-left-bottom",
+      nav: "bg-gradient-to-r from-[hsl(var(--link-border))] to-[hsl(var(--link-border))] bg-link-hide bg-right-bottom bg-no-repeat transition-[color,background-size] hover:bg-link-show hover:bg-left-bottom data-[active=true]:bg-link-show data-[active=true]:bg-left-bottom",
       toc: "data-[active=true]:text-[hsl(var(--link-border))]",
       none: "",
     },
