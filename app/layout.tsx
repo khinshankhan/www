@@ -1,7 +1,7 @@
 import "./globals.css"
 
 import React from "react"
-import { Montserrat, Open_Sans, Space_Grotesk } from "next/font/google"
+import { Montserrat, Open_Sans, Source_Code_Pro } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { BaseLayout } from "@/components/layouts/base"
 import { typographyVariants } from "@/components/primitives/typography"
@@ -17,7 +17,7 @@ const bodyFont = Open_Sans({
   variable: "--font-body",
   display: "swap",
 })
-const monoFont = Space_Grotesk({
+const monoFont = Source_Code_Pro({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",

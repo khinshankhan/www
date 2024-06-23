@@ -227,7 +227,7 @@ This is an [external link to file](https://google.com/example.pdf) example.
 
 #### TODO Inline Code
 
-Here is some inline code: `console.log('Hello, world!');`
+Here is some inline code: `console.log('Hello, world!');` But also, here is some inline code: `console.log('Hello, world!');`
 
 #### TODO Code Block
 
