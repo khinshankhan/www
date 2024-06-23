@@ -47,27 +47,63 @@ Ctr-f `TODO` to quickly find things I'm working on implementation. Likely in ord
   <figcaption>An elephant at sunset</figcaption>
 </figure>
 
-### TODO: Callouts
+### Callouts
 
 > [!NOTE] Note
 >
 > Highlights information that users should take into account, even when skimming.
+>
+> Second paragraph. With a [lorem ipsum](#) link.
 
 > [!TIP] Tip
 >
 > Optional information to help a user be more successful.
+>
+> Second paragraph. With a [lorem ipsum](#) link.
 
 > [!IMPORTANT] Important
 >
 > Crucial information necessary for users to succeed.
+>
+> Second paragraph. With a [lorem ipsum](#) link.
 
 > [!WARNING] Warning
 >
 > Critical content demanding immediate user attention due to potential risks.
+>
+> Second paragraph. With a [lorem ipsum](#) link.
 
 > [!CAUTION] Caution
 >
 > Negative potential consequences of an action.
+>
+> Second paragraph. With a [lorem ipsum](#) link.
+
+And nesting callouts
+
+> [!WARNING] Warning
+>
+> Critical content demanding immediate user attention due to potential risks.
+>
+> Second paragraph. With a [lorem ipsum](#) link.
+>
+> > [!CAUTION] Caution
+> >
+> > Negative potential consequences of an action.
+> >
+> > Second paragraph. With a [lorem ipsum](#) link.
+
+> [!CAUTION] Caution
+>
+> Negative potential consequences of an action.
+>
+> Second paragraph. With a [lorem ipsum](#) link.
+>
+> > [!WARNING] Warning
+> >
+> > Critical content demanding immediate user attention due to potential risks.
+> >
+> > Second paragraph. With a [lorem ipsum](#) link.
 
 and this continues the paragraph.
 
@@ -78,6 +114,14 @@ and this continues the paragraph.
 but also without any variant
 
 > This is another quote that is long enough to be on multiple lines. Let's see how it looks. And just to make sure it's long enough, I'll add some more text. Just a bit more.
+
+and nested
+
+> Level-one reply
+>
+> > Level-two reply
+> >
+> > > Level-three reply
 
 and now a quote with a caption:
 
@@ -122,6 +166,12 @@ Here is a list with different formatting:
 2. _Italicized Item_
 3. ~~Strikethrough Item~~
 4. **_Bold and Italicized Item_**
+
+### TODO Extended Formatting
+
+H_2_O
+
+X^2
 
 ### Headers
 

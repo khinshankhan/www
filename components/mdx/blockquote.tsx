@@ -36,7 +36,7 @@ export const MDXBlockquote: MDXComponents["blockquote"] = (props) => {
   if (variant && isCalloutKeyword(variant)) {
     return (
       <Callout variant={variant} heading={heading}>
-        <blockquote {...props} data-variant={variant} className="italic">
+        <blockquote {...props} data-variant={variant} className="flex flex-col gap-2 italic">
           {children}
         </blockquote>
       </Callout>

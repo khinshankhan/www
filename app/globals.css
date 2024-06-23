@@ -392,6 +392,30 @@
     @apply mt-4 text-balance text-center text-muted-foreground;
   }
 
+  /* loosely based off https://codepen.io/brucebrotherton/pen/GRxwQar */
+  blockquote[data-variant="quote"] {
+    & {
+      @apply my-12 text-center;
+    }
+
+    &:before,
+    &:after {
+      position: absolute;
+      font-size: 5rem;
+      color: hsl(var(--muted-foreground));
+    }
+    &:before {
+      top: -1.5rem;
+      left: 0rem;
+      content: open-quote;
+    }
+    &:after {
+      bottom: -2.875rem;
+      right: 1.25rem;
+      content: close-quote;
+    }
+  }
+
   .normalize {
     /* general spacing of content */
     & > * {
