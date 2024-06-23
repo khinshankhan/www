@@ -1,6 +1,8 @@
 import React from "react"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypeSlug from "rehype-slug"
 import { cn } from "@/lib/utils"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
@@ -41,7 +43,18 @@ export function MDXContent({
       options={{
         mdxOptions: {
           remarkPlugins: [],
-          rehypePlugins: [],
+          rehypePlugins: [
+            rehypeSlug,
+            [
+              rehypeAutolinkHeadings,
+              {
+                behavior: "wrap",
+                properties: {
+                  className: ["anchor-link"],
+                },
+              },
+            ],
+          ],
         },
       }}
     />
