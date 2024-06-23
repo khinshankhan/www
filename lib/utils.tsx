@@ -21,6 +21,12 @@ export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+/* boolean predicates */
+
+export const existPredicate = <T,>(item: T | undefined | null): item is T => {
+  return item !== null && item !== undefined
+}
+
 /* array utils */
 
 export function range(startOrEnd: number, end?: number, step: number = 1): number[] {

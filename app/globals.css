@@ -387,6 +387,13 @@
     --link-border-active: var(--danger-link-border-active);
     --border: var(--danger-border);
   }
+
+  .normalize {
+    /* general spacing of content */
+    & > * {
+      @apply mb-[1.25rem] md:mb-[1.375rem] lg:mb-[1.5rem];
+    }
+  }
 }
 
 @layer utilities {
