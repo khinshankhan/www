@@ -21,10 +21,11 @@ function ProfileImage() {
   return (
     <Image
       alt="Profile Image"
-      className="rounded-full md:ml-8"
       width={256}
       height={256}
-      src="https://github.com/ghost.png"
+      src="https://github.com/khinshankhan.png"
+      className="select-none rounded-full transition-[border-radius] duration-500 md:ml-8"
+      draggable="false"
       style={{
         aspectRatio: "256/256",
         objectFit: "cover",

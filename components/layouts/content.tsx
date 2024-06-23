@@ -63,14 +63,14 @@ export function ContentLayout({
     <main className="flex grow flex-col bg-background text-foreground">
       <header className="py-14 text-center">
         <h1 className={cn(typographyVariants({ variant: "h1" }), "text-balance")}>{title}</h1>
-        <span
+        <h2
           className={cn(
             typographyVariants({ variant: "nav" }),
             "block text-balance pt-6 font-medium text-muted-foreground"
           )}
         >
           {subtitle}
-        </span>
+        </h2>
       </header>
 
       <div className="isolate grow bg-content py-5 text-content-foreground">
