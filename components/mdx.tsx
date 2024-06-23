@@ -2,11 +2,15 @@ import React from "react"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import remarkUnwrapImages from "remark-unwrap-images"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-except"
+import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { cn } from "@/lib/utils"
+import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
+import { Video } from "@/components/primitives/video"
 
 const baseComponents: MDXComponents = {
   a: ({ href = "#", children = null, ...props }) => (
@@ -26,7 +30,20 @@ const baseComponents: MDXComponents = {
   h6: ({ className = "", ...props }) => (
     <h6 {...props} className={cn(typographyVariants({ variant: "h6", className }))} />
   ),
+
+  // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
+  img: SmartImage,
+  video: Video,
+
+  // custom components
+  SmartImage,
+  Video,
 }
+
+// @ts-expect-error
+const isImageMdastNode = (node: MdastNode) => node?.type === "image" || node?.name === "img"
+// @ts-expect-error
+const isVideoMdastNode = (node: MdastNode) => node?.type === "video" || node?.name === "video"
 
 export function MDXContent({
   source,
@@ -43,7 +60,27 @@ export function MDXContent({
       components={allComponents}
       options={{
         mdxOptions: {
-          remarkPlugins: [remarkMarkFirstParagraph],
+          remarkPlugins: [
+            remarkMarkFirstParagraph,
+            [
+              remarkJsxifyElements,
+              {
+                allowModifications: (node: MdastNode) =>
+                  [isImageMdastNode, isVideoMdastNode].some((fn) => fn(node)),
+                replaceNodeName: (node: MdastNode) => {
+                  if (isImageMdastNode(node)) {
+                    return "SmartImage"
+                  }
+                  if (isVideoMdastNode(node)) {
+                    return "Video"
+                  }
+
+                  return null
+                },
+              },
+            ],
+            remarkUnwrapImages,
+          ],
           rehypePlugins: [
             [
               rehypeSlug,

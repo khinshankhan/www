@@ -71,6 +71,9 @@ dependencies:
   remark:
     specifier: ^15.0.1
     version: 15.0.1
+  remark-unwrap-images:
+    specifier: ^4.0.0
+    version: 4.0.0
   tailwind-merge:
     specifier: ^2.3.0
     version: 2.3.0
@@ -4447,6 +4450,14 @@ packages:
       '@types/mdast': 4.0.4
       mdast-util-to-markdown: 2.1.0
       unified: 11.0.5
+    dev: false
+
+  /remark-unwrap-images@4.0.0:
+    resolution: {integrity: sha512-Ilr5ZhrhZSvnjemy1rRuxlTC0I/39YyWDRiE9d5vF079APcwdYYzwcZL8RGehlCtQCiik8hWMyo4Xhz2Fq0JhA==}
+    dependencies:
+      '@types/mdast': 4.0.4
+      hast-util-whitespace: 3.0.0
+      unist-util-visit: 5.0.0
     dev: false
 
   /remark@15.0.1:
