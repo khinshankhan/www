@@ -2,6 +2,7 @@ import React from "react"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import remarkGfm from "remark-gfm"
 import remarkUnwrapImages from "remark-unwrap-images"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-except"
@@ -62,6 +63,7 @@ export function MDXContent({
         mdxOptions: {
           remarkPlugins: [
             remarkMarkFirstParagraph,
+            remarkGfm,
             [
               remarkJsxifyElements,
               {
