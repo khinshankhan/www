@@ -86,6 +86,51 @@ export function isUrlFile(href: LinkProps["href"]) {
   return COMMON_FILE_EXTENSIONS.includes(getExtension(href).toLowerCase())
 }
 
+/* clipboard utils */
+
+// based on https://stackoverflow.com/a/65996386
+export async function copyToClipboardGraceful(text: string): Promise<boolean> {
+  // Navigator clipboard api needs a secure context (https)
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(text)
+      return true
+    } catch (error) {
+      console.error(error)
+      return false
+    }
+  }
+
+  // Use the 'out of viewport hidden text area' trick
+  const textArea = document.createElement("textarea")
+  textArea.value = text
+
+  // Move textarea out of the viewport so it's not visible
+  textArea.style.position = "absolute"
+  textArea.style.left = "-999999px"
+
+  document.body.prepend(textArea)
+  textArea.select()
+
+  try {
+    // NOTE: deprecated how it's literally for old browsers lol
+    document?.execCommand("copy")
+    return true
+  } catch (error) {
+    console.error(error)
+    return false
+  } finally {
+    textArea.remove()
+  }
+}
+
+export async function copyToClipboard(text: string): Promise<void> {
+  const success = await copyToClipboardGraceful(text)
+  if (!success) {
+    throw new Error("Failed to copy text to clipboard")
+  }
+}
+
 /* unit utils */
 
 interface GetSizePartsProps {

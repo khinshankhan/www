@@ -180,6 +180,16 @@
     --logo-foreground: var(--foreground);
     --logo-border: var(--transparent);
     --logo-shadow: 0, 0%, 43.5%;
+
+    --sh-class: #1e40af;
+    --sh-identifier: #622ebc;
+    --sh-sign: #48525f;
+    --sh-property: #047857;
+    --sh-entity: #6039a7;
+    --sh-jsxliterals: hsla(var(--black), 85%);
+    --sh-string: #913109;
+    --sh-keyword: #025583;
+    --sh-comment: #495057;
   }
 
   .light {
@@ -263,6 +273,16 @@
     --danger-link-border: var(--rose-400);
     --danger-link-border-active: var(--rose-600);
     --danger-border: var(--rose-400);
+
+    --sh-class: #4dabf7;
+    --sh-identifier: #c79bdc;
+    --sh-sign: #a1b3c9;
+    --sh-property: #34d399;
+    --sh-entity: #cd94ff;
+    --sh-jsxliterals: hsla(var(--white), 90%);
+    --sh-string: #f4a261;
+    --sh-keyword: #48cae4;
+    --sh-comment: #a7adb2;
   }
 
   * {

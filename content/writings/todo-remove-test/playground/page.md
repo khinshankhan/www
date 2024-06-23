@@ -223,19 +223,60 @@ This is an [internal link to file](/floating-cogs.svg) example.
 
 This is an [external link to file](https://google.com/example.pdf) example.
 
-### TODO Code
+### Code
 
-#### TODO Inline Code
+#### Inline Code
 
 Here is some inline code: `console.log('Hello, world!');` But also, here is some inline code: `console.log('Hello, world!');`
 
-#### TODO Code Block
+#### Code Block
 
 ```javascript
 function greet() {
   console.log("Hello, world!")
 }
 greet()
+```
+
+#### GitHub
+
+```ruby
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
+
+#### Radix Tooltip
+
+```jsx
+import React from "react"
+import { PlusIcon } from "@radix-ui/react-icons"
+import * as Tooltip from "@radix-ui/react-tooltip"
+
+const TooltipDemo = () => {
+  return (
+    <Tooltip.Provider>
+      <Tooltip.Root>
+        <Tooltip.Trigger asChild>
+          <button className="text-violet11 shadow-blackA4 hover:bg-violet3 inline-flex h-[35px] w-[35px] items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
+            <PlusIcon />
+          </button>
+        </Tooltip.Trigger>
+        <Tooltip.Portal>
+          <Tooltip.Content
+            className="data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade text-violet11 select-none rounded-[4px] bg-white px-[15px] py-[10px] text-[15px] leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity]"
+            sideOffset={5}
+          >
+            Add to library
+            <Tooltip.Arrow className="fill-white" />
+          </Tooltip.Content>
+        </Tooltip.Portal>
+      </Tooltip.Root>
+    </Tooltip.Provider>
+  )
+}
+
+export default TooltipDemo
 ```
 
 ### TODO Tables

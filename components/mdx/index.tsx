@@ -8,7 +8,7 @@ import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-except"
 import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { cn } from "@/lib/utils"
-import { Code } from "@/components/codeblock"
+import { Code, Pre } from "@/components/codeblock"
 import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
@@ -37,6 +37,7 @@ const baseComponents: MDXComponents = {
 
   // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
   code: Code,
+  pre: Pre,
   // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
   img: SmartImage,
   video: Video,
