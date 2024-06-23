@@ -98,7 +98,7 @@ function TocList({ headings: headingsProp = [], markExcerpt = true }: TocProps) 
             isFirstItem={idx === 0}
             isLastItem={idx === headings.length - 1}
             isActive={
-              activeIds.includes(heading.id) ||
+              activeIds?.[0] === heading.id ||
               // forcibly activate the first item if no other items are active
               (activeIds.length === 0 && idx === 0)
             }
