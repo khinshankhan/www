@@ -1,7 +1,6 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { SvgIcon, SVGIconNames } from "@/components/primitives/svg-icon"
 
 const alertVariants = cva(
   "w-full rounded-md border-2 border-border bg-background/60 p-4 text-foreground",
@@ -67,36 +66,3 @@ export const AlertDescription = React.forwardRef<
   <div ref={ref} className={cn("flex flex-col gap-2", className)} {...props} />
 ))
 AlertDescription.displayName = "AlertDescription"
-
-interface CalloutProps extends React.HTMLAttributes<HTMLDivElement>, AlertVariants {
-  variant?: NonNullable<AlertVariants["variant"]>
-  heading?: string
-  children: React.ReactNode
-  className?: string
-}
-
-export const calloutIcons: Record<NonNullable<CalloutProps["variant"]>, SVGIconNames> = {
-  note: "information-circle",
-  tip: "light-bulb",
-  important: "star",
-  warning: "exclamation-triangle",
-  caution: "shield-exclamation",
-}
-
-export function Callout({
-  variant = "note",
-  heading = undefined,
-  className = "",
-  children,
-}: CalloutProps) {
-  return (
-    <Alert key={variant} variant={variant} className={className}>
-      <AlertHeading>
-        <SvgIcon id={calloutIcons[variant]} />
-        {heading && <AlertTitle>{heading}</AlertTitle>}
-      </AlertHeading>
-
-      <AlertDescription>{children}</AlertDescription>
-    </Alert>
-  )
-}

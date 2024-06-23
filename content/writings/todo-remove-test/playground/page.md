@@ -49,23 +49,23 @@ Ctr-f `TODO` to quickly find things I'm working on implementation. Likely in ord
 
 ### TODO: Callouts
 
-> [!NOTE]
+> [!NOTE] Note
 >
 > Highlights information that users should take into account, even when skimming.
 
-> [!TIP]
+> [!TIP] Tip
 >
 > Optional information to help a user be more successful.
 
-> [!IMPORTANT]
+> [!IMPORTANT] Important
 >
 > Crucial information necessary for users to succeed.
 
-> [!WARNING]
+> [!WARNING] Warning
 >
 > Critical content demanding immediate user attention due to potential risks.
 
-> [!CAUTION]
+> [!CAUTION] Caution
 >
 > Negative potential consequences of an action.
 
@@ -97,12 +97,6 @@ and now a quote with a caption:
     Volume 19, Issue 1 (January-February 1995)
   </figcaption>
 </figure>
-
-### TODO Quotes
-
-> This is a blockquote.
->
-> It can span multiple lines and can be very useful for quoting text.
 
 ### Basic Text Formatting
 

@@ -12,6 +12,7 @@ import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
 import { Video } from "@/components/primitives/video"
+import { MDXBlockquote } from "./blockquote"
 
 const baseComponents: MDXComponents = {
   a: ({ href = "#", children = null, ...props }) => (
@@ -31,6 +32,7 @@ const baseComponents: MDXComponents = {
   h6: ({ className = "", ...props }) => (
     <h6 {...props} className={cn(typographyVariants({ variant: "h6", className }))} />
   ),
+  blockquote: MDXBlockquote,
 
   // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
   img: SmartImage,
