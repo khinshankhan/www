@@ -1,7 +1,8 @@
 import React, { type ReactNode } from "react"
 import NextLink, { type LinkProps as NextLinkProps } from "next/link"
 import { cva, VariantProps } from "class-variance-authority"
-import { cn, isRelative } from "@/lib/utils"
+import { cn, isRelative, isUrlFile } from "@/lib/utils"
+import { SvgIcon } from "@/components/primitives/svg-icon"
 
 export const linkVariants = cva("transition-[color] duration-500", {
   variants: {
@@ -25,12 +26,32 @@ export const linkVariants = cva("transition-[color] duration-500", {
 
 export type LinkVariants = VariantProps<typeof linkVariants>
 
+function VisualIcon({ isExternal, isFile }: { isExternal: boolean; isFile: boolean }) {
+  if (isExternal) {
+    return (
+      <span className="inline-flex items-center">
+        <SvgIcon id="arrow-up-right" className="inline size-4 pb-1" />
+      </span>
+    )
+  }
+  if (isFile) {
+    return (
+      <span className="inline-flex items-center">
+        <SvgIcon id="arrow-down-tray" className="inline size-4 pt-1" />
+      </span>
+    )
+  }
+
+  return null
+}
+
 interface LinkProps extends NextLinkProps, LinkVariants {
   className?: string
   children: ReactNode
   // custom options to optimize or else calculated on the fly
   isInternal?: boolean
   isExternal?: boolean
+  isFile?: boolean
 }
 
 export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
@@ -43,6 +64,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
       children,
       isInternal: isInternalProp = undefined,
       isExternal: isExternalProp = undefined,
+      isFile: isFileProp = undefined,
       ...props
     },
     ref
@@ -50,12 +72,14 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
     const classes = cn(linkVariants({ variant, isMonochrome, className }))
 
     const isExternal = (isInternalProp && !isInternalProp) ?? isExternalProp ?? !isRelative(href)
+    const isFile = isFileProp ?? isUrlFile(href)
 
     // if href is a url obj it's a local link with state (probably), and / is totally local
     if (typeof href !== "string" || href.startsWith("/")) {
       return (
         <NextLink ref={ref} href={href} className={classes} {...props}>
           {children}
+          <VisualIcon isExternal={false} isFile={isFile} />
         </NextLink>
       )
     }
@@ -64,6 +88,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
       return (
         <a ref={ref} href={href} className={classes} {...props}>
           {children}
+          <VisualIcon isExternal={false} isFile={isFile} />
         </a>
       )
     }
@@ -71,6 +96,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
     return (
       <a href={href} className={classes} target="_blank" rel="noopener noreferrer" {...props}>
         {children}
+        <VisualIcon isExternal={true} isFile={isFile} />
       </a>
     )
   }
