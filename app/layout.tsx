@@ -5,7 +5,7 @@ import { Montserrat, Open_Sans, Source_Code_Pro } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { BaseLayout } from "@/components/layouts/base"
 import { typographyVariants } from "@/components/primitives/typography"
-import { ThemeProvider } from "./providers"
+import { ThemeProvider, TooltipProvider } from "./providers"
 
 const headingFont = Montserrat({
   subsets: ["latin"],
@@ -42,7 +42,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           enableSystem
           disableTransitionOnChange
         >
-          <BaseLayout>{children}</BaseLayout>
+          <TooltipProvider>
+            <BaseLayout>{children}</BaseLayout>
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

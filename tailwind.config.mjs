@@ -61,8 +61,11 @@ const config = {
       white: hsla("white"),
       background: hsla("background"),
       foreground: hsla("foreground"),
-      knockout: hsla("knockout"),
       border: hsla("border"),
+      knockout: {
+        DEFAULT: hsla("knockout"),
+        foreground: hsla("knockout-foreground"),
+      },
       content: {
         DEFAULT: hsla("content"),
         foreground: hsla("content-foreground"),

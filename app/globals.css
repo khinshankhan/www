@@ -116,8 +116,10 @@
   .light {
     --background: var(--brand-100);
     --foreground: var(--brand-950);
-    --knockout: var(--brand-950);
     --border: var(--brand-200);
+
+    --knockout: var(--brand-950);
+    --knockout-foreground: var(--brand-50);
 
     --content: var(--brand-50);
     --content-foreground: var(--brand-950);
@@ -202,8 +204,10 @@
 
     --background: var(--brand-950);
     --foreground: var(--brand-50);
-    --knockout: var(--brand-50);
     --border: var(--brand-800);
+
+    --knockout: var(--brand-50);
+    --knockout-foreground: var(--brand-950);
 
     --content: var(--brand-900);
     --content-foreground: var(--brand-50);
