@@ -1,5 +1,6 @@
 "use client"
 
+import { title } from "process"
 import React, { useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { type TocItem } from "@/lib/mdx-plugins/remark-toc"
@@ -18,9 +19,10 @@ import { typographyVariants } from "@/components/primitives/typography"
 
 interface TocProps {
   headings?: TocItem[]
+  markExcerpt?: boolean
 }
 
-export function Toc({ headings = [] }: TocProps) {
+export function Toc({ headings = [], markExcerpt = true }: TocProps) {
   const [open, setOpen] = useState(false)
   const action = open ? "Close" : "Open"
 
@@ -51,20 +53,32 @@ export function Toc({ headings = [] }: TocProps) {
         </Button>
       </CollapsibleTrigger>
       <CollapsibleContent className="motion-safe:animated-collapsible">
-        <TocList headings={headings} />
+        <TocList headings={headings} markExcerpt={markExcerpt} />
       </CollapsibleContent>
     </Collapsible>
   )
 }
 
-function TocList({ headings = [] }: TocProps) {
+function TocList({ headings: headingsProp = [], markExcerpt = true }: TocProps) {
+  // this should be TocItem["depth"] but ts doesn't like that
   const minDepth =
-    headings.length === 0
-      ? 0 // by default the minimum is 0 (no headings)
-      : headings.reduce(
+    headingsProp.length === 0
+      ? 1 // by default the minimum is 1
+      : headingsProp.reduce(
           (min, { depth }) => Math.min(min, depth),
-          7 // 7 is an upperbound since indents are limited to 6 due to h1-h6
+          6 // 6 is an upperbound since headings are limited (h1-h6)
         )
+
+  const headings: TocItem[] = !markExcerpt
+    ? headingsProp
+    : [
+        {
+          id: "excerpt",
+          title: "Introduction",
+          depth: minDepth as TocItem["depth"],
+        },
+        ...headingsProp,
+      ]
 
   const activeIds = useScrollSpy(
     headings.map(({ id }) => `[id="${id}"]`),
