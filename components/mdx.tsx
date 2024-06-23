@@ -2,7 +2,8 @@ import React from "react"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
-import rehypeSlug from "rehype-slug"
+import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
+import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-except"
 import { cn } from "@/lib/utils"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
@@ -42,9 +43,14 @@ export function MDXContent({
       components={allComponents}
       options={{
         mdxOptions: {
-          remarkPlugins: [],
+          remarkPlugins: [remarkMarkFirstParagraph],
           rehypePlugins: [
-            rehypeSlug,
+            [
+              rehypeSlug,
+              {
+                reservedIds: ["excerpt"],
+              },
+            ],
             [
               rehypeAutolinkHeadings,
               {

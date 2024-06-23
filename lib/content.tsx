@@ -2,6 +2,9 @@ import fs from "fs"
 import path from "path"
 import { globby } from "globby"
 import matter from "gray-matter"
+import { remark } from "remark"
+import { remarkExcerptExport } from "@/lib/mdx-plugins/remark-except"
+import { remarkTocExport, type TocItem } from "@/lib/mdx-plugins/remark-toc"
 import { existPredicate } from "@/lib/utils"
 
 const projectRoot = process.cwd()
@@ -36,6 +39,17 @@ export async function getContentDataByFilePath(filePath: string) {
 
   const { data, content } = matter(fileContent)
 
+  const computedData = remark()
+    .use(remarkExcerptExport)
+    .use(remarkTocExport, { reservedIds: ["excerpt"] })
+    .processSync(content)
+
+  const frontmatter = {
+    showToc: defaultShowToc[source],
+    markExcerpt: true,
+    ...data,
+  }
+
   return {
     content,
     slug,
@@ -43,11 +57,12 @@ export async function getContentDataByFilePath(filePath: string) {
     data,
     computed: {
       baseName: path.basename(filePath),
+      // NOTE: this is guaranteed because of remarkExcerptExport
+      excerpt: (computedData?.data?.excerpt ?? "") as string,
+      // NOTE: this is guaranteed because of remarkTocExport
+      toc: (computedData?.data?.toc ?? []) as TocItem[],
     },
-    frontmatter: {
-      showToc: defaultShowToc[source],
-      ...data,
-    },
+    frontmatter,
   }
 }
 

@@ -1,7 +1,8 @@
 "use client"
 
-import React, { useRef, useState, type ReactNode } from "react"
+import React, { useRef, useState } from "react"
 import { motion } from "framer-motion"
+import { type TocItem } from "@/lib/mdx-plugins/remark-toc"
 import { cn } from "@/lib/utils"
 import { useBreakpoint, useIsomorphicEffect } from "@/hooks/media"
 import { useScrollSpy } from "@/hooks/scroll"
@@ -15,14 +16,8 @@ import { linkVariants } from "@/components/primitives/link"
 import { SvgIcon } from "@/components/primitives/svg-icon"
 import { typographyVariants } from "@/components/primitives/typography"
 
-export interface TOCItemType {
-  id: string
-  depth: number
-  title: ReactNode
-}
-
 interface TocProps {
-  headings?: TOCItemType[]
+  headings?: TocItem[]
 }
 
 export function Toc({ headings = [] }: TocProps) {
@@ -107,7 +102,7 @@ function TocItem({
   isLastItem,
   isActive,
 }: {
-  heading: TOCItemType
+  heading: TocItem
   indents: number
   isFirstItem: boolean
   isLastItem: boolean
