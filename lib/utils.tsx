@@ -42,6 +42,16 @@ export function range(startOrEnd: number, end?: number, step: number = 1): numbe
   return Array.from({ length: n }, (_, index) => actualStart + index * step)
 }
 
+/* scroll utils */
+
+// TODO: maybe scroll up vs down should be different functions
+export function scrollToElement(selector: string) {
+  const el = document.querySelector(selector)
+  // TODO: should probably alert/ toast here
+  if (!el) return
+  el.scrollIntoView()
+}
+
 /* url utils */
 
 // isRelative means within the project, not necessary the opposite of absolute

@@ -1,10 +1,9 @@
 "use client"
 
-import { title } from "process"
 import React, { useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { type TocItem } from "@/lib/mdx-plugins/remark-toc"
-import { cn } from "@/lib/utils"
+import { cn, scrollToElement } from "@/lib/utils"
 import { useBreakpoint, useIsomorphicEffect } from "@/hooks/media"
 import { useScrollSpy } from "@/hooks/scroll"
 import { Button } from "@/components/primitives/button"
@@ -154,6 +153,20 @@ function TocItem({
           indents === 4 && "ps-20",
           indents === 5 && "ps-24"
         )}
+        onClick={() => {
+          {
+            /* const target = document.getElementById(id)!
+
+          scrollIntoView(target, {
+            scrollMode: "always",
+            behavior: "smooth",
+            inline: "nearest",
+            block: "nearest",
+                }) */
+          }
+
+          scrollToElement(`[id="${id}"]`)
+        }}
       >
         <span className={cn(typographyVariants({ variant: "small" }), "hyphens-auto")}>
           {title}
