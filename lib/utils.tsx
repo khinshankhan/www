@@ -1,3 +1,4 @@
+import { type LinkProps } from "next/link"
 import tailwindConfig from "@/tailwind.config.mjs"
 import { ClassValue, clsx } from "clsx"
 import { extendTailwindMerge } from "tailwind-merge"
@@ -39,4 +40,18 @@ export function range(startOrEnd: number, end?: number, step: number = 1): numbe
 
   const n = Math.max(Math.ceil((actualEnd - actualStart) / step), 0)
   return Array.from({ length: n }, (_, index) => actualStart + index * step)
+}
+
+/* url utils */
+
+// isRelative means within the project, not necessary the opposite of absolute
+export function isRelative(href: LinkProps["href"]) {
+  return (
+    // if href is a url obj it's a local link with state (probably)
+    typeof href !== "string" ||
+    // / is totally a local url
+    href.startsWith("/") ||
+    // # means same page so still relative
+    href.startsWith("#")
+  )
 }
