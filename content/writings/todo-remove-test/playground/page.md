@@ -173,6 +173,18 @@ H_2_O
 
 X^2
 
+### Spoilers
+
+Don't you just hate <Spoiler>spoilers</Spoiler>?
+
+Also, <Spoiler>this is some spoiler that's far too long to fit in one line when listed on a page.</Spoiler>
+
+How about with... markup? <Spoiler>this is _italics_ and **bold** and _underline_ and **_something_**</Spoiler>.
+
+TODO: absolutely failing --
+
+...how about a formatting spoiler? <Spoiler>a [link home](/) and [external link to Google](https://google.com)</Spoiler>
+
 ### Headers
 
 #### Header 4

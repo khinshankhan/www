@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils"
 import { Code, Pre } from "@/components/codeblock"
 import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
+import { Spoiler } from "@/components/primitives/spoiler"
 import { typographyVariants } from "@/components/primitives/typography"
 import { Video } from "@/components/primitives/video"
 import { MDXBlockquote } from "./blockquote"
@@ -45,6 +46,7 @@ const baseComponents: MDXComponents = {
   // custom components
   SmartImage,
   Video,
+  Spoiler,
 }
 
 // @ts-expect-error
