@@ -8,8 +8,8 @@ import { remarkTocExport, type TocItem } from "@/lib/mdx-plugins/remark-toc"
 import { existPredicate } from "@/lib/utils"
 import {
   ContentFrontmatterSchema,
+  getContentSource,
   type ContentData,
-  type ContentFrontmatter,
   type ContentSource,
 } from "../schemas/content"
 
@@ -18,42 +18,6 @@ const contentDir = path.join(projectRoot, "content")
 // TODO: turn this into `"**/page*.mdx"` when dealing with i18n
 // eg page.es.mdx will be spanish
 const contentPatterns = ["**/*.md", "**/*.mdx"]
-
-function getContentSource(slug: string): ContentSource {
-  if (slug.startsWith("writings")) return "writings"
-  if (slug.startsWith("projects")) return "projects"
-  return "root"
-}
-
-const defaultFrontmatter: Record<ContentSource, Partial<ContentFrontmatter>> = {
-  root: {
-    showToc: true,
-    markExcerpt: true,
-    ld: {
-      type: "WebPage",
-      name: "PLACEHOLDER",
-      description: "PLACEHOLDER",
-    },
-  },
-  writings: {
-    showToc: true,
-    markExcerpt: true,
-    ld: {
-      type: "BlogPosting",
-      name: "PLACEHOLDER",
-      description: "PLACEHOLDER",
-    },
-  },
-  projects: {
-    showToc: false,
-    markExcerpt: true,
-    ld: {
-      type: "CollectionPage",
-      name: "PLACEHOLDER",
-      description: "PLACEHOLDER",
-    },
-  },
-}
 
 export async function getContentDataByFilePath(filePath: string): Promise<ContentData> {
   const absFilePath = path.join(contentDir, filePath)
@@ -72,28 +36,26 @@ export async function getContentDataByFilePath(filePath: string): Promise<Conten
     .use(remarkExcerptExport)
     .use(remarkTocExport, { reservedIds: ["excerpt"] })
     .processSync(content)
+  // NOTE: this is guaranteed because of remarkExcerptExport
+  const excerpt = (computedData?.data?.excerpt ?? "") as string
+  // NOTE: this is guaranteed because of remarkTocExport
+  const toc = (computedData?.data?.toc ?? []) as TocItem[]
 
-  const frontmatter = {
-    ...defaultFrontmatter[source],
+  const parsedFrontmatter = ContentFrontmatterSchema.parse({
+    slug,
+    excerpt,
     ...data,
-    ld: {
-      ...defaultFrontmatter[source].ld,
-      ...data?.ld,
-    },
-  }
+  })
 
   return {
-    content,
     slug,
     source,
+    content,
+    frontmatter: parsedFrontmatter,
     computed: {
       baseName: path.basename(filePath),
-      // NOTE: this is guaranteed because of remarkExcerptExport
-      excerpt: (computedData?.data?.excerpt ?? "") as string,
-      // NOTE: this is guaranteed because of remarkTocExport
-      toc: (computedData?.data?.toc ?? []) as TocItem[],
+      toc,
     },
-    frontmatter: ContentFrontmatterSchema.parse(frontmatter),
   }
 }
 
