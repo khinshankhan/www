@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { info } from "@/settings"
 import { cn } from "@/lib/utils"
+import { Emoji } from "@/components/emoji"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
 
@@ -36,18 +37,7 @@ function ProfileImage() {
 }
 
 function Wave() {
-  return (
-    <img
-      className="inline aspect-auto size-[1em] animate-wave"
-      src="https://github.githubassets.com/images/icons/emoji/unicode/1f44b.png?v8"
-      alt=":wave:"
-      aria-label=":wave:"
-      data-type="emoji"
-      draggable="false"
-      height="72px"
-      width="72px"
-    />
-  )
+  return <Emoji name=":wave:" className="animate-wave" />
 }
 
 function IntroSection() {
