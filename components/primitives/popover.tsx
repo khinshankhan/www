@@ -24,7 +24,6 @@ const PopoverContent = React.forwardRef<
       {...props}
     >
       {children}
-      <PopoverPrimitive.Arrow className="fill-knockout" width={11} height={5} />
     </PopoverPrimitive.Content>
   </PopoverPrimitive.Portal>
 ))

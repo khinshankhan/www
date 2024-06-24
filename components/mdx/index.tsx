@@ -1,14 +1,17 @@
 import React from "react"
+import { remarkSimpleEmoji } from "@khinshankhan/emoji-helper-remark"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import remarkGfm from "remark-gfm"
 import remarkUnwrapImages from "remark-unwrap-images"
+import { EmojiKey, emojiLookup } from "@/lib/emoji"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-except"
 import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { cn } from "@/lib/utils"
 import { Code, Pre } from "@/components/codeblock"
+import { Emoji } from "@/components/emoji"
 import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
 import { Spoiler } from "@/components/primitives/spoiler"
@@ -59,6 +62,7 @@ const baseComponents: MDXComponents = {
   SmartImage,
   Video,
   Spoiler,
+  Emoji,
 }
 
 // @ts-expect-error
@@ -82,6 +86,17 @@ export function MDXContent({
       options={{
         mdxOptions: {
           remarkPlugins: [
+            [
+              remarkSimpleEmoji,
+              {
+                validate: (name: string) => emojiLookup.get(name as EmojiKey),
+                lookup: (name: string) => {
+                  const emoji = emojiLookup.get(name as EmojiKey)
+                  // NOTE: this should be guranteed due to validate
+                  return emoji!.alt
+                },
+              },
+            ],
             remarkMarkFirstParagraph,
             remarkGfm,
             [
