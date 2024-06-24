@@ -140,7 +140,7 @@ function TocItem({
         data-active={isActive}
         className={cn(
           linkVariants({ variant: "toc" }),
-          typographyVariants({ variant: "small" }),
+          typographyVariants({ variant: "xs" }),
           "pointer-events-auto text-left transition-[font-weight] data-[active=true]:font-semibold",
           isFirstItem && "pb-1.5",
           isLastItem && "pt-1.5",

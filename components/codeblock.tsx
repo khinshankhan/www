@@ -12,6 +12,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/primitives/tooltip"
+import { typographyVariants } from "@/components/primitives/typography"
 
 export interface CodeProps extends React.ComponentPropsWithoutRef<"code"> {
   children: string
@@ -29,7 +30,11 @@ export const Code = React.forwardRef<HTMLElement, CodeProps>(function Code(
       ref={forwardedRef}
       suppressHydrationWarning
       dangerouslySetInnerHTML={{ __html: codeHTML }}
-      className={cn("rounded-lg bg-muted px-1 text-content-foreground", className)}
+      className={cn(
+        !shouldHighlight && typographyVariants({ variant: "small" }),
+        "rounded-lg bg-muted px-1 py-0.5 text-content-foreground",
+        className
+      )}
       {...props}
     />
   )
@@ -51,7 +56,10 @@ export const Pre = React.forwardRef<HTMLPreElement, PreProps>(function Pre(
 
         <pre
           ref={forwardedRef}
-          className="size-full whitespace-pre rounded-lg bg-muted px-4 pb-6 pt-3 text-content-foreground [&>code]:contents"
+          className={cn(
+            typographyVariants({ variant: "small" }),
+            "size-full whitespace-pre rounded-lg bg-muted px-4 pb-6 pt-3 text-content-foreground [&>code]:contents"
+          )}
           {...props}
         >
           {children}

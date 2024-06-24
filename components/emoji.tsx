@@ -54,7 +54,7 @@ export function Emoji({ name, className = "", wrapperClassName = "" }: EmojiProp
         </TooltipTrigger>
         <TooltipContent
           side="top"
-          className={cn(typographyVariants({ variant: "small" }), "w-full p-2")}
+          className={cn(typographyVariants({ variant: "xs" }), "w-full p-2")}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onPointerDownOutside={() => setClicked(false)}

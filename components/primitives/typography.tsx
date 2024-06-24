@@ -12,7 +12,8 @@ export const typographyVariants = cva("", {
       h5: "font-heading text-base font-semibold tracking-wide md:text-lg lg:text-xl",
       h6: "font-heading text-sm font-semibold tracking-wide md:text-base lg:text-lg",
       body: "text-pretty font-body text-lg tracking-wider antialiased md:text-xl lg:text-2xl",
-      small: "font-body text-xs md:text-sm lg:text-base",
+      small: "font-body text-sm md:text-base lg:text-xl",
+      xs: "font-body text-xs md:text-sm lg:text-base",
     },
   },
   defaultVariants: {
