@@ -1,5 +1,6 @@
 import React from "react"
 import { cn } from "@/lib/utils"
+import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
 
 export interface WithSidebarProps {
@@ -45,6 +46,7 @@ export function WithSidebar({
 export interface ContentLayoutProps extends WithSidebarProps {
   title: string
   subtitle: React.ReactNode
+  ghPath: string
   children: React.ReactNode
 }
 
@@ -53,6 +55,7 @@ export function ContentLayout({
   subtitle,
   children,
   direction = "right",
+  ghPath,
   sidebar = null,
   before = null,
   after = null,
@@ -84,7 +87,9 @@ export function ContentLayout({
       <div className="z-1 bg-background py-6 text-foreground">
         <div className="page-container">
           <div className="flex flex-row-reverse">
-            <p>View page on GitHub</p>
+            <Link href={`https://github.com/khinshankhan/www/tree/main${ghPath}`}>
+              View page on GitHub
+            </Link>
           </div>
         </div>
       </div>

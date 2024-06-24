@@ -12,6 +12,7 @@ export default function ConnectLayout({ children }: { children: React.ReactNode 
           <span>{`Getting in touch. Boop`}</span> <Emoji name=":point_up_2:" />
         </>
       }
+      ghPath="/app/(content)/connect/page.tsx"
     >
       {children}
       <ContentPattern />

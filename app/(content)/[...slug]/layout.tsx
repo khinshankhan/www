@@ -22,6 +22,7 @@ export default async function PagesLayout({
           <span>{contentData?.frontmatter?.subtitle}</span>
         </>
       }
+      ghPath={`/content/${contentData.slug}/${contentData.computed.baseName}`}
       sidebar={
         contentData?.frontmatter?.showToc && (
           <Toc
