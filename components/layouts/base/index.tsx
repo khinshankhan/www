@@ -1,5 +1,18 @@
 import React from "react"
+import { info } from "@/settings"
 import { Nav } from "./nav"
+
+export function Footer() {
+  return (
+    <footer className="relative z-1 bg-background py-16">
+      <div className="page-container flex flex-col">
+        <p className="text-center">
+          &copy; {info.startYear}+, {info.fullname}. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  )
+}
 
 export function BaseLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -11,9 +24,7 @@ export function BaseLayout({ children }: { children: React.ReactNode }) {
           {children}
         </div>
       </div>
-      <footer className="relative z-1 bg-background py-16">
-        <div className="page-container">footer</div>
-      </footer>
+      <Footer />
     </div>
   )
 }
