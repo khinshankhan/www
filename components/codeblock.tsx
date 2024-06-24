@@ -6,7 +6,12 @@ import { cn, copyToClipboardGraceful } from "@/lib/utils"
 import { Button, type ButtonProps } from "@/components/primitives/button"
 import { ScrollArea, ScrollBar } from "@/components/primitives/scroll-area"
 import { SvgIcon } from "@/components/primitives/svg-icon"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/primitives/tooltip"
+import {
+  Tooltip,
+  TooltipArrow,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/primitives/tooltip"
 
 export interface CodeProps extends React.ComponentPropsWithoutRef<"code"> {
   children: string
@@ -65,16 +70,17 @@ interface CopyToClipboardButtonProps extends ButtonProps {
 
 export const CopyToClipboardButton = forwardRef<HTMLButtonElement, CopyToClipboardButtonProps>(
   function CopyToClipboardButton({ text, className = "", ...props }, forwardedRef) {
+    const [hovering, setHovering] = useState(false)
+    const [clicked, setClicked] = useState(false)
     const [count, setCount] = useState(0)
-    const [clicked, setClick] = useState(false)
     const [copied, setCopied] = useState(false)
 
     useEffect(() => {
       const timer = setTimeout(() => {
-        setClick(false)
+        setClicked(false)
       }, 1000)
       return () => clearTimeout(timer)
-    }, [count, clicked, setClick])
+    }, [count, clicked, setClicked])
 
     useEffect(() => {
       const timer = setTimeout(() => {
@@ -88,16 +94,19 @@ export const CopyToClipboardButton = forwardRef<HTMLButtonElement, CopyToClipboa
 
       const successful = await copyToClipboardGraceful(text)
       if (successful) {
-        setClick(true)
+        setClicked(true)
         setCopied(true)
         setCount((c) => c + 1)
         return
       }
     }
 
+    const handleMouseEnter = () => setHovering(true)
+    const handleMouseLeave = () => setHovering(false)
+
     return (
-      <Tooltip disableHoverableContent>
-        <TooltipTrigger asChild>
+      <Tooltip disableHoverableContent open={hovering}>
+        <TooltipTrigger asChild onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <Button
             ref={forwardedRef}
             variant="ghost-contrast"
@@ -113,8 +122,11 @@ export const CopyToClipboardButton = forwardRef<HTMLButtonElement, CopyToClipboa
           onPointerDownOutside={(event) => {
             event.preventDefault()
           }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <span>{copied ? "Copied" : "Copy"}</span>
+          <TooltipArrow className="fill-knockout" width={11} height={5} />
         </TooltipContent>
       </Tooltip>
     )

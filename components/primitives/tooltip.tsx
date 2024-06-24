@@ -25,10 +25,11 @@ const TooltipContent = React.forwardRef<
       {...props}
     >
       {children}
-      <TooltipPrimitive.Arrow className="fill-knockout" width={11} height={5} />
     </TooltipPrimitive.Content>
   </TooltipPrimitive.Portal>
 ))
 TooltipContent.displayName = TooltipPrimitive.Content.displayName
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
+const TooltipArrow = TooltipPrimitive.Arrow
+
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipArrow, TooltipProvider }
