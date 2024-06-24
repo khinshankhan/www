@@ -1,9 +1,10 @@
 import React, { type ReactNode } from "react"
-import { PageSkeletonLayout } from "@/components/layouts"
-import { Toc } from "@/components/layouts/sidebars"
+import { ContentLayout } from "@/components/layouts/content"
+import { Toc } from "@/components/layouts/sidebars/toc"
+import { ContentPattern } from "@/components/patterns"
 import { getContentDataFromSlug } from "./utils"
 
-export default function PagesLayout({
+export default async function PagesLayout({
   params,
   children,
 }: {
@@ -11,24 +12,29 @@ export default function PagesLayout({
   children: ReactNode
 }) {
   const { slug } = params
-
-  const contentData = getContentDataFromSlug(slug)
+  const contentData = await getContentDataFromSlug(slug)
 
   return (
-    <PageSkeletonLayout
+    <ContentLayout
       title={contentData?.frontmatter?.title}
       subtitle={
         <>
           <span>{contentData?.frontmatter?.subtitle}</span>
         </>
       }
-      path={`/content/${contentData.slug}/${contentData.computed.baseName}`}
+      ghPath={`/content/${contentData.slug}/${contentData.computed.baseName}`}
       sidebar={
-        contentData?.frontmatter?.showToc &&
-        contentData?.computed?.toc && <Toc headings={contentData.computed.toc} />
+        contentData?.frontmatter?.showToc && (
+          <Toc
+            headings={contentData.computed.toc}
+            markExcerpt={contentData.frontmatter.markExcerpt}
+          />
+        )
       }
     >
       {children}
-    </PageSkeletonLayout>
+
+      <ContentPattern />
+    </ContentLayout>
   )
 }

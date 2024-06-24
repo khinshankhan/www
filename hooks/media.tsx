@@ -14,19 +14,21 @@ export function useMounted() {
   return mounted
 }
 
-export function useBreakpoints() {
-  // NOTE: this is a hacky way to get the breakpoints for controlled components
-  // this needs to be kept in sync with the tailwind config
-  const isXss = useMediaQuery({ query: "(min-width: 320px)" })
-  const isXs = useMediaQuery({ query: "(min-width: 392px)" })
-  const isSm = useMediaQuery({ query: "(min-width: 640px)" })
-  const isMd = useMediaQuery({ query: "(min-width: 768px)" })
-  const isLg = useMediaQuery({ query: "(min-width: 1024px)" })
-  const isXl = useMediaQuery({ query: "(min-width: 1325px)" })
-  const is2xl = useMediaQuery({ query: "(min-width: 1536px)" })
+// NOTE: this needs to be kept in sync with the tailwind config
+const breakpoints = {
+  xss: "(min-width: 320px)",
+  xs: "(min-width: 392px)",
+  sm: "(min-width: 640px)",
+  md: "(min-width: 768px)",
+  lg: "(min-width: 1024px)",
+  xl: "(min-width: 1325px)",
+  "2xl": "(min-width: 1536px)",
+  isMobile: "(max-width: 767px)",
+  isDesktop: "(min-width: 768px)",
+}
 
-  const isMobile = useMediaQuery({ query: "(max-width: 767px)" })
-  const isDesktop = useMediaQuery({ query: "(min-width: 768px)" })
-
-  return { isXss, isXs, isSm, isMd, isLg, isXl, is2xl, isMobile, isDesktop }
+// NOTE: this is a 'hacky way' to get the breakpoints for controlled components, rely on css as much a spossible
+export function useBreakpoint(breakpoint: keyof typeof breakpoints) {
+  const query = breakpoints[breakpoint]
+  return useMediaQuery({ query })
 }

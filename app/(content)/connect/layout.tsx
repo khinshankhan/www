@@ -1,18 +1,21 @@
-import React, { type ReactNode } from "react"
-import { PageSkeletonLayout } from "@/components/layouts"
+import React from "react"
+import { Emoji } from "@/components/emoji"
+import { ContentLayout } from "@/components/layouts/content"
+import { ContentPattern } from "@/components/patterns"
 
-export default function PagesLayout({ children }: { children: ReactNode }) {
+export default function ConnectLayout({ children }: { children: React.ReactNode }) {
   return (
-    <PageSkeletonLayout
+    <ContentLayout
       title="Connect"
       subtitle={
         <>
-          <span>{`Getting in touch. Boop`}</span>
+          <span>{`Getting in touch. Boop`}</span> <Emoji name=":point_up_2:" />
         </>
       }
-      path="/app/(content)/connect/page.tsx"
+      ghPath="/app/(content)/connect/page.tsx"
     >
       {children}
-    </PageSkeletonLayout>
+      <ContentPattern />
+    </ContentLayout>
   )
 }

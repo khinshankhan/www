@@ -1,11 +1,9 @@
-"use client"
-
 import React from "react"
 import { usePathname } from "next/navigation"
-import { headerLinks } from "@/config"
+import { headerLinks } from "@/settings"
 import { cn } from "@/lib/utils"
 import { ArrowRightIcon, HamburgerMenuIcon } from "@radix-ui/react-icons"
-import { Logo, type ILogoProps } from "@/components/icons"
+import { Logo, type ILogoProps } from "@/components/logo"
 import { Button } from "@/components/primitives/button"
 import {
   Drawer,
@@ -18,22 +16,20 @@ import {
   DrawerTrigger,
 } from "@/components/primitives/drawer"
 import { Link } from "@/components/primitives/link"
-import { typographyVariants } from "@/components/primitives/typography"
 
 interface IHomeLinkProps extends ILogoProps {
-  size?: number | string
-  scalable?: boolean
+  className?: string
+  sizes?: string
 }
 
 export function HomeLink({
-  size: sizeProp = undefined,
-  scalable = true,
-  className = "size-[42px] md:size-[45px] lg:size-[55px]",
+  className = "",
+  sizes = "size-[42px] md:size-[45px] lg:size-[55px]",
   ...props
 }: IHomeLinkProps) {
   return (
-    <Link href="/" aria-label="Navigate to homepage." underline={false} className="home-link">
-      <Logo className={cn("", className)} {...props} />
+    <Link href="/" aria-label="Navigate to homepage." variant="none" className="home-link">
+      <Logo className={cn(sizes, className)} {...props} />
     </Link>
   )
 }
@@ -42,21 +38,10 @@ export function NavLinks({ className = "" }: { className?: string }) {
   const pathname = usePathname()
 
   return (
-    <ul
-      className={cn(
-        typographyVariants({ variant: "nav" }),
-        "flex flex-col gap-4 md:flex-row",
-        className
-      )}
-    >
+    <ul className={cn("flex flex-col gap-4 md:flex-row", className)}>
       {headerLinks.map((link) => (
         <li key={link.href}>
-          <Link
-            href={link.href}
-            variant={pathname === link.href ? "on" : "default"}
-            nav={true}
-            underline={false}
-          >
+          <Link href={link.href} variant="nav" data-active={pathname === link.href}>
             {link.label}
           </Link>
         </li>
@@ -65,6 +50,7 @@ export function NavLinks({ className = "" }: { className?: string }) {
   )
 }
 
+// TODO: change icons and use sprite icon
 export function HamburgerMenu() {
   const pathname = usePathname()
 
@@ -85,21 +71,17 @@ export function HamburgerMenu() {
             <DrawerFooter>
               {headerLinks.map((link) => (
                 <DrawerClose key={link.href} asChild>
-                  <Link
-                    href={link.href}
-                    variant={pathname === link.href ? "on" : "default"}
-                    nav={false}
-                    underline={false}
+                  <Button
+                    asChild
+                    variant="outline"
+                    disabled={pathname === link.href}
+                    className="flex w-full justify-between"
                   >
-                    <Button
-                      variant="outline"
-                      disabled={pathname === link.href}
-                      className="flex w-full justify-between"
-                    >
+                    <Link variant="toc" href={link.href} data-active={pathname === link.href}>
                       {link.label}
                       <ArrowRightIcon className="block size-[1.2rem]" />
-                    </Button>
-                  </Link>
+                    </Link>
+                  </Button>
                 </DrawerClose>
               ))}
             </DrawerFooter>

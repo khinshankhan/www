@@ -1,25 +1,38 @@
 import Slugger from "github-slugger"
-import type { Heading, Root as MdastRoot } from "mdast"
+import type { Root as MdastRoot } from "mdast"
 import { toString } from "mdast-util-to-string"
 import type { Transformer } from "unified"
 import { SKIP, visit } from "unist-util-visit"
 
 export interface TocItem {
   id: string
-  text: string
-  level: Heading["depth"]
+  title: string
+  depth: number
 }
 
 // only need one slugger instance for the entire build
 const slugger = new Slugger()
 
-export function remarkTocExport(): Transformer<MdastRoot, MdastRoot> {
+type Options = {
+  reservedIds?: string[]
+}
+
+const defaultOptions = {
+  reservedIds: [],
+} satisfies Options
+
+export function remarkTocExport(options?: Options): Transformer<MdastRoot, MdastRoot> {
+  const settings = {
+    reservedIds: options?.reservedIds ?? defaultOptions.reservedIds,
+  }
+
   return function transformer(tree, vfile) {
     const toc: TocItem[] = []
     vfile.data.toc = toc
 
     // slugger is reset per file so that the same heading text in different files can have the same slug
     slugger.reset()
+    settings.reservedIds.forEach((reservedId) => slugger.slug(reservedId))
 
     /**
      * NOTE:
@@ -32,8 +45,8 @@ export function remarkTocExport(): Transformer<MdastRoot, MdastRoot> {
 
       toc.push({
         id: slugger.slug(value),
-        text: value,
-        level: node.depth,
+        title: value,
+        depth: node.depth,
       })
 
       return SKIP

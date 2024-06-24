@@ -1,6 +1,7 @@
 export const info = {
   fullname: "Khinshan Khan",
   startYear: 2017,
+  avatarUrl: "https://github.com/khinshankhan.png",
 }
 
 export const headerLinks = [
@@ -9,9 +10,3 @@ export const headerLinks = [
   { label: "Projects", href: "/projects/" },
   { label: "Connect", href: "/connect/" },
 ]
-
-export const flags = {
-  showBreakpointsIndicator: false,
-  // TODO: fix contrast issues
-  banner: false,
-}

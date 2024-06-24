@@ -1,8 +1,8 @@
 import React, { Children } from "react"
 import type { MDXComponents } from "mdx/types"
 import { filter, onlyText } from "react-children-utilities"
-import { Callout, isCalloutKeyword } from "@/components/blocks/callout"
-import { Blockquote } from "@/components/primitives/components"
+import { Callout, isCalloutKeyword } from "@/components/callout"
+import { Blockquote } from "@/components/primitives/blockquote"
 
 // match blockquotes `> [!variant] heading`
 const mdxBlockquoteMetaRegex = /\[!([^\]]+)\]\s*(.*)/
@@ -36,7 +36,7 @@ export const MDXBlockquote: MDXComponents["blockquote"] = (props) => {
   if (variant && isCalloutKeyword(variant)) {
     return (
       <Callout variant={variant} heading={heading}>
-        <blockquote {...props} data-variant={variant} className="italic">
+        <blockquote {...props} data-variant={variant} className="flex flex-col gap-2 italic">
           {children}
         </blockquote>
       </Callout>

@@ -1,8 +1,8 @@
 import React from "react"
-import { ContentData } from "@/schemas/content"
+import { type ContentData } from "@/schemas/content"
 import { getContentDataBySource } from "@/lib/content"
 import { cn } from "@/lib/utils"
-import { Callout } from "@/components/blocks/callout"
+import { Callout } from "@/components/callout"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
 
@@ -19,7 +19,7 @@ function WritingCard({ content, right = true }: { content: ContentData; right?: 
       >
         <div className="flex grow flex-col gap-1 p-6">
           <h3 className={cn(typographyVariants({ variant: "h3" }), textAlign)}>
-            <Link href={`/${content.slug}`} className="link-overlay" nav={true} underline={false}>
+            <Link href={`/${content.slug}`} className="link-overlay">
               {content.frontmatter.title}
             </Link>
           </h3>
@@ -46,16 +46,15 @@ function WritingCard({ content, right = true }: { content: ContentData; right?: 
   )
 }
 
-export default function Writings() {
-  const allContentData = getContentDataBySource("writings")
+export default async function Writings() {
+  const writingContentData = await getContentDataBySource("writings")
 
   return (
-    <main className="space-y-4">
+    <main className="flex flex-col gap-4">
       <Callout variant="note" heading="Work in Progress">
         <p>
-          {"I'm"} in the process of converting my previous articles from org mode and loose messages
-          to mdx. {"It'll"} take some time, so articles {"won't"} be here for a while... some may
-          trinkle in slowly but {"it'll"} all be up eventually... soon <sup>TM</sup>
+          {"I'm"} currently working on converting my previous articles from different formats to
+          markdown. This process will take some time. Stay tuned... coming soon!
         </p>
       </Callout>
 
@@ -65,15 +64,15 @@ export default function Writings() {
         className={cn(
           typographyVariants({
             variant: "h4",
-            className: "bg-background font-body text-muted-foreground",
+            className: "font-body text-muted-foreground",
           })
         )}
       >
-        {allContentData.length} Articles
+        {writingContentData.length} Articles
       </p>
 
-      <ul className="space-y-8">
-        {allContentData.map((contentData) => {
+      <ul className="flex flex-col gap-8">
+        {writingContentData.map((contentData) => {
           return <WritingCard key={contentData.slug} content={contentData} />
         })}
       </ul>

@@ -10,6 +10,13 @@ const nextConfig = {
   trailingSlash: true,
   output: "export",
   images: { unoptimized: true },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+  // apparently turbopack is broken with esm only https://github.com/vercel/next.js/issues/64525
+  transpilePackages: ["next-mdx-remote"],
 }
 
 /**

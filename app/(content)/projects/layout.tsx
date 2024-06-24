@@ -1,18 +1,16 @@
-import React, { type ReactNode } from "react"
-import { PageSkeletonLayout } from "@/components/layouts"
+import React from "react"
+import { ContentLayout } from "@/components/layouts/content"
+import { ContentPattern } from "@/components/patterns"
 
-export default function PagesLayout({ children }: { children: ReactNode }) {
+export default function ProjectsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <PageSkeletonLayout
+    <ContentLayout
       title="Projects"
-      subtitle={
-        <>
-          <span>{`Some work. Almost a portfolio?`}</span>
-        </>
-      }
-      path="/app/(content)/projects/page.tsx"
+      subtitle="Some work. Almost a portfolio?"
+      ghPath="/app/(content)/projects/page.tsx"
     >
       {children}
-    </PageSkeletonLayout>
+      <ContentPattern />
+    </ContentLayout>
   )
 }

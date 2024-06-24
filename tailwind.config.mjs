@@ -1,10 +1,8 @@
+import tailwindcssAnimate from "tailwindcss-animate"
 import defaultTheme from "tailwindcss/defaultTheme"
 
-function rawHsla(variable, alpha) {
-  return `hsla(var(--${variable}), ${alpha})`
-}
 function hsla(variable) {
-  return rawHsla(variable, "<alpha-value>")
+  return `hsla(var(--${variable}) / <alpha-value>)`
 }
 
 /** @type {import('tailwindcss').Config} */
@@ -16,7 +14,8 @@ const config = {
     "./content/**/*.{js,ts,jsx,tsx,mdx,md}",
   ],
   darkMode: ["class"],
-  safelist: ["dark"],
+  safelist: ["light", "dark"],
+  plugins: [tailwindcssAnimate],
   theme: {
     screens: {
       xss: "320px",
@@ -56,83 +55,99 @@ const config = {
       1: "1",
       2: "2",
     },
+    colors: {
+      transparent: "transparent",
+      black: hsla("black"),
+      white: hsla("white"),
+      background: hsla("background"),
+      foreground: hsla("foreground"),
+      border: hsla("border"),
+      knockout: {
+        DEFAULT: hsla("knockout"),
+        foreground: hsla("knockout-foreground"),
+      },
+      content: {
+        DEFAULT: hsla("content"),
+        foreground: hsla("content-foreground"),
+      },
+      primary: {
+        DEFAULT: hsla("primary"),
+        foreground: hsla("primary-foreground"),
+      },
+      secondary: {
+        DEFAULT: hsla("secondary"),
+        foreground: hsla("secondary-foreground"),
+      },
+      muted: {
+        DEFAULT: hsla("muted"),
+        foreground: hsla("muted-foreground"),
+      },
+      accent: {
+        DEFAULT: hsla("accent"),
+        foreground: hsla("accent-foreground"),
+      },
+      border: hsla("border"),
+      input: hsla("input"),
+      ring: hsla("ring"),
+      card: {
+        DEFAULT: hsla("card"),
+        foreground: hsla("card-foreground"),
+      },
+      popover: {
+        DEFAULT: hsla("popover"),
+        foreground: hsla("popover-foreground"),
+      },
+      link: {
+        foreground: hsla("link-foreground"),
+        border: hsla("link-border"),
+        "border-active": hsla("link-border-active"),
+      },
+      info: {
+        DEFAULT: hsla("info"),
+        foreground: hsla("info-foreground"),
+        "link-border": hsla("info-link-border"),
+        "link-border-active": hsla("info-link-border-active"),
+        border: hsla("info-border"),
+      },
+      success: {
+        DEFAULT: hsla("success-background"),
+        foreground: hsla("success-foreground"),
+        "link-border": hsla("success-link-border"),
+        "link-border-active": hsla("success-link-border-active"),
+        border: hsla("success-border"),
+      },
+      critical: {
+        DEFAULT: hsla("critical-background"),
+        foreground: hsla("critical-foreground"),
+        "link-border": hsla("critical-link-border"),
+        "link-border-active": hsla("critical-link-border-active"),
+        border: hsla("critical-border"),
+      },
+      warning: {
+        DEFAULT: hsla("warning-background"),
+        foreground: hsla("warning-foreground"),
+        "link-border": hsla("warning-link-border"),
+        "link-border-active": hsla("warning-link-border-active"),
+        border: hsla("warning-border"),
+      },
+      danger: {
+        DEFAULT: hsla("danger-background"),
+        foreground: hsla("danger-foreground"),
+        "link-border": hsla("danger-link-border"),
+        "link-border-active": hsla("danger-link-border-active"),
+        border: hsla("danger-border"),
+      },
+    },
     extend: {
       transitionProperty: {
         background: "background",
       },
-      colors: {
-        transparent: hsla("transparent"),
-        black: hsla("black"),
-        white: hsla("white"),
-        knockout: hsla("knockout"),
-        nav: hsla("nav"),
-        background: hsla("background"),
-        foreground: hsla("foreground"),
-        card: {
-          DEFAULT: hsla("card"),
-          foreground: hsla("card-foreground"),
-        },
-        popover: {
-          DEFAULT: hsla("popover"),
-          foreground: hsla("popover-foreground"),
-        },
-        primary: {
-          DEFAULT: hsla("primary"),
-          foreground: hsla("primary-foreground"),
-        },
-        secondary: {
-          DEFAULT: hsla("secondary"),
-          foreground: hsla("secondary-foreground"),
-        },
-        muted: {
-          DEFAULT: hsla("muted"),
-          foreground: hsla("muted-foreground"),
-        },
-        accent: {
-          DEFAULT: hsla("accent"),
-          foreground: hsla("accent-foreground"),
-        },
-        border: hsla("border"),
-        input: hsla("input"),
-        ring: hsla("ring"),
-        logo: {
-          DEFAULT: hsla("logo"),
-          foreground: hsla("logo-foreground"),
-          border: hsla("logo-border"),
-          shadow: hsla("logo-shadow"),
-        },
-        link: {
-          base: hsla("link-base"),
-          active: hsla("link-active"),
-          on: hsla("link-on"),
-        },
-        info: {
-          DEFAULT: hsla("info"),
-          foreground: hsla("info-foreground"),
-          border: hsla("info-border"),
-        },
-        success: {
-          DEFAULT: hsla("success"),
-          foreground: hsla("success-foreground"),
-          border: hsla("success-border"),
-        },
-        critical: {
-          DEFAULT: hsla("critical"),
-          foreground: hsla("critical-foreground"),
-          border: hsla("critical-border"),
-        },
-        warning: {
-          DEFAULT: hsla("warning"),
-          foreground: hsla("warning-foreground"),
-          border: hsla("warning-border"),
-        },
-        danger: {
-          DEFAULT: hsla("danger"),
-          foreground: hsla("danger-foreground"),
-          border: hsla("danger-border"),
-        },
+      backgroundPosition: {
+        underline: "0 100%",
       },
       backgroundSize: {
+        "subtle-underline": "100% 0.0625em",
+        "stark-underline": "100% 0.078125em",
         "link-hide": "0% 0.05em",
         "link-show": "100% 0.05em",
         full: "100%",
@@ -170,7 +185,6 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
 }
 
 export default config

@@ -35,8 +35,6 @@ const ModeButton = React.forwardRef<HTMLButtonElement, {}>((props, ref) => {
 })
 ModeButton.displayName = "ModeButton"
 
-/* NOTE: normally mode toggle would be 1 component but since the usage is split up, might as well */
-
 export function ModeToggleMobile() {
   const { setTheme, theme, systemTheme } = useTheme()
 

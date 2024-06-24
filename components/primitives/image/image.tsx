@@ -1,10 +1,8 @@
 "use client"
 
-import React, { Fragment, type CSSProperties, type ReactNode } from "react"
-import { default as NextImage, type ImageProps } from "next/image"
-import { compileMDX } from "next-mdx-remote/rsc"
+import React, { type CSSProperties } from "react"
+import { default as NextImage, type ImageProps as NextImageProps } from "next/image"
 import { cn, getSizeParts } from "@/lib/utils"
-import { Link } from "@/components/primitives/link"
 import { shouldShowFallbackImage, useImage } from "./use-image"
 
 interface SkeletonImageProps {
@@ -50,21 +48,11 @@ interface GetImageAltProps {
   alt?: string
   title?: string
 }
-export function getImageAlt({ src, alt, title }: GetImageAltProps) {
+function getImageAlt({ src, alt, title }: GetImageAltProps) {
   return alt || title || `This is an image from ${src}`
 }
-export function parseCaption(caption: boolean | ReactNode) {
-  if (caption === "true") return true
-  if (caption === "false") return false
-  return caption
-}
-export function parseFigure(figure: boolean | string) {
-  if (figure === "true") return true
-  if (figure === "false") return false
-  return Boolean(figure)
-}
 
-type FigureProps = Omit<ImageProps, "title" | "alt" | "height" | "width"> & {
+type ImageProps = Omit<NextImageProps, "title" | "alt" | "height" | "width"> & {
   src: string
   alt?: string
   title?: string
@@ -74,13 +62,8 @@ type FigureProps = Omit<ImageProps, "title" | "alt" | "height" | "width"> & {
   loaded?: boolean
   className?: string
   style?: CSSProperties
-
-  figure?: boolean | string
-  caption?: boolean | ReactNode
-
-  children?: ReactNode
 }
-export function Figure({
+export function Image({
   src,
   alt,
   title,
@@ -89,46 +72,32 @@ export function Figure({
   loaded = false,
   className = "",
   style = {},
-  figure = false,
-  caption = false,
-  children,
-}: FigureProps) {
+}: ImageProps) {
   const { size: trueHeight } = getSizeParts({ size: height })
   const { size: trueWidth } = getSizeParts({ size: width })
 
   const imageAlt = getImageAlt({ src: typeof src === "string" ? src : "local", alt, title })
-  const captionValue = parseCaption(caption)
-  const isFigure = captionValue || parseFigure(figure)
 
   const Component = loaded ? SkeletonImage : NextImage
-  const Wrapper = isFigure ? "figure" : Fragment
 
   return (
-    <Wrapper>
-      <Component
-        src={src}
-        alt={imageAlt}
-        title={title || ""}
-        height={trueHeight}
-        width={trueWidth}
-        style={{
-          ["--aspect-width" as any]: trueWidth,
-          ["--aspect-height" as any]: trueHeight,
-          ...style,
-        }}
-        className={className}
-      />
-
-      {isFigure && captionValue && (
-        <figcaption>
-          {(typeof captionValue === "boolean" && imageAlt) || children || imageAlt}
-        </figcaption>
-      )}
-    </Wrapper>
+    <Component
+      src={src}
+      alt={imageAlt}
+      title={title || ""}
+      height={trueHeight}
+      width={trueWidth}
+      style={{
+        ["--aspect-width" as any]: trueWidth,
+        ["--aspect-height" as any]: trueHeight,
+        ...style,
+      }}
+      className={className}
+    />
   )
 }
 
-export function SmartImage({ src, className = "", ...props }: FigureProps) {
+export function SmartImage({ src, className = "", alt = "", ...props }: ImageProps) {
   const { status } = useImage({
     src: typeof src === "string" ? src : "/fallback.png",
     ...props,
@@ -138,8 +107,8 @@ export function SmartImage({ src, className = "", ...props }: FigureProps) {
   const showFallbackImage = shouldShowFallbackImage(status, "beforeLoadOrError")
 
   return (
-    <Figure
-      {...props}
+    <Image
+      alt={alt}
       src={src}
       className={cn(
         "mx-auto size-auto max-h-[725px] max-w-full rounded-lg",
@@ -147,6 +116,7 @@ export function SmartImage({ src, className = "", ...props }: FigureProps) {
         !className.includes("aspect-") && "!aspect-[var(--aspect-width)/var(--aspect-height)]"
       )}
       loaded={showFallbackImage}
+      {...props}
     />
   )
 }

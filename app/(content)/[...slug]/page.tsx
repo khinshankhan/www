@@ -5,7 +5,7 @@ import { MDXContent } from "@/components/mdx"
 import { getContentDataFromSlug } from "./utils"
 
 export async function generateStaticParams() {
-  const slugsParts = getAllContentData().map((contentData) => {
+  const slugsParts = (await getAllContentData()).map((contentData) => {
     return {
       slug: contentData.slug.split("/"),
     }
@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const { slug } = params
 
-  const contentData = getContentDataFromSlug(slug)
+  const contentData = await getContentDataFromSlug(slug)
   if (!contentData) {
     notFound()
   }

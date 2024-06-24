@@ -1,26 +1,26 @@
-import React, { type ReactNode } from "react"
+import React from "react"
 import { cn } from "@/lib/utils"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
 
 export interface WithSidebarProps {
   direction?: "left" | "right"
-  sidebar?: ReactNode
+  sidebar?: React.ReactNode
 
-  before?: ReactNode
-  children: ReactNode
-  after?: ReactNode
+  before?: React.ReactNode
+  children: React.ReactNode
+  after?: React.ReactNode
 }
 
 export function WithSidebar({
-  direction = "left",
+  direction = "right",
   sidebar,
   before,
   children,
   after,
 }: WithSidebarProps) {
   return (
-    <div className={"content-container flex flex-col gap-10"}>
+    <div className="content-container flex flex-col gap-10">
       {before}
 
       <div
@@ -30,13 +30,11 @@ export function WithSidebar({
           direction === "left" ? "xl:flex-row" : "xl:flex-row-reverse"
         )}
       >
-        <aside>
-          {sidebar && (
-            <aside className="top-6 mt-6 pt-0 sm:top-2 sm:pt-2 xl:sticky xl:min-w-[200px] xl:max-w-[200px] xl:self-start 2xl:min-w-[225px] 2xl:max-w-[225px]">
-              {sidebar}
-            </aside>
-          )}
-        </aside>
+        {sidebar && (
+          <aside className="z-sticky xl:sticky xl:top-2 xl:mt-6 xl:min-w-[250px] xl:max-w-[250px] xl:self-start xl:pt-2 2xl:min-w-[275px] 2xl:max-w-[275px]">
+            {sidebar}
+          </aside>
+        )}
         {children}
       </div>
 
@@ -45,55 +43,48 @@ export function WithSidebar({
   )
 }
 
-export interface PageSkeletonLayoutProps extends WithSidebarProps {
+export interface ContentLayoutProps extends WithSidebarProps {
   title: string
-  subtitle: ReactNode
-  path: string
-  extendedSpace?: boolean
-  children: ReactNode
-  className?: string
+  subtitle: React.ReactNode
+  ghPath: string
+  children: React.ReactNode
 }
 
-export function PageSkeletonLayout({
+export function ContentLayout({
   title,
   subtitle,
-  direction = "right",
-  sidebar,
-  path: ghPath,
-  extendedSpace = false,
   children,
-  className = "",
-  before,
-  after,
-}: PageSkeletonLayoutProps) {
+  direction = "right",
+  ghPath,
+  sidebar = null,
+  before = null,
+  after = null,
+}: ContentLayoutProps) {
   // the flex grow applies to the base layout's min-h flex div. this keeps any negative space between content to footer
   // (within the min-h) the content bg color, accounting for potentially shorter content
   return (
-    <main className="flex grow flex-col">
-      <header className={cn("bg-nav py-14 text-center", extendedSpace && "pb-52")}>
+    <main className="flex grow flex-col bg-background text-foreground">
+      <header className="py-14 text-center">
         <h1 className={cn(typographyVariants({ variant: "h1" }), "text-balance")}>{title}</h1>
-        <span
+        <h2
           className={cn(
-            typographyVariants({ variant: "h4" }),
+            typographyVariants({ variant: "nav" }),
             "block text-balance pt-6 font-medium text-muted-foreground"
           )}
         >
           {subtitle}
-        </span>
+        </h2>
       </header>
 
-      <div className="grow bg-background py-5">
+      <div className="isolate grow bg-content py-5 text-content-foreground">
         <WithSidebar direction={direction} sidebar={sidebar} before={before} after={after}>
-          <article
-            id="article"
-            className={cn("my-6 flex min-w-full flex-1 flex-col pt-0 sm:pt-2", className)}
-          >
+          <article className="my-6 flex min-w-full flex-1 flex-col pt-0 sm:pt-2">
             {children}
           </article>
         </WithSidebar>
       </div>
 
-      <div className="bg-nav py-6">
+      <div className="z-1 bg-background py-6 text-foreground">
         <div className="page-container">
           <div className="flex flex-row-reverse">
             <Link href={`https://github.com/khinshankhan/www/tree/main${ghPath}`}>
@@ -106,4 +97,4 @@ export function PageSkeletonLayout({
   )
 }
 
-export default PageSkeletonLayout
+export default ContentLayout

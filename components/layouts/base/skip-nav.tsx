@@ -13,6 +13,7 @@ export function focusSkipNav(blur = false) {
   }
 }
 
+// TODO: add button to skip to main content
 export function SkipNav() {
   const pathname = usePathname()
 

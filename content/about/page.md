@@ -37,7 +37,7 @@ I’ve been discontent with my website; I must’ve changed it 10+ times now. Af
 comfortable with and similar to what I use for work. Hopefully embracing modern technologies will make this full-on
 rewrite the last rewrite for years on end. I've named it 'anchorage' to keep me anchored... hopefully :flushed:
 
-I don't intend on making this a reusable template easy for anyone to use at the moment, but I _am_ trying to decouple
+I don't intend to make this a reusable template easy for anyone to use at the moment, but I _am_ trying to decouple
 personal information from the components. It's a long process and gets harder as tech debt piles up, but maybe one day
 this will be easy to fork and wind up.
 

@@ -3,13 +3,14 @@ import { remarkSimpleEmoji } from "@khinshankhan/emoji-helper-remark"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
-import rehypeSlug from "rehype-slug"
+import remarkGfm from "remark-gfm"
 import remarkUnwrapImages from "remark-unwrap-images"
 import { EmojiKey, emojiLookup } from "@/lib/emoji"
-import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
+import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
+import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-except"
 import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { cn } from "@/lib/utils"
-import { Code, Pre } from "@/components/blocks/codeblock"
+import { Code, Pre } from "@/components/codeblock"
 import { Emoji } from "@/components/emoji"
 import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
@@ -25,29 +26,43 @@ const baseComponents: MDXComponents = {
     </Link>
   ),
   h3: ({ className = "", ...props }) => (
-    <h3 {...props} className={cn(typographyVariants({ variant: "h3", className }))} />
+    <h3
+      {...props}
+      className={cn("scroll-mt-5", typographyVariants({ variant: "h3", className }))}
+    />
   ),
   h4: ({ className = "", ...props }) => (
-    <h4 {...props} className={cn(typographyVariants({ variant: "h4", className }))} />
+    <h4
+      {...props}
+      className={cn("scroll-mt-5", typographyVariants({ variant: "h4", className }))}
+    />
   ),
   h5: ({ className = "", ...props }) => (
-    <h5 {...props} className={cn(typographyVariants({ variant: "h5", className }))} />
+    <h5
+      {...props}
+      className={cn("scroll-mt-5", typographyVariants({ variant: "h5", className }))}
+    />
   ),
   h6: ({ className = "", ...props }) => (
-    <h6 {...props} className={cn(typographyVariants({ variant: "h6", className }))} />
+    <h6
+      {...props}
+      className={cn("scroll-mt-5", typographyVariants({ variant: "h6", className }))}
+    />
   ),
   blockquote: MDXBlockquote,
-  pre: Pre,
-  // @ts-ignore: not getting into the weeds of this
+
+  // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
   code: Code,
+  pre: Pre,
   // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
   img: SmartImage,
+  video: Video,
 
   // custom components
-  Spoiler,
-  Emoji,
   SmartImage,
   Video,
+  Spoiler,
+  Emoji,
 }
 
 // @ts-expect-error
@@ -72,7 +87,6 @@ export function MDXContent({
         mdxOptions: {
           remarkPlugins: [
             [
-              // @ts-expect-error: silly compatibility issue
               remarkSimpleEmoji,
               {
                 validate: (name: string) => emojiLookup.get(name as EmojiKey),
@@ -83,10 +97,9 @@ export function MDXContent({
                 },
               },
             ],
-            // @ts-expect-error: silly compatibility issue
             remarkMarkFirstParagraph,
+            remarkGfm,
             [
-              // @ts-expect-error: silly compatibility issue
               remarkJsxifyElements,
               {
                 allowModifications: (node: MdastNode) =>
@@ -106,14 +119,17 @@ export function MDXContent({
             remarkUnwrapImages,
           ],
           rehypePlugins: [
-            rehypeSlug,
+            [
+              rehypeSlug,
+              {
+                reservedIds: ["excerpt"],
+              },
+            ],
             [
               rehypeAutolinkHeadings,
               {
                 behavior: "wrap",
                 properties: {
-                  "data-nav": "true",
-                  "data-underline": "false",
                   className: ["anchor-link"],
                 },
               },
