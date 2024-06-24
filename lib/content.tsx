@@ -6,6 +6,12 @@ import { remark } from "remark"
 import { remarkExcerptExport } from "@/lib/mdx-plugins/remark-except"
 import { remarkTocExport, type TocItem } from "@/lib/mdx-plugins/remark-toc"
 import { existPredicate } from "@/lib/utils"
+import {
+  ContentFrontmatterSchema,
+  type ContentData,
+  type ContentFrontmatter,
+  type ContentSource,
+} from "../schemas/content"
 
 const projectRoot = process.cwd()
 const contentDir = path.join(projectRoot, "content")
@@ -13,20 +19,43 @@ const contentDir = path.join(projectRoot, "content")
 // eg page.es.mdx will be spanish
 const contentPatterns = ["**/*.md", "**/*.mdx"]
 
-type ContentSource = "root" | "writings" | "projects"
 function getContentSource(slug: string): ContentSource {
   if (slug.startsWith("writings")) return "writings"
   if (slug.startsWith("projects")) return "projects"
   return "root"
 }
 
-const defaultShowToc: Record<ContentSource, boolean> = {
-  root: true,
-  writings: true,
-  projects: false,
+const defaultFrontmatter: Record<ContentSource, Partial<ContentFrontmatter>> = {
+  root: {
+    showToc: true,
+    markExcerpt: true,
+    ld: {
+      type: "WebPage",
+      name: "PLACEHOLDER",
+      description: "PLACEHOLDER",
+    },
+  },
+  writings: {
+    showToc: true,
+    markExcerpt: true,
+    ld: {
+      type: "BlogPosting",
+      name: "PLACEHOLDER",
+      description: "PLACEHOLDER",
+    },
+  },
+  projects: {
+    showToc: false,
+    markExcerpt: true,
+    ld: {
+      type: "CollectionPage",
+      name: "PLACEHOLDER",
+      description: "PLACEHOLDER",
+    },
+  },
 }
 
-export async function getContentDataByFilePath(filePath: string) {
+export async function getContentDataByFilePath(filePath: string): Promise<ContentData> {
   const absFilePath = path.join(contentDir, filePath)
   if (!fs.existsSync(absFilePath)) {
     throw new Error(`File path is missing: ${absFilePath}`)
@@ -45,16 +74,18 @@ export async function getContentDataByFilePath(filePath: string) {
     .processSync(content)
 
   const frontmatter = {
-    showToc: defaultShowToc[source],
-    markExcerpt: true,
+    ...defaultFrontmatter[source],
     ...data,
+    ld: {
+      ...defaultFrontmatter[source].ld,
+      ...data?.ld,
+    },
   }
 
   return {
     content,
     slug,
     source,
-    data,
     computed: {
       baseName: path.basename(filePath),
       // NOTE: this is guaranteed because of remarkExcerptExport
@@ -62,7 +93,7 @@ export async function getContentDataByFilePath(filePath: string) {
       // NOTE: this is guaranteed because of remarkTocExport
       toc: (computedData?.data?.toc ?? []) as TocItem[],
     },
-    frontmatter,
+    frontmatter: ContentFrontmatterSchema.parse(frontmatter),
   }
 }
 
