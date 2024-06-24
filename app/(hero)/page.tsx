@@ -90,7 +90,7 @@ function MainContent() {
     <section
       className={cn(
         typographyVariants({ variant: "h4" }),
-        "mx-auto max-w-[1400px] space-y-8 hyphens-auto text-center font-normal sm:hyphens-none [&>*]:mx-8 [&>*]:rounded-lg [&>*]:bg-background/10 [&>*]:p-6 [&>*]:backdrop-blur-[3px]"
+        "md[&>*]:px-6 mx-auto max-w-[1400px] space-y-8 hyphens-auto text-center font-normal sm:hyphens-none [&>*]:rounded-lg [&>*]:bg-background/10 [&>*]:py-6 [&>*]:backdrop-blur-[3px] md:[&>*]:mx-8"
       )}
     >
       <p>
