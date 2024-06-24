@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { info } from "@/settings"
 import { cn } from "@/lib/utils"
 import { Link } from "@/components/primitives/link"
 import { typographyVariants } from "@/components/primitives/typography"
@@ -23,7 +24,7 @@ function ProfileImage() {
       alt="Profile Image"
       width={256}
       height={256}
-      src="https://github.com/khinshankhan.png"
+      src={info.avatarUrl}
       className="select-none rounded-full transition-[border-radius] duration-500 md:ml-8"
       draggable="false"
       style={{
@@ -61,7 +62,7 @@ function IntroSection() {
           Hello there <Wave />
         </h1>
         <h2 className={cn(typographyVariants({ variant: "h2", className: "font-extrabold" }))}>
-          {"I'm"} Khinshan Khan
+          {"I'm"} <span className="text-link-border-active">{info.fullname}</span>
         </h2>
       </div>
       <h3
