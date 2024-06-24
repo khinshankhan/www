@@ -1,27 +1,12 @@
 import "./globals.css"
 
 import React from "react"
-import { Montserrat, Open_Sans, Source_Code_Pro } from "next/font/google"
+import { GeistMono } from "geist/font/mono"
+import { GeistSans } from "geist/font/sans"
 import { cn } from "@/lib/utils"
 import { BaseLayout } from "@/components/layouts/base"
 import { typographyVariants } from "@/components/primitives/typography"
 import { ThemeProvider, TooltipProvider } from "./providers"
-
-const headingFont = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  display: "swap",
-})
-const bodyFont = Open_Sans({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-})
-const monoFont = Source_Code_Pro({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-})
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -33,12 +18,19 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head />
       <body
         className={cn(
-          headingFont.variable,
-          bodyFont.variable,
-          monoFont.variable,
+          GeistSans.variable,
+          GeistMono.variable,
           typographyVariants({ variant: "body" }),
           "min-h-screen bg-background text-foreground antialiased"
         )}
+        style={{
+          // @ts-ignore: this is a css variable which is perfectly valid
+          "--font-heading": "var(--font-geist-sans)",
+          // @ts-ignore: this is a css variable which is perfectly valid
+          "--font-body": "var(--font-geist-sans)",
+          // @ts-ignore: this is a css variable which is perfectly valid
+          "--font-mono": "var(--font-geist-mono)",
+        }}
       >
         <ThemeProvider
           attribute="class"
