@@ -97,7 +97,7 @@ export function Image({
   )
 }
 
-export function SmartImage({ src, className = "", ...props }: ImageProps) {
+export function SmartImage({ src, className = "", alt = "", ...props }: ImageProps) {
   const { status } = useImage({
     src: typeof src === "string" ? src : "/fallback.png",
     ...props,
@@ -108,7 +108,7 @@ export function SmartImage({ src, className = "", ...props }: ImageProps) {
 
   return (
     <Image
-      {...props}
+      alt={alt}
       src={src}
       className={cn(
         "mx-auto size-auto max-h-[725px] max-w-full rounded-lg",
@@ -116,6 +116,7 @@ export function SmartImage({ src, className = "", ...props }: ImageProps) {
         !className.includes("aspect-") && "!aspect-[var(--aspect-width)/var(--aspect-height)]"
       )}
       loaded={showFallbackImage}
+      {...props}
     />
   )
 }

@@ -59,7 +59,6 @@ export function Toc({ headings = [], markExcerpt = true }: TocProps) {
 }
 
 function TocList({ headings: headingsProp = [], markExcerpt = true }: TocProps) {
-  // this should be TocItem["depth"] but ts doesn't like that
   const minDepth =
     headingsProp.length === 0
       ? 1 // by default the minimum is 1
@@ -74,7 +73,7 @@ function TocList({ headings: headingsProp = [], markExcerpt = true }: TocProps) 
         {
           id: "excerpt",
           title: "Introduction",
-          depth: minDepth as TocItem["depth"],
+          depth: minDepth,
         },
         ...headingsProp,
       ]

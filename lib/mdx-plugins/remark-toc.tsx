@@ -1,14 +1,13 @@
-import { type ReactNode } from "react"
 import Slugger from "github-slugger"
-import type { Heading, Root as MdastRoot } from "mdast"
+import type { Root as MdastRoot } from "mdast"
 import { toString } from "mdast-util-to-string"
 import type { Transformer } from "unified"
 import { SKIP, visit } from "unist-util-visit"
 
 export interface TocItem {
   id: string
-  title: ReactNode
-  depth: Heading["depth"]
+  title: string
+  depth: number
 }
 
 // only need one slugger instance for the entire build
