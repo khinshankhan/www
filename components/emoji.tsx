@@ -5,11 +5,11 @@ import { InvalidEmojiException } from "@khinshankhan/emoji-helper-core"
 import { emojiLookup, type EmojiKey } from "@/lib/emoji"
 import { cn } from "@/lib/utils"
 import {
-  Popover,
-  PopoverArrow,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/primitives/popover"
+  Tooltip,
+  TooltipArrow,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/primitives/tooltip"
 import { typographyVariants } from "@/components/primitives/typography"
 
 interface EmojiProps {
@@ -29,12 +29,12 @@ export function Emoji({ name, className = "", wrapperClassName = "" }: EmojiProp
   const handleMouseEnter = () => setHovering(true)
   const handleMouseLeave = () => setHovering(false)
 
-  const isPopoverOpen = hovering || clicked
+  const isTooltipOpen = hovering || clicked
 
   return (
     <span className={wrapperClassName}>
-      <Popover open={isPopoverOpen}>
-        <PopoverTrigger
+      <Tooltip open={isTooltipOpen}>
+        <TooltipTrigger
           asChild
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -51,8 +51,8 @@ export function Emoji({ name, className = "", wrapperClassName = "" }: EmojiProp
             height="72px"
             width="72px"
           />
-        </PopoverTrigger>
-        <PopoverContent
+        </TooltipTrigger>
+        <TooltipContent
           side="top"
           className={cn(typographyVariants({ variant: "small" }), "w-full p-2")}
           onMouseEnter={handleMouseEnter}
@@ -60,9 +60,9 @@ export function Emoji({ name, className = "", wrapperClassName = "" }: EmojiProp
           onPointerDownOutside={() => setClicked(false)}
         >
           <span>{emojiInfo.alt}</span>
-          <PopoverArrow className="fill-knockout" width={11} height={5} />
-        </PopoverContent>
-      </Popover>
+          <TooltipArrow className="fill-knockout" width={11} height={5} />
+        </TooltipContent>
+      </Tooltip>
     </span>
   )
 }
