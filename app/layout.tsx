@@ -25,7 +25,11 @@ const monoFont = Source_Code_Pro({
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="touch-manipulation scroll-auto focus-within:scroll-smooth"
+    >
       <head />
       <body
         className={cn(

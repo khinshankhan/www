@@ -23,16 +23,28 @@ const baseComponents: MDXComponents = {
     </Link>
   ),
   h3: ({ className = "", ...props }) => (
-    <h3 {...props} className={cn(typographyVariants({ variant: "h3", className }))} />
+    <h3
+      {...props}
+      className={cn("scroll-mt-5", typographyVariants({ variant: "h3", className }))}
+    />
   ),
   h4: ({ className = "", ...props }) => (
-    <h4 {...props} className={cn(typographyVariants({ variant: "h4", className }))} />
+    <h4
+      {...props}
+      className={cn("scroll-mt-5", typographyVariants({ variant: "h4", className }))}
+    />
   ),
   h5: ({ className = "", ...props }) => (
-    <h5 {...props} className={cn(typographyVariants({ variant: "h5", className }))} />
+    <h5
+      {...props}
+      className={cn("scroll-mt-5", typographyVariants({ variant: "h5", className }))}
+    />
   ),
   h6: ({ className = "", ...props }) => (
-    <h6 {...props} className={cn(typographyVariants({ variant: "h6", className }))} />
+    <h6
+      {...props}
+      className={cn("scroll-mt-5", typographyVariants({ variant: "h6", className }))}
+    />
   ),
   blockquote: MDXBlockquote,
 

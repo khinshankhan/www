@@ -124,7 +124,7 @@ function TocItem({
   const liRef = useRef<HTMLLIElement | null>(null)
 
   return (
-    <li key={id} ref={liRef} data-active={isActive} className={cn("pointer-events-none relative")}>
+    <li key={id} ref={liRef} data-active={isActive} className="pointer-events-none relative">
       {/* default sideline for the toc items */}
       <span className="absolute z-1 h-full w-0.5 bg-muted duration-0" />
 
@@ -141,7 +141,8 @@ function TocItem({
         data-active={isActive}
         className={cn(
           linkVariants({ variant: "toc" }),
-          "pointer-events-auto text-left",
+          typographyVariants({ variant: "small" }),
+          "pointer-events-auto text-left transition-[font-weight] data-[active=true]:font-semibold",
           isFirstItem && "pb-1.5",
           isLastItem && "pt-1.5",
           !isFirstItem && !isLastItem && "py-1.5",
@@ -154,23 +155,10 @@ function TocItem({
           indents === 5 && "ps-24"
         )}
         onClick={() => {
-          {
-            /* const target = document.getElementById(id)!
-
-          scrollIntoView(target, {
-            scrollMode: "always",
-            behavior: "smooth",
-            inline: "nearest",
-            block: "nearest",
-                }) */
-          }
-
           scrollToElement(`[id="${id}"]`)
         }}
       >
-        <span className={cn(typographyVariants({ variant: "small" }), "hyphens-auto")}>
-          {title}
-        </span>
+        <span className="hyphens-auto">{title}</span>
       </button>
     </li>
   )
