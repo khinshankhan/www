@@ -18,7 +18,7 @@ export const ContentFrontmatterSchema = z.object({
   description: z.string().optional(),
   keywords: z.array(z.string()).optional().default([]),
   coverImage: ImageSchema.optional().default({
-    url: "/images/placeholder.png",
+    url: "/images/placeholder.png?v=1",
     alt: "Placeholder image",
   }),
 

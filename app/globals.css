@@ -140,6 +140,9 @@
     --input: var(--brand-200);
     --ring: var(--brand-950);
 
+    --card: var(--white);
+    --card-foreground: var(--brand-950);
+
     --popover: var(--white);
     --popover-foreground: var(--brand-950);
 
@@ -186,7 +189,7 @@
     --sh-sign: #48525f;
     --sh-property: #047857;
     --sh-entity: #6039a7;
-    --sh-jsxliterals: hsla(var(--black), 85%);
+    --sh-jsxliterals: hsla(var(--black) / 85%);
     --sh-string: #913109;
     --sh-keyword: #025583;
     --sh-comment: #495057;
@@ -238,6 +241,9 @@
     --input: var(--brand-800);
     --ring: var(--brand-300);
 
+    --card: var(--brand-950);
+    --card-foreground: var(--brand-50);
+
     --popover: var(--brand-950);
     --popover-foreground: var(--brand-50);
 
@@ -279,7 +285,7 @@
     --sh-sign: #a1b3c9;
     --sh-property: #34d399;
     --sh-entity: #cd94ff;
-    --sh-jsxliterals: hsla(var(--white), 90%);
+    --sh-jsxliterals: hsla(var(--white) / 90%);
     --sh-string: #f4a261;
     --sh-keyword: #48cae4;
     --sh-comment: #a7adb2;
@@ -367,6 +373,25 @@
     }
   }
 
+  /* based off https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/layout/src/link-box.tsx */
+  .link-overlay {
+    position: static;
+    &:after {
+      content: "";
+      cursor: inherit;
+      transition: transform 0.3s ease;
+      @apply absolute left-0 top-0 z-0 block h-full w-full;
+    }
+  }
+
+  .link-box {
+    @apply relative isolate;
+    /* elevate elements that are interactable also give special linkbox-elevate class privilege as a catchall */
+    & :is(a[href]:not(.link-overlay), button, .linkbox-elevate) {
+      @apply relative z-1;
+    }
+  }
+
   .info-theme {
     --background: var(--info-background);
     --foreground: var(--info-foreground);
@@ -432,6 +457,32 @@
       bottom: -2.875rem;
       right: 1.25rem;
       content: close-quote;
+    }
+  }
+
+  .card-link {
+    transition:
+      background-color 0.3s ease,
+      border 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.5s linear;
+    @apply border border-solid border-link-border;
+    &:is(:hover, :focus, :focus-visible) {
+      @apply -translate-y-3.5 border-link-border-active bg-card/40;
+      box-shadow:
+        hsla(var(--knockout) / 20%) 0px 0px 15px,
+        hsla(var(--knockout) / 15%) 0px 0px 3px 1px;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: hsla(var(--link-border-active) / 0.1);
+        z-index: -1;
+      }
     }
   }
 
@@ -522,6 +573,15 @@
       linear-gradient(to left, transparent 0%, rgba(255, 255, 255, 1) 40%);
     mask-size: cover;
     mask-composite: intersect;
+  }
+
+  /* credits to xetera for the initial idea */
+  /* resource: https://bennettfeely.com/clippy/ */
+  .clip-list-image-left {
+    clip-path: polygon(3% 0, 100% 0, 100% 100%, 20% 100%);
+  }
+  .clip-list-image-right {
+    clip-path: polygon(0 0, 97% 0, 80% 100%, 0 100%);
   }
 
   /* animations */

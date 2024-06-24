@@ -89,6 +89,10 @@ const config = {
       border: hsla("border"),
       input: hsla("input"),
       ring: hsla("ring"),
+      card: {
+        DEFAULT: hsla("card"),
+        foreground: hsla("card-foreground"),
+      },
       popover: {
         DEFAULT: hsla("popover"),
         foreground: hsla("popover-foreground"),
