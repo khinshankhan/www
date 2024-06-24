@@ -99,17 +99,32 @@ export async function getContentDataByFilePath(filePath: string): Promise<Conten
 
 export async function getAllContentData(getContentDataFromFilePath = getContentDataByFilePath) {
   const filePaths = await globby(contentPatterns, { cwd: contentDir })
-  const allContentDataPromises = filePaths.map(async (filePath) => {
+  const allPossibleContentDataPromises = filePaths.map(async (filePath) => {
     try {
       return getContentDataFromFilePath(filePath)
     } catch (err) {
       return null
     }
   })
-  const allContentData = await Promise.all(allContentDataPromises)
+  const allPossibleContentData = await Promise.all(allPossibleContentDataPromises)
 
-  const allValidContentData = allContentData.filter(existPredicate)
-  return allValidContentData
+  const allContentData = allPossibleContentData.filter(existPredicate).sort((a, b) => {
+    if (a.frontmatter.datePublished.getTime() !== b.frontmatter.datePublished.getTime()) {
+      return a.frontmatter.datePublished.getTime() - b.frontmatter.datePublished.getTime()
+    }
+
+    if (a.frontmatter.priority !== b.frontmatter.priority) {
+      return a.frontmatter.priority - b.frontmatter.priority
+    }
+
+    if (a.frontmatter.dateCreated.getTime() !== b.frontmatter.dateCreated.getTime()) {
+      return a.frontmatter.dateCreated.getTime() - b.frontmatter.dateCreated.getTime()
+    }
+
+    return a.frontmatter.title.localeCompare(b.frontmatter.title)
+  })
+
+  return allContentData
 }
 
 export async function getContentDataBySource(source: ContentSource) {
