@@ -1,6 +1,7 @@
 import React from "react"
 import { info } from "@/settings"
 import { Nav } from "./nav"
+import { SkipNav } from "./skip-nav"
 
 export function Footer() {
   return (
@@ -18,6 +19,7 @@ export function BaseLayout({ children }: { children: React.ReactNode }) {
   return (
     <div vaul-drawer-wrapper="">
       <div className="relative isolate z-0 flex min-h-[87vh] flex-col xs:min-h-[96vh]">
+        <SkipNav />
         <Nav />
         {/* NOTE: assumes pages will be wrapped in main tags with background color + grow */}
         <div id="page-content" className="relative flex grow flex-col">
