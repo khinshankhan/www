@@ -37,6 +37,7 @@ export function Spoiler({ className = "", children, ...props }: SpoilerProps) {
       className={cn(
         "relative inline rounded-lg px-1 py-0.5 text-knockout",
         "focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background",
+        !isRevealed && "select-none", // prevent text selection due to 'double click' on mobile
         isRevealed ? "bg-muted" : "bg-knockout",
         className
       )}
