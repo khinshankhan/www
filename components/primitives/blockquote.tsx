@@ -18,7 +18,10 @@ export function Blockquote({
 }: BlockquoteProps) {
   if (variant === "quote") {
     return (
-      <blockquote {...props} className={cn("relative italic text-muted-foreground", className)}>
+      <blockquote
+        {...props}
+        className={cn("relative text-muted-foreground [&>:is(span,p)]:italic", className)}
+      >
         {children}
       </blockquote>
     )
@@ -28,7 +31,7 @@ export function Blockquote({
     <blockquote
       {...props}
       className={cn(
-        "my-4 border-l-4 border-muted-foreground py-2 pl-4 italic text-muted-foreground",
+        "my-4 border-l-4 border-muted-foreground py-2 pl-4 text-muted-foreground [&>:is(span,p)]:italic",
         className
       )}
     >
