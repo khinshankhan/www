@@ -164,3 +164,14 @@ export function getSizeParts({
     unit: sizeUnit === "" ? sizeUnit : unit,
   }
 }
+
+/* event target utils */
+
+const interactiveTags = ["A", "BUTTON", "INPUT", "TEXTAREA", "SELECT"]
+const interactiveRoles = ["button", "link", "textbox", "listbox", "switch"]
+export function isInteractiveElement(element: HTMLElement) {
+  return (
+    interactiveTags.includes(element.tagName) ||
+    interactiveRoles.includes(element.getAttribute("role") || "")
+  )
+}

@@ -1,17 +1,32 @@
 "use client"
 
 import React, { useState, type ReactNode } from "react"
-import { cn } from "@/lib/utils"
+import { cn, isInteractiveElement } from "@/lib/utils"
 
 interface SpoilerProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string
   children: ReactNode
 }
+
 export function Spoiler({ className = "", children, ...props }: SpoilerProps) {
   const [isRevealed, setIsRevealed] = useState(false)
-  const toggleReveal = () => setIsRevealed((prev) => !prev)
 
   const toggleText = `Click to ${isRevealed ? "hide" : "reveal"} the spoiler`
+
+  const handleClick = (event: React.MouseEvent<HTMLSpanElement>) => {
+    if (event.target !== event.currentTarget && isInteractiveElement(event.target as HTMLElement)) {
+      event.stopPropagation()
+      return
+    }
+    setIsRevealed((prev) => !prev)
+  }
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
+    if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) {
+      event.preventDefault()
+      ;(event.target as HTMLSpanElement).click()
+    }
+  }
 
   return (
     <span
@@ -25,7 +40,8 @@ export function Spoiler({ className = "", children, ...props }: SpoilerProps) {
         isRevealed ? "bg-muted" : "bg-knockout",
         className
       )}
-      onClick={toggleReveal}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
       {...props}
     >
       <span aria-hidden={!isRevealed} className={isRevealed ? "visible" : "invisible"}>
