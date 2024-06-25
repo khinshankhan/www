@@ -4,10 +4,16 @@ import React from "react"
 import type { Metadata } from "next"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
+import { emojiLookup } from "@/lib/emoji"
 import { cn } from "@/lib/utils"
 import { BaseLayout } from "@/components/layouts/base"
 import { typographyVariants } from "@/components/primitives/typography"
 import { ThemeProvider, TooltipProvider } from "./providers"
+
+const faviconSrc =
+  process.env.NODE_ENV === "production" || process.env.NODE_ENV === "test"
+    ? "/favicon.ico?v=1"
+    : emojiLookup.get(":dancer:")!.url
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://khinshankhan.com"),
@@ -18,7 +24,7 @@ export const metadata: Metadata = {
   description:
     "Hello! Welcome to my digital garden, where I share my thoughts and musings. You may or may not learn something, but at least it'll be fun!",
   icons: {
-    shortcut: "/favicon.ico?v=1",
+    shortcut: faviconSrc,
   },
   openGraph: {
     title: "Khinshan Khan",
