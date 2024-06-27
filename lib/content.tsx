@@ -71,19 +71,23 @@ export async function getAllContentData(getContentDataFromFilePath = getContentD
   const allPossibleContentData = await Promise.all(allPossibleContentDataPromises)
 
   const allContentData = allPossibleContentData.filter(existPredicate).sort((a, b) => {
+    // Compare by datePublished in descending order
     if (a.frontmatter.datePublished.getTime() !== b.frontmatter.datePublished.getTime()) {
-      return a.frontmatter.datePublished.getTime() - b.frontmatter.datePublished.getTime()
+      return b.frontmatter.datePublished.getTime() - a.frontmatter.datePublished.getTime()
     }
 
+    // Compare by priority in descending order
     if (a.frontmatter.priority !== b.frontmatter.priority) {
-      return a.frontmatter.priority - b.frontmatter.priority
+      return b.frontmatter.priority - a.frontmatter.priority
     }
 
+    // Compare by dateCreated in descending order
     if (a.frontmatter.dateCreated.getTime() !== b.frontmatter.dateCreated.getTime()) {
-      return a.frontmatter.dateCreated.getTime() - b.frontmatter.dateCreated.getTime()
+      return b.frontmatter.dateCreated.getTime() - a.frontmatter.dateCreated.getTime()
     }
 
-    return a.frontmatter.title.localeCompare(b.frontmatter.title)
+    // Compare by title in reverse alphabetical order
+    return b.frontmatter.title.localeCompare(a.frontmatter.title)
   })
 
   return allContentData
