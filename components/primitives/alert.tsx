@@ -44,7 +44,7 @@ export const AlertHeading = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
-  <h5
+  <div
     ref={ref}
     className={cn("flex flex-row items-center gap-2 pb-2 font-semibold", className)}
     {...props}
