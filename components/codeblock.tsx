@@ -1,6 +1,6 @@
 "use client"
 
-import React, { forwardRef, useEffect, useState } from "react"
+import React, { forwardRef, useEffect, useRef, useState } from "react"
 import { highlight } from "sugar-high"
 import { cn, copyToClipboardGraceful } from "@/lib/utils"
 import { Button, type ButtonProps } from "@/components/primitives/button"
@@ -46,25 +46,33 @@ export const Pre = React.forwardRef<HTMLPreElement, PreProps>(function Pre(
   { className, children, ...props },
   forwardedRef
 ) {
+  // ref for scrollbar
+  const ref = useRef<HTMLDivElement>(null)
+  const visible = ref.current?.getAttribute("data-state") === "visible"
+
   // @ts-ignore: it's fine, this is how mdx codeblocks work
   const text = children?.props?.children ?? "Something went wrong, please contact support."
 
   return (
     <div className="group relative flex w-full items-start justify-center">
-      <ScrollArea className="group mb-0.5 block size-full rounded-lg bg-muted" type="auto">
+      <ScrollArea
+        className="group mb-0.5 block size-full rounded-lg border border-muted-foreground bg-muted"
+        type="auto"
+      >
         <CopyToClipboardButton text={text} className="absolute right-2 top-2" />
 
         <pre
           ref={forwardedRef}
           className={cn(
             typographyVariants({ variant: "small" }),
-            "size-full whitespace-pre rounded-lg bg-muted px-4 pb-6 pt-3 text-content-foreground [&>code]:contents"
+            "size-full whitespace-pre rounded-lg bg-accent px-4 pt-3 text-content-foreground [&>code]:contents",
+            visible ? "pb-4" : "pb-3"
           )}
           {...props}
         >
           {children}
         </pre>
-        <ScrollBar orientation="horizontal" className="mx-1" />
+        <ScrollBar ref={ref} orientation="horizontal" className="mx-1 mb-0.5" />
       </ScrollArea>
     </div>
   )
