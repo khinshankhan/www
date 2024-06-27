@@ -57,7 +57,7 @@ export function HamburgerMenu() {
   return (
     <Drawer shouldScaleBackground>
       <DrawerTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" aria-label="Toggle navigation menu">
           <HamburgerMenuIcon className="block size-[1.2rem]" />
         </Button>
       </DrawerTrigger>

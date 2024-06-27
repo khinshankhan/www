@@ -124,6 +124,7 @@ export const CopyToClipboardButton = forwardRef<HTMLButtonElement, CopyToClipboa
       <Tooltip disableHoverableContent open={hovering}>
         <TooltipTrigger asChild onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <Button
+            aria-label="Copy to clipboard"
             ref={forwardedRef}
             variant="ghost-contrast"
             className={cn("flex items-center gap-2", className)}
