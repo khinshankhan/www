@@ -12,6 +12,7 @@ import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-j
 import { cn } from "@/lib/utils"
 import { Code, Pre } from "@/components/codeblock"
 import { Emoji } from "@/components/emoji"
+import { Checkbox } from "@/components/primitives/checkbox"
 import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
 import { Spoiler } from "@/components/primitives/spoiler"
@@ -50,6 +51,13 @@ const baseComponents: MDXComponents = {
     />
   ),
   blockquote: MDXBlockquote,
+  input: ({ type: checkboxType = "checkbox", checked, disabled, ...props }) => {
+    if (checkboxType === "checkbox") {
+      return <Checkbox checked={checked} disabled={disabled} />
+    }
+
+    return <input type={checkboxType} {...props} />
+  },
 
   // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
   code: Code,
