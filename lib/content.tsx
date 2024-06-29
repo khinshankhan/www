@@ -3,7 +3,7 @@ import path from "path"
 import { globby } from "globby"
 import matter from "gray-matter"
 import { remark } from "remark"
-import { remarkExcerptExport } from "@/lib/mdx-plugins/remark-except"
+import { remarkExcerptExport } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkTocExport, type TocItem } from "@/lib/mdx-plugins/remark-toc"
 import { existPredicate } from "@/lib/utils"
 import {
