@@ -10,3 +10,7 @@ export const headerLinks = [
   { label: "Projects", href: "/projects/" },
   { label: "Connect", href: "/connect/" },
 ]
+
+export const flags = {
+  showCeaseFireBanner: false,
+}
