@@ -13,4 +13,5 @@ export const headerLinks = [
 
 export const flags = {
   showCeaseFireBanner: false,
+  showWritingImages: false,
 }

@@ -1,5 +1,6 @@
 import React from "react"
 import { type ContentData } from "@/schemas/content"
+import { flags } from "@/settings"
 import { getContentDataBySource } from "@/lib/content"
 import { cn } from "@/lib/utils"
 import { Callout } from "@/components/callout"
@@ -31,16 +32,18 @@ function WritingCard({ content, right = true }: { content: ContentData; right?: 
           </span>
         </div>
 
-        <div className="relative -z-1 h-32 w-full flex-none sm:h-48 md:h-auto md:w-72 lg:w-96">
-          <img
-            alt={content.frontmatter?.coverImage?.alt}
-            src={content.frontmatter.coverImage.url}
-            className={cn(
-              "relative inset-0 size-full rounded-t-lg object-cover md:absolute md:rounded-r-lg",
-              right ? "md:clip-list-image-left" : "md:clip-list-image-right"
-            )}
-          />
-        </div>
+        {flags.showWritingImages && (
+          <div className="relative -z-1 h-32 w-full flex-none sm:h-48 md:h-auto md:w-72 lg:w-96">
+            <img
+              alt={content.frontmatter?.coverImage?.alt}
+              src={content.frontmatter.coverImage.url}
+              className={cn(
+                "relative inset-0 size-full rounded-t-lg object-cover md:absolute md:rounded-r-lg",
+                right ? "md:clip-list-image-left" : "md:clip-list-image-right"
+              )}
+            />
+          </div>
+        )}
       </div>
     </li>
   )
