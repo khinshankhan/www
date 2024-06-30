@@ -11,6 +11,7 @@ import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { cn } from "@/lib/utils"
 import { Code, Pre } from "@/components/codeblock"
+import { YouTubeEmbed } from "@/components/embeds"
 import { Emoji } from "@/components/emoji"
 import { Checkbox } from "@/components/primitives/checkbox"
 import { SmartImage } from "@/components/primitives/image"
@@ -71,6 +72,7 @@ const baseComponents: MDXComponents = {
   Video,
   Spoiler,
   Emoji,
+  YouTubeEmbed,
 }
 
 // @ts-expect-error
