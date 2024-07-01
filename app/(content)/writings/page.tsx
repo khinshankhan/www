@@ -19,15 +19,27 @@ function WritingCard({ content, right = true }: { content: ContentData; right?: 
         )}
       >
         <div className="flex grow flex-col gap-1 p-6">
-          <h3 className={cn(typographyVariants({ variant: "h3" }), textAlign)}>
+          <h3
+            className={cn(
+              typographyVariants({ variant: "h3" }),
+              "line-clamp-2 md:line-clamp-1",
+              textAlign
+            )}
+          >
             <Link href={`/${content.slug}`} className="link-overlay">
               {content.frontmatter.title}
             </Link>
           </h3>
-          <span className={cn(typographyVariants({ variant: "h4" }), textAlign)}>
+          <span
+            className={cn(
+              typographyVariants({ variant: "h4" }),
+              "line-clamp-2 md:line-clamp-1",
+              textAlign
+            )}
+          >
             {content.frontmatter.subtitle}
           </span>
-          <span className={cn("text-theme-muted line-clamp-3", textAlign)}>
+          <span className={cn("text-theme-muted line-clamp-3 md:line-clamp-2", textAlign)}>
             {content.frontmatter.description}
           </span>
         </div>
