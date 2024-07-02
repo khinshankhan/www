@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useMemo } from "react"
 import { cn, range } from "@/lib/utils"
-import { useIsomorphicEffect } from "@/hooks/media"
+import { useBreakpoint, useMounted } from "@/hooks/media"
 
 // floating cogs from https://heropatterns.com/
 export const floatingCogsUrl = "url(/floating-cogs.svg?v=1)"
@@ -13,10 +13,12 @@ const contentPatternBlockDistance = 48
 const remToPx = (rem: number) => rem * 16
 
 export function ContentPattern() {
-  const [blockCount, setBlockCount] = useState(0)
+  const mounted = useMounted()
+  const isLg = useBreakpoint("lg")
+  const isXl = useBreakpoint("xl")
 
-  useIsomorphicEffect(() => {
-    if (!document) return
+  const blockCount = useMemo(() => {
+    if (!mounted || !isLg) return 0
 
     // NOTE: this height is in px
     const pageContentHeight = document.getElementById("page-content")?.clientHeight
@@ -29,8 +31,10 @@ export function ContentPattern() {
     )
 
     // we don't want to show the pattern with just one block
-    setBlockCount(possibleBlockCount > 1 ? possibleBlockCount : 0)
-  }, [])
+    return possibleBlockCount > 1 ? possibleBlockCount : 0
+  }, [mounted, isLg, isXl])
+
+  if (!mounted || !isLg || blockCount === 0) return null
 
   return range(0, blockCount).map((i) => {
     return (
@@ -60,6 +64,11 @@ export function ContentPattern() {
 }
 
 export function HeroPattern() {
+  const mounted = useMounted()
+  const isLg = useBreakpoint("lg")
+
+  if (!mounted || !isLg) return null
+
   return (
     <div role="presentation" className={"absolute left-0 top-0 -z-1 size-0 lg:size-full"}>
       <div
