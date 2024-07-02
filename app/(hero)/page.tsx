@@ -21,18 +21,26 @@ export default function Home() {
 
 function ProfileImage() {
   return (
-    <Image
-      alt="Profile Image"
-      width={256}
-      height={256}
-      src={info.avatarUrl}
-      className="select-none rounded-full transition-[border-radius] duration-500 md:ml-8"
-      draggable="false"
+    <div
+      className="md:ml-8"
       style={{
-        aspectRatio: "256/256",
-        objectFit: "cover",
+        minWidth: "256px",
+        minHeight: "256px",
       }}
-    />
+    >
+      <Image
+        alt="Profile Image"
+        width={256}
+        height={256}
+        src={info.avatarUrl}
+        className="select-none rounded-full transition-[border-radius] duration-500"
+        draggable="false"
+        style={{
+          aspectRatio: "256/256",
+          objectFit: "cover",
+        }}
+      />
+    </div>
   )
 }
 
