@@ -63,7 +63,18 @@ type ImageEvent = React.SyntheticEvent<HTMLImageElement, Event>
  * ```
  */
 export function useImage(props: UseImageProps) {
-  const { loading, src, srcSet, onLoad, onError, crossOrigin, sizes, ignoreFallback } = props
+  const {
+    loading,
+    src,
+    srcSet,
+    onLoad,
+    onError,
+    crossOrigin,
+    // @ts-ignore: this is a valid prop
+    referrerPolicy = "",
+    sizes,
+    ignoreFallback,
+  } = props
 
   const [status, setStatus] = useState<Status>("pending")
 
@@ -85,6 +96,7 @@ export function useImage(props: UseImageProps) {
     const img = new Image()
     img.src = src
     if (crossOrigin) img.crossOrigin = crossOrigin
+    if (referrerPolicy) img.referrerPolicy = referrerPolicy
     if (srcSet) img.srcset = srcSet
     if (sizes) img.sizes = sizes
     if (loading) img.loading = loading
