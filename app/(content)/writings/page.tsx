@@ -1,6 +1,4 @@
 import React from "react"
-import { type ContentData } from "@/schemas/content"
-import { flags } from "@/settings"
 import { getContentDataBySource } from "@/lib/content"
 import { cn } from "@/lib/utils"
 import { Callout } from "@/components/callout"

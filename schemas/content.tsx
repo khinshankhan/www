@@ -62,7 +62,9 @@ export const ContentFrontmatterSchema = z
 
     // misc
     draft: z.boolean().optional().default(false),
-    priority: z.number().optional().default(0),
+    // priority for sorting, lower is higher in priority
+    // based on linux nice values used for process priority
+    nice: z.number().min(-20).max(19).optional().default(0),
     tags: z.array(z.string()).optional().default([]),
 
     // for blogpostings

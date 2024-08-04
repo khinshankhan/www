@@ -76,9 +76,9 @@ export async function getAllContentData(getContentDataFromFilePath = getContentD
       return b.frontmatter.datePublished.getTime() - a.frontmatter.datePublished.getTime()
     }
 
-    // Compare by priority in descending order
-    if (a.frontmatter.priority !== b.frontmatter.priority) {
-      return b.frontmatter.priority - a.frontmatter.priority
+    // Compare by priority, from lowest to highest
+    if (a.frontmatter.nice !== b.frontmatter.nice) {
+      return a.frontmatter.nice - b.frontmatter.nice
     }
 
     // Compare by dateCreated in descending order
