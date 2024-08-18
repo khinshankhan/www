@@ -96,18 +96,6 @@ export function MDXContent({
       options={{
         mdxOptions: {
           remarkPlugins: [
-            [
-              remarkSimpleEmoji,
-              {
-                validate: (name: string) => emojiLookup.get(name as EmojiKey),
-                lookup: (name: string) => {
-                  const emoji = emojiLookup.get(name as EmojiKey)
-                  // NOTE: this should be guranteed due to validate
-                  return emoji!.alt
-                },
-              },
-            ],
-            remarkMarkFirstParagraph,
             remarkGfm,
             [
               remarkJsxifyElements,
@@ -127,6 +115,18 @@ export function MDXContent({
               },
             ],
             remarkUnwrapImages,
+            [
+              remarkSimpleEmoji,
+              {
+                validate: (name: string) => emojiLookup.get(name as EmojiKey),
+                lookup: (name: string) => {
+                  const emoji = emojiLookup.get(name as EmojiKey)
+                  // NOTE: this should be guranteed due to validate
+                  return emoji!.alt
+                },
+              },
+            ],
+            remarkMarkFirstParagraph,
           ],
           rehypePlugins: [
             [

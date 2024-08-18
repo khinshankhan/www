@@ -31,7 +31,7 @@ here](https://github.com/khinshankhan/www). You're free to use the code per the 
 however, is not under as free to use; I'm still working it out (TLDR: cite me if you use my words, would be cool if you
 mentioned me somewhere when you use my code too :stuck_out_tongue:)
 
-I’ve been discontent with my website; I must’ve changed it 10+ times now. After experimenting from vanilla to
+I've been discontent with my website; I must've changed it 10+ times now. After experimenting from vanilla to
 [Harp](https://github.com/sintaxi/harp) to [Frozen Flask](https://github.com/Frozen-Flask/Frozen-Flask) to
 [Jekyll](https://github.com/jekyll/jekyll) and etcetera etcetera, I've realized what I should use is what I feel most
 comfortable with and similar to what I use for work. Hopefully embracing modern technologies will make this full-on
