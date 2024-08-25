@@ -504,7 +504,9 @@
     }
     & li {
       padding-left: 0.375em;
+      @apply space-y-[0.75rem] md:space-y-[0.875rem] lg:space-y-[1rem];
     }
+
     /* NOTE: this assumes nested lists will be wrapped in a listitem */
     & :is(ol, ul) li > :is(ol, ul) {
       padding-left: 0.75em;
