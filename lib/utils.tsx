@@ -28,6 +28,10 @@ export const existPredicate = <T,>(item: T | undefined | null): item is T => {
   return item !== null && item !== undefined
 }
 
+export const identity = <T,>(item: T): T => {
+  return item
+}
+
 /* array utils */
 
 export function range(startOrEnd: number, end?: number, step: number = 1): number[] {
