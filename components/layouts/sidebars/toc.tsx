@@ -110,8 +110,6 @@ function TocList({ headings: headingsProp = [], markExcerpt = true }: TocProps) 
 function TocItem({
   heading: { id, title },
   indents,
-  isFirstItem,
-  isLastItem,
   isActive,
 }: {
   heading: TocItem
@@ -141,10 +139,7 @@ function TocItem({
         className={cn(
           linkVariants({ variant: "toc" }),
           typographyVariants({ variant: "xs" }),
-          "pointer-events-auto text-left transition-[font-weight] data-[active=true]:font-semibold",
-          isFirstItem && "pb-1.5",
-          isLastItem && "pt-1.5",
-          !isFirstItem && !isLastItem && "py-1.5",
+          "pointer-events-auto w-full py-1.5 text-left transition-[background-color] duration-1000 data-[active=true]:bg-muted",
           // this should be exhaustive for h1-6
           indents === 0 && "ps-4",
           indents === 1 && "ps-8",
