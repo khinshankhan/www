@@ -8,12 +8,14 @@ interface YouTubeEmbedProps extends React.IframeHTMLAttributes<HTMLIFrameElement
   width: number | string
   title?: string
   className?: string
+  fallbackSrc?: string
 }
 export function YouTubeEmbed({
   src,
   height,
   width,
   title = "YouTube Video",
+  fallbackSrc = undefined,
   className = "",
   style = {},
   ...props
@@ -41,9 +43,12 @@ export function YouTubeEmbed({
         {...props}
       />
 
-      <figcaption>
-        Because I don't trust third parties, <Link href={src}>direct link to video on YouTube</Link>
-      </figcaption>
+      {fallbackSrc && (
+        <figcaption>
+          Because I don't trust third parties,{" "}
+          <Link href={fallbackSrc}>here's the fallback source</Link>.
+        </figcaption>
+      )}
     </figure>
   )
 }
