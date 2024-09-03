@@ -52,3 +52,48 @@ export function YouTubeEmbed({
     </figure>
   )
 }
+
+interface SpotifyEmbedProps extends React.IframeHTMLAttributes<HTMLIFrameElement> {
+  src: string
+  height: number | string
+  width: number | string
+  className?: string
+  fallbackSrc?: string
+}
+export function SpotifyEmbed({
+  src,
+  height,
+  width,
+  fallbackSrc = undefined,
+  className = "",
+  style = {},
+  ...props
+}: SpotifyEmbedProps) {
+  // TODO: add in video skeleton
+  return (
+    <figure>
+      <iframe
+        src={src}
+        height={height}
+        width={width}
+        style={{
+          ["--aspect-width" as any]: width,
+          ["--aspect-height" as any]: height,
+          ...style,
+        }}
+        className={cn("rounded-[14px] border-none", className)}
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        allowFullScreen
+        loading="lazy"
+        {...props}
+      />
+
+      {fallbackSrc && (
+        <figcaption>
+          Because I don't trust third parties,{" "}
+          <Link href={fallbackSrc}>here's the fallback source</Link>.
+        </figcaption>
+      )}
+    </figure>
+  )
+}
