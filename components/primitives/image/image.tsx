@@ -107,16 +107,36 @@ export function SmartImage({ src, className = "", alt = "", ...props }: ImagePro
   const showFallbackImage = shouldShowFallbackImage(status, "beforeLoadOrError")
 
   return (
-    <Image
-      alt={alt}
-      src={src}
-      className={cn(
-        "mx-auto size-auto max-h-[725px] max-w-full rounded-lg",
-        className,
-        !className.includes("aspect-") && "!aspect-[var(--aspect-width)/var(--aspect-height)]"
-      )}
-      loaded={showFallbackImage}
-      {...props}
-    />
+    <>
+      <Image
+        alt={alt}
+        src={src}
+        className={cn(
+          "hide-no-js mx-auto size-auto max-h-[725px] max-w-full rounded-lg",
+          className,
+          !className.includes("aspect-") && "!aspect-[var(--aspect-width)/var(--aspect-height)]"
+        )}
+        loaded={showFallbackImage}
+        {...props}
+      />
+
+      <noscript>
+        <img
+          alt={alt}
+          src={src}
+          className={cn(
+            "show-no-js mx-auto hidden size-auto max-h-[725px] max-w-full rounded-lg",
+            className,
+            !className.includes("aspect-") && "!aspect-[var(--aspect-width)/var(--aspect-height)]"
+          )}
+          {...props}
+          style={{
+            ["--aspect-width" as any]: props.width,
+            ["--aspect-height" as any]: props.height,
+            ...(props?.style ?? {}),
+          }}
+        />
+      </noscript>
+    </>
   )
 }

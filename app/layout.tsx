@@ -21,7 +21,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       suppressHydrationWarning
       className="touch-manipulation scroll-auto focus-within:scroll-smooth"
     >
-      <head />
+      <head>
+        <noscript>
+          <style>{`
+            .hide-no-js {
+              display: none !important;
+            }
+            .show-no-js {
+              display: block !important;
+            }
+          `}</style>
+        </noscript>
+      </head>
       <body
         className={cn(
           GeistSans.variable,
