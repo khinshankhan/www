@@ -338,6 +338,32 @@
     text-align: right;
     color: hsl(var(--muted-foreground));
   }
+
+  /* expand lines in pre block to be 100% width so they can be highlighted */
+  pre code span.line {
+    display: inline-block;
+    width: 100%;
+  }
+
+  code span.line.remove {
+    background-color: hsla(var(--danger-link-border-active) / 0.2);
+  }
+
+  code span.line.add {
+    background-color: hsla(var(--success-link-border-active) / 0.2);
+  }
+
+  code span.line.highlighted {
+    background-color: hsla(var(--link-border-active) / 0.2);
+  }
+
+  code span.line.warning {
+    background-color: hsla(var(--warning-link-border-active) / 0.2);
+  }
+
+  code span.line.error {
+    background-color: hsla(var(--danger-link-border-active) / 0.2);
+  }
 }
 
 @layer components {

@@ -1,5 +1,10 @@
 import React, { Fragment } from "react"
 import { jsx, jsxs } from "react/jsx-runtime"
+import {
+  transformerNotationDiff,
+  transformerNotationErrorLevel,
+  transformerNotationHighlight,
+} from "@shikijs/transformers"
 import { toJsxRuntime } from "hast-util-to-jsx-runtime"
 import { createHighlighter } from "shiki"
 import { createCssVariablesTheme } from "shiki/core"
@@ -50,6 +55,11 @@ export async function Code({
   const out = highlighterInstance.codeToHast(children.trim(), {
     lang: language,
     theme: "css-variables",
+    transformers: [
+      transformerNotationDiff(),
+      transformerNotationHighlight(),
+      transformerNotationErrorLevel(),
+    ],
   })
 
   return (
