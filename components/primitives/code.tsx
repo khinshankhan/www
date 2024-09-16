@@ -79,15 +79,29 @@ export async function Code({
   )
 }
 
-export interface PreProps extends React.ComponentPropsWithoutRef<"pre"> {}
+export interface PreProps extends React.ComponentPropsWithoutRef<"pre"> {
+  showLineNumbers?: boolean
+  start?: string | number
+}
 
-export async function Pre({ children, ...props }: PreProps) {
+export async function Pre({
+  children,
+  showLineNumbers = false,
+  start = 1,
+  style = {},
+  ...props
+}: PreProps) {
   return (
     <pre
       className={cn(
         typographyVariants({ variant: "small" }),
         "size-full whitespace-pre rounded-lg bg-accent p-4 text-content-foreground [&>code]:contents"
       )}
+      data-lines={showLineNumbers ? "true" : "false"}
+      style={{
+        ...style,
+        ["--start" as any]: start,
+      }}
       {...props}
     >
       {children}

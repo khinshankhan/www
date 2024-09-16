@@ -79,9 +79,22 @@ const baseComponents: MDXComponents = {
     )
   },
   pre: ({ ref: _ref, children, ...props }) => {
+    // @ts-expect-error: these are custom props passed to the pre tag
+    const { showLineNumbers = undefined, ...rest } = props
+
     return (
       <Codeblock>
-        <Pre {...props}>{children}</Pre>
+        <Pre
+          {...rest}
+          showLineNumbers={showLineNumbers !== undefined}
+          start={
+            typeof showLineNumbers === "number" || typeof showLineNumbers === "string"
+              ? showLineNumbers
+              : 1
+          }
+        >
+          {children}
+        </Pre>
       </Codeblock>
     )
   },
