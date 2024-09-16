@@ -80,10 +80,13 @@ const baseComponents: MDXComponents = {
   },
   pre: ({ ref: _ref, children, ...props }) => {
     // @ts-expect-error: these are custom props passed to the pre tag
-    const { showLineNumbers = undefined, ...rest } = props
+    const { title = undefined, showLineNumbers = undefined, allowCopy = true, ...rest } = props
+
+    // @ts-ignore: it's fine, this is how mdx codeblocks work
+    const text = children?.props?.children
 
     return (
-      <Codeblock>
+      <Codeblock title={title} text={Boolean(allowCopy) ? text : undefined}>
         <Pre
           {...rest}
           showLineNumbers={showLineNumbers !== undefined}
