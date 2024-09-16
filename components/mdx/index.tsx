@@ -10,10 +10,11 @@ import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { cn } from "@/lib/utils"
-import { Code, Pre } from "@/components/codeblock"
+import { Codeblock } from "@/components/codeblock"
 import { SpotifyEmbed, YouTubeEmbed } from "@/components/embeds"
 import { Emoji } from "@/components/emoji"
 import { Checkbox } from "@/components/primitives/checkbox"
+import { Code, Pre } from "@/components/primitives/code"
 import { SmartImage } from "@/components/primitives/image"
 import { Link } from "@/components/primitives/link"
 import { Spoiler } from "@/components/primitives/spoiler"
@@ -63,6 +64,13 @@ const baseComponents: MDXComponents = {
   // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
   code: Code,
   pre: Pre,
+  pre: ({ ref: _ref, children, ...props }) => {
+    return (
+      <Codeblock>
+        <Pre {...props}>{children}</Pre>
+      </Codeblock>
+    )
+  },
   // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
   img: SmartImage,
   video: Video,
