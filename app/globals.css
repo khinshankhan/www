@@ -184,15 +184,18 @@
     --logo-border: var(--transparent);
     --logo-shadow: 0, 0%, 43.5%;
 
-    --sh-class: #1e40af;
-    --sh-identifier: #622ebc;
-    --sh-sign: #48525f;
-    --sh-property: #047857;
-    --sh-entity: #6039a7;
-    --sh-jsxliterals: hsla(var(--black) / 85%);
-    --sh-string: #913109;
-    --sh-keyword: #025583;
-    --sh-comment: #495057;
+    /* based on megaman's colors */
+    --shiki-foreground: hsl(220, 90%, 25%);
+    --shiki-background: hsl(210, 100%, 97%);
+    --shiki-token-constant: hsl(200, 100%, 40%);
+    --shiki-token-string: hsl(50, 100%, 35%);
+    --shiki-token-comment: hsl(210, 60%, 60%);
+    --shiki-token-keyword: hsl(340, 80%, 50%);
+    --shiki-token-parameter: hsl(270, 50%, 40%);
+    --shiki-token-function: hsl(280, 60%, 60%);
+    --shiki-token-string-expression: hsl(140, 60%, 40%);
+    --shiki-token-punctuation: hsl(0, 0%, 20%);
+    --shiki-token-link: hsl(240, 40%, 40%);
   }
 
   .light {
@@ -280,15 +283,17 @@
     --danger-link-border-active: var(--rose-600);
     --danger-border: var(--rose-400);
 
-    --sh-class: #4dabf7;
-    --sh-identifier: #c79bdc;
-    --sh-sign: #a1b3c9;
-    --sh-property: #34d399;
-    --sh-entity: #cd94ff;
-    --sh-jsxliterals: hsla(var(--white) / 90%);
-    --sh-string: #f4a261;
-    --sh-keyword: #48cae4;
-    --sh-comment: #a7adb2;
+    --shiki-foreground: hsl(220 100% 85%);
+    --shiki-background: hsl(220 80% 20%);
+    --shiki-token-constant: hsl(200 100% 70%);
+    --shiki-token-string: hsl(60 100% 80%);
+    --shiki-token-comment: hsl(220 60% 60%);
+    --shiki-token-keyword: hsl(341 90% 67%);
+    --shiki-token-parameter: hsl(270 50% 70%);
+    --shiki-token-function: hsl(281 73% 96%);
+    --shiki-token-string-expression: hsl(140 70% 50%);
+    --shiki-token-punctuation: hsl(0 0% 93%);
+    --shiki-token-link: hsl(240 60% 50%);
   }
 
   * {
