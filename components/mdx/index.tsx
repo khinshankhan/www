@@ -3,6 +3,7 @@ import { remarkSimpleEmoji } from "@khinshankhan/emoji-helper-remark"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypeMdxCodeProps from "rehype-mdx-code-props"
 import remarkGfm from "remark-gfm"
 import remarkUnwrapImages from "remark-unwrap-images"
 import { EmojiKey, emojiLookup } from "@/lib/emoji"
@@ -166,6 +167,7 @@ export function MDXContent({
                 },
               },
             ],
+            rehypeMdxCodeProps,
           ],
         },
       }}
