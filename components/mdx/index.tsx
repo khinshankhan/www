@@ -61,9 +61,22 @@ const baseComponents: MDXComponents = {
     return <input type={checkboxType} {...props} />
   },
 
-  // @ts-expect-error: all the props are probably compatible, we'll burn that bridge when we get there
-  code: Code,
-  pre: Pre,
+  code: ({ ref: _ref, children, ...props }) => {
+    // surely there's a better way to do this?
+    const language =
+      props.className
+        ?.split(" ")
+        .find((c) => c.startsWith("language-"))
+        ?.split("language-")
+        .pop() || "plaintext"
+
+    // can't find an edge case where children isn't a string so this should be fine?
+    return (
+      <Code language={language} {...props}>
+        {children as string}
+      </Code>
+    )
+  },
   pre: ({ ref: _ref, children, ...props }) => {
     return (
       <Codeblock>
