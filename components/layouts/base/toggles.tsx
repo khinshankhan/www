@@ -27,9 +27,9 @@ const themeOptionsList = ["light", "dark", "system"]
 const ModeButton = React.forwardRef<HTMLButtonElement, {}>((props, ref) => {
   return (
     <Button variant="ghost" size="icon" ref={ref} {...props}>
+      <span className="sr-only">Toggle theme</span>
       <SunIcon className="block size-[1.2rem] dark:hidden" />
       <MoonIcon className="hidden size-[1.2rem] dark:block" />
-      <span className="sr-only">Toggle theme</span>
     </Button>
   )
 })

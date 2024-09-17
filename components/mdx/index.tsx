@@ -11,7 +11,7 @@ import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkJsxifyElements, type MdastNode } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { cn } from "@/lib/utils"
-import { Codeblock } from "@/components/codeblock"
+import { Codeblock, CodeblockSwitcher } from "@/components/codeblock"
 import { SpotifyEmbed, YouTubeEmbed } from "@/components/embeds"
 import { Emoji } from "@/components/emoji"
 import { Checkbox } from "@/components/primitives/checkbox"
@@ -79,14 +79,22 @@ const baseComponents: MDXComponents = {
     )
   },
   pre: ({ ref: _ref, children, ...props }) => {
-    // @ts-expect-error: these are custom props passed to the pre tag
-    const { title = undefined, showLineNumbers = undefined, allowCopy = true, ...rest } = props
+    const {
+      // @ts-expect-error: these are custom props passed to the pre tag
+      filename = undefined,
+      title = undefined,
+      // @ts-expect-error: these are custom props passed to the pre tag
+      showLineNumbers = undefined,
+      // @ts-expect-error: these are custom props passed to the pre tag
+      allowCopy = true,
+      ...rest
+    } = props
 
     // @ts-ignore: it's fine, this is how mdx codeblocks work
     const text = children?.props?.children
 
     return (
-      <Codeblock title={title} text={Boolean(allowCopy) ? text : undefined}>
+      <Codeblock filename={filename} title={title} text={Boolean(allowCopy) ? text : undefined}>
         <Pre
           {...rest}
           showLineNumbers={showLineNumbers !== undefined}
@@ -106,6 +114,7 @@ const baseComponents: MDXComponents = {
   video: Video,
 
   // custom components
+  CodeblockSwitcher,
   SmartImage,
   Video,
   Spoiler,

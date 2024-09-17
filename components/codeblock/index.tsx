@@ -5,6 +5,7 @@ import { typographyVariants } from "@/components/primitives/typography"
 import { CopyButton } from "./copy-to-clipboard-button"
 
 interface CodeblockProps {
+  filename?: string
   title?: string
   text?: string
   className?: string
@@ -12,6 +13,7 @@ interface CodeblockProps {
 }
 
 export async function Codeblock({
+  filename = undefined,
   title = undefined,
   text = undefined,
   className = "",
@@ -19,6 +21,7 @@ export async function Codeblock({
 }: CodeblockProps) {
   return (
     <figure
+      data-filename={filename}
       className={cn(
         typographyVariants({ variant: "small" }),
         "relative my-6 overflow-hidden rounded-lg border border-muted-foreground",
@@ -41,3 +44,5 @@ export async function Codeblock({
     </figure>
   )
 }
+
+export { CodeblockSwitcher } from "./codeblock-switcher"
