@@ -30,11 +30,19 @@ export async function Codeblock({
     >
       <div className="flex flex-row items-center justify-between border-b border-muted-foreground bg-content/70 px-4 py-1.5">
         <div>{title && <figcaption className="mt-0">{title}</figcaption>}</div>
-        <CopyButton
-          className="-me-2"
-          disabled={!Boolean(text)}
-          text={text ?? "Something went wrong, please contact support."}
-        />
+
+        <div className="flex flex-row items-center gap-2">
+          {filename && (
+            <div data-switcher="true">
+              <noscript>(Requires Javascript to Change)</noscript>
+            </div>
+          )}
+          <CopyButton
+            className="-me-2"
+            disabled={!Boolean(text)}
+            text={text ?? "Something went wrong, please contact support."}
+          />
+        </div>
       </div>
 
       <ScrollArea dir="ltr" type="auto" className="bg-muted/50">
