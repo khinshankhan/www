@@ -99,13 +99,15 @@ export async function Pre({
   showLineNumbers = false,
   start = 1,
   style = {},
+  className = "",
   ...props
 }: PreProps) {
   return (
     <pre
       className={cn(
         typographyVariants({ variant: "small" }),
-        "size-full whitespace-pre rounded-lg bg-accent p-4 text-content-foreground [&>code]:contents"
+        "size-full whitespace-pre rounded-lg bg-accent p-4 text-content-foreground [&>code]:contents",
+        className
       )}
       data-lines={showLineNumbers ? "true" : "false"}
       style={{
