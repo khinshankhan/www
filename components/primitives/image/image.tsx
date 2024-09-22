@@ -59,7 +59,7 @@ type ImageProps = Omit<NextImageProps, "title" | "alt" | "height" | "width"> & {
   height: string | number
   width: string | number
 
-  loaded?: boolean
+  showFallbackImage?: boolean
   className?: string
   style?: CSSProperties
 }
@@ -69,7 +69,7 @@ export function Image({
   title,
   height,
   width,
-  loaded = false,
+  showFallbackImage = false,
   className = "",
   style = {},
 }: ImageProps) {
@@ -78,7 +78,7 @@ export function Image({
 
   const imageAlt = getImageAlt({ src: typeof src === "string" ? src : "local", alt, title })
 
-  const Component = loaded ? SkeletonImage : NextImage
+  const Component = showFallbackImage ? SkeletonImage : NextImage
 
   return (
     <Component
@@ -116,7 +116,7 @@ export function SmartImage({ src, className = "", alt = "", ...props }: ImagePro
           className,
           !className.includes("aspect-") && "!aspect-[var(--aspect-width)/var(--aspect-height)]"
         )}
-        loaded={showFallbackImage}
+        showFallbackImage={showFallbackImage}
         {...props}
       />
 
