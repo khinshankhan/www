@@ -1,9 +1,12 @@
 "use client"
 
-import React, { type CSSProperties } from "react"
+import React, { Fragment, type CSSProperties } from "react"
 import { default as NextImage, type ImageProps as NextImageProps } from "next/image"
+import Zoom from "react-medium-image-zoom"
 import { cn, getSizeParts } from "@/lib/utils"
 import { shouldShowFallbackImage, useImage } from "./use-image"
+
+import "react-medium-image-zoom/dist/styles.css"
 
 interface SkeletonImageProps {
   height: string | number
@@ -59,9 +62,11 @@ type ImageProps = Omit<NextImageProps, "title" | "alt" | "height" | "width"> & {
   height: string | number
   width: string | number
 
-  showFallbackImage?: boolean
   className?: string
   style?: CSSProperties
+
+  showFallbackImage?: boolean
+  zoomable?: boolean
 }
 export function Image({
   src,
@@ -69,9 +74,10 @@ export function Image({
   title,
   height,
   width,
-  showFallbackImage = false,
   className = "",
   style = {},
+  showFallbackImage = false,
+  zoomable = false,
 }: ImageProps) {
   const { size: trueHeight } = getSizeParts({ size: height })
   const { size: trueWidth } = getSizeParts({ size: width })
@@ -79,25 +85,34 @@ export function Image({
   const imageAlt = getImageAlt({ src: typeof src === "string" ? src : "local", alt, title })
 
   const Component = showFallbackImage ? SkeletonImage : NextImage
+  const Wrapper = zoomable && !showFallbackImage ? Zoom : Fragment
 
   return (
-    <Component
-      src={src}
-      alt={imageAlt}
-      title={title || ""}
-      height={trueHeight}
-      width={trueWidth}
-      style={{
-        ["--aspect-width" as any]: trueWidth,
-        ["--aspect-height" as any]: trueHeight,
-        ...style,
-      }}
-      className={className}
-    />
+    <Wrapper>
+      <Component
+        src={src}
+        alt={imageAlt}
+        title={title || ""}
+        height={trueHeight}
+        width={trueWidth}
+        style={{
+          ["--aspect-width" as any]: trueWidth,
+          ["--aspect-height" as any]: trueHeight,
+          ...style,
+        }}
+        className={className}
+      />
+    </Wrapper>
   )
 }
 
-export function SmartImage({ src, className = "", alt = "", ...props }: ImageProps) {
+export function SmartImage({
+  src,
+  className = "",
+  alt = "",
+  zoomable = true,
+  ...props
+}: ImageProps) {
   const { status } = useImage({
     src: typeof src === "string" ? src : "/fallback.png",
     ...props,
@@ -117,6 +132,7 @@ export function SmartImage({ src, className = "", alt = "", ...props }: ImagePro
           !className.includes("aspect-") && "!aspect-[var(--aspect-width)/var(--aspect-height)]"
         )}
         showFallbackImage={showFallbackImage}
+        zoomable={zoomable}
         {...props}
       />
 

@@ -367,6 +367,16 @@
 }
 
 @layer components {
+  /* image styling */
+  [data-rmiz-modal-overlay="visible"] {
+    background-color: hsla(var(--muted) / 0.95) !important;
+  }
+
+  [data-rmiz-modal-overlay="hidden"] {
+    background-color: var(--transparent) !important;
+  }
+
+  /* link styling */
   .home-link {
     & svg {
       box-shadow: 0px 0px 10px 1px hsl(var(--logo-shadow));

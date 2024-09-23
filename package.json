@@ -45,6 +45,7 @@
     "react": "^18.3.1",
     "react-children-utilities": "^2.10.0",
     "react-dom": "^18.3.1",
+    "react-medium-image-zoom": "^5.2.10",
     "react-responsive": "^10.0.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-mdx-code-props": "^3.0.1",
