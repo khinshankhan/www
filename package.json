@@ -27,6 +27,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@types/hast": "^3.0.4",
+    "@types/refractor": "^3.4.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.12",
@@ -35,9 +36,8 @@
     "globby": "^14.0.2",
     "gray-matter": "^4.0.3",
     "hast-util-heading-rank": "^3.0.0",
-    "hast-util-to-jsx-runtime": "^2.3.0",
+    "hast-util-to-html": "^9.0.3",
     "hast-util-to-string": "^3.0.0",
-    "hastscript": "^9.0.0",
     "mdast-util-to-string": "^4.0.0",
     "next": "^14.2.4",
     "next-mdx-remote": "^5.0.0",
@@ -47,6 +47,7 @@
     "react-dom": "^18.3.1",
     "react-medium-image-zoom": "^5.2.10",
     "react-responsive": "^10.0.0",
+    "refractor": "^4.8.1",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-mdx-code-props": "^3.0.1",
     "remark": "^15.0.1",
@@ -77,7 +78,6 @@
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.5.14",
-    "shiki": "^1.17.6",
     "tailwindcss": "3.4.3"
   }
 }

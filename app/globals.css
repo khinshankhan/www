@@ -185,17 +185,11 @@
     --logo-shadow: 0, 0%, 43.5%;
 
     /* based on megaman's colors */
-    --shiki-foreground: hsl(220, 90%, 25%);
-    --shiki-background: hsl(210, 100%, 97%);
-    --shiki-token-constant: hsl(200, 100%, 40%);
-    --shiki-token-string: hsl(50, 100%, 35%);
-    --shiki-token-comment: hsl(210, 60%, 60%);
-    --shiki-token-keyword: hsl(340, 80%, 50%);
-    --shiki-token-parameter: hsl(270, 50%, 40%);
-    --shiki-token-function: hsl(280, 60%, 60%);
-    --shiki-token-string-expression: hsl(140, 60%, 40%);
-    --shiki-token-punctuation: hsl(0, 0%, 20%);
-    --shiki-token-link: hsl(240, 40%, 40%);
+    --syntax-1: hsl(100, 27%, 34%); /* comments, resembling system notes? */
+    --syntax-2: hsl(0, 0%, 39%); /* punctuation */
+    --syntax-3: hsl(207, 88%, 37%); /* classes, functions, etc */
+    --syntax-4: hsl(60, 90%, 21%); /* strings and attributes (data-like) */
+    --syntax-5: hsl(336, 75%, 43%); /* keywords and variables */
   }
 
   .light {
@@ -283,17 +277,12 @@
     --danger-link-border-active: var(--rose-600);
     --danger-border: var(--rose-400);
 
-    --shiki-foreground: hsl(220 100% 85%);
-    --shiki-background: hsl(220 80% 20%);
-    --shiki-token-constant: hsl(200 100% 70%);
-    --shiki-token-string: hsl(60 100% 80%);
-    --shiki-token-comment: hsl(220 60% 60%);
-    --shiki-token-keyword: hsl(341 90% 67%);
-    --shiki-token-parameter: hsl(270 50% 70%);
-    --shiki-token-function: hsl(281 73% 96%);
-    --shiki-token-string-expression: hsl(140 70% 50%);
-    --shiki-token-punctuation: hsl(0 0% 93%);
-    --shiki-token-link: hsl(240 60% 50%);
+    /* based on megaman's colors */
+    --syntax-1: hsl(100, 40%, 60%); /* comments, resembling system notes? */
+    --syntax-2: hsl(0, 0%, 80%); /* punctuation */
+    --syntax-3: hsl(200, 100%, 70%); /* classes, functions, etc */
+    --syntax-4: hsl(60, 100%, 80%); /* strings and attributes (data-like) */
+    --syntax-5: hsl(340, 80%, 75%); /* keywords and variables */
   }
 
   * {
@@ -322,47 +311,61 @@
   }
 
   /* codeblock styling */
+  code {
+    .token.punctuation,
+    .token.attr-value > .token.punctuation.attr-equals {
+      color: var(--syntax-2);
+    }
 
-  /* codeblock line numbers based off https://github.com/shikijs/shiki/issues/3#issuecomment-830564854 */
-  pre[data-lines="true"] {
-    counter-reset: step;
-    counter-increment: step calc(var(--start, 1) - 1);
-  }
+    .token.class-name,
+    .token.class,
+    .token.function,
+    .token.maybe-class-name,
+    .token.parameter,
+    .token.property,
+    .token.pseudo-class,
+    .token.selector,
+    .token.tag,
+    .token.number,
+    .token.boolean,
+    .token.constant {
+      color: var(--syntax-3);
+    }
 
-  pre[data-lines="true"] .line::before {
-    content: counter(step);
-    counter-increment: step;
-    width: 1rem;
-    margin-right: 1.5rem;
-    display: inline-block;
-    text-align: right;
-    color: hsl(var(--muted-foreground));
-  }
+    .token.attr-value,
+    .token.color,
+    .token.imports,
+    .token.unit,
+    .token.string,
+    .token.attr-value > .token.punctuation {
+      color: var(--syntax-4);
+    }
 
-  /* expand lines in pre block to be 100% width so they can be highlighted */
-  pre code span.line {
-    display: inline-block;
-    width: 100%;
-  }
+    .token.attr-name,
+    .token.important,
+    .token.interpolation-punctuation,
+    .token.keyword,
+    .token.module,
+    .token.rule,
+    .token.variable {
+      color: var(--syntax-5);
+    }
 
-  code span.line.remove {
-    background-color: hsla(var(--danger-link-border-active) / 0.2);
-  }
+    .token.comment {
+      color: var(--syntax-1);
+    }
 
-  code span.line.add {
-    background-color: hsla(var(--success-link-border-active) / 0.2);
-  }
-
-  code span.line.highlighted {
-    background-color: hsla(var(--link-border-active) / 0.2);
-  }
-
-  code span.line.warning {
-    background-color: hsla(var(--warning-link-border-active) / 0.2);
-  }
-
-  code span.line.error {
-    background-color: hsla(var(--danger-link-border-active) / 0.2);
+    .line {
+      &.highlighted {
+        background-color: hsla(var(--knockout) / 0.1);
+      }
+      &.diff.add {
+        background-color: hsla(var(--success-link-border-active) / 0.2);
+      }
+      &.diff.remove {
+        background-color: hsla(var(--danger-link-border-active) / 0.2);
+      }
+    }
   }
 }
 

@@ -1,44 +1,43 @@
-import React, { Fragment } from "react"
-import { jsx, jsxs } from "react/jsx-runtime"
-import {
-  transformerNotationDiff,
-  transformerNotationErrorLevel,
-  transformerNotationHighlight,
-} from "@shikijs/transformers"
-import { toJsxRuntime } from "hast-util-to-jsx-runtime"
-import { createHighlighter } from "shiki"
-import { createCssVariablesTheme } from "shiki/core"
+import React from "react"
+import { toHtml as hastToHtml } from "hast-util-to-html"
+import bash from "refractor/lang/bash"
+import diff from "refractor/lang/diff"
+import go from "refractor/lang/go"
+import graphql from "refractor/lang/graphql"
+import ini from "refractor/lang/ini"
+import javascript from "refractor/lang/javascript"
+import json from "refractor/lang/json"
+import jsx from "refractor/lang/jsx"
+import lisp from "refractor/lang/lisp"
+import markdown from "refractor/lang/markdown"
+import markup from "refractor/lang/markup"
+import ruby from "refractor/lang/ruby"
+import tsx from "refractor/lang/tsx"
+import typescript from "refractor/lang/typescript"
+import { refractor } from "refractor/lib/core"
+import conf from "@/lib/syntax/lang/conf"
+import css from "@/lib/syntax/lang/css"
 import { cn } from "@/lib/utils"
 import { typographyVariants } from "@/components/primitives/typography"
 
-const myTheme = createCssVariablesTheme({
-  name: "css-variables",
-  variablePrefix: "--shiki-",
-  variableDefaults: {},
-  fontStyle: true,
-})
-
-const highlighter = createHighlighter({
-  // perhaps autogenerate this list of langs?
-  langs: [
-    "js",
-    "ts",
-    "jsx",
-    "tsx",
-    "css",
-    "html",
-    "json",
-    "yaml",
-    "markdown",
-    "ini",
-    "shell",
-    "bash",
-    "plaintext",
-    "go",
-  ],
-  // register the theme
-  themes: [myTheme],
-})
+;[
+  bash,
+  conf,
+  css,
+  diff,
+  go,
+  graphql,
+  ini,
+  javascript,
+  json,
+  jsx,
+  lisp,
+  markdown,
+  markup,
+  ruby,
+  tsx,
+  typescript,
+].forEach(refractor.register)
 
 export interface CodeProps extends React.ComponentPropsWithoutRef<"code"> {
   children: string
@@ -51,16 +50,9 @@ export async function Code({
   className = "",
   ...props
 }: CodeProps) {
-  const highlighterInstance = await highlighter
-  const out = highlighterInstance.codeToHast(children.trim(), {
-    lang: language,
-    theme: "css-variables",
-    transformers: [
-      transformerNotationDiff(),
-      transformerNotationHighlight(),
-      transformerNotationErrorLevel(),
-    ],
-  })
+  const tree = refractor.highlight(children, language)
+  // @ts-expect-error: there's a slight type mismatch between refractor tree and hast tree but it works
+  const content = hastToHtml(tree)
 
   return (
     <code
@@ -70,22 +62,9 @@ export async function Code({
         "rounded-lg bg-muted px-1 py-0.5 text-content-foreground",
         className
       )}
+      dangerouslySetInnerHTML={{ __html: content }}
       {...props}
-    >
-      {toJsxRuntime(out, {
-        Fragment,
-        // @ts-expect-error: trust https://shiki.style/packages/next#custom-components
-        jsx: jsx,
-        // @ts-expect-error: trust https://shiki.style/packages/next#custom-components
-        jsxs: jsxs,
-        components: {
-          // @ts-expect-error: trust https://shiki.style/packages/next#custom-components
-          pre: (props) => props.children,
-          // @ts-expect-error: trust https://shiki.style/packages/next#custom-components
-          code: (props) => props.children,
-        },
-      })}
-    </code>
+    ></code>
   )
 }
 

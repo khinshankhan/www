@@ -10,8 +10,8 @@ import React, {
   useState,
   type ReactNode,
 } from "react"
-import { useIsomorphicEffect } from "hooks/media"
 import { cn, existPredicate } from "@/lib/utils"
+import { useIsomorphicEffect } from "@/hooks/media"
 import * as Portal from "@radix-ui/react-portal"
 import { Button } from "@/components/primitives/button"
 import {
