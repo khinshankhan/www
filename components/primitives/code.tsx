@@ -1,5 +1,6 @@
 import React from "react"
 import { toHtml as hastToHtml } from "hast-util-to-html"
+import rangeParser from "parse-numeric-range"
 import bash from "refractor/lang/bash"
 import diff from "refractor/lang/diff"
 import go from "refractor/lang/go"
@@ -19,6 +20,7 @@ import conf from "@/lib/syntax/lang/conf"
 import css from "@/lib/syntax/lang/css"
 import rehypeWrapLines from "@/lib/syntax/plugins/rehype-wrap-lines"
 import { cn } from "@/lib/utils"
+import { Slot } from "@radix-ui/react-slot"
 import { typographyVariants } from "@/components/primitives/typography"
 
 ;[
@@ -43,27 +45,51 @@ import { typographyVariants } from "@/components/primitives/typography"
 export interface CodeProps extends React.ComponentPropsWithoutRef<"code"> {
   children: string
   language: string
+
+  highlighted?: string
+  add?: string
+  remove?: string
 }
 
 export async function Code({
   children,
-  language = "plaintext",
   className = "",
+  language = "plaintext",
+
+  highlighted = "",
+  add = "",
+  remove = "",
+
   ...props
 }: CodeProps) {
+  const linesToMarkHighlighted = new Set(rangeParser(highlighted))
+  const linesToMarkAdd = new Set(rangeParser(add))
+  const linesToMarkRemove = new Set(rangeParser(remove))
+
   const tree = refractor.highlight(children, language)
-  // @ts-expect-error: there's a slight type mismatch between refractor tree and hast tree but it works
-  const transformedTree = rehypeWrapLines(tree)
+  const transformedTree = rehypeWrapLines(
+    // @ts-expect-error: there's a slight type mismatch between refractor tree and hast tree but it works
+    tree,
+    (i) => {
+      const shouldMarkHighlighted = linesToMarkHighlighted.has(i)
+      const shouldMarkAdd = linesToMarkAdd.has(i)
+      const shouldMarkRemove = linesToMarkRemove.has(i)
+
+      return cn(
+        "line",
+        shouldMarkHighlighted && "highlighted",
+        (shouldMarkAdd || shouldMarkRemove) && "diff",
+        shouldMarkAdd && "add",
+        shouldMarkRemove && "remove"
+      )
+    }
+  )
   const content = hastToHtml(transformedTree)
 
   return (
     <code
       suppressHydrationWarning
-      className={cn(
-        typographyVariants({ variant: "small" }),
-        "rounded-lg bg-muted px-1 py-0.5 text-content-foreground",
-        className
-      )}
+      className={cn(typographyVariants({ variant: "small" }), className)}
       dangerouslySetInnerHTML={{ __html: content }}
       {...props}
     ></code>
@@ -73,6 +99,10 @@ export async function Code({
 export interface PreProps extends React.ComponentPropsWithoutRef<"pre"> {
   showLineNumbers?: boolean
   start?: string | number
+
+  highlighted?: string
+  add?: string
+  remove?: string
 }
 
 export async function Pre({
@@ -81,23 +111,27 @@ export async function Pre({
   start = 1,
   style = {},
   className = "",
+
+  highlighted = "",
+  add = "",
+  remove = "",
+
   ...props
 }: PreProps) {
   return (
     <pre
-      className={cn(
-        typographyVariants({ variant: "small" }),
-        "size-full whitespace-pre rounded-lg bg-accent p-4 text-content-foreground [&>code]:contents",
-        className
-      )}
-      data-lines={showLineNumbers ? "true" : "false"}
+      className={className}
+      data-show-lines={showLineNumbers ? "true" : "false"}
       style={{
         ...style,
         ["--start" as any]: start,
       }}
       {...props}
     >
-      {children}
+      {/* @ts-expect-error: total hack to pass props down */}
+      <Slot highlighted={highlighted} add={add} remove={remove}>
+        {children}
+      </Slot>
     </pre>
   )
 }

@@ -312,23 +312,45 @@
 
   /* codeblock styling */
 
-  /* codeblock line numbers based off https://github.com/shikijs/shiki/issues/3#issuecomment-830564854 */
-  pre[data-lines="true"] {
-    counter-reset: step;
-    counter-increment: step calc(var(--start, 1) - 1);
-  }
+  pre {
+    @apply size-full whitespace-pre rounded-lg bg-accent py-4 font-mono text-content-foreground [&>code]:contents;
 
-  pre[data-lines="true"] .line::before {
-    content: counter(step);
-    counter-increment: step;
-    width: 1rem;
-    margin-right: 1.5rem;
-    display: inline-block;
-    text-align: right;
-    color: hsl(var(--muted-foreground));
+    /* codeblock line numbers based off https://github.com/shikijs/shiki/issues/3#issuecomment-830564854 */
+    &[data-show-lines="true"] {
+      counter-reset: step;
+      counter-increment: step calc(var(--start, 1) - 1);
+    }
+
+    &[data-show-lines="true"] .line::before {
+      content: counter(step);
+      counter-increment: step;
+      width: 1rem;
+      margin-right: 1.5rem;
+      display: inline-block;
+      text-align: right;
+      color: hsl(var(--muted-foreground));
+    }
+
+    code {
+      .line {
+        @apply block px-4;
+
+        &.highlighted {
+          @apply bg-knockout/10;
+        }
+        &.diff.add {
+          @apply bg-success-link-border-active/20;
+        }
+        &.diff.remove {
+          @apply bg-danger-link-border-active/20;
+        }
+      }
+    }
   }
 
   code {
+    @apply rounded-lg bg-muted px-1 py-0.5 font-mono text-content-foreground;
+
     .token.punctuation,
     .token.attr-value > .token.punctuation.attr-equals {
       color: var(--syntax-2);
@@ -370,18 +392,6 @@
 
     .token.comment {
       color: var(--syntax-1);
-    }
-
-    .line {
-      &.highlighted {
-        background-color: hsla(var(--knockout) / 0.1);
-      }
-      &.diff.add {
-        background-color: hsla(var(--success-link-border-active) / 0.2);
-      }
-      &.diff.remove {
-        background-color: hsla(var(--danger-link-border-active) / 0.2);
-      }
     }
   }
 }

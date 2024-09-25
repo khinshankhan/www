@@ -4,7 +4,6 @@ import { RootContent, type Root as HastRoot } from "hast"
 import { toHtml as hastToHtml } from "hast-util-to-html"
 import parse from "rehype-parse"
 import { unified } from "unified"
-import { cn } from "@/lib/utils"
 
 // https://github.com/gatsbyjs/gatsby/pull/26161/files
 const MULTILINE_TOKEN_SPAN = /<span class="token ([^"]+)">[^<]*\n[^<]*<\/span>/g
@@ -77,16 +76,12 @@ const lineNumberify = function lineNumberify(
   )
 }
 
+type DetermineClasses = (index: number) => string
+
 function wrapLines(
   ast: (RootContent & { lineNumber: number })[],
-  highlighted: number[],
-  add: number[],
-  remove: number[]
+  determineClasses: DetermineClasses
 ) {
-  const linesToMarkHighlighted = new Set(highlighted)
-  const linesToMarkAdd = new Set(add)
-  const linesToMarkRemove = new Set(remove)
-
   // get all unique line numbers from the AST nodes
   const allLines = Array.from(new Set(ast.map((x) => x.lineNumber)))
 
@@ -115,23 +110,13 @@ function wrapLines(
       }
     }
 
-    const shouldMarkHighlighted = linesToMarkHighlighted.has(line)
-    const shouldMarkAdd = linesToMarkAdd.has(line)
-    const shouldMarkRemove = linesToMarkRemove.has(line)
-
     // this is the line element, opt to use a span to avoid any loss of flow
     nodes.push({
       type: "element",
       tagName: "span",
       properties: {
         dataLine: line,
-        className: cn(
-          "line",
-          shouldMarkHighlighted && "highlighted",
-          (shouldMarkAdd || shouldMarkRemove) && "diff",
-          shouldMarkAdd && "add",
-          shouldMarkRemove && "remove"
-        ),
+        className: determineClasses(line),
       },
       // @ts-expect-error: children has lineNumber attached to it (which is probably fine as hast just ignored unknown properties unless they're data properties)
       children: children,
@@ -144,11 +129,11 @@ function wrapLines(
   return wrapped
 }
 
-export function rehypeWrapLines(ast: HastRoot, highlighted = [], add = [], remove = []) {
+export function rehypeWrapLines(ast: HastRoot, determineClasses: DetermineClasses = () => "line") {
   const formattedAst = applyMultilineFix(ast)
   const numbered = lineNumberify(formattedAst).nodes
 
-  return wrapLines(numbered, highlighted, add, remove)
+  return wrapLines(numbered, determineClasses)
 }
 
 export default rehypeWrapLines
