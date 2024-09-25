@@ -89,7 +89,7 @@ export async function Code({
   return (
     <code
       suppressHydrationWarning
-      className={cn(typographyVariants({ variant: "small" }), className)}
+      className={cn(typographyVariants({ variant: "small" }), "font-mono", className)}
       dangerouslySetInnerHTML={{ __html: content }}
       {...props}
     ></code>

@@ -313,7 +313,7 @@
   /* codeblock styling */
 
   pre {
-    @apply size-full whitespace-pre rounded-lg bg-accent py-4 font-mono text-content-foreground [&>code]:contents;
+    @apply size-full whitespace-pre rounded-lg bg-accent py-4 font-mono tracking-normal text-content-foreground [&>code]:contents;
 
     /* codeblock line numbers based off https://github.com/shikijs/shiki/issues/3#issuecomment-830564854 */
     &[data-show-lines="true"] {
