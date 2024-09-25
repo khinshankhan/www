@@ -45,8 +45,8 @@ export function YouTubeEmbed({
 
       {fallbackSrc && (
         <figcaption>
-          Because I don't trust third parties,{" "}
-          <Link href={fallbackSrc}>here's the fallback source</Link>.
+          Because I {`don't`} trust third parties,{" "}
+          <Link href={fallbackSrc}>{`here's`} the fallback source</Link>.
         </figcaption>
       )}
     </figure>
@@ -90,8 +90,8 @@ export function SpotifyEmbed({
 
       {fallbackSrc && (
         <figcaption>
-          Because I don't trust third parties,{" "}
-          <Link href={fallbackSrc}>here's the fallback source</Link>.
+          Because I {`don't`} trust third parties,{" "}
+          <Link href={fallbackSrc}>{`here's`} the fallback source</Link>.
         </figcaption>
       )}
     </figure>

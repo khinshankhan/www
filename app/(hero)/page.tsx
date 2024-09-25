@@ -97,13 +97,13 @@ function MainContent() {
       </p>
 
       <p>
-        Landing pages can be a bit bland with all that whitespace, so here's a little engagement
+        Landing pages can be a bit bland with all that whitespace, so {`here's`} a little engagement
         hook: this website has 0 hidden easter eggs. Can you find them all? Happy hunting!
       </p>
 
       <p>
         Meanwhile, feel free to check out my <Link href="/writings/">writings</Link> or{" "}
-        <Link href="/projects/">projects</Link>. If you'd like to get in touch, you can{" "}
+        <Link href="/projects/">projects</Link>. If {`you'd`} like to get in touch, you can{" "}
         <Link href="/connect/">connect with me</Link>.
       </p>
 
