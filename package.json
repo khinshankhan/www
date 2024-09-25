@@ -50,6 +50,7 @@
     "refractor": "^4.8.1",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-mdx-code-props": "^3.0.1",
+    "rehype-parse": "^9.0.0",
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.0",
     "remark-unwrap-images": "^4.0.0",

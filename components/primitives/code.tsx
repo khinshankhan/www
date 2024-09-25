@@ -17,6 +17,7 @@ import typescript from "refractor/lang/typescript"
 import { refractor } from "refractor/lib/core"
 import conf from "@/lib/syntax/lang/conf"
 import css from "@/lib/syntax/lang/css"
+import rehypeWrapLines from "@/lib/syntax/plugins/rehype-wrap-lines"
 import { cn } from "@/lib/utils"
 import { typographyVariants } from "@/components/primitives/typography"
 
@@ -52,7 +53,8 @@ export async function Code({
 }: CodeProps) {
   const tree = refractor.highlight(children, language)
   // @ts-expect-error: there's a slight type mismatch between refractor tree and hast tree but it works
-  const content = hastToHtml(tree)
+  const transformedTree = rehypeWrapLines(tree)
+  const content = hastToHtml(transformedTree)
 
   return (
     <code

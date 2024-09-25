@@ -311,6 +311,23 @@
   }
 
   /* codeblock styling */
+
+  /* codeblock line numbers based off https://github.com/shikijs/shiki/issues/3#issuecomment-830564854 */
+  pre[data-lines="true"] {
+    counter-reset: step;
+    counter-increment: step calc(var(--start, 1) - 1);
+  }
+
+  pre[data-lines="true"] .line::before {
+    content: counter(step);
+    counter-increment: step;
+    width: 1rem;
+    margin-right: 1.5rem;
+    display: inline-block;
+    text-align: right;
+    color: hsl(var(--muted-foreground));
+  }
+
   code {
     .token.punctuation,
     .token.attr-value > .token.punctuation.attr-equals {
