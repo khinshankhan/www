@@ -33,7 +33,7 @@ export const defaultMetadata = {
     type: "website",
     images: [
       {
-        url: "https://www.khinshankhan.com/og.png?v=4",
+        url: "https://www.khinshankhan.com/og.png?v=5",
         width: 1200,
         height: 630,
       },
