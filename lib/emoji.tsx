@@ -24,6 +24,14 @@ export const customEmoji = [
     names: ["anko_bleh"],
     url: "https://cdn.discordapp.com/emojis/634884904689074187.gif?amp;quality=lossless",
   },
+  {
+    names: ["blobsweats"],
+    url: "https://cdn.discordapp.com/emojis/443156750204665878.gif?amp;quality=lossless",
+  },
+  {
+    names: ["world-map"],
+    url: "https://em-content.zobj.net/source/samsung/78/world-map_1f5fa.png",
+  },
 ] as const satisfies readonly EmojiInfoTemplate[]
 
 export const emojiLookup = createEmojiLookup([githubEmoji, customEmoji], true, true)
