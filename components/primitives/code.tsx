@@ -23,24 +23,22 @@ import { cn } from "@/lib/utils"
 import { Slot } from "@radix-ui/react-slot"
 import { typographyVariants } from "@/components/primitives/typography"
 
-;[
-  bash,
-  conf,
-  css,
-  diff,
-  go,
-  graphql,
-  ini,
-  javascript,
-  json,
-  jsx,
-  lisp,
-  markdown,
-  markup,
-  ruby,
-  tsx,
-  typescript,
-].forEach(refractor.register)
+refractor.register(markup)
+refractor.register(css)
+refractor.register(javascript)
+refractor.register(bash)
+refractor.register(markdown)
+refractor.register(ruby)
+refractor.register(diff)
+refractor.register(go)
+refractor.register(graphql)
+refractor.register(json)
+refractor.register(ini)
+refractor.register(conf)
+refractor.register(typescript)
+refractor.register(lisp)
+refractor.register(jsx)
+refractor.register(tsx)
 
 export interface CodeProps extends React.ComponentPropsWithoutRef<"code"> {
   children: string
