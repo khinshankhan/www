@@ -33,7 +33,8 @@ export default function Og() {
         <div
           className="h-full w-[750px]"
           style={{
-            textShadow: "hsl(var(--knockout-foreground)) 1px 0 0px, hsl(var(--knockout)) 2px 0 0px",
+            // TODO: circle back to this
+            // textShadow: "hsl(var(--knockout-foreground)) 1px 0 0px, hsl(var(--knockout)) 2px 0 0px",
             backgroundImage: `radial-gradient(circle at 6px 24px, #404458 1%, transparent 1%), radial-gradient(circle at 47px 53px, #3f4356 1%, transparent 1%)`,
             backgroundSize: "79px 60px",
           }}
@@ -47,7 +48,7 @@ export default function Og() {
                     fontFamily: "var(--font-test)",
                   }}
                 >
-                  <span className="p-12 backdrop-blur-[3px]">Khinshan Khan</span>
+                  <span className="p-12">Khinshan Khan</span>
                 </h1>
 
                 <h2
@@ -61,7 +62,7 @@ export default function Og() {
                     fontFamily: "var(--font-test)",
                   }}
                 >
-                  <span className="p-12 backdrop-blur-[3px]">
+                  <span className="p-12">
                     Exploring the <span style={{ color: "var(--syntax-4)" }}>intersections</span> of{" "}
                     <span style={{ color: "var(--syntax-5)" }}>creativity</span> and{" "}
                     <span style={{ color: "var(--syntax-3)" }}>technology</span>{" "}
