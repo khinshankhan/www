@@ -277,6 +277,11 @@
     --danger-link-border-active: var(--rose-600);
     --danger-border: var(--rose-400);
 
+    --logo: var(--transparent);
+    --logo-foreground: var(--foreground);
+    --logo-border: var(--transparent);
+    --logo-shadow: 0, 0%, 43.5%;
+
     /* based on megaman's colors */
     --syntax-1: hsl(100, 40%, 60%); /* comments, resembling system notes? */
     --syntax-2: hsl(0, 0%, 80%); /* punctuation */
