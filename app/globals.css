@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer base {
+}
+
+@layer components {
+}
+
+@layer utilities {
+  .hide-mobile {
+    @media not all and screen(md) {
+      display: none !important;
+    }
+  }
+  .hide-desktop {
+    @media screen(md) {
+      display: none !important;
+    }
+  }
+}
