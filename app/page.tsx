@@ -4,8 +4,8 @@ export default async function Page() {
   return (
     <>
       <p className="bg-green-900/70 sticky top-0">General Kenobi!</p>
-      <p className="hide-desktop">This is visible on mobile only.</p>
-      <p className="hide-mobile">This is visible on desktop only.</p>
+      <p className="hide-on-desktop">This is visible on mobile only.</p>
+      <p className="hide-on-mobile">This is visible on desktop only.</p>
 
       <p>
         <strong>Pellentesque habitant morbi tristique</strong> senectus et netus
