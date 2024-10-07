@@ -10,12 +10,13 @@
 }
 
 @layer utilities {
-  .hide-mobile {
+  .hidden-for-mobile {
     @media not all and screen(md) {
       display: none !important;
     }
   }
-  .hide-desktop {
+
+  .hidden-for-desktop {
     @media screen(md) {
       display: none !important;
     }

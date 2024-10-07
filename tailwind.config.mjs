@@ -11,13 +11,13 @@ export default {
   plugins: [],
   theme: {
     screens: {
-      xss: "320px",
-      xs: "392px",
-      sm: "640px",
-      md: "768px", // this is the boundary between mobile vs desktop
-      lg: "1024px",
-      xl: "1325px",
-      "2xl": "1536px",
+      xss: "20rem", // 320px
+      xs: "24.5rem", // 392px
+      sm: "40rem", // 640px
+      md: "48rem", // 768px -- this is the boundary between mobile vs desktop
+      lg: "64rem", // 1024px
+      xl: "82.8125rem", // 1325px
+      "2xl": "96rem", // 1536px
     },
     zIndex: {
       auto: "auto",
