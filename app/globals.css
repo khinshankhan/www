@@ -21,11 +21,13 @@
   );
 
   /* Breakpoints */
-  --breakpoint-sm: 40rem;
-  --breakpoint-md: 48rem;
-  --breakpoint-lg: 64rem;
-  --breakpoint-xl: 80rem;
-  --breakpoint-2xl: 96rem;
+  --breakpoint-xss: 20rem; /* 320px */
+  --breakpoint-xs: 24.5rem; /* 392px */
+  --breakpoint-sm: 40rem; /* 640px */
+  --breakpoint-md: 48rem; /* 768px */
+  --breakpoint-lg: 64rem; /* 1024px */
+  --breakpoint-xl: 82.8125rem; /* 1325px */
+  --breakpoint-2xl: 96rem; /* 1536px */
 
   /* Colors */
   --color-black: #000;
@@ -481,5 +483,26 @@
       transform: none;
       animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
+  }
+}
+
+/**
+ * Tailwind v4 doesn't support directives like `screen` (yet?).
+ *
+ * CSS variables can't be used outside of property values, which a media query is
+ * https://stackoverflow.com/questions/40722882/css-native-variables-not-working-in-media-queries.
+ *
+ * This means that we need to carefully write out the breakpoint, the 'boundary between mobile and desktop' should be
+ * used below.
+ */
+.hide-on-mobile {
+  @media not all and (min-width: 48rem) {
+    display: none !important;
+  }
+}
+
+.hide-on-desktop {
+  @media screen and (min-width: 48rem) {
+    display: none !important;
   }
 }

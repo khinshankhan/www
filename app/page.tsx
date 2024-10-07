@@ -3,7 +3,9 @@ import React from "react";
 export default async function Page() {
   return (
     <>
-      <p className="bg-green-900/70 sticky top-0">General Kenobi!</p>
+      <p className="bg-green-900/70 sticky top-0 backdrop-blur-[3px]">
+        General Kenobi!
+      </p>
       <p className="hide-on-desktop">This is visible on mobile only.</p>
       <p className="hide-on-mobile">This is visible on desktop only.</p>
 
