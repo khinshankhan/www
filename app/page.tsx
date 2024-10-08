@@ -3,11 +3,17 @@ import React from "react";
 export default async function Page() {
   return (
     <>
-      <p className="bg-green-900/70 sticky top-0 backdrop-blur-[3px]">
+      <p className="bg-background/70 sticky top-0 backdrop-blur-[3px]">
         General Kenobi!
       </p>
-      <p className="hidden-for-desktop">This is visible on mobile only.</p>
+      <p className="dark bg-background/70 sticky top-0 backdrop-blur-[3px]">
+        General Kenobi!
+      </p>
+      <p className="orange bg-background/70 sticky top-0 backdrop-blur-[3px]">
+        General Kenobi!
+      </p>
       <p className="hidden-for-mobile">This is visible on desktop only.</p>
+      <p className="hidden-for-desktop">This is visible on mobile only.</p>
 
       <p>
         <strong>Pellentesque habitant morbi tristique</strong> senectus et netus

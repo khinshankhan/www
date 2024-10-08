@@ -1,24 +1,48 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
+@import "tailwindcss";
 
-@layer base {
+@theme {
+  --breakpoint-xss: 20rem; /* 320px */
+  --breakpoint-xs: 24.5rem; /* 392px */
+  --breakpoint-sm: 40rem; /* 640px */
+  --breakpoint-md: 48rem; /* 768px -- this is the boundary between mobile vs desktop */
+  --breakpoint-lg: 64rem; /* 1024px */
+  --breakpoint-xl: 82.8125rem; /* 1325px */
+  --breakpoint-2xl: 96rem; /* 1536px */
+
+  --color-*: initial;
+  --color-background: #000; /* this lets tailwind reference the variable */
 }
 
-@layer components {
+:root,
+.light {
+  --color-background: #f0f; /* this sets the variable for light mode */
 }
 
-@layer utilities {
+.dark {
+  --color-background: #0ff; /* this sets the variable for dark mode */
+}
+
+.orange {
+  --color-background: #f90; /* this sets the variable for orange mode */
+}
+
+/**
+ * Tailwind v4 doesn't support directives like `screen` (yet?).
+ *
+ * CSS variables can't be used outside of property values, which a media query is
+ * https://stackoverflow.com/questions/40722882/css-native-variables-not-working-in-media-queries.
+ *
+ * This means that we need to carefully write out the breakpoint, the 'boundary between mobile and desktop' should be
+ * used below.
+ */
+@media not all and (min-width: 48rem) {
   .hidden-for-mobile {
-    @media not all and screen(md) {
-      display: none !important;
-    }
+    display: none !important;
   }
+}
 
+@media screen and (min-width: 48rem) {
   .hidden-for-desktop {
-    @media screen(md) {
-      display: none !important;
-    }
+    display: none !important;
   }
 }
