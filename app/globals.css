@@ -13,36 +13,34 @@
   --color-background: #000; /* this lets tailwind reference the variable */
 }
 
-:root,
-.light {
-  --color-background: #f0f; /* this sets the variable for light mode */
-}
-
-.dark {
-  --color-background: #0ff; /* this sets the variable for dark mode */
-}
-
-.orange {
-  --color-background: #f90; /* this sets the variable for orange mode */
-}
-
 /**
  * Tailwind v4 doesn't support directives like `screen` (yet?).
  *
  * CSS variables can't be used outside of property values, which a media query is
  * https://stackoverflow.com/questions/40722882/css-native-variables-not-working-in-media-queries.
  *
- * This means that we need to carefully write out the breakpoint, the 'boundary between mobile and desktop' should be
- * used below.
+ * This means that we need to carefully write out the breakpoint and keep it in sync with Tailwind.
  */
-@media not all and (min-width: 48rem) {
-  .hidden-for-mobile {
+@media (min-width: 48rem) {
+  /* invisible when not mobile, default visible = visible only on mobile */
+  .show-mobile {
     display: none !important;
   }
 }
 
-@media screen and (min-width: 48rem) {
-  .hidden-for-desktop {
+@media not all and (min-width: 48rem) {
+  /* invisible on mobile, default visible = visible when not mobile */
+  .hide-mobile {
     display: none !important;
+  }
+}
+
+@media print {
+  /* Since printing shows the whole page, showing desktop makes sense... probably. We can wait for complaint. */
+  .show-mobile {
+    display: none !important;
+  }
+  .hide-mobile {
+    display: block !important;
   }
 }
