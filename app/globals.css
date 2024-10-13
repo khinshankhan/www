@@ -39,33 +39,42 @@
 }
 
 /**
- * Tailwind v4 doesn't support directives like `screen` (yet?).
+ * CSS variables can't be used outside of property values so media queries can't use breakpoints variables directly.
+ * Reference: https://stackoverflow.com/questions/40722882/css-native-variables-not-working-in-media-queries
  *
- * CSS variables can't be used outside of property values, which a media query is
- * https://stackoverflow.com/questions/40722882/css-native-variables-not-working-in-media-queries.
+ * Tailwind v4 doesn't yet support media query-related directives like `screen` (yet?). Therefore, we need to write out
+ * the breakpoints explicitly and ensure they match Tailwind's configuration.
  *
- * This means that we need to carefully write out the breakpoint and keep it in sync with Tailwind.
+ * Philosophy on show/hide: While "visible" has many possible states (block, inline-block, flex, grid), hiding content
+ * (`display: none`) only has one state. To keep things simple, we'll use `display: none` for hiding and leave the code
+ * to handle the specific visible state when showing (use a specific visible display property can mess with intended
+ * experience). This assumption works for now but may need rethinking as the project evolves.
+ *
+ * Managing `!important`: It's hard to override one `!important` with another. Currently, we're handling this case by
+ * applying print utility classes for specific print styles, but a case-by-case approach might be needed moving forward.
  */
-@media (min-width: 48rem) {
-  /* invisible when not mobile, default visible = visible only on mobile */
-  .show-mobile {
-    display: none !important;
+@media not print {
+  @media (min-width: 48rem) {
+    .show-mobile {
+      /* force hidden when not mobile */
+      display: none !important;
+    }
+  }
+
+  @media not all and (min-width: 48rem) {
+    /* force hidden when mobile */
+    .hide-mobile {
+      display: none !important;
+    }
   }
 }
 
-@media not all and (min-width: 48rem) {
-  /* invisible on mobile, default visible = visible when not mobile */
-  .hide-mobile {
-    display: none !important;
-  }
-}
-
+/**
+ * Similar logic as to above, let the code define visible state, the utility class can only reliably define hidden
+ * without accidentally changing an expected display.
+ */
 @media print {
-  /* Since printing shows the whole page, showing desktop makes sense... probably. We can wait for complaint. */
-  .show-mobile {
+  .hide-print {
     display: none !important;
-  }
-  .hide-mobile {
-    display: block !important;
   }
 }

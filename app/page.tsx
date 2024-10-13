@@ -4,7 +4,7 @@ export default async function Page() {
   return (
     <>
       <p className="">General Kenobi!</p>
-      <p className="show-mobile">This is visible on mobile only.</p>
+      <p className="show-mobile hide-print">This is visible on mobile only.</p>
       <p className="hide-mobile">This is visible on desktop only.</p>
 
       <p>
