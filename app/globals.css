@@ -19,6 +19,10 @@
   color-scheme: light dark;
 
   --color-background: #f3e5ab;
+
+  .orange {
+    --color-background: #ff7e67;
+  }
 }
 
 .light {
@@ -28,6 +32,10 @@
 .dark {
   color-scheme: dark;
   --color-background: #0c1a54;
+
+  .orange {
+    --color-background: #fed8b1;
+  }
 }
 
 /**

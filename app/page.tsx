@@ -27,7 +27,7 @@ export default async function Page() {
         <li>Aliquam tincidunt mauris eu risus.</li>
       </ol>
 
-      <blockquote>
+      <blockquote className="orange bg-background">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
           magna. Cras in mi at felis aliquet congue. Ut a est eget ligula
