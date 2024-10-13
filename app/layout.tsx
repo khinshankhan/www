@@ -1,5 +1,6 @@
 import "./globals.css";
 import React from "react";
+import { ThemeProvider } from "next-themes";
 
 export default async function Layout({
   children,
@@ -7,11 +8,17 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head></head>
-      <body>
-        <p>Hello there!</p>
-        {children}
+      <body className="bg-background">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

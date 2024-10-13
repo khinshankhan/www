@@ -9,8 +9,25 @@
   --breakpoint-xl: 82.8125rem; /* 1325px */
   --breakpoint-2xl: 96rem; /* 1536px */
 
+  /* this lets tailwind reference the variable */
   --color-*: initial;
-  --color-background: #000; /* this lets tailwind reference the variable */
+  --color-background: #f0f;
+}
+
+:root,
+.light {
+  color-scheme: light dark;
+
+  --color-background: #f3e5ab;
+}
+
+.light {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+  --color-background: #0c1a54;
 }
 
 /**
