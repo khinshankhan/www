@@ -1,12 +1,9 @@
-import "./globals.css";
-import React from "react";
-import { ThemeProvider } from "next-themes";
+import React from "react"
+import { ThemeProvider } from "next-themes"
 
-export default async function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import "./globals.css"
+
+export default async function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head></head>
@@ -21,5 +18,5 @@ export default async function Layout({
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }
