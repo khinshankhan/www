@@ -14,6 +14,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@radix-ui/colors": "^3.0.0",
     "@tailwindcss/postcss": "4.0.0-alpha.26",
     "next": "15.0.0-rc.0",
     "next-themes": "^0.3.0",

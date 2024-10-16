@@ -3,10 +3,10 @@ import React from "react"
 export default async function Page() {
   return (
     <>
-      <p className="">General Kenobi!</p>
+      <p>Hello there.</p>
+      <p>General Kenobi!</p>
       <p className="show-mobile hide-print">This is visible on mobile only.</p>
       <p className="hide-mobile">This is visible on desktop only.</p>
-
       <p>
         <strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames
         ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet,
@@ -17,15 +17,12 @@ export default async function Page() {
         lacus enim ac dui. <a href="#here">Donec non enim</a> in turpis pulvinar facilisis. Ut
         felis.
       </p>
-
       <h2>Header Level 2</h2>
-
       <ol>
         <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
         <li>Aliquam tincidunt mauris eu risus.</li>
       </ol>
-
-      <blockquote className="orange bg-background">
+      <blockquote>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at
           felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec
@@ -33,9 +30,14 @@ export default async function Page() {
           sit amet quam. Vivamus pretium ornare est.
         </p>
       </blockquote>
-
-      <h3>Header Level 3</h3>
-
+      <h3 className="">Header Level 3</h3>
+      <h3 className="bg-accent-5">Header Level 3</h3>
+      <h3 className="default-theme bg-accent-5">Header Level 3</h3>
+      <h3 className="info-theme bg-accent-5">Header Level 3</h3>
+      <h3 className="success-theme bg-accent-5">Header Level 3</h3>
+      <h3 className="critical-theme bg-accent-5">Header Level 3</h3>
+      <h3 className="warning-theme bg-accent-5">Header Level 3</h3>
+      <h3 className="danger-theme bg-accent-5">Header Level 3</h3>
       <ul>
         <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
         <li>Aliquam tincidunt mauris eu risus.</li>

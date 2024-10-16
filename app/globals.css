@@ -1,4 +1,183 @@
+@import "@radix-ui/colors/black-alpha.css";
+@import "@radix-ui/colors/white-alpha.css";
+
+@import "@radix-ui/colors/gray.css";
+@import "@radix-ui/colors/gray-alpha.css";
+@import "@radix-ui/colors/gray-dark.css";
+@import "@radix-ui/colors/gray-dark-alpha.css";
+
+@import "@radix-ui/colors/sky.css";
+@import "@radix-ui/colors/sky-alpha.css";
+@import "@radix-ui/colors/sky-dark.css";
+@import "@radix-ui/colors/sky-dark-alpha.css";
+
+@import "@radix-ui/colors/grass.css";
+@import "@radix-ui/colors/grass-alpha.css";
+@import "@radix-ui/colors/grass-dark.css";
+@import "@radix-ui/colors/grass-dark-alpha.css";
+
+@import "@radix-ui/colors/violet.css";
+@import "@radix-ui/colors/violet-alpha.css";
+@import "@radix-ui/colors/violet-dark.css";
+@import "@radix-ui/colors/violet-dark-alpha.css";
+
+@import "@radix-ui/colors/amber.css";
+@import "@radix-ui/colors/amber-alpha.css";
+@import "@radix-ui/colors/amber-dark.css";
+@import "@radix-ui/colors/amber-dark-alpha.css";
+
+@import "@radix-ui/colors/tomato.css";
+@import "@radix-ui/colors/tomato-alpha.css";
+@import "@radix-ui/colors/tomato-dark.css";
+@import "@radix-ui/colors/tomato-dark-alpha.css";
+
 @import "tailwindcss";
+
+:root,
+.light,
+.light-theme {
+  --custom-accent-1: #fffafc;
+  --custom-accent-2: #fff5f9;
+  --custom-accent-3: #ffe9f0;
+  --custom-accent-4: #fedfe8;
+  --custom-accent-5: #fdd5e1;
+  --custom-accent-6: #f9cbd9;
+  --custom-accent-7: #f5bdce;
+  --custom-accent-8: #eca3bb;
+  --custom-accent-9: #1f000c;
+  --custom-accent-10: #3f1827;
+  --custom-accent-11: #885264;
+  --custom-accent-12: #371120;
+
+  --custom-accent-a1: #ff006605;
+  --custom-accent-a2: #ff00660a;
+  --custom-accent-a3: #ff005216;
+  --custom-accent-a4: #f8004820;
+  --custom-accent-a5: #f300492a;
+  --custom-accent-a6: #e2004534;
+  --custom-accent-a7: #d9004242;
+  --custom-accent-a8: #cb00435c;
+  --custom-accent-a9: #1f000c;
+  --custom-accent-a10: #2b0011e7;
+  --custom-accent-a11: #50001bad;
+  --custom-accent-a12: #290010ee;
+
+  --custom-accent-contrast: #fff;
+  --custom-accent-surface: #fff3f8cc;
+  --custom-accent-indicator: #1f000c;
+  --custom-accent-track: #1f000c;
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    :root,
+    .light,
+    .light-theme {
+      --custom-accent-1: oklch(99.2% 0.0085 358.3);
+      --custom-accent-2: oklch(98.3% 0.0154 358.3);
+      --custom-accent-3: oklch(95.6% 0.028 358.3);
+      --custom-accent-4: oklch(93.2% 0.0368 358.3);
+      --custom-accent-5: oklch(90.9% 0.0476 358.3);
+      --custom-accent-6: oklch(88.6% 0.0547 358.3);
+      --custom-accent-7: oklch(85.4% 0.0673 358.3);
+      --custom-accent-8: oklch(79.4% 0.0912 358.3);
+      --custom-accent-9: oklch(15.5% 0.0633 358.3);
+      --custom-accent-10: oklch(27.3% 0.0633 358.3);
+      --custom-accent-11: oklch(50.5% 0.0755 358.3);
+      --custom-accent-12: oklch(24.5% 0.0633 358.3);
+
+      --custom-accent-a1: color(display-p3 0.8039 0.0196 0.4118 / 0.02);
+      --custom-accent-a2: color(display-p3 0.8078 0.0235 0.4157 / 0.04);
+      --custom-accent-a3: color(display-p3 0.8118 0.0078 0.2941 / 0.083);
+      --custom-accent-a4: color(display-p3 0.8078 0.0039 0.2627 / 0.122);
+      --custom-accent-a5: color(display-p3 0.8078 0.0039 0.2706 / 0.161);
+      --custom-accent-a6: color(display-p3 0.7451 0.0078 0.2471 / 0.197);
+      --custom-accent-a7: color(display-p3 0.7059 0.0039 0.2353 / 0.251);
+      --custom-accent-a8: color(display-p3 0.6667 0.0039 0.2275 / 0.35);
+      --custom-accent-a9: color(display-p3 0.102 0 0.0431 / 0.997);
+      --custom-accent-a10: color(display-p3 0.1412 0 0.0588 / 0.899);
+      --custom-accent-a11: color(display-p3 0.2549 0 0.0902 / 0.667);
+      --custom-accent-a12: color(display-p3 0.1333 0 0.0549 / 0.926);
+
+      --custom-accent-contrast: #fff;
+      --custom-accent-surface: color(display-p3 1 0.9569 0.9725 / 0.8);
+      --custom-accent-indicator: oklch(15.5% 0.0633 358.3);
+      --custom-accent-track: oklch(15.5% 0.0633 358.3);
+    }
+  }
+}
+
+.dark,
+.dark-theme {
+  --custom-accent-1: #250211;
+  --custom-accent-2: #350017;
+  --custom-accent-3: #440623;
+  --custom-accent-4: #50122d;
+  --custom-accent-5: #5b1d37;
+  --custom-accent-6: #6b2b44;
+  --custom-accent-7: #803f57;
+  --custom-accent-8: #9c576f;
+  --custom-accent-9: #b46d85;
+  --custom-accent-10: #a76179;
+  --custom-accent-11: #eca1b9;
+  --custom-accent-12: #ffcbdf;
+
+  --custom-accent-a1: #f9001116;
+  --custom-accent-a2: #fd003927;
+  --custom-accent-a3: #fe006537;
+  --custom-accent-a4: #fe157a44;
+  --custom-accent-a5: #fd378a50;
+  --custom-accent-a6: #fd559761;
+  --custom-accent-a7: #ff74a777;
+  --custom-accent-a8: #ff89b295;
+  --custom-accent-a9: #ff98bbaf;
+  --custom-accent-a10: #ff90b6a1;
+  --custom-accent-a11: #ffaec8eb;
+  --custom-accent-a12: #ffcbdf;
+
+  --custom-accent-contrast: #fff;
+  --custom-accent-surface: #59001d80;
+  --custom-accent-indicator: #b46d85;
+  --custom-accent-track: #b46d85;
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    .dark,
+    .dark-theme {
+      --custom-accent-1: oklch(17.8% 0.0633 358.3);
+      --custom-accent-2: oklch(20.5% 0.0949 358.3);
+      --custom-accent-3: oklch(25.9% 0.0949 358.3);
+      --custom-accent-4: oklch(29.8% 0.0949 358.3);
+      --custom-accent-5: oklch(33.7% 0.0949 358.3);
+      --custom-accent-6: oklch(38.8% 0.0949 358.3);
+      --custom-accent-7: oklch(45.7% 0.0949 358.3);
+      --custom-accent-8: oklch(54.5% 0.0949 358.3);
+      --custom-accent-9: oklch(61.9% 0.0949 358.3);
+      --custom-accent-10: oklch(57.8% 0.0949 358.3);
+      --custom-accent-11: oklch(78.8% 0.0949 358.3);
+      --custom-accent-12: oklch(90.6% 0.0949 358.3);
+
+      --custom-accent-a1: color(display-p3 0.9922 0 0.0706 / 0.068);
+      --custom-accent-a2: color(display-p3 0.9961 0 0.2471 / 0.131);
+      --custom-accent-a3: color(display-p3 0.9961 0 0.4392 / 0.19);
+      --custom-accent-a4: color(display-p3 1 0.1686 0.5176 / 0.236);
+      --custom-accent-a5: color(display-p3 1 0.2902 0.5843 / 0.282);
+      --custom-accent-a6: color(display-p3 1 0.4078 0.6353 / 0.345);
+      --custom-accent-a7: color(display-p3 1 0.5098 0.6902 / 0.433);
+      --custom-accent-a8: color(display-p3 1 0.5882 0.7333 / 0.547);
+      --custom-accent-a9: color(display-p3 1 0.6471 0.7686 / 0.643);
+      --custom-accent-a10: color(display-p3 1 0.6196 0.7529 / 0.589);
+      --custom-accent-a11: color(display-p3 1 0.7255 0.8157 / 0.874);
+      --custom-accent-a12: color(display-p3 0.9961 0.8275 0.898 / 0.967);
+
+      --custom-accent-contrast: #fff;
+      --custom-accent-surface: color(display-p3 0.298 0 0.102 / 0.5);
+      --custom-accent-indicator: oklch(61.9% 0.0949 358.3);
+      --custom-accent-track: oklch(61.9% 0.0949 358.3);
+    }
+  }
+}
 
 @theme {
   --breakpoint-xss: 20rem; /* 320px */
@@ -11,18 +190,39 @@
 
   /* this lets tailwind reference the variable */
   --color-*: initial;
-  --color-background: #f0f;
+
+  --color-background: var(--gray-1);
+  --color-foreground: var(--gray-12);
+
+  --color-accent-1: var(--custom-accent-1);
+  --color-accent-2: var(--custom-accent-2);
+  --color-accent-3: var(--custom-accent-3);
+  --color-accent-4: var(--custom-accent-4);
+  --color-accent-5: var(--custom-accent-5);
+  --color-accent-6: var(--custom-accent-6);
+  --color-accent-7: var(--custom-accent-7);
+  --color-accent-8: var(--custom-accent-8);
+  --color-accent-9: var(--custom-accent-9);
+  --color-accent-10: var(--custom-accent-10);
+  --color-accent-11: var(--custom-accent-11);
+  --color-accent-12: var(--custom-accent-12);
+  --color-accent-a1: var(--custom-accent-a1);
+  --color-accent-a2: var(--custom-accent-a2);
+  --color-accent-a3: var(--custom-accent-a3);
+  --color-accent-a4: var(--custom-accent-a4);
+  --color-accent-a5: var(--custom-accent-a5);
+  --color-accent-a6: var(--custom-accent-a6);
+  --color-accent-a7: var(--custom-accent-a7);
+  --color-accent-a8: var(--custom-accent-a8);
+  --color-accent-a9: var(--custom-accent-a9);
+  --color-accent-a10: var(--custom-accent-a10);
+  --color-accent-a11: var(--custom-accent-a11);
+  --color-accent-a12: var(--custom-accent-a12);
 }
 
 :root,
 .light {
   color-scheme: light dark;
-
-  --color-background: #f3e5ab;
-
-  .orange {
-    --color-background: #ff7e67;
-  }
 }
 
 .light {
@@ -31,11 +231,186 @@
 
 .dark {
   color-scheme: dark;
-  --color-background: #0c1a54;
+}
 
-  .orange {
-    --color-background: #fed8b1;
+/* Because Chrome is buggy with box-shadow transitions from "transparent" keyword and/or RGB color into P3 colors. */
+/* Note: using `:where` here to guarantee that the P3 color will take over regardless of the output rule order. */
+:where(body) {
+  --color-transparent: rgb(0 0 0 / 0);
+}
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    body {
+      --color-transparent: color(display-p3 0 0 0 / 0);
+    }
   }
+}
+
+.default-theme {
+  --color-accent-1: var(--custom-accent-1);
+  --color-accent-2: var(--custom-accent-2);
+  --color-accent-3: var(--custom-accent-3);
+  --color-accent-4: var(--custom-accent-4);
+  --color-accent-5: var(--custom-accent-5);
+  --color-accent-6: var(--custom-accent-6);
+  --color-accent-7: var(--custom-accent-7);
+  --color-accent-8: var(--custom-accent-8);
+  --color-accent-9: var(--custom-accent-9);
+  --color-accent-10: var(--custom-accent-10);
+  --color-accent-11: var(--custom-accent-11);
+  --color-accent-12: var(--custom-accent-12);
+  --color-accent-a1: var(--custom-accent-a1);
+  --color-accent-a2: var(--custom-accent-a2);
+  --color-accent-a3: var(--custom-accent-a3);
+  --color-accent-a4: var(--custom-accent-a4);
+  --color-accent-a5: var(--custom-accent-a5);
+  --color-accent-a6: var(--custom-accent-a6);
+  --color-accent-a7: var(--custom-accent-a7);
+  --color-accent-a8: var(--custom-accent-a8);
+  --color-accent-a9: var(--custom-accent-a9);
+  --color-accent-a10: var(--custom-accent-a10);
+  --color-accent-a11: var(--custom-accent-a11);
+  --color-accent-a12: var(--custom-accent-a12);
+}
+
+.sky-theme,
+.info-theme {
+  --color-accent-1: var(--sky-1);
+  --color-accent-2: var(--sky-2);
+  --color-accent-3: var(--sky-3);
+  --color-accent-4: var(--sky-4);
+  --color-accent-5: var(--sky-5);
+  --color-accent-6: var(--sky-6);
+  --color-accent-7: var(--sky-7);
+  --color-accent-8: var(--sky-8);
+  --color-accent-9: var(--sky-9);
+  --color-accent-10: var(--sky-10);
+  --color-accent-11: var(--sky-11);
+  --color-accent-12: var(--sky-12);
+  --color-accent-a1: var(--sky-a1);
+  --color-accent-a2: var(--sky-a2);
+  --color-accent-a3: var(--sky-a3);
+  --color-accent-a4: var(--sky-a4);
+  --color-accent-a5: var(--sky-a5);
+  --color-accent-a6: var(--sky-a6);
+  --color-accent-a7: var(--sky-a7);
+  --color-accent-a8: var(--sky-a8);
+  --color-accent-a9: var(--sky-a9);
+  --color-accent-a10: var(--sky-a10);
+  --color-accent-a11: var(--sky-a11);
+  --color-accent-a12: var(--sky-a12);
+}
+
+.grass-theme,
+.success-theme {
+  --color-accent-1: var(--grass-1);
+  --color-accent-2: var(--grass-2);
+  --color-accent-3: var(--grass-3);
+  --color-accent-4: var(--grass-4);
+  --color-accent-5: var(--grass-5);
+  --color-accent-6: var(--grass-6);
+  --color-accent-7: var(--grass-7);
+  --color-accent-8: var(--grass-8);
+  --color-accent-9: var(--grass-9);
+  --color-accent-10: var(--grass-10);
+  --color-accent-11: var(--grass-11);
+  --color-accent-12: var(--grass-12);
+  --color-accent-a1: var(--grass-a1);
+  --color-accent-a2: var(--grass-a2);
+  --color-accent-a3: var(--grass-a3);
+  --color-accent-a4: var(--grass-a4);
+  --color-accent-a5: var(--grass-a5);
+  --color-accent-a6: var(--grass-a6);
+  --color-accent-a7: var(--grass-a7);
+  --color-accent-a8: var(--grass-a8);
+  --color-accent-a9: var(--grass-a9);
+  --color-accent-a10: var(--grass-a10);
+  --color-accent-a11: var(--grass-a11);
+  --color-accent-a12: var(--grass-a12);
+}
+
+.violet-theme,
+.critical-theme {
+  --color-accent-1: var(--violet-1);
+  --color-accent-2: var(--violet-2);
+  --color-accent-3: var(--violet-3);
+  --color-accent-4: var(--violet-4);
+  --color-accent-5: var(--violet-5);
+  --color-accent-6: var(--violet-6);
+  --color-accent-7: var(--violet-7);
+  --color-accent-8: var(--violet-8);
+  --color-accent-9: var(--violet-9);
+  --color-accent-10: var(--violet-10);
+  --color-accent-11: var(--violet-11);
+  --color-accent-12: var(--violet-12);
+  --color-accent-a1: var(--violet-a1);
+  --color-accent-a2: var(--violet-a2);
+  --color-accent-a3: var(--violet-a3);
+  --color-accent-a4: var(--violet-a4);
+  --color-accent-a5: var(--violet-a5);
+  --color-accent-a6: var(--violet-a6);
+  --color-accent-a7: var(--violet-a7);
+  --color-accent-a8: var(--violet-a8);
+  --color-accent-a9: var(--violet-a9);
+  --color-accent-a10: var(--violet-a10);
+  --color-accent-a11: var(--violet-a11);
+  --color-accent-a12: var(--violet-a12);
+}
+
+.amber-theme,
+.warning-theme {
+  --color-accent-1: var(--amber-1);
+  --color-accent-2: var(--amber-2);
+  --color-accent-3: var(--amber-3);
+  --color-accent-4: var(--amber-4);
+  --color-accent-5: var(--amber-5);
+  --color-accent-6: var(--amber-6);
+  --color-accent-7: var(--amber-7);
+  --color-accent-8: var(--amber-8);
+  --color-accent-9: var(--amber-9);
+  --color-accent-10: var(--amber-10);
+  --color-accent-11: var(--amber-11);
+  --color-accent-12: var(--amber-12);
+  --color-accent-a1: var(--amber-a1);
+  --color-accent-a2: var(--amber-a2);
+  --color-accent-a3: var(--amber-a3);
+  --color-accent-a4: var(--amber-a4);
+  --color-accent-a5: var(--amber-a5);
+  --color-accent-a6: var(--amber-a6);
+  --color-accent-a7: var(--amber-a7);
+  --color-accent-a8: var(--amber-a8);
+  --color-accent-a9: var(--amber-a9);
+  --color-accent-a10: var(--amber-a10);
+  --color-accent-a11: var(--amber-a11);
+  --color-accent-a12: var(--amber-a12);
+}
+
+.tomato-theme,
+.danger-theme {
+  --color-accent-1: var(--tomato-1);
+  --color-accent-2: var(--tomato-2);
+  --color-accent-3: var(--tomato-3);
+  --color-accent-4: var(--tomato-4);
+  --color-accent-5: var(--tomato-5);
+  --color-accent-6: var(--tomato-6);
+  --color-accent-7: var(--tomato-7);
+  --color-accent-8: var(--tomato-8);
+  --color-accent-9: var(--tomato-9);
+  --color-accent-10: var(--tomato-10);
+  --color-accent-11: var(--tomato-11);
+  --color-accent-12: var(--tomato-12);
+  --color-accent-a1: var(--tomato-a1);
+  --color-accent-a2: var(--tomato-a2);
+  --color-accent-a3: var(--tomato-a3);
+  --color-accent-a4: var(--tomato-a4);
+  --color-accent-a5: var(--tomato-a5);
+  --color-accent-a6: var(--tomato-a6);
+  --color-accent-a7: var(--tomato-a7);
+  --color-accent-a8: var(--tomato-a8);
+  --color-accent-a9: var(--tomato-a9);
+  --color-accent-a10: var(--tomato-a10);
+  --color-accent-a11: var(--tomato-a11);
+  --color-accent-a12: var(--tomato-a12);
 }
 
 /**

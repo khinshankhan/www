@@ -5,9 +5,13 @@ import "./globals.css"
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="touch-manipulation scroll-auto focus-within:scroll-smooth"
+      suppressHydrationWarning
+    >
       <head></head>
-      <body className="bg-background">
+      <body className="min-h-screen bg-background text-foreground antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
