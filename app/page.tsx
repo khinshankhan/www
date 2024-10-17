@@ -1,5 +1,18 @@
 import React from "react"
 
+function Sample({ className, title = "Default" }: { className: string; title?: string }) {
+  return (
+    <div className={className}>
+      <div class="border-4 border-accent-7 bg-accent-2 p-4">
+        <p class="font-bold text-accent-12">{`Alert! ${title} Theme`}</p>
+        <p class="text-accent-11">
+          This is a placeholder alert message. Please update the text accordingly.
+        </p>
+      </div>
+    </div>
+  )
+}
+
 export default async function Page() {
   return (
     <>
@@ -30,6 +43,22 @@ export default async function Page() {
           sit amet quam. Vivamus pretium ornare est.
         </p>
       </blockquote>
+
+      <br />
+
+      <Sample className="default-theme" title="Default" />
+      <br />
+      <Sample className="info-theme" title="Info" />
+      <br />
+      <Sample className="success-theme" title="Success" />
+      <br />
+      <Sample className="critical-theme" title="Critical" />
+      <br />
+      <Sample className="warning-theme" title="Warning" />
+      <br />
+      <Sample className="danger-theme" title="Danger" />
+      <br />
+
       <h3 className="">Header Level 3</h3>
       <h3 className="bg-accent-5">Header Level 3</h3>
       <h3 className="default-theme bg-accent-5">Header Level 3</h3>
