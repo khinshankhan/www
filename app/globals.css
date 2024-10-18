@@ -59,10 +59,10 @@
   --color-accent-a11: var(--custom-a11);
   --color-accent-a12: var(--custom-a12);
 
-  --accent-contrast: var(--custom-contrast);
-  --accent-surface: var(--custom-surface);
-  --accent-indicator: var(--custom-indicator);
-  --accent-track: var(--custom-track);
+  --color-accent-contrast: var(--custom-contrast);
+  --color-accent-surface: var(--custom-surface);
+  --color-accent-indicator: var(--custom-indicator);
+  --color-accent-track: var(--custom-track);
 }
 
 .default-theme {
@@ -92,10 +92,10 @@
   --color-accent-a11: var(--custom-a11);
   --color-accent-a12: var(--custom-a12);
 
-  --accent-contrast: var(--custom-contrast);
-  --accent-surface: var(--custom-surface);
-  --accent-indicator: var(--custom-indicator);
-  --accent-track: var(--custom-track);
+  --color-accent-contrast: var(--custom-contrast);
+  --color-accent-surface: var(--custom-surface);
+  --color-accent-indicator: var(--custom-indicator);
+  --color-accent-track: var(--custom-track);
 }
 
 .cyan-theme,
@@ -126,10 +126,10 @@
   --color-accent-a11: var(--cyan-a11);
   --color-accent-a12: var(--cyan-a12);
 
-  --accent-contrast: var(--cyan-contrast);
-  --accent-surface: var(--cyan-surface);
-  --accent-indicator: var(--cyan-indicator);
-  --accent-track: var(--cyan-track);
+  --color-accent-contrast: var(--cyan-contrast);
+  --color-accent-surface: var(--cyan-surface);
+  --color-accent-indicator: var(--cyan-indicator);
+  --color-accent-track: var(--cyan-track);
 }
 
 .green-theme,
@@ -160,10 +160,10 @@
   --color-accent-a11: var(--green-a11);
   --color-accent-a12: var(--green-a12);
 
-  --accent-contrast: var(--green-contrast);
-  --accent-surface: var(--green-surface);
-  --accent-indicator: var(--green-indicator);
-  --accent-track: var(--green-track);
+  --color-accent-contrast: var(--green-contrast);
+  --color-accent-surface: var(--green-surface);
+  --color-accent-indicator: var(--green-indicator);
+  --color-accent-track: var(--green-track);
 }
 
 .violet-theme,
@@ -194,10 +194,10 @@
   --color-accent-a11: var(--violet-a11);
   --color-accent-a12: var(--violet-a12);
 
-  --accent-contrast: var(--violet-contrast);
-  --accent-surface: var(--violet-surface);
-  --accent-indicator: var(--violet-indicator);
-  --accent-track: var(--violet-track);
+  --color-accent-contrast: var(--violet-contrast);
+  --color-accent-surface: var(--violet-surface);
+  --color-accent-indicator: var(--violet-indicator);
+  --color-accent-track: var(--violet-track);
 }
 
 .amber-theme,
@@ -228,10 +228,10 @@
   --color-accent-a11: var(--amber-a11);
   --color-accent-a12: var(--amber-a12);
 
-  --accent-contrast: var(--amber-contrast);
-  --accent-surface: var(--amber-surface);
-  --accent-indicator: var(--amber-indicator);
-  --accent-track: var(--amber-track);
+  --color-accent-contrast: var(--amber-contrast);
+  --color-accent-surface: var(--amber-surface);
+  --color-accent-indicator: var(--amber-indicator);
+  --color-accent-track: var(--amber-track);
 }
 
 .red-theme,
@@ -262,10 +262,10 @@
   --color-accent-a11: var(--red-a11);
   --color-accent-a12: var(--red-a12);
 
-  --accent-contrast: var(--red-contrast);
-  --accent-surface: var(--red-surface);
-  --accent-indicator: var(--red-indicator);
-  --accent-track: var(--red-track);
+  --color-accent-contrast: var(--red-contrast);
+  --color-accent-surface: var(--red-surface);
+  --color-accent-indicator: var(--red-indicator);
+  --color-accent-track: var(--red-track);
 }
 
 /* Because Chrome is buggy with box-shadow transitions from "transparent" keyword and/or RGB color into P3 colors. */
