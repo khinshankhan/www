@@ -3,10 +3,15 @@ import React from "react"
 function Sample({ className, title = "Default" }: { className: string; title?: string }) {
   return (
     <div className={className}>
-      <div class="border-4 border-accent-7 bg-accent-2 p-4">
-        <p class="font-bold text-accent-12">{`Alert! ${title} Theme`}</p>
-        <p class="text-accent-11">
-          This is a placeholder alert message. Please update the text accordingly.
+      <div class="bg-accent-6/60 p-4">
+        <p class="font-bold">{`Alert! ${title} Theme`}</p>
+        <p class="">
+          <span>This is a placeholder alert message.</span> Please update the text accordingly. And
+          this is a{" "}
+          <a href="https://google.com" className="text-accent-link">
+            lorem ipsum
+          </a>{" "}
+          link .
         </p>
       </div>
     </div>

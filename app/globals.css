@@ -8,10 +8,19 @@
 
 .light {
   color-scheme: light;
+
+  /** HACK: This is a quick workaround for being able to darken color for light mode. Hopefully tailwind adds this as an
+   * easier feature https://github.com/tailwindlabs/tailwindcss/discussions/14712
+   */
+  /* --accent-link-color: color-mix(in srgb, var(--color-accent-11) 80%, #000); */
+
+  --hack-mix-color: #000;
 }
 
 .dark {
   color-scheme: dark;
+
+  --hack-mix-color: #fff;
 }
 
 @theme {
@@ -63,6 +72,8 @@
   --color-accent-surface: var(--custom-surface);
   --color-accent-indicator: var(--custom-indicator);
   --color-accent-track: var(--custom-track);
+
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
 }
 
 .default-theme {
@@ -96,6 +107,8 @@
   --color-accent-surface: var(--custom-surface);
   --color-accent-indicator: var(--custom-indicator);
   --color-accent-track: var(--custom-track);
+
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 90%, var(--hack-mix-color));
 }
 
 .cyan-theme,
@@ -130,6 +143,8 @@
   --color-accent-surface: var(--cyan-surface);
   --color-accent-indicator: var(--cyan-indicator);
   --color-accent-track: var(--cyan-track);
+
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
 }
 
 .green-theme,
@@ -164,6 +179,8 @@
   --color-accent-surface: var(--green-surface);
   --color-accent-indicator: var(--green-indicator);
   --color-accent-track: var(--green-track);
+
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
 }
 
 .violet-theme,
@@ -198,6 +215,8 @@
   --color-accent-surface: var(--violet-surface);
   --color-accent-indicator: var(--violet-indicator);
   --color-accent-track: var(--violet-track);
+
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
 }
 
 .amber-theme,
@@ -232,6 +251,8 @@
   --color-accent-surface: var(--amber-surface);
   --color-accent-indicator: var(--amber-indicator);
   --color-accent-track: var(--amber-track);
+
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
 }
 
 .red-theme,
@@ -266,6 +287,8 @@
   --color-accent-surface: var(--red-surface);
   --color-accent-indicator: var(--red-indicator);
   --color-accent-track: var(--red-track);
+
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
 }
 
 /* Because Chrome is buggy with box-shadow transitions from "transparent" keyword and/or RGB color into P3 colors. */
