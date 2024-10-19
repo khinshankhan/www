@@ -1,4 +1,7 @@
 import React from "react"
+import { cn } from "@/lib/utils"
+import { GeistMono } from "geist/font/mono"
+import { GeistSans } from "geist/font/sans"
 import { ThemeProvider } from "next-themes"
 
 import "./globals.css"
@@ -11,7 +14,21 @@ export default async function Layout({ children }: { children: React.ReactNode }
       suppressHydrationWarning
     >
       <head></head>
-      <body className="min-h-screen bg-background text-foreground antialiased">
+      <body
+        className={cn(
+          GeistSans.variable,
+          GeistMono.variable,
+          "min-h-screen bg-background font-body text-foreground antialiased"
+        )}
+        style={{
+          // @ts-ignore: this is a css variable which is perfectly valid
+          "--font-heading": "var(--font-geist-sans)",
+          // @ts-ignore: this is a css variable which is perfectly valid
+          "--font-body": "var(--font-geist-sans)",
+          // @ts-ignore: this is a css variable which is perfectly valid
+          "--font-mono": "var(--font-geist-mono)",
+        }}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

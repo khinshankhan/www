@@ -78,6 +78,13 @@
   --color-accent-track: var(--custom-track);
 
   --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
+
+  --font-family-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --font-family-body: var(--font-body), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  --font-family-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 }
 
 /**
