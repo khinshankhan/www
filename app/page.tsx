@@ -3,7 +3,7 @@ import React from "react"
 function Sample({ className, title = "Default" }: { className: string; title?: string }) {
   return (
     <div className={className}>
-      <div class="bg-accent-6/60 p-4">
+      <div class={(className === "foobar" ? "animated-background" : "bg-accent-6/60") + " p-4"}>
         <p class="font-bold">{`Alert! ${title} Theme`}</p>
         <p class="">
           <span>This is a placeholder alert message.</span> Please update the text accordingly. And
@@ -62,6 +62,8 @@ export default async function Page() {
       <Sample className="warning-theme" title="Warning" />
       <br />
       <Sample className="danger-theme" title="Danger" />
+      <br />
+      <Sample className="foobar" title="Foobar" />
       <br />
 
       <h3 className="">Header Level 3</h3>

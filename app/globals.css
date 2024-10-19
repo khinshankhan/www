@@ -15,12 +15,16 @@
   /* --accent-link-color: color-mix(in srgb, var(--color-accent-11) 80%, #000); */
 
   --hack-mix-color: #000;
+
+  --colorful-gradient: #fffde5, #e9ffda, #dffbff, #ecefff, #f6e1ff, #ffe5f0;
 }
 
 .dark {
   color-scheme: dark;
 
   --hack-mix-color: #fff;
+
+  --colorful-gradient: #5a4b3c, #4c593d, #3a535f, #414758, #533f60, #604048;
 }
 
 @theme {
@@ -343,4 +347,22 @@
   .hide-print {
     display: none !important;
   }
+}
+
+@keyframes background-animation {
+  0% {
+    background-position: 0% 25%;
+  }
+  50% {
+    background-position: 100% 76%;
+  }
+  100% {
+    background-position: 0% 25%;
+  }
+}
+
+.animated-background {
+  background: linear-gradient(277deg, var(--colorful-gradient));
+  background-size: 1200% 1200%;
+  animation: background-animation 10s ease infinite;
 }
