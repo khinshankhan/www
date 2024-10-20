@@ -18,7 +18,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
         className={cn(
           GeistSans.variable,
           GeistMono.variable,
-          "min-h-screen bg-background font-body text-foreground antialiased"
+          "min-h-screen bg-background-1 font-body text-foreground antialiased"
         )}
         style={{
           // @ts-ignore: this is a css variable which is perfectly valid

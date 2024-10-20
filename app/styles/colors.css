@@ -32,6 +32,32 @@
   --gray-indicator: #8d8d8d;
   --gray-track: #8d8d8d;
 
+  --celestial-1: hsl(240, 40%, 98%);
+  --celestial-2: hsl(240, 40%, 96.1%);
+  --celestial-3: hsl(240, 31.8%, 91.4%);
+  --celestial-4: hsl(240, 26.8%, 83.9%);
+  --celestial-5: hsl(240, 20.2%, 65.1%);
+  --celestial-6: hsl(240, 16.3%, 46.9%);
+  --celestial-7: hsl(240, 19.3%, 34.5%);
+  --celestial-8: hsl(240, 25%, 26.7%);
+  --celestial-9: hsl(240, 32.6%, 17.5%);
+  --celestial-10: hsl(240, 47.4%, 11.2%);
+  --celestial-11: hsl(240, 84%, 4.9%);
+  --celestial-12: hsl(240, 100%, 2%);
+
+  --celestial-a1: hsla(240, 40%, 98%, 0.03);
+  --celestial-a2: hsla(240, 40%, 96.1%, 0.06);
+  --celestial-a3: hsla(240, 31.8%, 91.4%, 0.1);
+  --celestial-a4: hsla(240, 26.8%, 83.9%, 0.15);
+  --celestial-a5: hsla(240, 20.2%, 65.1%, 0.2);
+  --celestial-a6: hsla(240, 16.3%, 46.9%, 0.25);
+  --celestial-a7: hsla(240, 19.3%, 34.5%, 0.31);
+  --celestial-a8: hsla(240, 25%, 26.7%, 0.44);
+  --celestial-a9: hsla(240, 32.6%, 17.5%, 0.72);
+  --celestial-a10: hsla(240, 47.4%, 11.2%, 0.82);
+  --celestial-a11: hsla(240, 84%, 4.9%, 0.91);
+  --celestial-a12: hsla(240, 100%, 2%, 0.97);
+
   --custom-1: #fefcfe;
   --custom-2: #fbf8fc;
   --custom-3: #f7edf7;
@@ -476,6 +502,32 @@
   --gray-surface: #24242480;
   --gray-indicator: #484848;
   --gray-track: #484848;
+
+  --celestial-1: hsl(240, 84%, 4.9%);
+  --celestial-2: hsl(240, 47.4%, 11.2%);
+  --celestial-3: hsl(240, 32.6%, 17.5%);
+  --celestial-4: hsl(240, 25%, 26.7%);
+  --celestial-5: hsl(240, 19.3%, 34.5%);
+  --celestial-6: hsl(240, 16.3%, 46.9%);
+  --celestial-7: hsl(240, 20.2%, 65.1%);
+  --celestial-8: hsl(240, 26.8%, 83.9%);
+  --celestial-9: hsl(240, 31.8%, 91.4%);
+  --celestial-10: hsl(240, 40%, 96.1%);
+  --celestial-11: hsl(240, 40%, 98%);
+  --celestial-12: hsl(240, 100%, 99%);
+
+  --celestial-a1: hsla(240, 84%, 4.9%, 0.03);
+  --celestial-a2: hsla(240, 47.4%, 11.2%, 0.06);
+  --celestial-a3: hsla(240, 32.6%, 17.5%, 0.1);
+  --celestial-a4: hsla(240, 25%, 26.7%, 0.15);
+  --celestial-a5: hsla(240, 19.3%, 34.5%, 0.2);
+  --celestial-a6: hsla(240, 16.3%, 46.9%, 0.25);
+  --celestial-a7: hsla(240, 20.2%, 65.1%, 0.31);
+  --celestial-a8: hsla(240, 26.8%, 83.9%, 0.44);
+  --celestial-a9: hsla(240, 31.8%, 91.4%, 0.72);
+  --celestial-a10: hsla(240, 40%, 96.1%, 0.82);
+  --celestial-a11: hsla(240, 40%, 98%, 0.91);
+  --celestial-a12: hsla(240, 100%, 99%, 0.97);
 
   --custom-1: #131014;
   --custom-2: #1c151d;
