@@ -1,4 +1,5 @@
 import React from "react"
+import { typographyVariants } from "@/components/base/typography"
 import { cn } from "@/lib/utils"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
@@ -18,6 +19,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
         className={cn(
           GeistSans.variable,
           GeistMono.variable,
+          typographyVariants({ variant: "p" }),
           "min-h-screen bg-background-1 font-body text-foreground antialiased"
         )}
         style={{
