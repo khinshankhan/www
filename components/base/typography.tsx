@@ -77,3 +77,19 @@ export function Text({
 
   return <Comp className={cn(typographyVariants({ variant, className }))}>{children}</Comp>
 }
+
+export function Strong({
+  asChild = false,
+  as: Tag = "strong",
+  className = "",
+  children,
+}: {
+  asChild?: boolean
+  as?: keyof HTMLElementTagNameMap
+  className?: string
+  children: React.ReactNode
+}) {
+  const Comp = asChild ? Slot : Tag
+
+  return <Comp className={cn("font-bold", className)}>{children}</Comp>
+}
