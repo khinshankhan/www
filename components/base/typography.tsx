@@ -42,6 +42,7 @@ export function Heading({
   asChild = false,
   as: Tag = "h1",
   variant = undefined,
+  weight = null,
   className = "",
   children,
 }: {
@@ -55,7 +56,7 @@ export function Heading({
   const calculatedVariant = variant ?? Tag
 
   return (
-    <Comp className={cn(typographyVariants({ variant: calculatedVariant, className }))}>
+    <Comp className={cn(typographyVariants({ variant: calculatedVariant, weight }), className)}>
       {children}
     </Comp>
   )
@@ -65,6 +66,7 @@ export function Text({
   asChild = false,
   as: Tag = "p",
   variant = "p",
+  weight = null,
   className = "",
   children,
 }: {
@@ -75,7 +77,7 @@ export function Text({
 } & TypographyVariants) {
   const Comp = asChild ? Slot : Tag
 
-  return <Comp className={cn(typographyVariants({ variant, className }))}>{children}</Comp>
+  return <Comp className={cn(typographyVariants({ variant, weight }), className)}>{children}</Comp>
 }
 
 export function Strong({
