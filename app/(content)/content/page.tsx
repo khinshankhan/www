@@ -21,18 +21,18 @@ export default async function Page() {
             proportional way that maximizes beauty and makes reading easier and more pleasant.
           </p>
 
+          <Text id="foo">hi</Text>
+
           <div className="w-full space-y-4 bg-accent-4 py-4">
             <p>I wanna be full width</p>
 
             <p>I wanna be full width 2</p>
           </div>
-
           <p>
-            The <Strong>Golden Ratio</Strong> is a mathematical ratio that's commonly found in
+            The <Strong>Golden Ratio</Strong> is a mathematical ratio that is commonly found in
             nature. It can be used to create pleasing, natural-looking compositions in your design
             work.
           </p>
-
           <p>
             Cherry bananas rainbow sprinkles, hot fudge cookie dough blueberries strawberries french
             vanilla oreos. Strawberry strawberries blueberries pistachio chocolate Pistachio mint
@@ -43,7 +43,6 @@ export default async function Page() {
             chocolate cake batter. Cookies and cream mint chocolate chip cookies and cream vanilla
             kitkat peanuts, mint cake batter. Caramel syrup peanuts mint chocolate chip peanuts.
           </p>
-
           {[].map((i) => (
             <p key={i}>
               Cherry bananas rainbow sprinkles, hot fudge cookie dough blueberries strawberries
