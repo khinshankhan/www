@@ -19,7 +19,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
         className={cn(
           GeistSans.variable,
           GeistMono.variable,
-          typographyVariants({ variant: "p" }),
+          typographyVariants({ variant: "body" }),
           "min-h-screen bg-background-1 font-body text-foreground antialiased"
         )}
         style={{
