@@ -153,6 +153,16 @@
   animation: background-animation 10s ease infinite;
 }
 
+/*
+  .page-container {
+    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1280px] 2xl:max-w-[1450px];
+  }
+
+  .content-container {
+    @apply mx-auto w-full max-w-[95%] px-0 sm:max-w-[90%] sm:px-[1.5rem] xl:max-w-[1050px] 2xl:max-w-[1200px];
+  }
+*/
+
 .page-container {
   :where(& > *) {
     width: 100%;
@@ -165,13 +175,49 @@
     /* breakpoint xl */
     @media (min-width: 82.8125rem) {
       background-color: blue;
-      max-width: 76rem;
+      max-width: 77rem;
     }
 
     /* breakpoint 2xl */
     @media (min-width: 96rem) {
       background-color: red;
-      max-width: 90rem;
+      max-width: 87.5rem;
     }
+  }
+}
+
+.content-container {
+  :where(& > *, & > .mobile-full-width-container > *) {
+    width: 100%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+    background-color: red;
+
+    /* breakpoint xl */
+    @media (min-width: 82.8125rem) {
+      background-color: green;
+      max-width: 62rem;
+    }
+
+    /* breakpoint 2xl */
+    @media (min-width: 96rem) {
+      background-color: blue;
+      max-width: 72rem;
+    }
+  }
+}
+
+/* breakpoint md */
+@media not all and (min-width: 48rem) {
+  .mobile-full-width-container {
+    position: relative;
+    max-width: none !important;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
   }
 }
