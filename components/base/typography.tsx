@@ -117,3 +117,26 @@ export function Strong<T extends React.ElementType = "strong">({
     </Comp>
   )
 }
+
+type EmProps<T extends React.ElementType = "em"> = {
+  as?: T
+  asChild?: boolean
+  className?: string
+  children: React.ReactNode
+} & React.ComponentPropsWithoutRef<T>
+
+export function Em<T extends React.ElementType = "em">({
+  as: Tag,
+  asChild = false,
+  className = "",
+  children,
+  ...props
+}: EmProps<T>) {
+  const Comp = asChild ? Slot : (Tag ?? "em")
+
+  return (
+    <Comp className={cn("italic", className)} {...props}>
+      {children}
+    </Comp>
+  )
+}

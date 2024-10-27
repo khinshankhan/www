@@ -1,5 +1,5 @@
 import React from "react"
-import { Heading, Strong, Text } from "@/components/base/typography"
+import { Em, Heading, Strong, Text } from "@/components/base/typography"
 
 export default async function Page() {
   return (
@@ -28,9 +28,12 @@ export default async function Page() {
         </p>
 
         <p>
-          The <Strong>Golden Ratio</Strong> is a mathematical ratio that is commonly found in
-          nature. It can be used to create pleasing, natural-looking compositions in your design
-          work.
+          The <Strong>Golden Ratio</Strong> is a <Em>mathematical ratio</Em> that is commonly found
+          in{" "}
+          <Strong>
+            <Em>nature</Em>
+          </Strong>
+          . It can be used to create pleasing, natural-looking compositions in your design work.
         </p>
         <p>
           Cherry bananas rainbow sprinkles, hot fudge cookie dough blueberries strawberries french
