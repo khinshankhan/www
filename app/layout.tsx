@@ -38,17 +38,35 @@ export default async function Layout({ children }: { children: React.ReactNode }
         >
           <div vaul-drawer-wrapper="">
             <div className="relative isolate z-0 flex min-h-[87vh] flex-col xs:min-h-[96vh]">
-              <header className="page-container flex min-h-[68px] items-center pt-2 md:min-h-[78px] lg:min-h-[88px]">
+              <header className="bounded-page-layout flex min-h-[68px] items-center pt-2 md:min-h-[78px] lg:min-h-[88px]">
                 <nav className="flex w-full flex-row items-center justify-between">
-                  <div>header</div> <div>here</div>
+                  <div aria-label="Site Logo">
+                    <a href="#">Logo</a>
+                  </div>
+                  <div>
+                    <ul className="flex space-x-4">
+                      <li>
+                        <a href="#">Home</a>
+                      </li>
+                      <li>
+                        <a href="#">About</a>
+                      </li>
+                      <li>
+                        <a href="#">Services</a>
+                      </li>
+                      <li>
+                        <a href="#">Contact</a>
+                      </li>
+                    </ul>
+                  </div>
                 </nav>
               </header>
               {/* NOTE: assumes pages will be wrapped in main tags with background color + grow */}
-              <div id="page-content" className="relative flex grow flex-col">
-                {children}
-              </div>
+              <div className="relative flex grow flex-col">{children}</div>
             </div>
-            <div className="h-40">footer</div>
+            <footer className="bounded-page-layout h-40">
+              <p>Footer content here</p>
+            </footer>
           </div>
           <BreakpointsIndicator />
         </ThemeProvider>

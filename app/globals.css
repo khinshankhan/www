@@ -163,31 +163,29 @@
   }
 */
 
-.page-container {
-  :where(& > *) {
-    width: 100%;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+.bounded-page-layout {
+  width: 100%;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 
-    background-color: green;
+  background-color: green;
 
-    /* breakpoint xl */
-    @media (min-width: 82.8125rem) {
-      background-color: blue;
-      max-width: 77rem;
-    }
+  /* breakpoint xl */
+  @media (min-width: 82.8125rem) {
+    background-color: blue;
+    max-width: 77rem;
+  }
 
-    /* breakpoint 2xl */
-    @media (min-width: 96rem) {
-      background-color: red;
-      max-width: 87.5rem;
-    }
+  /* breakpoint 2xl */
+  @media (min-width: 96rem) {
+    background-color: red;
+    max-width: 87.5rem;
   }
 }
 
-.content-container {
-  :where(& > *, & > .mobile-full-width-container > *) {
+.bounded-content-layout {
+  :where(& > *) {
     width: 100%;
     max-width: 90%;
     margin-left: auto;
@@ -206,18 +204,5 @@
       background-color: blue;
       max-width: 72rem;
     }
-  }
-}
-
-/* breakpoint md */
-@media not all and (min-width: 48rem) {
-  .mobile-full-width-container {
-    position: relative;
-    max-width: none !important;
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw !important;
-    margin-right: -50vw !important;
   }
 }
