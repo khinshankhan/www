@@ -3,7 +3,7 @@ import { typographyVariants } from "@/components/base/typography"
 import { cn } from "@/lib/utils"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
-import { ThemeProvider } from "next-themes"
+import { BreakpointsIndicator, ThemeProvider } from "./providers"
 
 import "./globals.css"
 
@@ -26,7 +26,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
           GeistSans.variable,
           GeistMono.variable,
           typographyVariants({ variant: "body" }),
-          "min-h-screen bg-background-1 font-body text-foreground antialiased"
+          "relative min-h-screen bg-background-1 font-body text-foreground antialiased"
         )}
         style={fontAliases}
       >
@@ -50,6 +50,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
             </div>
             <div className="h-40">footer</div>
           </div>
+          <BreakpointsIndicator />
         </ThemeProvider>
       </body>
     </html>
