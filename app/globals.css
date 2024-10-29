@@ -12,8 +12,6 @@
   /** HACK: This is a quick workaround for being able to darken color for light mode. Hopefully tailwind adds this as an
    * easier feature https://github.com/tailwindlabs/tailwindcss/discussions/14712
    */
-  /* --accent-link-color: color-mix(in srgb, var(--color-accent-11) 80%, #000); */
-
   --hack-mix-color: #000;
 
   --colorful-gradient: #fffde5, #e9ffda, #dffbff, #ecefff, #f6e1ff, #ffe5f0;
@@ -186,5 +184,20 @@
     @media (min-width: 96rem) {
       max-width: 72rem;
     }
+  }
+}
+
+.link-drastic-underline-on-hover {
+  background-position: 0 100%;
+  background-size: 100% 0.0625em;
+  &:hover {
+    background-size: 100% 0.078125em;
+  }
+}
+
+.link-reveal-on-hover {
+  background-size: 0% 0.05em;
+  &:hover {
+    background-size: 100% 0.05em;
   }
 }

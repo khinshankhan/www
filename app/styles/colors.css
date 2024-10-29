@@ -1021,7 +1021,7 @@
   --color-accent-indicator: var(--cyan-indicator);
   --color-accent-track: var(--cyan-track);
 
-  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 90%, var(--hack-mix-color));
 }
 
 .green-theme,
@@ -1057,7 +1057,7 @@
   --color-accent-indicator: var(--green-indicator);
   --color-accent-track: var(--green-track);
 
-  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 90%, var(--hack-mix-color));
 }
 
 .violet-theme,
@@ -1093,7 +1093,7 @@
   --color-accent-indicator: var(--violet-indicator);
   --color-accent-track: var(--violet-track);
 
-  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 90%, var(--hack-mix-color));
 }
 
 .amber-theme,
@@ -1129,7 +1129,7 @@
   --color-accent-indicator: var(--amber-indicator);
   --color-accent-track: var(--amber-track);
 
-  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 90%, var(--hack-mix-color));
 }
 
 .red-theme,
@@ -1165,5 +1165,5 @@
   --color-accent-indicator: var(--red-indicator);
   --color-accent-track: var(--red-track);
 
-  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 90%, var(--hack-mix-color));
 }
