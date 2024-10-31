@@ -9,9 +9,9 @@ import { BreakpointsIndicator, ThemeProvider } from "./providers"
 import "./globals.css"
 
 const fontAliases = {
-  heading: "var(--font-geist-sans)",
-  body: "var(--font-geist-sans)",
-  mono: "var(--font-geist-mono)",
+  ["--font-heading"]: "var(--font-geist-sans)",
+  ["--font-body"]: "var(--font-geist-sans)",
+  ["--font-mono"]: "var(--font-geist-mono)",
 } as React.CSSProperties
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
