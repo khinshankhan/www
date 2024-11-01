@@ -1,5 +1,6 @@
 import React from "react"
 import { Em, Heading, Strong, Text } from "@/components/base/typography"
+import { SmartLink } from "@/components/composite/smart-link"
 
 export default async function Page() {
   return (
@@ -18,13 +19,16 @@ export default async function Page() {
 
       <div className="bounded-content-layout py-6">
         <p>
-          Hello there. This is where experiments sprout and blossom. Some even become features! Or
-          they may become bugs that then become features. Or they... well yea, stuff happens.
+          Hello there. <SmartLink href="/">This</SmartLink> is where experiments sprout and blossom.
+          Some even become features! Or they may become bugs that then become features. Or they...
+          well yea, <SmartLink href="/hello.pdf">stuff happens</SmartLink>.
         </p>
 
         <p>
-          The goal of typography is to relate font size, line height, and line width in a
-          proportional way that maximizes beauty and makes reading easier and more pleasant.
+          The goal of{" "}
+          <SmartLink href="https://en.wikipedia.org/wiki/Typography">typography</SmartLink> is to
+          relate font size, line height, and line width in a proportional way that maximizes beauty
+          and makes reading easier and more pleasant.
         </p>
 
         <p>
@@ -35,6 +39,10 @@ export default async function Page() {
           </Strong>
           . It can be used to create pleasing, natural-looking compositions in your design work.
         </p>
+
+        <Heading as="h2" variant="h2">
+          The Randomness of Lorem
+        </Heading>
         <p>
           Cherry bananas rainbow sprinkles, hot fudge cookie dough blueberries strawberries french
           vanilla oreos. Strawberry strawberries blueberries pistachio chocolate Pistachio mint
