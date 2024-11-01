@@ -26,10 +26,11 @@ export const linkVariants = cva("transition-[color] duration-500", {
 // prettier-ignore
 export type LinkVariants = VariantProps<typeof linkVariants>
 
-interface LinkProps extends NextLinkProps, LinkVariants {
+export interface LinkProps extends NextLinkProps, LinkVariants {
   className?: string
   children: ReactNode
   style?: React.CSSProperties
+  icon?: ReactNode
 }
 
 export function Link({
@@ -39,6 +40,7 @@ export function Link({
   className = "",
   children,
   style = {},
+  icon = null,
   ...props
 }: LinkProps) {
   const classes = cn(linkVariants({ variant, isMonochrome }), className)
@@ -52,7 +54,8 @@ export function Link({
   if (typeof href !== "string" || href.startsWith("/")) {
     return (
       <NextLink href={href} className={classes} style={styles} {...props}>
-        {children} i
+        {children}
+        {icon}
       </NextLink>
     )
   }
@@ -61,7 +64,8 @@ export function Link({
   if (href.startsWith("#")) {
     return (
       <a href={href} className={classes} style={styles} {...props}>
-        {children} a
+        {children}
+        {icon}
       </a>
     )
   }
@@ -76,7 +80,8 @@ export function Link({
       rel="noopener noreferrer"
       {...props}
     >
-      {children} e
+      {children}
+      {icon}
     </a>
   )
 }
