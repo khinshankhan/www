@@ -201,3 +201,96 @@
     background-size: 100% 0.05em;
   }
 }
+
+.prose {
+  /* General spacing of content, this is meant to cover cases that can't be easily done with inline classes.
+   *
+   * Keep in mind the phenomenon called 'margin collapsing', where if margins left and right or top and bottom meet and
+   * they're they're both positive, instead of pushing away the additive distance, the larger of two margins is used.
+   *
+   * Reference: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_model/Mastering_margin_collapsing
+   *
+   * However, since if one margin is positive and the other is negative the additive distance is used, it's possible to
+   * leverage 'negative margins' to bring elements closer such that a group of elements seem related.
+   *
+   * Reference: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_model/Mastering_margin_collapsing
+   */
+  & > :where(*) {
+    margin-bottom: 1.25rem;
+
+    /* breakpoint md */
+    @media (min-width: 48rem) {
+      margin-bottom: 1.375rem;
+    }
+
+    /* breakpoint lg */
+    @media (min-width: 64rem) {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  /* spacing for headings */
+  & :where(h1, h2, h3, h4, h5, h6) {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+
+    /* breakpoint md */
+    @media (min-width: 48rem) {
+      margin-top: 1.75rem;
+      margin-bottom: 0.875rem;
+    }
+
+    /* breakpoint lg */
+    @media (min-width: 64rem) {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  /* list styles */
+  & :where(ol, ul) {
+    padding-left: 1em;
+
+    & :where(& > :not(:last-child)) {
+      margin-bottom: 0.375em;
+    }
+  }
+
+  /*
+   * Lists should feel connected to the preceding content but still show hierarchy I'm using a negative margin top to
+   * pull the list closer to the preceding content which should have the margin bottom applied to it
+   */
+  & > p + :where(ol, ul) {
+    margin-top: -0.75rem;
+
+    /* breakpoint md */
+    @media (min-width: 48rem) {
+      margin-top: -0.875rem;
+    }
+
+    /* breakpoint lg */
+    @media (min-width: 64rem) {
+      margin-top: -1rem;
+    }
+  }
+
+  /* sane defaults for list types */
+  & ol {
+    list-style-type: decimal;
+  }
+  & ol ol {
+    list-style-type: lower-alpha;
+  }
+  & ol ol ol {
+    list-style-type: lower-greek;
+  }
+  & ul {
+    list-style-type: disc;
+  }
+  & ul ul {
+    list-style-type: circle;
+  }
+  & ul ul ul {
+    list-style-type: square;
+  }
+}

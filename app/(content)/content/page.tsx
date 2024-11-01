@@ -17,7 +17,7 @@ export default async function Page() {
         </div>
       </header>
 
-      <div className="bounded-content-layout py-6">
+      <div className="bounded-content-layout prose py-6">
         <p>
           Hello there. <SmartLink href="/">This</SmartLink> is where experiments sprout and blossom.
           Some even become features! Or they may become bugs that then become features. Or they...
@@ -44,17 +44,47 @@ export default async function Page() {
           The Randomness of Lorem
         </Heading>
         <p>
-          Cherry bananas rainbow sprinkles, hot fudge cookie dough blueberries strawberries french
-          vanilla oreos. Strawberry strawberries blueberries pistachio chocolate Pistachio mint
-          chocolate chip rocky road peanut butter strawberries coffee vanilla chocolate chip cookie
-          dough almonds. Neopolitan chocolate chip caramel syrup, french vanilla gummy worms bananas
-          oreos oreos. Strawberry salted caramel syrup chocolate cake batter whipped cream cherry
-          rocky road gummy worms Strawberry chocolate sprinkles blueberries dark chocolate cake
-          batter. Cookies and cream mint chocolate chip cookies and cream vanilla kitkat peanuts,
-          mint cake batter. Caramel syrup peanuts mint chocolate chip peanuts.
+          I quite like ice cream. I like it a lot. I like it so much that I decided to write a whole
+          paragraph about it. Even though I could have written about anything else, I chose ice
+          cream. I like it that much. This page's title is "Icecream Lorem Ipsum" after all. So
+          here's a paragraph about ice cream. I hope you like it. Enjoy!
         </p>
 
-        {[].map((i) => (
+        <ul>
+          <li>
+            Item 1
+            <ul>
+              <li>Sub-item 1</li>
+              <li>Sub-item 2</li>
+            </ul>
+          </li>
+          <li>
+            Item 2
+            <ul>
+              <li>Sub-item 1</li>
+              <li>
+                Sub-item 2
+                <ul>
+                  <li>Sub-sub-item 1</li>
+                  <li>Sub-sub-item 2</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Item 3</li>
+        </ul>
+
+        <p>Some things I like that you may like:</p>
+        <ul>
+          <li>cooking</li>
+          <li>linguistics</li>
+          <li>puzzles &amp; fallacies</li>
+          <li>(video | board | *)games</li>
+          <li>interactivity</li>
+          <li>unordered lists</li>
+        </ul>
+
+        {[0].map((i) => (
           <p key={i}>
             Cherry bananas rainbow sprinkles, hot fudge cookie dough blueberries strawberries french
             Chocolate chip cookie dough chocolate chip cookie dough chocolate chip cookie dough
