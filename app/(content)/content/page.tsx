@@ -75,7 +75,7 @@ export default async function Page() {
         </ul>
 
         <p>Some things I like that you may like:</p>
-        <ul>
+        <ul className="mb-40">
           <li>cooking</li>
           <li>linguistics</li>
           <li>puzzles &amp; fallacies</li>

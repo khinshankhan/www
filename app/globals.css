@@ -202,7 +202,7 @@
   }
 }
 
-.prose {
+@layer base {
   /* General spacing of content, this is meant to cover cases that can't be easily done with inline classes.
    *
    * Keep in mind the phenomenon called 'margin collapsing', where if margins left and right or top and bottom meet and
@@ -215,7 +215,7 @@
    *
    * Reference: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_model/Mastering_margin_collapsing
    */
-  & > :where(*) {
+  .prose > * {
     margin-bottom: 1.25rem;
 
     /* breakpoint md */
@@ -230,7 +230,7 @@
   }
 
   /* spacing for headings */
-  & :where(h1, h2, h3, h4, h5, h6) {
+  .prose :where(h1, h2, h3, h4, h5, h6) {
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
 
@@ -248,7 +248,7 @@
   }
 
   /* list styles */
-  & :where(ol, ul) {
+  .prose :where(ol, ul) {
     padding-left: 1em;
 
     & :where(& > :not(:last-child)) {
@@ -260,7 +260,7 @@
    * Lists should feel connected to the preceding content but still show hierarchy I'm using a negative margin top to
    * pull the list closer to the preceding content which should have the margin bottom applied to it
    */
-  & > p + :where(ol, ul) {
+  .prose > p + :where(ol, ul) {
     margin-top: -0.75rem;
 
     /* breakpoint md */
@@ -275,22 +275,22 @@
   }
 
   /* sane defaults for list types */
-  & ol {
+  .prose ol {
     list-style-type: decimal;
   }
-  & ol ol {
+  .prose ol ol {
     list-style-type: lower-alpha;
   }
-  & ol ol ol {
+  .prose ol ol ol {
     list-style-type: lower-greek;
   }
-  & ul {
+  .prose ul {
     list-style-type: disc;
   }
-  & ul ul {
+  .prose ul ul {
     list-style-type: circle;
   }
-  & ul ul ul {
+  .prose ul ul ul {
     list-style-type: square;
   }
 }
