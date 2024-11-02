@@ -1,8 +1,6 @@
 import React from "react"
-import NextLink from "next/link"
-import { Logo } from "@/components/base/logo"
 import { typographyVariants } from "@/components/base/typography"
-import { SmartLink } from "@/components/composite/smart-link"
+import { Navbar } from "@/components/section/navbar"
 import { cn } from "@/lib/utils"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
@@ -41,31 +39,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
         >
           <div vaul-drawer-wrapper="">
             <div className="relative isolate z-0 flex min-h-[87vh] flex-col xs:min-h-[96vh]">
-              <header className="bounded-page-layout flex min-h-[68px] items-center pt-2 md:min-h-[78px] lg:min-h-[88px]">
-                <nav className="flex w-full flex-row items-center justify-between">
-                  <div aria-label="Site Logo">
-                    <NextLink href="/" className="group">
-                      <Logo className={cn("size-[42px] md:size-[45px] lg:size-[55px]")} />
-                    </NextLink>
-                  </div>
-                  <div>
-                    <ul className="flex space-x-4">
-                      {[
-                        { href: "#", label: "Home" },
-                        { href: "#", label: "About" },
-                        { href: "#", label: "Services" },
-                        { href: "#", label: "Contact" },
-                      ].map((link, index) => (
-                        <li key={index}>
-                          <SmartLink href={link.href} variant="nav">
-                            {link.label}
-                          </SmartLink>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </nav>
-              </header>
+              <Navbar />
               {/* NOTE: assumes pages will be wrapped in main tags with background color + grow */}
               <div className="relative flex grow flex-col">{children}</div>
             </div>
