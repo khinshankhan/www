@@ -7,8 +7,8 @@ export const linkVariants = cva("transition-[color] duration-500", {
   variants: {
     variant: {
       default:
-        "link-drastic-underline-on-hover bg-gradient-to-r from-[var(--link-border)] to-[var(--link-border)] bg-no-repeat hover:from-[var(--link-border-active)] hover:to-[var(--link-border-active)]",
-      nav: "link-reveal-on-hover data-[active=true]:bg-link-show bg-gradient-to-r from-[var(--link-border)] to-[var(--link-border)] bg-right-bottom bg-no-repeat transition-[color,background-size] hover:bg-left-bottom data-[active=true]:bg-left-bottom",
+        "bg-gradient-to-r from-[var(--link-border)] to-[var(--link-border)] subtle-underline show-underline bg-no-repeat hover:from-[var(--link-border-active)] hover:to-[var(--link-border-active)] hover:drastic-underline",
+      nav: "bg-gradient-to-r from-[var(--link-border)] to-[var(--link-border)] link-hide bg-right-bottom bg-no-repeat transition-[color,background-size] hover:link-show hover:bg-left-bottom data-[active=true]:link-show data-[active=true]:bg-left-bottom",
       toc: "data-[active=true]:text-[var(--link-border)]",
       none: "",
     },

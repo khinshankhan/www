@@ -187,21 +187,6 @@
   }
 }
 
-.link-drastic-underline-on-hover {
-  background-position: 0 100%;
-  background-size: 100% 0.0625em;
-  &:hover {
-    background-size: 100% 0.078125em;
-  }
-}
-
-.link-reveal-on-hover {
-  background-size: 0% 0.05em;
-  &:hover {
-    background-size: 100% 0.05em;
-  }
-}
-
 @layer base {
   /* General spacing of content, this is meant to cover cases that can't be easily done with inline classes.
    *
@@ -293,4 +278,24 @@
   .prose ul ul ul {
     list-style-type: square;
   }
+}
+
+@utility show-underline {
+  background-position: 0 100%;
+}
+
+@utility subtle-underline {
+  background-size: 100% 0.0625em;
+}
+
+@utility drastic-underline {
+  background-size: 100% 0.078125em;
+}
+
+@utility link-hide {
+  background-size: 0% 0.05em;
+}
+
+@utility link-show {
+  background-size: 100% 0.05em;
 }
