@@ -4,7 +4,7 @@ import React from "react"
 import NextLink from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/base/button"
-import { MonitorCog, Moon, Sun, type IconProps } from "@/components/base/icon"
+import { Close, HamburgerMenu, MonitorCog, Moon, Sun, type IconProps } from "@/components/base/icon"
 import { Logo } from "@/components/base/logo"
 import {
   DropdownMenu,
@@ -24,7 +24,7 @@ const links = [
   { label: "Connect", href: "/connect/" },
 ]
 
-function NavLinks({ className = "" }: { className?: string }) {
+function NavLinksDesktop({ className = "" }: { className?: string }) {
   const pathname = usePathname()
 
   return (
@@ -37,6 +37,39 @@ function NavLinks({ className = "" }: { className?: string }) {
         </li>
       ))}
     </ul>
+  )
+}
+
+function NavLinksMobile() {
+  const pathname = usePathname()
+  const [isOpen, setIsOpen] = React.useState(false)
+
+  return (
+    <DropdownMenu modal={false} open={isOpen} onOpenChange={() => setIsOpen((prev) => !prev)}>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+        >
+          {isOpen ? (
+            <Close className="size-[1.2rem]" role="presentation" aria-hidden="true" />
+          ) : (
+            <HamburgerMenu className="size-[1.2rem]" role="presentation" aria-hidden="true" />
+          )}
+        </Button>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent side="bottom" align="end">
+        <DropdownMenuRadioGroup value={pathname}>
+          {links.map((link) => (
+            <DropdownMenuRadioItem key={link.href} value={link.href} asChild>
+              <NextLink href={link.href}>{link.label}</NextLink>
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 
@@ -95,7 +128,7 @@ export function Navbar() {
 
         {/* rhs on desktop view */}
         <div className="hide-mobile flex flex-row items-center gap-4">
-          <NavLinks />
+          <NavLinksDesktop />
 
           <div className="flex flex-row gap-4">
             <ModeToggle />
@@ -105,6 +138,7 @@ export function Navbar() {
         {/* rhs on mobile view */}
         <div className="show-mobile flex flex-col-reverse gap-2 xss:flex-row">
           <ModeToggle />
+          <NavLinksMobile />
         </div>
       </nav>
     </header>

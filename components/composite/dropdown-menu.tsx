@@ -12,6 +12,7 @@ import type {
   DropdownMenuSubContentProps,
   DropdownMenuSubTriggerProps,
 } from "@radix-ui/react-dropdown-menu"
+import { Slottable } from "@radix-ui/react-slot"
 
 export const DropdownMenu = DropdownMenuPrimitive.Root
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger
@@ -134,7 +135,7 @@ export function DropdownMenuRadioItem({
           <Circle className="h-2 w-2 fill-current" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
-      {children}
+      <Slottable>{children}</Slottable>
     </DropdownMenuPrimitive.RadioItem>
   )
 }
