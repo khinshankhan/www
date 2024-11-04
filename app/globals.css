@@ -6,10 +6,6 @@
 :root,
 .light {
   color-scheme: light dark;
-}
-
-:where(.light) {
-  color-scheme: light;
 
   /** HACK: This is a quick workaround for being able to darken color for light mode. Hopefully tailwind adds this as an
    * easier feature https://github.com/tailwindlabs/tailwindcss/discussions/14712
@@ -22,7 +18,11 @@
   --background-2: var(--celestial-1);
 }
 
-:where(.dark) {
+.light {
+  color-scheme: light;
+}
+
+.dark {
   color-scheme: dark;
 
   --hack-mix-color: #fff;
