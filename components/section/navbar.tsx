@@ -4,7 +4,15 @@ import React from "react"
 import NextLink from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/base/button"
-import { Close, HamburgerMenu, MonitorCog, Moon, Sun, type IconProps } from "@/components/base/icon"
+import {
+  Circle,
+  Close,
+  HamburgerMenu,
+  MonitorCog,
+  Moon,
+  Sun,
+  type IconProps,
+} from "@/components/base/icon"
 import { Logo } from "@/components/base/logo"
 import {
   DropdownMenu,
@@ -63,7 +71,16 @@ function NavLinksMobile() {
       <DropdownMenuContent side="bottom" align="end">
         <DropdownMenuRadioGroup value={pathname}>
           {links.map((link) => (
-            <DropdownMenuRadioItem key={link.href} value={link.href} asChild>
+            <DropdownMenuRadioItem
+              key={link.href}
+              value={link.href}
+              Indicator={() => (
+                <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+                  <Circle className={cn("h-2 w-2", pathname === link.href && "fill-current")} />
+                </span>
+              )}
+              asChild
+            >
               <NextLink href={link.href}>{link.label}</NextLink>
             </DropdownMenuRadioItem>
           ))}
@@ -98,7 +115,15 @@ function ModeToggle() {
       <DropdownMenuContent side="bottom" align="end">
         <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
           {["light", "dark", "system"].map((value) => (
-            <DropdownMenuRadioItem key={value} value={value}>
+            <DropdownMenuRadioItem
+              key={value}
+              value={value}
+              Indicator={() => (
+                <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+                  <Circle className={cn("h-2 w-2", theme === value && "fill-current")} />
+                </span>
+              )}
+            >
               <span className="flex w-full flex-row items-center justify-between">
                 <span>{capitalize(value)}</span>
 
