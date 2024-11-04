@@ -22,6 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/composite/dropdown-menu"
 import { SmartLink } from "@/components/composite/smart-link"
+import { useMounted } from "@/hooks/media"
 import { capitalize, cn } from "@/lib/utils"
 import { useTheme } from "next-themes"
 
@@ -90,10 +91,18 @@ function NavLinksMobile() {
   )
 }
 
-function ModeIcon({ theme, ...props }: { theme: string } & IconProps) {
-  if (theme === "light") return <Sun {...props} />
+function ModeIcon({ theme, ignoreMount = false, ...props }: { theme: string } & IconProps) {
+  // TODO: circle back for disabled javascript
+  const mounted = useMounted()
+  if (!ignoreMount && !mounted) {
+    return null
+  }
+
+  if (theme === "system") return <MonitorCog {...props} />
   if (theme === "dark") return <Moon {...props} />
-  return <MonitorCog {...props} />
+  // NOTE: we treat light as default since with no javascript it's the default
+  // ideally we could use the system theme but that's not possible without javascript currently
+  return <Sun {...props} />
 }
 
 function ModeToggle() {
