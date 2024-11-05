@@ -1,21 +1,12 @@
 import React from "react"
-import { Em, Heading, Strong, Text } from "@/components/base/typography"
+import { Em, Heading, Strong } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
+import { PageHeader } from "@/components/section/page-header"
 
 export default async function Page() {
   return (
     <article>
-      <header className="bg-background-1 py-14 text-center">
-        <div className="bounded-page-layout">
-          <Heading as="h1" variant="h1" className="text-balance">
-            Icecream Lorem Ipsum
-          </Heading>
-
-          <Text as="p" variant="nav" className="text-balance pt-6 text-muted-foreground">
-            ...with a cherry on top!
-          </Text>
-        </div>
-      </header>
+      <PageHeader title="Icecream Lorem Ipsum" subtitle="...with a cherry on top!" />
 
       <div className="bounded-content-layout prose py-6">
         <p>

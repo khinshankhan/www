@@ -42,7 +42,9 @@ type HeadingProps = {
   asChild?: boolean
   className?: string
   children: React.ReactNode
-} & TypographyVariants
+} & TypographyVariants &
+  // prettier-ignore
+  React.HTMLAttributes<HTMLHeadingElement>
 
 export function Heading({
   as: Tag,
