@@ -5,7 +5,11 @@ import { ContentLayout } from "@/components/template/content-layout"
 
 export default async function Page() {
   return (
-    <ContentLayout title="Icecream Lorem Ipsum" subtitle="...with a cherry on top!">
+    <ContentLayout
+      title="Icecream Lorem Ipsum"
+      subtitle="...with a cherry on top!"
+      ghPath="/app/(content)/content/page.tsx"
+    >
       <p>
         Hello there. <SmartLink href="/">This</SmartLink> is where experiments sprout and blossom.
         Some even become features! Or they may become bugs that then become features. Or they...

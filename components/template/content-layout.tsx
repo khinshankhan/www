@@ -1,14 +1,16 @@
 import React from "react"
 import { Heading, Text } from "@/components/base/typography"
+import { SmartLink } from "@/components/composite/smart-link"
 import { WithSidebar } from "@/components/section/with-sidebar"
 
 export interface ContentLayoutProps {
   title: string
   subtitle: string
+  ghPath: string
   children: React.ReactNode
 }
 
-export function ContentLayout({ title, subtitle, children }: ContentLayoutProps) {
+export function ContentLayout({ title, subtitle, ghPath, children }: ContentLayoutProps) {
   return (
     <article className="flex grow flex-col">
       <header className="bg-background-1 py-14 text-center">
@@ -30,6 +32,14 @@ export function ContentLayout({ title, subtitle, children }: ContentLayoutProps)
         >
           <div className="prose min-w-full">{children}</div>
         </WithSidebar>
+      </div>
+
+      <div className="bg-background-1 py-6 text-center">
+        <div className="bounded-page-layout flex flex-row-reverse">
+          <SmartLink href={`https://github.com/khinshankhan/www/tree/main${ghPath}`}>
+            View page on GitHub
+          </SmartLink>
+        </div>
       </div>
     </article>
   )
