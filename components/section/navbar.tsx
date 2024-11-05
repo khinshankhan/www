@@ -82,7 +82,12 @@ function NavLinksMobile() {
               )}
               asChild
             >
-              <NextLink href={link.href}>{link.label}</NextLink>
+              <NextLink
+                aria-label={`Navigate to ${link.label.toLowerCase()} page`}
+                href={link.href}
+              >
+                {link.label}
+              </NextLink>
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>
@@ -91,7 +96,11 @@ function NavLinksMobile() {
   )
 }
 
-function ModeIcon({ theme, ignoreMount = false, ...props }: { theme: string } & IconProps) {
+function ModeIcon({
+  theme,
+  ignoreMount = false,
+  ...props
+}: { ignoreMount: boolean; theme: string } & IconProps) {
   // TODO: circle back for disabled javascript
   const mounted = useMounted()
   if (!ignoreMount && !mounted) {
@@ -126,6 +135,7 @@ function ModeToggle() {
           {["light", "dark", "system"].map((value) => (
             <DropdownMenuRadioItem
               key={value}
+              aria-label={`Toggle ${value} mode`}
               value={value}
               Indicator={() => (
                 <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
@@ -156,7 +166,7 @@ export function Navbar() {
     <header className="bounded-page-layout flex min-h-[68px] items-center pt-2 md:min-h-[78px] lg:min-h-[88px]">
       <nav className="flex w-full flex-row items-center justify-between">
         {/* lhs on all views */}
-        <NextLink href="/" className="group">
+        <NextLink aria-label="Navigate to homepage." href="/" className="group">
           <Logo className={cn("size-[42px] md:size-[45px] lg:size-[55px]")} />
         </NextLink>
 
