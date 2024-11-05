@@ -188,6 +188,21 @@
   }
 }
 
+.bounded-with-sidebar-layout {
+  @apply max-w-full xl:max-w-[800px] 2xl:max-w-[950px];
+
+  max-width: 100%;
+  /* breakpoint xl */
+  @media (min-width: 82.8125rem) {
+    max-width: 50rem;
+  }
+
+  /* breakpoint 2xl */
+  @media (min-width: 96rem) {
+    max-width: 60rem;
+  }
+}
+
 @layer base {
   /* General spacing of content, this is meant to cover cases that can't be easily done with inline classes.
    *
