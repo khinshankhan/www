@@ -1,15 +1,27 @@
 import React from "react"
-import { PageHeader, type PageHeaderProps } from "@/components/section/page-header"
+import { Heading, Text } from "@/components/base/typography"
 import { WithSidebar } from "@/components/section/with-sidebar"
 
-export function ContentLayout({
-  title,
-  subtitle,
-  children,
-}: PageHeaderProps & { children: React.ReactNode }) {
+export interface ContentLayoutProps {
+  title: string
+  subtitle: string
+  children: React.ReactNode
+}
+
+export function ContentLayout({ title, subtitle, children }: ContentLayoutProps) {
   return (
     <article className="flex grow flex-col">
-      <PageHeader title={title} subtitle={subtitle} />
+      <header className="bg-background-1 py-14 text-center">
+        <div className="bounded-page-layout">
+          <Heading id="page-heading" as="h1" variant="h1" className="text-balance">
+            {title}
+          </Heading>
+
+          <Text as="p" variant="nav" className="text-balance pt-6 text-muted-foreground">
+            {subtitle}
+          </Text>
+        </div>
+      </header>
 
       <div className="bounded-content-layout my-1 flex grow flex-col py-12">
         <WithSidebar
