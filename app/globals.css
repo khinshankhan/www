@@ -172,21 +172,19 @@
 }
 
 .bounded-content-layout {
-  :where(& > *) {
-    width: 100%;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+  width: 100%;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 
-    /* breakpoint xl */
-    @media (min-width: 82.8125rem) {
-      max-width: 62rem;
-    }
+  /* breakpoint xl */
+  @media (min-width: 82.8125rem) {
+    max-width: 62rem;
+  }
 
-    /* breakpoint 2xl */
-    @media (min-width: 96rem) {
-      max-width: 72rem;
-    }
+  /* breakpoint 2xl */
+  @media (min-width: 96rem) {
+    max-width: 72rem;
   }
 }
 
