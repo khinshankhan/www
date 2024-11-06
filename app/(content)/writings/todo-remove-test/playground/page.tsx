@@ -5,6 +5,7 @@ import { typographyVariants } from "@/components/base/typography"
 import { ContentLayout } from "@/components/template/content-layout"
 import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-by-heading"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
+import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
 import { cn } from "@/lib/utils"
 import matter from "gray-matter"
@@ -74,6 +75,7 @@ export default async function Page() {
         options={{
           mdxOptions: {
             remarkPlugins: [
+              remarkMarkFirstParagraph,
               [
                 remarkPrependTopHeading,
                 {
@@ -86,7 +88,12 @@ export default async function Page() {
               ],
             ],
             rehypePlugins: [
-              rehypeSlug,
+              [
+                rehypeSlug,
+                {
+                  reservedIds: ["excerpt"],
+                },
+              ],
               [
                 rehypeSectionizeByHeading,
                 {
