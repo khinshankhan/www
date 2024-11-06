@@ -1,53 +1,49 @@
 import type { Element as HastElement, Root as HastRoot } from "hast"
+import { headingRank } from "hast-util-heading-rank"
 import type { Transformer } from "unified"
 import { u } from "unist-builder"
-import { visit } from "unist-util-visit"
+import { SKIP, visit } from "unist-util-visit"
 
 // prettier-ignore
 export function rehypeSectionizeByHeading(): Transformer<HastRoot, HastRoot>  {
   return (tree) => {
-    // This will accumulate the transformed tree
-    const newChildren: HastElement[] = []
-    let sectionNode: HastElement | null = null
+    const sections: HastElement[] = []
 
-    visit(tree, "element", (node) => {
-      // If the node is a heading, close any open section and start a new one
-      if (node.tagName.match(/^h[1-6]$/)) {
-        // If there is an open section, add it to newChildren and start a new one
-        if (sectionNode) {
-          newChildren.push(sectionNode)
-        }
+    visit(tree, (node, index) => {
+      // the root is what acts as the parent of everything
+      if (node.type === "root") return
 
-        console.log({ node1: node })
+      const isHeading = node.type === "element" && node.tagName.match(/^h[1-6]$/)
 
-        // Start a new section with the current heading
-        sectionNode = u(
+      if (isHeading) {
+        const depth = headingRank(node)
+
+        const newSection = u(
           'element',
           {
             tagName: 'section',
             properties: {
               // NOTE: this assumes headings have ids, which can be done by running rehypeSlug beforehand
               'aria-labelledby': node.properties.id,
+              'data-depth': depth,
             }
           },
           [node]
         )
-      } else if (sectionNode) {
-        // Add non-heading nodes to the current section
-        sectionNode.children.push(node)
-        console.log({ node2: node })
-      } else {
-        // If we haven't started a section, push nodes directly
-        newChildren.push(node)
-        console.log({ node3: node })
+
+        sections.push(newSection)
+        // @ts-expect-error: unsure about the types
+        return [SKIP, index + 1]
       }
+
+      const currentSection = sections[sections.length - 1]
+      // @ts-expect-error: unsure about the types
+      currentSection.children.push(node)
+
+      // @ts-expect-error: unsure about the types
+      return [SKIP, index + 1]
     })
 
-    // Push the last open section if it exists
-    if (sectionNode) {
-      newChildren.push(sectionNode)
-    }
-
-    tree.children = newChildren
+    tree.children = sections
   }
 }
