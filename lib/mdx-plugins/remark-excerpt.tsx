@@ -17,7 +17,13 @@ export function remarkMarkFirstParagraph(options?: Options): Transformer<MdastRo
   const settings = options || defaultOptions
 
   return function transformer(tree) {
-    visit(tree, "paragraph", function (node) {
+    visit(tree, "paragraph", function (node, _,parent) {
+      // elements like callouts may contain p tags but they don't count as excerpts
+      // only the direct descendant of root would be considered the excerpt
+      if(parent?.type !== "root") {
+        return
+      }
+
       node = setNodeProperty(node, "id", settings.id)
       return EXIT
     })
@@ -29,7 +35,13 @@ export function remarkExcerptExport(): Transformer<MdastRoot, MdastRoot> {
   return function transformer(tree, vfile) {
     vfile.data = vfile.data || {}
     vfile.data.excerpt = ""
-    visit(tree, "paragraph", function (node) {
+    visit(tree, "paragraph", function (node, _, parent) {
+      // elements like callouts may contain p tags but they don't count as excerpts
+      // only the direct descendant of root would be considered the excerpt
+      if(parent?.type !== "root") {
+        return
+      }
+
       vfile.data.excerpt = toString(node)
       return EXIT
     })
