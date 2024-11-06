@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
       fullUrl: true,
     },
   },
+  // apparently turbopack is broken with esm only https://github.com/vercel/next.js/issues/64525
+  transpilePackages: ["next-mdx-remote"],
 }
 
 export default nextConfig
