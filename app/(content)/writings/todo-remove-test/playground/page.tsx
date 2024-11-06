@@ -3,6 +3,7 @@ import path from "path"
 import React from "react"
 import { typographyVariants } from "@/components/base/typography"
 import { ContentLayout } from "@/components/template/content-layout"
+import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-by-heading"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
 import { cn } from "@/lib/utils"
@@ -82,7 +83,7 @@ export default async function Page() {
                 },
               ],
             ],
-            rehypePlugins: [rehypeSlug],
+            rehypePlugins: [rehypeSlug, rehypeSectionizeByHeading],
           },
         }}
       />
