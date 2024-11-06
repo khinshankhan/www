@@ -53,6 +53,8 @@ const components: MDXComponents = {
       className={cn("scroll-mt-5", typographyVariants({ variant: "h6" }), className)}
     />
   ),
+
+  Test: ({ className = "" }) => <div className={cn(className)}>this was a test and you passed</div>,
 }
 
 export default async function Page() {
@@ -83,7 +85,18 @@ export default async function Page() {
                 },
               ],
             ],
-            rehypePlugins: [rehypeSlug, rehypeSectionizeByHeading],
+            rehypePlugins: [
+              rehypeSlug,
+              [
+                rehypeSectionizeByHeading,
+                {
+                  isFlat: false,
+                  sectionProperties: {
+                    className: "prose",
+                  },
+                },
+              ],
+            ],
           },
         }}
       />

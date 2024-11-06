@@ -1,13 +1,29 @@
-import type { Element as HastElement, Root as HastRoot } from "hast"
+import type { Element as HastElement, Root as HastRoot, RootContent as HastRootContent } from "hast"
 import { headingRank } from "hast-util-heading-rank"
 import type { Transformer } from "unified"
 import { u } from "unist-builder"
 import { SKIP, visit } from "unist-util-visit"
 
+type Options = {
+  isFlat: boolean
+  // prettier-ignore
+  sectionProperties: Record<string, unknown>
+}
+
+const defaultOptions = {
+  isFlat: false,
+  sectionProperties: {},
+} satisfies Options
+
 // prettier-ignore
-export function rehypeSectionizeByHeading(): Transformer<HastRoot, HastRoot>  {
+export function rehypeSectionizeByHeading(options?: Options): Transformer<HastRoot, HastRoot>  {
+  const settings = {
+    isFlat: options?.isFlat ?? defaultOptions.isFlat,
+    sectionProperties: options?.sectionProperties ?? defaultOptions.sectionProperties,
+  }
+
   return function transform(tree) {
-    let sections: HastElement[] = []
+    let sections: HastRootContent[] = []
     let currentSection: HastElement | null = null
 
     visit(tree, (node, index) => {
@@ -21,7 +37,7 @@ export function rehypeSectionizeByHeading(): Transformer<HastRoot, HastRoot>  {
       if(isHeading){
         const depth = headingRank(node)
 
-        const newSection: HastElement = u(
+        const newSection: HastRootContent = u(
           'element',
           {
             tagName: 'section',
@@ -29,7 +45,7 @@ export function rehypeSectionizeByHeading(): Transformer<HastRoot, HastRoot>  {
               // NOTE: this assumes headings have ids, which can be done by running rehypeSlug beforehand
               'aria-labelledby': node.properties.id,
               'data-depth': depth,
-              className: 'prose'
+              ...settings.sectionProperties
             }
           },
           [node]
@@ -38,8 +54,9 @@ export function rehypeSectionizeByHeading(): Transformer<HastRoot, HastRoot>  {
         if(currentSection === null) {
           currentSection = newSection
         } else {
-          // @ts-expect-error: data-depth is not in the types
-          if(depth <= currentSection?.properties?.['data-depth']){
+          if(settings.isFlat ||
+             // @ts-expect-error: data-depth is not in the types
+             depth <= currentSection?.properties?.['data-depth']){
             sections.push(currentSection)
             currentSection = newSection
           } else {
@@ -60,16 +77,18 @@ export function rehypeSectionizeByHeading(): Transformer<HastRoot, HastRoot>  {
 
         // @ts-expect-error: unsure about the types
         return [SKIP, index + 1]
-      }
+       }
 
       let relevantSection = currentSection
-      while (
-        relevantSection &&
-        relevantSection.children.length > 0 &&
-        // @ts-expect-error: unsure about the types
-        relevantSection.children[relevantSection.children.length - 1].tagName === 'section'
+      if(!settings.isFlat){
+        while (
+          relevantSection &&
+          relevantSection.children.length > 0 &&
+          // @ts-expect-error: unsure about the types
+          relevantSection.children[relevantSection.children.length - 1].tagName === 'section'
       ) {
         relevantSection = relevantSection.children[relevantSection.children.length - 1] as HastElement
+        }
       }
 
       // @ts-expect-error: unsure about the types
