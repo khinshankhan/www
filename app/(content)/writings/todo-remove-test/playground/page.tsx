@@ -4,6 +4,7 @@ import React from "react"
 import { typographyVariants } from "@/components/base/typography"
 import { ContentLayout } from "@/components/template/content-layout"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
+import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
 import { cn } from "@/lib/utils"
 import matter from "gray-matter"
 import type { MDXComponents } from "mdx/types"
@@ -69,7 +70,18 @@ export default async function Page() {
         components={components}
         options={{
           mdxOptions: {
-            remarkPlugins: [],
+            remarkPlugins: [
+              [
+                remarkPrependTopHeading,
+                {
+                  depth: 2,
+                  text: "Introduction",
+                  properties: {
+                    className: "sr-only",
+                  },
+                },
+              ],
+            ],
             rehypePlugins: [rehypeSlug],
           },
         }}
