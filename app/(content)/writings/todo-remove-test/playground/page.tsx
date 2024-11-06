@@ -3,6 +3,7 @@ import path from "path"
 import React from "react"
 import { typographyVariants } from "@/components/base/typography"
 import { ContentLayout } from "@/components/template/content-layout"
+import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { cn } from "@/lib/utils"
 import matter from "gray-matter"
 import type { MDXComponents } from "mdx/types"
@@ -63,7 +64,16 @@ export default async function Page() {
       subtitle={data.subtitle}
       ghPath="/app/(content)/writings/todo-remove-test/playground/content.tsx"
     >
-      <MDXRemote source={content} components={components} />
+      <MDXRemote
+        source={content}
+        components={components}
+        options={{
+          mdxOptions: {
+            remarkPlugins: [],
+            rehypePlugins: [rehypeSlug],
+          },
+        }}
+      />
     </ContentLayout>
   )
 }
