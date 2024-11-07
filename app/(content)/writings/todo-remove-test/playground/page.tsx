@@ -8,6 +8,7 @@ import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-b
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { remarkExcerptExport, remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
+import { remarkTocExport, type TocItem } from "@/lib/mdx-plugins/remark-toc-export"
 import {
   ContentFrontmatterSchema,
   getContentSource,
@@ -83,11 +84,13 @@ export default async function Page() {
         className: "sr-only",
       },
     })
+    .use(remarkTocExport, { reservedIds: ["excerpt"] })
     .processSync(content)
   // NOTE: this is guaranteed because of remarkExcerptExport
   const excerpt = (computedData?.data?.excerpt ?? "") as string
 
-  const toc = []
+  // NOTE: this is guaranteed because of remarkTocExport
+  const toc = (computedData?.data?.toc ?? []) as TocItem[]
 
   const parsedFrontmatter = ContentFrontmatterSchema.parse({
     slug,
@@ -106,7 +109,7 @@ export default async function Page() {
     },
   }
 
-  console.log({ metadata })
+  console.log({ metadata, toc })
 
   return (
     <ContentLayout
