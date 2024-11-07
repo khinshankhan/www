@@ -100,7 +100,7 @@ function ModeIcon({
   theme,
   ignoreMount = false,
   ...props
-}: { ignoreMount: boolean; theme: string } & IconProps) {
+}: { ignoreMount?: boolean; theme: string } & IconProps) {
   // TODO: circle back for disabled javascript
   const mounted = useMounted()
   if (!ignoreMount && !mounted) {
