@@ -6,23 +6,23 @@ import { SmartLink } from "@/components/composite/smart-link"
 import { ContentLayout } from "@/components/template/content-layout"
 import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-by-heading"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
-import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
+import { remarkExcerptExport, remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
+import {
+  ContentFrontmatterSchema,
+  getContentSource,
+  type ContentData,
+  type ContentSource,
+} from "@/lib/schemas/content"
 import { cn } from "@/lib/utils"
 import matter from "gray-matter"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import { remark } from "remark"
 
 const projectRoot = process.cwd()
-const thisDir = path.join(
-  projectRoot,
-  "app",
-  "(content)",
-  "writings",
-  "todo-remove-test",
-  "playground"
-)
+const thisDir = path.join(projectRoot, "app", "(content)")
 
 const components: MDXComponents = {
   a: ({ href = "#", children = null, ...props }) => (
@@ -66,9 +66,47 @@ const components: MDXComponents = {
 }
 
 export default async function Page() {
-  const absFilePath = path.join(thisDir, "./content.md")
+  const filePath = path.join("writings", "todo-remove-test", "playground", "content.md")
+  const absFilePath = path.join(thisDir, filePath)
   const fileContent = await fs.promises.readFile(absFilePath, "utf8")
   const { data, content } = matter(fileContent)
+
+  const slug = filePath.split("/").slice(0, -1).join("/")
+  const source = getContentSource(slug)
+
+  const computedData = remark()
+    .use(remarkExcerptExport)
+    .use(remarkPrependTopHeading, {
+      depth: 2,
+      text: "Introduction",
+      properties: {
+        className: "sr-only",
+      },
+    })
+    .processSync(content)
+  // NOTE: this is guaranteed because of remarkExcerptExport
+  const excerpt = (computedData?.data?.excerpt ?? "") as string
+
+  const toc = []
+
+  const parsedFrontmatter = ContentFrontmatterSchema.parse({
+    slug,
+    excerpt,
+    ...data,
+  })
+
+  const metadata = {
+    slug,
+    source,
+    content,
+    frontmatter: parsedFrontmatter,
+    computed: {
+      baseName: path.basename(filePath),
+      toc,
+    },
+  }
+
+  console.log({ metadata })
 
   return (
     <ContentLayout
