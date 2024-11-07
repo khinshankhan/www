@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils"
 import matter from "gray-matter"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
 
 const projectRoot = process.cwd()
 const thisDir = path.join(
@@ -106,6 +107,15 @@ export default async function Page() {
                   isFlat: false,
                   sectionProperties: {
                     className: "prose",
+                  },
+                },
+              ],
+              [
+                rehypeAutolinkHeadings,
+                {
+                  behavior: "wrap",
+                  properties: {
+                    className: ["anchor-link"],
                   },
                 },
               ],
