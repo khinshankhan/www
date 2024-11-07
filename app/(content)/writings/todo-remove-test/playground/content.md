@@ -3,40 +3,19 @@ title: Playground v2
 subtitle: Where Things are Perfectly Broken
 ---
 
-> Foobar
-
 Hello there. This is where experiments sprout and blossom. Some even become features! Or they may become bugs that then
 become features. Or they... well yea, stuff happens.
 
-Yippee!
+Ctr-f `TODO` to quickly find things I'm working on implementation. Likely in order of top to bottom.
 
-## Same level
+### Links
 
-Heyo
+This is an [internal link](/writings) example.
 
-### Henlo
+This is an [external link](https://google.com) example.
 
-<div className="bg-accent-7"> hello? </div>
+This is an [internal anchor link](#links) example.
 
-<figure>
-    <img alt="Something witty that makes this seem unique" src="https://wallpaperaccess.com/full/6788153.jpg"/>
-    <figcaption>Pretty in a Sense</figcaption>
-</figure>
+This is an [internal link to file](/floating-cogs.svg) example.
 
-#### Henlo 4
-
-henlo
-
-henlo 2
-
-<Test />
-
-### Henlo 3
-
-Lorem Ipsum
-
-## New Section
-
-Yay!
-
-<h3>Not a markdown heading hmm</h3>
+This is an [external link to file](https://google.com/example.pdf) example.

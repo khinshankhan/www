@@ -2,6 +2,7 @@ import fs from "fs"
 import path from "path"
 import React from "react"
 import { typographyVariants } from "@/components/base/typography"
+import { SmartLink } from "@/components/composite/smart-link"
 import { ContentLayout } from "@/components/template/content-layout"
 import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-by-heading"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
@@ -23,6 +24,11 @@ const thisDir = path.join(
 )
 
 const components: MDXComponents = {
+  a: ({ href = "#", children = null, ...props }) => (
+    <SmartLink href={href} {...props}>
+      {children}
+    </SmartLink>
+  ),
   // TODO: look into why heading component isn't compatible with MDX headings
   h2: ({ className = "", ...props }) => (
     <h2
