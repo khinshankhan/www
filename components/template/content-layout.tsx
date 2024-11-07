@@ -1,16 +1,26 @@
 import React from "react"
 import { Heading, Text } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
-import { WithSidebar } from "@/components/section/with-sidebar"
+import { WithSidebar, type WithSidebarProps } from "@/components/section/with-sidebar"
+import { cn } from "@/lib/utils"
 
-export interface ContentLayoutProps {
+export interface ContentLayoutProps extends WithSidebarProps {
   title: string
   subtitle: string
   ghPath: string
   children: React.ReactNode
+  childrenWrappingClass?: string
 }
 
-export function ContentLayout({ title, subtitle, ghPath, children }: ContentLayoutProps) {
+export function ContentLayout({
+  title,
+  subtitle,
+  ghPath,
+  children,
+  childrenWrappingClass = "prose",
+  direction = "right",
+  sidebar = null,
+}: ContentLayoutProps) {
   return (
     <article className="flex grow flex-col">
       <header className="bg-background-1 py-14 text-center">
@@ -26,11 +36,8 @@ export function ContentLayout({ title, subtitle, ghPath, children }: ContentLayo
       </header>
 
       <div className="bounded-content-layout my-1 flex grow flex-col py-12">
-        <WithSidebar
-          direction="right"
-          sidebar={<div>Sample sidebar plus some lorem ipsum to showcase wrapping</div>}
-        >
-          <div className="prose min-w-full">{children}</div>
+        <WithSidebar direction={direction} sidebar={sidebar}>
+          <div className={cn("min-w-full", childrenWrappingClass)}>{children}</div>
         </WithSidebar>
       </div>
 
