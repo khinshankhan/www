@@ -117,6 +117,8 @@ export default async function Page() {
                   properties: {
                     className: ["anchor-link"],
                   },
+                  // @ts-expect-error: unsure about the types
+                  test: (element, index, parent) => element.properties.id !== "introduction",
                 },
               ],
             ],
