@@ -121,6 +121,12 @@
     "Segoe UI Emoji";
   --font-family-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
+
+  /* Transition timing functions */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-arrow-rotation: cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 /**
@@ -374,4 +380,33 @@
         margin 0.5s ease-in-out;
     }
   }
+}
+
+@keyframes collapsible-slide-up {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes collapsible-slide-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+
+/* animations */
+.animated-collapsible {
+  overflow: hidden;
+}
+.animated-collapsible[data-state="open"] {
+  animation: collapsible-slide-down 300ms ease-out;
+}
+.animated-collapsible[data-state="closed"] {
+  animation: collapsible-slide-up 300ms ease-out;
 }
