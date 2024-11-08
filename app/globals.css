@@ -49,12 +49,31 @@
 
   --color-transparent: var(--transparent);
 
-  --color-background-1: var(--background-1);
-  --color-background-2: var(--background-2);
-  --color-muted: var(--gray-4);
+  --color-surface-1: var(--celestial-1);
+  --color-surface-2: var(--celestial-2);
+  --color-surface-3: var(--celestial-3);
+  --color-surface-4: var(--celestial-4);
+  --color-surface-5: var(--celestial-5);
+  --color-surface-6: var(--celestial-6);
+  --color-surface-7: var(--celestial-7);
+  --color-surface-8: var(--celestial-8);
+  --color-surface-9: var(--celestial-9);
+  --color-surface-10: var(--celestial-10);
+  --color-surface-11: var(--celestial-11);
+  --color-surface-12: var(--celestial-12);
 
-  --color-foreground: var(--gray-a12);
-  --color-muted-foreground: var(--gray-a11);
+  --color-surface-a1: var(--celestial-a1);
+  --color-surface-a2: var(--celestial-a2);
+  --color-surface-a3: var(--celestial-a3);
+  --color-surface-a4: var(--celestial-a4);
+  --color-surface-a5: var(--celestial-a5);
+  --color-surface-a6: var(--celestial-a6);
+  --color-surface-a7: var(--celestial-a7);
+  --color-surface-a8: var(--celestial-a8);
+  --color-surface-a9: var(--celestial-a9);
+  --color-surface-a10: var(--celestial-a10);
+  --color-surface-a11: var(--celestial-a11);
+  --color-surface-a12: var(--celestial-a12);
 
   --color-accent-1: var(--custom-1);
   --color-accent-2: var(--custom-2);
@@ -86,6 +105,13 @@
   --color-accent-surface: var(--custom-surface);
   --color-accent-indicator: var(--custom-indicator);
   --color-accent-track: var(--custom-track);
+
+  --color-background-1: var(--background-1);
+  --color-background-2: var(--background-2);
+  --color-muted: var(--gray-4);
+
+  --color-foreground: var(--gray-a12);
+  --color-muted-foreground: var(--gray-a11);
 
   --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
 
