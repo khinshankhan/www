@@ -4,14 +4,22 @@ import { useEffect, useRef, useState } from "react"
 import { useMounted } from "./media"
 
 // based off https://github.com/chakra-ui/chakra-ui-docs/blob/main/src/hooks/use-scrollspy.ts
-export function useScrollSpy(
-  selectors: string[],
-  options?: IntersectionObserverInit,
-  retain = true
-) {
+export function useScrollSpy({
+  selectors,
+  options = {},
+  retain = true,
+  attribute = "id",
+  delimiter = " ",
+}: {
+  selectors: string[]
+  options?: IntersectionObserverInit
+  retain?: boolean
+  attribute?: string
+  delimiter?: string
+}) {
   const mounted = useMounted()
 
-  const [activeIds, setActiveIds] = useState<string[]>([])
+  const [activeIds, setActiveIds] = useState("")
 
   const observer = useRef<IntersectionObserver | null>(null)
   useEffect(() => {
@@ -24,14 +32,18 @@ export function useScrollSpy(
       const newActiveIds: string[] = []
       entries.forEach((entry) => {
         if (entry?.isIntersecting) {
-          newActiveIds.push(entry.target.getAttribute("id") ?? "")
+          newActiveIds.push(entry.target.getAttribute(attribute) ?? "")
         }
       })
 
+      const newActiveIdsString = newActiveIds.join(delimiter)
       if (!retain) {
-        setActiveIds(newActiveIds)
+        // if not retain, just set the new active ids
+        setActiveIds(newActiveIdsString)
       } else if (newActiveIds.length > 0) {
-        setActiveIds(newActiveIds)
+        // if retain and new active ids are not empty, set the new active ids
+        // otherwise we keep ('retain') the previously active ids
+        setActiveIds(newActiveIdsString)
       }
     }, options)
 
@@ -40,7 +52,11 @@ export function useScrollSpy(
     })
 
     return () => observer.current?.disconnect()
-  }, [selectors, options, mounted])
+
+    // we shouldn't rely on selectors nor options changing due to them not being primitives
+    // which would cause the effect to run indefinitely
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mounted])
 
   return activeIds
 }

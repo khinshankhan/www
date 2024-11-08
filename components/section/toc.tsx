@@ -4,7 +4,6 @@ import React, { useRef, useState } from "react"
 import { Button } from "@/components/base/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/base/collapsible"
 import { ChevronRight } from "@/components/base/icon"
-import { Link } from "@/components/base/link"
 import { Text, typographyVariants } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { useScrollSpy } from "@/hooks/scroll"
@@ -76,16 +75,14 @@ function TocList({ headings = [] }: TocProps) {
           6 // 6 is an upperbound since headings are limited (h1-h6)
         )
 
-  const activeIds = useScrollSpy(
-    headings.map(({ id }) => `[id="${id}"]`),
-    {
+  const activeIdsString = useScrollSpy({
+    selectors: headings.map(({ id }) => `[id="${id}"]`),
+    options: {
       rootMargin: "0% 0% -80% 0%",
-    }
-  )
-
+    },
+  })
+  const activeIds = activeIdsString.split(" ")
   const activeId = activeIds[activeIds.length - 1] || headings[0].id
-
-  console.log({ activeId, activeIds })
 
   if (headings.length === 0) return <div className="mt-4">Nothing to show...</div>
 
