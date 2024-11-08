@@ -23,7 +23,7 @@ export function rehypeSectionizeByHeading(options?: Options): Transformer<HastRo
   }
 
   return function transform(tree) {
-    let sections: HastRootContent[] = []
+    const sections: HastRootContent[] = []
     let currentSection: HastElement | null = null
 
     visit(tree, (node, index) => {

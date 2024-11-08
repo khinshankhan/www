@@ -6,12 +6,10 @@ import type { Node as MdastNode } from "mdast"
 // https://github.com/syntax-tree/unist/blob/main/readme.md#data
 export function setNodeProperty<T extends MdastNode>(node: T, attribute: string, value: string) {
   node.data = node.data || {}
-  // @ts-ignore: hProperties is not in the Data types
   node.data.hProperties = node.data.hProperties || {}
 
-  // @ts-ignore: variable attributes is not in the Data type
+  // @ts-expect-error: variable attributes is not in the Data type
   node.data[attribute] = value
-  // @ts-ignore: hProperties is not in the Data type
   node.data.hProperties[attribute] = value
 
   return node

@@ -12,7 +12,8 @@ export function getContentSource(slug: string): ContentSource {
 export const ContentLdTypes = ["WebPage", "BlogPosting", "CollectionPage"] as const
 export type ContentLdType = (typeof ContentLdTypes)[number]
 
-const defaultContentLd: Record = {
+// prettier-ignore
+const defaultContentLd: Record<ContentSource, ContentLdType> = {
   root: "WebPage",
   writings: "BlogPosting",
   projects: "CollectionPage",

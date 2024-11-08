@@ -16,11 +16,7 @@ const fontAliases = {
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className="touch-manipulation scroll-auto focus-within:scroll-smooth"
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <head></head>
       <body
         className={cn(

@@ -10,12 +10,7 @@ import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { remarkExcerptExport, remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
 import { remarkTocExport, type TocItem } from "@/lib/mdx-plugins/remark-toc-export"
-import {
-  ContentFrontmatterSchema,
-  getContentSource,
-  type ContentData,
-  type ContentSource,
-} from "@/lib/schemas/content"
+import { ContentFrontmatterSchema, getContentSource } from "@/lib/schemas/content"
 import { cn } from "@/lib/utils"
 import matter from "gray-matter"
 import type { MDXComponents } from "mdx/types"
@@ -33,35 +28,30 @@ const components: MDXComponents = {
     </SmartLink>
   ),
   // TODO: look into why heading component isn't compatible with MDX headings
-  h2: ({ className = "", ...props }) => (
-    <h2
-      {...props}
-      className={cn("scroll-mt-5", typographyVariants({ variant: "h2" }), className)}
-    />
+  h2: ({ className = "", children, ...props }) => (
+    <h2 {...props} className={cn("scroll-mt-5", typographyVariants({ variant: "h2" }), className)}>
+      {children}
+    </h2>
   ),
-  h3: ({ className = "", ...props }) => (
-    <h3
-      {...props}
-      className={cn("scroll-mt-5", typographyVariants({ variant: "h3" }), className)}
-    />
+  h3: ({ className = "", children, ...props }) => (
+    <h3 {...props} className={cn("scroll-mt-5", typographyVariants({ variant: "h3" }), className)}>
+      {children}
+    </h3>
   ),
-  h4: ({ className = "", ...props }) => (
-    <h4
-      {...props}
-      className={cn("scroll-mt-5", typographyVariants({ variant: "h4" }), className)}
-    />
+  h4: ({ className = "", children, ...props }) => (
+    <h4 {...props} className={cn("scroll-mt-5", typographyVariants({ variant: "h4" }), className)}>
+      {children}
+    </h4>
   ),
-  h5: ({ className = "", ...props }) => (
-    <h5
-      {...props}
-      className={cn("scroll-mt-5", typographyVariants({ variant: "h5" }), className)}
-    />
+  h5: ({ className = "", children, ...props }) => (
+    <h5 {...props} className={cn("scroll-mt-5", typographyVariants({ variant: "h5" }), className)}>
+      {children}
+    </h5>
   ),
-  h6: ({ className = "", ...props }) => (
-    <h6
-      {...props}
-      className={cn("scroll-mt-5", typographyVariants({ variant: "h6" }), className)}
-    />
+  h6: ({ className = "", children, ...props }) => (
+    <h6 {...props} className={cn("scroll-mt-5", typographyVariants({ variant: "h6" }), className)}>
+      {children}
+    </h6>
   ),
 
   Test: ({ className = "" }) => <div className={cn(className)}>this was a test and you passed</div>,
@@ -117,7 +107,7 @@ export default async function Page() {
       title={data.title}
       subtitle={data.subtitle}
       ghPath="/app/(content)/writings/todo-remove-test/playground/content.tsx"
-      sidebar={<Toc headings={metadata.computed.toc} />}
+      sidebar={metadata.frontmatter.showToc && <Toc headings={metadata.computed.toc} />}
     >
       <MDXRemote
         source={content}
@@ -161,7 +151,7 @@ export default async function Page() {
                     className: ["anchor-link"],
                   },
                   // @ts-expect-error: unsure about the types
-                  test: (element, index, parent) => element.properties.id !== "introduction",
+                  test: (element) => element.properties.id !== "introduction",
                 },
               ],
             ],

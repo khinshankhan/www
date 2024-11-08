@@ -113,7 +113,7 @@
   --color-foreground: var(--gray-a12);
   --color-muted-foreground: var(--gray-a11);
 
-  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 80%, var(--hack-mix-color));
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 90%, var(--hack-mix-color));
 
   --font-family-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji";
@@ -409,4 +409,9 @@
 }
 .animated-collapsible[data-state="closed"] {
   animation: collapsible-slide-up 300ms ease-out;
+}
+
+html {
+  touch-action: manipulation;
+  scroll-behavior: smooth;
 }
