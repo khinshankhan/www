@@ -71,9 +71,7 @@ export default async function Page() {
     .use(remarkPrependTopHeading, {
       depth: 2,
       text: "Introduction",
-      properties: {
-        className: "sr-only",
-      },
+      properties: {},
     })
     .use(remarkTocExport, { reservedIds: ["excerpt"] })
     .processSync(content)
@@ -122,7 +120,7 @@ export default async function Page() {
                   depth: 2,
                   text: "Introduction",
                   properties: {
-                    className: "sr-only",
+                    className: "sr-only m-0",
                   },
                 },
               ],
