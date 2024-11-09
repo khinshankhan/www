@@ -382,6 +382,32 @@
   }
 }
 
+/* based off https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/layout/src/link-box.tsx */
+.link-overlay {
+  position: static;
+}
+.link-overlay:after {
+  content: "";
+  cursor: inherit;
+  transition: transform 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.link-box {
+  position: relative;
+  isolation: isolate;
+}
+/* elevate elements that are interactable also give special linkbox-elevate class privilege as a catchall */
+.link-box :is(a[href]:not(.link-overlay), button, .linkbox-elevate) {
+  z-index: 1;
+}
+
 @keyframes collapsible-slide-up {
   from {
     height: var(--radix-collapsible-content-height);

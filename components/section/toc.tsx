@@ -30,13 +30,19 @@ function TocItem({
   const router = useRouter()
 
   return (
-    <li ref={liRef} className="relative w-full">
+    <li
+      ref={liRef}
+      data-active={isActive}
+      className={cn(
+        "link-box relative mx-1 w-full transition-[background-color] data-[active=false]:duration-500 data-[active=true]:bg-surface-5/25 data-[active=true]:duration-1000"
+      )}
+    >
       {/* default sideline for the toc items */}
-      <span className="absolute z-1 h-full w-0.5 bg-muted/40 duration-0" />
+      <span className="absolute z-1 h-full w-0.5 bg-muted/30 duration-0" />
 
       {/* sideline for the active toc item, visually above the default sideline */}
       {isActive && (
-        <motion.div
+        <motion.span
           layoutId="toc-sideline-on"
           className="absolute z-50 w-0.5 bg-accent-link duration-0"
           style={{ height: liRef.current?.offsetHeight ?? 0 }}
@@ -45,11 +51,12 @@ function TocItem({
 
       <SmartLink
         href={`#${heading.id}`}
+        aria-label={`Jump to ${heading.title}`}
         data-active={isActive}
         variant="toc"
         className={cn(
           typographyVariants({ variant: "xs" }),
-          "inline-block w-full scroll-smooth py-1.5 text-left transition-[background-color] data-[active=false]:duration-500 data-[active=true]:bg-surface-5/25 data-[active=true]:duration-1000",
+          "link-overlay me-1 ml-1 inline-block w-full scroll-smooth py-1.5 text-left",
           indents === 0 && "ps-4",
           indents === 1 && "ps-8",
           indents === 2 && "ps-12",
