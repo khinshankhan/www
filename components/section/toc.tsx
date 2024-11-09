@@ -1,13 +1,14 @@
 "use client"
 
 import React, { useRef, useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/base/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/base/collapsible"
 import { ChevronRight } from "@/components/base/icon"
 import { Text, typographyVariants } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { useScrollSpy } from "@/hooks/scroll"
-import { cn } from "@/lib/utils"
+import { cn, scrollToElement } from "@/lib/utils"
 import { motion } from "framer-motion"
 
 export interface Heading {
@@ -26,6 +27,7 @@ function TocItem({
   isActive: boolean
 }) {
   const liRef = useRef<HTMLLIElement | null>(null)
+  const router = useRouter()
 
   return (
     <li ref={liRef} className="relative w-full">
@@ -55,6 +57,24 @@ function TocItem({
           indents === 4 && "ps-20",
           indents === 5 && "ps-24"
         )}
+        onClick={(e) => {
+          /* Reasoning for this approach:
+           * Since headings aren't "focusable" elements, the 'focus-within' smooth scroll won't work and we need to
+           * handle the scroll ourselves. Non js users will still get the default anchor behavior ('abruptly jumping'
+           * to the link) which isn't as nice but it's still usable. It's fine as opting to not use js often comes with
+           * a different set of expectations.
+           */
+
+          // prevent default anchor behavior
+          e.preventDefault()
+
+          // update the url without causing a full page reload
+          // this may even handle scrolling to target smoothly
+          router.push(`#${heading.id}`)
+
+          // definitively scroll smoothly to the section
+          scrollToElement(`#${heading.id}`, { behavior: "smooth" })
+        }}
       >
         {heading.title}
       </SmartLink>

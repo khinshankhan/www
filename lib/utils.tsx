@@ -12,6 +12,17 @@ export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+/* scroll utils */
+
+// NOTE: maybe scroll up vs down should be different functions?
+export function scrollToElement(selector: string, options?: boolean | ScrollIntoViewOptions) {
+  const el = document.querySelector(selector)
+  // should probably alert/ toast here about an error?
+  // maybe we can lint to ensure no invalid selectors are possible
+  if (!el) return
+  el.scrollIntoView(options)
+}
+
 /* url utils */
 
 export function isInternalLink(href: LinkProps["href"]) {
