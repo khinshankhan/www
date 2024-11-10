@@ -19,7 +19,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import { remark } from "remark"
 
 const projectRoot = process.cwd()
-const thisDir = path.join(projectRoot, "app", "(content)")
+const projectDir = path.join(projectRoot)
 
 const components: MDXComponents = {
   a: ({ href = "#", children = null, ...props }) => (
@@ -58,8 +58,8 @@ const components: MDXComponents = {
 }
 
 export default async function Page() {
-  const filePath = path.join("writings", "todo-remove-test", "playground", "content.md")
-  const absFilePath = path.join(thisDir, filePath)
+  const filePath = path.join("content", "writings", "todo-remove-test", "playground", "page.md")
+  const absFilePath = path.join(projectDir, filePath)
   const fileContent = await fs.promises.readFile(absFilePath, "utf8")
   const { data, content } = matter(fileContent)
 
@@ -106,7 +106,7 @@ export default async function Page() {
     <ContentLayout
       title={data.title}
       subtitle={data.subtitle}
-      ghPath="/app/(content)/writings/todo-remove-test/playground/content.tsx"
+      ghPath={`/${filePath}`}
       childrenWrappingClass={cn("prose", showToc && "mt-6 xl:mt-2")}
       sidebar={showToc && <Toc headings={metadata.computed.toc} />}
     >
