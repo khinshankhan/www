@@ -8,7 +8,13 @@ import { ChevronRight } from "@/components/base/icon"
 import { Text, typographyVariants } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { useScrollSpy } from "@/hooks/scroll"
-import { cn, scrollToElement } from "@/lib/utils"
+import {
+  checkIfElementInView,
+  cn,
+  focusElement,
+  scrollToElement,
+  waitForWindowScrollEnd,
+} from "@/lib/utils"
 import { motion } from "framer-motion"
 
 export interface Heading {
@@ -64,12 +70,13 @@ function TocItem({
           indents === 4 && "ps-20",
           indents === 5 && "ps-24"
         )}
-        onClick={(e) => {
+        onClick={async (e) => {
           /* Reasoning for this approach:
            * Since headings aren't "focusable" elements, the 'focus-within' smooth scroll won't work and we need to
            * handle the scroll ourselves. Non js users will still get the default anchor behavior ('abruptly jumping'
            * to the link) which isn't as nice but it's still usable. It's fine as opting to not use js often comes with
-           * a different set of expectations.
+           * a different set of expectations. Similarly, focus element won't work for non-js users but it's a nice to have
+           * for js users, which hopefully most people who need accessibility tools have on.
            */
 
           // prevent default anchor behavior
@@ -81,6 +88,13 @@ function TocItem({
 
           // definitively scroll smoothly to the section
           scrollToElement(`#${heading.id}`, { behavior: "smooth" })
+
+          // wait for scroll to end, then focus the element because focusing 'jumps' the page
+          await waitForWindowScrollEnd()
+          const isElementInView = await checkIfElementInView(`#${heading.id}`)
+          if (isElementInView) {
+            focusElement(`#${heading.id} a`)
+          }
         }}
       >
         {heading.title}

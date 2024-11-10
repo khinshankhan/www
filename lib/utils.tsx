@@ -12,6 +12,32 @@ export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+/* focus utils */
+
+// NOTE: requires element to be focusable
+export function focusElement(selector: string) {
+  const el = document.querySelector(selector)
+  if (!el) return
+
+  // @ts-expect-error: just trust a focusable element is passed in
+  el.focus({ preventScroll: true })
+}
+
+export async function checkIfElementInView(selector: string) {
+  const el = document.querySelector(selector)
+  if (!el) return false
+
+  let observer: IntersectionObserver
+  return new Promise((resolve) => {
+    observer = new IntersectionObserver(([entry]) => {
+      resolve(entry.isIntersecting)
+      observer.unobserve(el)
+    })
+
+    observer.observe(el)
+  })
+}
+
 /* scroll utils */
 
 // NOTE: maybe scroll up vs down should be different functions?
@@ -21,6 +47,16 @@ export function scrollToElement(selector: string, options?: boolean | ScrollInto
   // maybe we can lint to ensure no invalid selectors are possible
   if (!el) return
   el.scrollIntoView(options)
+}
+
+export async function waitForWindowScrollEnd() {
+  return new Promise((resolve) => {
+    const onUserScroll = () => {
+      resolve(true)
+    }
+
+    window.addEventListener("scrollend", onUserScroll, { once: true })
+  })
 }
 
 /* url utils */
