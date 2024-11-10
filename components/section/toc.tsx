@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useRef, useState } from "react"
-import { useRouter } from "next/navigation"
 import { Button } from "@/components/base/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/base/collapsible"
 import { ChevronRight } from "@/components/base/icon"
@@ -33,7 +32,6 @@ function TocItem({
   isActive: boolean
 }) {
   const liRef = useRef<HTMLLIElement | null>(null)
-  const router = useRouter()
 
   return (
     <li
@@ -84,7 +82,7 @@ function TocItem({
 
           // update the url without causing a full page reload
           // this may even handle scrolling to target smoothly
-          router.push(`#${heading.id}`)
+          history.pushState(null, "", `#${heading.id}`)
 
           // definitively scroll smoothly to the section
           scrollToElement(`#${heading.id}`, { behavior: "smooth" })
