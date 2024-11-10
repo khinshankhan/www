@@ -100,12 +100,15 @@ export default async function Page() {
 
   console.log({ metadata, toc })
 
+  const showToc = metadata.frontmatter.showToc
+
   return (
     <ContentLayout
       title={data.title}
       subtitle={data.subtitle}
       ghPath="/app/(content)/writings/todo-remove-test/playground/content.tsx"
-      sidebar={metadata.frontmatter.showToc && <Toc headings={metadata.computed.toc} />}
+      childrenWrappingClass={cn("prose", showToc && "mt-6 xl:mt-2")}
+      sidebar={showToc && <Toc headings={metadata.computed.toc} />}
     >
       <MDXRemote
         source={content}
