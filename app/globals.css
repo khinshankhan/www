@@ -437,9 +437,16 @@
   animation: collapsible-slide-up 300ms ease-out;
 }
 
+/* style specific elements from here */
 html {
   touch-action: manipulation;
+  scroll-behavior: auto;
 }
 html:focus-within {
+  /* allows ctr-f to work without smooth scrolling https://css-tricks.com/fixing-smooth-scrolling-with-find-on-page/ */
   scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--color-accent-a7);
 }
