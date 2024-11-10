@@ -62,7 +62,7 @@ function TocItem({
         variant="toc"
         className={cn(
           typographyVariants({ variant: "xs" }),
-          "link-overlay me-1 ml-1 inline-block w-full scroll-smooth py-1.5 text-left",
+          "link-overlay ml-1 inline-block w-full scroll-smooth pe-1 py-1.5 text-left",
           indents === 0 && "ps-4",
           indents === 1 && "ps-8",
           indents === 2 && "ps-12",
