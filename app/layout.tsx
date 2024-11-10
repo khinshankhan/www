@@ -17,7 +17,18 @@ const fontAliases = {
 export default async function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head></head>
+      <head>
+        <noscript>
+          <style>{`
+            .hide-no-js {
+              display: none !important;
+            }
+            .show-no-js {
+              display: block !important;
+            }
+          `}</style>
+        </noscript>
+      </head>
       <body
         className={cn(
           GeistSans.variable,

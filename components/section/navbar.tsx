@@ -10,6 +10,8 @@ import {
   HamburgerMenu,
   MonitorCog,
   Moon,
+  ScreenShareOff,
+  Slash,
   Sun,
   type IconProps,
 } from "@/components/base/icon"
@@ -60,12 +62,15 @@ function NavLinksMobile() {
           variant="ghost"
           size="icon"
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          className="relative"
         >
           {isOpen ? (
             <Close className="size-[1.2rem]" role="presentation" aria-hidden="true" />
           ) : (
             <HamburgerMenu className="size-[1.2rem]" role="presentation" aria-hidden="true" />
           )}
+
+          <Slash className="show-no-js absolute hidden" role="presentation" aria-hidden="true" />
         </Button>
       </DropdownMenuTrigger>
 
@@ -107,11 +112,14 @@ function ModeIcon({
     return null
   }
 
-  if (theme === "system") return <MonitorCog {...props} />
-  if (theme === "dark") return <Moon {...props} />
-  // NOTE: we treat light as default since with no javascript it's the default
-  // ideally we could use the system theme but that's not possible without javascript currently
-  return <Sun {...props} />
+  if (theme === "light") {
+    return <Sun {...props} />
+  }
+  if (theme === "dark") {
+    return <Moon {...props} />
+  }
+
+  return <MonitorCog {...props} />
 }
 
 function ModeToggle() {
@@ -122,8 +130,15 @@ function ModeToggle() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" aria-label="Toggle theme">
           <ModeIcon
-            theme={theme ?? "system"}
+            theme={theme}
             className="size-[1.2rem]"
+            role="presentation"
+            aria-hidden="true"
+          />
+
+          {/* fallback in case theme isn't working (likely because javascript is disabled)  */}
+          <ScreenShareOff
+            className="show-no-js hidden size-[1.2rem]"
             role="presentation"
             aria-hidden="true"
           />
