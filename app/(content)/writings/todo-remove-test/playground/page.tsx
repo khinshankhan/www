@@ -17,6 +17,7 @@ import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import { remark } from "remark"
+import remarkGfm from "remark-gfm"
 
 const projectRoot = process.cwd()
 const projectDir = path.join(projectRoot)
@@ -127,6 +128,7 @@ export default async function Page() {
                   },
                 },
               ],
+              [remarkGfm, { singleTilde: false }],
             ],
             rehypePlugins: [
               [
