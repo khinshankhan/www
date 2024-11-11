@@ -70,7 +70,11 @@ function NavLinksMobile() {
             <HamburgerMenu className="size-[1.2rem]" role="presentation" aria-hidden="true" />
           )}
 
-          <Slash className="show-no-js absolute hidden" role="presentation" aria-hidden="true" />
+          <Slash
+            className="show-no-js absolute hidden [&>path]:stroke-[var(--red-9)]"
+            role="presentation"
+            aria-hidden="true"
+          />
         </Button>
       </DropdownMenuTrigger>
 
@@ -138,7 +142,7 @@ function ModeToggle() {
 
           {/* fallback in case theme isn't working (likely because javascript is disabled)  */}
           <ScreenShareOff
-            className="show-no-js hidden size-[1.2rem]"
+            className="show-no-js hidden size-[1.2rem] first:[&_:nth-child(n+4)]:stroke-[var(--red-9)]"
             role="presentation"
             aria-hidden="true"
           />
