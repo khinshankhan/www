@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react"
 import { Button } from "@/components/base/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/base/collapsible"
-import { ChevronRight, Slash } from "@/components/base/icon"
+import { ChevronRight } from "@/components/base/icon"
 import { Text, typographyVariants } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { useScrollSpy } from "@/hooks/scroll"
@@ -161,19 +161,7 @@ export function Toc({ headings }: TocProps) {
             className="group flex w-full items-center justify-between text-foreground"
           >
             <span>On this page</span>
-
-            <span className="relative inline-flex size-6 items-center justify-center">
-              <ChevronRight
-                className="ease-arrow-rotation rotate-90 transition-transform duration-300 group-data-[state=closed]:rotate-0"
-                role="presentation"
-                aria-hidden="true"
-              />
-              <Slash
-                className="show-no-js absolute hidden [&>path]:stroke-[var(--red-9)]"
-                role="presentation"
-                aria-hidden="true"
-              />
-            </span>
+            <ChevronRight className="ease-arrow-rotation rotate-90 transition-transform duration-300 group-data-[state=closed]:rotate-0" />
           </Text>
         </Button>
       </CollapsibleTrigger>
