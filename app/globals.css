@@ -115,12 +115,15 @@
 
   --color-accent-link: color-mix(in srgb, var(--color-accent-11) 90%, var(--hack-mix-color));
 
+  --font-family-*: initial;
   --font-family-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji";
   --font-family-body: var(--font-body), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji";
   --font-family-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
+  --default-font-family: var(--font-family-body);
+  --default-mono-font-family: var(--font-family-mono);
 
   /* Transition timing functions */
   --ease-in: cubic-bezier(0.4, 0, 1, 1);

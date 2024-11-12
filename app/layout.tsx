@@ -16,27 +16,18 @@ const fontAliases = {
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <noscript>
-          <style>{`
-            .hide-no-js {
-              display: none !important;
-            }
-            .show-no-js {
-              display: block !important;
-            }
-          `}</style>
-        </noscript>
-      </head>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn(GeistSans.variable, GeistMono.variable)}
+      style={fontAliases}
+    >
+      <head></head>
       <body
         className={cn(
-          GeistSans.variable,
-          GeistMono.variable,
           typographyVariants({ variant: "body" }),
           "relative min-h-screen bg-background-1 font-body text-foreground antialiased"
         )}
-        style={fontAliases}
       >
         <ThemeProvider
           attribute="class"

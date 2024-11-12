@@ -56,9 +56,9 @@ This is an [internal link to file](/floating-cogs.svg) example.
 
 This is an [external link to file](https://google.com/example.pdf) example.
 
-### Lists
+## Lists
 
-#### Unordered List
+### Unordered List
 
 - Item 1
   - Sub-item 1
@@ -70,7 +70,7 @@ This is an [external link to file](https://google.com/example.pdf) example.
     - Sub-sub-item 2
 - Item 3
 
-#### Ordered List
+### Ordered List
 
 1. First item
    1. Sub-item 1
