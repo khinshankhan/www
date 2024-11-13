@@ -1,6 +1,7 @@
 import fs from "fs"
 import path from "path"
 import React from "react"
+import { Code } from "@/components/base/code"
 import { typographyVariants } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { Toc } from "@/components/section/toc"
@@ -54,6 +55,9 @@ const components: MDXComponents = {
       {children}
     </h6>
   ),
+  code: ({ ref: _ref, children, ...props }) => {
+    return <Code {...props}>{children as string}</Code>
+  },
 
   Test: ({ className = "" }) => <div className={cn(className)}>this was a test and you passed</div>,
 }

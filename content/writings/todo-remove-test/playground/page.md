@@ -121,3 +121,9 @@ Mauris ac convallis ligula. Phasellus nec ultricies libero, vel bibendum nunc. U
 Vivamus vel bibendum eros. Nulla varius faucibus ex, nec congue urna ornare sit amet. Pellentesque in elit aliquam est vehicula scelerisque ac vel risus. Nulla facilisis nec mauris ac fringilla. Cras dignissim ultricies vulputate. Nam a odio lorem. Integer sit amet velit libero. Sed convallis ex sit amet nibh blandit, id facilisis velit luctus. Aliquam erat volutpat. Mauris tincidunt lacinia erat, quis pellentesque nisl.
 
 Proin dapibus mollis libero id viverra. Proin efficitur id nunc vitae semper. Aenean feugiat pulvinar eros vitae dictum. Donec tincidunt facilisis fringilla. Sed semper suscipit dictum. Etiam sed quam at sem egestas convallis at quis eros. Mauris et laoreet odio. Ut orci dui, malesuada pretium iaculis id, pretium eget magna. Etiam tellus est, imperdiet in posuere sed, venenatis venenatis eros. Mauris risus est, suscipit eu luctus a, pellentesque nec tellus. Sed quis urna fringilla, vestibulum urna id, dictum arcu. Mauris lectus odio, faucibus eget est at, maximus sodales ipsum.
+
+## Codeblocks
+
+### Inline Code
+
+Because `code` should exist within words too. Awkward if the next line also had a `codeblock` and the blocks touched :pensive:
