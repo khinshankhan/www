@@ -127,3 +127,15 @@ Proin dapibus mollis libero id viverra. Proin efficitur id nunc vitae semper. Ae
 ### Inline Code
 
 Because `code` should exist within words too. Awkward if the next line also had a `codeblock` and the blocks touched :pensive:
+
+### With Pre
+
+Not pre workout but still hype.
+
+```js
+function greet() {
+  console.log("Hello, world!")
+}
+
+greet()
+```
