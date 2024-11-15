@@ -57,7 +57,19 @@ const components: MDXComponents = {
     </h6>
   ),
   code: ({ ref: _ref, children, ...props }) => {
-    return <Code {...props}>{children as string}</Code>
+    // surely there's a better way to do this?
+    const language =
+      props.className
+        ?.split(" ")
+        .find((c) => c.startsWith("language-"))
+        ?.split("language-")
+        .pop() || "plaintext"
+
+    return (
+      <Code language={language} {...props}>
+        {children as string}
+      </Code>
+    )
   },
   pre: ({ ref: _ref, ...props }) => {
     return <Pre {...props} />

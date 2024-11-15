@@ -1,20 +1,26 @@
 import React from "react"
 import { cn } from "@/lib/utils"
+import { toHtml } from "hast-util-to-html"
+import { all, createLowlight } from "lowlight"
+
+const lowlight = createLowlight(all)
 
 // prettier-ignore
 export interface CodeProps extends React.ComponentPropsWithRef<"code"> {
   children: string
+  language?: string
 }
 
-export function Code({ children, className = "" }: CodeProps) {
+export function Code({ children, language = "plaintext", className = "" }: CodeProps) {
+  const tree = lowlight.highlight(language, children)
+
   return (
     <code
       className={cn(
         "rounded-md border border-muted bg-muted/30 py-0.25 px-1 text-sm md:text-base lg:text-xl",
         className
       )}
-    >
-      {children}
-    </code>
+      dangerouslySetInnerHTML={{ __html: toHtml(tree) }}
+    />
   )
 }
