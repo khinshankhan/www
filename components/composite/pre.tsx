@@ -8,33 +8,32 @@ import { useIsomorphicEffect } from "@/hooks/media"
 import { cn } from "@/lib/utils"
 
 // prettier-ignore
-export interface PreProps extends React.ComponentPropsWithRef<"pre"> {
+type PreProps = React.ComponentPropsWithRef<"pre">
+
+function PreBlock({ className = "", ...props }: PreProps) {
+  return (
+    <pre
+      className={cn("text-sm md:text-base lg:text-xl [&>code]:contents", className)}
+      {...props}
+    />
+  )
 }
 
-function PreBlock({
+function ScrollablePreBlock({
   className = "",
   allowScroll = true,
   ...props
 }: PreProps & { allowScroll?: boolean }) {
+  const wrapperClasses = cn("size-full rounded-md border border-muted bg-muted/30 p-2", className)
+
   if (!allowScroll) {
-    return (
-      <pre
-        className={cn(
-          "size-full overflow-hidden rounded-md border border-muted bg-muted/30 p-2 text-sm md:text-base lg:text-xl [&>code]:contents",
-          className
-        )}
-        {...props}
-      />
-    )
+    return <PreBlock className={wrapperClasses} {...props} />
   }
 
   return (
     <ScrollArea className="w-full" type="auto">
-      <ScrollViewport className="size-full rounded-md border border-muted bg-muted/30 p-2">
-        <pre
-          className={cn("text-sm md:text-base lg:text-xl [&>code]:contents", className)}
-          {...props}
-        />
+      <ScrollViewport className={wrapperClasses}>
+        <PreBlock {...props} />
       </ScrollViewport>
 
       <ScrollBar orientation="horizontal" />
@@ -50,21 +49,21 @@ export function Pre({ className = "", ...props }: PreProps) {
 
   useIsomorphicEffect(() => {
     if (!preRef.current) return
-    console.log(preRef.current.clientHeight)
+
     if (preRef.current.clientHeight > 320) {
       setIsCollapsible(true)
     }
   }, [preRef.current])
 
   if (!isCollapsible) {
-    return <PreBlock ref={preRef} className={className} allowScroll {...props} />
+    return <ScrollablePreBlock ref={preRef} className={className} allowScroll {...props} />
   }
 
   return (
     <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
       <div className={cn("relative overflow-hidden", className)}>
         <CollapsibleContent forceMount className={cn("overflow-hidden", !isExpanded && "max-h-48")}>
-          <PreBlock
+          <ScrollablePreBlock
             className={cn(className, isExpanded && "pb-12")}
             allowScroll={isExpanded}
             {...props}
