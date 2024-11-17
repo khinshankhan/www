@@ -11,7 +11,7 @@ become features. Or they... well yea, stuff happens.
 
 Ctr-f `TODO` to quickly find things I'm working on implementation. Likely in order of top to bottom.
 
-### Basic Text Formatting
+## Basic Text Formatting
 
 _This text is italicized._
 
@@ -23,7 +23,7 @@ _This text is italicized._
 
 _**This text is bold and italicized.**_
 
-### Compound Formatting
+## Compound Formatting
 
 **_This is bold and italicized text._**
 
@@ -38,11 +38,23 @@ Here is a list with different formatting:
 3. ~~Strikethrough Item~~
 4. **_Bold and Italicized Item_**
 
-### TODO Extended Formatting
+## TODO Extended Formatting
 
 H_2_O
 
 X^2
+
+## Spoilers
+
+Don't you just hate <Spoiler>spoilers</Spoiler>?
+
+Also, <Spoiler>this is some spoiler that's far too long to fit in one line when listed on a page.</Spoiler>
+
+How about with... markup? <Spoiler>this is _italics_ and **bold** and _underline_ and **_something_**</Spoiler>.
+
+TODO: absolutely failing --
+
+...how about a formatting spoiler? <Spoiler>a [link home](/) and [external link to Google](https://google.com)</Spoiler>
 
 ## Links
 

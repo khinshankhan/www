@@ -2,6 +2,7 @@ import fs from "fs"
 import path from "path"
 import React from "react"
 import { Code } from "@/components/base/code"
+import { Spoiler } from "@/components/base/spoiler"
 import { typographyVariants } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { Pre } from "@/components/section/pre"
@@ -79,6 +80,7 @@ const components: MDXComponents = {
     return <Pre {...props} text={text} />
   },
 
+  Spoiler,
   Tabbify,
 
   Test: ({ className = "" }) => <div className={cn(className)}>this was a test and you passed</div>,
