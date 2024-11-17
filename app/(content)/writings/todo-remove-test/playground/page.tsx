@@ -3,8 +3,8 @@ import path from "path"
 import React from "react"
 import { Code } from "@/components/base/code"
 import { typographyVariants } from "@/components/base/typography"
-import { Pre } from "@/components/composite/pre"
 import { SmartLink } from "@/components/composite/smart-link"
+import { Pre } from "@/components/section/pre"
 import { Toc } from "@/components/section/toc"
 import { ContentLayout } from "@/components/template/content-layout"
 import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-by-heading"
@@ -72,7 +72,10 @@ const components: MDXComponents = {
     )
   },
   pre: ({ ref: _ref, ...props }) => {
-    return <Pre {...props} />
+    // @ts-ignore: it's fine, this is how mdx codeblocks work supposedly
+    const text = props.children?.props?.children as string
+
+    return <Pre {...props} text={text} />
   },
 
   Test: ({ className = "" }) => <div className={cn(className)}>this was a test and you passed</div>,
