@@ -141,6 +141,12 @@ function greet() {
 greet()
 ```
 
+```js
+console.log(
+  "text-violet11 shadow-blackA4 hover:bg-violet3 bg-white focus:shadow-black inline-flex h-[35px] w-[35px] items-center justify-center rounded-full shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px]"
+)
+```
+
 ```jsx
 import React from "react"
 import { PlusIcon } from "@radix-ui/react-icons"
@@ -171,3 +177,108 @@ const TooltipDemo = () => {
 
 export default TooltipDemo
 ```
+
+```js
+// say hello
+function greet() {
+  console.log("Hello, world!", 5 + 17)
+}
+
+greet()
+
+// say hello
+function greet() {
+  console.log("Hello, world!", 5 + 17)
+}
+
+greet()
+
+// say hello
+function greet() {
+  console.log("Hello, world!", 5 + 17)
+}
+
+greet()
+```
+
+#### What about... tabs?
+
+<Tabbify labels={["One", "Two"]}>
+
+```js
+// say hello
+function greet1() {
+  console.log("Hello, world!", 5 + 17)
+}
+
+greet1()
+```
+
+```js
+// say hello
+function greet2() {
+  console.log("Hello, world!", 5 + 17)
+}
+
+greet2()
+```
+
+</Tabbify>
+
+<Tabbify labels={["Tooltip", "Nonsense Hello"]}>
+
+```jsx
+import React from "react"
+import { PlusIcon } from "@radix-ui/react-icons"
+import * as Tooltip from "@radix-ui/react-tooltip"
+
+const TooltipDemo = () => {
+  return (
+    <Tooltip.Provider>
+      <Tooltip.Root>
+        <Tooltip.Trigger asChild>
+          <button className="text-violet11 shadow-blackA4 hover:bg-violet3 bg-white focus:shadow-black inline-flex h-[35px] w-[35px] items-center justify-center rounded-full shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px]">
+            <PlusIcon />
+          </button>
+        </Tooltip.Trigger>
+        <Tooltip.Portal>
+          <Tooltip.Content
+            className="data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade text-violet11 bg-white rounded-[4px] py-[10px] px-[15px] text-[15px] leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity] select-none"
+            sideOffset={5}
+          >
+            Add to library
+            <Tooltip.Arrow className="fill-white" />
+          </Tooltip.Content>
+        </Tooltip.Portal>
+      </Tooltip.Root>
+    </Tooltip.Provider>
+  )
+}
+
+export default TooltipDemo
+```
+
+```js
+// say hello
+function greet() {
+  console.log("Hello, world!", 5 + 17)
+}
+
+greet()
+
+// say hello
+function greet() {
+  console.log("Hello, world!", 5 + 17)
+}
+
+greet()
+
+// say hello
+function greet() {
+  console.log("Hello, world!", 5 + 17)
+}
+
+greet()
+```
+
+</Tabbify>

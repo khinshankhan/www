@@ -5,6 +5,7 @@ import { Code } from "@/components/base/code"
 import { typographyVariants } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { Pre } from "@/components/section/pre"
+import { Tabbify } from "@/components/section/tabbify"
 import { Toc } from "@/components/section/toc"
 import { ContentLayout } from "@/components/template/content-layout"
 import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-by-heading"
@@ -77,6 +78,8 @@ const components: MDXComponents = {
 
     return <Pre {...props} text={text} />
   },
+
+  Tabbify,
 
   Test: ({ className = "" }) => <div className={cn(className)}>this was a test and you passed</div>,
 }
