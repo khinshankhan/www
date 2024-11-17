@@ -10,6 +10,7 @@ export const buttonVariants = cva(
       variant: {
         default: "bg-surface-4 hover:bg-surface-6/40",
         ghost: "hover:bg-surface-6/40",
+        phantom: "bg-surface-4/60 hover:bg-surface-6/40",
       },
       size: {
         default: "h-10 py-2 px-4",
