@@ -39,10 +39,8 @@ export function ScrollBar({ className, orientation = "vertical", ...props }: Scr
       orientation={orientation}
       className={cn(
         "flex touch-none p-0.5 transition-colors duration-[160ms] ease-out select-none hover:bg-background-1/30",
-        orientation === "vertical" && "w-2.5 flex-row",
-        orientation === "horizontal" && "h-2.5 flex-col",
-        // orientation === "vertical" && "h-full w-1.5",
-        // orientation === "horizontal" && "h-1.5 flex-col",
+        orientation === "vertical" && "w-2 flex-row",
+        orientation === "horizontal" && "h-2 flex-col",
         className
       )}
       {...props}
