@@ -57,10 +57,10 @@ export function Tabbify({ labels, defaultValue = undefined, children }: TabbifyP
             </Tabs.Trigger>
           ))}
 
-          {/* Static Underline */}
+          {/* static underline */}
           <span className="absolute bottom-0 h-0.5 w-full bg-knockout-mix/10 duration-0" />
 
-          {/* Animated Underline */}
+          {/* animated underline */}
           <motion.div
             className="absolute bottom-0 h-0.5 w-full bg-accent-link"
             animate={underlineStyle}
