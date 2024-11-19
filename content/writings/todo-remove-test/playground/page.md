@@ -11,6 +11,41 @@ become features. Or they... well yea, stuff happens.
 
 Ctr-f `TODO` to quickly find things I'm working on implementation. Likely in order of top to bottom.
 
+## Images
+
+<figure>
+  <Image alt="Pretty" src="https://wallpaperaccess.com/full/6788153.jpg" width="3840" height="2160" />
+
+  <figcaption>Pretty but slow to load</figcaption>
+</figure>
+
+<figure>
+  <Image
+    alt="Stuffs"
+    src="https://media1.tenor.com/m/R3H7o7xRfUMAAAAC/it%27s-saturday.gif"
+    width="260"
+    height="401"
+  />
+
+  <figcaption>Stuffs</figcaption>
+</figure>
+
+<figure>
+  <Image
+    alt="Saturday Vibes"
+    src="https://media1.tenor.com/m/iGSIl1am6BMAAAAC/fat-albert-saturday.gif"
+    width="498"
+    height="381"
+  />
+
+  <figcaption>Saturday Vibes [(from Tenor)](https://tenor.com/view/fat-albert-saturday-gif-9828130470404483091)</figcaption>
+</figure>
+
+<figure>
+  <Image src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/elephant-660-480.jpg" height="660" width="480" alt="Elephant at sunset" />
+  <figcaption>An elephant at sunset</figcaption>
+</figure>
+
 ## Basic Text Formatting
 
 _This text is italicized._

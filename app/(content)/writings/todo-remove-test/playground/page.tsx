@@ -2,6 +2,7 @@ import fs from "fs"
 import path from "path"
 import React from "react"
 import { Code } from "@/components/base/code"
+import { Image } from "@/components/base/image"
 import { Spoiler } from "@/components/base/spoiler"
 import { typographyVariants } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
@@ -82,6 +83,7 @@ const components: MDXComponents = {
 
   Spoiler,
   Tabbify,
+  Image,
 
   Test: ({ className = "" }) => <div className={cn(className)}>this was a test and you passed</div>,
 }

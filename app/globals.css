@@ -460,3 +460,13 @@ html:focus-within {
 ::selection {
   background: var(--color-accent-a7);
 }
+
+/* image styling */
+[data-rmiz-modal-overlay="visible"] {
+  background-color: color-mix(in srgb, var(--background-1) 80%, var(--transparent)) !important;
+  backdrop-filter: blur(4px);
+}
+
+[data-rmiz-modal-overlay="hidden"] {
+  background-color: var(--transparent) !important;
+}
