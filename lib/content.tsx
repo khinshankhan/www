@@ -13,10 +13,13 @@ import { globby } from "globby"
 import matter from "gray-matter"
 import { remark } from "remark"
 
-const projectRoot = process.cwd()
-const contentDir = path.join(projectRoot, "content")
+export const projectRoot = process.cwd()
+export const contentDir = path.join(projectRoot, "content")
 
-function resolveFilePath(fileSlug: string | string[], basePath: string): string {
+export function resolveFilePath(
+  fileSlug: string | string[],
+  basePath: string = contentDir
+): string {
   const fileSlugParts = Array.isArray(fileSlug) ? fileSlug : [fileSlug]
   return path.join(basePath, ...fileSlugParts)
 }
