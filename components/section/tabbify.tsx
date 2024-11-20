@@ -58,7 +58,7 @@ export function Tabbify({ labels, defaultValue = undefined, children }: TabbifyP
           ))}
 
           {/* static underline */}
-          <span className="absolute bottom-0 h-0.5 w-full bg-knockout-mix/10 duration-0" />
+          <span className="absolute bottom-0 h-0.5 w-full bg-knockout/10 duration-0" />
 
           {/* animated underline */}
           <motion.div

@@ -36,10 +36,10 @@ export function Spoiler({ className = "", children, ...props }: SpoilerProps) {
       aria-label={toggleText}
       title={toggleText}
       className={cn(
-        "text-knockout relative inline rounded-lg py-0.5 px-1",
+        "relative inline rounded-lg py-0.5 px-1 text-knockout",
         "focus:ring-ring focus:ring-offset-background focus:ring-2 focus:ring-offset-2",
         !isRevealed && "select-none", // prevent text selection due to 'double click' on mobile
-        isRevealed ? "bg-knockout-mix/10" : "bg-knockout-mix/70",
+        isRevealed ? "bg-knockout/10" : "bg-knockout/70",
         className
       )}
       onClick={handleClick}

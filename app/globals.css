@@ -8,12 +8,7 @@
 .light {
   color-scheme: light dark;
 
-  --knockout-mix: #000;
-
-  /** HACK: This is a quick workaround for being able to darken color for light mode. Hopefully tailwind adds this as an
-   * easier feature https://github.com/tailwindlabs/tailwindcss/discussions/14712
-   */
-  --hack-mix-color: #000;
+  --knockout: #000;
 
   --colorful-gradient: #fffde5, #e9ffda, #dffbff, #ecefff, #f6e1ff, #ffe5f0;
 
@@ -30,8 +25,7 @@
 .dark {
   color-scheme: dark;
 
-  --knockout-mix: #fff;
-  --hack-mix-color: #fff;
+  --knockout: #fff;
 
   --colorful-gradient: #5a4b3c, #4c593d, #3a535f, #414758, #533f60, #604048;
 
@@ -110,7 +104,6 @@
   --color-accent-indicator: var(--custom-indicator);
   --color-accent-track: var(--custom-track);
 
-  --color-knockout-mix: var(--knockout-mix);
   --color-background-1: var(--background-1);
   --color-background-2: var(--background-2);
   --color-muted: var(--gray-4);
@@ -118,7 +111,13 @@
   --color-foreground: var(--gray-a12);
   --color-muted-foreground: var(--gray-a11);
 
-  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 90%, var(--hack-mix-color));
+  --color-knockout: var(--knockout);
+
+  /**
+   * HACK: This is a quick workaround for being able to darken color for light mode. Hopefully tailwind adds this as an
+   * easier feature https://github.com/tailwindlabs/tailwindcss/discussions/14712
+   */
+  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 90%, var(--knockout));
 
   --font-family-*: initial;
   --font-family-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif,

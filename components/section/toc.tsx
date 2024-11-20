@@ -42,7 +42,7 @@ function TocItem({
       )}
     >
       {/* default sideline for the toc items */}
-      <span className="absolute z-1 h-full w-0.5 bg-knockout-mix/10 duration-0" />
+      <span className="absolute z-1 h-full w-0.5 bg-knockout/10 duration-0" />
 
       {/* sideline for the active toc item, visually above the default sideline */}
       {isActive && (
