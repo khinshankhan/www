@@ -8,6 +8,7 @@ import {
   ContentFrontmatterSchema,
   getContentSource,
 } from "@/lib/schemas/content"
+import { globby } from "globby"
 import matter from "gray-matter"
 import { remark } from "remark"
 
@@ -72,4 +73,31 @@ export async function getContentDataBySlug({ fileSlug, basePath = contentDir }: 
   }
 
   return ContentDataSchema.parse(contentData)
+}
+
+// NOTE: we will be able to turn this into `"**/page*.mdx"` when dealing with i18n once i18n support evolves
+// eg page.mdx -> english, page.es.mdx -> spanish
+const contentPatterns = ["**/*.md", "**/*.mdx"]
+
+interface ListAllContentDataProps {
+  basePath?: string
+  extPatterns?: string[]
+}
+
+export async function listAllContentData({
+  basePath = contentDir,
+  extPatterns = contentPatterns,
+}: ListAllContentDataProps) {
+  const fileSlugs = await globby(contentPatterns, { cwd: basePath })
+
+  const allPossibleContentData = await Promise.all(
+    fileSlugs.map(async (fileSlug) => {
+      return getContentDataBySlug({ fileSlug })
+    })
+  )
+
+  // TODO: add filtering here
+  // TODO: add sorting here
+
+  return allPossibleContentData
 }

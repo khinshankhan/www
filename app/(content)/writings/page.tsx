@@ -1,8 +1,12 @@
 import React from "react"
 import { Heading } from "@/components/base/typography"
+import { SmartLink } from "@/components/composite/smart-link"
 import { ContentLayout } from "@/components/template/content-layout"
+import { listAllContentData } from "@/lib/content"
 
 export default async function Page() {
+  const contentData = await listAllContentData({})
+
   return (
     <ContentLayout
       title="Writings"
@@ -13,6 +17,14 @@ export default async function Page() {
       <Heading as="h2" variant="h2">
         Articles
       </Heading>
+
+      <ul>
+        {contentData.map((data) => (
+          <li key={data.slug}>
+            <SmartLink href={`/${data.slug}`}>{data.frontmatter.title}</SmartLink>
+          </li>
+        ))}
+      </ul>
     </ContentLayout>
   )
 }
