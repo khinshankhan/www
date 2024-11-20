@@ -24,8 +24,10 @@ export function Image({
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const loaded = imgRef.current?.complete === true
-    setLoading(!loaded)
+    // handle cached images
+    if (imgRef.current?.complete) {
+      setLoading(false)
+    }
   }, [src])
 
   const Wrapper = disableZoom ? Fragment : Zoom
@@ -38,9 +40,13 @@ export function Image({
         width={width}
         height={height}
         className={cn(
+          // general styles, haven't encountered any issues with these yet
+          // can easily be overridden by passing a className prop
           "mx-auto max-h-[725px] max-w-full rounded-lg",
-          className,
-          loading && "animate-pulse bg-background-1/60"
+          // shimmer effect for loading images
+          // also can be overridden by passing a className prop
+          loading && "animate-pulse bg-background-1/60",
+          className
         )}
         onLoad={() => {
           setLoading(false)
