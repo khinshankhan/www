@@ -7,6 +7,7 @@ import {
   ContentDataSchema,
   ContentFrontmatterSchema,
   getContentSource,
+  type ContentData,
 } from "@/lib/schemas/content"
 import { globby } from "globby"
 import matter from "gray-matter"
@@ -39,12 +40,18 @@ function processMarkdown(content: string) {
   }
 }
 
-interface ContentDataProps {
+interface GetContentDataBySlugProps {
   fileSlug: string | string[]
   basePath?: string
 }
 
-export async function getContentDataBySlug({ fileSlug, basePath = contentDir }: ContentDataProps) {
+// prettier-ignore
+type GetContentDataBySlugReturn = Promise<ContentData>
+
+export async function getContentDataBySlug({
+  fileSlug,
+  basePath = contentDir,
+}: GetContentDataBySlugProps): GetContentDataBySlugReturn {
   const filePath = resolveFilePath(fileSlug, basePath)
   const fileContent = await fs.promises.readFile(filePath, "utf8")
 
@@ -82,11 +89,13 @@ const contentPatterns = ["**/*.md", "**/*.mdx"]
 interface ListAllContentDataProps {
   basePath?: string
   extPatterns?: string[]
+  filter?: (data: ContentData) => boolean
 }
 
 export async function listAllContentData({
   basePath = contentDir,
   extPatterns = contentPatterns,
+  filter = () => true,
 }: ListAllContentDataProps) {
   const fileSlugs = await globby(contentPatterns, { cwd: basePath })
 
@@ -96,8 +105,8 @@ export async function listAllContentData({
     })
   )
 
-  // TODO: add filtering here
   // TODO: add sorting here
+  const relevantPossibleContentData = allPossibleContentData.filter(filter)
 
-  return allPossibleContentData
+  return relevantPossibleContentData
 }

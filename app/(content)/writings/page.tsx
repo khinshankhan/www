@@ -4,8 +4,14 @@ import { SmartLink } from "@/components/composite/smart-link"
 import { ContentLayout } from "@/components/template/content-layout"
 import { listAllContentData } from "@/lib/content"
 
+async function listWritingsContentData() {
+  return await listAllContentData({
+    filter: (contentData) => contentData.source === "writings",
+  })
+}
+
 export default async function Page() {
-  const contentData = await listAllContentData({})
+  const contentData = await listWritingsContentData()
 
   return (
     <ContentLayout
