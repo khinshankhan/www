@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 
 export default async function Page() {
   const fileSlug = ["writings", "todo-remove-test", "playground", "page.md"]
-  const contentData = await getContentDataBySlug(fileSlug)
+  const contentData = await getContentDataBySlug({ fileSlug })
 
   return (
     <ContentLayout
