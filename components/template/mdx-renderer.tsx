@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypeMdxCodeProps from "rehype-mdx-code-props"
 import remarkGfm from "remark-gfm"
 
 const components: MDXComponents = {
@@ -123,6 +124,7 @@ export async function MDXRenderer({ source }: { source: string }) {
                 },
               },
             ],
+            rehypeMdxCodeProps,
           ],
         },
       }}

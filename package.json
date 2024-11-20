@@ -39,6 +39,7 @@
     "react-dom": "19.0.0-rc-02c0e824-20241028",
     "react-medium-image-zoom": "^5.2.11",
     "rehype-autolink-headings": "^7.1.0",
+    "rehype-mdx-code-props": "^3.0.1",
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.0",
     "tailwind-merge": "^2.5.4",
