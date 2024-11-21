@@ -9,6 +9,10 @@ import { Tabbify } from "@/components/section/tabbify"
 import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-by-heading"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
+import {
+  RemarkJsxifyElementOptions,
+  remarkJsxifyElements,
+} from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
 import { cn } from "@/lib/utils"
 import type { MDXComponents } from "mdx/types"
@@ -98,6 +102,19 @@ export async function MDXRenderer({ source }: { source: string }) {
               },
             ],
             [remarkGfm, { singleTilde: false }],
+            [
+              remarkJsxifyElements,
+              {
+                elementMatcher: (node) => {
+                  // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
+                  if (node?.name === "img") {
+                    return "Image"
+                  }
+
+                  return null
+                },
+              } satisfies RemarkJsxifyElementOptions,
+            ],
           ],
           rehypePlugins: [
             [

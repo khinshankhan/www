@@ -9,18 +9,18 @@ dateModified: 2024-11-06
 Hello there. This is where experiments sprout and blossom. Some even become features! Or they may become bugs that then
 become features. Or they... well yea, stuff happens.
 
-Ctr-f `TODO` to quickly find things I'm working on implementation. Likely in order of top to bottom.
+`Ctr-f TODO` to quickly find things I'm working on implementation. Likely in order of top to bottom.
 
 ## Images
 
 <figure>
-  <Image alt="Pretty" src="https://wallpaperaccess.com/full/6788153.jpg" width="3840" height="2160" />
+  <img alt="Pretty" src="https://wallpaperaccess.com/full/6788153.jpg" width="3840" height="2160" />
 
   <figcaption>Pretty but slow to load</figcaption>
 </figure>
 
 <figure>
-  <Image
+  <img
     alt="Stuffs"
     src="https://media1.tenor.com/m/R3H7o7xRfUMAAAAC/it%27s-saturday.gif"
     width="260"
@@ -31,7 +31,7 @@ Ctr-f `TODO` to quickly find things I'm working on implementation. Likely in ord
 </figure>
 
 <figure>
-  <Image
+  <img
     alt="Saturday Vibes"
     src="https://media1.tenor.com/m/iGSIl1am6BMAAAAC/fat-albert-saturday.gif"
     width="498"
@@ -42,7 +42,7 @@ Ctr-f `TODO` to quickly find things I'm working on implementation. Likely in ord
 </figure>
 
 <figure>
-  <Image src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/elephant-660-480.jpg" height="660" width="480" alt="Elephant at sunset" />
+  <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/elephant-660-480.jpg" height="660" width="480" alt="Elephant at sunset" />
   <figcaption>An elephant at sunset</figcaption>
 </figure>
 
