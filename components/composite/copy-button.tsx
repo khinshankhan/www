@@ -16,7 +16,7 @@ export function CopyButton({ text, onCopy, ...props }: CopyButtonProps) {
   const copyCallback = useCallback(async () => {
     await copyToClipboardGraceful(text)
     onCopy?.()
-  }, [text])
+  }, [text, onCopy])
 
   const [checked, onClick] = useCopyButton(copyCallback)
 

@@ -101,11 +101,11 @@ function NavLinksMobile() {
   )
 }
 
-function ModeIcon({
-  theme,
-  ignoreMount = false,
-  ...props
-}: { ignoreMount?: boolean; theme: string } & IconProps) {
+interface ModeIconProps extends IconProps {
+  ignoreMount?: boolean
+  theme: string | undefined
+}
+function ModeIcon({ theme, ignoreMount = false, ...props }: ModeIconProps) {
   // TODO: circle back for disabled javascript
   const mounted = useMounted()
   if (!ignoreMount && !mounted) {

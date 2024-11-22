@@ -100,7 +100,7 @@ export async function listAllContentData({
   extPatterns = contentPatterns,
   filter = () => true,
 }: ListAllContentDataProps) {
-  const fileSlugs = await globby(contentPatterns, { cwd: basePath })
+  const fileSlugs = await globby(extPatterns, { cwd: basePath })
 
   const allPossibleContentData = await Promise.all(
     fileSlugs.map(async (fileSlug) => {

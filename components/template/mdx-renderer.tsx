@@ -53,6 +53,8 @@ const components: MDXComponents = {
       {children}
     </h6>
   ),
+  // refs are incompatible
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   code: ({ ref: _ref, children, ...props }) => {
     // surely there's a better way to do this?
     const language =
@@ -68,8 +70,10 @@ const components: MDXComponents = {
       </Code>
     )
   },
+  // refs are incompatible
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   pre: ({ ref: _ref, ...props }) => {
-    // @ts-ignore: it's fine, this is how mdx codeblocks work supposedly
+    // @ts-expect-error: it's fine, this is how mdx codeblocks work supposedly
     const text = props.children?.props?.children as string
 
     return <Pre {...props} text={text} />
