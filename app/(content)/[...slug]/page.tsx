@@ -17,8 +17,11 @@ export async function generateStaticParams() {
   return slugsParts
 }
 
-export default async function Page({ params }: { params: { slug: string[] } }) {
-  const { slug } = await params
+// prettier-ignore
+type tParams = Promise<{ slug: string[] }>;
+
+export default async function Page(props: { params: tParams }) {
+  const { slug } = await props.params
 
   const possibleContentData = await Promise.all(
     // HACK: totally fails i18n and the sort, surely there's a better way to go about this
