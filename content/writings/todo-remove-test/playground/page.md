@@ -46,6 +46,49 @@ become features. Or they... well yea, stuff happens.
   <figcaption>An elephant at sunset</figcaption>
 </figure>
 
+## Video
+
+<figure>
+   <video
+      controls
+      src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"
+      poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
+      width="620">
+      Sorry, your browser doesn't support embedded videos, but don't worry, you can
+      <a href="https://archive.org/details/BigBuckBunny_124">download it</a>
+      and watch it with your favorite video player!
+   </video>
+
+   <figcaption>
+      Example 1 from [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#examples)
+   </figcaption>
+</figure>
+
+<figure>
+   <video
+      width="620"
+      controls
+      poster="https://upload.wikimedia.org/wikipedia/commons/e/e8/Elephants_Dream_s5_both.jpg">
+      <source
+         src="https://archive.org/download/ElephantsDream/ed_hd.avi"
+         type="video/avi" />
+      <source
+         src="https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4"
+         type="video/mp4" />
+      Sorry, your browser doesn't support embedded videos, but don't worry, you can
+      <a
+         href="https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4"
+         download="ed_1024_512kb.mp4">
+      download the MP4
+      </a>
+      and watch it with your favorite video player!
+   </video>
+
+   <figcaption>
+      Example 2 from [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#examples)
+   </figcaption>
+</figure>
+
 ## Basic Text Formatting
 
 _This text is italicized._

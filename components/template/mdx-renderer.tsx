@@ -6,6 +6,7 @@ import { Spoiler } from "@/components/base/spoiler"
 import { typographyVariants } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { Pre } from "@/components/section/pre"
+import { SmartVideo } from "@/components/section/smart-video"
 import { Tabbify } from "@/components/section/tabbify"
 import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-by-heading"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
@@ -83,6 +84,7 @@ const components: MDXComponents = {
   Spoiler,
   Tabbify,
   Image,
+  SmartVideo,
   Figcaption,
 
   Test: ({ className = "" }) => <div className={cn(className)}>this was a test and you passed</div>,
@@ -115,6 +117,11 @@ export async function MDXRenderer({ source }: { source: string }) {
                   // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
                   if (node?.name === "img") {
                     return "Image"
+                  }
+
+                  // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
+                  if (node?.name === "video") {
+                    return "SmartVideo"
                   }
 
                   // NOTE: I wonder if it's worth investigating around the node so different versions
