@@ -1,7 +1,7 @@
 import React from "react"
 import { Download, SquareArrowOutUpRight } from "@/components/base/icon"
 import { Link, type LinkProps } from "@/components/base/link"
-import { cn, isFileLink, isInternalLink } from "@/lib/utils"
+import { isFileLink, isInternalLink } from "@/lib/utils"
 
 export interface SmartLinkProps extends LinkProps {
   hideIcon?: boolean
@@ -20,8 +20,8 @@ export function SmartLink({
     return (
       <Link
         href={href}
-        className={cn(className, "relative pr-3")}
-        icon={<SquareArrowOutUpRight className="absolute top-1 inline size-3" />}
+        className={className}
+        icon={<SquareArrowOutUpRight className="inline size-3 align-top" />}
         {...props}
       />
     )
@@ -31,8 +31,8 @@ export function SmartLink({
     return (
       <Link
         href={href}
-        className={cn(className, "relative pr-3")}
-        icon={<Download className="absolute bottom-1 inline size-3" />}
+        className={className}
+        icon={<Download className="inline size-3 align-middle" />}
         {...props}
       />
     )
