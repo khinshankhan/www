@@ -1,5 +1,6 @@
 import React from "react"
 import { Code } from "@/components/base/code"
+import { Figcaption } from "@/components/base/figure"
 import { Image } from "@/components/base/image"
 import { Spoiler } from "@/components/base/spoiler"
 import { typographyVariants } from "@/components/base/typography"
@@ -82,6 +83,7 @@ const components: MDXComponents = {
   Spoiler,
   Tabbify,
   Image,
+  Figcaption,
 
   Test: ({ className = "" }) => <div className={cn(className)}>this was a test and you passed</div>,
 }
@@ -113,6 +115,13 @@ export async function MDXRenderer({ source }: { source: string }) {
                   // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
                   if (node?.name === "img") {
                     return "Image"
+                  }
+
+                  // NOTE: I wonder if it's worth investigating around the node so different versions
+                  // of figcaption can be rendered if it's preceded by an img vs blockquote
+                  // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
+                  if (node?.name === "figcaption") {
+                    return "Figcaption"
                   }
 
                   return null
