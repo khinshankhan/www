@@ -2,7 +2,7 @@ import React, { Children } from "react"
 import { Video, type VideoProps } from "@/components/base/video"
 import { SmartLink } from "@/components/composite/smart-link"
 
-export function SmartVideo({ children, className, ...props }: VideoProps) {
+export function SmartVideo({ children, ...props }: VideoProps) {
   // extract `src` from `props` or any `<source>` children
   const fallbackSrc =
     props.src ||
