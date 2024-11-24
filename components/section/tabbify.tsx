@@ -4,16 +4,29 @@ import React, { useRef, useState } from "react"
 import { Button } from "@/components/base/button"
 import { useIsomorphicEffect } from "@/hooks/media"
 import { motion } from "framer-motion"
+import Slugger from "github-slugger"
 import * as Tabs from "@radix-ui/react-tabs"
+
+const slugger = new Slugger()
 
 export interface TabbifyProps {
   labels: string[]
-  defaultValue?: string
+  defaultIndex?: number
   children: React.ReactNode
 }
 
-export function Tabbify({ labels, defaultValue = undefined, children }: TabbifyProps) {
-  const [activeTab, setActiveTab] = useState(defaultValue ?? labels[0])
+export function Tabbify({ labels, defaultIndex = undefined, children }: TabbifyProps) {
+  slugger.reset()
+
+  const labelWithSlugs = labels.map((label) => {
+    return {
+      label,
+      slug: slugger.slug(label),
+    }
+  })
+
+  const defaultTab = labelWithSlugs[defaultIndex ?? 0]
+  const [activeTab, setActiveTab] = useState(defaultTab.slug)
   const [underlineStyle, setUnderlineStyle] = useState({ width: 0, left: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -40,7 +53,7 @@ export function Tabbify({ labels, defaultValue = undefined, children }: TabbifyP
   return (
     <Tabs.Root
       className=""
-      defaultValue={defaultValue ?? labels[0]}
+      defaultValue={defaultTab.slug}
       onValueChange={(value) => setActiveTab(value)}
     >
       <div className="relative">
@@ -49,10 +62,15 @@ export function Tabbify({ labels, defaultValue = undefined, children }: TabbifyP
           className="relative flex shrink-0 gap-2"
           aria-label="Change contents"
         >
-          {labels.map((label) => (
-            <Tabs.Trigger key={label} value={label} asChild className="relative focus:outline-none">
-              <Button aria-label={`Change to ${label} contents`} variant="ghost">
-                {label}
+          {labelWithSlugs.map((labelWithSlug) => (
+            <Tabs.Trigger
+              key={labelWithSlug.slug}
+              value={labelWithSlug.slug}
+              asChild
+              className="relative focus:outline-none"
+            >
+              <Button aria-label={`Change to ${labelWithSlug.label} contents`} variant="ghost">
+                {labelWithSlug.label}
               </Button>
             </Tabs.Trigger>
           ))}
@@ -69,8 +87,8 @@ export function Tabbify({ labels, defaultValue = undefined, children }: TabbifyP
         </Tabs.List>
       </div>
 
-      {labels.map((label, labelIdx) => (
-        <Tabs.Content key={label} className="mt-4" value={label}>
+      {labelWithSlugs.map((labelWithSlug, labelIdx) => (
+        <Tabs.Content key={labelWithSlug.slug} className="mt-4" value={labelWithSlug.slug}>
           {React.Children.toArray(children)[labelIdx]}
         </Tabs.Content>
       ))}
