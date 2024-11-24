@@ -7,13 +7,13 @@ export const linkVariants = cva("transition-[color] duration-500", {
   variants: {
     variant: {
       default:
-        "bg-gradient-to-r from-[var(--link-border)] to-[var(--link-border)] subtle-underline show-underline bg-no-repeat hover:from-[var(--link-border-active)] hover:to-[var(--link-border-active)] hover:drastic-underline",
-      nav: "bg-gradient-to-r from-[var(--link-border)] to-[var(--link-border)] link-hide bg-right-bottom bg-no-repeat transition-[color,background-size] hover:link-show hover:bg-left-bottom data-[active=true]:link-show data-[active=true]:bg-left-bottom",
-      toc: "data-[active=true]:text-[var(--link-border)]",
+        "bg-gradient-to-r from-accent-11 to-accent-11 subtle-underline show-underline bg-no-repeat hover:from-accent-8 hover:to-accent-8 hover:drastic-underline",
+      nav: "bg-gradient-to-r from-accent-11 to-accent-11 link-hide bg-right-bottom bg-no-repeat transition-[color,background-size] hover:link-show hover:bg-left-bottom data-[active=true]:link-show data-[active=true]:bg-left-bottom",
+      toc: "data-[active=true]:text-accent-11",
       none: "",
     },
     isMonochrome: {
-      false: "hover:text-[var(--link-border)]",
+      false: "hover:text-accent-11",
       true: "",
     },
   },
@@ -39,21 +39,15 @@ export function Link({
   isMonochrome = false,
   className = "",
   children,
-  style = {},
   icon = null,
   ...props
 }: LinkProps) {
   const classes = cn(linkVariants({ variant, isMonochrome }), className)
-  const styles = {
-    "--link-border": "var(--color-accent-link)",
-    "--link-border-active": "var(--color-accent-8)",
-    ...style,
-  } as React.CSSProperties
 
   // if href is a url obj it's a local link with state (probably), and / is totally local
   if (typeof href !== "string" || href.startsWith("/")) {
     return (
-      <NextLink href={href} className={classes} style={styles} {...props}>
+      <NextLink href={href} className={classes} {...props}>
         {children}
         {icon}
       </NextLink>
@@ -63,7 +57,7 @@ export function Link({
   // # means same page so still relative but use a tag for browser based scrolling
   if (href.startsWith("#")) {
     return (
-      <a href={href} className={classes} style={styles} {...props}>
+      <a href={href} className={classes} {...props}>
         {children}
         {icon}
       </a>
@@ -72,14 +66,7 @@ export function Link({
 
   // exhaustively, we're left with only an external link
   return (
-    <a
-      href={href}
-      className={classes}
-      style={styles}
-      target="_blank"
-      rel="noopener noreferrer"
-      {...props}
-    >
+    <a href={href} className={classes} target="_blank" rel="noopener noreferrer" {...props}>
       {children}
       {icon}
     </a>
