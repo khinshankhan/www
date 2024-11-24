@@ -3,6 +3,9 @@ import React from "react"
 // prettier-ignore
 export type IconProps = React.HTMLAttributes<SVGElement>
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export type IconComponent = (props: IconProps) => JSX.Element
+
 // https://www.radix-ui.com/icons
 export function Moon(props: IconProps) {
   return (

@@ -13,14 +13,14 @@ import {
   OctagonAlert,
   Star,
   TriangleAlert,
-  type IconProps,
+  type IconComponent,
 } from "@/components/base/icon"
 import { cn } from "@/lib/utils"
 
 // prettier-ignore
-type IconLookup = Record<NonNullable<AlertVariants["variant"]>, (props: IconProps) => JSX.Element>
+type IconLookup = Record<NonNullable<AlertVariants["variant"]>, IconComponent>
 
-const icons: IconLookup = {
+export const calloutIcons: IconLookup = {
   note: Info,
   tip: Lightbulb,
   important: Star,
@@ -30,11 +30,15 @@ const icons: IconLookup = {
 
 export interface CalloutProps extends AlertVariants {
   title?: React.ReactNode
+  icon?: IconComponent | null
   children: React.ReactNode
 }
 
-export function Callout({ variant = "note", title, children }: CalloutProps) {
-  const Icon = variant ? icons[variant] : null
+export function Callout({ variant = undefined, icon = undefined, title, children }: CalloutProps) {
+  // hide icon entirely if it's explicitly set to null or else try to use icon prop if provided
+  // otherwise try to use the variant to get the icon
+  const Icon =
+    icon === null ? null : icon !== undefined ? icon : variant ? calloutIcons[variant] : null
 
   return (
     <div className="pt-4">
@@ -50,7 +54,7 @@ export function Callout({ variant = "note", title, children }: CalloutProps) {
           </div>
         )}
 
-        <div className="pt-1">
+        <div className={cn(Icon && "pt-1")}>
           {title && (
             <AlertHeading className="prose-heading mt-0 pb-0">
               <AlertTitle>{title}</AlertTitle>

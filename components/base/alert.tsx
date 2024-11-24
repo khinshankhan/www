@@ -15,7 +15,7 @@ export const alertVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "note",
+      variant: null,
     },
   }
 )
@@ -28,7 +28,7 @@ interface AlertProps extends React.HTMLAttributes<HTMLDivElement>, AlertVariants
   children?: React.ReactNode;
 }
 
-export function Alert({ className, variant = "note", ...props }: AlertProps) {
+export function Alert({ className, variant = undefined, ...props }: AlertProps) {
   return <aside className={cn(alertVariants({ variant }), className)} {...props} />
 }
 
