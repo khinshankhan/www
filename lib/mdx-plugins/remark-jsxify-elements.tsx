@@ -42,10 +42,23 @@ export type RemarkJsxifyElementOptions = {
   elementMatcher: MatchFunction<MdastNode, string | null>
   // prettier-ignore
   isSandbox?: MatchFunction<Attribute, boolean>
+  // prettier-ignore
+  // eslint-disable-line no-unused-vars
+  elementModifier?: (jsxName: string, mdxJsxFlowElement: MdxJsxFlowElement) => MdxJsxFlowElement
 }
 
-const defaultIsSandbox: RemarkJsxifyElementOptions["isSandbox"] = (attribute: Attribute) => {
+// prettier-ignore
+const defaultIsSandbox: NonNullable<RemarkJsxifyElementOptions["isSandbox"]> = (attribute: Attribute) => {
   return attribute.name === "data-sandbox" && attribute.value === "true"
+}
+
+// prettier-ignore
+const defaultElementModifier: NonNullable<RemarkJsxifyElementOptions["elementModifier"]> = (
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+  jsxName,
+  element
+) => {
+  return element
 }
 
 export function remarkJsxifyElements(
@@ -54,6 +67,7 @@ export function remarkJsxifyElements(
 ): Transformer {
   const elementMatcher = options.elementMatcher
   const isSandbox = options.isSandbox ?? defaultIsSandbox
+  const elementModifier = options.elementModifier ?? defaultElementModifier
 
   return function transformer(tree) {
     visit(tree, (node, index, parent) => {
@@ -68,15 +82,18 @@ export function remarkJsxifyElements(
         return CONTINUE
       }
 
-      // TODO: this might break on certain node types?
-      // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
-      parent.children[index] = createMdxJsxFlowElement(
+      const mdxJsxFlowElement = createMdxJsxFlowElement(
         jsxName,
         // @ts-expect-error: technically we shouldn't be looking at mdxJsxFlowElement
         (node.attributes as Attribute[]) ?? [],
         // @ts-expect-error: technically we shouldn't be looking at mdxJsxFlowElement
         node.children ?? []
       )
+      const modifiedElement = elementModifier(jsxName, mdxJsxFlowElement)
+
+      // TODO: this might break on certain node types?
+      // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
+      parent.children[index] = modifiedElement
 
       return [SKIP, index + 1]
     })
