@@ -14,6 +14,7 @@ import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-b
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import {
+  createMdxJsxFlowElement,
   RemarkJsxifyElementOptions,
   remarkJsxifyElements,
 } from "@/lib/mdx-plugins/remark-jsxify-elements"
@@ -101,47 +102,22 @@ const components: MDXComponents = {
   Image,
   SmartVideo,
   Figcaption,
-  // TODO: look into transforming at via plugins
-  Callout: ({ children }: { children: React.ReactNode }) => {
-    const variant = Children.toArray(children)
-      .filter((_, i) => i === 0)
-      // @ts-expect-error: unwrapping from default mdx p tag
-      .map((p) => Children.toArray(p.props.children))
-      .map((c) => {
-        // @ts-expect-error: given the logic to transform blockquote to callout, it's guaranteed we'll always start with a string as long as Callout isn't called directly
-        const match = mdxBlockquoteMetaRegex.exec(c[0])
-        if (!match) {
-          return c
-        }
-
-        const [, keyword] = match
-        const variant = keyword.toLowerCase()
-        if (isCalloutKeyword(variant)) {
-          return variant
-        }
-
-        return null
-      })
-      .find((v) => typeof v === "string")
-
-    const title = Children.toArray(children)
-      .filter((_, i) => i === 0)
-      // @ts-expect-error: unwrapping from default mdx p tag
-      .map((p) => Children.toArray(p.props.children))
-      .map((c) => {
-        // @ts-expect-error: given the logic to transform blockquote to callout, it's guaranteed we'll always start with a string as long as Callout isn't called directly
-        const match = mdxBlockquoteMetaRegex.exec(c[0])
-        if (!match) {
-          return c
-        }
-
-        const [, , title] = match
-        return [title, ...c.slice(1)]
-      })
-    const content = Children.toArray(children).filter((_, i) => i !== 0)
+  Callout: ({
+    variant,
+    firstChildIsTitle: mdxFirstChildIsTitle,
+    children,
+  }: CalloutProps & {
+    // this lets us leverage the default mdx parsing to parse the title in case it has any other elements
+    firstChildIsTitle: "true" | "false" | undefined
+  }) => {
+    const firstChildIsTitle = mdxFirstChildIsTitle === "true"
+    const title = !firstChildIsTitle ? null : Children.toArray(children).filter((_, i) => i === 0)
+    const content = !firstChildIsTitle
+      ? children
+      : Children.toArray(children).filter((_, i) => i !== 0)
 
     return (
-      <Callout variant={variant} title={title}>
+      <Callout variant={variant} title={title?.length !== 0 ? title : null}>
         {content}
       </Callout>
     )
@@ -193,7 +169,7 @@ export async function MDXRenderer({ source }: { source: string }) {
                   }
 
                   if (node.type === "blockquote") {
-                    // @ts-expect-error: I have no idea what I'm doing honestly but maybe the children can be null?
+                    // @ts-expect-error: seems the node type doesn't account for MdxJsxFlowElements
                     const firstChildText = toString(node?.children?.[0] ?? "")
                     const match = mdxBlockquoteMetaRegex.exec(firstChildText)
                     // TODO: check if we need to handle blockquotes differently
@@ -203,6 +179,53 @@ export async function MDXRenderer({ source }: { source: string }) {
                   }
 
                   return null
+                },
+                elementModifier: (jsxName, element) => {
+                  if (jsxName === "Callout") {
+                    const possibleHeadingTree = element?.children?.[0]?.children || []
+                    const possibleHeadingText = toString(possibleHeadingTree)
+
+                    const match = mdxBlockquoteMetaRegex.exec(possibleHeadingText)
+                    if (!match) {
+                      return element
+                    }
+
+                    const [, keyword, partialTitle] = match
+                    const variant = keyword.toLowerCase()
+                    if (!isCalloutKeyword(variant)) {
+                      return element
+                    }
+
+                    const firstChildIsTitle =
+                      Boolean(partialTitle) || possibleHeadingTree.length > 1
+
+                    const updatedAttributes = [
+                      ...element.attributes,
+                      { name: "variant", value: variant },
+                      { name: "firstChildIsTitle", value: firstChildIsTitle },
+                    ]
+                    if (!firstChildIsTitle) {
+                      return createMdxJsxFlowElement(
+                        element.name,
+                        updatedAttributes,
+                        // the first child would have the meta info for the callout
+                        element.children.slice(1)
+                      )
+                    }
+
+                    const titleElement = createMdxJsxFlowElement(
+                      null,
+                      [],
+                      // we remove the variant info from the start of the title and keep the rest
+                      [{ type: "text", value: partialTitle }, ...possibleHeadingTree.slice(1)]
+                    )
+
+                    return createMdxJsxFlowElement(element.name, updatedAttributes, [
+                      titleElement,
+                      ...element.children.slice(1),
+                    ])
+                  }
+                  return element
                 },
               } satisfies RemarkJsxifyElementOptions,
             ],
