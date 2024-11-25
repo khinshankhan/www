@@ -18,7 +18,7 @@ import {
 import { cn } from "@/lib/utils"
 
 // prettier-ignore
-type IconLookup = Record<NonNullable<AlertVariants["variant"]>, IconComponent>
+type IconLookup = Record<NonNullable<AlertVariants["variant"]>, IconComponent | null>
 
 export const calloutIcons: IconLookup = {
   note: Info,
@@ -26,6 +26,7 @@ export const calloutIcons: IconLookup = {
   important: Star,
   warning: TriangleAlert,
   caution: OctagonAlert,
+  default: null, // no icon for defaults
 }
 
 export interface CalloutProps extends AlertVariants {
@@ -41,7 +42,7 @@ export function Callout({ variant = undefined, icon = undefined, title, children
     icon === null ? null : icon !== undefined ? icon : variant ? calloutIcons[variant] : null
 
   return (
-    <div className="pt-4">
+    <div className={cn(Icon && "pt-4")}>
       <Alert variant={variant} className="relative">
         {Icon && (
           <div

@@ -20,6 +20,7 @@ import {
 } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
 import { cn } from "@/lib/utils"
+import type { RootContent as MdastContent } from "mdast"
 import { toString } from "mdast-util-to-string"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
@@ -182,7 +183,9 @@ export async function MDXRenderer({ source }: { source: string }) {
                 },
                 elementModifier: (jsxName, element) => {
                   if (jsxName === "Callout") {
-                    const possibleHeadingTree = element?.children?.[0]?.children || []
+                    // @ts-expect-error: we're extracting the element from the auto p tag
+                    const possibleHeadingTree = (element?.children?.[0]?.children ||
+                      []) as MdastContent[]
                     const possibleHeadingText = toString(possibleHeadingTree)
 
                     const match = mdxBlockquoteMetaRegex.exec(possibleHeadingText)
@@ -202,7 +205,7 @@ export async function MDXRenderer({ source }: { source: string }) {
                     const updatedAttributes = [
                       ...element.attributes,
                       { name: "variant", value: variant },
-                      { name: "firstChildIsTitle", value: firstChildIsTitle },
+                      { name: "firstChildIsTitle", value: firstChildIsTitle.toString() },
                     ]
                     if (!firstChildIsTitle) {
                       return createMdxJsxFlowElement(
@@ -221,6 +224,7 @@ export async function MDXRenderer({ source }: { source: string }) {
                     )
 
                     return createMdxJsxFlowElement(element.name, updatedAttributes, [
+                      // @ts-expect-error: seems the types are iffy around mdxJsxFlowElement
                       titleElement,
                       ...element.children.slice(1),
                     ])

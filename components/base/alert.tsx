@@ -12,6 +12,7 @@ export const alertVariants = cva(
         important: "critical-theme",
         warning: "warning-theme",
         caution: "danger-theme",
+        default: "",
       },
     },
     defaultVariants: {

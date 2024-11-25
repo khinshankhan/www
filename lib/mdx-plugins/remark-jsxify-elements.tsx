@@ -10,7 +10,7 @@ export interface Attribute {
 
 export interface MdxJsxFlowElement {
   type: "mdxJsxFlowElement"
-  name: string
+  name: string | null
   // prettier-ignore
   attributes: NonNullable<Attribute>[]
   children: MdastContent[]
@@ -20,9 +20,9 @@ export interface MdxJsxFlowElement {
 }
 
 export function createMdxJsxFlowElement(
-  name: string,
+  name: string | null,
   attributes: Attribute[],
-  children = []
+  children: MdastContent[] = []
 ): MdxJsxFlowElement {
   return {
     type: "mdxJsxFlowElement",
