@@ -1,4 +1,5 @@
 import React, { Children } from "react"
+import { Blockquote, type BlockquoteProps } from "@/components/base/blockquote"
 import { Code } from "@/components/base/code"
 import { Figcaption } from "@/components/base/figure"
 import { Sun } from "@/components/base/icon"
@@ -103,6 +104,15 @@ const components: MDXComponents = {
   Image,
   SmartVideo,
   Figcaption,
+  Blockquote: ({
+    variant,
+    children,
+  }: BlockquoteProps & {
+    // extend from callout because too lazy to separate the logic that processes it with callout
+    firstChildIsTitle: "true" | "false" | undefined
+  }) => {
+    return <Blockquote variant={variant}>{children}</Blockquote>
+  },
   Callout: ({
     variant,
     firstChildIsTitle: mdxFirstChildIsTitle,
@@ -173,16 +183,16 @@ export async function MDXRenderer({ source }: { source: string }) {
                     // @ts-expect-error: seems the node type doesn't account for MdxJsxFlowElements
                     const firstChildText = toString(node?.children?.[0] ?? "")
                     const match = mdxBlockquoteMetaRegex.exec(firstChildText)
-                    // TODO: check if we need to handle blockquotes differently
-                    if (match) {
-                      return "Callout"
-                    }
+                    const [, keyword] = match ?? []
+                    const variant = (keyword ?? "").toLowerCase()
+
+                    return isCalloutKeyword(variant) ? "Callout" : "Blockquote"
                   }
 
                   return null
                 },
                 elementModifier: (jsxName, element) => {
-                  if (jsxName === "Callout") {
+                  if (["Blockquote", "Callout"].includes(jsxName)) {
                     // @ts-expect-error: we're extracting the element from the auto p tag
                     const possibleHeadingTree = (element?.children?.[0]?.children ||
                       []) as MdastContent[]
@@ -195,9 +205,6 @@ export async function MDXRenderer({ source }: { source: string }) {
 
                     const [, keyword, partialTitle] = match
                     const variant = keyword.toLowerCase()
-                    if (!isCalloutKeyword(variant)) {
-                      return element
-                    }
 
                     const firstChildIsTitle =
                       Boolean(partialTitle) || possibleHeadingTree.length > 1
