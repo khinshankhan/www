@@ -80,7 +80,7 @@ export function Tabbify({ labels, defaultIndex = undefined, children }: TabbifyP
 
           {/* animated underline */}
           <motion.div
-            className="absolute bottom-0 h-0.5 w-full bg-accent-link"
+            className="absolute bottom-0 h-0.5 w-full bg-accent-11"
             animate={underlineStyle}
             transition={{ duration: 0.2, ease: "easeInOut" }}
           />

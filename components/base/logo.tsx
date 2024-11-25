@@ -30,7 +30,7 @@ export function Logo({
       viewBox="0 0 460 460"
       style={{ display: "block" }}
       className={cn(
-        "shadow-[0px_0px_10px_1px] shadow-foreground transition-all duration-300 ease-in-out group-hover:shadow-accent-link focus:group-hover:shadow-accent-link",
+        "shadow-[0px_0px_10px_1px] shadow-foreground transition-all duration-300 ease-in-out group-hover:shadow-accent-8 focus:group-hover:shadow-accent-8",
         className
       )}
       {...props}
@@ -45,7 +45,7 @@ export function Logo({
       />
       <path
         className={cn(
-          "transition-stroke fill-none stroke-transparent duration-500 ease-in-out group-hover:stroke-accent-link",
+          "transition-stroke fill-none stroke-transparent duration-500 ease-in-out group-hover:stroke-accent-11",
           borderClassName
         )}
         strokeWidth={20}

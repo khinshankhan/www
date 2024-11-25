@@ -113,12 +113,6 @@
 
   --color-knockout: var(--knockout);
 
-  /**
-   * HACK: This is a quick workaround for being able to darken color for light mode. Hopefully tailwind adds this as an
-   * easier feature https://github.com/tailwindlabs/tailwindcss/discussions/14712
-   */
-  --color-accent-link: color-mix(in srgb, var(--color-accent-11) 90%, var(--knockout));
-
   --font-family-*: initial;
   --font-family-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji";

@@ -45,7 +45,7 @@ export function ScrollBar({ className, orientation = "vertical", ...props }: Scr
       )}
       {...props}
     >
-      <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-accent-link/70" />
+      <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-accent-8 hover:bg-accent-11" />
     </ScrollAreaPrimitive.Scrollbar>
   )
 }

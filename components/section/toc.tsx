@@ -48,7 +48,7 @@ function TocItem({
       {isActive && (
         <motion.span
           layoutId="toc-sideline-on"
-          className="absolute z-50 w-0.5 bg-accent-link duration-0"
+          className="absolute z-50 w-0.5 bg-accent-11 duration-0"
           style={{ height: liRef.current?.offsetHeight ?? 0 }}
         />
       )}
