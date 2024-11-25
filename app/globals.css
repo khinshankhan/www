@@ -470,3 +470,20 @@ html:focus-within {
 [data-rmiz-modal-overlay="hidden"] {
   background-color: var(--transparent) !important;
 }
+
+/* loosely based off https://codepen.io/brucebrotherton/pen/GRxwQar */
+.quotes:before,
+.quotes:after {
+  position: absolute;
+  font-size: 5rem;
+}
+.quotes:before {
+  top: -1.5rem;
+  left: 0rem;
+  content: open-quote;
+}
+.quotes:after {
+  bottom: -2.875rem;
+  right: 1.25rem;
+  content: close-quote;
+}

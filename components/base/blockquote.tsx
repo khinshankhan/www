@@ -9,6 +9,7 @@ export const blockquoteVariants = cva("relative", {
   variants: {
     variant: {
       blockquote: "border-l-4 border-muted-foreground pl-4",
+      quote: "quotes my-12 text-center before:text-muted-foreground after:text-muted-foreground",
     },
   },
   defaultVariants: {
