@@ -95,7 +95,7 @@ export function remarkJsxifyElements(
       // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
       parent.children[index] = modifiedElement
 
-      return [SKIP, index + 1]
+      return [SKIP, index]
     })
   }
 }
