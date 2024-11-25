@@ -15,7 +15,7 @@ import {
   TriangleAlert,
   type IconComponent,
 } from "@/components/base/icon"
-import { cn } from "@/lib/utils"
+import { capitalize, cn } from "@/lib/utils"
 
 // prettier-ignore
 type IconLookup = Record<NonNullable<AlertVariants["variant"]>, IconComponent | null>
@@ -51,7 +51,14 @@ export function Callout({ variant = undefined, icon = undefined, title, children
               "absolute -top-4 -left-4 w-max items-center gap-2 rounded-full p-1.5"
             )}
           >
-            <Icon className="h-6 w-6 text-foreground" />
+            <Icon
+              aria-hidden={
+                // Hides the raw SVG from screen readers
+                "true"
+              }
+              className="h-6 w-6 text-foreground"
+            />
+            {variant && <span className="sr-only">{capitalize(variant)}</span>}
           </div>
         )}
 
