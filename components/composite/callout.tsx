@@ -48,7 +48,7 @@ export function Callout({ variant = undefined, icon = undefined, title, children
           <div
             className={cn(
               alertVariants({ variant }),
-              "absolute -top-4 -left-4 w-max items-center gap-2 rounded-full p-1.5 backdrop-blur-lg"
+              "absolute -top-4 -left-4 w-max items-center gap-2 rounded-full p-1.5"
             )}
           >
             <Icon className="h-6 w-6 text-foreground" />
