@@ -89,6 +89,38 @@ become features. Or they... well yea, stuff happens.
    </figcaption>
 </figure>
 
+## Callouts
+
+> [!NOTE] Note <Sun className="inline" />
+>
+> Highlights information that users should take into account, even when skimming.
+>
+> Second paragraph. With a [lorem ipsum](#) link.
+
+> [!TIP] Tip
+>
+> Optional information to help a user be more successful.
+>
+> Second paragraph. With a [lorem ipsum](#) link.
+
+> [!IMPORTANT] Important
+>
+> Crucial information necessary for users to succeed.
+>
+> Second paragraph. With a [lorem ipsum](#) link.
+
+> [!WARNING] Warning
+>
+> Critical content demanding immediate user attention due to potential risks.
+>
+> Second paragraph. With a [lorem ipsum](#) link.
+
+> [!CAUTION] Caution
+>
+> Negative potential consequences of an action.
+>
+> Second paragraph. With a [lorem ipsum](#) link.
+
 ## Basic Text Formatting
 
 _This text is italicized._

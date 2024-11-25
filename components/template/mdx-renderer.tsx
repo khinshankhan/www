@@ -1,9 +1,11 @@
-import React from "react"
+import React, { Children } from "react"
 import { Code } from "@/components/base/code"
 import { Figcaption } from "@/components/base/figure"
+import { Sun } from "@/components/base/icon"
 import { Image } from "@/components/base/image"
 import { Spoiler } from "@/components/base/spoiler"
 import { typographyVariants } from "@/components/base/typography"
+import { Callout, calloutIcons, type CalloutProps } from "@/components/composite/callout"
 import { SmartLink } from "@/components/composite/smart-link"
 import { Pre } from "@/components/section/pre"
 import { SmartVideo } from "@/components/section/smart-video"
@@ -17,11 +19,24 @@ import {
 } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
 import { cn } from "@/lib/utils"
+import { toString } from "mdast-util-to-string"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeMdxCodeProps from "rehype-mdx-code-props"
 import remarkGfm from "remark-gfm"
+
+// prettier-ignore
+export const calloutKeywords = Object.keys(calloutIcons) as NonNullable<CalloutProps["variant"]>[]
+
+// prettier-ignore
+export function isCalloutKeyword(keyword: string): keyword is NonNullable<CalloutProps["variant"]> {
+  //@ts-expect-error: silly object can't be indexed by string error
+  return calloutKeywords.includes(keyword)
+}
+
+// match blockquotes `> [!variant] heading`
+const mdxBlockquoteMetaRegex = /\[!([^\]]+)\]\s*(.*)/
 
 const components: MDXComponents = {
   a: ({ href = "#", children = null, ...props }) => (
@@ -86,6 +101,52 @@ const components: MDXComponents = {
   Image,
   SmartVideo,
   Figcaption,
+  // TODO: look into transforming at via plugins
+  Callout: ({ children }: { children: React.ReactNode }) => {
+    const variant = Children.toArray(children)
+      .filter((_, i) => i === 0)
+      // @ts-expect-error: unwrapping from default mdx p tag
+      .map((p) => Children.toArray(p.props.children))
+      .map((c) => {
+        // @ts-expect-error: given the logic to transform blockquote to callout, it's guaranteed we'll always start with a string as long as Callout isn't called directly
+        const match = mdxBlockquoteMetaRegex.exec(c[0])
+        if (!match) {
+          return c
+        }
+
+        const [, keyword] = match
+        const variant = keyword.toLowerCase()
+        if (isCalloutKeyword(variant)) {
+          return variant
+        }
+
+        return null
+      })
+      .find((v) => typeof v === "string")
+
+    const title = Children.toArray(children)
+      .filter((_, i) => i === 0)
+      // @ts-expect-error: unwrapping from default mdx p tag
+      .map((p) => Children.toArray(p.props.children))
+      .map((c) => {
+        // @ts-expect-error: given the logic to transform blockquote to callout, it's guaranteed we'll always start with a string as long as Callout isn't called directly
+        const match = mdxBlockquoteMetaRegex.exec(c[0])
+        if (!match) {
+          return c
+        }
+
+        const [, , title] = match
+        return [title, ...c.slice(1)]
+      })
+    const content = Children.toArray(children).filter((_, i) => i !== 0)
+
+    return (
+      <Callout variant={variant} title={title}>
+        {content}
+      </Callout>
+    )
+  },
+  Sun,
 
   Test: ({ className = "" }) => <div className={cn(className)}>this was a test and you passed</div>,
 }
@@ -129,6 +190,16 @@ export async function MDXRenderer({ source }: { source: string }) {
                   // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
                   if (node?.name === "figcaption") {
                     return "Figcaption"
+                  }
+
+                  if (node.type === "blockquote") {
+                    // @ts-expect-error: I have no idea what I'm doing honestly but maybe the children can be null?
+                    const firstChildText = toString(node?.children?.[0] ?? "")
+                    const match = mdxBlockquoteMetaRegex.exec(firstChildText)
+                    // TODO: check if we need to handle blockquotes differently
+                    if (match) {
+                      return "Callout"
+                    }
                   }
 
                   return null
