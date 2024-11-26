@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@khinshankhan/emoji-helper-core':
+        specifier: ^3.0.1
+        version: 3.0.1
+      '@khinshankhan/emoji-helper-pack-github':
+        specifier: ^3.0.4
+        version: 3.0.4(@khinshankhan/emoji-helper-core@3.0.1)
       '@radix-ui/react-collapsible':
         specifier: ^1.1.1
         version: 1.1.1(@types/react@18.3.11)(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)
@@ -425,6 +431,14 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@khinshankhan/emoji-helper-core@3.0.1':
+    resolution: {integrity: sha512-mdUZYjWhAYS2cumfXrbMlYygzDzj7RqAJ+ORoU2XqFF/NHQlwA5o+tlkeE/IAvIzVYbvFqjt5ZZWPNJWkRax0A==}
+
+  '@khinshankhan/emoji-helper-pack-github@3.0.4':
+    resolution: {integrity: sha512-D01VKCirnw8ipTAfSfMw+Qlavnv5hQWLp3iJglQOgnaaVlg4Uwf2/cKGL1i1JdJ5VjKDLGbAYBySnbSAlv2zMg==}
+    peerDependencies:
+      '@khinshankhan/emoji-helper-core': ^3.0.1
 
   '@mdx-js/mdx@3.1.0':
     resolution: {integrity: sha512-/QxEhPAvGwbQmy1Px8F899L5Uc2KZ6JtXwlCgJmjSTBedwOZkByYcBG4GceIGPXRDsmfxhHazuS+hlOShRLeDw==}
@@ -3248,6 +3262,12 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@khinshankhan/emoji-helper-core@3.0.1': {}
+
+  '@khinshankhan/emoji-helper-pack-github@3.0.4(@khinshankhan/emoji-helper-core@3.0.1)':
+    dependencies:
+      '@khinshankhan/emoji-helper-core': 3.0.1
 
   '@mdx-js/mdx@3.1.0(acorn@8.12.1)':
     dependencies:
