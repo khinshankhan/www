@@ -14,6 +14,9 @@ importers:
       '@khinshankhan/emoji-helper-pack-github':
         specifier: ^3.0.4
         version: 3.0.4(@khinshankhan/emoji-helper-core@3.0.1)
+      '@khinshankhan/emoji-helper-remark':
+        specifier: ^3.1.1
+        version: 3.1.1
       '@radix-ui/react-collapsible':
         specifier: ^1.1.1
         version: 1.1.1(@types/react@18.3.11)(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)
@@ -445,6 +448,9 @@ packages:
     resolution: {integrity: sha512-D01VKCirnw8ipTAfSfMw+Qlavnv5hQWLp3iJglQOgnaaVlg4Uwf2/cKGL1i1JdJ5VjKDLGbAYBySnbSAlv2zMg==}
     peerDependencies:
       '@khinshankhan/emoji-helper-core': ^3.0.1
+
+  '@khinshankhan/emoji-helper-remark@3.1.1':
+    resolution: {integrity: sha512-6KMNnwCrtBE1gr0co8/cwllYZ6BAYemadN3j6ZQLd1rfsaGHKxe5cRdTeHsjOB7BDc/Spc/oMiSoMY+5pOxTdA==}
 
   '@mdx-js/mdx@3.1.0':
     resolution: {integrity: sha512-/QxEhPAvGwbQmy1Px8F899L5Uc2KZ6JtXwlCgJmjSTBedwOZkByYcBG4GceIGPXRDsmfxhHazuS+hlOShRLeDw==}
@@ -2915,6 +2921,9 @@ packages:
   unist-util-visit-parents@6.0.1:
     resolution: {integrity: sha512-L/PqWzfTP9lzzEa6CKs0k2nARxTdZduw3zyh8d2NVBnsyvHjSX4TWse388YrrQKbvI8w20fGjGlhgT96WwKykw==}
 
+  unist-util-visit@4.1.2:
+    resolution: {integrity: sha512-MSd8OUGISqHdVvfY9TPhyK2VdUrPgxkUtWSuMHF6XAAFuL4LokseigBnZtPnJMu+FbynTkFNnFlyjxpVKujMRg==}
+
   unist-util-visit@5.0.0:
     resolution: {integrity: sha512-MR04uvD+07cwl/yhVuVWAtw+3GOR/knlL55Nd/wAdblk27GCVt3lqpTivy/tkJcZoNPzTwS1Y+KMojlLDhoTzg==}
 
@@ -3305,6 +3314,10 @@ snapshots:
   '@khinshankhan/emoji-helper-pack-github@3.0.4(@khinshankhan/emoji-helper-core@3.0.1)':
     dependencies:
       '@khinshankhan/emoji-helper-core': 3.0.1
+
+  '@khinshankhan/emoji-helper-remark@3.1.1':
+    dependencies:
+      unist-util-visit: 4.1.2
 
   '@mdx-js/mdx@3.1.0(acorn@8.12.1)':
     dependencies:
@@ -6334,6 +6347,12 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
       unist-util-is: 6.0.0
+
+  unist-util-visit@4.1.2:
+    dependencies:
+      '@types/unist': 2.0.11
+      unist-util-is: 5.2.1
+      unist-util-visit-parents: 5.1.3
 
   unist-util-visit@5.0.0:
     dependencies:

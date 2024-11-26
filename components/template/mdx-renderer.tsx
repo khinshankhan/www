@@ -7,10 +7,12 @@ import { Image } from "@/components/base/image"
 import { Spoiler } from "@/components/base/spoiler"
 import { typographyVariants } from "@/components/base/typography"
 import { Callout, calloutIcons, type CalloutProps } from "@/components/composite/callout"
+import { Emoji } from "@/components/composite/emoji"
 import { SmartLink } from "@/components/composite/smart-link"
 import { Pre } from "@/components/section/pre"
 import { SmartVideo } from "@/components/section/smart-video"
 import { Tabbify } from "@/components/section/tabbify"
+import { emojiLookup, type EmojiKey } from "@/lib/emoji"
 import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-by-heading"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
@@ -28,6 +30,7 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeMdxCodeProps from "rehype-mdx-code-props"
 import remarkGfm from "remark-gfm"
+import { remarkSimpleEmoji } from "@khinshankhan/emoji-helper-remark"
 
 // prettier-ignore
 export const calloutKeywords = Object.keys(calloutIcons) as NonNullable<CalloutProps["variant"]>[]
@@ -99,6 +102,7 @@ const components: MDXComponents = {
     return <Pre {...props} text={text} />
   },
 
+  Emoji,
   Spoiler,
   Tabbify,
   Image,
@@ -146,6 +150,17 @@ export async function MDXRenderer({ source }: { source: string }) {
       options={{
         mdxOptions: {
           remarkPlugins: [
+            [
+              remarkSimpleEmoji,
+              {
+                validate: (name: string) => emojiLookup.get(name as EmojiKey),
+                lookup: (name: string) => {
+                  const emoji = emojiLookup.get(name as EmojiKey)
+                  // NOTE: this should be guranteed due to validate
+                  return emoji!.alt
+                },
+              },
+            ],
             remarkMarkFirstParagraph,
             [
               remarkPrependTopHeading,

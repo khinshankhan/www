@@ -16,6 +16,7 @@
   "dependencies": {
     "@khinshankhan/emoji-helper-core": "^3.0.1",
     "@khinshankhan/emoji-helper-pack-github": "^3.0.4",
+    "@khinshankhan/emoji-helper-remark": "^3.1.1",
     "@radix-ui/react-collapsible": "^1.1.1",
     "@radix-ui/react-dropdown-menu": "^2.1.2",
     "@radix-ui/react-scroll-area": "^1.2.1",

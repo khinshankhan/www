@@ -1,4 +1,4 @@
-import type { RootContent as MdastContent, Node as MdastNode } from "mdast"
+import type { RootContent as MdastContent, Node as MdastNode, Root as MdastRoot } from "mdast"
 import type { Transformer } from "unified"
 import { CONTINUE, SKIP, visit } from "unist-util-visit"
 
@@ -61,10 +61,8 @@ const defaultElementModifier: NonNullable<RemarkJsxifyElementOptions["elementMod
   return element
 }
 
-export function remarkJsxifyElements(
-  options: RemarkJsxifyElementOptions
-  // prettier-ignore
-): Transformer {
+export function remarkJsxifyElements(options: RemarkJsxifyElementOptions): // prettier-ignore
+Transformer<MdastRoot, MdastRoot> {
   const elementMatcher = options.elementMatcher
   const isSandbox = options.isSandbox ?? defaultIsSandbox
   const elementModifier = options.elementModifier ?? defaultElementModifier
