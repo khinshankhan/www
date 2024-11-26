@@ -4,6 +4,8 @@
 
 @variant dark (&:where(.dark,.dark *));
 
+@plugin "tailwindcss-animate";
+
 :root,
 .light {
   color-scheme: light dark;
@@ -112,6 +114,7 @@
   --color-muted-foreground: var(--gray-a11);
 
   --color-knockout: var(--knockout);
+  --color-knockout-foreground: var(--gray-1);
 
   --font-family-*: initial;
   --font-family-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif,
