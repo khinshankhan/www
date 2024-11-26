@@ -446,6 +446,7 @@
   z-index: 1;
 }
 
+/* animations */
 @keyframes collapsible-slide-up {
   from {
     height: var(--radix-collapsible-content-height);
@@ -464,7 +465,6 @@
   }
 }
 
-/* animations */
 .animated-collapsible {
   overflow: hidden;
 }
@@ -473,6 +473,38 @@
 }
 .animated-collapsible[data-state="closed"] {
   animation: collapsible-slide-up 300ms ease-out;
+}
+
+/* https://jarv.is/notes/css-waving-hand-emoji/ */
+@keyframes waving {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animated-waving-hand {
+  animation: waving 2.5s infinite;
 }
 
 /* style specific elements from here */

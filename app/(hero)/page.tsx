@@ -1,6 +1,7 @@
 import { Button } from "@/components/base/button"
 import { Image } from "@/components/base/image"
 import { Heading, Text, typographyVariants } from "@/components/base/typography"
+import { Emoji } from "@/components/composite/emoji"
 import { SmartLink } from "@/components/composite/smart-link"
 import { cn } from "@/lib/utils"
 
@@ -40,7 +41,9 @@ function IntroSection() {
   return (
     <section className="flex flex-col items-center space-y-8 text-center md:items-end md:text-right">
       <Heading as="h1" variant="h1" className="flex flex-col font-extrabold md:whitespace-nowrap">
-        <span>Hello there!</span>
+        <span>
+          <span>Hello there</span> <Emoji name=":wave:" className="animated-waving-hand" />
+        </span>
 
         <Text as="span" variant="h2" className="font-extrabold">
           I&apos;m <span className="text-accent-11">{info.fullname}</span>
