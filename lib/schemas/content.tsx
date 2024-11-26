@@ -19,6 +19,8 @@ const defaultContentLd: Record<ContentSource, ContentLdType> = {
   projects: "CollectionPage",
 }
 
+const ImageSchema = z.object({ url: z.string(), alt: z.string() })
+
 export const ContentFrontmatterSchema = z
   .object({
     // required
@@ -34,6 +36,10 @@ export const ContentFrontmatterSchema = z
     // seo
     description: z.string().optional(),
     keywords: z.array(z.string()).optional().default([]),
+    coverImage: ImageSchema.optional().default({
+      url: "/images/placeholder.png?v=1",
+      alt: "Placeholder image",
+    }),
 
     og: z
       .object({

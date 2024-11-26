@@ -386,6 +386,15 @@
   }
 }
 
+/* credits to xetera for the initial idea */
+/* resource: https://bennettfeely.com/clippy/ */
+@utility clip-tl-br {
+  clip-path: polygon(3% 0, 100% 0, 100% 100%, 20% 100%);
+}
+@utility clip-tr-bl {
+  clip-path: polygon(0 0, 97% 0, 80% 100%, 0 100%);
+}
+
 /* based off https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/layout/src/link-box.tsx */
 .link-overlay {
   position: static;
