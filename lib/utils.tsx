@@ -12,6 +12,20 @@ export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+/* array utils */
+
+export function range(startOrEnd: number, end?: number, step: number = 1): number[] {
+  if (step === 0) {
+    throw new Error("Step cannot be zero.")
+  }
+
+  const actualStart = end === undefined ? 0 : startOrEnd
+  const actualEnd = end === undefined ? startOrEnd : end
+
+  const n = Math.max(Math.ceil((actualEnd - actualStart) / step), 0)
+  return Array.from({ length: n }, (_, index) => actualStart + index * step)
+}
+
 /* focus utils */
 
 // NOTE: requires element to be focusable
