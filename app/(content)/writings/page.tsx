@@ -1,5 +1,6 @@
 import React from "react"
 import { Heading, Text } from "@/components/base/typography"
+import { Callout } from "@/components/composite/callout"
 import { SmartLink } from "@/components/composite/smart-link"
 import { ContentLayout } from "@/components/template/content-layout"
 import { listAllContentData } from "@/lib/content"
@@ -38,7 +39,6 @@ function WritingCard({ content, right = false }: { content: ContentData; right?:
 
           <Text
             as="span"
-            variant={null}
             className={cn("line-clamp-3 text-muted-foreground md:line-clamp-2", textAlign)}
           >
             {content.frontmatter.description}
@@ -72,15 +72,30 @@ export default async function Page() {
       ghPath="/app/(content)/writings/page.tsx"
       childrenWrappingClass="flex flex-col gap-4"
     >
+      <Callout variant="note" title={"Work in Progress"} icon={null}>
+        {`I'm currently working on converting my previous articles from different formats to markdown. This process will take some time. Stay tuned... coming soon!`}
+      </Callout>
+
       <Heading as="h2" variant="h2">
         Articles
       </Heading>
 
-      <ul className="flex flex-col gap-8">
-        {contentData.map((content) => (
-          <WritingCard key={content.slug} content={content} />
-        ))}
-      </ul>
+      <Text className="text-muted-foreground">
+        {`Dive into all ${contentData.length} articles!`}
+      </Text>
+
+      {contentData.length === 0 ? (
+        <Text as="p" className="text-center">
+          It seems no articles are available right now. Check back soon! In the meantime, perhaps
+          look out for an <SmartLink href="/">easter egg</SmartLink>?
+        </Text>
+      ) : (
+        <ul className="flex flex-col gap-8">
+          {contentData.map((content) => (
+            <WritingCard key={content.slug} content={content} />
+          ))}
+        </ul>
+      )}
     </ContentLayout>
   )
 }
