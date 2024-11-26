@@ -4,6 +4,7 @@ import { SmartLink } from "@/components/composite/smart-link"
 import { ContentLayout } from "@/components/template/content-layout"
 import { listAllContentData } from "@/lib/content"
 import { type ContentData } from "@/lib/schemas/content"
+import { cn } from "@/lib/utils"
 
 async function listWritingsContentData() {
   return await listAllContentData({
@@ -13,25 +14,32 @@ async function listWritingsContentData() {
 
 const showWritingCardImage = true
 
-function WritingCard({ content }: { content: ContentData }) {
+function WritingCard({ content, right = false }: { content: ContentData; right?: boolean }) {
+  const textAlign = right ? "text-right" : "text-left"
+
   return (
     <li className="link-box w-full overflow-hidden rounded-lg border border-solid border-accent-8 shadow-none transition-all duration-700 ease-in-out group-hover:shadow-accent-8 hover:-translate-y-2 hover:border-accent-11 hover:bg-surface-5/25 hover:shadow-[0px_0px_10px_1px]">
-      <div className="flex size-full flex-col-reverse md:flex-row">
+      <div
+        className={cn(
+          "flex size-full flex-col-reverse",
+          right ? "md:flex-row-reverse" : "md:flex-row"
+        )}
+      >
         <div className="flex flex-col gap-1 p-6">
-          <Heading as="h3" variant="h3" className="line-clamp-2 md:line-clamp-1">
+          <Heading as="h3" variant="h3" className={cn("line-clamp-2 md:line-clamp-1", textAlign)}>
             <SmartLink href={`/${content.slug}`} className="link-overlay">
               {content.frontmatter.title}
             </SmartLink>
           </Heading>
 
-          <Text as="span" variant="h4" className="line-clamp-2 md:line-clamp-1">
+          <Text as="span" variant="h4" className={cn("line-clamp-2 md:line-clamp-1", textAlign)}>
             {content.frontmatter.subtitle}
           </Text>
 
           <Text
             as="span"
             variant={null}
-            className="line-clamp-3 text-muted-foreground md:line-clamp-2"
+            className={cn("line-clamp-3 text-muted-foreground md:line-clamp-2", textAlign)}
           >
             {content.frontmatter.description}
           </Text>
@@ -42,7 +50,10 @@ function WritingCard({ content }: { content: ContentData }) {
             <img
               alt={content.frontmatter.coverImage.alt}
               src={content.frontmatter.coverImage.url}
-              className="relative inset-0 size-full rounded-t-lg object-cover md:absolute md:rounded-r-lg md:clip-tl-br"
+              className={cn(
+                "relative inset-0 size-full rounded-t-lg object-cover md:absolute md:rounded-r-lg",
+                right ? "md:clip-tr-bl" : "md:clip-tl-br"
+              )}
             />
           </div>
         )}
