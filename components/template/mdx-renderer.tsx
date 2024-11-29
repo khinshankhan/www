@@ -101,6 +101,7 @@ const components: MDXComponents = {
 
     return <Pre {...props} text={text} />
   },
+  li: ({ className = "", ...props }) => <li className={cn("prose", className)} {...props} />,
 
   Emoji,
   Spoiler,

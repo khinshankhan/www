@@ -109,7 +109,25 @@ export async function listAllContentData({
   )
 
   // TODO: add sorting here
-  const relevantPossibleContentData = allPossibleContentData.filter(filter)
+  const relevantPossibleContentData = allPossibleContentData.filter(filter).sort((a, b) => {
+    // Compare by datePublished in descending order
+    if (a.frontmatter.datePublished.getTime() !== b.frontmatter.datePublished.getTime()) {
+      return b.frontmatter.datePublished.getTime() - a.frontmatter.datePublished.getTime()
+    }
+
+    // Compare by priority, from lowest to highest
+    if (a.frontmatter.nice !== b.frontmatter.nice) {
+      return a.frontmatter.nice - b.frontmatter.nice
+    }
+
+    // Compare by dateCreated in descending order
+    if (a.frontmatter.dateCreated.getTime() !== b.frontmatter.dateCreated.getTime()) {
+      return b.frontmatter.dateCreated.getTime() - a.frontmatter.dateCreated.getTime()
+    }
+
+    // Compare by title in reverse alphabetical order
+    return b.frontmatter.title.localeCompare(a.frontmatter.title)
+  })
 
   return relevantPossibleContentData
 }

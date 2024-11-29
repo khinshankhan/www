@@ -26,7 +26,7 @@ function WritingCard({ content, right = false }: { content: ContentData; right?:
           right ? "md:flex-row-reverse" : "md:flex-row"
         )}
       >
-        <div className="flex flex-col gap-1 p-6">
+        <div className="flex grow flex-col gap-1 p-6">
           <Heading as="h3" variant="h3" className={cn("line-clamp-2 md:line-clamp-1", textAlign)}>
             <SmartLink href={`/${content.slug}`} className="link-overlay">
               {content.frontmatter.title}
