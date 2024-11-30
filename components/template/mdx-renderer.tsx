@@ -30,6 +30,8 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeMdxCodeProps from "rehype-mdx-code-props"
 import remarkGfm from "remark-gfm"
+import smartypants from "remark-smartypants"
+import remarkSmartypants from "remark-smartypants"
 import { remarkSimpleEmoji } from "@khinshankhan/emoji-helper-remark"
 
 // prettier-ignore
@@ -151,6 +153,14 @@ export async function MDXRenderer({ source }: { source: string }) {
       options={{
         mdxOptions: {
           remarkPlugins: [
+            [
+              remarkSmartypants,
+              {
+                backticks: false,
+                ellipses: false,
+                quotes: false,
+              },
+            ],
             [
               remarkSimpleEmoji,
               {
