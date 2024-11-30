@@ -69,7 +69,7 @@ export function Callout({ variant = undefined, icon = undefined, title, children
             </AlertHeading>
           )}
 
-          <AlertDescription className="prose block [&_*]:last:mb-0">{children}</AlertDescription>
+          <AlertDescription className="prose block **:last:mb-0">{children}</AlertDescription>
         </div>
       </Alert>
     </div>

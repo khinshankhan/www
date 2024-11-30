@@ -186,7 +186,7 @@ export function Navbar() {
         </NextLink>
 
         {/* rhs on desktop view */}
-        <div className="hide-mobile flex flex-row items-center gap-4">
+        <div className="flex hide-mobile flex-row items-center gap-4 max-md:hide-print">
           <NavLinksDesktop />
 
           <div className="flex flex-row gap-4">
@@ -195,7 +195,7 @@ export function Navbar() {
         </div>
 
         {/* rhs on mobile view */}
-        <div className="show-mobile flex flex-col-reverse gap-2 xss:flex-row">
+        <div className="flex show-mobile flex-col-reverse gap-2 xss:flex-row md:hide-print">
           <ModeToggle />
           <NavLinksMobile />
         </div>

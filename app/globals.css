@@ -1,41 +1,14 @@
 @import "./styles/colors.css";
 @import "./styles/hljs-github.css";
+
 @import "tailwindcss";
 
-@variant dark (&:where(.dark,.dark *));
+@variant dark (&:is(.dark *));
 
 @plugin "tailwindcss-animate";
 
-:root,
-.light {
-  color-scheme: light dark;
-
-  --knockout: #000;
-
-  --colorful-gradient: #fffde5, #e9ffda, #dffbff, #ecefff, #f6e1ff, #ffe5f0;
-
-  --background-1: var(--celestial-3);
-  --background-2: var(--celestial-1);
-
-  --icons-anchor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath stroke='currentColor' fill='currentColor' d='m22 15-3-4-3 4h1.906c-.436 2.469-2.438 4.471-4.906 4.906V13h2v-2h-2V9.336c1.543-.459 2.714-1.923 2.714-3.621C15.714 3.666 14.048 2 12 2S8.286 3.666 8.286 5.715c0 1.698 1.171 3.162 2.714 3.621V11H9v2h2v6.906C8.531 19.471 6.529 17.469 6.094 15H8l-3-4-3 4h2.073c.511 3.885 3.929 7 7.927 7s7.416-3.115 7.927-7H22zM10.286 5.715C10.286 4.77 11.055 4 12 4s1.714.77 1.714 1.715c0 .951-.801 1.785-1.714 1.785s-1.714-.834-1.714-1.785z'/%3E%3C/svg%3E");
-}
-
-.light {
-  color-scheme: light;
-}
-
-.dark {
-  color-scheme: dark;
-
-  --knockout: #fff;
-
-  --colorful-gradient: #5a4b3c, #4c593d, #3a535f, #414758, #533f60, #604048;
-
-  --background-1: var(--celestial-1);
-  --background-2: var(--celestial-2);
-}
-
 @theme {
+  --breakpoint-*: initial;
   --breakpoint-xss: 20rem; /* 320px */
   --breakpoint-xs: 24.5rem; /* 392px */
   --breakpoint-sm: 40rem; /* 640px */
@@ -44,9 +17,17 @@
   --breakpoint-xl: 82.8125rem; /* 1325px */
   --breakpoint-2xl: 96rem; /* 1536px */
 
-  /* this lets tailwind reference the variable */
-  --color-*: initial;
+  --font-family-*: initial;
+  --font-family-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --font-family-body: var(--font-body), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  --font-family-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --default-font-family: var(--font-family-body);
+  --default-mono-font-family: var(--font-family-mono);
 
+  --color-*: initial;
   --color-transparent: var(--transparent);
 
   --color-surface-1: var(--celestial-1);
@@ -106,144 +87,186 @@
   --color-accent-indicator: var(--custom-indicator);
   --color-accent-track: var(--custom-track);
 
+  /* semantic colors */
   --color-background-1: var(--background-1);
   --color-background-2: var(--background-2);
-  --color-muted: var(--gray-4);
-
   --color-foreground: var(--gray-a12);
+
+  --color-muted: var(--gray-4);
   --color-muted-foreground: var(--gray-a11);
 
   --color-knockout: var(--knockout);
   --color-knockout-foreground: var(--gray-1);
 
-  --font-family-*: initial;
-  --font-family-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji";
-  --font-family-body: var(--font-body), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji";
-  --font-family-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-  --default-font-family: var(--font-family-body);
-  --default-mono-font-family: var(--font-family-mono);
+  --color-colorful-gradient: var(--colorful-gradient);
 
   /* Transition timing functions */
+  --ease-*: initial;
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-arrow-rotation: cubic-bezier(0.87, 0, 0.13, 1);
 
-  --spacing-0_25: 0.0625rem;
-}
+  --animate-collapsible-open: collapsible-slide-down 300ms ease-out;
+  --animate-collapsible-close: collapsible-slide-up 300ms ease-out;
+  --animate-waving-hand: waving 2.5s infinite;
 
-/**
- * CSS variables can't be used outside of property values so media queries can't use breakpoints variables directly.
- * Reference: https://stackoverflow.com/questions/40722882/css-native-variables-not-working-in-media-queries
- *
- * Tailwind v4 doesn't yet support media query-related directives like `screen` (yet?). Therefore, we need to write out
- * the breakpoints explicitly and ensure they match Tailwind's configuration.
- *
- * Philosophy on show/hide: While "visible" has many possible states (block, inline-block, flex, grid), hiding content
- * (`display: none`) only has one state. To keep things simple, we'll use `display: none` for hiding and leave the code
- * to handle the specific visible state when showing (use a specific visible display property can mess with intended
- * experience). This assumption works for now but may need rethinking as the project evolves.
- *
- * Managing `!important`: It's hard to override one `!important` with another. Currently, we're handling this case by
- * applying print utility classes for specific print styles, but a case-by-case approach might be needed moving forward.
- */
-@media not print {
-  @media (min-width: 48rem) {
-    .show-mobile {
-      /* force hidden when not mobile */
-      display: none !important;
+  /* https://www.radix-ui.com/primitives/docs/components/collapsible#animating-content-size */
+  @keyframes collapsible-slide-up {
+    from {
+      height: var(--radix-collapsible-content-height);
+    }
+    to {
+      height: 0;
     }
   }
-
-  @media not all and (min-width: 48rem) {
-    /* force hidden when mobile */
-    .hide-mobile {
-      display: none !important;
+  @keyframes collapsible-slide-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
     }
   }
-}
-
-/**
- * Similar logic as to above, let the code define visible state, the utility class can only reliably define hidden
- * without accidentally changing an expected display.
- */
-@media print {
-  .hide-print {
-    display: none !important;
-  }
-}
-
-@keyframes background-animation {
-  0% {
-    background-position: 0% 25%;
-  }
-  50% {
-    background-position: 100% 76%;
-  }
-  100% {
-    background-position: 0% 25%;
-  }
-}
-
-.animated-background {
-  background: linear-gradient(277deg, var(--colorful-gradient));
-  background-size: 1200% 1200%;
-  animation: background-animation 10s ease infinite;
-}
-
-.bounded-page-layout {
-  width: 100%;
-  max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-
-  /* breakpoint xl */
-  @media (min-width: 82.8125rem) {
-    max-width: 77rem;
-  }
-
-  /* breakpoint 2xl */
-  @media (min-width: 96rem) {
-    max-width: 87.5rem;
-  }
-}
-
-.bounded-content-layout {
-  width: 100%;
-  max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-
-  /* breakpoint xl */
-  @media (min-width: 82.8125rem) {
-    max-width: 62rem;
-  }
-
-  /* breakpoint 2xl */
-  @media (min-width: 96rem) {
-    max-width: 72rem;
-  }
-}
-
-.bounded-with-sidebar-layout {
-  @apply max-w-full xl:max-w-[800px] 2xl:max-w-[950px];
-
-  max-width: 100%;
-  /* breakpoint xl */
-  @media (min-width: 82.8125rem) {
-    max-width: 50rem;
-  }
-
-  /* breakpoint 2xl */
-  @media (min-width: 96rem) {
-    max-width: 60rem;
+  /* https://jarv.is/notes/css-waving-hand-emoji/ */
+  @keyframes waving {
+    0% {
+      transform: rotate(0deg);
+    }
+    10% {
+      transform: rotate(14deg);
+    }
+    20% {
+      transform: rotate(-8deg);
+    }
+    30% {
+      transform: rotate(14deg);
+    }
+    40% {
+      transform: rotate(-4deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    60% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
   }
 }
 
 @layer base {
+  /* we define variables for light directly in :root in case the next-themes fails for some reason, could be a print setting */
+  :root,
+  .light {
+    color-scheme: light dark;
+
+    --knockout: #000;
+
+    --background-1: var(--celestial-3);
+    --background-2: var(--celestial-1);
+
+    --colorful-gradient: #fffde5, #e9ffda, #dffbff, #ecefff, #f6e1ff, #ffe5f0;
+
+    --icons-anchor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath stroke='currentColor' fill='currentColor' d='m22 15-3-4-3 4h1.906c-.436 2.469-2.438 4.471-4.906 4.906V13h2v-2h-2V9.336c1.543-.459 2.714-1.923 2.714-3.621C15.714 3.666 14.048 2 12 2S8.286 3.666 8.286 5.715c0 1.698 1.171 3.162 2.714 3.621V11H9v2h2v6.906C8.531 19.471 6.529 17.469 6.094 15H8l-3-4-3 4h2.073c.511 3.885 3.929 7 7.927 7s7.416-3.115 7.927-7H22zM10.286 5.715C10.286 4.77 11.055 4 12 4s1.714.77 1.714 1.715c0 .951-.801 1.785-1.714 1.785s-1.714-.834-1.714-1.785z'/%3E%3C/svg%3E");
+  }
+
+  .light {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+
+    --knockout: #fff;
+
+    --background-1: var(--celestial-1);
+    --background-2: var(--celestial-2);
+
+    --colorful-gradient: #5a4b3c, #4c593d, #3a535f, #414758, #533f60, #604048;
+  }
+
+  /*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-6, currentColor);
+  }
+}
+
+@layer components {
+  /* style specific elements from here */
+  html {
+    touch-action: manipulation;
+    scroll-behavior: auto;
+  }
+  html:focus-within {
+    /* allows ctr-f to work without smooth scrolling https://css-tricks.com/fixing-smooth-scrolling-with-find-on-page/ */
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background: var(--color-accent-a7);
+  }
+
+  .bounded-page-layout {
+    width: 100%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* breakpoint xl */
+    @media (min-width: 82.8125rem) {
+      max-width: 77rem;
+    }
+
+    /* breakpoint 2xl */
+    @media (min-width: 96rem) {
+      max-width: 87.5rem;
+    }
+  }
+
+  .bounded-content-layout {
+    width: 100%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* breakpoint xl */
+    @media (min-width: 82.8125rem) {
+      max-width: 62rem;
+    }
+
+    /* breakpoint 2xl */
+    @media (min-width: 96rem) {
+      max-width: 72rem;
+    }
+  }
+
+  .bounded-with-sidebar-layout {
+    max-width: 100%;
+    /* breakpoint xl */
+    @media (min-width: 82.8125rem) {
+      max-width: 50rem;
+    }
+
+    /* breakpoint 2xl */
+    @media (min-width: 96rem) {
+      max-width: 60rem;
+    }
+  }
+
   /* General spacing of content, this is meant to cover cases that can't be easily done with inline classes.
    *
    * Keep in mind the phenomenon called 'margin collapsing', where if margins left and right or top and bottom meet and
@@ -335,6 +358,88 @@
   .prose ul ul ul {
     list-style-type: square;
   }
+
+  /* image styling */
+  [data-rmiz-modal-overlay="visible"] {
+    background-color: color-mix(in srgb, var(--background-1) 80%, var(--transparent)) !important;
+    backdrop-filter: blur(4px);
+  }
+
+  [data-rmiz-modal-overlay="hidden"] {
+    background-color: var(--transparent) !important;
+  }
+}
+
+/**
+ * CSS variables can't be used outside of property values so media queries can't use breakpoints variables directly.
+ * Reference: https://stackoverflow.com/questions/40722882/css-native-variables-not-working-in-media-queries
+ *
+ * Tailwind v4 doesn't yet support media query-related directives like `screen` (yet?). Therefore, we need to write out
+ * the breakpoints explicitly and ensure they match Tailwind's configuration.
+ *
+ * Philosophy on show/hide: While "visible" has many possible states (block, inline-block, flex, grid), hiding content
+ * (`display: none`) only has one state. To keep things simple, we'll use `display: none` for hiding and leave the code
+ * to handle the specific visible state when showing (use a specific visible display property can mess with intended
+ * experience). This assumption works for now but may need rethinking as the project evolves.
+ *
+ * Managing `!important`: It's hard to override one `!important` with another. Currently, we're handling this case by
+ * applying print utility classes for specific print styles, but a case-by-case approach might be needed moving forward.
+ */
+@utility show-mobile {
+  @media not print {
+    @media (min-width: 48rem) {
+      /* force hidden when not mobile */
+      display: none !important;
+    }
+  }
+}
+
+@utility hide-mobile {
+  @media not print {
+    @media not all and (min-width: 48rem) {
+      /* force hidden when mobile */
+      display: none !important;
+    }
+  }
+}
+
+/**
+ * Similar logic as to above, let the code define visible state, the utility class can only reliably define hidden
+ * without accidentally changing an expected display.
+ */
+@utility hide-print {
+  @media print {
+    display: none !important;
+  }
+}
+
+/* https://www.radix-ui.com/primitives/docs/components/collapsible#animating-content-size */
+@utility animated-collapsible {
+  overflow: hidden;
+  &[data-state="open"] {
+    animation: collapsible-slide-down 300ms ease-out;
+  }
+  &[data-state="closed"] {
+    animation: collapsible-slide-up 300ms ease-out;
+  }
+}
+
+/* based off fantia */
+@keyframes background-animation {
+  0% {
+    background-position: 0% 25%;
+  }
+  50% {
+    background-position: 100% 76%;
+  }
+  100% {
+    background-position: 0% 25%;
+  }
+}
+@utility animated-background {
+  background: linear-gradient(277deg, var(--color-colorful-gradient));
+  background-size: 1200% 1200%;
+  animation: background-animation 10s ease infinite;
 }
 
 @utility show-underline {
@@ -424,129 +529,47 @@
 }
 
 /* based off https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/layout/src/link-box.tsx */
-.link-overlay {
+@utility link-overlay {
   position: static;
-}
-.link-overlay:after {
-  content: "";
-  cursor: inherit;
-  transition: transform 0.3s ease;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  display: block;
-  height: 100%;
-  width: 100%;
+  &:after {
+    content: "";
+    cursor: inherit;
+    transition: transform 0.3s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
 }
 
-.link-box {
+@utility link-box {
   position: relative;
   isolation: isolate;
-}
-/* elevate elements that are interactable also give special linkbox-elevate class privilege as a catchall */
-.link-box :is(a[href]:not(.link-overlay), button, .linkbox-elevate) {
-  z-index: 1;
-}
-
-/* animations */
-@keyframes collapsible-slide-up {
-  from {
-    height: var(--radix-collapsible-content-height);
+  /* elevate elements that are interactable also give special linkbox-elevate class privilege as a catchall */
+  & :is(a[href]:not(.link-overlay), button, .linkbox-elevate) {
+    z-index: 1;
   }
-  to {
-    height: 0;
-  }
-}
-
-@keyframes collapsible-slide-down {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-collapsible-content-height);
-  }
-}
-
-.animated-collapsible {
-  overflow: hidden;
-}
-.animated-collapsible[data-state="open"] {
-  animation: collapsible-slide-down 300ms ease-out;
-}
-.animated-collapsible[data-state="closed"] {
-  animation: collapsible-slide-up 300ms ease-out;
-}
-
-/* https://jarv.is/notes/css-waving-hand-emoji/ */
-@keyframes waving {
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(14deg);
-  }
-  20% {
-    transform: rotate(-8deg);
-  }
-  30% {
-    transform: rotate(14deg);
-  }
-  40% {
-    transform: rotate(-4deg);
-  }
-  50% {
-    transform: rotate(10deg);
-  }
-  60% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-.animated-waving-hand {
-  animation: waving 2.5s infinite;
-}
-
-/* style specific elements from here */
-html {
-  touch-action: manipulation;
-  scroll-behavior: auto;
-}
-html:focus-within {
-  /* allows ctr-f to work without smooth scrolling https://css-tricks.com/fixing-smooth-scrolling-with-find-on-page/ */
-  scroll-behavior: smooth;
-}
-
-::selection {
-  background: var(--color-accent-a7);
-}
-
-/* image styling */
-[data-rmiz-modal-overlay="visible"] {
-  background-color: color-mix(in srgb, var(--background-1) 80%, var(--transparent)) !important;
-  backdrop-filter: blur(4px);
-}
-
-[data-rmiz-modal-overlay="hidden"] {
-  background-color: var(--transparent) !important;
 }
 
 /* loosely based off https://codepen.io/brucebrotherton/pen/GRxwQar */
-.quotes:before,
-.quotes:after {
-  position: absolute;
-  font-size: 5rem;
-}
-.quotes:before {
-  top: -1.5rem;
-  left: 0rem;
-  content: open-quote;
-}
-.quotes:after {
-  bottom: -2.875rem;
-  right: 1.25rem;
-  content: close-quote;
+@utility surround-quotes {
+  &:before,
+  &:after {
+    color: var(--color-muted-foreground);
+    position: absolute;
+    font-size: 5rem;
+  }
+  &:before {
+    top: -3.75rem;
+    left: 0rem;
+    content: open-quote;
+  }
+  &:after {
+    bottom: -5.25rem;
+    right: 1.25rem;
+    content: close-quote;
+  }
 }

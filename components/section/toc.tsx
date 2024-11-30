@@ -145,7 +145,7 @@ export function Toc({ headings }: TocProps) {
 
   return (
     <Collapsible
-      className="w-full rounded-lg bg-background-1/25 py-3 px-2 backdrop-blur-md xl:backdrop-blur-sm"
+      className="w-full rounded-lg bg-background-1/25 py-3 px-2 backdrop-blur-md xl:backdrop-blur-xs"
       open={open}
       onOpenChange={setOpen}
     >

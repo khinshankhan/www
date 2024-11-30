@@ -56,7 +56,7 @@ export function Pre({ text, className = "", ...props }: { text: string } & PrePr
         <div
           className={cn(
             "absolute inset-x-0 bottom-0 flex items-center justify-center p-2",
-            isExpanded ? "bottom-1" : "bg-gradient-to-b from-background-2/30 to-background-1/90"
+            isExpanded ? "bottom-1" : "bg-linear-to-b from-background-2/30 to-background-1/90"
           )}
         >
           <CollapsibleTrigger asChild>

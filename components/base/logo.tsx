@@ -30,7 +30,7 @@ export function Logo({
       viewBox="0 0 460 460"
       style={{ display: "block" }}
       className={cn(
-        "shadow-[0px_0px_10px_1px] shadow-foreground transition-all duration-300 ease-in-out group-hover:shadow-accent-8 focus:group-hover:shadow-accent-8",
+        "shadow-[0px_0px_10px_1px] shadow-foreground transition-all duration-300 ease-in-out group-hover:shadow-accent-8 group-hover:focus:shadow-accent-8",
         className
       )}
       {...props}

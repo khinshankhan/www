@@ -42,7 +42,7 @@ function IntroSection() {
     <section className="flex flex-col items-center space-y-8 text-center md:items-end md:text-right">
       <Heading as="h1" variant="h1" className="flex flex-col font-extrabold md:whitespace-nowrap">
         <span>
-          <span>Hello there</span> <Emoji name=":wave:" className="animated-waving-hand" />
+          <span>Hello there</span> <Emoji name=":wave:" className="animate-waving-hand" />
         </span>
 
         <Text as="span" variant="h2" className="font-extrabold">
@@ -53,7 +53,7 @@ function IntroSection() {
       <Heading
         as="h2"
         variant="h3"
-        className="mx-auto max-w-[700px] hyphens-auto text-balance font-medium sm:hyphens-none"
+        className="mx-auto max-w-[700px] font-medium text-balance hyphens-auto sm:hyphens-none"
       >
         Exploring the intersections of creativity and technology
       </Heading>
@@ -72,7 +72,7 @@ function MainContent() {
     <section
       className={cn(
         typographyVariants({ variant: "h4" }),
-        "md[&>*]:px-6 [&>*]:bg-background/10 mx-auto max-w-[1400px] space-y-8 hyphens-auto text-center font-normal sm:hyphens-none [&>*]:rounded-lg [&>*]:py-6 [&>*]:backdrop-blur-[3px] md:[&>*]:mx-8"
+        "md[&>*]:px-6 *:bg-background/10 mx-auto max-w-[1400px] space-y-8 text-center font-normal hyphens-auto *:rounded-lg *:py-6 *:backdrop-blur-[3px] sm:hyphens-none md:*:mx-8"
       )}
     >
       <p>
@@ -98,7 +98,7 @@ function MainContent() {
 
 export default function Page() {
   return (
-    <section className="bounded-page-layout mt-8 mx-auto flex flex-col items-center justify-center space-y-20 md:mt-20">
+    <section className="bounded-page-layout mx-auto mt-8 flex flex-col items-center justify-center space-y-20 md:mt-20">
       <header className="flex flex-col items-center justify-center gap-4 md:flex-row-reverse">
         <ProfileImage />
 

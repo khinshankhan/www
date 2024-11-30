@@ -7,8 +7,8 @@ export const linkVariants = cva("transition-[color] duration-500", {
   variants: {
     variant: {
       default:
-        "bg-gradient-to-r from-accent-11 to-accent-11 subtle-underline show-underline bg-no-repeat hover:from-accent-8 hover:to-accent-8 hover:drastic-underline",
-      nav: "bg-gradient-to-r from-accent-11 to-accent-11 link-hide bg-right-bottom bg-no-repeat transition-[color,background-size] hover:link-show hover:bg-left-bottom data-[active=true]:link-show data-[active=true]:bg-left-bottom",
+        "bg-linear-to-r from-accent-11 to-accent-11 subtle-underline show-underline bg-no-repeat hover:from-accent-8 hover:to-accent-8 hover:drastic-underline",
+      nav: "bg-linear-to-r from-accent-11 to-accent-11 link-hide bg-right-bottom bg-no-repeat transition-[color,background-size] hover:link-show hover:bg-left-bottom data-[active=true]:link-show data-[active=true]:bg-left-bottom",
       toc: "data-[active=true]:text-accent-11",
       none: "",
     },

@@ -67,7 +67,7 @@ export function Tabbify({ labels, defaultIndex = undefined, children }: TabbifyP
               key={labelWithSlug.slug}
               value={labelWithSlug.slug}
               asChild
-              className="relative focus:outline-none"
+              className="relative focus:outline-hidden"
             >
               <Button aria-label={`Change to ${labelWithSlug.label} contents`} variant="ghost">
                 {labelWithSlug.label}
