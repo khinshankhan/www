@@ -33,11 +33,15 @@ export function Spoiler({ className = "", children, ...props }: SpoilerProps) {
     <span
       role="button"
       tabIndex={0}
+      aria-expanded={
+        // Announce toggle state
+        isRevealed
+      }
       aria-label={toggleText}
       title={toggleText}
       className={cn(
-        "relative inline rounded-lg py-0.5 px-1 text-knockout",
-        "focus:ring-ring focus:ring-offset-background focus:ring-2 focus:ring-offset-2",
+        "relative inline rounded-lg px-1 py-0.5 text-knockout",
+        "focus:ring-ring focus:ring-offset-background cursor-pointer focus:ring-2 focus:ring-offset-2",
         !isRevealed && "select-none", // prevent text selection due to 'double click' on mobile
         isRevealed ? "bg-knockout/10" : "bg-knockout/70",
         className
@@ -46,7 +50,13 @@ export function Spoiler({ className = "", children, ...props }: SpoilerProps) {
       onKeyDown={handleKeyDown}
       {...props}
     >
-      <span aria-hidden={!isRevealed} className={isRevealed ? "visible" : "invisible"}>
+      <span
+        aria-live={
+          // Make text announce when updated
+          "polite"
+        }
+        className={isRevealed ? "visible" : "invisible"}
+      >
         {children}
       </span>
     </span>
