@@ -8,9 +8,14 @@ import { ScrollablePreBlock, type PreProps } from "@/components/composite/pre-bl
 import { useIsomorphicEffect } from "@/hooks/media"
 import { cn } from "@/lib/utils"
 
-function CopyButtonOverlay({ text }: { text: string }) {
+function CopyButtonOverlay({ text, height }: { text: string; height: number }) {
   return (
-    <div className="absolute top-2 right-2 flex items-center justify-end p-2">
+    <div
+      className={cn(
+        "absolute top-0.5 right-0.5 flex items-center justify-end",
+        height > 50 && "top-2 right-2"
+      )}
+    >
       <CopyButton text={text} />
     </div>
   )
@@ -19,12 +24,14 @@ function CopyButtonOverlay({ text }: { text: string }) {
 export function Pre({ text, className = "", ...props }: { text: string } & PreProps) {
   const [isCollapsible, setIsCollapsible] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
+  const [preRefHeight, setPreRefHeight] = useState(0)
 
   const preRef = useRef<HTMLPreElement | null>(null)
 
   useIsomorphicEffect(() => {
     if (!preRef.current) return
 
+    setPreRefHeight(preRef.current.clientHeight)
     if (preRef.current.clientHeight > 320) {
       setIsCollapsible(true)
     }
@@ -35,7 +42,7 @@ export function Pre({ text, className = "", ...props }: { text: string } & PrePr
       <div className="relative">
         <ScrollablePreBlock ref={preRef} className={className} allowScroll {...props} />
 
-        <CopyButtonOverlay text={text} />
+        <CopyButtonOverlay text={text} height={preRefHeight} />
       </div>
     )
   }
@@ -51,7 +58,7 @@ export function Pre({ text, className = "", ...props }: { text: string } & PrePr
           />
         </CollapsibleContent>
 
-        <CopyButtonOverlay text={text} />
+        <CopyButtonOverlay text={text} height={preRefHeight} />
 
         <div
           className={cn(

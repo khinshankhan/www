@@ -24,14 +24,15 @@ export function CopyButton({ text, onCopy, ...props }: CopyButtonProps) {
     <Button
       aria-label="Copy text to clipboard"
       variant="phantom"
-      className={cn("bg-opacity-20 flex items-center gap-2 transition-all", props.className)}
+      size="icon"
+      className={cn("bg-opacity-20 flex w-16 items-center gap-2 transition-all", props.className)}
       onClick={onClick}
       {...props}
     >
       {checked ? (
-        <Check className="success-theme h-5 stroke-accent-11" />
+        <Check className="success-theme h-4 stroke-accent-11" />
       ) : (
-        <Copy className="h-5" />
+        <Copy className="h-4" />
       )}
     </Button>
   )
