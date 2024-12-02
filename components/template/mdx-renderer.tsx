@@ -2,13 +2,13 @@ import React, { Children } from "react"
 import { Blockquote, type BlockquoteProps } from "@/components/base/blockquote"
 import { Code } from "@/components/base/code"
 import { Figcaption } from "@/components/base/figure"
-import { Sun } from "@/components/base/icon"
 import { Image } from "@/components/base/image"
 import { Spoiler } from "@/components/base/spoiler"
 import { typographyVariants } from "@/components/base/typography"
 import { Callout, calloutIcons, type CalloutProps } from "@/components/composite/callout"
 import { Emoji } from "@/components/composite/emoji"
 import { SmartLink } from "@/components/composite/smart-link"
+import { SpotifyEmbed, YouTubeEmbed } from "@/components/section/embeds"
 import { Pre } from "@/components/section/pre"
 import { SmartVideo } from "@/components/section/smart-video"
 import { Tabbify } from "@/components/section/tabbify"
@@ -139,9 +139,9 @@ const components: MDXComponents = {
       </Callout>
     )
   },
-  Sun,
 
-  Test: ({ className = "" }) => <div className={cn(className)}>this was a test and you passed</div>,
+  SpotifyEmbed,
+  YouTubeEmbed,
 }
 
 export async function MDXRenderer({ source }: { source: string }) {
