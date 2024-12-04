@@ -27,7 +27,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
       <body
         className={cn(
           typographyVariants({ variant: "body" }),
-          "relative min-h-screen bg-background-1 font-body text-foreground antialiased"
+          "font-body relative min-h-screen bg-background-1 text-foreground antialiased"
         )}
       >
         <ThemeProvider

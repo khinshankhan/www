@@ -32,7 +32,7 @@ export function ContentLayout({
             {title}
           </Heading>
 
-          <Text as="p" variant="nav" className="text-balance pt-6 text-muted-foreground">
+          <Text as="p" variant="nav" className="pt-6 text-balance text-muted-foreground">
             {subtitle}
           </Text>
         </div>

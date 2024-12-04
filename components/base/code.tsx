@@ -17,7 +17,7 @@ export function Code({ children, language = "plaintext", className = "" }: CodeP
   return (
     <code
       className={cn(
-        "rounded-md border border-muted bg-muted/30 py-0.25 px-1 text-sm md:text-base lg:text-xl",
+        "rounded-md border border-muted bg-muted/30 px-1 py-0.25 text-sm md:text-base lg:text-xl",
         className
       )}
       dangerouslySetInnerHTML={{ __html: toHtml(tree) }}
