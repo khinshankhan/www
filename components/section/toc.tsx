@@ -6,6 +6,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { ChevronRight } from "@/components/base/icon"
 import { Text, typographyVariants } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
+import { useBreakpoint, useIsomorphicEffect } from "@/hooks/media"
 import { useScrollSpy } from "@/hooks/scroll"
 import {
   checkIfElementInView,
@@ -60,7 +61,7 @@ function TocItem({
         variant="toc"
         className={cn(
           typographyVariants({ variant: "xs" }),
-          "link-overlay ml-1 inline-block w-full scroll-smooth pe-1 py-1.5 text-left",
+          "link-overlay ml-1 inline-block w-full scroll-smooth py-1.5 pe-1 text-left",
           indents === 0 && "ps-4",
           indents === 1 && "ps-8",
           indents === 2 && "ps-12",
@@ -140,12 +141,15 @@ function TocList({ headings = [] }: TocProps) {
 }
 
 export function Toc({ headings }: TocProps) {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const action = open ? "Close" : "Open"
+
+  const isXl = useBreakpoint("xl")
+  useIsomorphicEffect(() => setOpen(isXl), [isXl])
 
   return (
     <Collapsible
-      className="w-full rounded-lg bg-background-1/25 py-3 px-2 backdrop-blur-md xl:backdrop-blur-xs"
+      className="w-full rounded-lg bg-background-1/25 px-2 py-3 backdrop-blur-md xl:backdrop-blur-xs"
       open={open}
       onOpenChange={setOpen}
     >
@@ -161,7 +165,7 @@ export function Toc({ headings }: TocProps) {
             className="group flex w-full items-center justify-between text-foreground"
           >
             <span>On this page</span>
-            <ChevronRight className="ease-arrow-rotation rotate-90 transition-transform duration-300 group-data-[state=closed]:rotate-0" />
+            <ChevronRight className="rotate-90 transition-transform duration-300 ease-arrow-rotation group-data-[state=closed]:rotate-0" />
           </Text>
         </Button>
       </CollapsibleTrigger>
