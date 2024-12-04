@@ -18,12 +18,17 @@ export function YouTubeEmbed({
   src,
   height,
   width,
-  title = "YouTube Video",
+  title = "YouTube Video Embed",
   fallbackSrc = undefined,
   className = "",
   style = {},
   ...props
 }: YouTubeEmbedProps) {
+  const aspectStyles = {
+    ["--aspect-width"]: width,
+    ["--aspect-height"]: height,
+  } as React.CSSProperties
+
   // TODO: add in video skeleton
   return (
     <figure>
@@ -33,8 +38,7 @@ export function YouTubeEmbed({
         height={height}
         width={width}
         style={{
-          ["--aspect-width" as any]: width,
-          ["--aspect-height" as any]: height,
+          ...aspectStyles,
           ...style,
         }}
         className={cn(
@@ -61,6 +65,7 @@ interface SpotifyEmbedProps extends IframeProps {
   src: string
   height: number | string
   width: number | string
+  title?: string
   className?: string
   fallbackSrc?: string
 }
@@ -68,21 +73,27 @@ export function SpotifyEmbed({
   src,
   height,
   width,
+  title = "Spotify Embed",
   fallbackSrc = undefined,
   className = "",
   style = {},
   ...props
 }: SpotifyEmbedProps) {
+  const aspectStyles = {
+    ["--aspect-width"]: width,
+    ["--aspect-height"]: height,
+  } as React.CSSProperties
+
   // TODO: add in video skeleton
   return (
     <figure>
       <iframe
         src={src}
+        title={title}
         height={height}
         width={width}
         style={{
-          ["--aspect-width" as any]: width,
-          ["--aspect-height" as any]: height,
+          ...aspectStyles,
           ...style,
         }}
         className={cn("rounded-[14px] border-none", className)}
