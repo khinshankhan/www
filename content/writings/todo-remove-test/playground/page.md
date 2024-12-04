@@ -91,7 +91,7 @@ become features. Or they... well yea, stuff happens.
 
 ## Callouts
 
-> [!NOTE] Note <Sun className="inline" />
+> [!NOTE] Note
 >
 > Highlights information that users should take into account, even when skimming.
 >
@@ -171,16 +171,17 @@ and now a quote with a caption:
 
 > [!QUOTE]
 >
-> The truth may be puzzling. It may take some work to grapple with. It may be counterintuitive.
-> It may contradict deeply held prejudices. It may not be consonant with what we desperately
-> want to be true. But our preferences do not determine what's true. We have a method, and that
-> method helps us to reach not absolute truth, only asymptotic approaches to the truth — never
-> there, just closer and closer, always finding vast new oceans of undiscovered possibilities.
-> Cleverly designed experiments are the key.
+> The truth may be puzzling. It may take some work to grapple with. It may be counterintuitive. It may contradict
+> deeply held prejudices. It may not be consonant with what we desperately want to be true. But our preferences do not
+> determine what's true. We have a method, and that method helps us to reach not absolute truth, only asymptotic
+> approaches to the truth -- never there, just closer and closer, always finding vast new oceans of undiscovered
+> possibilities. Cleverly designed experiments are the key.
 
   <figcaption>
-    Carl Sagan, in "<cite>Wonder and Skepticism</cite>", from the <cite>Skeptical Inquirer</cite>{" "}
+
+    Carl Sagan, in "<cite>Wonder and Skepticism</cite>", from the <cite>Skeptical Inquirer</cite>
     Volume 19, Issue 1 (January-February 1995)
+
   </figcaption>
 </figure>
 
