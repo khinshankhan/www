@@ -109,11 +109,8 @@ interface TocProps {
 function TocList({ headings = [] }: TocProps) {
   const minDepth =
     headings.length === 0
-      ? 1 // by default the minimum is 1
-      : headings.reduce(
-          (min, { depth }) => Math.min(min, depth),
-          6 // 6 is an upperbound since headings are limited (h1-h6)
-        )
+      ? 1 // 1 is an lowerbound since headings are limited (h1-h6) and this gets used for indents
+      : Math.min(...headings.map(({ depth }) => depth))
 
   const activeIdsString = useScrollSpy({
     selectors: headings.map(({ id }) => `[id="${id}"]`),
