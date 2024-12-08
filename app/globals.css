@@ -376,6 +376,10 @@
       text-align: right;
       color: var(--color-muted-foreground);
     }
+
+    code .line {
+      display: block;
+    }
   }
 
   /* image styling */

@@ -26,8 +26,6 @@ export function Code({
   add = "",
   remove = "",
 }: CodeProps) {
-  console.log({ highlighted, add, remove })
-
   const linesToMarkHighlighted = new Set(rangeParser(highlighted))
   const linesToMarkAdd = new Set(rangeParser(add))
   const linesToMarkRemove = new Set(rangeParser(remove))
@@ -39,7 +37,7 @@ export function Code({
     const shouldMarkRemove = linesToMarkRemove.has(i)
 
     return cn(
-      "line block",
+      "line",
       shouldMarkHighlighted && "highlighted bg-accent-a4",
       (shouldMarkAdd || shouldMarkRemove) && "diff",
       shouldMarkAdd && "add success-theme bg-accent-a4",
