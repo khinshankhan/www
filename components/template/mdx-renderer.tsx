@@ -32,6 +32,7 @@ import rehypeMdxCodeProps from "rehype-mdx-code-props"
 import remarkGfm from "remark-gfm"
 import remarkSmartypants from "remark-smartypants"
 import { remarkSimpleEmoji } from "@khinshankhan/emoji-helper-remark"
+import { Slot } from "@radix-ui/react-slot"
 
 // prettier-ignore
 export const calloutKeywords = Object.keys(calloutIcons) as NonNullable<CalloutProps["variant"]>[]
@@ -97,10 +98,30 @@ const components: MDXComponents = {
   // refs are incompatible
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   pre: ({ ref: _ref, ...props }) => {
+    const {
+      // @ts-expect-error: these are custom props passed to the pre tag
+      showLineNumbers = undefined,
+      // @ts-expect-error: these are custom props passed to the pre tag
+      highlighted = "",
+      // @ts-expect-error: these are custom props passed to the pre tag
+      add = "",
+      // @ts-expect-error: these are custom props passed to the pre tag
+      remove = "",
+      children,
+      ...rest
+    } = props
+
     // @ts-expect-error: it's fine, this is how mdx codeblocks work supposedly
     const text = props.children?.props?.children as string
 
-    return <Pre {...props} text={text} />
+    return (
+      <Pre {...rest} showLineNumbers={showLineNumbers !== undefined} text={text}>
+        {/* @ts-expect-error: total hack to pass props down */}
+        <Slot highlighted={highlighted} add={add} remove={remove}>
+          {children}
+        </Slot>
+      </Pre>
+    )
   },
   li: ({ className = "", ...props }) => <li className={cn("prose", className)} {...props} />,
 

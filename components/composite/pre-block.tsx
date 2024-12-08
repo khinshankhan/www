@@ -3,12 +3,30 @@ import { ScrollArea, ScrollBar, ScrollViewport } from "@/components/base/scroll-
 import { cn } from "@/lib/utils"
 
 // prettier-ignore
-export type PreProps = React.ComponentPropsWithRef<"pre">
+type PreElementProps = React.ComponentPropsWithRef<"pre">
 
-export function PreBlock({ className = "", ...props }: PreProps) {
+export interface PreProps extends PreElementProps {
+  showLineNumbers?: boolean
+  start?: string | number
+}
+
+export function PreBlock({
+  className = "",
+
+  showLineNumbers = false,
+  start = 1,
+  style = {},
+
+  ...props
+}: PreProps) {
   return (
     <pre
       className={cn("text-sm md:text-base lg:text-xl [&>code]:contents", className)}
+      data-show-lines={showLineNumbers ? "true" : "false"}
+      style={{
+        ...style,
+        ["--start" as any]: start,
+      }}
       {...props}
     />
   )

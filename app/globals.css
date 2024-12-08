@@ -359,6 +359,25 @@
     list-style-type: square;
   }
 
+  /* code block styling */
+  pre {
+    /* codeblock line numbers based off https://github.com/shikijs/shiki/issues/3#issuecomment-830564854 */
+    &[data-show-lines="true"] {
+      counter-reset: step;
+      counter-increment: step calc(var(--start, 1) - 1);
+    }
+
+    &[data-show-lines="true"] .line::before {
+      content: counter(step);
+      counter-increment: step;
+      width: 1rem;
+      margin-right: 1.5rem;
+      display: inline-block;
+      text-align: right;
+      color: var(--color-muted-foreground);
+    }
+  }
+
   /* image styling */
   [data-rmiz-modal-overlay="visible"] {
     background-color: color-mix(in srgb, var(--background-1) 80%, var(--transparent)) !important;
