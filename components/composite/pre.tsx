@@ -1,5 +1,9 @@
-import React from "react"
+"use client"
+
+import React, { useRef, useState } from "react"
 import { ScrollArea, ScrollBar, ScrollViewport } from "@/components/base/scroll-area"
+import { CopyButton } from "@/components/composite/copy-button"
+import { useIsomorphicEffect } from "@/hooks/media"
 import { cn } from "@/lib/utils"
 
 // prettier-ignore
@@ -19,13 +23,17 @@ export function PreBlock({
 
   ...props
 }: PreProps) {
+  const lineStyles = {
+    ["--start"]: start,
+  } as React.CSSProperties
+
   return (
     <pre
       className={cn("text-sm md:text-base lg:text-xl [&>code]:contents", className)}
       data-show-lines={showLineNumbers ? "true" : "false"}
       style={{
+        ...lineStyles,
         ...style,
-        ["--start" as any]: start,
       }}
       {...props}
     />
@@ -51,5 +59,38 @@ export function ScrollablePreBlock({
 
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
+  )
+}
+
+function CopyButtonOverlay({ text, height }: { text: string; height: number }) {
+  return (
+    <div
+      className={cn(
+        "absolute top-0.5 right-0.5 flex items-center justify-end",
+        height > 50 && "top-2 right-2"
+      )}
+    >
+      <CopyButton text={text} />
+    </div>
+  )
+}
+
+export function Pre({ text, className = "", ...props }: { text: string } & PreProps) {
+  const [preRefHeight, setPreRefHeight] = useState(0)
+
+  const preRef = useRef<HTMLPreElement | null>(null)
+
+  useIsomorphicEffect(() => {
+    if (!preRef.current) return
+
+    setPreRefHeight(preRef.current.clientHeight)
+  }, [preRef.current])
+
+  return (
+    <div className="relative">
+      <ScrollablePreBlock ref={preRef} className={className} allowScroll {...props} />
+
+      <CopyButtonOverlay text={text} height={preRefHeight} />
+    </div>
   )
 }
