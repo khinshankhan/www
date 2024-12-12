@@ -321,24 +321,6 @@
     }
   }
 
-  /*
-   * Lists should feel connected to the preceding content but still show hierarchy I'm using a negative margin top to
-   * pull the list closer to the preceding content which should have the margin bottom applied to it
-   */
-  .prose > p + :where(ol, ul) {
-    margin-top: -0.75rem;
-
-    /* breakpoint md */
-    @media (min-width: 48rem) {
-      margin-top: -0.875rem;
-    }
-
-    /* breakpoint lg */
-    @media (min-width: 64rem) {
-      margin-top: -1rem;
-    }
-  }
-
   /* sane defaults for list types */
   .prose ol {
     list-style-type: decimal;

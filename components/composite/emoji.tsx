@@ -43,8 +43,8 @@ export function Emoji({ name, className = "", wrapperClassName = "" }: EmojiProp
             aria-label={emojiInfo.alt}
             data-type="emoji"
             draggable="false"
-            height="72px"
-            width="72px"
+            height="72"
+            width="72"
           />
         </TooltipTrigger>
         <TooltipContent

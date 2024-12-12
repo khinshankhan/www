@@ -12,6 +12,7 @@ import {
 import { globby } from "globby"
 import matter from "gray-matter"
 import { remark } from "remark"
+import remarkSmartypants from "remark-smartypants"
 
 export const projectRoot = process.cwd()
 export const contentDir = path.join(projectRoot, "content")
@@ -25,7 +26,13 @@ export function resolveFilePath(
 }
 
 function processMarkdown(content: string) {
+  // TODO: possibly rehype with emoji support?
   const computedData = remark()
+    .use(remarkSmartypants, {
+      backticks: false,
+      ellipses: false,
+      quotes: false,
+    })
     .use(remarkExcerptExport)
     .use(remarkPrependTopHeading, {
       depth: 2,
@@ -71,10 +78,16 @@ export async function getContentDataBySlug({
     ...data,
   })
 
+  // probably unnecessary, but just in case the description is not via excerpt and has markdown? Shouldn't be too costly
+  const description = processMarkdown(parsedFrontmatter.description).excerpt
+
   const contentData = {
     slug,
     source,
-    frontmatter: parsedFrontmatter,
+    frontmatter: {
+      ...parsedFrontmatter,
+      description,
+    },
     computed: {
       baseName: path.basename(filePath),
       toc,
