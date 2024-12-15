@@ -4,6 +4,14 @@ import { Code } from "@/components/base/code"
 import { Figcaption } from "@/components/base/figure"
 import { Image } from "@/components/base/image"
 import { Spoiler } from "@/components/base/spoiler"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/base/table"
 import { typographyVariants } from "@/components/base/typography"
 import { Callout, calloutIcons, type CalloutProps } from "@/components/composite/callout"
 import { Emoji } from "@/components/composite/emoji"
@@ -124,6 +132,19 @@ const components: MDXComponents = {
     )
   },
   li: ({ className = "", ...props }) => <li className={cn("prose", className)} {...props} />,
+
+  // @ts-expect-error: this elemented is added by the remark plugin
+  table: Table,
+  // @ts-expect-error: this elemented is added by the remark plugin
+  thead: TableHead,
+  // @ts-expect-error: this elemented is added by the remark plugin
+  tbody: TableBody,
+  // @ts-expect-error: this elemented is added by the remark plugin
+  tr: TableRow,
+  // @ts-expect-error: this elemented is added by the remark plugin
+  th: TableHeader,
+  // @ts-expect-error: this elemented is added by the remark plugin
+  td: TableCell,
 
   Emoji,
   Spoiler,
