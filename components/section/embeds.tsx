@@ -3,7 +3,6 @@ import { Figcaption } from "@/components/base/figure"
 import { SmartLink } from "@/components/composite/smart-link"
 import { cn } from "@/lib/utils"
 
-// prettier-ignore
 type IframeProps = React.IframeHTMLAttributes<HTMLIFrameElement>
 
 interface YouTubeEmbedProps extends IframeProps {

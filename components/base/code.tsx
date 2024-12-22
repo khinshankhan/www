@@ -7,7 +7,6 @@ import rangeParser from "parse-numeric-range"
 
 const lowlight = createLowlight(all)
 
-// prettier-ignore
 export interface CodeProps extends React.ComponentPropsWithRef<"code"> {
   children: string
   language?: string

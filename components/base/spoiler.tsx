@@ -3,7 +3,6 @@
 import React, { useState, type ReactNode } from "react"
 import { cn, isInteractiveElement } from "@/lib/utils"
 
-// prettier-ignore
 interface SpoilerProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string
   children: ReactNode

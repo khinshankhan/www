@@ -11,7 +11,6 @@ export interface Attribute {
 export interface MdxJsxFlowElement {
   type: "mdxJsxFlowElement"
   name: string | null
-  // prettier-ignore
   attributes: NonNullable<Attribute>[]
   children: MdastContent[]
   data?: {
@@ -38,31 +37,29 @@ export function createMdxJsxFlowElement(
 export type MatchFunction<P, T> = (node: P) => T
 
 export type RemarkJsxifyElementOptions = {
-  // prettier-ignore
   elementMatcher: MatchFunction<MdastNode, string | null>
-  // prettier-ignore
   isSandbox?: MatchFunction<Attribute, boolean>
-  // prettier-ignore
   // eslint-disable-line no-unused-vars
   elementModifier?: (jsxName: string, mdxJsxFlowElement: MdxJsxFlowElement) => MdxJsxFlowElement
 }
 
-// prettier-ignore
-const defaultIsSandbox: NonNullable<RemarkJsxifyElementOptions["isSandbox"]> = (attribute: Attribute) => {
+const defaultIsSandbox: NonNullable<RemarkJsxifyElementOptions["isSandbox"]> = (
+  attribute: Attribute
+) => {
   return attribute.name === "data-sandbox" && attribute.value === "true"
 }
 
-// prettier-ignore
 const defaultElementModifier: NonNullable<RemarkJsxifyElementOptions["elementModifier"]> = (
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   jsxName,
   element
 ) => {
   return element
 }
 
-export function remarkJsxifyElements(options: RemarkJsxifyElementOptions): // prettier-ignore
-Transformer<MdastRoot, MdastRoot> {
+export function remarkJsxifyElements(
+  options: RemarkJsxifyElementOptions
+): Transformer<MdastRoot, MdastRoot> {
   const elementMatcher = options.elementMatcher
   const isSandbox = options.isSandbox ?? defaultIsSandbox
   const elementModifier = options.elementModifier ?? defaultElementModifier

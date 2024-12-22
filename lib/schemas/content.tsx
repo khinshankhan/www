@@ -12,7 +12,6 @@ export function getContentSource(slug: string): ContentSource {
 export const ContentLdTypes = ["WebPage", "BlogPosting", "CollectionPage"] as const
 export type ContentLdType = (typeof ContentLdTypes)[number]
 
-// prettier-ignore
 const defaultContentLd: Record<ContentSource, ContentLdType> = {
   root: "WebPage",
   writings: "BlogPosting",
@@ -89,7 +88,6 @@ export const ContentFrontmatterSchema = z
     }
   })
 
-// prettier-ignore
 export type ContentFrontmatter = z.infer<typeof ContentFrontmatterSchema>
 
 export const ComputedDataSchema = z.object({
@@ -108,5 +106,4 @@ export const ContentDataSchema = z.object({
   content: z.string(),
 })
 
-// prettier-ignore
 export type ContentData = z.infer<typeof ContentDataSchema>

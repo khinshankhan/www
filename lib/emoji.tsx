@@ -1,7 +1,6 @@
 import { createEmojiLookup, type EmojiInfoTemplate } from "@khinshankhan/emoji-helper-core"
 import githubEmoji from "@khinshankhan/emoji-helper-pack-github"
 
-// prettier-ignore
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type MapKey<T> = T extends Map<infer K, any> ? K : never
 
@@ -37,5 +36,4 @@ export const customEmoji = [
 ] as const satisfies readonly EmojiInfoTemplate[]
 
 export const emojiLookup = createEmojiLookup([githubEmoji, customEmoji], true, true)
-// prettier-ignore
 export type EmojiKey = MapKey<typeof emojiLookup>

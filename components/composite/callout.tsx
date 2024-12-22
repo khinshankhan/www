@@ -17,7 +17,6 @@ import {
 } from "@/components/base/icon"
 import { capitalize, cn } from "@/lib/utils"
 
-// prettier-ignore
 type IconLookup = Record<NonNullable<AlertVariants["variant"]>, IconComponent | null>
 
 export const calloutIcons: IconLookup = {

@@ -6,7 +6,6 @@ import Zoom from "react-medium-image-zoom"
 
 import "react-medium-image-zoom/dist/styles.css"
 
-// prettier-ignore
 type ImageElementProps = React.ImgHTMLAttributes<HTMLImageElement>
 
 export interface ImageProps extends ImageElementProps {

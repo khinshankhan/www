@@ -21,20 +21,17 @@ export const alertVariants = cva(
   }
 )
 
-// prettier-ignore
-export type AlertVariants = VariantProps<typeof alertVariants>;
+export type AlertVariants = VariantProps<typeof alertVariants>
 
-// prettier-ignore
 interface AlertProps extends React.HTMLAttributes<HTMLDivElement>, AlertVariants {
-  children?: React.ReactNode;
+  children?: React.ReactNode
 }
 
 export function Alert({ className, variant = undefined, ...props }: AlertProps) {
   return <aside className={cn(alertVariants({ variant }), className)} {...props} />
 }
 
-// prettier-ignore
-type AlertHeadingProps = React.HTMLAttributes<HTMLHeadingElement>;
+type AlertHeadingProps = React.HTMLAttributes<HTMLHeadingElement>
 
 export function AlertHeading({ className, ...props }: AlertHeadingProps) {
   return (
@@ -45,15 +42,13 @@ export function AlertHeading({ className, ...props }: AlertHeadingProps) {
   )
 }
 
-// prettier-ignore
-type AlertTitleProps = React.HTMLAttributes<HTMLSpanElement>;
+type AlertTitleProps = React.HTMLAttributes<HTMLSpanElement>
 
 export function AlertTitle({ className = "", style = {}, ...props }: AlertTitleProps) {
   return <span className={cn(className)} style={{ fontSize: "120%", ...style }} {...props} />
 }
 
-// prettier-ignore
-type AlertDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
+type AlertDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>
 
 export function AlertDescription({ className, ...props }: AlertDescriptionProps) {
   return <div className={cn("flex flex-col gap-4", className)} {...props} />

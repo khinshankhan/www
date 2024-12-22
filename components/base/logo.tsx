@@ -1,7 +1,6 @@
 import React from "react"
 import { cn } from "@/lib/utils"
 
-// prettier-ignore
 export interface ILogoProps extends React.SVGAttributes<SVGElement> {
   width?: number | string
   height?: number | string

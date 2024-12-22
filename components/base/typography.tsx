@@ -43,7 +43,6 @@ type HeadingProps = {
   className?: string
   children: React.ReactNode
 } & TypographyVariants &
-  // prettier-ignore
   React.HTMLAttributes<HTMLHeadingElement>
 
 export function Heading({

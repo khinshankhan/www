@@ -11,15 +11,14 @@ const defaultOptions: Options = {
   id: "excerpt",
 }
 
-// prettier-ignore
 export function remarkMarkFirstParagraph(options?: Options): Transformer<MdastRoot, MdastRoot> {
   const settings = options || defaultOptions
 
   return function transformer(tree) {
-    visit(tree, "paragraph", function (node, _,parent) {
+    visit(tree, "paragraph", function (node, _, parent) {
       // elements like callouts may contain p tags but they don't count as excerpts
       // only the direct descendant of root would be considered the excerpt
-      if(parent?.type !== "root") {
+      if (parent?.type !== "root") {
         return
       }
 
@@ -38,7 +37,6 @@ export function remarkMarkFirstParagraph(options?: Options): Transformer<MdastRo
   }
 }
 
-// prettier-ignore
 export function remarkExcerptExport(): Transformer<MdastRoot, MdastRoot> {
   return function transformer(tree, vfile) {
     vfile.data = vfile.data || {}
@@ -46,7 +44,7 @@ export function remarkExcerptExport(): Transformer<MdastRoot, MdastRoot> {
     visit(tree, "paragraph", function (node, _, parent) {
       // elements like callouts may contain p tags but they don't count as excerpts
       // only the direct descendant of root would be considered the excerpt
-      if(parent?.type !== "root") {
+      if (parent?.type !== "root") {
         return
       }
 

@@ -1,6 +1,5 @@
 import React from "react"
 
-// prettier-ignore
 export type IconProps = React.HTMLAttributes<SVGElement>
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

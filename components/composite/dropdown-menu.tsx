@@ -170,7 +170,6 @@ export function DropdownMenuSeparator({ className, ...props }: DropdownMenuSepar
 export function DropdownMenuShortcut({
   className,
   ...props
-}: // prettier-ignore
-React.HTMLAttributes<HTMLSpanElement>) {
+}: React.HTMLAttributes<HTMLSpanElement>) {
   return <span className={cn("ml-auto text-xs tracking-widest opacity-60", className)} {...props} />
 }

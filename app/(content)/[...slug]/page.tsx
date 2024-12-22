@@ -17,8 +17,7 @@ export async function generateStaticParams() {
   return slugsParts
 }
 
-// prettier-ignore
-type tParams = Promise<{ slug: string[] }>;
+type tParams = Promise<{ slug: string[] }>
 
 export default async function Page(props: { params: tParams }) {
   const { slug } = await props.params

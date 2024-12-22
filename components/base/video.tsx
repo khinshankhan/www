@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils"
 // TODO: we'll circle back to this, it's currently a bit complicated to handle in this HoC
 /* eslint-disable jsx-a11y/media-has-caption */
 
-// prettier-ignore
 type VideoElementProps = React.ComponentPropsWithoutRef<"video">
 
 export interface VideoProps extends VideoElementProps {

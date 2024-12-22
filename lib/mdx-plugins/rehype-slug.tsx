@@ -18,8 +18,7 @@ const defaultOptions = {
   reservedIds: [],
 } satisfies Options
 
-// prettier-ignore
-export function rehypeSlug(options?: Options): Transformer<HastRoot, HastRoot>  {
+export function rehypeSlug(options?: Options): Transformer<HastRoot, HastRoot> {
   const settings = {
     prefix: options?.prefix ?? defaultOptions.prefix,
     reservedIds: options?.reservedIds ?? defaultOptions.reservedIds,

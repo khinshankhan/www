@@ -2,8 +2,10 @@ import React from "react"
 import { cn } from "@/lib/utils"
 import { cva, type VariantProps } from "class-variance-authority"
 
-// prettier-ignore
-type BlockquoteElementProps = React.DetailedHTMLProps<React.BlockquoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>
+type BlockquoteElementProps = React.DetailedHTMLProps<
+  React.BlockquoteHTMLAttributes<HTMLQuoteElement>,
+  HTMLQuoteElement
+>
 
 export const blockquoteVariants = cva("relative", {
   variants: {
@@ -17,8 +19,7 @@ export const blockquoteVariants = cva("relative", {
   },
 })
 
-// prettier-ignore
-export type BlockquoteVariants = VariantProps<typeof blockquoteVariants>;
+export type BlockquoteVariants = VariantProps<typeof blockquoteVariants>
 
 export interface BlockquoteProps extends BlockquoteElementProps, BlockquoteVariants {
   className?: string

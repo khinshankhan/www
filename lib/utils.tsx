@@ -109,7 +109,6 @@ export function isFileLink(href: LinkProps["href"]) {
 /* navigator */
 
 // based on https://stackoverflow.com/a/65996386
-// prettier-ignore
 export async function copyToClipboardGraceful(text: string): Promise<boolean> {
   // Navigator clipboard api needs a secure context (https)
   if (navigator.clipboard && window.isSecureContext) {

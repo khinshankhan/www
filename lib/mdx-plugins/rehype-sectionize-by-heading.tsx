@@ -6,7 +6,6 @@ import { SKIP, visit } from "unist-util-visit"
 
 type Options = {
   isFlat: boolean
-  // prettier-ignore
   sectionProperties: Record<string, unknown>
 }
 
@@ -15,8 +14,7 @@ const defaultOptions = {
   sectionProperties: {},
 } satisfies Options
 
-// prettier-ignore
-export function rehypeSectionizeByHeading(options?: Options): Transformer<HastRoot, HastRoot>  {
+export function rehypeSectionizeByHeading(options?: Options): Transformer<HastRoot, HastRoot> {
   const settings = {
     isFlat: options?.isFlat ?? defaultOptions.isFlat,
     sectionProperties: options?.sectionProperties ?? defaultOptions.sectionProperties,
@@ -28,35 +26,37 @@ export function rehypeSectionizeByHeading(options?: Options): Transformer<HastRo
 
     visit(tree, (node, index) => {
       // the root is what acts as the parent of everything
-      if(node.type === "root") return
+      if (node.type === "root") return
 
       // NOTE: by transversing "element" nodes, we can ensure that we only sectionize headings
       // that are coming from markdown and not HTML literals
       const isHeading = node.type === "element" && node.tagName.match(/^h[1-6]$/)
 
-      if(isHeading){
+      if (isHeading) {
         const depth = headingRank(node)
 
         const newSection: HastRootContent = u(
-          'element',
+          "element",
           {
-            tagName: 'section',
+            tagName: "section",
             properties: {
               // NOTE: this assumes headings have ids, which can be done by running rehypeSlug beforehand
-              'aria-labelledby': node.properties.id,
-              'data-depth': depth,
-              ...settings.sectionProperties
-            }
+              "aria-labelledby": node.properties.id,
+              "data-depth": depth,
+              ...settings.sectionProperties,
+            },
           },
           [node]
         )
 
-        if(currentSection === null) {
+        if (currentSection === null) {
           currentSection = newSection
         } else {
-          if(settings.isFlat ||
-             // @ts-expect-error: data-depth is not in the types
-             depth <= currentSection?.properties?.['data-depth']){
+          if (
+            settings.isFlat ||
+            // @ts-expect-error: data-depth is not in the types
+            depth <= currentSection?.properties?.["data-depth"]
+          ) {
             sections.push(currentSection)
             currentSection = newSection
           } else {
@@ -64,11 +64,15 @@ export function rehypeSectionizeByHeading(options?: Options): Transformer<HastRo
             while (
               relevantSection.children.length > 0 &&
               // @ts-expect-error: unsure about the types
-              relevantSection.children[relevantSection.children.length - 1].tagName === 'section' &&
+              relevantSection.children[relevantSection.children.length - 1].tagName === "section" &&
               // @ts-expect-error: unsure about the types
-              relevantSection.children[relevantSection.children.length - 1].properties['data-depth'] < depth
+              relevantSection.children[relevantSection.children.length - 1].properties[
+                "data-depth"
+              ] < depth
             ) {
-              relevantSection = relevantSection.children[relevantSection.children.length - 1] as HastElement
+              relevantSection = relevantSection.children[
+                relevantSection.children.length - 1
+              ] as HastElement
             }
 
             relevantSection.children.push(newSection)
@@ -77,17 +81,19 @@ export function rehypeSectionizeByHeading(options?: Options): Transformer<HastRo
 
         // @ts-expect-error: unsure about the types
         return [SKIP, index + 1]
-       }
+      }
 
       let relevantSection = currentSection
-      if(!settings.isFlat){
+      if (!settings.isFlat) {
         while (
           relevantSection &&
           relevantSection.children.length > 0 &&
           // @ts-expect-error: unsure about the types
-          relevantSection.children[relevantSection.children.length - 1].tagName === 'section'
-      ) {
-        relevantSection = relevantSection.children[relevantSection.children.length - 1] as HastElement
+          relevantSection.children[relevantSection.children.length - 1].tagName === "section"
+        ) {
+          relevantSection = relevantSection.children[
+            relevantSection.children.length - 1
+          ] as HastElement
         }
       }
 
@@ -98,7 +104,7 @@ export function rehypeSectionizeByHeading(options?: Options): Transformer<HastRo
       return [SKIP, index + 1]
     })
 
-    if(currentSection !== null){
+    if (currentSection !== null) {
       sections.push(currentSection)
     }
 

@@ -55,7 +55,6 @@ interface GetContentDataBySlugProps {
   basePath?: string
 }
 
-// prettier-ignore
 type GetContentDataBySlugReturn = Promise<ContentData>
 
 export async function getContentDataBySlug({

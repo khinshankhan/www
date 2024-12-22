@@ -6,7 +6,6 @@ import { CopyButton } from "@/components/composite/copy-button"
 import { useIsomorphicEffect } from "@/hooks/media"
 import { cn } from "@/lib/utils"
 
-// prettier-ignore
 type PreElementProps = React.ComponentPropsWithRef<"pre">
 
 export interface PreProps extends PreElementProps {

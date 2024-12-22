@@ -21,7 +21,6 @@ const defaultOptions = {
   reservedIds: [],
 } satisfies Options
 
-// prettier-ignore
 export function remarkTocExport(options?: Options): Transformer<MdastRoot, MdastRoot> {
   const settings = {
     reservedIds: options?.reservedIds ?? defaultOptions.reservedIds,

@@ -23,7 +23,6 @@ export const linkVariants = cva("transition-[color] duration-500", {
   },
 })
 
-// prettier-ignore
 export type LinkVariants = VariantProps<typeof linkVariants>
 
 export interface LinkProps extends NextLinkProps, LinkVariants {

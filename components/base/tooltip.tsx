@@ -10,7 +10,6 @@ export const TooltipArrow = TooltipPrimitive.Arrow
 export const Tooltip = TooltipPrimitive.Root
 export const TooltipTrigger = TooltipPrimitive.Trigger
 
-// prettier-ignore
 type BaseTooltipContentProps = React.ComponentPropsWithRef<typeof TooltipPrimitive.Content>
 
 interface TooltipContentProps extends BaseTooltipContentProps {

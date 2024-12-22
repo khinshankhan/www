@@ -42,10 +42,8 @@ import remarkSmartypants from "remark-smartypants"
 import { remarkSimpleEmoji } from "@khinshankhan/emoji-helper-remark"
 import { Slot } from "@radix-ui/react-slot"
 
-// prettier-ignore
 export const calloutKeywords = Object.keys(calloutIcons) as NonNullable<CalloutProps["variant"]>[]
 
-// prettier-ignore
 export function isCalloutKeyword(keyword: string): keyword is NonNullable<CalloutProps["variant"]> {
   //@ts-expect-error: silly object can't be indexed by string error
   return calloutKeywords.includes(keyword)

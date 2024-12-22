@@ -4,7 +4,6 @@ import React from "react"
 import { cn } from "@/lib/utils"
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area"
 
-// prettier-ignore
 type ScrollViewportProps = React.ComponentPropsWithRef<typeof ScrollAreaPrimitive.Viewport>
 
 export function ScrollViewport({ className = "", children, ...props }: ScrollViewportProps) {
@@ -18,7 +17,6 @@ export function ScrollViewport({ className = "", children, ...props }: ScrollVie
   )
 }
 
-// prettier-ignore
 type ScrollAreaProps = React.ComponentPropsWithRef<typeof ScrollAreaPrimitive.Root>
 
 export function ScrollArea({ className = "", children, ...props }: ScrollAreaProps) {
@@ -30,7 +28,6 @@ export function ScrollArea({ className = "", children, ...props }: ScrollAreaPro
   )
 }
 
-// prettier-ignore
 type ScrollBarProps = React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Scrollbar>
 
 export function ScrollBar({ className, orientation = "vertical", ...props }: ScrollBarProps) {
