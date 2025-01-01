@@ -3,11 +3,12 @@ import { ContentPattern } from "@/components/base/patterns"
 import { Heading, Text } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { WithSidebar, type WithSidebarProps } from "@/components/section/with-sidebar"
+import { processMarkdown } from "@/lib/content"
 import { cn } from "@/lib/utils"
 
 export interface ContentLayoutProps extends WithSidebarProps {
   title: string
-  subtitle: string
+  description: string
   ghPath: string
   children: React.ReactNode
   childrenWrappingClass?: string
@@ -16,7 +17,7 @@ export interface ContentLayoutProps extends WithSidebarProps {
 
 export function ContentLayout({
   title,
-  subtitle,
+  description,
   ghPath,
   children,
   childrenWrappingClass = "prose",
@@ -26,14 +27,14 @@ export function ContentLayout({
 }: ContentLayoutProps) {
   return (
     <article className="relative isolate flex grow flex-col">
-      <header className="bg-background-1 py-14 text-center">
-        <div className="bounded-page-layout">
+      <header className="bg-background-1 py-14">
+        <div className="bounded-content-layout">
           <Heading id="page-heading" as="h1" variant="h1" className="text-balance">
             {title}
           </Heading>
 
           <Text as="p" variant="nav" className="pt-6 text-balance text-muted-foreground">
-            {subtitle}
+            {processMarkdown(description).excerpt}
           </Text>
         </div>
       </header>

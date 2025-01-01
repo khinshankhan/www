@@ -25,7 +25,7 @@ export function resolveFilePath(
   return path.join(basePath, ...fileSlugParts)
 }
 
-function processMarkdown(content: string) {
+export function processMarkdown(content: string) {
   // TODO: possibly rehype with emoji support?
   const computedData = remark()
     .use(remarkSmartypants, {

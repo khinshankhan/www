@@ -25,7 +25,6 @@ export const ContentFrontmatterSchema = z
     // required
     slug: z.string(),
     title: z.string(),
-    subtitle: z.string(),
     excerpt: z.string(),
 
     dateCreated: z.instanceof(Date),
@@ -33,7 +32,7 @@ export const ContentFrontmatterSchema = z
     dateModified: z.instanceof(Date),
 
     // seo
-    description: z.string().optional(),
+    description: z.string(),
     keywords: z.array(z.string()).optional().default([]),
     coverImage: ImageSchema.optional().default({
       url: "/images/placeholder.png?v=1",
@@ -77,11 +76,14 @@ export const ContentFrontmatterSchema = z
 
     return {
       ...data,
-      description: data.description ?? data.excerpt,
       ld: {
         type: data.ld?.type ?? defaultContentLd[source],
-        name: data.ld?.name ?? data.title,
-        description: data.ld?.description ?? data.description ?? data.excerpt,
+        name: data.ld?.name ?? data?.og?.title ?? data.title,
+        description: data.ld?.description ?? data?.og?.description ?? data.description,
+      },
+      og: {
+        title: data?.og?.title ?? data.ld?.name ?? data.title,
+        description: data?.og?.description ?? data.ld?.description ?? data.description,
       },
       showToc: data.showToc ?? { root: true, writings: true, projects: false }[source],
       markExcerpt: data.markExcerpt ?? true,

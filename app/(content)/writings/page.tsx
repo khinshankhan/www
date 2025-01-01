@@ -13,7 +13,7 @@ async function listWritingsContentData() {
   })
 }
 
-const showWritingCardImage = true
+const showWritingCardImage = false
 
 function WritingCard({ content, right = false }: { content: ContentData; right?: boolean }) {
   const textAlign = right ? "text-right" : "text-left"
@@ -26,16 +26,12 @@ function WritingCard({ content, right = false }: { content: ContentData; right?:
           right ? "md:flex-row-reverse" : "md:flex-row"
         )}
       >
-        <div className="flex grow flex-col gap-1 p-6">
+        <div className="flex grow flex-col gap-2 p-6">
           <Heading as="h3" variant="h3" className={cn("line-clamp-2 md:line-clamp-1", textAlign)}>
             <SmartLink href={`/${content.slug}`} className="link-overlay">
               {content.frontmatter.title}
             </SmartLink>
           </Heading>
-
-          <Text as="span" variant="h4" className={cn("line-clamp-2 md:line-clamp-1", textAlign)}>
-            {content.frontmatter.subtitle}
-          </Text>
 
           <Text
             as="span"
@@ -68,7 +64,7 @@ export default async function Page() {
   return (
     <ContentLayout
       title="Writings"
-      subtitle="My ramblings and some thoughts"
+      description="A collection of my ramblings, thoughts, and half-baked explorations -- a sidequest that gets updated once in a blue moon."
       ghPath="/app/(content)/writings/page.tsx"
       childrenWrappingClass="flex flex-col gap-4"
     >

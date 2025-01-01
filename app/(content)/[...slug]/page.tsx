@@ -44,7 +44,7 @@ export default async function Page(props: { params: tParams }) {
   return (
     <ContentLayout
       title={contentData.frontmatter.title}
-      subtitle={contentData.frontmatter.subtitle}
+      description={contentData.frontmatter.description}
       ghPath={`/content/${contentData.slug}/${contentData.computed.baseName}`}
       childrenWrappingClass={cn("prose", contentData.frontmatter.showToc && "mt-6 xl:mt-2")}
       sidebar={contentData.frontmatter.showToc && <Toc headings={contentData.computed.toc} />}
