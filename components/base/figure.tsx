@@ -1,8 +1,16 @@
 import React from "react"
+import { cn } from "@/lib/utils"
 
-export function Figcaption({ children }: { children: React.ReactNode }) {
+export interface FigcaptionProps extends React.ComponentPropsWithRef<"figcaption"> {
+  children: React.ReactNode
+}
+
+export function Figcaption({ children, className = "", ...props }: FigcaptionProps) {
   return (
-    <figcaption className="mt-4 text-center text-balance text-muted-foreground">
+    <figcaption
+      className={cn("mt-4 text-center text-balance text-muted-foreground", className)}
+      {...props}
+    >
       {children}
     </figcaption>
   )
