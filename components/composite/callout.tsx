@@ -25,6 +25,7 @@ export const calloutIcons: IconLookup = {
   important: Star,
   warning: TriangleAlert,
   caution: OctagonAlert,
+  neutral: null,
   default: null, // no icon for defaults
 }
 

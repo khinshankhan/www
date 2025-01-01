@@ -1155,3 +1155,37 @@
   --color-accent-indicator: var(--red-indicator);
   --color-accent-track: var(--red-track);
 }
+
+.gray-theme,
+.neutral-theme {
+  --color-accent-1: var(--gray-1);
+  --color-accent-2: var(--gray-2);
+  --color-accent-3: var(--gray-3);
+  --color-accent-4: var(--gray-4);
+  --color-accent-5: var(--gray-5);
+  --color-accent-6: var(--gray-6);
+  --color-accent-7: var(--gray-7);
+  --color-accent-8: var(--gray-8);
+  --color-accent-9: var(--gray-9);
+  --color-accent-10: var(--gray-10);
+  --color-accent-11: var(--gray-11);
+  --color-accent-12: var(--gray-12);
+
+  --color-accent-a1: var(--gray-a1);
+  --color-accent-a2: var(--gray-a2);
+  --color-accent-a3: var(--gray-a3);
+  --color-accent-a4: var(--gray-a4);
+  --color-accent-a5: var(--gray-a5);
+  --color-accent-a6: var(--gray-a6);
+  --color-accent-a7: var(--gray-a7);
+  --color-accent-a8: var(--gray-a8);
+  --color-accent-a9: var(--gray-a9);
+  --color-accent-a10: var(--gray-a10);
+  --color-accent-a11: var(--gray-a11);
+  --color-accent-a12: var(--gray-a12);
+
+  --color-accent-contrast: var(--gray-contrast);
+  --color-accent-surface: var(--gray-surface);
+  --color-accent-indicator: var(--gray-indicator);
+  --color-accent-track: var(--gray-track);
+}
