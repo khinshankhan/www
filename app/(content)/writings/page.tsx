@@ -68,8 +68,9 @@ export default async function Page() {
       ghPath="/app/(content)/writings/page.tsx"
       childrenWrappingClass="flex flex-col gap-4"
     >
-      <Callout variant="note" title={"Work in Progress"} icon={null}>
-        {`I'm currently working on converting my previous articles from different formats to markdown. This process will take some time. Stay tuned... coming soon!`}
+      <Callout variant="note" title="Work in Progress" icon={null}>
+        I am currently working on converting my previous articles from different formats to
+        markdown. This process will take some time. Stay tuned... coming soon!
       </Callout>
 
       <Heading as="h2" variant="h2">
