@@ -4,11 +4,7 @@ import { Heading, Text, typographyVariants } from "@/components/base/typography"
 import { Emoji } from "@/components/composite/emoji"
 import { SmartLink } from "@/components/composite/smart-link"
 import { cn } from "@/lib/utils"
-
-const info = {
-  fullname: "Khinshan Khan",
-  avatarUrl: "https://github.com/khinshankhan.png",
-}
+import { info } from "@/settings"
 
 function ProfileImage() {
   return (
@@ -46,7 +42,7 @@ function IntroSection() {
         </span>
 
         <Text as="span" variant="h2" className="font-extrabold">
-          I&apos;m <span className="text-accent-11">{info.fullname}</span>
+          <span>I&apos;m</span> <span className="text-accent-11">{info.fullname}</span>
         </Text>
       </Heading>
 
@@ -81,13 +77,15 @@ function MainContent() {
       </p>
 
       <p>
-        Landing pages can be a bit bland with all that whitespace, so {`here's`} a little engagement
-        hook: this website has 0 hidden easter eggs. Can you find them all? Happy hunting!
+        Landing pages can be a bit bland with all that whitespace, so here&apos;s a little
+        engagement hook: this website has 0 hidden easter eggs. Can you find them all? Happy
+        hunting!
       </p>
 
       <p>
-        Meanwhile, feel free to check out my <SmartLink href="/writings/">writings</SmartLink> or{" "}
-        <SmartLink href="/projects/">projects</SmartLink>. If {`you'd`} like to get in touch, you
+        Meanwhile, feel free to check out my <SmartLink href="/writings/">writings</SmartLink>
+        {" or "}
+        <SmartLink href="/projects/">projects</SmartLink>. If you&apos;d like to get in touch, you
         can <SmartLink href="/connect/">connect with me</SmartLink>.
       </p>
 

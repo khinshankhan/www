@@ -3,6 +3,7 @@ import { TooltipProvider } from "@/components/base/tooltip"
 import { typographyVariants } from "@/components/base/typography"
 import { Navbar } from "@/components/section/navbar"
 import { cn } from "@/lib/utils"
+import { info } from "@/settings"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
 import { BreakpointsIndicator, ThemeProvider } from "./providers"
@@ -44,9 +45,12 @@ export default async function Layout({ children }: { children: React.ReactNode }
                 <div className="relative flex grow flex-col">{children}</div>
               </div>
               <footer className="bounded-page-layout h-40 py-8">
-                <p className="text-center text-balance">
-                  &copy; 2017+, Khinshan Khan. All rights reserved.
-                </p>
+                <p
+                  className="text-center text-balance"
+                  dangerouslySetInnerHTML={{
+                    __html: `&copy; ${info.startYear}+, ${info.fullname}. All rights reserved.`,
+                  }}
+                />
               </footer>
             </div>
             <BreakpointsIndicator />
