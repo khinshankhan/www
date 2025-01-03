@@ -1,10 +1,17 @@
 import fs from "fs"
 import React from "react"
+import type { Metadata, ResolvingMetadata } from "next"
 import { notFound } from "next/navigation"
 import { Toc } from "@/components/section/toc"
 import { ContentLayout } from "@/components/template/content-layout"
 import { MDXRenderer } from "@/components/template/mdx-renderer"
-import { getContentDataBySlug, listAllContentData, resolveFilePath } from "@/lib/content"
+import {
+  getContentDataBySlug,
+  listAllContentData,
+  processMarkdown,
+  resolveFilePath,
+} from "@/lib/content"
+import { createMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 export async function generateStaticParams() {
@@ -17,11 +24,7 @@ export async function generateStaticParams() {
   return slugsParts
 }
 
-type tParams = Promise<{ slug: string[] }>
-
-export default async function Page(props: { params: tParams }) {
-  const { slug } = await props.params
-
+async function getResolvedContentData(slug: string[]) {
   const possibleContentData = await Promise.all(
     // HACK: totally fails i18n and the sort, surely there's a better way to go about this
     // but we need to prioritize content delivery for now, we can circle back to this later
@@ -36,7 +39,14 @@ export default async function Page(props: { params: tParams }) {
     })
   )
 
-  const contentData = possibleContentData.find((contentData) => contentData !== null)
+  return possibleContentData.find((contentData) => contentData !== null)
+}
+
+type tParams = Promise<{ slug: string[] }>
+
+export default async function Page(props: { params: tParams }) {
+  const { slug } = await props.params
+  const contentData = await getResolvedContentData(slug)
   if (!contentData) {
     notFound()
   }
@@ -52,4 +62,21 @@ export default async function Page(props: { params: tParams }) {
       <MDXRenderer source={contentData.content} />
     </ContentLayout>
   )
+}
+
+type Props = {
+  params: Promise<{ slug: string[] }>
+}
+export async function generateMetadata({ params }: Props): Promise<Metadata | undefined> {
+  const fileSlug = (await params).slug
+  const contentData = await getResolvedContentData(fileSlug)
+  if (!contentData) {
+    throw new Error(`Could not find metadata for ${fileSlug.join()}`)
+  }
+
+  return createMetadata({
+    title: contentData.frontmatter.title,
+    description: processMarkdown(contentData.frontmatter.description).excerpt,
+    slug: "/" + resolveFilePath(fileSlug, ""),
+  })
 }

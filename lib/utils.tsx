@@ -12,6 +12,12 @@ export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+/* boolean predicates */
+
+export const identity = <T,>(item: T): T => {
+  return item
+}
+
 /* array utils */
 
 export function range(startOrEnd: number, end?: number, step: number = 1): number[] {

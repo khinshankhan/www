@@ -1,11 +1,18 @@
 import React from "react"
+import type { Metadata } from "next"
 import { Heading, Text } from "@/components/base/typography"
 import { Callout } from "@/components/composite/callout"
 import { SmartLink } from "@/components/composite/smart-link"
 import { ContentLayout } from "@/components/template/content-layout"
-import { listAllContentData } from "@/lib/content"
+import { listAllContentData, processMarkdown } from "@/lib/content"
 import { type ContentData } from "@/lib/schemas/content"
+import { createMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
+
+const title = "Writings"
+const description =
+  "A collection of my ramblings, thoughts, and half-baked explorations -- a sidequest that gets updated once in a blue moon."
+const slug = "/writings"
 
 async function listWritingsContentData() {
   return await listAllContentData({
@@ -63,8 +70,8 @@ export default async function Page() {
 
   return (
     <ContentLayout
-      title="Writings"
-      description="A collection of my ramblings, thoughts, and half-baked explorations -- a sidequest that gets updated once in a blue moon."
+      title={title}
+      description={description}
       ghPath="/app/(content)/writings/page.tsx"
       childrenWrappingClass="flex flex-col gap-4"
     >
@@ -95,4 +102,12 @@ export default async function Page() {
       )}
     </ContentLayout>
   )
+}
+
+export async function generateMetadata(): Promise<Metadata | undefined> {
+  return createMetadata({
+    title,
+    description: processMarkdown(description).excerpt,
+    slug,
+  })
 }

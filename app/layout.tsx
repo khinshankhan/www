@@ -1,7 +1,9 @@
 import React from "react"
+import type { Metadata } from "next"
 import { TooltipProvider } from "@/components/base/tooltip"
 import { typographyVariants } from "@/components/base/typography"
 import { Navbar } from "@/components/section/navbar"
+import { createMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 import { info } from "@/settings"
 import { GeistMono } from "geist/font/mono"
@@ -59,4 +61,8 @@ export default async function Layout({ children }: { children: React.ReactNode }
       </body>
     </html>
   )
+}
+
+export async function generateMetadata(): Promise<Metadata | undefined> {
+  return createMetadata({})
 }
