@@ -43,8 +43,10 @@ export default async function Layout({ children }: { children: React.ReactNode }
                 {/* NOTE: assumes pages will be wrapped in main tags with background color + grow */}
                 <div className="relative flex grow flex-col">{children}</div>
               </div>
-              <footer className="bounded-page-layout h-40">
-                <p>Footer content here</p>
+              <footer className="bounded-page-layout h-40 py-8">
+                <p className="text-center text-balance">
+                  &copy; 2017+, Khinshan Khan. All rights reserved.
+                </p>
               </footer>
             </div>
             <BreakpointsIndicator />
