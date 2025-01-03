@@ -33,7 +33,7 @@ export function rehypeSectionizeByHeading(options?: Options): Transformer<HastRo
       const isHeading = node.type === "element" && node.tagName.match(/^h[1-6]$/)
 
       if (isHeading) {
-        const depth = headingRank(node)
+        const depth = headingRank(node) ?? 0
 
         const newSection: HastRootContent = u(
           "element",
