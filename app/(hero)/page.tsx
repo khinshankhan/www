@@ -1,23 +1,10 @@
-import Image from "next/image"
-import { info } from "@/settings"
+import { Button } from "@/components/base/button"
+import { Image } from "@/components/base/image"
+import { Heading, Text, typographyVariants } from "@/components/base/typography"
+import { Emoji } from "@/components/composite/emoji"
+import { SmartLink } from "@/components/composite/smart-link"
 import { cn } from "@/lib/utils"
-import { Emoji } from "@/components/emoji"
-import { Link } from "@/components/primitives/link"
-import { typographyVariants } from "@/components/primitives/typography"
-
-export default function Home() {
-  return (
-    <section className="page-container mx-auto mt-8 flex flex-col items-center justify-center space-y-20 md:mt-20">
-      <header className="flex flex-col items-center justify-center gap-4 md:flex-row-reverse">
-        <ProfileImage />
-
-        <IntroSection />
-      </header>
-
-      <MainContent />
-    </section>
-  )
-}
+import { info } from "@/settings"
 
 function ProfileImage() {
   return (
@@ -30,55 +17,48 @@ function ProfileImage() {
     >
       <Image
         alt="Profile Image"
-        width={256}
-        height={256}
+        width="256"
+        height="256"
         src={info.avatarUrl}
-        className="select-none rounded-full transition-[border-radius] duration-500"
-        draggable="false"
+        className="rounded-full transition-[border-radius] duration-500 select-none"
         style={{
           aspectRatio: "256/256",
           objectFit: "cover",
         }}
+        draggable="false"
+        disableZoom
       />
     </div>
   )
 }
 
-function Wave() {
-  return <Emoji name=":wave:" className="animate-wave" />
-}
-
+// TODO: add back animated wave emoji
 function IntroSection() {
   return (
     <section className="flex flex-col items-center space-y-8 text-center md:items-end md:text-right">
-      <div>
-        <h1
-          className={cn(
-            typographyVariants({ variant: "h1", className: "font-extrabold md:whitespace-nowrap" })
-          )}
-        >
-          Hello there <Wave />
-        </h1>
-        <h2 className={cn(typographyVariants({ variant: "h2", className: "font-extrabold" }))}>
-          {"I'm"} <span className="text-link-border-active">{info.fullname}</span>
-        </h2>
-      </div>
-      <h3
-        className={cn(
-          typographyVariants({ variant: "h3" }),
-          "mx-auto max-w-[700px] hyphens-auto text-balance font-normal sm:hyphens-none"
-        )}
+      <Heading as="h1" variant="h1" className="flex flex-col font-extrabold md:whitespace-nowrap">
+        <span>
+          <span>Hello there</span> <Emoji name=":wave:" className="animate-waving-hand" />
+        </span>
+
+        <Text as="span" variant="h2" className="font-extrabold">
+          <span>I&apos;m</span> <span className="text-accent-11">{info.fullname}</span>
+        </Text>
+      </Heading>
+
+      <Heading
+        as="h2"
+        variant="h3"
+        className="mx-auto max-w-[700px] font-medium text-balance hyphens-auto sm:hyphens-none"
       >
         Exploring the intersections of creativity and technology
-      </h3>
+      </Heading>
 
-      <Link
-        variant="toc"
-        href="/writings/"
-        className="w-full rounded-lg bg-secondary py-3 text-secondary-foreground shadow-lg transition-colors duration-300 ease-in-out hover:bg-secondary/90 md:w-auto md:px-8 md:text-lg"
-      >
-        Read my writings
-      </Link>
+      <Button asChild size="lg">
+        <SmartLink variant="toc" href="/writings/" isMonochrome>
+          Read my writings
+        </SmartLink>
+      </Button>
     </section>
   )
 }
@@ -88,7 +68,7 @@ function MainContent() {
     <section
       className={cn(
         typographyVariants({ variant: "h4" }),
-        "md[&>*]:px-6 mx-auto max-w-[1400px] space-y-8 hyphens-auto text-center font-normal sm:hyphens-none [&>*]:rounded-lg [&>*]:bg-background/10 [&>*]:py-6 [&>*]:backdrop-blur-[3px] md:[&>*]:mx-8"
+        "md[&>*]:px-6 *:bg-background/10 mx-auto max-w-[1400px] space-y-8 text-center font-normal hyphens-auto *:rounded-lg *:py-6 *:backdrop-blur-[3px] sm:hyphens-none md:*:mx-8"
       )}
     >
       <p>
@@ -97,17 +77,33 @@ function MainContent() {
       </p>
 
       <p>
-        Landing pages can be a bit bland with all that whitespace, so {`here's`} a little engagement
-        hook: this website has 0 hidden easter eggs. Can you find them all? Happy hunting!
+        Landing pages can be a bit bland with all that whitespace, so here&apos;s a little
+        engagement hook: this website has 0 hidden easter eggs. Can you find them all? Happy
+        hunting!
       </p>
 
       <p>
-        Meanwhile, feel free to check out my <Link href="/writings/">writings</Link> or{" "}
-        <Link href="/projects/">projects</Link>. If {`you'd`} like to get in touch, you can{" "}
-        <Link href="/connect/">connect with me</Link>.
+        Meanwhile, feel free to check out my <SmartLink href="/writings/">writings</SmartLink>
+        {" or "}
+        <SmartLink href="/projects/">projects</SmartLink>. If you&apos;d like to get in touch, you
+        can <SmartLink href="/connect/">connect with me</SmartLink>.
       </p>
 
       <p>Enjoy exploring!</p>
+    </section>
+  )
+}
+
+export default function Page() {
+  return (
+    <section className="bounded-page-layout mx-auto mt-8 flex flex-col items-center justify-center space-y-20 md:mt-20">
+      <header className="flex flex-col items-center justify-center gap-4 md:flex-row-reverse">
+        <ProfileImage />
+
+        <IntroSection />
+      </header>
+
+      <MainContent />
     </section>
   )
 }

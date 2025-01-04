@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import { defaultMetadata } from "@/settings"
 import { identity } from "./utils"
 
-type NextMetadata = Metadata
-type NextOpenGraph = NonNullable<NextMetadata["openGraph"]>
+export type NextMetadata = Metadata
+export type NextOpenGraph = NonNullable<NextMetadata["openGraph"]>
 
 // NOTE: this was rewritten to match
 // https://github.com/vercel/next.js/blob/canary/packages/next/src/lib/metadata/types/opengraph-types.ts over

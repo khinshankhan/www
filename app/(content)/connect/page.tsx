@@ -1,17 +1,35 @@
 import React from "react"
-import { Callout } from "@/components/callout"
-import { Link } from "@/components/primitives/link"
+import type { Metadata } from "next"
+import { Callout } from "@/components/composite/callout"
+import { ContentLayout } from "@/components/template/content-layout"
+import { processMarkdown } from "@/lib/content"
+import { createMetadata } from "@/lib/seo"
 
-export default async function Connect() {
+const title = "Connect"
+const description =
+  "A hub to connect with me -- links, socials, and a space to say hello. Whether it's to collaborate, chat, or share ideas, I'd love to hear from you!"
+const slug = "/connect"
+
+export default async function Page() {
   return (
-    <main className="flex flex-col gap-4">
-      <Callout variant="note" heading="Work in Progress">
-        <p>
-          {"I'm"} currently in the process of rewriting my website. You can view the progress on{" "}
-          <Link href="https://github.com/khinshankhan/www">GitHub</Link>. This process will take
-          some time. Stay tuned... coming soon!
-        </p>
+    <ContentLayout
+      title={title}
+      description={description}
+      ghPath="/app/(content)/projects/page.tsx"
+      childrenWrappingClass="flex flex-col gap-4"
+    >
+      <Callout variant="note" title="Work in Progress" icon={null}>
+        This page is a work in progress. Soon, it will feature links to my socials, projects, and a
+        contact method to reach out directly. Stay tuned for updates!
       </Callout>
-    </main>
+    </ContentLayout>
   )
+}
+
+export async function generateMetadata(): Promise<Metadata | undefined> {
+  return createMetadata({
+    title,
+    description: processMarkdown(description).excerpt,
+    slug,
+  })
 }

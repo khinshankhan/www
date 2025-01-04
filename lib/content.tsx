@@ -1,45 +1,75 @@
 import fs from "fs"
 import path from "path"
-import { globby } from "globby"
-import matter from "gray-matter"
-import { remark } from "remark"
 import { remarkExcerptExport } from "@/lib/mdx-plugins/remark-excerpt"
-import { remarkTocExport, type TocItem } from "@/lib/mdx-plugins/remark-toc"
-import { existPredicate } from "@/lib/utils"
+import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
+import { remarkTocExport, type TocItem } from "@/lib/mdx-plugins/remark-toc-export"
 import {
+  ContentDataSchema,
   ContentFrontmatterSchema,
   getContentSource,
   type ContentData,
-  type ContentSource,
-} from "../schemas/content"
+} from "@/lib/schemas/content"
+import { globby } from "globby"
+import matter from "gray-matter"
+import { remark } from "remark"
+import remarkSmartypants from "remark-smartypants"
 
-const projectRoot = process.cwd()
-const contentDir = path.join(projectRoot, "content")
-// TODO: turn this into `"**/page*.mdx"` when dealing with i18n
-// eg page.es.mdx will be spanish
-const contentPatterns = ["**/*.md", "**/*.mdx"]
+export const projectRoot = process.cwd()
+export const contentDir = path.join(projectRoot, "content")
 
-export async function getContentDataByFilePath(filePath: string): Promise<ContentData> {
-  const absFilePath = path.join(contentDir, filePath)
-  if (!fs.existsSync(absFilePath)) {
-    throw new Error(`File path is missing: ${absFilePath}`)
-  }
+export function resolveFilePath(
+  fileSlug: string | string[],
+  basePath: string = contentDir
+): string {
+  const fileSlugParts = Array.isArray(fileSlug) ? fileSlug : [fileSlug]
+  return path.join(basePath, ...fileSlugParts)
+}
 
-  const fileContent = await fs.promises.readFile(absFilePath, "utf8")
-
-  const slug = filePath.split("/").slice(0, -1).join("/")
-  const source = getContentSource(slug)
-
-  const { data, content } = matter(fileContent)
-
+export function processMarkdown(content: string) {
+  // TODO: possibly rehype with emoji support?
   const computedData = remark()
+    .use(remarkSmartypants, {
+      backticks: false,
+      ellipses: false,
+      quotes: false,
+    })
     .use(remarkExcerptExport)
+    .use(remarkPrependTopHeading, {
+      depth: 2,
+      text: "Introduction",
+      properties: {},
+    })
     .use(remarkTocExport, { reservedIds: ["excerpt"] })
     .processSync(content)
-  // NOTE: this is guaranteed because of remarkExcerptExport
-  const excerpt = (computedData?.data?.excerpt ?? "") as string
-  // NOTE: this is guaranteed because of remarkTocExport
-  const toc = (computedData?.data?.toc ?? []) as TocItem[]
+
+  return {
+    // NOTE: this is guaranteed because of remarkExcerptExport
+    excerpt: (computedData?.data?.excerpt ?? "") as string,
+    // NOTE: this is guaranteed because of remarkTocExport
+    toc: (computedData?.data?.toc ?? []) as TocItem[],
+  }
+}
+
+interface GetContentDataBySlugProps {
+  fileSlug: string | string[]
+  basePath?: string
+}
+
+type GetContentDataBySlugReturn = Promise<ContentData>
+
+export async function getContentDataBySlug({
+  fileSlug,
+  basePath = contentDir,
+}: GetContentDataBySlugProps): GetContentDataBySlugReturn {
+  const filePath = resolveFilePath(fileSlug, basePath)
+  const fileContent = await fs.promises.readFile(filePath, "utf8")
+
+  const { data, content } = matter(fileContent)
+  const slug = filePath.replace(contentDir, "").split("/").slice(1, -1).join("/")
+
+  const source = getContentSource(slug)
+
+  const { excerpt, toc } = processMarkdown(content)
 
   const parsedFrontmatter = ContentFrontmatterSchema.parse({
     slug,
@@ -47,30 +77,51 @@ export async function getContentDataByFilePath(filePath: string): Promise<Conten
     ...data,
   })
 
-  return {
+  // probably unnecessary, but just in case the description is not via excerpt and has markdown? Shouldn't be too costly
+  const description = processMarkdown(parsedFrontmatter.description).excerpt
+
+  const contentData = {
     slug,
     source,
-    content,
-    frontmatter: parsedFrontmatter,
+    frontmatter: {
+      ...parsedFrontmatter,
+      description,
+    },
     computed: {
       baseName: path.basename(filePath),
       toc,
     },
+    content,
   }
+
+  return ContentDataSchema.parse(contentData)
 }
 
-export async function getAllContentData(getContentDataFromFilePath = getContentDataByFilePath) {
-  const filePaths = await globby(contentPatterns, { cwd: contentDir })
-  const allPossibleContentDataPromises = filePaths.map(async (filePath) => {
-    try {
-      return getContentDataFromFilePath(filePath)
-    } catch (err) {
-      return null
-    }
-  })
-  const allPossibleContentData = await Promise.all(allPossibleContentDataPromises)
+// NOTE: we will be able to turn this into `"**/page*.mdx"` when dealing with i18n once i18n support evolves
+// eg page.mdx -> english, page.es.mdx -> spanish
+const contentPatterns = ["**/*.md", "**/*.mdx"]
 
-  const allContentData = allPossibleContentData.filter(existPredicate).sort((a, b) => {
+interface ListAllContentDataProps {
+  basePath?: string
+  extPatterns?: string[]
+  filter?: (data: ContentData) => boolean
+}
+
+export async function listAllContentData({
+  basePath = contentDir,
+  extPatterns = contentPatterns,
+  filter = () => true,
+}: ListAllContentDataProps) {
+  const fileSlugs = await globby(extPatterns, { cwd: basePath })
+
+  const allPossibleContentData = await Promise.all(
+    fileSlugs.map(async (fileSlug) => {
+      return getContentDataBySlug({ fileSlug })
+    })
+  )
+
+  // TODO: add sorting here
+  const relevantPossibleContentData = allPossibleContentData.filter(filter).sort((a, b) => {
     // Compare by datePublished in descending order
     if (a.frontmatter.datePublished.getTime() !== b.frontmatter.datePublished.getTime()) {
       return b.frontmatter.datePublished.getTime() - a.frontmatter.datePublished.getTime()
@@ -90,10 +141,5 @@ export async function getAllContentData(getContentDataFromFilePath = getContentD
     return b.frontmatter.title.localeCompare(a.frontmatter.title)
   })
 
-  return allContentData
-}
-
-export async function getContentDataBySource(source: ContentSource) {
-  const contentData = await getAllContentData()
-  return contentData.filter((content) => content.source === source)
+  return relevantPossibleContentData
 }

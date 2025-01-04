@@ -1,6 +1,7 @@
 import { createEmojiLookup, type EmojiInfoTemplate } from "@khinshankhan/emoji-helper-core"
 import githubEmoji from "@khinshankhan/emoji-helper-pack-github"
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type MapKey<T> = T extends Map<infer K, any> ? K : never
 
 export const customEmoji = [

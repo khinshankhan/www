@@ -1,5 +1,9 @@
 import React from "react"
 
-export default function ContentLayout({ children }: { children: React.ReactNode }) {
-  return <main className="flex grow flex-col bg-content text-content-foreground">{children}</main>
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <main id="main-content" className="flex grow flex-col bg-background-2">
+      {children}
+    </main>
+  )
 }

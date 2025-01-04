@@ -1,36 +1,113 @@
 import React from "react"
-import { getContentDataBySource } from "@/lib/content"
+import type { Metadata } from "next"
+import { Heading, Text } from "@/components/base/typography"
+import { Callout } from "@/components/composite/callout"
+import { SmartLink } from "@/components/composite/smart-link"
+import { ContentLayout } from "@/components/template/content-layout"
+import { listAllContentData, processMarkdown } from "@/lib/content"
+import { type ContentData } from "@/lib/schemas/content"
+import { createMetadata } from "@/lib/seo"
 import { cn } from "@/lib/utils"
-import { Callout } from "@/components/callout"
-import { typographyVariants } from "@/components/primitives/typography"
-import { WritingList } from "@/components/writing-list"
 
-export default async function Writings() {
-  const writingContentData = await getContentDataBySource("writings")
+const title = "Writings"
+const description =
+  "A collection of my ramblings, thoughts, and half-baked explorations -- a sidequest that gets updated once in a blue moon."
+const slug = "/writings"
+
+async function listWritingsContentData() {
+  return await listAllContentData({
+    filter: (contentData) => contentData.source === "writings",
+  })
+}
+
+const showWritingCardImage = false
+
+function WritingCard({ content, right = false }: { content: ContentData; right?: boolean }) {
+  const textAlign = right ? "text-right" : "text-left"
 
   return (
-    <main className="flex flex-col gap-4">
-      <Callout variant="note" heading="Work in Progress">
-        <p>
-          {"I'm"} currently working on converting my previous articles from different formats to
-          markdown. This process will take some time. Stay tuned... coming soon!
-        </p>
-      </Callout>
-
-      <h2 className={typographyVariants({ variant: "h2" })}>Articles</h2>
-
-      <p
+    <li className="link-box w-full overflow-hidden rounded-lg border border-solid border-accent-8 shadow-none transition-all duration-700 ease-in-out group-hover:shadow-accent-8 hover:-translate-y-2 hover:border-accent-11 hover:bg-surface-5/25 hover:shadow-[0px_0px_10px_1px]">
+      <div
         className={cn(
-          typographyVariants({
-            variant: "h4",
-            className: "font-body text-muted-foreground",
-          })
+          "flex size-full flex-col-reverse",
+          right ? "md:flex-row-reverse" : "md:flex-row"
         )}
       >
-        {writingContentData.length} Articles
-      </p>
+        <div className="flex grow flex-col gap-2 p-6">
+          <Heading as="h3" variant="h3" className={cn("line-clamp-2 md:line-clamp-1", textAlign)}>
+            <SmartLink href={`/${content.slug}`} className="link-overlay">
+              {content.frontmatter.title}
+            </SmartLink>
+          </Heading>
 
-      <WritingList writingContentData={writingContentData} />
-    </main>
+          <Text
+            as="span"
+            className={cn("line-clamp-3 text-muted-foreground md:line-clamp-2", textAlign)}
+          >
+            {content.frontmatter.description}
+          </Text>
+        </div>
+
+        {showWritingCardImage && (
+          <div className="relative -z-1 h-32 w-full flex-none sm:h-48 md:h-auto md:w-72 lg:w-96">
+            <img
+              alt={content.frontmatter.coverImage.alt}
+              src={content.frontmatter.coverImage.url}
+              className={cn(
+                "relative inset-0 size-full rounded-t-lg object-cover md:absolute md:rounded-r-lg",
+                right ? "md:clip-tr-bl" : "md:clip-tl-br"
+              )}
+            />
+          </div>
+        )}
+      </div>
+    </li>
   )
+}
+
+export default async function Page() {
+  const contentData = await listWritingsContentData()
+
+  return (
+    <ContentLayout
+      title={title}
+      description={description}
+      ghPath="/app/(content)/writings/page.tsx"
+      childrenWrappingClass="flex flex-col gap-4"
+    >
+      <Callout variant="note" title="Work in Progress" icon={null}>
+        I am currently working on converting my previous articles from different formats to
+        markdown. This process will take some time. Stay tuned... coming soon!
+      </Callout>
+
+      <Heading as="h2" variant="h2">
+        Articles
+      </Heading>
+
+      <Text className="text-muted-foreground">
+        {`Dive into all ${contentData.length} articles!`}
+      </Text>
+
+      {contentData.length === 0 ? (
+        <Text as="p" className="text-center">
+          It seems no articles are available right now. Check back soon! In the meantime, perhaps
+          look out for an <SmartLink href="/">easter egg</SmartLink>?
+        </Text>
+      ) : (
+        <ul className="flex flex-col gap-8">
+          {contentData.map((content) => (
+            <WritingCard key={content.slug} content={content} />
+          ))}
+        </ul>
+      )}
+    </ContentLayout>
+  )
+}
+
+export async function generateMetadata(): Promise<Metadata | undefined> {
+  return createMetadata({
+    title,
+    description: processMarkdown(description).excerpt,
+    slug,
+  })
 }

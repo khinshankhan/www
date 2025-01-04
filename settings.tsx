@@ -13,6 +13,12 @@ const faviconSrc =
     : emojiLookup.get(":dancer:")!.url
 
 export const defaultMetadata = {
+  viewport: {
+    viewportFit: "cover",
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
   metadataBase: new URL("https://khinshankhan.com"),
   title: {
     default: "Khinshan Khan",
@@ -29,13 +35,14 @@ export const defaultMetadata = {
       "Hello! Welcome to my digital garden, where I share my thoughts and musings. You may or may not learn something, but at least it'll be fun!",
     url: "https://www.khinshankhan.com",
     siteName: "Khinshan Khan",
+    // TODO: look into how to best support multiple languages
     locale: "en-US",
     type: "website",
     images: [
       {
-        url: "https://www.khinshankhan.com/og.png?v=5",
-        width: 1200,
-        height: 630,
+        url: "https://www.khinshankhan.com/og.png?v=6",
+        width: 1125,
+        height: 590,
       },
     ],
   },
@@ -44,15 +51,3 @@ export const defaultMetadata = {
     card: "summary_large_image",
   },
 } satisfies Metadata
-
-export const headerLinks = [
-  { label: "About", href: "/about/" },
-  { label: "Writings", href: "/writings/" },
-  { label: "Projects", href: "/projects/" },
-  { label: "Connect", href: "/connect/" },
-]
-
-export const flags = {
-  showCeaseFireBanner: false,
-  showWritingImages: false,
-}

@@ -1,5 +1,3 @@
-// based off https://github.com/rehypejs/rehype-slug
-
 import Slugger from "github-slugger"
 import type { Root as HastRoot } from "hast"
 import { headingRank } from "hast-util-heading-rank"
@@ -31,6 +29,8 @@ export function rehypeSlug(options?: Options): Transformer<HastRoot, HastRoot> {
     slugger.reset()
     settings.reservedIds.forEach((reservedId) => slugger.slug(reservedId))
 
+    // NOTE: by transversing "element" nodes, we can ensure that we only add ids to headings
+    // that are coming from markdown and not HTML literals
     visit(tree, "element", function (node) {
       if (headingRank(node) && !node.properties.id) {
         node.properties.id = settings.prefix + slugger.slug(toString(node))

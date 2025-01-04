@@ -1,12 +1,28 @@
-import type { RootContent as MdastContent, Root as MdastRoot } from "mdast"
+import type { RootContent as MdastContent, Node as MdastNode, Root as MdastRoot } from "mdast"
 import type { Transformer } from "unified"
-import { SKIP, visit } from "unist-util-visit"
+import { CONTINUE, SKIP, visit } from "unist-util-visit"
 
 export interface Attribute {
+  type?: string
   name: string
   value: string
 }
-export function createMdxJsxFlowElement(name: string, attributes: Attribute[], children = []) {
+
+export interface MdxJsxFlowElement {
+  type: "mdxJsxFlowElement"
+  name: string | null
+  attributes: NonNullable<Attribute>[]
+  children: MdastContent[]
+  data?: {
+    _mdxExplicitJsx?: boolean
+  }
+}
+
+export function createMdxJsxFlowElement(
+  name: string | null,
+  attributes: Attribute[],
+  children: MdastContent[] = []
+): MdxJsxFlowElement {
   return {
     type: "mdxJsxFlowElement",
     name,
@@ -17,44 +33,64 @@ export function createMdxJsxFlowElement(name: string, attributes: Attribute[], c
   }
 }
 
-export type MdastNode = MdastRoot | MdastContent
-
 // eslint-disable-line no-unused-vars
-export type MatchFunction<T> = (node: MdastNode) => T
+export type MatchFunction<P, T> = (node: P) => T
 
-export interface RemarkJsxifyElementsOptions {
-  allowModifications?: MatchFunction<boolean>
-  replaceNodeName?: MatchFunction<string | null>
+export type RemarkJsxifyElementOptions = {
+  elementMatcher: MatchFunction<MdastNode, string | null>
+  isSandbox?: MatchFunction<Attribute, boolean>
+  // eslint-disable-line no-unused-vars
+  elementModifier?: (jsxName: string, mdxJsxFlowElement: MdxJsxFlowElement) => MdxJsxFlowElement
+}
+
+const defaultIsSandbox: NonNullable<RemarkJsxifyElementOptions["isSandbox"]> = (
+  attribute: Attribute
+) => {
+  return attribute.name === "data-sandbox" && attribute.value === "true"
+}
+
+const defaultElementModifier: NonNullable<RemarkJsxifyElementOptions["elementModifier"]> = (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  jsxName,
+  element
+) => {
+  return element
 }
 
 export function remarkJsxifyElements(
-  options: RemarkJsxifyElementsOptions
+  options: RemarkJsxifyElementOptions
 ): Transformer<MdastRoot, MdastRoot> {
-  const allowModifications = options.allowModifications ?? (() => false)
-  const replaceNodeName = options.replaceNodeName ?? (() => null)
+  const elementMatcher = options.elementMatcher
+  const isSandbox = options.isSandbox ?? defaultIsSandbox
+  const elementModifier = options.elementModifier ?? defaultElementModifier
 
   return function transformer(tree) {
     visit(tree, (node, index, parent) => {
-      const shouldModify = allowModifications(node)
-      // @ts-ignore: maybe it exists
-      if (shouldModify && node?.data?._mdxExplicitJsx) {
-        // @ts-ignore: definitely exists
-        node.data._mdxExplicitJsx = false
+      // @ts-expect-error: technically we shouldn't be looking at mdxJsxFlowElement
+      const shouldSkipElement = (node.attributes as Attribute[])?.some(isSandbox)
+      if (shouldSkipElement) {
+        return SKIP
       }
 
-      const jsxName = replaceNodeName(node)
-      if (!parent || !index || !jsxName) return
+      const jsxName = elementMatcher(node)
+      if (!parent || index === undefined || !jsxName) {
+        return CONTINUE
+      }
 
-      // TODO: this might break on certain node types
-      // @ts-expect-error
-      parent.children[index] = createMdxJsxFlowElement(
+      const mdxJsxFlowElement = createMdxJsxFlowElement(
         jsxName,
-        // @ts-expect-error
+        // @ts-expect-error: technically we shouldn't be looking at mdxJsxFlowElement
         (node.attributes as Attribute[]) ?? [],
-        // @ts-expect-error
+        // @ts-expect-error: technically we shouldn't be looking at mdxJsxFlowElement
         node.children ?? []
       )
-      return [SKIP, index + 1]
+      const modifiedElement = elementModifier(jsxName, mdxJsxFlowElement)
+
+      // TODO: this might break on certain node types?
+      // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
+      parent.children[index] = modifiedElement
+
+      return [SKIP, index]
     })
   }
 }

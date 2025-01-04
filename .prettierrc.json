@@ -8,7 +8,7 @@
   "tabWidth": 2,
   "trailingComma": "es5",
   "plugins": ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
-  "tailwindConfig": "./tailwind.config.mjs",
+  "tailwindStylesheet": "./app/globals.css",
   "tailwindFunctions": ["cn", "cva"],
   "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
   "importOrderTypeScriptVersion": "5.3.3",
@@ -17,19 +17,10 @@
     "<BUILTIN_MODULES>",
     "^(react/(.*)$)|^(react$)",
     "^(next/(.*)$)|^(next$)",
+    "^(@/)",
     "<THIRD_PARTY_MODULES>",
-    "^@/env(.*)$",
-    "^types$",
-    "^@/types/(.*)$",
-    "^@/config/(.*)$",
-    "^@/constants/(.*)$",
-    "^@/lib/(.*)$",
-    "^@/stores/(.*)$",
-    "^@/hooks/(.*)$",
-    "^@radix-ui/(.*)$",
-    "^@/components/ui/(.*)$",
-    "^@/components/(.*)$",
-    "^@/styles/(.*)$",
-    "^[./]"
+    "^@",
+    "^(?!.*[.]css$)[./].*$",
+    ".css$"
   ]
 }

@@ -1,129 +1,25 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { useIsomorphicEffect, useMounted } from "./media"
-
-// TODO: add support for custom target
-type Target = (Window & typeof globalThis) | null
-const defaultTarget = typeof window !== "undefined" ? window : null
-
-interface UseScrollDirectionProps {
-  initalIsScrollingUp?: boolean
-  target?: Target
-  upThreshold?: number
-  downThreshold?: number
-}
-
-interface UseScrollDirectionState {
-  isScrollingUp: boolean
-}
-
-export function useScrollDirection({
-  initalIsScrollingUp = false,
-  target = defaultTarget,
-  upThreshold = 0,
-  downThreshold = 0,
-}: UseScrollDirectionProps): UseScrollDirectionState {
-  const [ticking, setTicking] = useState(false)
-  const [lastScrollTop, setLastScrollTop] = useState(0)
-  const [isScrollingUp, setIsScrollingUp] = useState(initalIsScrollingUp)
-
-  useIsomorphicEffect(() => {
-    if (!target) return
-
-    const handleScrollUpdate = () => {
-      const currentScrollTop = target.scrollY || document.documentElement.scrollTop
-      const distanceScrolled = Math.abs(currentScrollTop - lastScrollTop)
-
-      if (currentScrollTop < lastScrollTop && distanceScrolled > upThreshold) {
-        setIsScrollingUp(true)
-      } else if (currentScrollTop > lastScrollTop && distanceScrolled > downThreshold) {
-        setIsScrollingUp(false)
-      }
-
-      setLastScrollTop(currentScrollTop)
-    }
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          handleScrollUpdate()
-          setTicking(false)
-        })
-        setTicking(true)
-      }
-    }
-
-    target.addEventListener("scroll", handleScroll)
-    return () => target.removeEventListener("scroll", handleScroll)
-  }, [target, lastScrollTop, upThreshold, downThreshold, ticking])
-
-  return { isScrollingUp }
-}
-
-interface UseHeadroomProps {
-  target?: Target
-  pinStart?: number
-}
-
-interface UseHeadroomState {
-  positionStatus: "before-start" | "at-start" | "after-start"
-}
-
-export function useHeadroom({
-  target = defaultTarget,
-  pinStart = 0,
-}: UseHeadroomProps): UseHeadroomState {
-  const [ticking, setTicking] = useState(false)
-  const [lastScrollTop, setLastScrollTop] = useState(0)
-  const [positionStatus, setPositionStatus] =
-    useState<UseHeadroomState["positionStatus"]>("before-start")
-
-  useIsomorphicEffect(() => {
-    if (!target) return
-
-    const handleScrollUpdate = () => {
-      const currentScrollTop = target.scrollY
-      setPositionStatus((_) => {
-        if (currentScrollTop < pinStart) {
-          return "before-start"
-        } else if (currentScrollTop > pinStart) {
-          return "after-start"
-        } else {
-          return "at-start"
-        }
-      })
-      setLastScrollTop(currentScrollTop)
-    }
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          handleScrollUpdate()
-          setTicking(false)
-        })
-        setTicking(true)
-      }
-    }
-
-    target.addEventListener("scroll", handleScroll)
-    return () => {
-      target.removeEventListener("scroll", handleScroll)
-    }
-  }, [target, lastScrollTop])
-
-  return { positionStatus }
-}
+import { useMounted } from "./media"
 
 // based off https://github.com/chakra-ui/chakra-ui-docs/blob/main/src/hooks/use-scrollspy.ts
-export function useScrollSpy(
-  selectors: string[],
-  options?: IntersectionObserverInit,
-  retain = true
-) {
+export function useScrollSpy({
+  selectors,
+  options = {},
+  retain = true,
+  attribute = "id",
+  delimiter = " ",
+}: {
+  selectors: string[]
+  options?: IntersectionObserverInit
+  retain?: boolean
+  attribute?: string
+  delimiter?: string
+}) {
   const mounted = useMounted()
 
-  const [activeIds, setActiveIds] = useState<string[]>([])
+  const [activeIds, setActiveIds] = useState("")
 
   const observer = useRef<IntersectionObserver | null>(null)
   useEffect(() => {
@@ -136,14 +32,18 @@ export function useScrollSpy(
       const newActiveIds: string[] = []
       entries.forEach((entry) => {
         if (entry?.isIntersecting) {
-          newActiveIds.push(entry.target.getAttribute("id") ?? "")
+          newActiveIds.push(entry.target.getAttribute(attribute) ?? "")
         }
       })
 
+      const newActiveIdsString = newActiveIds.join(delimiter)
       if (!retain) {
-        setActiveIds(newActiveIds)
+        // if not retain, just set the new active ids
+        setActiveIds(newActiveIdsString)
       } else if (newActiveIds.length > 0) {
-        setActiveIds(newActiveIds)
+        // if retain and new active ids are not empty, set the new active ids
+        // otherwise we keep ('retain') the previously active ids
+        setActiveIds(newActiveIdsString)
       }
     }, options)
 
@@ -152,7 +52,11 @@ export function useScrollSpy(
     })
 
     return () => observer.current?.disconnect()
-  }, [selectors, options, mounted])
+
+    // we shouldn't rely on selectors nor options changing due to them not being primitives
+    // which would cause the effect to run indefinitely
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mounted])
 
   return activeIds
 }
