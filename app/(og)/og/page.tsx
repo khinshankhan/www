@@ -3,7 +3,7 @@ import { Star } from "@/components/base/icon"
 import { Logo } from "@/components/base/logo"
 import { info } from "@/settings"
 
-export function OgLayout({ children }: { children: ReactNode }) {
+function OgLayout({ children }: { children: ReactNode }) {
   return (
     <div>
       <div className="py-14">

@@ -1,6 +1,6 @@
 import fs from "fs"
 import React from "react"
-import type { Metadata, ResolvingMetadata } from "next"
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { Toc } from "@/components/section/toc"
 import { ContentLayout } from "@/components/template/content-layout"
