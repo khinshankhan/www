@@ -1,10 +1,18 @@
 import React from "react"
-import { ContentPattern } from "@/components/base/patterns"
+import { GridPattern } from "@/components/base/patterns"
 import { Heading, Text } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { WithSidebar, type WithSidebarProps } from "@/components/section/with-sidebar"
 import { processMarkdown } from "@/lib/content"
 import { cn } from "@/lib/utils"
+
+function Pattern({ className = "" }: { slug?: string; className?: string }) {
+  return (
+    <GridPattern
+      className={cn("relative flex hidden grow flex-col overflow-hidden sm:block", className)}
+    />
+  )
+}
 
 export interface ContentLayoutProps extends WithSidebarProps {
   title: string
@@ -39,12 +47,16 @@ export function ContentLayout({
         </div>
       </header>
 
-      <div id="page-content" className="bounded-content-layout my-1 flex grow flex-col py-12">
-        <WithSidebar direction={direction} sidebar={sidebar}>
-          <div className={cn("min-w-full", childrenWrappingClass)}>{children}</div>
-        </WithSidebar>
+      <div id="page-content" className="flex grow flex-row">
+        {!hideContentPattern && <Pattern className="mask-gradient-reveal-from-right" />}
 
-        {!hideContentPattern && <ContentPattern />}
+        <div className="bounded-content-layout my-1 grow py-12">
+          <WithSidebar direction={direction} sidebar={sidebar}>
+            <div className={cn("min-w-full", childrenWrappingClass)}>{children}</div>
+          </WithSidebar>
+        </div>
+
+        {!hideContentPattern && <Pattern className="mask-gradient-reveal-from-left" />}
       </div>
 
       <div className="bg-background-1 py-6 text-center">

@@ -500,26 +500,20 @@
 }
 
 @utility mask-gradient-reveal-from-left {
-  mask-image: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 1) 50%),
-    linear-gradient(to top, transparent 0%, rgba(255, 255, 255, 1) 50%),
-    linear-gradient(to left, transparent 0%, rgba(255, 255, 255, 1) 40%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 1) 90%);
   mask-size: cover;
-  mask-composite: intersect;
 }
 
 @utility mask-gradient-reveal-from-right {
-  mask-image: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 1) 50%),
-    linear-gradient(to top, transparent 0%, rgba(255, 255, 255, 1) 50%),
-    linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 1) 40%);
+  mask-image: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 1) 90%);
   mask-size: cover;
-  mask-composite: intersect;
 }
 
 @utility mask-gradient-reveal-center {
-  mask-image: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 1) 50%),
-    linear-gradient(to top, transparent 0%, rgba(255, 255, 255, 1) 50%),
-    linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 1) 40%),
-    linear-gradient(to left, transparent 0%, rgba(255, 255, 255, 1) 40%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 1) 35%),
+    linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 1) 35%),
+    linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 1) 25%),
+    linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 1) 25%);
   mask-size: cover;
   mask-composite: intersect;
 }
