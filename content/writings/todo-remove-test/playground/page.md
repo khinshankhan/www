@@ -238,7 +238,7 @@ This is an [external link](https://google.com) example.
 
 This is an [internal anchor link](#links) example.
 
-This is an [internal link to file](/floating-cogs.svg) example.
+This is an [internal link to file](/og.png) example.
 
 This is an [external link to file](https://google.com/example.pdf) example.
 

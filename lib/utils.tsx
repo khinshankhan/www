@@ -104,7 +104,7 @@ export function getExtension(href: string) {
 
 // TODO: exclude common extensions that are files
 // NOTE: to some extent it will have to be manual vigilance when creating links
-const COMMON_FILE_EXTENSIONS = ["pdf", "svg"]
+const COMMON_FILE_EXTENSIONS = ["pdf", "svg", "png"]
 
 export function isFileLink(href: LinkProps["href"]) {
   // not bothering with link object, an extension-less url is probably just an url
