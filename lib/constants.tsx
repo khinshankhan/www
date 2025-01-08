@@ -8,3 +8,5 @@ export const color1_bold = yellow500
 export const color2_bold = blue400
 export const color1_base = yellow400
 export const color2_base = blue300
+
+export const defaultSeed = 44364

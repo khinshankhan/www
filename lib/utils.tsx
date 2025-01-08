@@ -166,3 +166,23 @@ export function isInteractiveElement(element: HTMLElement) {
 export function pxToRem(px: number) {
   return px / 16
 }
+
+export function createStarGlow(color: string) {
+  return `drop-shadow(0 0 10px ${color}) drop-shadow(0 0 20px ${color})`
+}
+
+/* pseudo randomness */
+
+// Lehmer random number generator (PRNG)
+export function seededRandom(seed: number) {
+  // ensure the seed is within the valid range
+  let value = seed % 2147483647 || 44364
+
+  return () => {
+    // Lehmer PRNG core logic
+    value = (value * 16807) % 2147483647
+
+    // normalize to return a value between 0 and 1
+    return (value - 1) / 2147483646
+  }
+}

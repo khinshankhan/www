@@ -3,8 +3,8 @@
 import React, { useMemo } from "react"
 import { Star } from "@/components/base/icon"
 import { useMounted } from "@/hooks/media"
-import { color1_base, color1_bold, color2_base, color2_bold } from "@/lib/constants"
-import { cn, pxToRem, range } from "@/lib/utils"
+import { color1_base, color1_bold, color2_base, color2_bold, defaultSeed } from "@/lib/constants"
+import { cn, createStarGlow, pxToRem, range, seededRandom } from "@/lib/utils"
 
 interface GridPatternProps extends React.HTMLAttributes<HTMLDivElement> {
   contrast?: boolean
@@ -34,20 +34,6 @@ export function GridPattern({
   )
 }
 
-// Seeded random number generator... need to make this more deterministic
-function seededRandom(seed: number) {
-  let value = seed % 2147483647
-  if (value <= 0) value += 2147483646
-  return () => {
-    value = (value * 16807) % 2147483647
-    return (value - 1) / 2147483646 // Returns a float between 0 and 1
-  }
-}
-
-function createGlow(color: string) {
-  return `drop-shadow(0 0 10px ${color}) drop-shadow(0 0 20px ${color})`
-}
-
 function generateStars(seed: number, count: number) {
   const random = seededRandom(seed)
 
@@ -62,14 +48,12 @@ function generateStars(seed: number, count: number) {
       Math.floor(random() * allowedColorsIndices) % allowedColorsIndices
     ]
 
-    const rotation = Math.floor(random() * 60 - 30)
-
     return {
       top: `${top}%`,
       left: `${left}%`,
       size: `${size}px`,
       color,
-      rotation,
+      rotation: Math.floor(random() * 60 - 30),
       bin: Math.floor(random() * 3) % 2,
       duration: (Math.floor(random() * 25) % 25) + 5,
     }
@@ -87,7 +71,7 @@ interface StarGridPatternProps extends React.HTMLAttributes<HTMLDivElement> {
 export function StarGridPattern({
   contrast,
   dense = false,
-  seed = 44364,
+  seed = defaultSeed,
   className = "",
 }: StarGridPatternProps) {
   const mounted = useMounted()
@@ -129,7 +113,7 @@ export function StarGridPattern({
                 width: star.size,
                 height: star.size,
                 color: star.color,
-                filter: createGlow(star.color),
+                filter: createStarGlow(star.color),
                 rotate: `${star.rotation}deg`,
               }}
             >
