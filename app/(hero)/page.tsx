@@ -10,7 +10,7 @@ import { info } from "@/settings"
 function ProfileImage() {
   return (
     <div
-      className="md:ml-8"
+      className="exclude-stars md:ml-8"
       style={{
         minWidth: "256px",
         minHeight: "256px",
@@ -40,7 +40,7 @@ function IntroSection() {
       <Heading
         as="h1"
         variant="h1"
-        className="flex flex-col p-1 font-extrabold md:whitespace-nowrap"
+        className="exclude-stars flex flex-col p-1 font-extrabold md:whitespace-nowrap"
       >
         <span>
           <span>Hello there</span> <Emoji name=":wave:" className="animate-waving-hand" />
@@ -64,7 +64,7 @@ function IntroSection() {
       <Heading
         as="h2"
         variant="h3"
-        className="max-w-[435px] p-1 font-medium text-balance hyphens-auto sm:hyphens-none"
+        className="exclude-stars max-w-[435px] p-1 font-medium text-balance hyphens-auto sm:hyphens-none"
       >
         Exploring the intersections of <span style={{ color: color2_bold }}>creativity</span> and{" "}
         <span style={{ color: color1_bold }}>technology</span>
@@ -87,25 +87,25 @@ function MainContent() {
         "md[&>*]:px-6 *:bg-background/10 mx-auto max-w-[1400px] space-y-8 text-center font-normal hyphens-auto *:rounded-lg *:py-6 *:backdrop-blur-3xl sm:hyphens-none md:*:mx-8"
       )}
     >
-      <p>
+      <p className="exclude-stars relative">
         Welcome to my little corner of the internet! Here, I share my thoughts and musings. Whether
         you learn something new or just have a bit of fun, I hope you enjoy your stay.
       </p>
 
-      <p>
+      <p className="exclude-stars">
         Landing pages can be a bit bland with all that whitespace, so here&apos;s a little
         engagement hook: this website has 0 hidden easter eggs. Can you find them all? Happy
         hunting!
       </p>
 
-      <p>
+      <p className="exclude-stars">
         Meanwhile, feel free to check out my <SmartLink href="/writings/">writings</SmartLink>
         {" or "}
         <SmartLink href="/projects/">projects</SmartLink>. If you&apos;d like to get in touch, you
         can <SmartLink href="/connect/">connect with me</SmartLink>.
       </p>
 
-      <p>Enjoy exploring!</p>
+      <p className="exclude-stars">Enjoy exploring! 1</p>
     </section>
   )
 }

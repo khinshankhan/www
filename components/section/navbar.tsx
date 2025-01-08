@@ -178,7 +178,10 @@ function ModeToggle() {
 
 export function Navbar() {
   return (
-    <header className="bounded-page-layout flex min-h-[68px] items-center pt-2 md:min-h-[78px] lg:min-h-[88px]">
+    <header
+      id="navbar"
+      className="bounded-page-layout flex min-h-[68px] items-center pt-2 md:min-h-[78px] lg:min-h-[88px]"
+    >
       <nav className="flex w-full flex-row items-center justify-between">
         {/* lhs on all views */}
         <NextLink aria-label="Navigate to homepage." href="/" className="group">

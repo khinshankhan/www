@@ -167,6 +167,21 @@ export function pxToRem(px: number) {
   return px / 16
 }
 
+export function getAbsolutePosition(el: HTMLElement, extraneousHeight: number = 0) {
+  let offsetTop = 0
+  let offsetLeft = 0
+  let currentElement = el
+
+  // traverse up the DOM tree, adding the offsetTop and offsetLeft of each parent
+  while (currentElement) {
+    offsetTop += currentElement.offsetTop
+    offsetLeft += currentElement.offsetLeft
+    currentElement = currentElement.offsetParent as HTMLElement
+  }
+
+  return { top: offsetTop - extraneousHeight, left: offsetLeft }
+}
+
 export function createStarGlow(color: string) {
   return `drop-shadow(0 0 10px ${color}) drop-shadow(0 0 20px ${color})`
 }
