@@ -35,23 +35,27 @@ export function GridPattern({
 }
 
 function generateStars(seed: number, count: number) {
+  if (count === 0) return []
+
   const random = seededRandom(seed)
 
   const stars = range(count).map((i) => {
-    const top = Math.floor(random() * 100)
-    const left = Math.floor(random() * 100)
     const size = Math.floor(random() * 20) + 10
 
-    // pseudo randomness based on the cicada principle https://www.sitepoint.com/the-cicada-principle-and-why-it-matters-to-web-designers/
+    const top = Math.floor(random() * 100)
+    const left = Math.floor(random() * 100)
+
+    // pseudo-random color assignment (based on cicada principle)
+    // https://www.sitepoint.com/the-cicada-principle-and-why-it-matters-to-web-designers/
     const allowedColorsIndices = i % 5 === 0 || i % 13 === 0 || i % 17 === 0 ? 4 : 2
     const color = [color1_base, color2_base, color1_bold, color2_bold][
       Math.floor(random() * allowedColorsIndices) % allowedColorsIndices
     ]
 
     return {
+      size: `${size}px`,
       top: `${top}%`,
       left: `${left}%`,
-      size: `${size}px`,
       color,
       rotation: Math.floor(random() * 60 - 30),
       bin: Math.floor(random() * 3) % 2,
@@ -78,15 +82,20 @@ export function StarGridPattern({
   const starsCount = useMemo(() => {
     if (!mounted) return 0
 
-    // NOTE: this height is in px
-    const pageContentHeight = document.getElementById("page-content")?.clientHeight
-    const availableHeight = Math.floor(pxToRem(pageContentHeight ?? 0))
-    const reasonableStars = Math.floor((availableHeight * (dense ? 1000 : 90)) / (7 * 13 * 17))
+    const pageContent = document.getElementById("page-content")
+    const availableWidth = Math.floor(pageContent?.clientWidth ?? 0 ?? 0)
+    const availableHeight = Math.floor(pageContent?.clientHeight ?? 0 ?? 0)
+    const availableArea = availableWidth * availableHeight
+
+    const density = dense ? 0.000025 : 0.00001
+    const reasonableStars = Math.floor(availableArea * density)
 
     return reasonableStars
   }, [mounted, dense])
 
   const stars = useMemo(() => {
+    if (!mounted) return []
+
     return generateStars(seed, starsCount)
   }, [seed, starsCount])
 
