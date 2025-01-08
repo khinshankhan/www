@@ -34,7 +34,49 @@ export function GridPattern({
   )
 }
 
-function generateStars(seed: number, count: number) {
+interface SingleStarProps {
+  size: string
+  top: string
+  left: string
+  color: string
+  rotation: number
+  pattern: "jellyfish-floating-1" | "jellyfish-floating-2"
+  duration: number
+}
+
+export function SingleStar({
+  size,
+  top,
+  left,
+  color,
+  rotation,
+  pattern,
+  duration,
+}: SingleStarProps) {
+  const animationStyle = {
+    ["--animation"]: `${pattern} ${duration}s infinite linear`,
+  } as React.CSSProperties
+
+  return (
+    <div
+      className={cn("star absolute motion-safe:custom-animation")}
+      style={{
+        ...animationStyle,
+        top: top,
+        left: left,
+        width: size,
+        height: size,
+        color: color,
+        filter: createStarGlow(color),
+        rotate: `${rotation}deg`,
+      }}
+    >
+      <Star />
+    </div>
+  )
+}
+
+function generateStars(seed: number, count: number): SingleStarProps[] {
   if (count === 0) return []
 
   const random = seededRandom(seed)
@@ -100,15 +142,17 @@ function generateStars(seed: number, count: number) {
       Math.floor(random() * allowedColorsIndices) % allowedColorsIndices
     ]
 
-    return {
+    const star: SingleStarProps = {
       size: `${size}px`,
       top: `${top}px`,
       left: `${left}px`,
       color,
       rotation: Math.floor(random() * 60 - 30),
-      bin: Math.floor(random() * 3) % 2,
+      pattern: Math.floor(random() * 3) % 2 === 0 ? "jellyfish-floating-1" : "jellyfish-floating-2",
       duration: (Math.floor(random() * 25) % 25) + 5,
     }
+
+    return star
   })
 
   return stars
@@ -127,6 +171,7 @@ export function StarGridPattern({
   className = "",
 }: StarGridPatternProps) {
   const mounted = useMounted()
+
   const starsCount = useMemo(() => {
     if (!mounted) return 0
 
@@ -136,9 +181,8 @@ export function StarGridPattern({
     const availableArea = availableWidth * availableHeight
 
     const density = dense ? 0.000025 : 0.00001
-    const reasonableStars = Math.floor(availableArea * density)
 
-    return reasonableStars
+    return Math.floor(availableArea * density)
   }, [mounted, dense])
 
   const stars = useMemo(() => {
@@ -152,32 +196,20 @@ export function StarGridPattern({
       {/* Background Grid */}
       <GridPattern contrast={contrast} />
       {/* Dynamically Generated Stars */}
-      {mounted &&
-        stars.map((star, index) => {
-          const animation = star.bin === 0 ? "jellyfish-floating-1" : "jellyfish-floating-2"
-          const animationStyle = {
-            ["--animation"]: `${animation} ${star.duration}s infinite linear`,
-          } as React.CSSProperties
-
-          return (
-            <div
-              key={index}
-              className={cn("star absolute motion-safe:custom-animation")}
-              style={{
-                ...animationStyle,
-                top: star.top,
-                left: star.left,
-                width: star.size,
-                height: star.size,
-                color: star.color,
-                filter: createStarGlow(star.color),
-                rotate: `${star.rotation}deg`,
-              }}
-            >
-              <Star />
-            </div>
-          )
-        })}
+      {stars.map((star, index) => {
+        return (
+          <SingleStar
+            key={index}
+            size={star.size}
+            top={star.top}
+            left={star.left}
+            color={star.color}
+            rotation={star.rotation}
+            pattern={star.pattern}
+            duration={star.duration}
+          />
+        )
+      })}
     </div>
   )
 }
