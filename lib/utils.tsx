@@ -160,3 +160,9 @@ export function isInteractiveElement(element: HTMLElement) {
     interactiveRoles.includes(element.getAttribute("role") || "")
   )
 }
+
+/* pixel utils */
+
+export function pxToRem(px: number) {
+  return px / 16
+}

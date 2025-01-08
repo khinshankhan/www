@@ -418,6 +418,36 @@
   }
 }
 
+/* animations */
+@utility custom-animation {
+  animation: var(--animation);
+}
+
+/* effect to move back and forth, sort of looks like a jellyfish floating */
+@keyframes jellyfish-floating-1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-25px, -25px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes jellyfish-floating-2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, 20px) scale(1.2);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
 /* https://www.radix-ui.com/primitives/docs/components/collapsible#animating-content-size */
 @utility animated-collapsible {
   overflow: hidden;
@@ -441,6 +471,7 @@
     background-position: 0% 25%;
   }
 }
+
 @utility animated-background {
   background: linear-gradient(277deg, var(--color-colorful-gradient));
   background-size: 1200% 1200%;

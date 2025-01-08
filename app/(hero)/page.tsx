@@ -3,6 +3,7 @@ import { Image } from "@/components/base/image"
 import { Heading, Text, typographyVariants } from "@/components/base/typography"
 import { Emoji } from "@/components/composite/emoji"
 import { SmartLink } from "@/components/composite/smart-link"
+import { color1_bold, color2_bold } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import { info } from "@/settings"
 
@@ -35,7 +36,7 @@ function ProfileImage() {
 // TODO: add back animated wave emoji
 function IntroSection() {
   return (
-    <section className="flex flex-col items-center space-y-8 text-center *:backdrop-blur-sm md:items-end md:text-right">
+    <section className="flex flex-col items-center space-y-8 text-center *:backdrop-blur-3xl md:items-end md:text-right">
       <Heading
         as="h1"
         variant="h1"
@@ -46,7 +47,17 @@ function IntroSection() {
         </span>
 
         <Text as="span" variant="h2" className="font-extrabold">
-          <span>I&apos;m</span> <span className="text-accent-11">{info.fullname}</span>
+          <span>I&apos;m </span>
+
+          {info.fullname.split(" ").map((part, i, arr) => {
+            const color = [color1_bold, color2_bold][i % 2]
+
+            return (
+              <span key={i} style={{ color: color }}>
+                {part} {i !== arr.length - 1 && <>&nbsp;</>}
+              </span>
+            )
+          })}
         </Text>
       </Heading>
 
@@ -55,7 +66,8 @@ function IntroSection() {
         variant="h3"
         className="max-w-[435px] p-1 font-medium text-balance hyphens-auto sm:hyphens-none"
       >
-        Exploring the intersections of creativity and technology
+        Exploring the intersections of <span style={{ color: color2_bold }}>creativity</span> and{" "}
+        <span style={{ color: color1_bold }}>technology</span>
       </Heading>
 
       <Button asChild size="lg">
@@ -72,7 +84,7 @@ function MainContent() {
     <section
       className={cn(
         typographyVariants({ variant: "h4" }),
-        "md[&>*]:px-6 *:bg-background/10 mx-auto max-w-[1400px] space-y-8 text-center font-normal hyphens-auto *:rounded-lg *:py-6 *:backdrop-blur-sm sm:hyphens-none md:*:mx-8"
+        "md[&>*]:px-6 *:bg-background/10 mx-auto max-w-[1400px] space-y-8 text-center font-normal hyphens-auto *:rounded-lg *:py-6 *:backdrop-blur-3xl sm:hyphens-none md:*:mx-8"
       )}
     >
       <p>

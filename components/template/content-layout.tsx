@@ -1,14 +1,17 @@
 import React from "react"
-import { GridPattern } from "@/components/base/patterns"
+import { StarGridPattern } from "@/components/base/patterns"
 import { Heading, Text } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { WithSidebar, type WithSidebarProps } from "@/components/section/with-sidebar"
 import { processMarkdown } from "@/lib/content"
 import { cn } from "@/lib/utils"
 
-function Pattern({ className = "" }: { slug?: string; className?: string }) {
+function Pattern({ slug = "", className = "" }: { slug?: string; className?: string }) {
+  const seed = (slug + className).split("").reduce((acc, curr) => acc + curr.charCodeAt(0), 0)
+
   return (
-    <GridPattern
+    <StarGridPattern
+      seed={seed}
       className={cn("relative flex hidden grow flex-col overflow-hidden sm:block", className)}
     />
   )
@@ -48,7 +51,9 @@ export function ContentLayout({
       </header>
 
       <div id="page-content" className="flex grow flex-row">
-        {!hideContentPattern && <Pattern className="mask-gradient-reveal-from-right" />}
+        {!hideContentPattern && (
+          <Pattern className="mask-gradient-reveal-from-right" slug={ghPath} />
+        )}
 
         <div className="bounded-content-layout my-1 grow py-12">
           <WithSidebar direction={direction} sidebar={sidebar}>
@@ -56,7 +61,9 @@ export function ContentLayout({
           </WithSidebar>
         </div>
 
-        {!hideContentPattern && <Pattern className="mask-gradient-reveal-from-left" />}
+        {!hideContentPattern && (
+          <Pattern className="mask-gradient-reveal-from-left" slug={ghPath} />
+        )}
       </div>
 
       <div className="bg-background-1 py-6 text-center">
