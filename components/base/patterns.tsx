@@ -56,7 +56,8 @@ export function SingleStar({
 }: SingleStarProps) {
   const ua = useUserAgent()
   const disableAnimation =
-    !ua?.browser.name || ["firefox", "safari"].some((name) => ua.browser.name === name)
+    !ua?.browser.name ||
+    ["firefox", "safari"].some((name) => ua.browser.name?.toLowerCase().includes(name))
 
   const animationStyle = {
     ["--animation"]: `${pattern} ${duration}s infinite linear`,
