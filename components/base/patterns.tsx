@@ -3,6 +3,7 @@
 import React, { useMemo } from "react"
 import { Star } from "@/components/base/icon"
 import { useMounted } from "@/hooks/media"
+import { useUserAgent } from "@/hooks/navigator"
 import { color1_base, color1_bold, color2_base, color2_bold, defaultSeed } from "@/lib/constants"
 import { cn, createStarGlow, getAbsolutePosition, range, seededRandom } from "@/lib/utils"
 
@@ -53,6 +54,16 @@ export function SingleStar({
   pattern,
   duration,
 }: SingleStarProps) {
+  const ua = useUserAgent()
+
+  const showAnimation = useMemo(() => {
+    if (!ua?.browser?.name || ua.browser.name.toLowerCase() === "firefox") {
+      return false
+    }
+
+    return true
+  }, [ua?.browser])
+
   const animationStyle = {
     ["--animation"]: `${pattern} ${duration}s infinite linear`,
   } as React.CSSProperties
@@ -61,7 +72,7 @@ export function SingleStar({
     <div
       className={cn("star absolute motion-safe:custom-animation")}
       style={{
-        ...animationStyle,
+        ...(showAnimation ? animationStyle : {}),
         top: top,
         left: left,
         width: size,
@@ -69,6 +80,7 @@ export function SingleStar({
         color: color,
         filter: createStarGlow(color),
         rotate: `${rotation}deg`,
+        transform: "translateZ(0)",
       }}
     >
       <Star />
