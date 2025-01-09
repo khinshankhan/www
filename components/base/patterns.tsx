@@ -55,14 +55,8 @@ export function SingleStar({
   duration,
 }: SingleStarProps) {
   const ua = useUserAgent()
-
-  const showAnimation = useMemo(() => {
-    if (!ua?.browser?.name || ua.browser.name.toLowerCase() === "firefox") {
-      return false
-    }
-
-    return true
-  }, [ua?.browser])
+  const disableAnimation =
+    !ua?.browser.name || ["firefox", "safari"].some((name) => ua.browser.name === name)
 
   const animationStyle = {
     ["--animation"]: `${pattern} ${duration}s infinite linear`,
@@ -72,7 +66,7 @@ export function SingleStar({
     <div
       className={cn("star absolute motion-safe:custom-animation")}
       style={{
-        ...(showAnimation ? animationStyle : {}),
+        ...(disableAnimation ? {} : animationStyle),
         top: top,
         left: left,
         width: size,
