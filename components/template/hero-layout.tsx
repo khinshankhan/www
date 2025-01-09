@@ -1,7 +1,7 @@
 import React, { type ReactNode } from "react"
 import { StarGridPattern } from "@/components/base/patterns"
 
-export default function HomeLayout({ children }: { children: ReactNode }) {
+export function HeroLayout({ children }: { children: ReactNode }) {
   return (
     <main
       id="page-content"

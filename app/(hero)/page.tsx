@@ -3,6 +3,7 @@ import { Image } from "@/components/base/image"
 import { Heading, Text, typographyVariants } from "@/components/base/typography"
 import { Emoji } from "@/components/composite/emoji"
 import { SmartLink } from "@/components/composite/smart-link"
+import { HeroLayout } from "@/components/template/hero-layout"
 import { color1_bold, color2_bold } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import { info } from "@/settings"
@@ -105,21 +106,23 @@ function MainContent() {
         can <SmartLink href="/connect/">connect with me</SmartLink>.
       </p>
 
-      <p className="exclude-stars">Enjoy exploring! 1</p>
+      <p className="exclude-stars">Enjoy exploring!</p>
     </section>
   )
 }
 
 export default function Page() {
   return (
-    <section className="bounded-page-layout mx-auto mt-8 flex flex-col items-center justify-center space-y-20 md:mt-20">
-      <header className="flex flex-col items-center justify-center gap-4 md:flex-row-reverse">
-        <ProfileImage />
+    <HeroLayout>
+      <section className="bounded-page-layout mx-auto mt-8 flex flex-col items-center justify-center space-y-20 md:mt-20">
+        <header className="flex flex-col items-center justify-center gap-4 md:flex-row-reverse">
+          <ProfileImage />
 
-        <IntroSection />
-      </header>
+          <IntroSection />
+        </header>
 
-      <MainContent />
-    </section>
+        <MainContent />
+      </section>
+    </HeroLayout>
   )
 }
