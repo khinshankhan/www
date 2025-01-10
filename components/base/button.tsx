@@ -8,8 +8,8 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-surface-4 hover:bg-surface-6/40",
-        ghost: "hover:bg-surface-6/40",
+        default: "bg-surface-4 hover:bg-surface-3",
+        ghost: "bg-transparent hover:bg-surface-6/40",
         phantom: "bg-surface-4/40 hover:bg-surface-6/40",
       },
       size: {
