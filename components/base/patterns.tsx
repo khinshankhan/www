@@ -29,7 +29,7 @@ export function GridPattern({
   ...props
 }: GridPatternProps) {
   const gridColor1 = contrast ? "var(--color-surface-5)" : "var(--color-surface-4)"
-  const gridColor2 = contrast ? "var(--color-surface-3)" : "var(--color-surface-3)"
+  const gridColor2 = contrast ? "var(--color-background-2)" : "var(--color-surface-3)"
 
   const gridSize1 = "60px"
   const gridSize2 = "15px"
