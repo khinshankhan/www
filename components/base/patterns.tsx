@@ -133,23 +133,27 @@ function generateStars(seed: number, count: number): SingleStarProps[] {
     }
   })
 
+  const maxTries = 10
+
   const stars = range(count).map((i) => {
     const size = Math.floor(random() * 20) + 10
+
+    let tries = 0
 
     let top = -1
     let left = -1
 
-    let tries = 0
-    const maxTries = 10
+    const xMargin = Math.floor(availableWidth * 0.1)
+    const yMargin = Math.floor(availableHeight * 0.1)
 
     do {
-      top = Math.floor(random() * availableHeight)
-      left = Math.floor(random() * availableWidth)
+      left = xMargin / 2 + Math.floor(random() * (availableWidth - xMargin))
+      top = yMargin / 2 + Math.floor(random() * (availableHeight - yMargin))
 
-      const starTop = top
       const starLeft = left
-      const starBottom = starTop + size
+      const starTop = top
       const starRight = starLeft + size
+      const starBottom = starTop + size
 
       const starInExcludedArea = excludedAreas.some((area) => {
         // check if the star's "box" intersects with any excluded area

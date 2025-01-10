@@ -531,12 +531,24 @@
 }
 
 @utility mask-gradient-reveal-from-left {
-  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 1) 90%);
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 10%,
+    rgba(0, 0, 0, 0.5) 35%,
+    rgba(0, 0, 0, 1) 100%
+  );
   mask-size: cover;
 }
 
 @utility mask-gradient-reveal-from-right {
-  mask-image: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 1) 90%);
+  mask-image: linear-gradient(
+    to left,
+    transparent 0%,
+    transparent 10%,
+    rgba(0, 0, 0, 0.5) 35%,
+    rgba(0, 0, 0, 1) 100%
+  );
   mask-size: cover;
 }
 
