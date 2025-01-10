@@ -180,7 +180,7 @@ export function Navbar() {
   return (
     <header
       id="navbar"
-      className="bounded-page-layout flex min-h-[68px] items-center pt-2 md:min-h-[78px] lg:min-h-[88px]"
+      className="bounded-page-layout z-2 flex min-h-[68px] items-center pt-2 md:min-h-[78px] lg:min-h-[88px]"
     >
       <nav className="flex w-full flex-row items-center justify-between">
         {/* lhs on all views */}
