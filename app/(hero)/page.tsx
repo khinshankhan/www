@@ -4,7 +4,7 @@ import { Heading, Text, typographyVariants } from "@/components/base/typography"
 import { Emoji } from "@/components/composite/emoji"
 import { SmartLink } from "@/components/composite/smart-link"
 import { HeroLayout } from "@/components/template/hero-layout"
-import { color1_bold, color2_bold } from "@/lib/constants"
+import { color1_bold, color2_bold, color3_base, color3_bold } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import { info } from "@/settings"
 
@@ -97,8 +97,16 @@ function MainContent() {
 
       <p className={pClasses}>
         Landing pages can be a bit bland with all that whitespace, so here&apos;s a little
-        engagement hook: this website has 0 hidden easter eggs. Can you find them all? Happy
-        hunting!
+        engagement hook: this website has{" "}
+        <span
+          style={{
+            color: color3_bold,
+            textShadow: `0 0 20px ${color3_base}, 0 0 30px ${color3_base}, 0 0 40px ${color3_base}, 0 0 50px ${color3_base}, 0 0 60px ${color3_base}, 0 0 70px ${color3_base}`,
+          }}
+        >
+          0
+        </span>{" "}
+        hidden easter eggs. Can you find them all? Happy hunting!
       </p>
 
       <p className={pClasses}>

@@ -4,7 +4,15 @@ import React, { useMemo } from "react"
 import { Star } from "@/components/base/icon"
 import { useMounted } from "@/hooks/media"
 import { useUserAgent } from "@/hooks/navigator"
-import { color1_base, color1_bold, color2_base, color2_bold, defaultSeed } from "@/lib/constants"
+import {
+  color1_base,
+  color1_bold,
+  color2_base,
+  color2_bold,
+  color3_base,
+  color3_bold,
+  defaultSeed,
+} from "@/lib/constants"
 import { cn, createStarGlow, getAbsolutePosition, range, seededRandom } from "@/lib/utils"
 
 interface GridPatternProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -162,9 +170,9 @@ function generateStars(seed: number, count: number): SingleStarProps[] {
 
     // pseudo-random color assignment (based on cicada principle)
     // https://www.sitepoint.com/the-cicada-principle-and-why-it-matters-to-web-designers/
-    const allowedColorsIndices = i % 5 === 0 || i % 13 === 0 || i % 17 === 0 ? 4 : 2
-    const color = [color1_base, color2_base, color1_bold, color2_bold][
-      Math.floor(random() * allowedColorsIndices) % allowedColorsIndices
+    const allowedColorsCount = i % 7 === 0 || i % 13 === 0 || i % 17 === 0 ? 5 : i % 5 === 0 ? 3 : 2
+    const color = [color1_base, color2_base, color3_base, color1_bold, color2_bold, color3_bold][
+      Math.floor(random() * allowedColorsCount)
     ]
 
     const star: SingleStarProps = {
@@ -205,7 +213,7 @@ export function StarGridPattern({
     const availableHeight = Math.floor(pageContent?.clientHeight ?? 0 ?? 0)
     const availableArea = availableWidth * availableHeight
 
-    const density = dense ? 0.000025 : 0.00001
+    const density = dense ? 0.000025 : 0.000015
 
     return Math.floor(availableArea * density)
   }, [mounted, dense])
