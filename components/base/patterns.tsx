@@ -11,6 +11,8 @@ import {
   color2_bold,
   color3_base,
   color3_bold,
+  color4_base,
+  color4_bold,
   defaultSeed,
 } from "@/lib/constants"
 import { cn, createStarGlow, getAbsolutePosition, range, seededRandom } from "@/lib/utils"
@@ -174,10 +176,17 @@ function generateStars(seed: number, count: number): SingleStarProps[] {
 
     // pseudo-random color assignment (based on cicada principle)
     // https://www.sitepoint.com/the-cicada-principle-and-why-it-matters-to-web-designers/
-    const allowedColorsCount = i % 7 === 0 || i % 13 === 0 || i % 17 === 0 ? 5 : i % 5 === 0 ? 3 : 2
-    const color = [color1_base, color2_base, color3_base, color1_bold, color2_bold, color3_bold][
-      Math.floor(random() * allowedColorsCount)
-    ]
+    const allowedColorsCount = i % 7 === 0 || i % 13 === 0 || i % 17 === 0 ? 8 : i % 5 === 0 ? 4 : 2
+    const color = [
+      color1_base,
+      color2_base,
+      color3_base,
+      color4_base,
+      color1_bold,
+      color2_bold,
+      color3_bold,
+      color4_bold,
+    ][Math.floor(random() * allowedColorsCount)]
 
     const star: SingleStarProps = {
       size: `${size}px`,
