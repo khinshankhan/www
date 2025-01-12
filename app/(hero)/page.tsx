@@ -123,7 +123,7 @@ function MainContent() {
 
 export default function Page() {
   return (
-    <HeroLayout>
+    <HeroLayout slug="/">
       <section className="bounded-page-layout mx-auto mt-8 flex flex-col items-center justify-center space-y-20 md:mt-20">
         <header className="flex flex-col items-center justify-center gap-4 md:flex-row-reverse">
           <ProfileImage />
