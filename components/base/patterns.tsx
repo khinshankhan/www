@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useMemo } from "react"
+import React, { useMemo, useRef } from "react"
 import { Star } from "@/components/base/icon"
 import { useMounted } from "@/hooks/media"
 import { useUserAgent } from "@/hooks/navigator"
@@ -111,8 +111,23 @@ export function SingleStar({
   )
 }
 
-function generateStars(seed: number, count: number): SingleStarProps[] {
-  if (count === 0) return []
+interface GenerateStarsProps {
+  seed: number
+  count: number
+  availableWidth?: number
+  availableHeight?: number
+  xMarginPercent: number
+  yMarginPercent: number
+}
+function generateStars({
+  seed,
+  count,
+  availableWidth,
+  availableHeight,
+  xMarginPercent,
+  yMarginPercent,
+}: GenerateStarsProps): SingleStarProps[] {
+  if (count === 0 || !availableWidth || !availableHeight) return []
 
   const random = seededRandom(seed)
 
@@ -120,8 +135,6 @@ function generateStars(seed: number, count: number): SingleStarProps[] {
   const navbarHeight = navbar?.clientHeight ?? 0
 
   const pageContent = document.getElementById("page-content")
-  const availableWidth = pageContent?.clientWidth ?? 0
-  const availableHeight = pageContent?.clientHeight ?? 0
 
   const contentElements = pageContent?.querySelectorAll<HTMLElement>(".exclude-stars")
   const excludedAreas = Array.from(contentElements ?? []).map((el) => {
@@ -145,12 +158,12 @@ function generateStars(seed: number, count: number): SingleStarProps[] {
     let top = -1
     let left = -1
 
-    const xMargin = Math.floor(availableWidth * 0.1)
-    const yMargin = Math.floor(availableHeight * 0.1)
+    const xMargin = Math.floor(availableWidth * xMarginPercent)
+    const yMargin = Math.floor(availableHeight * yMarginPercent)
 
     do {
-      left = xMargin / 2 + Math.floor(random() * (availableWidth - xMargin))
-      top = yMargin / 2 + Math.floor(random() * (availableHeight - yMargin))
+      left = xMargin * 0.5 + Math.floor(random() * (availableWidth - xMargin))
+      top = yMargin * 0.5 + Math.floor(random() * (availableHeight - yMargin))
 
       const starLeft = left
       const starTop = top
@@ -209,36 +222,47 @@ interface StarGridPatternProps extends React.HTMLAttributes<HTMLDivElement> {
   dense?: boolean
   seed?: number
   className?: string
+  xMarginPercent?: number
+  yMarginPercent?: number
 }
 export function StarGridPattern({
   contrast,
   dense = false,
   seed = defaultSeed,
   className = "",
+  xMarginPercent = 0.25,
+  yMarginPercent = 0.1,
 }: StarGridPatternProps) {
   const mounted = useMounted()
+  const patternRef = useRef<HTMLDivElement>(null)
+
+  const availableWidth = patternRef.current?.clientWidth
+  const availableHeight = patternRef.current?.clientHeight
 
   const starsCount = useMemo(() => {
-    if (!mounted) return 0
+    if (!mounted || !availableWidth || !availableHeight) return 0
 
-    const pageContent = document.getElementById("page-content")
-    const availableWidth = Math.floor(pageContent?.clientWidth ?? 0 ?? 0)
-    const availableHeight = Math.floor(pageContent?.clientHeight ?? 0 ?? 0)
     const availableArea = availableWidth * availableHeight
-
-    const density = dense ? 0.000025 : 0.000015
+    const density = dense ? 0.0000155 : 0.000015
 
     return Math.floor(availableArea * density)
-  }, [mounted, dense])
+  }, [mounted, dense, availableWidth, availableHeight])
 
   const stars = useMemo(() => {
-    if (!mounted) return []
+    if (!mounted || !availableWidth || !availableHeight) return []
 
-    return generateStars(seed, starsCount)
-  }, [seed, starsCount])
+    return generateStars({
+      seed,
+      count: starsCount,
+      availableWidth,
+      availableHeight,
+      xMarginPercent,
+      yMarginPercent,
+    })
+  }, [seed, starsCount, availableWidth, availableHeight, xMarginPercent, yMarginPercent])
 
   return (
-    <div role="presentation" className={cn("relative", className)}>
+    <div ref={patternRef} role="presentation" className={cn("relative", className)}>
       {/* Background Grid */}
       <GridPattern contrast={contrast} secondaryPattern />
       {/* Dynamically Generated Stars */}
