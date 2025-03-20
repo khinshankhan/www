@@ -24,6 +24,7 @@ export function Image({
   height,
   className = "",
   disableZoom = false,
+  style = {},
   ...props
 }: ImageProps) {
   const imgRef = useRef<HTMLImageElement>(null)
@@ -38,6 +39,11 @@ export function Image({
 
   const Wrapper = disableZoom ? Fragment : Zoom
 
+  const aspectRatioStyles = {
+    ["--data-width"]: width,
+    ["--data-height"]: height,
+  } as React.CSSProperties
+
   return (
     <Wrapper>
       <img
@@ -49,9 +55,13 @@ export function Image({
         data-loading={loading}
         className={cn(
           // data-[loading=true] adds shimmer effect for loading images
-          "mx-auto max-h-[725px] max-w-full rounded-lg backdrop-blur-none data-[loading=true]:animate-pulse data-[loading=true]:bg-background-1/60 data-[loading=true]:backdrop-blur-xs",
+          "mx-auto aspect-[var(--data-width)/var(--data-height)] max-h-[725px] max-w-full rounded-lg backdrop-blur-none data-[loading=true]:animate-pulse data-[loading=true]:bg-background-1/60 data-[loading=true]:backdrop-blur-xs",
           className
         )}
+        style={{
+          ...aspectRatioStyles,
+          ...style,
+        }}
         onLoad={() => {
           setLoading(false)
         }}
