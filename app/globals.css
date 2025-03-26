@@ -294,8 +294,8 @@
   }
 
   /* spacing for headings */
-  .prose :where(h1, h2, h3, h4, h5, h6),
-  .prose-heading {
+  .prose :where(h1, h2, h3, h4, h5, h6):not(.not-prose, .not-prose *),
+  .prose-heading:not(.not-prose, .not-prose *) {
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
 
@@ -313,7 +313,7 @@
   }
 
   /* list styles */
-  .prose :where(ol, ul) {
+  .prose :where(ol, ul):not(.not-prose, .not-prose *) {
     padding-left: 1em;
 
     & :where(& > :not(:last-child)) {
@@ -322,22 +322,22 @@
   }
 
   /* sane defaults for list types */
-  .prose ol {
+  .prose ol :not(.not-prose, .not-prose *) {
     list-style-type: decimal;
   }
-  .prose ol ol {
+  .prose ol ol :not(.not-prose, .not-prose *) {
     list-style-type: lower-alpha;
   }
-  .prose ol ol ol {
+  .prose ol ol ol :not(.not-prose, .not-prose *) {
     list-style-type: lower-greek;
   }
-  .prose ul {
+  .prose ul :not(.not-prose, .not-prose *) {
     list-style-type: disc;
   }
-  .prose ul ul {
+  .prose ul ul :not(.not-prose, .not-prose *) {
     list-style-type: circle;
   }
-  .prose ul ul ul {
+  .prose ul ul ul :not(.not-prose, .not-prose *) {
     list-style-type: square;
   }
 

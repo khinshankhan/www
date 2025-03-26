@@ -38,7 +38,7 @@ export function ContentLayout({
 }: ContentLayoutProps) {
   return (
     <article className="relative isolate flex grow flex-col">
-      <header className="bg-background-1 py-14">
+      <header className="relative py-14">
         <div className="bounded-content-layout">
           <Heading id="page-heading" as="h1" variant="h1" className="text-balance">
             {title}
@@ -50,7 +50,7 @@ export function ContentLayout({
         </div>
       </header>
 
-      <div id="page-content" className="flex grow flex-row">
+      <div id="page-content" className="relative flex grow flex-row bg-background-2">
         {!hideContentPattern && (
           <Pattern className="mask-gradient-reveal-from-right" slug={ghPath} />
         )}
@@ -66,7 +66,7 @@ export function ContentLayout({
         )}
       </div>
 
-      <div className="bg-background-1 py-6 text-center">
+      <div className="py-6 text-center">
         <div className="bounded-page-layout flex flex-row-reverse">
           <SmartLink href={`https://github.com/khinshankhan/www/tree/main${ghPath}`}>
             View page on GitHub

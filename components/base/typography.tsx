@@ -6,7 +6,7 @@ import { Slot } from "@radix-ui/react-slot"
 export const typographyVariants = cva("", {
   variants: {
     variant: {
-      body: "font-body text-lg tracking-wider text-pretty antialiased md:text-xl lg:text-2xl",
+      body: "font-body text-lg text-pretty antialiased md:text-xl lg:text-2xl",
       h1: "font-heading text-3xl font-semibold tracking-wider md:text-4xl lg:text-5xl",
       h2: "font-heading text-2xl font-semibold tracking-wide md:text-3xl lg:text-4xl",
       h3: "font-heading text-xl font-semibold tracking-wide md:text-2xl lg:text-3xl",

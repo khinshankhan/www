@@ -7,12 +7,7 @@ export interface SmartLinkProps extends LinkProps {
   hideIcon?: boolean
 }
 
-export function SmartLink({
-  href = "",
-  className = "",
-  hideIcon = false,
-  ...props
-}: SmartLinkProps) {
+export function SmartLink({ href = "", hideIcon = false, ...props }: SmartLinkProps) {
   const isExternal = !isInternalLink(href)
   const isFile = isFileLink(href)
 
@@ -20,7 +15,6 @@ export function SmartLink({
     return (
       <Link
         href={href}
-        className={className}
         icon={<SquareArrowOutUpRight className="inline size-3 align-top" />}
         {...props}
       />
@@ -29,14 +23,9 @@ export function SmartLink({
 
   if (!hideIcon && isFile) {
     return (
-      <Link
-        href={href}
-        className={className}
-        icon={<Download className="inline size-3 align-middle" />}
-        {...props}
-      />
+      <Link href={href} icon={<Download className="inline size-3 align-middle" />} {...props} />
     )
   }
 
-  return <Link href={href} className={className} {...props} />
+  return <Link href={href} {...props} />
 }
