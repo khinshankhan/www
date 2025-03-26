@@ -11,7 +11,7 @@ import { info } from "@/settings"
 function ProfileImage() {
   return (
     <div
-      className="exclude-stars md:ml-8"
+      className="md:ml-8"
       style={{
         minWidth: "256px",
         minHeight: "256px",
@@ -41,7 +41,7 @@ function IntroSection() {
       <Heading
         as="h1"
         variant="h1"
-        className="exclude-stars flex flex-col rounded-lg bg-background-1 p-2 font-extrabold md:whitespace-nowrap"
+        className="relative flex flex-col rounded-lg bg-background-1 p-2 font-extrabold md:whitespace-nowrap"
       >
         <span>
           <span>Hello there</span> <Emoji name=":wave:" className="animate-waving-hand" />
@@ -65,7 +65,7 @@ function IntroSection() {
       <Heading
         as="h2"
         variant="h3"
-        className="exclude-stars max-w-[435px] rounded-lg bg-background-1 p-2 font-medium text-balance hyphens-auto sm:hyphens-none"
+        className="relative max-w-[435px] rounded-lg bg-background-1 p-2 font-medium text-balance hyphens-auto sm:hyphens-none"
       >
         Exploring the intersections of <span style={{ color: color2_bold }}>creativity</span> and{" "}
         <span style={{ color: color1_bold }}>technology</span>
@@ -81,7 +81,7 @@ function IntroSection() {
 }
 
 function MainContent() {
-  const pClasses = cn("exclude-stars rounded-lg bg-background-1 py-6 md:mx-8 md:px-6")
+  const pClasses = cn("relative rounded-lg bg-background-1 py-6 md:mx-8 md:px-6")
 
   return (
     <section
