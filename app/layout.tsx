@@ -40,7 +40,14 @@ export default async function Layout({ children }: { children: React.ReactNode }
           disableTransitionOnChange
         >
           <TooltipProvider>
-            <div vaul-drawer-wrapper="">
+            <div role="presentation" className="noise" />
+
+            <div
+              className={
+                // z-1 ensures content is above the noise background
+                "z-1"
+              }
+            >
               <div className="relative isolate z-0 flex min-h-[87vh] flex-col xs:min-h-[96vh]">
                 <Navbar />
                 {/* NOTE: assumes pages will be wrapped in main tags with background color + grow */}

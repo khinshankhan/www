@@ -51,13 +51,23 @@ export function ContentLayout({
       </header>
 
       <div id="page-content" className="relative flex grow flex-row bg-background-2">
+        <div role="presentation" className="noise" />
+
         {!hideContentPattern && (
           <Pattern className="mask-gradient-reveal-from-right" slug={ghPath} />
         )}
 
         <div className="bounded-content-layout my-1 grow py-12">
           <WithSidebar direction={direction} sidebar={sidebar}>
-            <div className={cn("min-w-full", childrenWrappingClass)}>{children}</div>
+            <div
+              className={cn(
+                // z-1 ensures content is above the noise background
+                "z-1 min-w-full",
+                childrenWrappingClass
+              )}
+            >
+              {children}
+            </div>
           </WithSidebar>
         </div>
 

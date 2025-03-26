@@ -34,7 +34,6 @@ function ProfileImage() {
   )
 }
 
-// TODO: add back animated wave emoji
 function IntroSection() {
   return (
     <section className="flex flex-col items-center space-y-8 text-center md:items-end md:text-right">
@@ -43,11 +42,25 @@ function IntroSection() {
         variant="h1"
         className="relative flex flex-col rounded-lg bg-background-1 p-2 font-extrabold md:whitespace-nowrap"
       >
-        <span>
+        <span role="presentation" className="noise" />
+
+        <span
+          className={
+            // z-1 ensures content is above the noise background
+            "relative z-1"
+          }
+        >
           <span>Hello there</span> <Emoji name=":wave:" className="animate-waving-hand" />
         </span>
 
-        <Text as="span" variant="h2" className="font-extrabold">
+        <Text
+          as="span"
+          variant="h2"
+          className={
+            // z-1 ensures content is above the noise background
+            "relative z-1 font-extrabold"
+          }
+        >
           <span>I&apos;m </span>
 
           {info.fullname.split(" ").map((part, i, arr) => {
@@ -67,8 +80,17 @@ function IntroSection() {
         variant="h3"
         className="relative max-w-[435px] rounded-lg bg-background-1 p-2 font-medium text-balance hyphens-auto sm:hyphens-none"
       >
-        Exploring the intersections of <span style={{ color: color2_bold }}>creativity</span> and{" "}
-        <span style={{ color: color1_bold }}>technology</span>
+        <span role="presentation" className="noise" />
+
+        <span
+          className={
+            // z-1 ensures content is above the noise background
+            "relative z-1"
+          }
+        >
+          Exploring the intersections of <span style={{ color: color2_bold }}>creativity</span> and{" "}
+          <span style={{ color: color1_bold }}>technology</span>
+        </span>
       </Heading>
 
       <Button asChild size="lg">
@@ -80,9 +102,22 @@ function IntroSection() {
   )
 }
 
+function MainContentText({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative rounded-lg bg-background-1 py-6 md:mx-8 md:px-6">
+      <span role="presentation" className="noise" />
+      <p
+        className={
+          // z-1 ensures content is above the noise background
+          "relative z-1"
+        }
+      >
+        {children}
+      </p>
+    </div>
+  )
+}
 function MainContent() {
-  const pClasses = cn("relative rounded-lg bg-background-1 py-6 md:mx-8 md:px-6")
-
   return (
     <section
       className={cn(
@@ -90,12 +125,12 @@ function MainContent() {
         "mx-auto max-w-[1400px] space-y-8 text-center font-normal hyphens-auto sm:hyphens-none"
       )}
     >
-      <p className={pClasses}>
+      <MainContentText>
         Welcome to my little corner of the internet! Here, I share my thoughts and musings. Whether
         you learn something new or just have a bit of fun, I hope you enjoy your stay.
-      </p>
+      </MainContentText>
 
-      <p className={pClasses}>
+      <MainContentText>
         Landing pages can be a bit bland with all that whitespace, so here&apos;s a little
         engagement hook: this website has{" "}
         <span
@@ -107,16 +142,16 @@ function MainContent() {
           0
         </span>{" "}
         hidden easter eggs. Can you find them all? Happy hunting!
-      </p>
+      </MainContentText>
 
-      <p className={pClasses}>
+      <MainContentText>
         Meanwhile, feel free to check out my <SmartLink href="/writings/">writings</SmartLink>
         {" or "}
         <SmartLink href="/projects/">projects</SmartLink>. If you&apos;d like to get in touch, you
         can <SmartLink href="/connect/">connect with me</SmartLink>.
-      </p>
+      </MainContentText>
 
-      <p className={pClasses}>Enjoy exploring!</p>
+      <MainContentText>Enjoy exploring!</MainContentText>
     </section>
   )
 }
