@@ -1,5 +1,4 @@
 import { Button } from "@/components/base/button"
-import { Image } from "@/components/base/image"
 import { Heading, Text, typographyVariants } from "@/components/base/typography"
 import { Emoji } from "@/components/composite/emoji"
 import { SmartLink } from "@/components/composite/smart-link"
@@ -7,33 +6,7 @@ import { HeroLayout } from "@/components/template/hero-layout"
 import { color1_bold, color2_bold, color3_base, color3_bold } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import { info } from "@/settings"
-
-function ProfileImage() {
-  return (
-    <div
-      className="group relative isolate rounded-[128px] md:ml-8"
-      style={{
-        minWidth: "256px",
-        minHeight: "256px",
-      }}
-    >
-      <Image
-        alt="Profile Image"
-        width="256"
-        height="256"
-        src={info.avatarUrl}
-        className="z-0 rotate-180 rounded-[128px] border-8 border-muted mix-blend-multiply saturate-0 transition-all duration-300 ease-in-out select-none group-hover:rotate-0 group-hover:border-0 group-hover:saturate-200"
-        style={{
-          aspectRatio: "256/256",
-          objectFit: "cover",
-        }}
-        draggable="false"
-        disableZoom
-      />
-      <div className="noise before:z-1 before:rounded-[128px] before:opacity-100 group-hover:before:-z-1 group-hover:before:rounded-none group-hover:before:opacity-0" />
-    </div>
-  )
-}
+import { ProfileImage } from "./profile-image"
 
 function IntroSection() {
   return (
