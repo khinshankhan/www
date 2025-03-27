@@ -15,7 +15,11 @@ export interface VideoProps extends VideoElementProps {
 // TODO: add in video skeleton, possibly leverage the image shimmer effect
 export function Video({ children, className = "", ...props }: VideoProps) {
   return (
-    <video controls className={cn("mx-auto max-h-[725px] rounded-lg", className)} {...props}>
+    <video
+      controls
+      className={cn("mx-auto max-h-[725px] rounded-lg border border-muted", className)}
+      {...props}
+    >
       {children}
     </video>
   )

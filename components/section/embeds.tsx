@@ -41,7 +41,7 @@ export function YouTubeEmbed({
           ...style,
         }}
         className={cn(
-          "!aspect-[var(--aspect-width)/var(--aspect-height)] h-auto w-full",
+          "!aspect-[var(--aspect-width)/var(--aspect-height)] h-auto w-full rounded-lg border border-muted",
           className
         )}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -83,24 +83,26 @@ export function SpotifyEmbed({
     ["--aspect-height"]: height,
   } as React.CSSProperties
 
-  // TODO: add in video skeleton
+  // TODO: add in spotify skeleton
   return (
     <figure>
-      <iframe
-        src={src}
-        title={title}
-        height={height}
-        width={width}
-        style={{
-          ...aspectStyles,
-          ...style,
-        }}
-        className={cn("rounded-[14px] border-none", className)}
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        allowFullScreen
-        loading="lazy"
-        {...props}
-      />
+      <div className="rounded-[14px] border border-muted">
+        <iframe
+          src={src}
+          title={title}
+          height={height}
+          width={width}
+          style={{
+            ...aspectStyles,
+            ...style,
+          }}
+          className={cn("rounded-[14px] border-none", className)}
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          allowFullScreen
+          loading="lazy"
+          {...props}
+        />
+      </div>
 
       {fallbackSrc && (
         <Figcaption>
