@@ -9,6 +9,9 @@ export function ProfileImage() {
 
   return (
     <div
+      role="button"
+      aria-label="Toggle profile image appearance"
+      tabIndex={0}
       data-active={isActive}
       className="group relative isolate cursor-pointer rounded-[128px] md:ml-8"
       style={{
@@ -16,6 +19,10 @@ export function ProfileImage() {
         minHeight: "256px",
       }}
       onClick={() => setIsActive((prev) => !prev)}
+      onKeyUp={(e) => {
+        if (e.code !== "Enter") return
+        setIsActive((prev) => !prev)
+      }}
     >
       <Image
         alt="Profile Image"
@@ -25,7 +32,7 @@ export function ProfileImage() {
         data-active={isActive}
         className="z-0 rotate-180 rounded-[128px] border-8 border-muted mix-blend-multiply saturate-0 transition-all duration-300 ease-in-out select-none group-hover:rotate-0 group-hover:border-0 group-hover:saturate-200 data-[active=true]:rotate-0 data-[active=true]:border-0 data-[active=true]:saturate-200"
         style={{
-          aspectRatio: "1024/1024",
+          aspectRatio: "256/256",
           objectFit: "cover",
         }}
         draggable="false"
