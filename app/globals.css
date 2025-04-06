@@ -182,8 +182,8 @@
 
     --knockout: #fff;
 
-    --background-1: var(--celestial-1);
-    --background-2: var(--celestial-2);
+    --background-1: #000011;
+    --background-2: var(--celestial-1);
 
     --colorful-gradient: #5a4b3c, #4c593d, #3a535f, #414758, #533f60, #604048;
   }
@@ -538,7 +538,7 @@
     background-image: url("data:image/svg+xml,%3C!-- svg: first layer --%3E%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 182px;
-    opacity: 0.075;
+    opacity: 0.15;
     top: 0;
     left: 0;
     position: absolute;
