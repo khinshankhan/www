@@ -42,7 +42,7 @@ become features. Or they... well yea, stuff happens.
 </figure>
 
 <figure>
-  <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/elephant-660-480.jpg" height="660" width="480" alt="Elephant at sunset" />
+  <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/elephant-660-480.jpg" height="480" width="660" alt="Elephant at sunset" />
   <figcaption>An elephant at sunset</figcaption>
 </figure>
 
