@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react"
 import { Button } from "@/components/base/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/base/collapsible"
-import { ChevronRight } from "@/components/base/icon"
+import { ChevronRight, ListTree } from "@/components/base/icon"
 import { Text, typographyVariants } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { useBreakpoint, useIsomorphicEffect } from "@/hooks/media"
@@ -166,6 +166,17 @@ export function Toc({ headings }: TocProps) {
           </Text>
         </Button>
       </CollapsibleTrigger>
+
+      <div className="hidden xl:block">
+        <Text
+          as="span"
+          variant="h5"
+          className="group flex w-full items-center gap-4 text-foreground"
+        >
+          <ListTree />
+          <span>On this page</span>
+        </Text>
+      </div>
 
       <CollapsibleContent className="animated-collapsible">
         <TocList headings={headings} />
