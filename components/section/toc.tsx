@@ -137,6 +137,23 @@ function TocList({ headings = [] }: TocProps) {
   )
 }
 
+function TocDescription() {
+  return (
+    <Text
+      as="span"
+      variant="h5"
+      className="group flex w-full items-center justify-between text-foreground"
+    >
+      <span className="flex w-full items-center gap-2 text-foreground xl:gap-4">
+        <ListTree />
+        <span>On this page</span>
+      </span>
+
+      <ChevronRight className="block rotate-90 transition-transform duration-300 ease-arrow-rotation group-data-[state=closed]:rotate-0 xl:hidden" />
+    </Text>
+  )
+}
+
 export function Toc({ headings }: TocProps) {
   const [open, setOpen] = useState(false)
   const action = open ? "Close" : "Open"
@@ -154,28 +171,14 @@ export function Toc({ headings }: TocProps) {
         <Button
           aria-label={`${action} table of contents.`}
           variant="ghost"
-          className="group w-full pl-0 xl:hidden xl:pl-2.5"
+          className="group w-full pl-2.5 xl:hidden"
         >
-          <Text
-            as="span"
-            variant="h5"
-            className="group flex w-full items-center justify-between text-foreground"
-          >
-            <span>On this page</span>
-            <ChevronRight className="rotate-90 transition-transform duration-300 ease-arrow-rotation group-data-[state=closed]:rotate-0" />
-          </Text>
+          <TocDescription />
         </Button>
       </CollapsibleTrigger>
 
       <div className="hidden xl:block">
-        <Text
-          as="span"
-          variant="h5"
-          className="group flex w-full items-center gap-4 text-foreground"
-        >
-          <ListTree />
-          <span>On this page</span>
-        </Text>
+        <TocDescription />
       </div>
 
       <CollapsibleContent className="animated-collapsible">
