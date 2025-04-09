@@ -35,6 +35,7 @@ export function ContentLayout({
   direction = "right",
   sidebar = null,
   hideContentPattern = false,
+  ...widthSidebarProps
 }: ContentLayoutProps) {
   return (
     <article className="relative isolate flex grow flex-col">
@@ -58,7 +59,7 @@ export function ContentLayout({
         )}
 
         <div className="bounded-content-layout my-1 grow py-12">
-          <WithSidebar direction={direction} sidebar={sidebar}>
+          <WithSidebar direction={direction} sidebar={sidebar} {...widthSidebarProps}>
             <div
               className={cn(
                 // z-1 ensures content is above the noise background

@@ -27,7 +27,7 @@ export function WithSidebar({
       )}
     >
       {sidebar && (
-        <aside className="z-50 xl:sticky xl:top-4 xl:max-w-[250px] xl:min-w-[250px] xl:self-start 2xl:max-w-[275px] 2xl:min-w-[275px]">
+        <aside className="z-50 w-full xl:sticky xl:top-4 xl:max-w-[250px] xl:min-w-[250px] xl:self-start 2xl:max-w-[275px] 2xl:min-w-[275px]">
           {sidebar}
         </aside>
       )}
