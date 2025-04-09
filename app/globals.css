@@ -263,7 +263,7 @@
 
     /* breakpoint 2xl */
     @media (min-width: 96rem) {
-      max-width: 60rem;
+      max-width: 55rem;
     }
   }
 

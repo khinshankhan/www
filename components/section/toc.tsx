@@ -146,7 +146,7 @@ export function Toc({ headings }: TocProps) {
 
   return (
     <Collapsible
-      className="w-full rounded-lg bg-background-1/25 px-2 py-3 backdrop-blur-md xl:backdrop-blur-xs"
+      className="w-full rounded-lg px-2 py-3 backdrop-blur-md max-xl:bg-background-1/25 xl:backdrop-blur-xs"
       open={open}
       onOpenChange={setOpen}
     >
@@ -154,7 +154,7 @@ export function Toc({ headings }: TocProps) {
         <Button
           aria-label={`${action} table of contents.`}
           variant="ghost"
-          className="group w-full pl-0 xl:pl-2.5"
+          className="group w-full pl-0 xl:hidden xl:pl-2.5"
         >
           <Text
             as="span"
