@@ -56,12 +56,12 @@ export default async function Page(props: { params: tParams }) {
       title={contentData.frontmatter.title}
       description={contentData.frontmatter.description}
       ghPath={`/content/${contentData.slug}/${contentData.computed.baseName}`}
-      className="[&_aside]:mx-auto [&_aside]:max-w-[55ch]"
       childrenWrappingClass={cn(
         "prose [&>*]:max-w-[55ch] max-xl:[&>*]:mx-auto",
         contentData.frontmatter.showToc ? "mt-6 xl:mt-2" : "[&>*]:mx-auto"
       )}
       sidebar={contentData.frontmatter.showToc && <Toc headings={contentData.computed.toc} />}
+      sidebarClassName="mx-auto max-w-[55ch]"
     >
       <MDXRenderer source={contentData.content} />
     </ContentLayout>

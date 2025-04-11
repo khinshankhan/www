@@ -5,6 +5,7 @@ export interface WithSidebarProps {
   direction?: "left" | "right"
   sidebar?: React.ReactNode
   className?: string
+  sidebarClassName?: string
 
   children: React.ReactNode
 }
@@ -15,6 +16,7 @@ export function WithSidebar({
   direction = "right",
   sidebar,
   className = "",
+  sidebarClassName = "",
   children,
 }: WithSidebarProps) {
   return (
@@ -27,7 +29,12 @@ export function WithSidebar({
       )}
     >
       {sidebar && (
-        <aside className="z-50 w-full xl:sticky xl:top-4 xl:max-w-[270px] xl:min-w-[270px] xl:self-start 2xl:max-w-[285px] 2xl:min-w-[285px]">
+        <aside
+          className={cn(
+            "z-50 w-full xl:sticky xl:top-4 xl:max-w-[270px] xl:min-w-[270px] xl:self-start 2xl:max-w-[285px] 2xl:min-w-[285px]",
+            sidebarClassName
+          )}
+        >
           {sidebar}
         </aside>
       )}
