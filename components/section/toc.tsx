@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/base/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/base/collapsible"
 import { ChevronRight, ListTree, Pin, PinOff } from "@/components/base/icon"
@@ -36,6 +36,15 @@ function TocItem({
   layoutId: string
 }) {
   const liRef = useRef<HTMLLIElement | null>(null)
+  const [height, setHeight] = useState(0)
+
+  // force recalculation of height after collapsible is opened
+  useEffect(() => {
+    if (liRef.current) {
+      const currentHeight = liRef.current.offsetHeight
+      setHeight(currentHeight)
+    }
+  }, [isActive])
 
   return (
     <li
@@ -53,7 +62,7 @@ function TocItem({
         <motion.span
           layoutId={layoutId}
           className="absolute z-50 w-0.5 bg-accent-11 duration-0"
-          style={{ height: liRef.current?.offsetHeight ?? 0 }}
+          style={{ height: height }}
         />
       )}
 
