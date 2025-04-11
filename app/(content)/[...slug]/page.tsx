@@ -61,7 +61,7 @@ export default async function Page(props: { params: tParams }) {
         contentData.frontmatter.showToc ? "mt-6 xl:mt-2" : "[&>*]:mx-auto"
       )}
       sidebar={contentData.frontmatter.showToc && <Toc headings={contentData.computed.toc} />}
-      sidebarClassName="mx-auto max-w-[55ch]"
+      sidebarClassName="mx-auto max-w-[55ch] sticky top-4"
     >
       <MDXRenderer source={contentData.content} />
     </ContentLayout>

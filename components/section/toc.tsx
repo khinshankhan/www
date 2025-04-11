@@ -16,6 +16,7 @@ import {
   waitForWindowScrollEnd,
 } from "@/lib/utils"
 import { motion } from "framer-motion"
+import Slugger from "github-slugger"
 
 export interface Heading {
   id: string
@@ -27,10 +28,12 @@ function TocItem({
   heading,
   indents,
   isActive,
+  layoutId,
 }: {
   heading: Heading
   indents: number
   isActive: boolean
+  layoutId: string
 }) {
   const liRef = useRef<HTMLLIElement | null>(null)
 
@@ -38,9 +41,9 @@ function TocItem({
     <li
       ref={liRef}
       data-active={isActive}
-      className={cn(
+      className={
         "link-box relative mx-1 w-full transition-[background-color] data-[active=false]:duration-500 data-[active=true]:bg-surface-5/25 data-[active=true]:duration-1000"
-      )}
+      }
     >
       {/* default sideline for the toc items */}
       <span className="absolute z-1 h-full w-0.5 bg-knockout/10 duration-0" />
@@ -48,7 +51,7 @@ function TocItem({
       {/* sideline for the active toc item, visually above the default sideline */}
       {isActive && (
         <motion.span
-          layoutId="toc-sideline-on"
+          layoutId={layoutId}
           className="absolute z-50 w-0.5 bg-accent-11 duration-0"
           style={{ height: liRef.current?.offsetHeight ?? 0 }}
         />
@@ -106,31 +109,28 @@ interface TocProps {
   headings?: Heading[]
 }
 
-function TocList({ headings = [] }: TocProps) {
+function TocList({
+  headings = [],
+  layoutId,
+  className = "",
+  activeId,
+}: TocProps & { layoutId: string; className?: string; activeId: string }) {
   const minDepth =
     headings.length === 0
       ? 1 // 1 is an lowerbound since headings are limited (h1-h6) and this gets used for indents
       : Math.min(...headings.map(({ depth }) => depth))
 
-  const activeIdsString = useScrollSpy({
-    selectors: headings.map(({ id }) => `[id="${id}"]`),
-    options: {
-      rootMargin: "0% 0% -80% 0%",
-    },
-  })
-  const activeIds = activeIdsString.split(" ")
-  const activeId = activeIds[activeIds.length - 1] || headings[0].id
-
   if (headings.length === 0) return <div className="mt-4">Nothing to show...</div>
 
   return (
-    <ul className="list-none pt-2">
+    <ul className={cn("list-none pt-2", className)}>
       {headings?.map((heading, idx) => (
         <TocItem
           key={idx}
           heading={heading}
           indents={heading.depth - minDepth}
           isActive={activeId === heading.id}
+          layoutId={layoutId}
         />
       ))}
     </ul>
@@ -154,36 +154,66 @@ function TocDescription() {
   )
 }
 
+const layoutIdSlugger = new Slugger()
 export function Toc({ headings }: TocProps) {
+  layoutIdSlugger.reset()
+
   const [open, setOpen] = useState(false)
   const action = open ? "Close" : "Open"
 
   const isXl = useBreakpoint("xl")
   useIsomorphicEffect(() => setOpen(isXl), [isXl])
 
+  // this exists outside of the collapsible content so it won't be unmounted
+  // allowing us to track the current active id even if the toc is closed
+  const activeIdsString = useScrollSpy({
+    selectors: (headings ?? []).map(({ id }) => `[id="${id}"]`),
+    options: {
+      rootMargin: "0% 0% -80% 0%",
+    },
+  })
+  const activeIds = activeIdsString.split(" ")
+  const activeId = activeIds[activeIds.length - 1] || (headings?.[0]?.id ?? "")
+
   return (
-    <Collapsible
-      className="w-full rounded-lg px-2 py-3 backdrop-blur-md max-xl:bg-background-1/25 xl:backdrop-blur-xs"
-      open={open}
-      onOpenChange={setOpen}
-    >
-      <CollapsibleTrigger asChild>
-        <Button
-          aria-label={`${action} table of contents.`}
-          variant="ghost"
-          className="group w-full pl-2.5 xl:hidden"
-        >
+    <>
+      <Collapsible
+        className="block h-[64px] w-full rounded-lg bg-background-1/25 px-2 py-3 backdrop-blur-2xl data-[state=open]:bg-background-1 xl:hidden"
+        open={open}
+        onOpenChange={setOpen}
+      >
+        <CollapsibleTrigger asChild>
+          <Button
+            aria-label={`${action} table of contents.`}
+            variant="ghost"
+            className="group w-full pl-2.5"
+          >
+            <TocDescription />
+          </Button>
+        </CollapsibleTrigger>
+
+        <CollapsibleContent className="animated-collapsible pt-4">
+          <TocList
+            headings={headings}
+            activeId={activeId}
+            layoutId={layoutIdSlugger.slug("toc-sideline-on")}
+            className="rounded-lg bg-background-1 pb-1 backdrop-blur-2xl"
+          />
+        </CollapsibleContent>
+      </Collapsible>
+
+      <div className="hidden w-full rounded-lg px-2 py-3 backdrop-blur-xs xl:block">
+        <div>
           <TocDescription />
-        </Button>
-      </CollapsibleTrigger>
-
-      <div className="hidden xl:block">
-        <TocDescription />
+        </div>
+        <div className="animated-collapsible">
+          <TocList
+            headings={headings}
+            activeId={activeId}
+            layoutId={layoutIdSlugger.slug("toc-sideline-on")}
+          />
+        </div>
       </div>
-
-      <CollapsibleContent className="animated-collapsible">
-        <TocList headings={headings} />
-      </CollapsibleContent>
-    </Collapsible>
+    </>
   )
 }
