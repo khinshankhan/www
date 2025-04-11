@@ -30,6 +30,7 @@ export function WithSidebar({
     >
       {sidebar && (
         <aside
+          suppressHydrationWarning
           className={cn(
             "z-50 w-full xl:sticky xl:top-4 xl:max-w-[270px] xl:min-w-[270px] xl:self-start 2xl:max-w-[285px] 2xl:min-w-[285px]",
             sidebarClassName

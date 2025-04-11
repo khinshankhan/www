@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react"
 import { Button } from "@/components/base/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/base/collapsible"
-import { ChevronRight, ListTree } from "@/components/base/icon"
+import { ChevronRight, ListTree, Pin, PinOff } from "@/components/base/icon"
 import { Text, typographyVariants } from "@/components/base/typography"
 import { SmartLink } from "@/components/composite/smart-link"
 import { useBreakpoint, useIsomorphicEffect } from "@/hooks/media"
@@ -158,11 +158,31 @@ const layoutIdSlugger = new Slugger()
 export function Toc({ headings }: TocProps) {
   layoutIdSlugger.reset()
 
+  const tocRef = useRef<HTMLDivElement | null>(null)
+
   const [open, setOpen] = useState(false)
   const action = open ? "Close" : "Open"
 
   const isXl = useBreakpoint("xl")
   useIsomorphicEffect(() => setOpen(isXl), [isXl])
+
+  const [sticky, setSticky] = useState(true)
+  const stickyAction = sticky ? "Unpin" : "Pin"
+  const toggleParentSticky = (stick: boolean) => {
+    if (stick) {
+      tocRef.current?.parentElement?.classList.add("sticky")
+    } else {
+      tocRef.current?.parentElement?.classList.remove("sticky")
+    }
+  }
+  useIsomorphicEffect(() => {
+    if (isXl) {
+      toggleParentSticky(true)
+      return
+    }
+
+    toggleParentSticky(sticky)
+  }, [sticky, isXl])
 
   // this exists outside of the collapsible content so it won't be unmounted
   // allowing us to track the current active id even if the toc is closed
@@ -176,23 +196,46 @@ export function Toc({ headings }: TocProps) {
   const activeId = activeIds[activeIds.length - 1] || (headings?.[0]?.id ?? "")
 
   return (
-    <>
+    <div ref={tocRef}>
       <Collapsible
-        className="block h-[64px] w-full rounded-lg bg-background-1/25 px-2 py-3 backdrop-blur-2xl data-[state=open]:bg-background-1 xl:hidden"
+        data-sticky={sticky}
+        className="group mx-auto block h-[64px] w-full max-w-[55ch] data-[sticky=true]:sticky xl:hidden"
         open={open}
         onOpenChange={setOpen}
       >
-        <CollapsibleTrigger asChild>
-          <Button
-            aria-label={`${action} table of contents.`}
-            variant="ghost"
-            className="group w-full pl-2.5"
-          >
-            <TocDescription />
-          </Button>
-        </CollapsibleTrigger>
+        <div className="group space-between flex w-full flex-row items-center gap-4">
+          <div className="w-full rounded-lg bg-background-1/25 px-2 py-3 backdrop-blur-2xl group-data-[state=open]:bg-background-1">
+            <CollapsibleTrigger asChild>
+              <Button
+                aria-label={`${action} table of contents.`}
+                variant="ghost"
+                className="w-full grow pl-2.5"
+              >
+                <TocDescription />
+              </Button>
+            </CollapsibleTrigger>
+          </div>
 
-        <CollapsibleContent className="animated-collapsible pt-4">
+          <div className="group rounded-lg bg-background-1/25 px-2 py-3 backdrop-blur-2xl group-data-[state=open]:bg-background-1">
+            <Button
+              aria-label={`${stickyAction} table of contents.`}
+              variant="ghost"
+              className="w-full pl-2.5"
+              onClick={() => {
+                setSticky((wasSticky) => {
+                  setOpen((wasOpen) => {
+                    return !wasSticky && wasOpen
+                  })
+                  return !wasSticky
+                })
+              }}
+            >
+              {sticky ? <PinOff /> : <Pin />}
+            </Button>
+          </div>
+        </div>
+
+        <CollapsibleContent className="animated-collapsible pt-2">
           <TocList
             headings={headings}
             activeId={activeId}
@@ -214,6 +257,6 @@ export function Toc({ headings }: TocProps) {
           />
         </div>
       </div>
-    </>
+    </div>
   )
 }
