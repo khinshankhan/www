@@ -46,9 +46,8 @@ export default function Home() {
           <HorizontalLine className="z-2 reveal-on-scroll absolute bottom-0" />
         </header>
 
-        <div className="content-layout grow">
-          {/* make this header "scroll effect" */}
-          <header className="py-14">
+        <div className="content-layout isolate grow">
+          <header className="z-1 content-layout fixed w-full py-14">
             <h1>Title of the page</h1>
             <span>Description of page</span>
 
@@ -57,7 +56,10 @@ export default function Home() {
             </HorizontalLine>
           </header>
 
-          <div className="flex w-full grow flex-col gap-2">
+          {/* acts as buffer to gradually hide fixed header, also gives header breathing room from content */}
+          <div className="z-2 from-background/100 via-background/50 to-background/0 relative mt-48 h-12 bg-gradient-to-t" />
+
+          <div className="z-2 bg-background relative flex w-full grow flex-col gap-2">
             <p>Hello there. Content goes here</p>
 
             {[...Array(13).keys()].map((num) => (
