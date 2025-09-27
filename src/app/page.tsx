@@ -47,6 +47,7 @@ export default function Home() {
           <RevealOnScroll rangePx={200}>
             <HorizontalLine className="z-2 absolute bottom-0" />
           </RevealOnScroll>
+          <div className="from-background/100 via-background/50 to-background/0 absolute -bottom-16 h-16 w-full bg-gradient-to-b" />
         </header>
 
         <div className="content-layout isolate grow">
