@@ -1,10 +1,23 @@
+import React from "react"
+import { cn } from "@/lib/utils"
+
+interface HorizontalLineProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string
+}
+
+function HorizontalLine({ className, ...props }: HorizontalLineProps) {
+  return (
+    <div role="presentation" className={cn("bg-foreground h-px w-full", className)} {...props} />
+  )
+}
+
 export default function Home() {
   return (
     <div className="flex min-h-dvh w-full flex-col items-center justify-center">
       <div className="xs:min-h-[96vh] flex min-h-[87vh] w-full grow flex-col items-center justify-center">
         <header className="bg-background/60 page-layout sticky-header relative sticky top-0 z-50 flex justify-center py-4 pt-8 backdrop-blur-md">
           <nav> Hello there</nav>
-          <div className="bg-foreground z-2 reveal-on-scroll absolute bottom-0 h-px w-full" />
+          <HorizontalLine className="z-2 reveal-on-scroll absolute bottom-0" />
         </header>
 
         <div className="content-layout grow">
