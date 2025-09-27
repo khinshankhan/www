@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="flex min-h-dvh w-full flex-col items-center justify-center">
       <div className="xs:min-h-[96vh] flex min-h-[87vh] w-full grow flex-col items-center justify-center">
-        <header className="bg-background/60 page-layout sticky-header relative sticky top-0 z-50 flex flex-col justify-center py-4 pt-8 backdrop-blur-md">
+        <header className="bg-background page-layout sticky-header relative sticky top-0 z-50 flex flex-col justify-center py-4 pt-8">
           <nav className="align-center flex flex-row justify-between">
             <div>icon</div>
 
@@ -44,9 +44,12 @@ export default function Home() {
             </div>
           </nav>
 
+          {/* just a really cool line effect */}
           <RevealOnScroll rangePx={200}>
             <HorizontalLine className="z-2 absolute bottom-0" />
           </RevealOnScroll>
+
+          {/* acts as buffer to gradually introduce actual header's overlay onto content */}
           <div className="from-background/100 via-background/50 to-background/0 absolute -bottom-16 h-16 w-full bg-gradient-to-b" />
         </header>
 
