@@ -2,8 +2,9 @@ export default function Home() {
   return (
     <div className="flex min-h-dvh w-full flex-col items-center justify-center">
       <div className="xs:min-h-[96vh] flex min-h-[87vh] w-full grow flex-col items-center justify-center">
-        <header className="page-layout h-16">
-          <p className="">Header</p>
+        <header className="bg-background/60 page-layout sticky-header relative sticky top-0 z-50 flex justify-center py-4 pt-8 backdrop-blur-md">
+          <nav> Hello there</nav>
+          <div className="bg-foreground z-2 reveal-on-scroll absolute bottom-0 h-px w-full" />
         </header>
 
         <div className="content-layout grow">
@@ -15,8 +16,8 @@ export default function Home() {
 
           <p>Hello there. Content goes here</p>
 
-          {[0, 1, 2, 3, 4, 5].map((_, i) => (
-            <p key={i}>
+          {[...Array(13).keys()].map((num) => (
+            <p key={num}>
               Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
               egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
               Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris
