@@ -1,32 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background-1: hsl(240, 31.8%, 91.4%);
+  --background-2: hsl(240, 40%, 98%);
   --foreground: #040404;
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-background-1: var(--background-1);
+  --color-background-2: var(--background-2);
   --color-foreground: var(--foreground);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background-1: #000011;
+    --background-2: hsl(240, 84%, 4.9%);
     --foreground: #ededed;
   }
 }
 
 * {
-  scrollbar-color: var(--color-foreground) var(--color-background);
+  scrollbar-color: var(--color-foreground) var(--color-background-1);
 }
 
 .page-layout {
   max-width: 1200px;
-  width: 100%;
 }
 
 .content-layout {
   max-width: calc(72ch + 32px);
-  width: 100%;
 }

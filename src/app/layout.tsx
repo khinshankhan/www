@@ -14,9 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="animated-background bg-background text-foreground flow-root min-h-dvh">
-        {children}
-      </body>
+      <body className="bg-background-1 text-foreground flow-root min-h-screen">{children}</body>
     </html>
   )
 }
