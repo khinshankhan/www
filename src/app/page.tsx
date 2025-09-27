@@ -2,12 +2,29 @@ import React from "react"
 import { cn } from "@/lib/utils"
 
 interface HorizontalLineProps extends React.HTMLAttributes<HTMLDivElement> {
+  gradient?: string
+  bg?: string
   className?: string
+  children?: React.ReactNode
 }
 
-function HorizontalLine({ className, ...props }: HorizontalLineProps) {
+function HorizontalLine({
+  gradient = "bg-gradient-to-r from-foreground/0 via-foreground/40 to-foreground/0",
+  bg = "bg-background",
+  className = "",
+  children,
+  ...props
+}: HorizontalLineProps) {
   return (
-    <div role="presentation" className={cn("bg-foreground h-px w-full", className)} {...props} />
+    <div role="separator" className={cn("relative w-full", className)} {...props}>
+      <div role="presentation" className={cn("bg-foreground relative h-px w-full", gradient)} />
+
+      {children && (
+        <div className={cn("absolute -bottom-3 w-full text-center")}>
+          <span className={cn("px-2", bg)}>{children}</span>
+        </div>
+      )}
+    </div>
   )
 }
 
