@@ -30,22 +30,3 @@
   max-width: calc(72ch + 32px);
   width: 100%;
 }
-
-.reveal-on-scroll {
-  opacity: 0;
-  animation-name: fade-in;
-  animation-duration: 1ms;
-  animation-timeline: scroll();
-  animation-range: 0 250px;
-  animation-fill-mode: both;
-  animation-timing-function: steps(100, end);
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}

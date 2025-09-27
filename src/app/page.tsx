@@ -1,4 +1,5 @@
 import React from "react"
+import { RevealOnScroll } from "@/components/reveal-on-scroll"
 import { cn } from "@/lib/utils"
 
 interface HorizontalLineProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -43,7 +44,9 @@ export default function Home() {
             </div>
           </nav>
 
-          <HorizontalLine className="z-2 reveal-on-scroll absolute bottom-0" />
+          <RevealOnScroll rangePx={200}>
+            <HorizontalLine className="z-2 absolute bottom-0" />
+          </RevealOnScroll>
         </header>
 
         <div className="content-layout isolate grow">
