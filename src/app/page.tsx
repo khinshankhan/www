@@ -37,12 +37,14 @@ export default function Home() {
           <header className="align-center flex w-full justify-center py-4 pt-8">
             <div className="page-layout w-full">
               <nav className="align-center flex flex-row justify-between">
+                {/* TODO: port over logo */}
                 <div>icon</div>
 
                 <div className="align-center flex flex-row gap-2">
-                  {[...Array(4).keys()].map((num) => (
-                    <div key={num}>{`Link ${num}`}</div>
-                  ))}
+                  {[...Array(4).keys()].map((num) => {
+                    /* TODO: figure out navbar items */
+                    return <div key={num}>{`Link ${num}`}</div>
+                  })}
                 </div>
               </nav>
             </div>
@@ -61,19 +63,16 @@ export default function Home() {
           <header className="content-layout fixed z-0 w-full py-14">
             <h1>Title of the page</h1>
             <span>Description of page</span>
-
-            <HorizontalLine className="z-0 mt-10">
-              93ecdd28051c2a5053f29c7888cf45e8b7ab2b86
-            </HorizontalLine>
           </header>
         </div>
 
+        {/* TODO: determine margin based on article header height */}
         {/* acts as buffer to gradually hide fixed header, also gives header breathing room from content */}
         <div className="z-1 from-background-1/100 via-background-1/50 to-background-1/0 relative mt-48 h-12 bg-gradient-to-t" />
 
         <div className="bg-background-2 isolate flex w-full grow flex-col items-center justify-center">
           <div className="content-layout relative flex w-full grow flex-col gap-2 py-14">
-            <p>Hello there. Content goes here</p>
+            <p>Hello there. Content goes here [gets sourced from mdx files later].</p>
 
             {[...Array(13).keys()].map((num) => (
               <p key={num}>
@@ -91,9 +90,17 @@ export default function Home() {
             ))}
           </div>
         </div>
+
+        <div className="flex w-full flex-col items-center py-8">
+          <div className="page-layout w-full text-center md:text-end">
+            [Link to specific article page goes here]
+          </div>
+        </div>
       </div>
 
-      <div className="bg-background-1 w-full">footer</div>
+      <footer className="bg-background-1 flex w-full flex-col items-center">
+        <p className="pb-20 pt-8 text-center">&copy; 2017+, Khinshan Khan. All rights reserved.</p>
+      </footer>
     </div>
   )
 }
