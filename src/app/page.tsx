@@ -35,7 +35,7 @@ export default function Home() {
       <div className="xs:min-h-[96vh] flex min-h-[87vh] w-full grow flex-col">
         <div className="z-2 bg-background-1 sticky top-0 w-full">
           <header className="align-center flex w-full justify-center py-4 pt-8">
-            <div className="page-layout w-full">
+            <div className="maxw-page w-full">
               <nav className="align-center flex flex-row justify-between">
                 {/* TODO: port over logo */}
                 <div>icon</div>
@@ -51,7 +51,7 @@ export default function Home() {
 
             {/* just a really cool line effect */}
             <RevealOnScroll rangePx={200}>
-              <HorizontalLine className="z-2 page-layout absolute bottom-0 left-1/2 -translate-x-1/2 transform" />
+              <HorizontalLine className="z-2 maxw-page absolute bottom-0 left-1/2 -translate-x-1/2 transform" />
             </RevealOnScroll>
           </header>
 
@@ -60,7 +60,7 @@ export default function Home() {
         </div>
 
         <div className="isolate flex w-full flex-col items-center">
-          <header className="content-layout fixed z-0 w-full py-14">
+          <header className="maxw-content fixed z-0 w-full py-14">
             <h1>Title of the page</h1>
             <span>Description of page</span>
           </header>
@@ -71,7 +71,7 @@ export default function Home() {
         <div className="z-1 from-background-1/100 via-background-1/50 to-background-1/0 relative mt-48 h-12 bg-gradient-to-t" />
 
         <div className="bg-background-2 isolate flex w-full grow flex-col items-center justify-center">
-          <div className="content-layout relative flex w-full grow flex-col gap-2 py-14">
+          <div className="maxw-content relative flex w-full grow flex-col gap-2 py-14">
             <p>Hello there. Content goes here [gets sourced from mdx files later].</p>
 
             {[...Array(13).keys()].map((num) => (
@@ -92,7 +92,7 @@ export default function Home() {
         </div>
 
         <div className="flex w-full flex-col items-center py-8">
-          <div className="page-layout w-full text-center md:text-end">
+          <div className="maxw-page w-full text-center md:text-end">
             [Link to specific article page goes here]
           </div>
         </div>

@@ -24,10 +24,10 @@
   scrollbar-color: var(--color-foreground) var(--color-background-1);
 }
 
-.page-layout {
+.maxw-page {
   max-width: 1200px;
 }
 
-.content-layout {
+.maxw-content {
   max-width: calc(72ch + 32px);
 }
