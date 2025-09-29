@@ -1,27 +1,75 @@
 @import "tailwindcss";
 
-:root {
-  --background-1: hsl(240, 31.8%, 91.4%);
-  --background-2: hsl(240, 40%, 98%);
-  --foreground: #040404;
-}
+@import "./styles/colors.css";
 
 @theme inline {
-  --color-background-1: var(--background-1);
-  --color-background-2: var(--background-2);
-  --color-foreground: var(--foreground);
-}
+  --color-*: initial;
+  --color-transparent: var(--transparent);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-1: #000011;
-    --background-2: hsl(240, 84%, 4.9%);
-    --foreground: #ededed;
-  }
+  --color-surface-1: var(--celestial-1);
+  --color-surface-2: var(--celestial-2);
+  --color-surface-3: var(--celestial-3);
+  --color-surface-4: var(--celestial-4);
+  --color-surface-5: var(--celestial-5);
+  --color-surface-6: var(--celestial-6);
+  --color-surface-7: var(--celestial-7);
+  --color-surface-8: var(--celestial-8);
+  --color-surface-9: var(--celestial-9);
+  --color-surface-10: var(--celestial-10);
+  --color-surface-11: var(--celestial-11);
+  --color-surface-12: var(--celestial-12);
+
+  --color-surface-a1: var(--celestial-a1);
+  --color-surface-a2: var(--celestial-a2);
+  --color-surface-a3: var(--celestial-a3);
+  --color-surface-a4: var(--celestial-a4);
+  --color-surface-a5: var(--celestial-a5);
+  --color-surface-a6: var(--celestial-a6);
+  --color-surface-a7: var(--celestial-a7);
+  --color-surface-a8: var(--celestial-a8);
+  --color-surface-a9: var(--celestial-a9);
+  --color-surface-a10: var(--celestial-a10);
+  --color-surface-a11: var(--celestial-a11);
+  --color-surface-a12: var(--celestial-a12);
+
+  --color-accent-1: var(--plum-1);
+  --color-accent-2: var(--plum-2);
+  --color-accent-3: var(--plum-3);
+  --color-accent-4: var(--plum-4);
+  --color-accent-5: var(--plum-5);
+  --color-accent-6: var(--plum-6);
+  --color-accent-7: var(--plum-7);
+  --color-accent-8: var(--plum-8);
+  --color-accent-9: var(--plum-9);
+  --color-accent-10: var(--plum-10);
+  --color-accent-11: var(--plum-11);
+  --color-accent-12: var(--plum-12);
+
+  --color-accent-a1: var(--plum-a1);
+  --color-accent-a2: var(--plum-a2);
+  --color-accent-a3: var(--plum-a3);
+  --color-accent-a4: var(--plum-a4);
+  --color-accent-a5: var(--plum-a5);
+  --color-accent-a6: var(--plum-a6);
+  --color-accent-a7: var(--plum-a7);
+  --color-accent-a8: var(--plum-a8);
+  --color-accent-a9: var(--plum-a9);
+  --color-accent-a10: var(--plum-a10);
+  --color-accent-a11: var(--plum-a11);
+  --color-accent-a12: var(--plum-a12);
+
+  /* semantic tokens */
+  --color-background-1: var(--color-surface-2);
+  --color-background-2: var(--color-surface-1);
+
+  --color-foreground: var(--color-surface-11);
+  --color-foreground-muted: var(--color-surface-11);
+
+  --color-border: var(--color-surface-7);
 }
 
 * {
-  scrollbar-color: var(--color-foreground) var(--color-background-1);
+  scrollbar-color: var(--color-foreground) var(--color-background-2);
 }
 
 .maxw-page {

@@ -10,7 +10,7 @@ interface HorizontalLineProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function HorizontalLine({
-  gradient = "bg-gradient-to-r from-foreground/0 via-foreground/40 to-foreground/0",
+  gradient = "bg-gradient-to-r from-border/0 via-border/40 to-border/0",
   bg = "bg-background-1",
   className = "",
   children,
@@ -18,7 +18,7 @@ function HorizontalLine({
 }: HorizontalLineProps) {
   return (
     <div role="separator" className={cn("relative w-full", className)} {...props}>
-      <div role="presentation" className={cn("bg-foreground relative h-px w-full", gradient)} />
+      <div role="presentation" className={cn("bg-border relative h-px w-full", gradient)} />
 
       {children && (
         <div className={cn("absolute -bottom-3 w-full text-center")}>
