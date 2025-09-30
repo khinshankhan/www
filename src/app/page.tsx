@@ -1,34 +1,8 @@
 import React from "react"
+import { Divider } from "@/components/design-system/primitives/divider"
 import { RevealOnScroll } from "@/components/reveal-on-scroll"
 import { cn } from "@/lib/utils"
 import { cva, type VariantProps } from "class-variance-authority"
-
-interface HorizontalLineProps extends React.HTMLAttributes<HTMLDivElement> {
-  gradient?: string
-  bg?: string
-  className?: string
-  children?: React.ReactNode
-}
-
-function HorizontalLine({
-  gradient = "bg-gradient-to-r from-border/0 via-border/40 to-border/0",
-  bg = "bg-background-1",
-  className = "",
-  children,
-  ...props
-}: HorizontalLineProps) {
-  return (
-    <div role="separator" className={cn("relative w-full", className)} {...props}>
-      <div role="presentation" className={cn("bg-border relative h-px w-full", gradient)} />
-
-      {children && (
-        <div className={cn("absolute -bottom-3 w-full text-center")}>
-          <span className={cn("px-2", bg)}>{children}</span>
-        </div>
-      )}
-    </div>
-  )
-}
 
 const bufferLineVariants = cva(
   "z-2 from-background-1/100 via-background-1/50 to-background-1/0 w-full",
@@ -71,7 +45,7 @@ function TopBar() {
 
         {/* just a really cool line effect */}
         <RevealOnScroll rangePx={200}>
-          <HorizontalLine className="z-2 maxw-page absolute bottom-0 left-1/2 -translate-x-1/2 transform" />
+          <Divider className="z-2 maxw-page absolute bottom-0 left-1/2 -translate-x-1/2 transform" />
         </RevealOnScroll>
       </header>
 
@@ -128,7 +102,7 @@ function ArticleContent() {
               <p>Hello there. Content goes here [gets sourced from mdx files later].</p>
             </section>
 
-            {[...Array(13).keys()].map((num) => (
+            {[...Array(3).keys()].map((num) => (
               <section key={num} aria-labelledby={`section-${num}`} className="flex flex-col gap-2">
                 <h2 id={`section-${num}`} className="text-foreground pt-8 text-2xl font-bold">
                   {`Section ${num}`}
