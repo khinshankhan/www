@@ -1,6 +1,7 @@
 import React from "react"
 import { RevealOnScroll } from "@/components/reveal-on-scroll"
 import { cn } from "@/lib/utils"
+import { cva, type VariantProps } from "class-variance-authority"
 
 interface HorizontalLineProps extends React.HTMLAttributes<HTMLDivElement> {
   gradient?: string
@@ -27,6 +28,27 @@ function HorizontalLine({
       )}
     </div>
   )
+}
+
+const bufferLineVariants = cva(
+  "z-2 from-background-1/100 via-background-1/50 to-background-1/0 w-full",
+  {
+    variants: {
+      dirTo: {
+        top: "bg-gradient-to-t",
+        bottom: "bg-gradient-to-b",
+      },
+    },
+  }
+)
+
+type BufferLineVariantProps = Required<VariantProps<typeof bufferLineVariants>>
+
+interface BufferLineProps extends React.HTMLAttributes<HTMLDivElement>, BufferLineVariantProps {
+  heightClass: string
+}
+function BufferLine({ dirTo, heightClass, className = "", ...props }: BufferLineProps) {
+  return <div className={cn(bufferLineVariants({ dirTo }), heightClass, className)} {...props} />
 }
 
 export default function Home() {
@@ -56,7 +78,7 @@ export default function Home() {
           </header>
 
           {/* acts as buffer to gradually introduce actual header's overlay onto content */}
-          <div className="from-background-1/100 via-background-1/50 to-background-1/0 absolute -bottom-16 h-16 w-full bg-gradient-to-b" />
+          <BufferLine dirTo="bottom" heightClass="h-16" className="z-2 absolute -bottom-16" />
         </div>
 
         <main className="text-foreground z-1 relative isolate flex grow flex-col">
@@ -68,7 +90,7 @@ export default function Home() {
 
             {/* TODO: determine margin based on article header height */}
             {/* acts as buffer to gradually hide fixed header, also gives header breathing room from content */}
-            <div className="z-2 from-background-1/100 via-background-1/50 to-background-1/0 relative mt-48 h-12 w-full bg-gradient-to-t" />
+            <BufferLine dirTo="top" heightClass="h-12" className="z-2 relative mt-48" />
 
             <div className="bg-background-2 z-2 relative isolate flex w-full grow flex-col items-center justify-center">
               <div className="maxw-content relative flex w-full grow flex-col gap-2 py-14">
@@ -110,7 +132,7 @@ export default function Home() {
 
           {/* TODO: determine margin based on content below */}
           {/* acts as buffer to gradually reveal fixed footer, also gives footer breathing room from content */}
-          <div className="z-2 from-background-1/100 via-background-1/50 to-background-1/0 relative mb-56 h-12 w-full bg-gradient-to-b" />
+          <BufferLine dirTo="bottom" heightClass="h-12" className="z-2 relative mb-56" />
 
           <div className="z-1 fixed bottom-44 flex w-full flex-col items-center">
             <div className="maxw-page w-full text-center md:text-end">
