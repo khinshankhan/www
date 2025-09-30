@@ -8,8 +8,7 @@ export const rail = cva("relative", {
   variants: {
     orientation: {
       horizontal: "h-px w-full",
-      // TODO: enable vertical in the future when there's a usecase
-      /*       vertical: "h-full", */
+      vertical: "h-full w-px",
     },
     inset: { none: "", start: "ps-4", end: "pe-4", both: "px-4" },
   },
@@ -22,8 +21,7 @@ export const line = cva("bg-border relative", {
   variants: {
     orientation: {
       horizontal: "h-(--weight) w-full bg-gradient-to-r",
-      // TODO: enable vertical in the future when there's a usecase
-      // vertical: "w-(--weight) h-full bg-gradient-to-t",
+      vertical: "w-(--weight) h-full bg-gradient-to-t",
     },
     weight: {
       hairline: "[--weight:1px]",
@@ -73,6 +71,13 @@ const horizLabelAlignments: Record<LabelAlign, string> = {
   right: "text-right",
 } as const
 
+// NOTE: these are just hacked together, probably could be improved
+const vertLabelAlignments: Record<LabelAlign, string> = {
+  left: "-bottom-1 -translate-y-1/2 -right-1.5",
+  center: "top-1/2 -translate-y-1/2 -right-4",
+  right: "-top-1 -translate-y-1/2 -right-3",
+} as const
+
 export function Divider({
   orientation = "horizontal",
   inset = "none",
@@ -114,8 +119,8 @@ export function Divider({
         <div
           aria-hidden
           className={cn(
-            horizontal ? "absolute -bottom-2.5 w-full" : "absolute inset-y-0 -end-2.5 flex",
-            horizLabelAlignments[labelAlignment],
+            horizontal ? "absolute -bottom-2.5 w-full" : "absolute -rotate-90",
+            horizontal ? horizLabelAlignments[labelAlignment] : vertLabelAlignments[labelAlignment],
             labelWrapperClassName
           )}
         >
