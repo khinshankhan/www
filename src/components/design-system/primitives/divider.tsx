@@ -21,69 +21,33 @@ type RailVariantProps = VariantProps<typeof rail>
 export const line = cva("bg-border relative", {
   variants: {
     orientation: {
-      horizontal: "w-full",
+      horizontal: "h-(--weight) w-full bg-gradient-to-r",
       // TODO: enable vertical in the future when there's a usecase
-      /*       vertical: "h-full w-px", */
+      // vertical: "w-(--weight) h-full bg-gradient-to-t",
     },
-    thickness: { hairline: "h-px", sm: "h-[1.5px]", md: "h-[2px]" },
-    gradient: {
-      none: "", // classes injected via compoundVariants below
-      soft: "", // classes injected via compoundVariants below
-      strong: "", // classes injected via compoundVariants below
+    weight: {
+      hairline: "[--weight:1px]",
+      thin: "[--weight:1.5px]",
+      regular: "[--weight:2px]",
+      thick: "[--weight:4px]",
+    },
+    intensity: {
+      none: "[--intensity-1:0%] [--intensity-2:0%] [--intensity-3:0%]",
+      soft: "[--intensity-1:40%] [--intensity-2:20%] [--intensity-3:0%]",
+      strong: "[--intensity-1:60%] [--intensity-2:30%] [--intensity-3:0%]",
+      solid: "[--intensity-1:100%] [--intensity-2:100%] [--intensity-3:100%]",
     },
     labelAlign: {
-      center: "", // classes injected via compoundVariants below
-      left: "", // classes injected via compoundVariants below
-      right: "", // classes injected via compoundVariants below
+      center: "from-border/(--intensity-3) via-border/(--intensity-1) to-border/(--intensity-3)",
+      left: "from-border/(--intensity-1) via-border/(--intensity-2) to-border/(--intensity-3)",
+      right: "from-border/(--intensity-3) via-border/(--intensity-2) to-border/(--intensity-1)",
     },
   },
-  compoundVariants: [
-    // CENTER alignment: fade in from transparent, solid in middle, fade out to transparent
-    {
-      orientation: "horizontal",
-      gradient: "soft",
-      labelAlign: "center",
-      class: "from-border/0 via-border/40 to-border/0 bg-gradient-to-r",
-    },
-    {
-      orientation: "horizontal",
-      gradient: "strong",
-      labelAlign: "center",
-      class: "from-border/0 via-border/60 to-border/0 bg-gradient-to-r",
-    },
-
-    // LEFT alignment: solid on the left, fade to transparent on the right
-    {
-      orientation: "horizontal",
-      gradient: "soft",
-      labelAlign: "left",
-      class: "from-border/100 via-border/40 to-border/0 bg-gradient-to-r",
-    },
-    {
-      orientation: "horizontal",
-      gradient: "strong",
-      labelAlign: "left",
-      class: "from-border/100 via-border/60 to-border/0 bg-gradient-to-r",
-    },
-
-    // RIGHT alignment: transparent on the left, solid on the right
-    {
-      orientation: "horizontal",
-      gradient: "soft",
-      labelAlign: "right",
-      class: "from-border/0 via-border/40 to-border/100 bg-gradient-to-r",
-    },
-    {
-      orientation: "horizontal",
-      gradient: "strong",
-      labelAlign: "right",
-      class: "from-border/0 via-border/60 to-border/100 bg-gradient-to-r",
-    },
-  ],
   defaultVariants: {
     orientation: "horizontal",
-    thickness: "hairline",
-    gradient: "strong",
+    weight: "hairline",
+    intensity: "strong",
+    labelAlign: "center",
   },
 })
 
@@ -112,8 +76,8 @@ const horizLabelAlignments: Record<LabelAlign, string> = {
 export function Divider({
   orientation = "horizontal",
   inset = "none",
-  thickness,
-  gradient,
+  weight,
+  intensity,
   labelAlign = "center",
   label,
   labelBgClass = "bg-background-2",
@@ -141,7 +105,7 @@ export function Divider({
         data-vertical={!horizontal || undefined}
         data-align={labelAlignment}
         className={cn(
-          line({ orientation: lineOrientation, thickness, gradient, labelAlign: labelAlignment }),
+          line({ orientation: lineOrientation, weight, intensity, labelAlign: labelAlignment }),
           lineClassName
         )}
       />
