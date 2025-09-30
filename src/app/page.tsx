@@ -59,16 +59,16 @@ export default function Home() {
           <div className="from-background-1/100 via-background-1/50 to-background-1/0 absolute -bottom-16 h-16 w-full bg-gradient-to-b" />
         </div>
 
-        <main>
-          <article className="isolate flex w-full flex-col items-center">
+        <main className="text-foreground flex grow flex-col">
+          <article className="isolate flex w-full grow flex-col items-center">
             <header className="maxw-content fixed z-0 w-full py-14">
-              <h1>Title of the page</h1>
-              <span>Description of page</span>
+              <h1 className="text-foreground">Title of the page</h1>
+              <p className="text-foreground-muted">Description of page</p>
             </header>
 
             {/* TODO: determine margin based on article header height */}
             {/* acts as buffer to gradually hide fixed header, also gives header breathing room from content */}
-            <div className="z-1 from-background-1/100 via-background-1/50 to-background-1/0 relative mt-48 h-12 bg-gradient-to-t" />
+            <div className="z-1 from-background-1/100 via-background-1/50 to-background-1/0 relative mt-48 h-12 w-full bg-gradient-to-t" />
 
             <div className="bg-background-2 isolate flex w-full grow flex-col items-center justify-center">
               <div className="maxw-content relative flex w-full grow flex-col gap-2 py-14">
@@ -86,8 +86,8 @@ export default function Home() {
                     aria-labelledby={`section-${num}`}
                     className="flex flex-col gap-2"
                   >
-                    <h2 id={`section-${num}`} className="pt-8 text-2xl font-bold">
-                      Section {num}
+                    <h2 id={`section-${num}`} className="text-foreground pt-8 text-2xl font-bold">
+                      {`Section ${num}`}
                     </h2>
                     <p>
                       Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac

@@ -62,8 +62,8 @@
   --color-background-1: var(--color-surface-2);
   --color-background-2: var(--color-surface-1);
 
-  --color-foreground: var(--color-surface-11);
-  --color-foreground-muted: var(--color-surface-11);
+  --color-foreground: var(--color-surface-12);
+  --color-foreground-muted: var(--color-surface-a9);
 
   --color-border: var(--color-surface-7);
 }
