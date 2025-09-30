@@ -59,8 +59,8 @@ export default function Home() {
           <div className="from-background-1/100 via-background-1/50 to-background-1/0 absolute -bottom-16 h-16 w-full bg-gradient-to-b" />
         </div>
 
-        <main className="text-foreground flex grow flex-col">
-          <article className="isolate flex w-full grow flex-col items-center">
+        <main className="text-foreground z-1 relative isolate flex grow flex-col">
+          <article className="z-2 relative isolate flex w-full grow flex-col items-center">
             <header className="maxw-content fixed z-0 w-full py-14">
               <h1 className="text-foreground">Title of the page</h1>
               <p className="text-foreground-muted">Description of page</p>
@@ -68,9 +68,9 @@ export default function Home() {
 
             {/* TODO: determine margin based on article header height */}
             {/* acts as buffer to gradually hide fixed header, also gives header breathing room from content */}
-            <div className="z-1 from-background-1/100 via-background-1/50 to-background-1/0 relative mt-48 h-12 w-full bg-gradient-to-t" />
+            <div className="z-2 from-background-1/100 via-background-1/50 to-background-1/0 relative mt-48 h-12 w-full bg-gradient-to-t" />
 
-            <div className="bg-background-2 isolate flex w-full grow flex-col items-center justify-center">
+            <div className="bg-background-2 z-2 relative isolate flex w-full grow flex-col items-center justify-center">
               <div className="maxw-content relative flex w-full grow flex-col gap-2 py-14">
                 <section aria-labelledby="introduction" className="flex flex-col gap-2">
                   <h2 id="introduction" className="sr-only pt-8 text-2xl font-bold">
@@ -108,7 +108,11 @@ export default function Home() {
             </div>
           </article>
 
-          <div className="flex w-full flex-col items-center py-8">
+          {/* TODO: determine margin based on content below */}
+          {/* acts as buffer to gradually reveal fixed footer, also gives footer breathing room from content */}
+          <div className="z-2 from-background-1/100 via-background-1/50 to-background-1/0 relative mb-56 h-12 w-full bg-gradient-to-b" />
+
+          <div className="z-1 fixed bottom-44 flex w-full flex-col items-center">
             <div className="maxw-page w-full text-center md:text-end">
               [Link to specific article page goes here]
             </div>
@@ -116,8 +120,8 @@ export default function Home() {
         </main>
       </div>
 
-      <footer className="bg-background-1 flex w-full flex-col items-center">
-        <p className="pb-20 pt-8 text-center">&copy; 2017+, Khinshan Khan. All rights reserved.</p>
+      <footer className="fixed bottom-24 z-0 flex w-full flex-col items-center">
+        <p className="text-center">&copy; 2017+, shan. All rights reserved.</p>
       </footer>
     </div>
   )
