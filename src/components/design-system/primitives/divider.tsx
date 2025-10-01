@@ -51,8 +51,121 @@ export const line = cva("bg-border relative", {
 
 type LineVariantProps = VariantProps<typeof line>
 
-interface Props extends React.HTMLAttributes<HTMLDivElement>, RailVariantProps, LineVariantProps {
-  /** Center label (horizontal) or side label (vertical) */
+export const labelWrapperVariants = cva("absolute", {
+  variants: {
+    orientation: {
+      horizontal: "-bottom-2.5 w-full",
+      vertical: "",
+    },
+    alignment: {
+      left: "",
+      center: "",
+      right: "",
+    },
+    side: {
+      top: "rotate-0",
+      bottom: "rotate-180",
+      left: "-rotate-90",
+      right: "rotate-90",
+    },
+  },
+  compoundVariants: [
+    // horizontal alignment
+    {
+      orientation: "horizontal",
+      alignment: "left",
+      class: "text-left",
+    },
+    {
+      orientation: "horizontal",
+      alignment: "center",
+      class: "text-center",
+    },
+    {
+      orientation: "horizontal",
+      alignment: "right",
+      class: "text-right",
+    },
+
+    // vertical alignment
+    // TODO: figure out a smart way to handle vertical alignment
+    {
+      orientation: "vertical",
+      alignment: "left",
+      class: "-right-4.5 bottom-0",
+    },
+    {
+      orientation: "vertical",
+      alignment: "center",
+      class: "-right-8 top-1/2",
+    },
+    {
+      orientation: "vertical",
+      alignment: "right",
+      class: "-right-4.5 top-0",
+    },
+  ],
+})
+
+type LabelWrapperVariantProps = VariantProps<typeof labelWrapperVariants>
+
+export const labelVariants = cva("", {
+  variants: {
+    orientation: {
+      horizontal: "-bottom-2.5 w-full",
+      vertical: "",
+    },
+    alignment: {
+      left: "",
+      center: "",
+      right: "",
+    },
+  },
+  compoundVariants: [
+    // horizontal alignment
+    {
+      orientation: "horizontal",
+      alignment: "left",
+      class: "pr-2",
+    },
+    {
+      orientation: "horizontal",
+      alignment: "center",
+      class: "px-2",
+    },
+    {
+      orientation: "horizontal",
+      alignment: "right",
+      class: "pl-2",
+    },
+
+    // vertical alignment
+    {
+      orientation: "vertical",
+      alignment: "left",
+      class: "pr-2",
+    },
+    {
+      orientation: "vertical",
+      alignment: "center",
+      class: "px-2",
+    },
+    {
+      orientation: "vertical",
+      alignment: "right",
+      class: "pl-2",
+    },
+  ],
+})
+
+type LabelVariantProps = VariantProps<typeof labelVariants>
+
+interface Props
+  extends React.HTMLAttributes<HTMLDivElement>,
+    RailVariantProps,
+    LineVariantProps,
+    LabelWrapperVariantProps,
+    LabelVariantProps {
   label?: React.ReactNode
   /** Background behind label chip to "cut" the line (make it same as the surface to get the "bleed" effect) */
   labelBgClass?: string
@@ -63,21 +176,6 @@ interface Props extends React.HTMLAttributes<HTMLDivElement>, RailVariantProps, 
   labelClassName?: string
 }
 
-type LabelAlign = NonNullable<Required<LineVariantProps>["labelAlign"]>
-
-const horizLabelAlignments: Record<LabelAlign, string> = {
-  left: "text-left",
-  center: "text-center",
-  right: "text-right",
-} as const
-
-// NOTE: these are just hacked together, probably could be improved
-const vertLabelAlignments: Record<LabelAlign, string> = {
-  left: "-bottom-1 -translate-y-1/2 -right-1.5",
-  center: "top-1/2 -translate-y-1/2 -right-4",
-  right: "-top-1 -translate-y-1/2 -right-3",
-} as const
-
 export function Divider({
   orientation = "horizontal",
   inset = "none",
@@ -85,6 +183,7 @@ export function Divider({
   intensity,
   labelAlign = "center",
   label,
+  side = undefined,
   labelBgClass = "bg-background-2",
   railClassName,
   lineClassName,
@@ -94,9 +193,11 @@ export function Divider({
   ...rest
 }: Props) {
   // default to horizontal if null orientation is passed
-  const lineOrientation = orientation || "horizontal"
+  const lineOrientation = orientation ?? "horizontal"
   const horizontal = lineOrientation === "horizontal"
-  const labelAlignment = labelAlign || "center"
+
+  const labelAlignment = labelAlign ?? "center"
+  const labelSide = side ?? (horizontal ? "top" : "left")
 
   return (
     <div
@@ -119,12 +220,19 @@ export function Divider({
         <div
           aria-hidden
           className={cn(
-            horizontal ? "absolute -bottom-2.5 w-full" : "absolute -rotate-90",
-            horizontal ? horizLabelAlignments[labelAlignment] : vertLabelAlignments[labelAlignment],
+            labelWrapperVariants({ orientation, alignment: labelAlign, side: labelSide }),
             labelWrapperClassName
           )}
         >
-          <span className={cn("px-2", labelBgClass, labelClassName)}>{label}</span>
+          <span
+            className={cn(
+              labelVariants({ orientation, alignment: labelAlign }),
+              labelBgClass,
+              labelClassName
+            )}
+          >
+            {label}
+          </span>
         </div>
       )}
     </div>
