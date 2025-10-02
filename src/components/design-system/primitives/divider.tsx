@@ -1,5 +1,3 @@
-"use client"
-
 import React from "react"
 import { cn } from "@/lib/utils"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -20,14 +18,14 @@ type RailVariantProps = VariantProps<typeof rail>
 export const line = cva("bg-border relative", {
   variants: {
     orientation: {
-      horizontal: "h-(--weight) w-full bg-gradient-to-r",
-      vertical: "w-(--weight) h-full bg-gradient-to-t",
+      horizontal: "h-(--thickness) w-full bg-gradient-to-r",
+      vertical: "w-(--thickness) h-full bg-gradient-to-t",
     },
-    weight: {
-      hairline: "[--weight:1px]",
-      thin: "[--weight:1.5px]",
-      regular: "[--weight:2px]",
-      thick: "[--weight:4px]",
+    thickness: {
+      hairline: "[--thickness:1px]",
+      thin: "[--thickness:1.5px]",
+      regular: "[--thickness:2px]",
+      thick: "[--thickness:4px]",
     },
     intensity: {
       none: "[--intensity-1:0%] [--intensity-2:0%] [--intensity-3:0%]",
@@ -35,7 +33,7 @@ export const line = cva("bg-border relative", {
       strong: "[--intensity-1:60%] [--intensity-2:30%] [--intensity-3:0%]",
       solid: "[--intensity-1:100%] [--intensity-2:100%] [--intensity-3:100%]",
     },
-    labelAlign: {
+    align: {
       center: "from-border/(--intensity-3) via-border/(--intensity-1) to-border/(--intensity-3)",
       left: "from-border/(--intensity-1) via-border/(--intensity-2) to-border/(--intensity-3)",
       right: "from-border/(--intensity-3) via-border/(--intensity-2) to-border/(--intensity-1)",
@@ -43,9 +41,9 @@ export const line = cva("bg-border relative", {
   },
   defaultVariants: {
     orientation: "horizontal",
-    weight: "hairline",
+    thickness: "hairline",
     intensity: "strong",
-    labelAlign: "center",
+    align: "center",
   },
 })
 
@@ -57,7 +55,7 @@ export const labelWrapperVariants = cva("absolute", {
       horizontal: "-bottom-2.5 w-full",
       vertical: "",
     },
-    alignment: {
+    align: {
       left: "",
       center: "",
       right: "",
@@ -73,36 +71,37 @@ export const labelWrapperVariants = cva("absolute", {
     // horizontal alignment
     {
       orientation: "horizontal",
-      alignment: "left",
+      align: "left",
       class: "text-left",
     },
     {
       orientation: "horizontal",
-      alignment: "center",
+      align: "center",
       class: "text-center",
     },
     {
       orientation: "horizontal",
-      alignment: "right",
+      align: "right",
       class: "text-right",
     },
 
     // vertical alignment
     // TODO: figure out a smart way to handle vertical alignment
+    // probably unusable for now
     {
       orientation: "vertical",
-      alignment: "left",
-      class: "-right-4.5 bottom-0",
+      align: "left",
+      class: "absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-0.5 transform",
     },
     {
       orientation: "vertical",
-      alignment: "center",
-      class: "-right-8 top-1/2",
+      align: "center",
+      class: "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform",
     },
     {
       orientation: "vertical",
-      alignment: "right",
-      class: "-right-4.5 top-0",
+      align: "right",
+      class: "absolute left-1/2 top-0 -translate-x-1/2 translate-y-1/2 transform",
     },
   ],
 })
@@ -115,47 +114,12 @@ export const labelVariants = cva("", {
       horizontal: "-bottom-2.5 w-full",
       vertical: "",
     },
-    alignment: {
-      left: "",
-      center: "",
-      right: "",
+    align: {
+      left: "pr-2",
+      center: "px-2",
+      right: "pl-2",
     },
   },
-  compoundVariants: [
-    // horizontal alignment
-    {
-      orientation: "horizontal",
-      alignment: "left",
-      class: "pr-2",
-    },
-    {
-      orientation: "horizontal",
-      alignment: "center",
-      class: "px-2",
-    },
-    {
-      orientation: "horizontal",
-      alignment: "right",
-      class: "pl-2",
-    },
-
-    // vertical alignment
-    {
-      orientation: "vertical",
-      alignment: "left",
-      class: "pr-2",
-    },
-    {
-      orientation: "vertical",
-      alignment: "center",
-      class: "px-2",
-    },
-    {
-      orientation: "vertical",
-      alignment: "right",
-      class: "pl-2",
-    },
-  ],
 })
 
 type LabelVariantProps = VariantProps<typeof labelVariants>
@@ -170,6 +134,8 @@ interface Props
   /** Background behind label chip to "cut" the line (make it same as the surface to get the "bleed" effect) */
   labelBgClass?: string
 
+  orientation?: "horizontal" | "vertical"
+
   railClassName?: string
   lineClassName?: string
   labelWrapperClassName?: string
@@ -179,11 +145,11 @@ interface Props
 export function Divider({
   orientation = "horizontal",
   inset = "none",
-  weight,
+  thickness,
   intensity,
-  labelAlign = "center",
+  align: alignProp = "center",
   label,
-  side = undefined,
+  side: sideProp = undefined,
   labelBgClass = "bg-background-2",
   railClassName,
   lineClassName,
@@ -192,45 +158,31 @@ export function Divider({
   className,
   ...rest
 }: Props) {
-  // default to horizontal if null orientation is passed
-  const lineOrientation = orientation ?? "horizontal"
-  const horizontal = lineOrientation === "horizontal"
+  const isHorizontal = orientation === "horizontal"
 
-  const labelAlignment = labelAlign ?? "center"
-  const labelSide = side ?? (horizontal ? "top" : "left")
+  const align = alignProp ?? "center"
+  const side = sideProp ?? (isHorizontal ? "top" : "left")
 
   return (
     <div
       role="separator"
-      aria-orientation={horizontal ? "horizontal" : "vertical"}
-      className={cn(rail({ orientation: lineOrientation, inset }), railClassName, className)}
+      aria-orientation={isHorizontal ? "horizontal" : "vertical"}
+      className={cn(rail({ orientation, inset }), railClassName, className)}
       {...rest}
     >
       <div
         role="presentation"
-        data-vertical={!horizontal || undefined}
-        data-align={labelAlignment}
-        className={cn(
-          line({ orientation: lineOrientation, weight, intensity, labelAlign: labelAlignment }),
-          lineClassName
-        )}
+        data-vertical={!isHorizontal || undefined}
+        data-align={align}
+        className={cn(line({ orientation, thickness, intensity, align }), lineClassName)}
       />
 
       {label && (
         <div
-          aria-hidden
-          className={cn(
-            labelWrapperVariants({ orientation, alignment: labelAlign, side: labelSide }),
-            labelWrapperClassName
-          )}
+          data-align={align}
+          className={cn(labelWrapperVariants({ orientation, align, side }), labelWrapperClassName)}
         >
-          <span
-            className={cn(
-              labelVariants({ orientation, alignment: labelAlign }),
-              labelBgClass,
-              labelClassName
-            )}
-          >
+          <span className={cn(labelVariants({ orientation, align }), labelBgClass, labelClassName)}>
             {label}
           </span>
         </div>
