@@ -1,63 +1,7 @@
 import React from "react"
-import { ScrollReveal } from "@/components/design-system/patterns/view-observers/scroll-reveal"
-import { Divider } from "@/components/design-system/primitives/divider"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
-import { cn } from "@/lib/utils"
-import { cva, type VariantProps } from "class-variance-authority"
-
-function TopBar() {
-  return (
-    <div className="z-2 bg-background-1 sticky top-0 w-full">
-      <header className="align-center flex w-full justify-center py-4 pt-8">
-        <div className="maxw-page w-full">
-          <nav className="align-center flex flex-row justify-between">
-            {/* TODO: port over logo */}
-            <div>icon</div>
-
-            <div className="align-center flex flex-row gap-2">
-              {[...Array(4).keys()].map((num) => {
-                /* TODO: figure out navbar items */
-                return <div key={num}>{`Link ${num}`}</div>
-              })}
-            </div>
-          </nav>
-        </div>
-
-        {/* just a really cool line effect */}
-        <ScrollReveal rangePx={200}>
-          <Divider className="z-2 maxw-page absolute bottom-0 left-1/2 -translate-x-1/2 transform" />
-        </ScrollReveal>
-      </header>
-
-      {/* acts as buffer to gradually introduce actual header's overlay onto content */}
-      <EdgeFade direction="bottom" className="z-2 absolute -bottom-16 h-16" />
-    </div>
-  )
-}
-
-const footerVariants = cva("flex w-full flex-col items-center", {
-  variants: {
-    position: {
-      fixed: "fixed bottom-24",
-      static: "static",
-    },
-  },
-  defaultVariants: {
-    position: "static",
-  },
-})
-
-type FooterVariantProps = VariantProps<typeof footerVariants>
-
-interface FooterProps extends React.HTMLAttributes<HTMLDivElement>, FooterVariantProps {}
-
-function Footer({ position, className = "", ...props }: FooterProps) {
-  return (
-    <footer className={cn(footerVariants({ position }), className)} {...props}>
-      <p className="text-center">&copy; 2017+, Khinshan Khan. All rights reserved.</p>
-    </footer>
-  )
-}
+import { SiteFooter } from "@/components/layout/site-footer"
+import { SiteHeader } from "@/components/layout/site-header"
 
 function ArticleContent() {
   return (
@@ -122,12 +66,12 @@ export default function Home() {
   return (
     <div className="flex min-h-screen w-full grow flex-col">
       <div className="xs:min-h-[96vh] flex min-h-[87vh] w-full grow flex-col">
-        <TopBar />
+        <SiteHeader />
 
         <ArticleContent />
       </div>
 
-      <Footer position="fixed" />
+      <SiteFooter position="fixed" />
     </div>
   )
 }
