@@ -1,7 +1,7 @@
 import React from "react"
+import { ScrollReveal } from "@/components/design-system/patterns/view-observers/scroll-reveal"
 import { Divider } from "@/components/design-system/primitives/divider"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
-import { RevealOnScroll } from "@/components/reveal-on-scroll"
 import { cn } from "@/lib/utils"
 import { cva, type VariantProps } from "class-variance-authority"
 
@@ -24,9 +24,9 @@ function TopBar() {
         </div>
 
         {/* just a really cool line effect */}
-        <RevealOnScroll rangePx={200}>
+        <ScrollReveal rangePx={200}>
           <Divider className="z-2 maxw-page absolute bottom-0 left-1/2 -translate-x-1/2 transform" />
-        </RevealOnScroll>
+        </ScrollReveal>
       </header>
 
       {/* acts as buffer to gradually introduce actual header's overlay onto content */}
