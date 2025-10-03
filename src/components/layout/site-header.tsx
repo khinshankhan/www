@@ -10,8 +10,8 @@ export function SiteHeader() {
   return (
     <div className="z-2 sticky top-0 w-full">
       <ScrollRevealBackground
-        fromColor="var(--background-1)"
-        toColor="var(--background-2)"
+        fromColor="var(--color-background-1)"
+        toColor="var(--color-background-2)"
         rangePx={1440}
       >
         <header className="align-center flex w-full justify-center py-4 pt-8">
