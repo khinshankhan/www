@@ -32,11 +32,15 @@ export function ScrollRevealBackground({
   const progress = useTransform(scrollY, [0, rangePx], [0, 1], { clamp: true })
   const pct = useTransform(progress, (p) => `${p * 100}%`)
 
+  const motionStyle = {
+    "--reveal-pct": pct as unknown as MotionValue<string>,
+  } as React.CSSProperties
+
   const style = {
-    ["--reveal-pct" as any]: pct as unknown as MotionValue<string>,
+    ...motionStyle,
     background: `color-mix(in oklab, ${fromColor} calc(100% - var(--reveal-pct)), ${toColor} var(--reveal-pct))`,
     willChange: "background-color",
-  } as React.CSSProperties
+  }
 
   return <motion.div style={style}>{children}</motion.div>
 }
