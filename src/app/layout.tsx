@@ -1,6 +1,16 @@
+import React from "react"
 import type { Metadata } from "next"
+import { cn } from "@/lib/utils"
+import { GeistMono } from "geist/font/mono"
+import { GeistSans } from "geist/font/sans"
 
 import "./globals.css"
+
+const fontAliases = {
+  ["--font-heading"]: "var(--font-geist-sans)",
+  ["--font-body"]: "var(--font-geist-sans)",
+  ["--font-mono"]: "var(--font-geist-mono)",
+} as React.CSSProperties
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)} style={fontAliases}>
       <body className="bg-background-1 text-foreground flex flow-root min-h-screen flex-col">
         {children}
       </body>

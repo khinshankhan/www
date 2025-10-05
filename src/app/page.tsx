@@ -17,7 +17,7 @@ function ArticleContent() {
     <main className="text-foreground z-1 relative isolate flex grow flex-col">
       <article className="z-2 relative isolate flex w-full grow flex-col items-center">
         <header ref={headerRef} className="maxw-content fixed z-0 flex w-full flex-col gap-4 py-14">
-          <h1 className="text-foreground scroll-m-20 text-balance text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
+          <h1 className="font-heading text-foreground scroll-m-20 text-balance text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
             {title}
           </h1>
           <p className="text-foreground-muted text-balance text-xl font-medium leading-relaxed lg:text-2xl">

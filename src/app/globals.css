@@ -12,6 +12,17 @@
   --breakpoint-xl: 82.8125rem; /* 1325px */
   --breakpoint-2xl: 96rem; /* 1536px */
 
+  --font-family-*: initial;
+  --font-family-heading:
+    var(--font-heading), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-family-body:
+    var(--font-body), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-family-mono:
+    var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --default-font-family: var(--font-family-body);
+  --default-mono-font-family: var(--font-family-mono);
+
   --color-*: initial;
   --color-transparent: var(--transparent);
 
