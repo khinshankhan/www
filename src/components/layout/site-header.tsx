@@ -14,7 +14,7 @@ export function SiteHeader() {
       <ScrollRevealBackground
         fromColor="var(--color-background-1)"
         toColor="var(--color-background-2)"
-        rangePx={1440}
+        rangePx={842}
       >
         <header className="align-center flex w-full justify-center py-4 pt-8">
           <div className="maxw-page w-full">
