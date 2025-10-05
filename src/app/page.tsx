@@ -67,12 +67,8 @@ function ArticleContent() {
         </div>
       </article>
 
-      {/* TODO: determine margin based on content below */}
-      {/* acts as buffer to gradually reveal fixed footer, also gives footer breathing room from content */}
-      <EdgeFade direction="bottom" className="z-2 relative mb-56 h-12" />
-
-      <div className="z-1 fixed bottom-44 flex w-full flex-col items-center">
-        <div className="maxw-page w-full text-center md:text-end">
+      <div className="z-1 flex w-full flex-col items-center pt-14">
+        <div className="maxw-page w-full text-center md:px-4 md:text-end">
           [Link to specific article page goes here]
         </div>
       </div>
@@ -89,7 +85,7 @@ export default function Home() {
         <ArticleContent />
       </div>
 
-      <SiteFooter position="fixed" />
+      <SiteFooter position="static" />
     </div>
   )
 }
