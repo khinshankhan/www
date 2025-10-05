@@ -122,9 +122,25 @@
 }
 
 .maxw-page {
-  max-width: 1200px;
+  max-width: 90%;
+
+  @media (min-width: theme(--breakpoint-xl)) {
+    max-width: 77rem;
+  }
+
+  @media (min-width: theme(--breakpoint-2xl)) {
+    max-width: 87.5rem;
+  }
 }
 
 .maxw-content {
-  max-width: calc(72ch + 32px);
+  max-width: 90%;
+
+  @media (min-width: theme(--breakpoint-xl)) {
+    max-width: 62rem;
+  }
+
+  @media (min-width: theme(--breakpoint-2xl)) {
+    max-width: 72rem;
+  }
 }
