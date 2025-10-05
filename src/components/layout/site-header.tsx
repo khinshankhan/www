@@ -20,7 +20,7 @@ export function SiteHeader() {
           <div className="maxw-page w-full">
             <nav className="align-center flex flex-row justify-between">
               {/* TODO: port over logo */}
-              <div className={cn(typographyVariants({ variant: "nav" }), "text-foreground")}>
+              <div className={cn(typographyVariants({ variant: "nav" }), "text-foreground-strong")}>
                 icon
               </div>
 
@@ -30,7 +30,10 @@ export function SiteHeader() {
                   return (
                     <div
                       key={num}
-                      className={cn(typographyVariants({ variant: "nav" }), "text-foreground")}
+                      className={cn(
+                        typographyVariants({ variant: "nav" }),
+                        "text-foreground-strong"
+                      )}
                     >{`Link ${num}`}</div>
                   )
                 })}

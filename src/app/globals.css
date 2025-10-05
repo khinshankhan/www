@@ -108,8 +108,10 @@
   --color-background-1: var(--color-surface-2);
   --color-background-2: var(--color-surface-1);
 
-  --color-foreground: var(--color-surface-12);
-  --color-foreground-muted: var(--color-surface-a9);
+  --color-foreground-strong: var(--color-surface-12);
+  --color-foreground: color-mix(in oklab, var(--color-surface-12) 90%, transparent);
+  --color-foreground-muted: color-mix(in oklab, var(--color-surface-12) 70%, transparent);
+  --color-foreground-subtle: color-mix(in oklab, var(--color-surface-12) 60%, transparent);
 
   --color-border: var(--color-surface-7);
 }

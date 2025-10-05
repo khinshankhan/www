@@ -316,6 +316,19 @@
   }
 }
 
+/* Because Chrome is buggy with box-shadow transitions from "transparent" keyword and/or RGB color into P3 colors. */
+/* Note: using `:where` here to guarantee that the P3 color will take over regardless of the output rule order. */
+:where(body) {
+  --transparent: rgb(0 0 0 / 0);
+}
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    body {
+      --transparent: color(display-p3 0 0 0 / 0);
+    }
+  }
+}
+
 .default-theme {
   --color-accent-1: var(--plum-1);
   --color-accent-2: var(--plum-2);

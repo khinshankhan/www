@@ -19,13 +19,11 @@ function ArticleContent() {
     <main className="z-1 relative isolate flex grow flex-col">
       <article className="z-2 relative isolate flex w-full grow flex-col items-center">
         <header ref={headerRef} className="maxw-content fixed z-0 flex w-full flex-col gap-4 py-14">
-          <h1 className={cn(typographyVariants({ variant: "h1" }), "text-foreground text-balance")}>
-            {title}
-          </h1>
+          <h1 className={cn(typographyVariants({ variant: "h1" }), "text-balance")}>{title}</h1>
           <p
             className={cn(
               typographyVariants({ variant: "nav" }),
-              "text-foreground/70 max-w-[75ch] leading-relaxed"
+              "text-foreground-muted max-w-[75ch] leading-relaxed"
             )}
           >
             {description}
@@ -73,9 +71,9 @@ function ArticleContent() {
                     alt="Grapefruit slice atop a pile of other slices"
                   />
 
-                  <figcaption className="text-foreground/70 flex max-w-[55ch] flex-col items-center gap-2 text-sm">
-                    <p className="text-foreground/70">Figure of Orange</p>
-                    <p className="text-foreground/70">Orange you glad?</p>
+                  <figcaption className="text-foreground-muted flex max-w-[55ch] flex-col items-center gap-2 text-sm">
+                    <p>Figure of Orange</p>
+                    <p>Orange you glad?</p>
                   </figcaption>
                 </figure>
               </section>
