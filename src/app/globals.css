@@ -3,6 +3,15 @@
 @import "./styles/colors.css";
 
 @theme inline {
+  --breakpoint-*: initial;
+  --breakpoint-xss: 20rem; /* 320px */
+  --breakpoint-xs: 24.5rem; /* 392px */
+  --breakpoint-sm: 40rem; /* 640px */
+  --breakpoint-md: 48rem; /* 768px -- this is the boundary between mobile vs desktop */
+  --breakpoint-lg: 64rem; /* 1024px */
+  --breakpoint-xl: 82.8125rem; /* 1325px */
+  --breakpoint-2xl: 96rem; /* 1536px */
+
   --color-*: initial;
   --color-transparent: var(--transparent);
 
@@ -70,6 +79,46 @@
 
 * {
   scrollbar-color: var(--color-foreground) var(--color-background-2);
+}
+
+/**
+ * CSS variables can't be used outside of property values so media queries can't use breakpoints variables directly.
+ * Reference: https://stackoverflow.com/questions/40722882/css-native-variables-not-working-in-media-queries
+ *
+ * Philosophy on show/hide: While "visible" has many possible states (block, inline-block, flex, grid), hiding content
+ * (`display: none`) only has one state. To keep things simple, we'll use `display: none` for hiding and leave the code
+ * to handle the specific visible state when showing (use a specific visible display property can mess with intended
+ * experience). This assumption works for now but may need rethinking as the project evolves.
+ *
+ * Managing `!important`: It's hard to override one `!important` with another. Currently, we're handling this case by
+ * applying print utility classes for specific print styles, but a case-by-case approach might be needed moving forward.
+ */
+@utility show-mobile {
+  @media not print {
+    @media (min-width: theme(--breakpoint-md)) {
+      /* force hidden when not mobile */
+      display: none !important;
+    }
+  }
+}
+
+@utility hide-mobile {
+  @media not print {
+    @media not all and (min-width: theme(--breakpoint-md)) {
+      /* force hidden when mobile */
+      display: none !important;
+    }
+  }
+}
+
+/**
+ * Similar logic as to above, let the code define visible state, the utility class can only reliably define hidden
+ * without accidentally changing an expected display.
+ */
+@utility hide-print {
+  @media print {
+    display: none !important;
+  }
 }
 
 .maxw-page {
