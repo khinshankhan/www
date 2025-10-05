@@ -1,20 +1,38 @@
+"use client"
+
 import React from "react"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { SiteHeader } from "@/components/layout/site-header"
+import { useElementSize } from "@/hooks/dimensions"
+
+const title = "About"
+const description =
+  "Exploring the intersections of the online and offline worlds with curiosity, creativity, and a dash of adventure."
 
 function ArticleContent() {
+  const { ref: headerRef, rect: headerRect } = useElementSize()
+
   return (
     <main className="text-foreground z-1 relative isolate flex grow flex-col">
       <article className="z-2 relative isolate flex w-full grow flex-col items-center">
-        <header className="maxw-content fixed z-0 w-full py-14">
-          <h1 className="text-foreground">Title of the page</h1>
-          <p className="text-foreground-muted">Description of page</p>
+        <header ref={headerRef} className="maxw-content fixed z-0 flex w-full flex-col gap-4 py-14">
+          <h1 className="text-foreground scroll-m-20 text-balance text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
+            {title}
+          </h1>
+          <p className="text-foreground-muted text-balance text-xl font-medium leading-relaxed lg:text-2xl">
+            {description}
+          </p>
         </header>
 
-        {/* TODO: determine margin based on article header height */}
         {/* acts as buffer to gradually hide fixed header, also gives header breathing room from content */}
-        <EdgeFade direction="top" className="z-2 relative mt-48 h-12" />
+        <EdgeFade
+          direction="top"
+          className="z-2 relative h-12"
+          style={{
+            marginTop: `${Math.max(headerRect.height, 246) - 48}px`,
+          }}
+        />
 
         <div className="bg-background-2 z-2 relative isolate flex w-full grow flex-col items-center justify-center">
           <div className="maxw-content relative flex w-full grow flex-col gap-2 py-14">
