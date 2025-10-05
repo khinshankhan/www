@@ -1,5 +1,6 @@
 import React from "react"
 import type { Metadata } from "next"
+import { typographyVariants } from "@/components/design-system/primitives/text"
 import { cn } from "@/lib/utils"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
@@ -24,7 +25,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)} style={fontAliases}>
-      <body className="bg-background-1 text-foreground flex flow-root min-h-screen flex-col">
+      <body
+        className={cn(
+          typographyVariants({ variant: "body" }),
+          "bg-background-1 text-foreground/90 flex flow-root min-h-screen flex-col"
+        )}
+      >
         {children}
       </body>
     </html>

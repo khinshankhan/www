@@ -2,9 +2,11 @@
 
 import React from "react"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
+import { typographyVariants } from "@/components/design-system/primitives/text"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { SiteHeader } from "@/components/layout/site-header"
 import { useElementSize } from "@/hooks/dimensions"
+import { cn } from "@/lib/utils"
 
 const title = "About"
 const description =
@@ -14,13 +16,18 @@ function ArticleContent() {
   const { ref: headerRef, rect: headerRect } = useElementSize()
 
   return (
-    <main className="text-foreground z-1 relative isolate flex grow flex-col">
+    <main className="z-1 relative isolate flex grow flex-col">
       <article className="z-2 relative isolate flex w-full grow flex-col items-center">
         <header ref={headerRef} className="maxw-content fixed z-0 flex w-full flex-col gap-4 py-14">
-          <h1 className="font-heading text-foreground scroll-m-20 text-balance text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
+          <h1 className={cn(typographyVariants({ variant: "h1" }), "text-foreground text-balance")}>
             {title}
           </h1>
-          <p className="text-foreground-muted text-balance text-xl font-medium leading-relaxed lg:text-2xl">
+          <p
+            className={cn(
+              typographyVariants({ variant: "nav" }),
+              "text-foreground/70 max-w-[75ch] leading-relaxed"
+            )}
+          >
             {description}
           </p>
         </header>
@@ -45,22 +52,32 @@ function ArticleContent() {
             </section>
 
             {[...Array(3).keys()].map((num) => (
-              <section key={num} aria-labelledby={`section-${num}`} className="flex flex-col gap-2">
-                <h2 id={`section-${num}`} className="text-foreground pt-8 text-2xl font-bold">
+              <section key={num} aria-labelledby={`section-${num}`} className="flex flex-col gap-4">
+                <h2
+                  id={`section-${num}`}
+                  className={cn(typographyVariants({ variant: "h2" }), "max-w-[75ch] pt-8")}
+                >
                   {`Section ${num}`}
                 </h2>
-                <p>
+                <p className={cn(typographyVariants({ variant: "body" }), "max-w-[75ch]")}>
                   Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
                   turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit
                   amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi
-                  vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien
-                  ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare
-                  sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum
-                  rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar
-                  facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque
-                  egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi,
-                  tincidunt quis, accumsan porttitor, facilisis luctus, metus
+                  vitae est. Mauris placerat eleifend leo.
                 </p>
+
+                <figure className="flex w-full flex-col items-center justify-center gap-4">
+                  <img
+                    className="size-72"
+                    src="https://1e709a32-0bf5-49ff-b976-d9f66716a6af.mdnplay.dev/shared-assets/images/examples/grapefruit-slice.jpg"
+                    alt="Grapefruit slice atop a pile of other slices"
+                  />
+
+                  <figcaption className="text-foreground/70 flex max-w-[55ch] flex-col items-center gap-2 text-sm">
+                    <p className="text-foreground/70">Figure of Orange</p>
+                    <p className="text-foreground/70">Orange you glad?</p>
+                  </figcaption>
+                </figure>
               </section>
             ))}
           </div>

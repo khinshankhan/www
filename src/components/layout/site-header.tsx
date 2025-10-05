@@ -5,6 +5,8 @@ import {
 } from "@/components/design-system/patterns/view-observers/scroll-reveal"
 import { Divider } from "@/components/design-system/primitives/divider"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
+import { typographyVariants } from "@/components/design-system/primitives/text"
+import { cn } from "@/lib/utils"
 
 export function SiteHeader() {
   return (
@@ -18,12 +20,19 @@ export function SiteHeader() {
           <div className="maxw-page w-full">
             <nav className="align-center flex flex-row justify-between">
               {/* TODO: port over logo */}
-              <div>icon</div>
+              <div className={cn(typographyVariants({ variant: "nav" }), "text-foreground")}>
+                icon
+              </div>
 
               <div className="align-center flex flex-row gap-2">
                 {[...Array(4).keys()].map((num) => {
                   /* TODO: figure out navbar items */
-                  return <div key={num}>{`Link ${num}`}</div>
+                  return (
+                    <div
+                      key={num}
+                      className={cn(typographyVariants({ variant: "nav" }), "text-foreground")}
+                    >{`Link ${num}`}</div>
+                  )
                 })}
               </div>
             </nav>
