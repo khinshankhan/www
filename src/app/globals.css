@@ -23,6 +23,32 @@
   --default-font-family: var(--font-family-body);
   --default-mono-font-family: var(--font-family-mono);
 
+  --text-*: initial;
+  --text-12: 0.75rem;
+  --text-12--line-height: calc(1 / 0.75);
+  --text-14: 0.875rem;
+  --text-14--line-height: calc(1.25 / 0.875);
+  --text-16: 1rem;
+  --text-16--line-height: calc(1.5 / 1);
+  --text-18: 1.125rem;
+  --text-18--line-height: calc(1.75 / 1.125);
+  --text-20: 1.25rem;
+  --text-20--line-height: calc(1.75 / 1.25);
+  --text-22: 1.375rem;
+  --text-22--line-height: calc(1.75 / 1.375);
+  --text-24: 1.5rem;
+  --text-24--line-height: calc(2 / 1.5);
+  --text-30: 1.875rem;
+  --text-30--line-height: calc(2.25 / 1.875);
+  --text-36: 2.25rem;
+  --text-36--line-height: calc(2.5 / 2.25);
+  --text-48: 3rem;
+  --text-48--line-height: 1;
+  --text-60: 3.75rem;
+  --text-60--line-height: 1;
+  --text-72: 4.5rem;
+  --text-72--line-height: 1;
+
   --color-*: initial;
   --color-transparent: var(--transparent);
 

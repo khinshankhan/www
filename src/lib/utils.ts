@@ -1,5 +1,13 @@
 import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { extendTailwindMerge } from "tailwind-merge"
+
+const twMerge = extendTailwindMerge({
+  extend: {
+    theme: {
+      text: ["14", "16", "18", "20", "24", "30", "36", "48", "60", "72"],
+    },
+  },
+})
 
 /* string utils */
 
