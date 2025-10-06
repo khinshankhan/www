@@ -2,7 +2,7 @@
 
 import React from "react"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
-import { typographyVariants } from "@/components/design-system/primitives/text"
+import { typographyVariants } from "@/components/design-system/primitives/typography"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { SiteHeader } from "@/components/layout/site-header"
 import { useElementSize } from "@/hooks/dimensions"

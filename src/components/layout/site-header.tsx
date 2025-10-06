@@ -6,7 +6,7 @@ import {
 } from "@/components/design-system/patterns/view-observers/scroll-reveal"
 import { Divider } from "@/components/design-system/primitives/divider"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
-import { typographyVariants } from "@/components/design-system/primitives/text"
+import { typographyVariants } from "@/components/design-system/primitives/typography"
 import { Logo } from "@/components/layout/logo"
 import { cn } from "@/lib/utils"
 

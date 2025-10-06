@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority"
 
 export const typographyVariants = cva("", {
   variants: {
@@ -33,3 +33,5 @@ export const typographyVariants = cva("", {
     weight: null,
   },
 })
+
+export type TypographyVariantProps = VariantProps<typeof typographyVariants>
