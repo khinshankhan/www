@@ -1,4 +1,5 @@
 import React from "react"
+import NextLink from "next/link"
 import {
   ScrollReveal,
   ScrollRevealBackground,
@@ -6,6 +7,7 @@ import {
 import { Divider } from "@/components/design-system/primitives/divider"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
 import { typographyVariants } from "@/components/design-system/primitives/text"
+import { Logo } from "@/components/layout/logo"
 import { cn } from "@/lib/utils"
 
 export function SiteHeader() {
@@ -14,15 +16,15 @@ export function SiteHeader() {
       fromColor="var(--color-background-1)"
       toColor="var(--color-background-2)"
       rangePx={900}
-      className="z-2 sticky top-0 w-full"
+      className="z-2 sticky top-0 flex min-h-[68px] w-full flex-col items-center justify-center md:min-h-[78px] lg:min-h-[88px]"
     >
-      <header className="align-center flex w-full justify-center py-4 pt-8">
+      <header className="align-center flex w-full justify-center">
         <div className="maxw-page w-full">
-          <nav className="align-center flex flex-row justify-between">
-            {/* TODO: port over logo */}
-            <div className={cn(typographyVariants({ variant: "nav" }), "text-foreground-strong")}>
-              icon
-            </div>
+          <nav className="align-center flex flex-row items-center justify-between">
+            {/* lhs on all views */}
+            <NextLink aria-label="Navigate to homepage." href="/" className="group">
+              <Logo className={cn("size-[42px] md:size-[45px] lg:size-[52px]")} />
+            </NextLink>
 
             <div className="align-center flex flex-row gap-2">
               {[...Array(4).keys()].map((num) => {
