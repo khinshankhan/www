@@ -2,11 +2,10 @@
 
 import React from "react"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
-import { typographyVariants } from "@/components/design-system/primitives/typography"
+import { H1, H2, Paragraph } from "@/components/design-system/primitives/text"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { SiteHeader } from "@/components/layout/site-header"
 import { useElementSize } from "@/hooks/dimensions"
-import { cn } from "@/lib/utils"
 
 const title = "About"
 const description =
@@ -19,15 +18,16 @@ function ArticleContent() {
     <main className="z-1 relative isolate flex grow flex-col">
       <article className="z-2 relative isolate flex w-full grow flex-col items-center">
         <header ref={headerRef} className="maxw-content fixed z-0 flex w-full flex-col gap-4 py-14">
-          <h1 className={cn(typographyVariants({ variant: "h1" }), "text-balance")}>{title}</h1>
-          <p
-            className={cn(
-              typographyVariants({ variant: "nav" }),
-              "text-foreground-muted max-w-[75ch] leading-relaxed"
-            )}
+          <H1 className="text-balance">{title}</H1>
+          <Paragraph
+            variant="nav"
+            className="text-foreground-muted max-w-[75ch] leading-relaxed"
+            render={(props) => {
+              return <span {...props} />
+            }}
           >
             {description}
-          </p>
+          </Paragraph>
         </header>
 
         {/* acts as buffer to gradually hide fixed header, also gives header breathing room from content */}
@@ -51,18 +51,15 @@ function ArticleContent() {
 
             {[...Array(3).keys()].map((num) => (
               <section key={num} aria-labelledby={`section-${num}`} className="flex flex-col gap-4">
-                <h2
-                  id={`section-${num}`}
-                  className={cn(typographyVariants({ variant: "h2" }), "max-w-[75ch] pt-8")}
-                >
+                <H2 id={`section-${num}`} className="max-w-[75ch] pt-8">
                   {`Section ${num}`}
-                </h2>
-                <p className={cn(typographyVariants({ variant: "body" }), "max-w-[75ch]")}>
+                </H2>
+                <Paragraph className="max-w-[75ch]">
                   Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
                   turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit
                   amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi
                   vitae est. Mauris placerat eleifend leo.
-                </p>
+                </Paragraph>
 
                 <figure className="flex w-full flex-col items-center justify-center gap-4">
                   <img
@@ -72,8 +69,8 @@ function ArticleContent() {
                   />
 
                   <figcaption className="text-foreground-muted flex max-w-[55ch] flex-col items-center gap-2 text-sm">
-                    <p>Figure of Orange</p>
-                    <p>Orange you glad?</p>
+                    <Paragraph>Figure of Orange</Paragraph>
+                    <Paragraph>Orange you glad?</Paragraph>
                   </figcaption>
                 </figure>
               </section>

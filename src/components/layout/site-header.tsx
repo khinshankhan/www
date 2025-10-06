@@ -6,7 +6,7 @@ import {
 } from "@/components/design-system/patterns/view-observers/scroll-reveal"
 import { Divider } from "@/components/design-system/primitives/divider"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
-import { typographyVariants } from "@/components/design-system/primitives/typography"
+import { Paragraph } from "@/components/design-system/primitives/text"
 import { Logo } from "@/components/layout/logo"
 import { cn } from "@/lib/utils"
 
@@ -30,10 +30,11 @@ export function SiteHeader() {
               {[...Array(4).keys()].map((num) => {
                 /* TODO: figure out navbar items */
                 return (
-                  <div
+                  <Paragraph
                     key={num}
-                    className={cn(typographyVariants({ variant: "nav" }), "text-foreground-strong")}
-                  >{`Link ${num}`}</div>
+                    variant="nav"
+                    className="text-foreground-strong"
+                  >{`Link ${num}`}</Paragraph>
                 )
               })}
             </div>
