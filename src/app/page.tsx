@@ -32,7 +32,7 @@ function ArticleContent() {
 
         {/* acts as buffer to push content below fixed header */}
         <div
-          className="starting:pb-0 transition-padding-bottom duration-1500 w-full pb-[calc(var(--pb)-48px)] [--d-pb:281px] md:[--d-pb:246px] lg:[--d-pb:247.5px]"
+          className="starting:pb-0 transition-padding-bottom duration-1750 w-full pb-[calc(var(--pb)-48px)] ease-in-out [--d-pb:281px] md:[--d-pb:246px] lg:[--d-pb:247.5px]"
           style={
             {
               "--a-pb": headerRect.height === 0 ? "" : `${headerRect.height}px`,
