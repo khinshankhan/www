@@ -93,7 +93,7 @@ function ArticleContent() {
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen w-full grow flex-col">
+    <div className="isolate flex min-h-screen w-full grow flex-col">
       <div className="xs:min-h-[96vh] flex min-h-[87vh] w-full grow flex-col">
         <SiteHeader />
 
