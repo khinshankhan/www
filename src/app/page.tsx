@@ -30,14 +30,19 @@ function ArticleContent() {
           </Paragraph>
         </header>
 
-        {/* acts as buffer to gradually hide fixed header, also gives header breathing room from content */}
-        <EdgeFade
-          direction="top"
-          className="z-2 relative h-12"
-          style={{
-            marginTop: `${Math.max(headerRect.height, 246) - 48}px`,
-          }}
+        {/* acts as buffer to push content below fixed header */}
+        <div
+          className="starting:pb-0 transition-padding-bottom duration-1500 w-full pb-[calc(var(--pb)-48px)] [--d-pb:281px] md:[--d-pb:246px] lg:[--d-pb:247.5px]"
+          style={
+            {
+              "--a-pb": headerRect.height === 0 ? "" : `${headerRect.height}px`,
+              "--pb": "var(--a-pb, var(--d-pb))",
+            } as React.CSSProperties
+          }
         />
+
+        {/* acts as a fade effect to gradually introduce content and hide content */}
+        <EdgeFade direction="top" className="z-2 relative h-12" />
 
         <div className="bg-background-2 z-2 relative isolate flex w-full grow flex-col items-center justify-center">
           <div className="maxw-content relative flex w-full grow flex-col gap-2 py-14">
