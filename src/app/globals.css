@@ -82,31 +82,31 @@
   --color-surface-a11: var(--celestial-a11);
   --color-surface-a12: var(--celestial-a12);
 
-  --color-accent-1: var(--plum-1);
-  --color-accent-2: var(--plum-2);
-  --color-accent-3: var(--plum-3);
-  --color-accent-4: var(--plum-4);
-  --color-accent-5: var(--plum-5);
-  --color-accent-6: var(--plum-6);
-  --color-accent-7: var(--plum-7);
-  --color-accent-8: var(--plum-8);
-  --color-accent-9: var(--plum-9);
-  --color-accent-10: var(--plum-10);
-  --color-accent-11: var(--plum-11);
-  --color-accent-12: var(--plum-12);
+  --color-accent-1: var(--accent-1);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-accent-4: var(--accent-4);
+  --color-accent-5: var(--accent-5);
+  --color-accent-6: var(--accent-6);
+  --color-accent-7: var(--accent-7);
+  --color-accent-8: var(--accent-8);
+  --color-accent-9: var(--accent-9);
+  --color-accent-10: var(--accent-10);
+  --color-accent-11: var(--accent-11);
+  --color-accent-12: var(--accent-12);
 
-  --color-accent-a1: var(--plum-a1);
-  --color-accent-a2: var(--plum-a2);
-  --color-accent-a3: var(--plum-a3);
-  --color-accent-a4: var(--plum-a4);
-  --color-accent-a5: var(--plum-a5);
-  --color-accent-a6: var(--plum-a6);
-  --color-accent-a7: var(--plum-a7);
-  --color-accent-a8: var(--plum-a8);
-  --color-accent-a9: var(--plum-a9);
-  --color-accent-a10: var(--plum-a10);
-  --color-accent-a11: var(--plum-a11);
-  --color-accent-a12: var(--plum-a12);
+  --color-accent-a1: var(--accent-a1);
+  --color-accent-a2: var(--accent-a2);
+  --color-accent-a3: var(--accent-a3);
+  --color-accent-a4: var(--accent-a4);
+  --color-accent-a5: var(--accent-a5);
+  --color-accent-a6: var(--accent-a6);
+  --color-accent-a7: var(--accent-a7);
+  --color-accent-a8: var(--accent-a8);
+  --color-accent-a9: var(--accent-a9);
+  --color-accent-a10: var(--accent-a10);
+  --color-accent-a11: var(--accent-a11);
+  --color-accent-a12: var(--accent-a12);
 
   /* semantic tokens */
   --color-background-1: var(--color-surface-2);
