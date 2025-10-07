@@ -3,6 +3,9 @@
 @import "./styles/colors.css";
 @import "./styles/prose.css";
 
+@custom-variant dark (&:where(.dark *));
+@custom-variant light (&:where(.light *));
+
 @theme inline {
   --breakpoint-*: initial;
   --breakpoint-xss: 20rem; /* 320px */
@@ -115,6 +118,13 @@
   --color-foreground-subtle: color-mix(in oklab, var(--color-surface-12) 60%, transparent);
 
   --color-border: var(--color-surface-7);
+
+  /* transition timing functions */
+  --ease-*: initial;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-arrow-rotation: cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 * {
@@ -182,5 +192,54 @@
 
   @media (min-width: theme(--breakpoint-2xl)) {
     max-width: 72rem;
+  }
+}
+
+@layer base {
+  /* we define variables for light directly in :root in case the next-themes fails for some reason, could be a print setting */
+  :root,
+  .light {
+    color-scheme: light dark;
+  }
+
+  .light {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
+  /*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-6, currentColor);
+  }
+}
+
+@layer components {
+  /* style specific elements from here */
+  html {
+    touch-action: manipulation;
+    scroll-behavior: auto;
+  }
+  html:focus-within {
+    /* allows ctr-f to work without smooth scrolling https://css-tricks.com/fixing-smooth-scrolling-with-find-on-page/ */
+    scroll-behavior: smooth;
+  }
+
+  /* this gives a nice highlight color for text selection, especially as we switch between section types */
+  ::selection {
+    background: var(--color-accent-a7);
   }
 }
