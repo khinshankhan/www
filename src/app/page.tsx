@@ -1,18 +1,27 @@
 "use client"
 
-import React from "react"
+import React, { Fragment, useState } from "react"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
 import { H1, H2, Paragraph } from "@/components/design-system/primitives/text"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { SiteHeader } from "@/components/layout/site-header"
 import { useElementSize } from "@/hooks/dimensions"
+import { cn } from "@/lib/utils"
 
 const title = "About"
 const description =
   "Exploring the intersections of the online and offline worlds with curiosity, creativity, and a dash of adventure."
 
+const tempSectionStyles = "flex flex-col md:flex-row md:items-center gap-2"
+const tempButtonStyles =
+  "text-accent-11 hover:bg-accent-4 border-accent-8 cursor-pointer rounded border px-4 py-2"
+
 function ArticleContent() {
   const { ref: headerRef, rect: headerRect } = useElementSize()
+  const [showOptions, setShowOptions] = useState(false)
+  const [sectionsCount, setSectionCount] = useState(3)
+  const [showImageOnEvenSections, setShowImageOnEvenSections] = useState(true)
+  const [showImageOnEvenParagraphs, setShowImageOnEvenParagraphs] = useState(true)
 
   return (
     <main className="z-1 relative isolate flex grow flex-col">
@@ -50,39 +59,95 @@ function ArticleContent() {
               <H2 id="introduction" className="sr-only">
                 Introduction
               </H2>
+              <Paragraph>{`Hello there. Content goes here [gets sourced from mdx files later].`}</Paragraph>
 
-              <p>Hello there. Content goes here [gets sourced from mdx files later].</p>
+              <Paragraph>Testing options:</Paragraph>
+
+              <button
+                className={cn(tempButtonStyles, "default-theme")}
+                onClick={() => setShowOptions((prev) => !prev)}
+              >
+                Toggle Options
+              </button>
+
+              {showOptions && (
+                <Fragment>
+                  <Paragraph>{`Buttons to increase/decrease sections for testing (we have ${sectionsCount}):`}</Paragraph>
+
+                  <section className={tempSectionStyles}>
+                    <button
+                      className={cn(tempButtonStyles, "success-theme")}
+                      onClick={() => setSectionCount((count) => count + 1)}
+                    >
+                      Add Section
+                    </button>
+                    <button
+                      className={cn(tempButtonStyles, "danger-theme")}
+                      onClick={() => setSectionCount((count) => Math.max(0, count - 1))}
+                    >
+                      Remove Section
+                    </button>
+                  </section>
+
+                  <Paragraph>
+                    Buttons to toggle showing image on even sections and/or even paragraphs:
+                  </Paragraph>
+                  <section className={tempSectionStyles}>
+                    <button
+                      className={cn(
+                        tempButtonStyles,
+                        showImageOnEvenSections ? "critical-theme" : "success-theme"
+                      )}
+                      onClick={() => setShowImageOnEvenSections((prev) => !prev)}
+                    >
+                      {`Show on ${showImageOnEvenSections ? "Even" : "Odd"} Sections`}
+                    </button>
+                    <button
+                      className={cn(
+                        tempButtonStyles,
+                        showImageOnEvenParagraphs ? "critical-theme" : "success-theme"
+                      )}
+                      onClick={() => setShowImageOnEvenParagraphs((prev) => !prev)}
+                    >
+                      {`Show on ${showImageOnEvenParagraphs ? "Even" : "Odd"} Paragraphs`}
+                    </button>
+                  </section>
+                </Fragment>
+              )}
             </section>
 
-            {[...Array(3).keys()].map((num) => (
+            {[...Array(sectionsCount).keys()].map((num) => (
               <section key={num} aria-labelledby={`section-${num}`} className="prose">
                 <H2 id={`section-${num}`} className="max-w-[75ch]">
                   {`Section ${num}`}
                 </H2>
 
                 {[...Array(3).keys()].map((j) => (
-                  <Paragraph key={j} className="max-w-[75ch]">
-                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
-                    turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor
-                    sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
-                    mi vitae est. Mauris placerat eleifend leo.
-                  </Paragraph>
+                  <Fragment key={j}>
+                    <Paragraph className="max-w-[75ch]">
+                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
+                      turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor
+                      sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                      mi vitae est. Mauris placerat eleifend leo.
+                    </Paragraph>
+
+                    {(num % 2 !== 0) === showImageOnEvenSections &&
+                      (j % 2 !== 0) === showImageOnEvenParagraphs && (
+                        <figure className="flex w-full flex-col items-center justify-center gap-4">
+                          <img
+                            className="size-72"
+                            src="https://1e709a32-0bf5-49ff-b976-d9f66716a6af.mdnplay.dev/shared-assets/images/examples/grapefruit-slice.jpg"
+                            alt="Grapefruit slice atop a pile of other slices"
+                          />
+
+                          <figcaption className="text-foreground-muted flex max-w-[55ch] flex-col items-center gap-2 text-sm">
+                            <Paragraph className="">Figure of Orange</Paragraph>
+                            <Paragraph>Orange you glad?</Paragraph>
+                          </figcaption>
+                        </figure>
+                      )}
+                  </Fragment>
                 ))}
-
-                {num % 2 !== 0 && (
-                  <figure className="flex w-full flex-col items-center justify-center gap-4">
-                    <img
-                      className="size-72"
-                      src="https://1e709a32-0bf5-49ff-b976-d9f66716a6af.mdnplay.dev/shared-assets/images/examples/grapefruit-slice.jpg"
-                      alt="Grapefruit slice atop a pile of other slices"
-                    />
-
-                    <figcaption className="text-foreground-muted flex max-w-[55ch] flex-col items-center gap-2 text-sm">
-                      <Paragraph>Figure of Orange</Paragraph>
-                      <Paragraph>Orange you glad?</Paragraph>
-                    </figcaption>
-                  </figure>
-                )}
               </section>
             ))}
           </div>
