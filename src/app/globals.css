@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @import "./styles/colors.css";
+@import "./styles/prose.css";
 
 @theme inline {
   --breakpoint-*: initial;

@@ -1,0 +1,71 @@
+@layer components {
+  /* General spacing of content, this is meant to cover cases that can't be easily done with inline classes.
+   *
+   * Keep in mind the phenomenon called 'margin collapsing', where if margins left and right or top and bottom meet and
+   * they're they're both positive, instead of pushing away the additive distance, the larger of two margins is used.
+   *
+   * Reference: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_model/Mastering_margin_collapsing
+   *
+   * However, since if one margin is positive and the other is negative the additive distance is used, it's possible to
+   * leverage 'negative margins' to bring elements closer such that a group of elements seem related.
+   *
+   * Reference: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_model/Mastering_margin_collapsing
+   */
+  .prose > * {
+    margin-bottom: 1.25rem;
+
+    @media (min-width: theme(--breakpoint-md)) {
+      margin-bottom: 1.375rem;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  /* spacing for headings */
+  .prose :where(h1, h2, h3, h4, h5, h6):not(.not-prose, .not-prose *),
+  .prose-heading:not(.not-prose, .not-prose *) {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+
+    @media (min-width: theme(--breakpoint-md)) {
+      margin-top: 1.75rem;
+      margin-bottom: 0.875rem;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  /* list styles */
+  .prose :where(ol, ul):not(.not-prose, .not-prose *) {
+    padding-left: 1em;
+
+    & :where(& > :not(:last-child)) {
+      margin-bottom: 0.375em;
+    }
+  }
+
+  /* sane defaults for list types */
+  .prose ol :not(.not-prose, .not-prose *) {
+    list-style-type: decimal;
+  }
+  .prose ol ol :not(.not-prose, .not-prose *) {
+    list-style-type: lower-alpha;
+  }
+  .prose ol ol ol :not(.not-prose, .not-prose *) {
+    list-style-type: lower-greek;
+  }
+  .prose ul :not(.not-prose, .not-prose *) {
+    list-style-type: disc;
+  }
+  .prose ul ul :not(.not-prose, .not-prose *) {
+    list-style-type: circle;
+  }
+  .prose ul ul ul :not(.not-prose, .not-prose *) {
+    list-style-type: square;
+  }
+}
