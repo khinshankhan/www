@@ -26,7 +26,7 @@ function ArticleContent() {
       <article className="z-2 relative isolate flex w-full grow flex-col items-center">
         <header
           className={cn(
-            "maxw-content top-(--h) sticky z-0 flex w-full flex-col gap-4 pb-2 pt-14",
+            "maxw-content top-(--h) -z-1 sticky flex w-full flex-col gap-4 pb-2 pt-14",
             siteHeaderHeight
           )}
         >
