@@ -4,8 +4,7 @@ import React, { Fragment, useState } from "react"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
 import { H1, H2, Paragraph } from "@/components/design-system/primitives/text"
 import { SiteFooter } from "@/components/layout/site-footer"
-import { SiteHeader } from "@/components/layout/site-header"
-import { useElementSize } from "@/hooks/dimensions"
+import { SiteHeader, siteHeaderHeight } from "@/components/layout/site-header"
 import { cn } from "@/lib/utils"
 
 const title = "About"
@@ -17,7 +16,6 @@ const tempButtonStyles =
   "text-accent-11 hover:bg-accent-4 border-accent-8 cursor-pointer rounded border px-4 py-2"
 
 function ArticleContent() {
-  const { ref: headerRef, rect: headerRect } = useElementSize()
   const [showOptions, setShowOptions] = useState(false)
   const [sectionsCount, setSectionCount] = useState(3)
   const [showImageOnEvenSections, setShowImageOnEvenSections] = useState(true)
@@ -26,7 +24,12 @@ function ArticleContent() {
   return (
     <main className="z-1 relative isolate flex grow flex-col">
       <article className="z-2 relative isolate flex w-full grow flex-col items-center">
-        <header ref={headerRef} className="maxw-content fixed z-0 flex w-full flex-col gap-4 py-14">
+        <header
+          className={cn(
+            "maxw-content top-(--h) sticky z-0 flex w-full flex-col gap-4 pb-2 pt-14",
+            siteHeaderHeight
+          )}
+        >
           <H1 className="text-balance">{title}</H1>
           <Paragraph
             variant="nav"
@@ -38,17 +41,6 @@ function ArticleContent() {
             {description}
           </Paragraph>
         </header>
-
-        {/* acts as buffer to push content below fixed header */}
-        <div
-          className="starting:pb-0 transition-padding-bottom duration-1750 w-full pb-[calc(var(--pb)-48px)] ease-in-out [--d-pb:281px] md:[--d-pb:246px] lg:[--d-pb:247.5px]"
-          style={
-            {
-              "--a-pb": headerRect.height === 0 ? "" : `${headerRect.height}px`,
-              "--pb": "var(--a-pb, var(--d-pb))",
-            } as React.CSSProperties
-          }
-        />
 
         {/* acts as a fade effect to gradually introduce content and hide content */}
         <EdgeFade direction="top" className="z-2 relative h-12" />

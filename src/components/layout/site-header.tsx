@@ -10,13 +10,18 @@ import { Paragraph } from "@/components/design-system/primitives/text"
 import { Logo } from "@/components/layout/logo"
 import { cn } from "@/lib/utils"
 
+export const siteHeaderHeight = "[--h:68px] md:[--h:78px] lg:[--h:88px]"
+
 export function SiteHeader() {
   return (
     <ScrollRevealBackground
       fromColor="var(--color-background-1)"
       toColor="var(--color-background-2)"
       rangePx={900}
-      className="z-2 sticky top-0 flex min-h-[68px] w-full flex-col items-center justify-center md:min-h-[78px] lg:min-h-[88px]"
+      className={cn(
+        "z-2 h-(--h) sticky top-0 flex w-full flex-col items-center justify-center",
+        siteHeaderHeight
+      )}
     >
       <header className="align-center flex w-full justify-center">
         <div className="maxw-page w-full">
