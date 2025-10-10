@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import { cn } from "@/lib/utils"
 import { motion, MotionValue, useScroll, useTransform } from "motion/react"
 
 interface ScrollRevealProps {
@@ -13,8 +14,25 @@ export function ScrollReveal({ rangePx, className = "", children }: ScrollReveal
   const { scrollY } = useScroll() // window scrollY
   const opacity = useTransform(scrollY, [0, rangePx], [0, 1], { clamp: true })
 
+  const motionStyle = {
+    opacity: opacity as unknown as MotionValue<number>,
+    willChange: "opacity",
+  }
+
+  const fallbackCssVars = {
+    "--range": `${rangePx}px`,
+    "--animation-duration": "1s",
+  } as React.CSSProperties
+
   return (
-    <motion.div className={className} style={{ opacity }}>
+    <motion.div
+      className={cn(
+        className,
+        /* NOTE: this is not cross browser compatible yet, which is why we'll use motion if possible */
+        "noscript:reveal-on-scroll noscript:animate-fade-in"
+      )}
+      style={{ ...motionStyle, ...fallbackCssVars }}
+    >
       {children}
     </motion.div>
   )

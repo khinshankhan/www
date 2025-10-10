@@ -125,6 +125,18 @@
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-arrow-rotation: cubic-bezier(0.87, 0, 0.13, 1);
+
+  --animate-fade-in: fade-in var(--animation-duration, 1s) ease-in both;
+
+  /* animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 * {
@@ -242,4 +254,14 @@
   ::selection {
     background: var(--color-accent-a7);
   }
+}
+
+/* NOTE: this should be used in unision with animate-fade-in utility */
+@utility reveal-on-scroll {
+  opacity: 0;
+  animation-duration: 1ms;
+  animation-timeline: scroll();
+  animation-range: 0 var(--range, 100px);
+  animation-fill-mode: both;
+  animation-timing-function: steps(100, end);
 }
