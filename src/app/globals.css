@@ -127,6 +127,7 @@
   --ease-arrow-rotation: cubic-bezier(0.87, 0, 0.13, 1);
 
   --animate-fade-in: fade-in var(--animation-duration, 1s) ease-in both;
+  --animate-bg-fade-in: bg-fade-in var(--animation-duration, 1s) ease-in both;
 
   /* animations */
   @keyframes fade-in {
@@ -135,6 +136,14 @@
     }
     to {
       opacity: 1;
+    }
+  }
+  @keyframes bg-fade-in {
+    from {
+      background-color: var(--from-color, var(--color-background-1));
+    }
+    to {
+      background-color: var(--to-color, var(--color-background-1));
     }
   }
 }
@@ -259,6 +268,16 @@
 /* NOTE: this should be used in unision with animate-fade-in utility */
 @utility reveal-on-scroll {
   opacity: 0;
+  animation-duration: 1ms;
+  animation-timeline: scroll();
+  animation-range: 0 var(--range, 100px);
+  animation-fill-mode: both;
+  animation-timing-function: steps(100, end);
+}
+
+/* NOTE: this should be used in unision with animate-bg-fade-in utility */
+@utility reveal-bg-on-scroll {
+  background-color: var(--from-color, var(--color-background-1));
   animation-duration: 1ms;
   animation-timeline: scroll();
   animation-range: 0 var(--range, 100px);

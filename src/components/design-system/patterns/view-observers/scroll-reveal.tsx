@@ -57,18 +57,34 @@ export function ScrollRevealBackground({
   const progress = useTransform(scrollY, [0, rangePx], [0, 1], { clamp: true })
   const pct = useTransform(progress, (p) => `${p * 100}%`)
 
-  const motionStyle = {
+  const motionCssVars = {
     "--reveal-pct": pct as unknown as MotionValue<string>,
   } as React.CSSProperties
 
-  const style = {
-    ...motionStyle,
+  const motionStyle = {
+    ...motionCssVars,
     background: `color-mix(in oklab, ${fromColor} calc(100% - var(--reveal-pct)), ${toColor} var(--reveal-pct))`,
     willChange: "background-color",
   }
 
+  const fallbackCssVars = {
+    "--range": `${rangePx}px`,
+    "--from-color": fromColor,
+    "--to-color": toColor,
+  } as React.CSSProperties
+
   return (
-    <motion.div className={className} style={style}>
+    <motion.div
+      className={cn(
+        className,
+        /* NOTE: this is not cross browser compatible yet, which is why we'll use motion if possible */
+        "noscript:reveal-bg-on-scroll noscript:animate-bg-fade-in"
+      )}
+      style={{
+        ...motionStyle,
+        ...fallbackCssVars,
+      }}
+    >
       {children}
     </motion.div>
   )
