@@ -6,7 +6,7 @@ import { type LinkLikeComponent } from "./types"
 interface LinkContextProps {
   ExternalComponent: LinkLikeComponent
   InternalComponent: LinkLikeComponent
-  AnchorComponent: LinkLikeComponent
+  HashComponent: LinkLikeComponent
   MailtoComponent: LinkLikeComponent
   TelComponent: LinkLikeComponent
 }
@@ -29,7 +29,7 @@ export const LinkProvider = ({
   children,
   ExternalComponent = "a",
   InternalComponent = "a",
-  AnchorComponent = "a",
+  HashComponent = "a",
   MailtoComponent = "a",
   TelComponent = "a",
 }: LinkProviderProps) => {
@@ -38,7 +38,7 @@ export const LinkProvider = ({
       value={{
         ExternalComponent,
         InternalComponent,
-        AnchorComponent,
+        HashComponent,
         MailtoComponent,
         TelComponent,
       }}
