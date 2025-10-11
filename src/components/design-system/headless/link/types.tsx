@@ -6,3 +6,5 @@ export type LinkLikeComponent =
   | "a"
   | React.ComponentType<LinkProps>
   | React.ForwardRefExoticComponent<LinkProps & React.RefAttributes<HTMLAnchorElement>>
+
+export type LinkKind = "hash" | "mailto" | "tel" | "external" | "internal"
