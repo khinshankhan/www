@@ -5,8 +5,12 @@ import {
   LinkLikeComponent,
   LinkProps,
 } from "@/components/design-system/headless/link/types"
-import { getSaneProps, resolveKindLite } from "@/components/design-system/headless/link/utils"
-import { SquareArrowOutUpRight } from "@/components/design-system/primitives/icon"
+import {
+  getSaneProps,
+  isFileLite,
+  resolveKindLite,
+} from "@/components/design-system/headless/link/utils"
+import { Download, SquareArrowOutUpRight } from "@/components/design-system/primitives/icon"
 import { cn } from "@/lib/utils"
 import { cva, VariantProps } from "class-variance-authority"
 import { mergeProps } from "@base-ui-components/react/merge-props"
@@ -18,9 +22,11 @@ interface LinkIconProps {
 }
 export const LinkIcon = ({ href, kind = undefined }: LinkIconProps) => {
   const isExternal = kind ? kind === "external" : resolveKindLite(href) === "external"
+  const isFile = isFileLite(href)
 
   return (
     <Fragment>
+      {isFile && <Download aria-label="File link." className="inline size-3 align-middle" />}
       {isExternal && (
         <SquareArrowOutUpRight aria-label="External link." className="inline size-3 align-top" />
       )}
