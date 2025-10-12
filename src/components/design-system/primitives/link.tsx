@@ -56,7 +56,14 @@ export const linkVariants = cva("transition-[color] duration-500", {
 
 export type LinkVariants = VariantProps<typeof linkVariants>
 
-interface LinkComponentProps extends useRender.ComponentProps<"a">, LinkProps, LinkVariants {
+interface LinkComponentState {
+  kind: LinkKind
+}
+
+interface LinkComponentProps
+  extends useRender.ComponentProps<"a", LinkComponentState>,
+    LinkProps,
+    LinkVariants {
   className?: string
   /**
    * Trailing icon/adornment behavior.
@@ -90,6 +97,7 @@ export function LinkComponent({
   return useRender({
     defaultTagName: "a",
     render: render ?? ((props) => <ResolvedLinkComponent kind={kind} {...props} />),
+    state: { kind },
     props: mergeProps<"a">(
       {
         href,
