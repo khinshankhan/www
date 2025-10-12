@@ -1,9 +1,11 @@
 import React from "react"
 import type { Metadata } from "next"
+import NextLink from "next/link"
 import { typographyVariants } from "@/components/design-system/primitives/typography"
 import { cn } from "@/lib/utils"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
+import { RootProvider } from "./providers"
 
 import "./globals.css"
 
@@ -31,7 +33,7 @@ export default function RootLayout({
           "bg-background-1 text-foreground/90 default-theme relative isolate flex flow-root min-h-screen flex-col"
         )}
       >
-        {children}
+        <RootProvider>{children}</RootProvider>
       </body>
     </html>
   )
