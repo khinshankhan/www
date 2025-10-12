@@ -26,7 +26,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={cn(GeistSans.variable, GeistMono.variable)} style={fontAliases}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn(GeistSans.variable, GeistMono.variable)}
+      style={fontAliases}
+    >
       <body
         className={cn(
           typographyVariants({ variant: "body" }),
