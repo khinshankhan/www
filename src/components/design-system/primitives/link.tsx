@@ -8,6 +8,8 @@ import {
 import { getSaneProps, resolveKindLite } from "@/components/design-system/headless/link/utils"
 import { cn } from "@/lib/utils"
 import { cva, VariantProps } from "class-variance-authority"
+import { mergeProps } from "@base-ui-components/react/merge-props"
+import { useRender } from "@base-ui-components/react/use-render"
 
 export const linkVariants = cva("transition-[color] duration-500", {
   variants: {
@@ -31,7 +33,7 @@ export const linkVariants = cva("transition-[color] duration-500", {
 
 export type LinkVariants = VariantProps<typeof linkVariants>
 
-interface LinkComponentProps extends LinkProps, LinkVariants {
+interface LinkComponentProps extends useRender.ComponentProps<"a">, LinkProps, LinkVariants {
   className?: string
   children?: React.ReactNode
 }
@@ -45,6 +47,7 @@ export function LinkComponent({
   variant = "default",
   isMonochrome = false,
   children = null,
+  render = undefined,
   ...props
 }: LinkComponentProps) {
   const { HashComponent, ExternalComponent, InternalComponent, MailtoComponent, TelComponent } =
@@ -63,16 +66,20 @@ export function LinkComponent({
 
   const saneProps = getSaneProps(kind)
 
-  return (
-    <Comp
-      href={href}
-      className={cn(linkVariants({ variant, isMonochrome }), className)}
-      {...saneProps}
-      {...props}
-    >
-      {children}
-    </Comp>
-  )
+  return useRender({
+    defaultTagName: "a",
+    render: render ?? ((props) => <Comp {...props} />),
+    props: mergeProps<"a">(
+      {
+        href,
+        className: cn(linkVariants({ variant, isMonochrome }), className),
+        ...saneProps,
+        ...props,
+        children,
+      },
+      props
+    ),
+  })
 }
 
 export const Link = LinkComponent
