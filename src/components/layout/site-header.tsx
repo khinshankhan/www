@@ -34,7 +34,7 @@ const THEMES = ["light", "system", "dark"]
 function getNextTheme(curr: string | undefined, themes = THEMES): string {
   const currIndex = themes.indexOf(curr || "system")
 
-  let nextIndex = currIndex + 1
+  const nextIndex = currIndex + 1
   if (nextIndex < 0) {
     return themes[themes.length - 1]
   }
