@@ -1,3 +1,12 @@
+import React from "react"
+import { useLinkContext } from "@/components/design-system/headless/link/context"
+import {
+  LinkKind,
+  LinkLikeComponent,
+  LinkProps,
+} from "@/components/design-system/headless/link/types"
+import { getSaneProps, resolveKindLite } from "@/components/design-system/headless/link/utils"
+import { cn } from "@/lib/utils"
 import { cva, VariantProps } from "class-variance-authority"
 
 export const linkVariants = cva("transition-[color] duration-500", {
@@ -21,3 +30,49 @@ export const linkVariants = cva("transition-[color] duration-500", {
 })
 
 export type LinkVariants = VariantProps<typeof linkVariants>
+
+interface LinkComponentProps extends LinkProps, LinkVariants {
+  className?: string
+  children?: React.ReactNode
+}
+
+export function LinkComponent({
+  // NOTE: although href is optional official spec, Link without href is not very useful. We will treat it as it as
+  // homepage link for safety, but we'll use linters and and validators to ensure href is always provided when consumed
+  // from data sources.
+  href = "/",
+  className = "",
+  variant = "default",
+  isMonochrome = false,
+  children = null,
+  ...props
+}: LinkComponentProps) {
+  const { HashComponent, ExternalComponent, InternalComponent, MailtoComponent, TelComponent } =
+    useLinkContext()
+
+  const components: Record<LinkKind, LinkLikeComponent> = {
+    hash: HashComponent,
+    mailto: MailtoComponent,
+    tel: TelComponent,
+    internal: InternalComponent,
+    external: ExternalComponent,
+  } as const
+
+  const kind: LinkKind = resolveKindLite(href)
+  const Comp = components[kind]
+
+  const saneProps = getSaneProps(kind)
+
+  return (
+    <Comp
+      href={href}
+      className={cn(linkVariants({ variant, isMonochrome }), className)}
+      {...saneProps}
+      {...props}
+    >
+      {children}
+    </Comp>
+  )
+}
+
+export const Link = LinkComponent
