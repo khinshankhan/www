@@ -1,5 +1,10 @@
 :root,
 .light {
+  --black: rgb(0 0 0);
+  --white: rgb(255 255 255);
+
+  --stark-contrast: var(--black);
+
   --celestial-1: hsl(240, 40%, 98%);
   --celestial-2: hsl(240, 40%, 96.1%);
   --celestial-3: hsl(240, 31.8%, 91.4%);
@@ -184,6 +189,8 @@
 }
 
 .dark {
+  --stark-contrast: var(--white);
+
   --celestial-1: hsl(240, 84%, 4.9%);
   --celestial-2: hsl(240, 47.4%, 11.2%);
   --celestial-3: hsl(240, 32.6%, 17.5%);

@@ -55,6 +55,10 @@
 
   --color-*: initial;
   --color-transparent: var(--transparent);
+  --color-black: var(--black);
+  --color-white: var(--white);
+
+  --color-stark-contrast: var(--stark-contrast);
 
   --color-surface-1: var(--celestial-1);
   --color-surface-2: var(--celestial-2);

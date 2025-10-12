@@ -22,7 +22,7 @@ function ArticleContent() {
 
   return (
     <main className="z-1 relative isolate flex grow flex-col">
-      <article className="z-2 relative isolate flex w-full grow flex-col items-center">
+      <article className="z-2 bg-background-1 relative isolate flex w-full grow flex-col items-center">
         <header
           className={cn(
             "maxw-content top-(--h) -z-1 sticky flex w-full flex-col gap-4 pb-2 pt-14",
@@ -143,7 +143,10 @@ function ArticleContent() {
 export default function Home() {
   return (
     <div className="isolate flex min-h-screen w-full grow flex-col">
-      <div className="xs:min-h-[96vh] flex min-h-[87vh] w-full grow flex-col">
+      <div
+        className="xs:min-h-[96vh] flex min-h-[87vh] w-full grow flex-col"
+        vaul-drawer-wrapper="true"
+      >
         <SiteHeader />
 
         <ArticleContent />

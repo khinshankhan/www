@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useMemo } from "react"
+import React, { useMemo, useState } from "react"
 import NextLink from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -11,6 +11,8 @@ import { Button } from "@/components/design-system/primitives/button"
 import { Divider } from "@/components/design-system/primitives/divider"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
 import {
+  Close,
+  HamburgerMenu,
   IconProps,
   Moon,
   ScreenShareOff,
@@ -18,12 +20,14 @@ import {
   SunMoon,
 } from "@/components/design-system/primitives/icon"
 import { Link } from "@/components/design-system/primitives/link"
+import { H2 } from "@/components/design-system/primitives/text"
 import { typographyVariants } from "@/components/design-system/primitives/typography"
 import { Logo } from "@/components/layout/logo"
 import { useMounted } from "@/hooks/core/useMounted"
 import { cn } from "@/lib/utils"
 import { navLinks } from "@/settings"
 import { useTheme } from "next-themes"
+import { Drawer } from "vaul-base"
 
 const THEMES = ["light", "system", "dark"]
 
@@ -74,6 +78,68 @@ function NavLinksDesktop({ className = "" }: { className?: string }) {
         </li>
       ))}
     </ul>
+  )
+}
+
+function NavLinksMobile() {
+  const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <Drawer.Root shouldScaleBackground open={isOpen} onOpenChange={setIsOpen}>
+      <Drawer.Trigger
+        render={(triggerProps, { open }) => (
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className="relative"
+            aria-label={open ? "Close menu" : "Open menu"}
+            title={open ? "Close menu" : "Open menu"}
+            {...triggerProps}
+          >
+            {open ? (
+              <Close className="size-[1.25rem]" aria-hidden="true" />
+            ) : (
+              <HamburgerMenu className="size-[1.25rem]" aria-hidden="true" />
+            )}
+          </Button>
+        )}
+      />
+
+      <Drawer.Portal>
+        <Drawer.Overlay className="fixed inset-0 bg-black/60" />
+        <Drawer.Content
+          aria-label="Main menu"
+          className="border-border/60 bg-background-1 fixed inset-x-0 bottom-0 h-[70vh] w-full rounded-t-2xl border backdrop-blur"
+        >
+          <Drawer.Handle className="top-3" />
+
+          <nav className="mx-auto flex h-full max-w-sm flex-col gap-1 px-4 py-6">
+            <H2 className="text-muted-foreground mb-2 uppercase tracking-wide">Navigation</H2>
+
+            <ul className="flex flex-col">
+              {navLinks.map((link) => {
+                return (
+                  <li key={link.href} className={typographyVariants({ variant: "nav" })}>
+                    <Link
+                      href={link.href}
+                      variant="nav"
+                      data-active={pathname === link.href}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+
+            {/* optional footer space or extras later */}
+            <div className="text-muted-foreground mt-auto pt-4 text-xs">Press Esc to close</div>
+          </nav>
+        </Drawer.Content>
+      </Drawer.Portal>
+    </Drawer.Root>
   )
 }
 
@@ -134,6 +200,12 @@ export function SiteHeader() {
               <div className="flex flex-row gap-4">
                 <ModeToggle />
               </div>
+            </div>
+
+            {/* rhs on mobile view */}
+            <div className="show-mobile xss:flex-row md:hide-print flex flex-col-reverse gap-2">
+              <ModeToggle />
+              <NavLinksMobile />
             </div>
           </nav>
         </div>
