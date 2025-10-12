@@ -30,7 +30,7 @@ export default function RootLayout({
       <body
         className={cn(
           typographyVariants({ variant: "body" }),
-          "bg-background-1 text-foreground/90 default-theme relative isolate flex flow-root min-h-screen flex-col"
+          "bg-background-1 text-foreground/90 accent-theme-default relative isolate flex flow-root min-h-screen flex-col"
         )}
       >
         <RootProvider>{children}</RootProvider>

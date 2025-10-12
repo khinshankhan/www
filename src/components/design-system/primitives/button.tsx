@@ -7,14 +7,14 @@ export const buttonVariants = cva(
   "ring-offset-background focus-visible:ring-ring focus-visible:outline-hidden inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
-      theme: {
-        primary: "theme-surface",
-        secondary: "theme-default",
-        info: "theme-info",
-        success: "theme-success",
-        critical: "theme-critical",
-        warning: "theme-warning",
-        danger: "theme-danger",
+      accent: {
+        primary: "accent-theme-surface",
+        secondary: "accent-theme-default",
+        info: "accent-theme-info",
+        success: "accent-theme-success",
+        critical: "accent-theme-critical",
+        warning: "accent-theme-warning",
+        danger: "accent-theme-danger",
       },
       variant: {
         default: "bg-accent-4 hover:bg-accent-3",
@@ -29,7 +29,7 @@ export const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      theme: "primary",
+      accent: "primary",
       variant: "default",
       size: "default",
     },
@@ -43,7 +43,7 @@ interface ButtonProps extends useRender.ComponentProps<"button">, ButtonVariantP
 }
 
 export function Button({
-  theme = "primary",
+  accent = "primary",
   variant = "default",
   size = "default",
   className = "",
@@ -54,7 +54,7 @@ export function Button({
     defaultTagName: "button",
     render,
     props: mergeProps<"button">(
-      { className: cn(buttonVariants({ variant, size, className })) },
+      { className: cn(buttonVariants({ accent, variant, size, className })) },
       props
     ),
   })

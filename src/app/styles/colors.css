@@ -388,7 +388,7 @@
  * NOTE: Tailwind won't tree-shake custom CSS, so these ship as-is. Handy for playgrounds and testing.
  */
 
-.default-theme {
+.accent-theme-default {
   --accent-1: var(--plum-1);
   --accent-2: var(--plum-2);
   --accent-3: var(--plum-3);
@@ -416,7 +416,7 @@
   --accent-a12: var(--plum-a12);
 }
 
-.surface-theme {
+.accent-theme-surface {
   --accent-1: var(--celestial-1);
   --accent-2: var(--celestial-2);
   --accent-3: var(--celestial-3);
@@ -444,7 +444,7 @@
   --accent-a12: var(--celestial-a12);
 }
 
-.info-theme {
+.accent-theme-info {
   --accent-1: var(--cyan-1);
   --accent-2: var(--cyan-2);
   --accent-3: var(--cyan-3);
@@ -472,7 +472,7 @@
   --accent-a12: var(--cyan-a12);
 }
 
-.success-theme {
+.accent-theme-success {
   --accent-1: var(--green-1);
   --accent-2: var(--green-2);
   --accent-3: var(--green-3);
@@ -500,7 +500,7 @@
   --accent-a12: var(--green-a12);
 }
 
-.critical-theme {
+.accent-theme-critical {
   --accent-1: var(--violet-1);
   --accent-2: var(--violet-2);
   --accent-3: var(--violet-3);
@@ -528,7 +528,7 @@
   --accent-a12: var(--violet-a12);
 }
 
-.warning-theme {
+.accent-theme-warning {
   --accent-1: var(--amber-1);
   --accent-2: var(--amber-2);
   --accent-3: var(--amber-3);
@@ -556,7 +556,7 @@
   --accent-a12: var(--amber-a12);
 }
 
-.danger-theme {
+.accent-theme-danger {
   --accent-1: var(--red-1);
   --accent-2: var(--red-2);
   --accent-3: var(--red-3);

@@ -1,19 +1,18 @@
 "use client"
 
 import React, { Fragment, useState } from "react"
+import { Button } from "@/components/design-system/primitives/button"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
 import { H1, H2, Paragraph } from "@/components/design-system/primitives/text"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { SiteHeader, siteHeaderHeight } from "@/components/layout/site-header"
 import { cn } from "@/lib/utils"
 
-const title = "About"
+const title = "Test"
 const description =
-  "Exploring the intersections of the online and offline worlds with curiosity, creativity, and a dash of adventure."
+  "Something really cool and impressive goes here. It'll be great, I promise. Maybe even better than great. Stay tuned!"
 
 const tempSectionStyles = "flex flex-col md:flex-row md:items-center gap-2"
-const tempButtonStyles =
-  "text-accent-11 hover:bg-accent-4 border-accent-8 cursor-pointer rounded border px-4 py-2"
 
 function ArticleContent() {
   const [showOptions, setShowOptions] = useState(false)
@@ -55,54 +54,40 @@ function ArticleContent() {
 
               <Paragraph>Testing options:</Paragraph>
 
-              <button
-                className={cn(tempButtonStyles, "default-theme")}
-                onClick={() => setShowOptions((prev) => !prev)}
-              >
-                Toggle Options
-              </button>
+              <Button onClick={() => setShowOptions((prev) => !prev)}>Toggle Options</Button>
 
               {showOptions && (
                 <Fragment>
                   <Paragraph>{`Buttons to increase/decrease sections for testing (we have ${sectionsCount}):`}</Paragraph>
 
                   <section className={tempSectionStyles}>
-                    <button
-                      className={cn(tempButtonStyles, "success-theme")}
-                      onClick={() => setSectionCount((count) => count + 1)}
-                    >
+                    <Button accent="success" onClick={() => setSectionCount((count) => count + 1)}>
                       Add Section
-                    </button>
-                    <button
-                      className={cn(tempButtonStyles, "danger-theme")}
+                    </Button>
+                    <Button
+                      accent="danger"
                       onClick={() => setSectionCount((count) => Math.max(0, count - 1))}
                     >
                       Remove Section
-                    </button>
+                    </Button>
                   </section>
 
                   <Paragraph>
                     Buttons to toggle showing image on even sections and/or even paragraphs:
                   </Paragraph>
                   <section className={tempSectionStyles}>
-                    <button
-                      className={cn(
-                        tempButtonStyles,
-                        showImageOnEvenSections ? "critical-theme" : "success-theme"
-                      )}
+                    <Button
+                      accent={showImageOnEvenSections ? "critical" : "success"}
                       onClick={() => setShowImageOnEvenSections((prev) => !prev)}
                     >
                       {`Show on ${showImageOnEvenSections ? "Even" : "Odd"} Sections`}
-                    </button>
-                    <button
-                      className={cn(
-                        tempButtonStyles,
-                        showImageOnEvenParagraphs ? "critical-theme" : "success-theme"
-                      )}
+                    </Button>
+                    <Button
+                      accent={showImageOnEvenParagraphs ? "critical" : "success"}
                       onClick={() => setShowImageOnEvenParagraphs((prev) => !prev)}
                     >
                       {`Show on ${showImageOnEvenParagraphs ? "Even" : "Odd"} Paragraphs`}
-                    </button>
+                    </Button>
                   </section>
                 </Fragment>
               )}
