@@ -85,30 +85,16 @@ export function LinkComponent({
   render = undefined,
   ...props
 }: LinkComponentProps) {
-  const { HashComponent, ExternalComponent, InternalComponent, MailtoComponent, TelComponent } =
-    useLinkContext()
-
-  const components: Record<LinkKind, LinkLikeComponent> = {
-    mailto: MailtoComponent,
-    tel: TelComponent,
-    hash: HashComponent,
-    internal: InternalComponent,
-    external: ExternalComponent,
-  } as const
-
   const kind: LinkKind = resolveKindLite(href)
-  const Comp = components[kind]
-
-  const saneProps = getSaneProps(kind)
 
   return useRender({
     defaultTagName: "a",
-    render: render ?? ((props) => <Comp {...props} />),
+    render: render ?? ((props) => <ResolvedLinkComponent kind={kind} {...props} />),
     props: mergeProps<"a">(
       {
         href,
         className: cn(linkVariants({ variant, isMonochrome }), className),
-        ...saneProps,
+        ...getSaneProps(kind),
         ...props,
         children: (
           <Fragment>
@@ -123,3 +109,23 @@ export function LinkComponent({
 }
 
 export const Link = LinkComponent
+
+interface ResolvedLinkComponentProps extends LinkComponentProps {
+  kind: LinkKind
+}
+export function ResolvedLinkComponent({ kind, ...props }: ResolvedLinkComponentProps) {
+  const { HashComponent, ExternalComponent, InternalComponent, MailtoComponent, TelComponent } =
+    useLinkContext()
+
+  const components: Record<LinkKind, LinkLikeComponent> = {
+    mailto: MailtoComponent,
+    tel: TelComponent,
+    hash: HashComponent,
+    internal: InternalComponent,
+    external: ExternalComponent,
+  } as const
+
+  const Comp = components[kind]
+
+  return <Comp {...props} />
+}
