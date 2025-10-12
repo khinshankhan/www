@@ -22,16 +22,16 @@ interface LinkIconProps {
 }
 export const LinkIcon = ({ href, kind = undefined }: LinkIconProps) => {
   const isExternal = kind ? kind === "external" : resolveKindLite(href) === "external"
-  const isFile = isFileLite(href)
+  if (isExternal) {
+    return <SquareArrowOutUpRight aria-label="External link." className="inline size-3 align-top" />
+  }
 
-  return (
-    <Fragment>
-      {isFile && <Download aria-label="File link." className="inline size-3 align-middle" />}
-      {isExternal && (
-        <SquareArrowOutUpRight aria-label="External link." className="inline size-3 align-top" />
-      )}
-    </Fragment>
-  )
+  const isFile = isFileLite(href)
+  if (isFile) {
+    return <Download aria-label="File link." className="inline size-3 align-middle" />
+  }
+
+  return null
 }
 
 export const linkVariants = cva("transition-[color] duration-500", {
