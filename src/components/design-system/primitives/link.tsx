@@ -1,10 +1,6 @@
 import React, { Fragment } from "react"
 import { useLinkContext } from "@/components/design-system/headless/link/context"
-import {
-  LinkKind,
-  LinkLikeComponent,
-  LinkProps,
-} from "@/components/design-system/headless/link/types"
+import { LinkKind, LinkProps } from "@/components/design-system/headless/link/types"
 import {
   getSaneProps,
   isFileLite,
@@ -125,15 +121,25 @@ export function ResolvedLinkComponent({ kind, ...props }: ResolvedLinkComponentP
   const { HashComponent, ExternalComponent, InternalComponent, MailtoComponent, TelComponent } =
     useLinkContext()
 
-  const components: Record<LinkKind, LinkLikeComponent> = {
-    mailto: MailtoComponent,
-    tel: TelComponent,
-    hash: HashComponent,
-    internal: InternalComponent,
-    external: ExternalComponent,
-  } as const
-
-  const Comp = components[kind]
-
-  return <Comp {...props} />
+  switch (kind) {
+    case "mailto": {
+      return <MailtoComponent {...props} />
+    }
+    case "tel": {
+      return <TelComponent {...props} />
+    }
+    case "hash": {
+      return <HashComponent {...props} />
+    }
+    case "internal": {
+      return <InternalComponent {...props} />
+    }
+    case "external": {
+      return <ExternalComponent {...props} />
+    }
+    default: {
+      const _exhaustiveCheck: never = kind
+      throw new Error(`Unhandled link kind: ${_exhaustiveCheck}`)
+    }
+  }
 }
