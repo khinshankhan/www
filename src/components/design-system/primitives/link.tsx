@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { useLinkContext } from "@/components/design-system/headless/link/context"
 import {
   LinkKind,
@@ -6,10 +6,27 @@ import {
   LinkProps,
 } from "@/components/design-system/headless/link/types"
 import { getSaneProps, resolveKindLite } from "@/components/design-system/headless/link/utils"
+import { SquareArrowOutUpRight } from "@/components/design-system/primitives/icon"
 import { cn } from "@/lib/utils"
 import { cva, VariantProps } from "class-variance-authority"
 import { mergeProps } from "@base-ui-components/react/merge-props"
 import { useRender } from "@base-ui-components/react/use-render"
+
+interface LinkIconProps {
+  href: string
+  kind?: LinkKind
+}
+export const LinkIcon = ({ href, kind = undefined }: LinkIconProps) => {
+  const isExternal = kind ? kind === "external" : resolveKindLite(href) === "external"
+
+  return (
+    <Fragment>
+      {isExternal && (
+        <SquareArrowOutUpRight aria-label="External link." className="inline size-3 align-top" />
+      )}
+    </Fragment>
+  )
+}
 
 export const linkVariants = cva("transition-[color] duration-500", {
   variants: {
@@ -35,6 +52,17 @@ export type LinkVariants = VariantProps<typeof linkVariants>
 
 interface LinkComponentProps extends useRender.ComponentProps<"a">, LinkProps, LinkVariants {
   className?: string
+  /**
+   * Trailing icon/adornment behavior.
+   *
+   * - `undefined` (default): A contextual icon is **auto-selected** based on `href`/`kind`
+   * - `null`: **No icon** is rendered at all (opt-out).
+   * - `ReactNode`: The provided icon is rendered **as-is** (opt-in to a custom icon).
+   *
+   * When using a custom `render` function and you want full control of icon placement,
+   * pass `icon={null}` and render your own icon inside `render` (or `children`).
+   */
+  icon?: React.ReactNode
   children?: React.ReactNode
 }
 
@@ -46,6 +74,7 @@ export function LinkComponent({
   className = "",
   variant = "default",
   isMonochrome = false,
+  icon = undefined,
   children = null,
   render = undefined,
   ...props
@@ -54,9 +83,9 @@ export function LinkComponent({
     useLinkContext()
 
   const components: Record<LinkKind, LinkLikeComponent> = {
-    hash: HashComponent,
     mailto: MailtoComponent,
     tel: TelComponent,
+    hash: HashComponent,
     internal: InternalComponent,
     external: ExternalComponent,
   } as const
@@ -75,7 +104,12 @@ export function LinkComponent({
         className: cn(linkVariants({ variant, isMonochrome }), className),
         ...saneProps,
         ...props,
-        children,
+        children: (
+          <Fragment>
+            {children}
+            {icon === undefined ? <LinkIcon href={href} kind={kind} /> : icon}
+          </Fragment>
+        ),
       },
       props
     ),
