@@ -49,6 +49,8 @@ export function Button({
   variant = "default",
   size = "default",
   className = "",
+  // default sane type for button is "button" unless otherwise specified
+  type = "button",
   render,
   ...props
 }: ButtonProps) {
@@ -56,7 +58,7 @@ export function Button({
     defaultTagName: "button",
     render,
     props: mergeProps<"button">(
-      { className: cn(buttonVariants({ accent, variant, size, className })) },
+      { className: cn(buttonVariants({ accent, variant, size, className })), type },
       props
     ),
   })

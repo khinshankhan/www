@@ -85,13 +85,12 @@ export function ModeToggle() {
     <Button
       variant="ghost"
       size="icon-sm"
-      type="button"
+      className="relative"
+      aria-label={`Switch to ${nextTheme} mode`}
+      title={`Switch to ${nextTheme} mode`}
       onClick={() => {
         setTheme(nextTheme)
       }}
-      aria-label={`Switch to ${nextTheme} mode`}
-      title={`Switch to ${nextTheme} mode`}
-      className="relative"
     >
       <ModeIcon theme={theme} role="presentation" aria-hidden="true" />
 
