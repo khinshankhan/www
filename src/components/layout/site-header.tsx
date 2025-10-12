@@ -1,14 +1,32 @@
 import React from "react"
 import NextLink from "next/link"
+import { usePathname } from "next/navigation"
 import {
   ScrollReveal,
   ScrollRevealBackground,
 } from "@/components/design-system/patterns/view-observers/scroll-reveal"
 import { Divider } from "@/components/design-system/primitives/divider"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
-import { Paragraph } from "@/components/design-system/primitives/text"
+import { Link } from "@/components/design-system/primitives/link"
 import { Logo } from "@/components/layout/logo"
 import { cn } from "@/lib/utils"
+import { navLinks } from "@/settings"
+
+function NavLinksDesktop({ className = "" }: { className?: string }) {
+  const pathname = usePathname()
+
+  return (
+    <ul className={cn("flex flex-col gap-4 md:flex-row", className)}>
+      {navLinks.map((link) => (
+        <li key={link.href}>
+          <Link href={link.href} variant="nav" data-active={pathname === link.href}>
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
 
 export const siteHeaderHeight = "[--h:68px] md:[--h:78px] lg:[--h:88px]"
 
@@ -31,17 +49,9 @@ export function SiteHeader() {
               <Logo className={cn("size-[42px] md:size-[45px] lg:size-[52px]")} />
             </NextLink>
 
-            <div className="align-center flex flex-row gap-2">
-              {[...Array(4).keys()].map((num) => {
-                /* TODO: figure out navbar items */
-                return (
-                  <Paragraph
-                    key={num}
-                    variant="nav"
-                    className="text-foreground-strong"
-                  >{`Link ${num}`}</Paragraph>
-                )
-              })}
+            {/* rhs on desktop view */}
+            <div className="hide-mobile max-md:hide-print flex flex-row items-center gap-4">
+              <NavLinksDesktop />
             </div>
           </nav>
         </div>
