@@ -1,4 +1,4 @@
-import { type LinkKind } from "./types"
+import { LinkProps, type LinkKind } from "./types"
 
 export function isMailtoLite(href: string): boolean {
   return href.startsWith("mailto:")
@@ -32,4 +32,11 @@ export function resolveKindLite(href: string): LinkKind {
     return "hash"
   }
   return isInternalLite(href) ? "internal" : "external"
+}
+
+export function getSaneProps(kind: LinkKind): Partial<LinkProps> {
+  return {
+    target: kind !== "external" ? undefined : "_blank",
+    rel: kind !== "external" ? undefined : "noopener noreferrer external",
+  }
 }
