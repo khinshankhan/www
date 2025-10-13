@@ -7,7 +7,7 @@ import {
   ScrollReveal,
   ScrollRevealBackground,
 } from "@/components/design-system/patterns/view-observers/scroll-reveal"
-import { Button } from "@/components/design-system/primitives/button"
+import { Button, buttonVariants } from "@/components/design-system/primitives/button"
 import { Divider } from "@/components/design-system/primitives/divider"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
 import {
@@ -19,10 +19,10 @@ import {
   Sun,
   SunMoon,
 } from "@/components/design-system/primitives/icon"
-import { Link } from "@/components/design-system/primitives/link"
-import { H2 } from "@/components/design-system/primitives/text"
+import { Link, ResolvedLinkComponent } from "@/components/design-system/primitives/link"
 import { typographyVariants } from "@/components/design-system/primitives/typography"
 import { Logo } from "@/components/layout/logo"
+import { FooterParagraph } from "@/components/layout/site-footer"
 import { useMounted } from "@/hooks/core/useMounted"
 import { cn } from "@/lib/utils"
 import { navLinks } from "@/settings"
@@ -86,7 +86,7 @@ function NavLinksMobile() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <Drawer.Root shouldScaleBackground open={isOpen} onOpenChange={setIsOpen}>
+    <Drawer.Root shouldScaleBackground={false} open={isOpen} onOpenChange={setIsOpen}>
       <Drawer.Trigger
         render={(triggerProps, { open }) => (
           <Button
@@ -110,32 +110,74 @@ function NavLinksMobile() {
         <Drawer.Overlay className="fixed inset-0 bg-black/60" />
         <Drawer.Content
           aria-label="Main menu"
-          className="border-border/60 bg-background-1 fixed inset-x-0 bottom-0 h-[70vh] w-full rounded-t-2xl border backdrop-blur"
+          className="border-border/60 bg-background-1 fixed inset-x-0 bottom-0 h-[72vh] w-full rounded-t-2xl border"
         >
           <Drawer.Handle className="top-3" />
 
-          <nav className="mx-auto flex h-full max-w-sm flex-col gap-1 px-4 py-6">
-            <H2 className="text-muted-foreground mb-2 uppercase tracking-wide">Navigation</H2>
+          <nav
+            className="mx-auto flex h-full max-w-sm flex-col gap-1 px-4 py-6"
+            style={{
+              paddingBottom: "max(1.5rem, env(safe-area-inset-bottom))",
+            }}
+          >
+            <header className="mb-8">
+              <p
+                className={cn(
+                  typographyVariants({ variant: "xs", weight: "medium" }),
+                  "text-muted-foreground mb-6 uppercase tracking-[0.16em]"
+                )}
+              >
+                Navigation
+              </p>
+              <Divider />
+            </header>
 
-            <ul className="flex flex-col">
+            <ul className="flex flex-col gap-4">
               {navLinks.map((link) => {
+                const active = pathname === link.href
                 return (
-                  <li key={link.href} className={typographyVariants({ variant: "nav" })}>
+                  <li key={link.href}>
                     <Link
                       href={link.href}
-                      variant="nav"
-                      data-active={pathname === link.href}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "flex w-full items-center justify-between rounded-xl px-3 py-4",
+                        "hover:bg-foreground/5 active:bg-foreground/10 transition"
+                      )}
                       onClick={() => setIsOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
+                      render={({ className, ...linkProps }, { kind }) => {
+                        return (
+                          <ResolvedLinkComponent
+                            kind={kind}
+                            className={cn(
+                              buttonVariants({ variant: "ghost" }),
+                              typographyVariants({ variant: "nav" }),
+                              "group flex w-full flex-row items-center justify-between"
+                            )}
+                            {...linkProps}
+                            onClick={() => setIsOpen(false)}
+                          >
+                            <span>{link.label}</span>
+                            <span
+                              className="text-muted-foreground ml-3 transition group-hover:-rotate-90"
+                              aria-hidden="true"
+                            >
+                              &rarr;
+                            </span>
+                          </ResolvedLinkComponent>
+                        )
+                      }}
+                    />
                   </li>
                 )
               })}
             </ul>
 
-            {/* optional footer space or extras later */}
-            <div className="text-muted-foreground mt-auto pt-4 text-xs">Press Esc to close</div>
+            <div className="mt-auto">
+              <Divider intensity="solid" thickness="light" className="mb-6" />
+
+              <FooterParagraph />
+            </div>
           </nav>
         </Drawer.Content>
       </Drawer.Portal>
@@ -157,6 +199,7 @@ export function ModeToggle() {
       onClick={() => {
         setTheme(nextTheme)
       }}
+      suppressHydrationWarning
     >
       <ModeIcon theme={theme} role="presentation" aria-hidden="true" />
 

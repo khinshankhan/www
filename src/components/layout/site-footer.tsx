@@ -19,10 +19,14 @@ type SiteFooterVariantProps = VariantProps<typeof siteFooterVariants>
 
 interface SiteFooterProps extends React.HTMLAttributes<HTMLDivElement>, SiteFooterVariantProps {}
 
+export function FooterParagraph() {
+  return <p className="text-center">&copy; 2017+, Khinshan Khan. All rights reserved.</p>
+}
+
 export function SiteFooter({ position, className = "", ...props }: SiteFooterProps) {
   return (
     <footer className={cn(siteFooterVariants({ position }), className)} {...props}>
-      <p className="text-center">&copy; 2017+, Khinshan Khan. All rights reserved.</p>
+      <FooterParagraph />
     </footer>
   )
 }

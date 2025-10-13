@@ -22,10 +22,15 @@ export const line = cva("bg-border relative", {
       vertical: "w-(--thickness) h-full bg-gradient-to-t",
     },
     thickness: {
-      hairline: "[--thickness:1px]",
-      thin: "[--thickness:1.5px]",
-      regular: "[--thickness:2px]",
-      thick: "[--thickness:4px]",
+      hairline: "[--thickness:0.25px]",
+      extralight: "[--thickness:0.5px]",
+      light: "[--thickness:0.75px]",
+      normal: "[--thickness:1px]",
+      medium: "[--thickness:1.5px]",
+      semibold: "[--thickness:2px]",
+      bold: "[--thickness:3px]",
+      extrabold: "[--thickness:4px]",
+      black: "[--thickness:6px]",
     },
     intensity: {
       none: "[--intensity-1:0%] [--intensity-2:0%] [--intensity-3:0%]",
@@ -41,7 +46,7 @@ export const line = cva("bg-border relative", {
   },
   defaultVariants: {
     orientation: "horizontal",
-    thickness: "hairline",
+    thickness: "normal",
     intensity: "strong",
     align: "center",
   },
