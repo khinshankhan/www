@@ -222,6 +222,22 @@
   }
 }
 
+.maxw-content-with-sidebar {
+  --sidebar-w: 100%;
+  --sidebar-gap: 0rem;
+  max-width: 100%;
+
+  @media (min-width: theme(--breakpoint-xl)) {
+    --sidebar-w: 17rem;
+    --sidebar-gap: 4rem;
+    max-width: calc(100% + var(--sidebar-gap) - var(--sidebar-w));
+  }
+  @media (min-width: theme(--breakpoint-2xl)) {
+    --sidebar-w: 18rem;
+    max-width: calc(100% + var(--sidebar-gap) - var(--sidebar-w));
+  }
+}
+
 @layer base {
   /* we define variables for light directly in :root in case the next-themes fails for some reason, could be a print setting */
   :root,
