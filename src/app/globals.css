@@ -197,26 +197,28 @@
 }
 
 .maxw-page {
-  max-width: 90%;
+  --maxw-page: 90%;
+  max-width: var(--maxw-page);
 
   @media (min-width: theme(--breakpoint-xl)) {
-    max-width: 77rem;
+    --maxw-page: 77rem;
   }
 
   @media (min-width: theme(--breakpoint-2xl)) {
-    max-width: 87.5rem;
+    --maxw-page: 87.5rem;
   }
 }
 
 .maxw-content {
-  max-width: 90%;
+  --maxw-content: 90%;
+  max-width: var(--maxw-content);
 
   @media (min-width: theme(--breakpoint-xl)) {
-    max-width: 62rem;
+    --maxw-content: 62rem;
   }
 
   @media (min-width: theme(--breakpoint-2xl)) {
-    max-width: 72rem;
+    --maxw-content: 72rem;
   }
 }
 
