@@ -13,6 +13,9 @@ export interface WithSidebarProps {
   children: React.ReactNode
 }
 
+export const sidebarTopDisplacement = "[--h-d:0px] xl:[--h-d:56px]"
+export const sidebarTop = "calc(var(--h) + var(--h-d))"
+
 // NOTE: children should leverage the min-w-full class to ensure it fills the width of the container rather than
 // allowing it to be constrained by the sidebar width
 export function WithSidebar({
@@ -35,14 +38,15 @@ export function WithSidebar({
       {sidebar && (
         <aside
           className={cn(
-            "top-(--h) sticky z-50 w-full xl:self-start",
+            "sticky z-50 w-full lg:self-start",
             sidebarClassName,
-            siteHeaderHeight
+            siteHeaderHeight,
+            sidebarTopDisplacement
           )}
           style={{
             minWidth: "var(--sidebar-w)",
             maxWidth: "var(--sidebar-w)",
-            top: "calc(var(--h) + 56px)",
+            top: sidebarTop,
           }}
         >
           {sidebar}

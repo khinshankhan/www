@@ -9,7 +9,7 @@ import {
 } from "@/components/design-system/patterns/view-observers/scroll-reveal"
 import { Button, buttonVariants } from "@/components/design-system/primitives/button"
 import { Divider } from "@/components/design-system/primitives/divider"
-import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
+import { EdgeFade, EdgeFadeProps } from "@/components/design-system/primitives/edge-fade"
 import {
   Close,
   HamburgerMenu,
@@ -213,9 +213,24 @@ export function ModeToggle() {
   )
 }
 
+type HeaderBufferProps = Partial<EdgeFadeProps>
+
+export function HeaderEdgeFade({ className = "", ...props }: HeaderBufferProps) {
+  return (
+    <EdgeFade
+      direction="bottom"
+      className={cn("z-2 absolute -bottom-16 h-16", className)}
+      {...props}
+    />
+  )
+}
+
 export const siteHeaderHeight = "[--h:68px] md:[--h:78px] lg:[--h:88px]"
 
-export function SiteHeader() {
+interface SiteHeaderProps {
+  edgeFadeProps?: Partial<EdgeFadeProps>
+}
+export function SiteHeader({ edgeFadeProps }: SiteHeaderProps) {
   return (
     <ScrollRevealBackground
       fromColor="var(--color-background-1)"
@@ -260,7 +275,7 @@ export function SiteHeader() {
       </header>
 
       {/* acts as buffer to gradually introduce actual header's overlay onto content */}
-      <EdgeFade direction="bottom" className="z-2 absolute -bottom-16 h-16" />
+      <HeaderEdgeFade {...edgeFadeProps} />
     </ScrollRevealBackground>
   )
 }

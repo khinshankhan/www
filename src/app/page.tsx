@@ -206,7 +206,11 @@ export default function Home() {
         className="xs:min-h-[96vh] flex min-h-[87vh] w-full grow flex-col"
         vaul-drawer-wrapper="true"
       >
-        <SiteHeader />
+        <SiteHeader
+          edgeFadeProps={{
+            className: "hidden xl:block",
+          }}
+        />
 
         <ArticleContent />
       </div>

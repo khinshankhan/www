@@ -21,7 +21,7 @@ export const fadeVariants = cva("", {
 
 type FadeVariantProps = VariantProps<typeof fadeVariants>
 
-interface EdgeFadeProps extends React.HTMLAttributes<HTMLDivElement>, FadeVariantProps {
+export interface EdgeFadeProps extends React.HTMLAttributes<HTMLDivElement>, FadeVariantProps {
   direction: NonNullable<FadeVariantProps["direction"]>
 }
 
