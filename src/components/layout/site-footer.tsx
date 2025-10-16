@@ -1,4 +1,5 @@
 import React from "react"
+import { Paragraph } from "@/components/design-system/primitives/text"
 import { cn } from "@/lib/utils"
 import { cva, type VariantProps } from "class-variance-authority"
 
@@ -20,7 +21,11 @@ type SiteFooterVariantProps = VariantProps<typeof siteFooterVariants>
 interface SiteFooterProps extends React.HTMLAttributes<HTMLDivElement>, SiteFooterVariantProps {}
 
 export function FooterParagraph() {
-  return <p className="text-center">&copy; 2017+, Khinshan Khan. All rights reserved.</p>
+  return (
+    <Paragraph variant="nav" className="text-center">
+      &copy; 2017+, Khinshan Khan. All rights reserved.
+    </Paragraph>
+  )
 }
 
 export function SiteFooter({ position, className = "", ...props }: SiteFooterProps) {
