@@ -2,13 +2,11 @@
 
 import React, { Fragment, useState } from "react"
 import { Button } from "@/components/design-system/primitives/button"
-import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
-import { H1, H2, Paragraph } from "@/components/design-system/primitives/text"
+import { H2, Paragraph } from "@/components/design-system/primitives/text"
+import { DuoLayout } from "@/components/layout/duo-layout"
 import { SiteFooter } from "@/components/layout/site-footer"
-import { SiteHeader, siteHeaderHeight } from "@/components/layout/site-header"
-import { TableOfContents } from "@/components/layout/toc"
+import { SiteHeader } from "@/components/layout/site-header"
 import { WithSidebar } from "@/components/layout/with-sidebar"
-import { cn } from "@/lib/utils"
 
 const title = "Test"
 const description =
@@ -109,51 +107,6 @@ function Content() {
   )
 }
 
-function ArticleContent() {
-  return (
-    <main className="z-1 relative isolate flex grow flex-col">
-      <article className="z-2 bg-background-1 relative isolate flex w-full grow flex-col items-center">
-        <header
-          className={cn(
-            "maxw-content top-(--h) -z-1 sticky flex w-full flex-col gap-4 pb-2 pt-14",
-            siteHeaderHeight
-          )}
-        >
-          <H1 className="text-balance">{title}</H1>
-          <Paragraph
-            variant="nav"
-            className="text-foreground-muted max-w-[75ch] leading-relaxed"
-            render={(props) => {
-              return <span {...props} />
-            }}
-          >
-            {description}
-          </Paragraph>
-        </header>
-
-        {/* acts as a fade effect to gradually introduce content and hide content */}
-        <EdgeFade direction="top" className="z-2 relative h-12" />
-
-        <div className="bg-background-2 z-2 relative isolate flex w-full grow flex-col items-center justify-center">
-          <div className="maxw-content relative w-full grow py-14">
-            <WithSidebar sidebar={<TableOfContents />} direction="right">
-              <div className="min-w-full">
-                <Content />
-              </div>
-            </WithSidebar>
-          </div>
-        </div>
-      </article>
-
-      <div className="z-1 flex w-full flex-col items-center pt-14">
-        <div className="maxw-page w-full text-center md:px-4 md:text-end">
-          [Link to specific article page goes here]
-        </div>
-      </div>
-    </main>
-  )
-}
-
 export default function Home() {
   return (
     <div className="isolate flex min-h-screen w-full grow flex-col">
@@ -167,7 +120,13 @@ export default function Home() {
           }}
         />
 
-        <ArticleContent />
+        <DuoLayout title={title} description={description} ghPath={"/src/app/page.tsx"}>
+          <WithSidebar sidebar={null} direction="right">
+            <div className="mx-auto min-w-full">
+              <Content />
+            </div>
+          </WithSidebar>
+        </DuoLayout>
       </div>
 
       <SiteFooter position="static" />
