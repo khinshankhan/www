@@ -1,8 +1,8 @@
 "use client"
 
 import React from "react"
-import { siteHeaderHeight } from "@/components/layout/site-header"
 import { cn } from "@/lib/utils"
+import { siteHeaderHeight } from "./site-header"
 
 export interface WithSidebarProps {
   direction?: "left" | "right"
