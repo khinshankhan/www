@@ -3,7 +3,7 @@ import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
 import { Link } from "@/components/design-system/primitives/link"
 import { H1, Paragraph } from "@/components/design-system/primitives/text"
 import { typographyVariants } from "@/components/design-system/primitives/typography"
-import { siteHeaderHeight } from "@/components/layout/site-header"
+import { siteHeaderHeight } from "@/components/layout/app-shell/header"
 import { cn } from "@/lib/utils"
 
 interface DuoLayoutProps {

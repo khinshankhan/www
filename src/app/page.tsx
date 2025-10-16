@@ -3,9 +3,8 @@
 import React, { Fragment, useState } from "react"
 import { Button } from "@/components/design-system/primitives/button"
 import { H2, Paragraph } from "@/components/design-system/primitives/text"
+import { AppShell } from "@/components/layout/app-shell"
 import { DuoLayout } from "@/components/layout/duo-layout"
-import { SiteFooter } from "@/components/layout/site-footer"
-import { SiteHeader } from "@/components/layout/site-header"
 import { WithSidebar } from "@/components/layout/with-sidebar"
 
 const title = "Test"
@@ -109,27 +108,14 @@ function Content() {
 
 export default function Home() {
   return (
-    <div className="isolate flex min-h-screen w-full grow flex-col">
-      <div
-        className="xs:min-h-[96vh] flex min-h-[87vh] w-full grow flex-col"
-        vaul-drawer-wrapper="true"
-      >
-        <SiteHeader
-          edgeFadeProps={{
-            className: "hidden xl:block",
-          }}
-        />
-
-        <DuoLayout title={title} description={description} ghPath={"/src/app/page.tsx"}>
-          <WithSidebar sidebar={null} direction="right">
-            <div className="mx-auto min-w-full">
-              <Content />
-            </div>
-          </WithSidebar>
-        </DuoLayout>
-      </div>
-
-      <SiteFooter position="static" />
-    </div>
+    <AppShell>
+      <DuoLayout title={title} description={description} ghPath={"/src/app/page.tsx"}>
+        <WithSidebar sidebar={null} direction="right">
+          <div className="mx-auto min-w-full">
+            <Content />
+          </div>
+        </WithSidebar>
+      </DuoLayout>
+    </AppShell>
   )
 }

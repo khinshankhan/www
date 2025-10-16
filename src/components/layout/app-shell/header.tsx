@@ -22,12 +22,12 @@ import {
 import { Link, ResolvedLinkComponent } from "@/components/design-system/primitives/link"
 import { typographyVariants } from "@/components/design-system/primitives/typography"
 import { Logo } from "@/components/layout/logo"
-import { FooterParagraph } from "@/components/layout/site-footer"
 import { useMounted } from "@/hooks/core/useMounted"
 import { cn } from "@/lib/utils"
 import { navLinks } from "@/settings"
 import { useTheme } from "next-themes"
 import { Drawer } from "vaul-base"
+import { FooterParagraph } from "./footer"
 
 const THEMES = ["light", "system", "dark"]
 
@@ -222,7 +222,7 @@ export function HeaderEdgeFade({ className = "", ...props }: HeaderBufferProps) 
 
 export const siteHeaderHeight = "[--h:68px] md:[--h:78px] lg:[--h:88px]"
 
-interface SiteHeaderProps {
+export interface SiteHeaderProps {
   edgeFadeProps?: Partial<EdgeFadeProps>
 }
 export function SiteHeader({ edgeFadeProps }: SiteHeaderProps) {
