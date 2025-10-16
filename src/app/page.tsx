@@ -3,6 +3,7 @@
 import React, { Fragment, useState } from "react"
 import { Button } from "@/components/design-system/primitives/button"
 import { EdgeFade } from "@/components/design-system/primitives/edge-fade"
+import { ListTree } from "@/components/design-system/primitives/icon"
 import { H1, H2, Paragraph } from "@/components/design-system/primitives/text"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { SiteHeader, siteHeaderHeight } from "@/components/layout/site-header"
@@ -15,15 +16,47 @@ const description =
 
 const tempSectionStyles = "flex flex-col md:flex-row md:items-center gap-2"
 
-function TableOfContents() {
+interface TableOfContentsProps {
+  className?: string
+}
+function TableOfContents({ className = "" }: TableOfContentsProps) {
   return (
     <nav
       aria-label="Table of contents"
-      className="prose rounded-lg px-2 py-3 backdrop-blur xl:-mt-3"
+      className={cn(
+        "bg-background-2 xl:bg-background-2/70 sticky top-0 w-full rounded-lg rounded-t-none px-2 py-3 backdrop-blur xl:-mt-3",
+        className
+      )}
     >
-      <H2 variant="h5" className="text-foreground mt-0">
+      <H2
+        variant="h5"
+        className="text-foreground mb-4 mt-0 flex flex-row items-center justify-start gap-2"
+      >
+        <span>
+          <ListTree />
+        </span>
         On this page
       </H2>
+
+      <ul
+        className="border-background-1 flex flex-col gap-2"
+        style={{
+          borderLeftWidth: "1.5px",
+        }}
+      >
+        <li className="bg-background-1/70 w-full py-1 pl-4">
+          <a className="hover:underline" href="#introduction">
+            Introduction
+          </a>
+        </li>
+        {[...Array(3).keys()].map((num) => (
+          <li key={num}>
+            <a className="pl-4 hover:underline" href={`#section-${num}`}>
+              {`Section ${num}`}
+            </a>
+          </li>
+        ))}
+      </ul>
     </nav>
   )
 }
