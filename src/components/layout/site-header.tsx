@@ -140,11 +140,6 @@ function NavLinksMobile() {
                     <Link
                       href={link.href}
                       aria-current={active ? "page" : undefined}
-                      className={cn(
-                        "flex w-full items-center justify-between rounded-xl px-3 py-4",
-                        "hover:bg-foreground/5 active:bg-foreground/10 transition"
-                      )}
-                      onClick={() => setIsOpen(false)}
                       render={({ className, ...linkProps }, { kind }) => {
                         return (
                           <ResolvedLinkComponent
