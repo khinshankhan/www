@@ -5,12 +5,19 @@ import { ListTree } from "@/components/design-system/primitives/icon"
 import { H2 } from "@/components/design-system/primitives/text"
 import { cn } from "@/lib/utils"
 
+export interface Heading {
+  id: string
+  title: string
+  depth: number
+}
+
 interface TableOfContentsProps {
+  headings?: Heading[]
   className?: string
 }
 
 // TODO: implement this
-export function TableOfContents({ className = "" }: TableOfContentsProps) {
+export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
   return (
     <nav
       aria-label="Table of contents"
@@ -35,15 +42,10 @@ export function TableOfContents({ className = "" }: TableOfContentsProps) {
           borderLeftWidth: "1.5px",
         }}
       >
-        <li className="bg-background-1/70 w-full py-1 pl-4">
-          <a className="hover:underline" href="#introduction">
-            Introduction
-          </a>
-        </li>
-        {[...Array(3).keys()].map((num) => (
-          <li key={num}>
-            <a className="pl-4 hover:underline" href={`#section-${num}`}>
-              {`Section ${num}`}
+        {headings.map((heading) => (
+          <li key={heading.id}>
+            <a className="pl-4 hover:underline" href={`#${heading.id}`}>
+              {heading.title}
             </a>
           </li>
         ))}
