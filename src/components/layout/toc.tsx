@@ -1,16 +1,19 @@
 "use client"
 
-import React from "react"
+import React, { useMemo, useState } from "react"
 import {
   ActiveAnchorsProvider,
   useActiveAnchors,
 } from "@/components/design-system/patterns/view-observers/active-anchors"
-import { ListTree } from "@/components/design-system/primitives/icon"
+import { Button } from "@/components/design-system/primitives/button"
+import { ChevronDown, ListTree } from "@/components/design-system/primitives/icon"
 import { Link } from "@/components/design-system/primitives/link"
-import { H2 } from "@/components/design-system/primitives/text"
 import { typographyVariants } from "@/components/design-system/primitives/typography"
+import { useBreakpoint } from "@/hooks/breakpoints"
+import { useIsomorphicEffect } from "@/hooks/core/useIsomorphicEffect"
 import { cn } from "@/lib/utils"
 import { LayoutGroup, motion } from "motion/react"
+import { Collapsible } from "@base-ui-components/react/collapsible"
 
 export interface Heading {
   id: string
@@ -68,39 +71,59 @@ interface TableOfContentsProps {
   headings?: Heading[]
   className?: string
 }
-
 export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
-  const minDepth =
-    headings.length === 0
-      ? 1 // 1 is an lowerbound since headings are limited (h1-h6) and this gets used for indents
-      : Math.min(...headings.map(({ depth }) => depth))
+  const [isOpen, setIsOpen] = useState(false)
+  const isXl = useBreakpoint("xl")
+  useIsomorphicEffect(() => setIsOpen(isXl), [isXl])
+
+  const minDepth = headings.length === 0 ? 1 : Math.min(...headings.map(({ depth }) => depth))
+  const ids = useMemo(() => headings.map((h) => h.id), [headings])
 
   return (
-    <ActiveAnchorsProvider ids={headings.map((h) => h.id)}>
+    <ActiveAnchorsProvider ids={ids}>
       <LayoutGroup id="toc">
-        <nav
-          aria-label="Table of contents"
-          className={cn(
-            "bg-background-2 xl:bg-background-2/70 sticky top-0 w-full rounded-lg rounded-t-none px-2 py-3 backdrop-blur xl:-mt-3",
-            className
-          )}
+        <Collapsible.Root
+          open={isOpen}
+          className={cn("bg-background-2 sticky top-0 w-full py-2", className)}
         >
-          <H2
-            variant="h5"
-            className="text-foreground mb-4 mt-0 flex flex-row items-center justify-start gap-2"
-          >
-            <span>
-              <ListTree />
-            </span>
-            On this page
-          </H2>
+          <Collapsible.Trigger
+            render={(props) => (
+              <Button
+                {...props}
+                variant="ghost"
+                className="group flex w-full justify-between px-2 py-2 xl:hidden"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <span className="flex items-center gap-2">
+                  <ListTree />
+                  <span className={cn(typographyVariants({ variant: "h5" }), "text-foreground")}>
+                    {`${isOpen ? "Hide" : "Show"} on this page`}
+                  </span>
+                </span>
+                <ChevronDown className="size-5 rotate-90 transition-all duration-300 ease-out group-data-[panel-open]:-rotate-90" />
+              </Button>
+            )}
+          />
 
-          <ul className="list-none">
-            {headings.map((heading) => (
-              <TocItem key={heading.id} heading={heading} indents={heading.depth - minDepth} />
-            ))}
-          </ul>
-        </nav>
+          <div className="text-foreground-muted hidden px-1 xl:block">
+            <span className="flex items-center gap-2">
+              <ListTree />
+              <span className={cn(typographyVariants({ variant: "h5" }), "text-foreground-muted")}>
+                On this page
+              </span>
+            </span>
+          </div>
+
+          <Collapsible.Panel className={cn("overflow-hidden")}>
+            <nav aria-label="Table of contents" className="px-1 pb-2 pt-2">
+              <ul className="list-none">
+                {headings.map((heading) => (
+                  <TocItem key={heading.id} heading={heading} indents={heading.depth - minDepth} />
+                ))}
+              </ul>
+            </nav>
+          </Collapsible.Panel>
+        </Collapsible.Root>
       </LayoutGroup>
     </ActiveAnchorsProvider>
   )
