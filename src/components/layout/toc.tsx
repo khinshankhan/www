@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from "react"
+import React from "react"
 import {
   ActiveAnchorsProvider,
   useActiveAnchors,
@@ -10,7 +10,7 @@ import { Link } from "@/components/design-system/primitives/link"
 import { H2 } from "@/components/design-system/primitives/text"
 import { typographyVariants } from "@/components/design-system/primitives/typography"
 import { cn } from "@/lib/utils"
-import { motion } from "motion/react"
+import { LayoutGroup, motion } from "motion/react"
 
 export interface Heading {
   id: string
@@ -26,39 +26,25 @@ function TocItem({ heading, indents }: TocItemProps) {
   const { activeId } = useActiveAnchors()
   const isActive = activeId === heading.id
 
-  // TODO: remove these hacks
-  const liRef = useRef<HTMLLIElement | null>(null)
-  const [height, setHeight] = useState(0)
-
-  // force recalculation of height after collapsible is opened
-  useEffect(() => {
-    if (liRef.current) {
-      const currentHeight = liRef.current.offsetHeight
-      setHeight(currentHeight)
-    }
-  }, [isActive])
-
   return (
     <li
-      ref={liRef}
       data-active={isActive ? "true" : "false"}
       className="link-box data-[active=true]:bg-surface-5/25 relative mx-1 w-full transition-[background-color] data-[active=false]:duration-500 data-[active=true]:duration-1000"
     >
-      {/* default sideline for the toc items */}
-      <span className="z-1 bg-surface-12/10 absolute h-full w-0.5 duration-0" />
+      {/* default sideline */}
+      <span className="bg-surface-12/10 absolute left-0 top-0 h-full w-0.5" />
 
-      {/* sideline for the active toc item, visually above the default sideline */}
+      {/* shared sideline that morphs between active items */}
       {isActive && (
         <motion.span
-          layoutId={`toc-active-indicator-${heading.id}`}
-          className="bg-accent-11 absolute z-50 w-0.5 duration-0"
-          style={{ height: height }}
+          layoutId="toc-active-indicator"
+          className="bg-accent-11 absolute inset-y-0 left-0 w-0.5 will-change-transform"
+          transition={{ type: "spring", stiffness: 420, damping: 36, mass: 0.6 }}
         />
       )}
 
       <Link
         href={`#${heading.id}`}
-        aria-label={`Jump to ${heading.title}`}
         data-active={isActive ? "true" : "false"}
         variant="toc"
         className={cn(
@@ -91,29 +77,31 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
 
   return (
     <ActiveAnchorsProvider ids={headings.map((h) => h.id)}>
-      <nav
-        aria-label="Table of contents"
-        className={cn(
-          "bg-background-2 xl:bg-background-2/70 sticky top-0 w-full rounded-lg rounded-t-none px-2 py-3 backdrop-blur xl:-mt-3",
-          className
-        )}
-      >
-        <H2
-          variant="h5"
-          className="text-foreground mb-4 mt-0 flex flex-row items-center justify-start gap-2"
+      <LayoutGroup id="toc">
+        <nav
+          aria-label="Table of contents"
+          className={cn(
+            "bg-background-2 xl:bg-background-2/70 sticky top-0 w-full rounded-lg rounded-t-none px-2 py-3 backdrop-blur xl:-mt-3",
+            className
+          )}
         >
-          <span>
-            <ListTree />
-          </span>
-          On this page
-        </H2>
+          <H2
+            variant="h5"
+            className="text-foreground mb-4 mt-0 flex flex-row items-center justify-start gap-2"
+          >
+            <span>
+              <ListTree />
+            </span>
+            On this page
+          </H2>
 
-        <ul className="list-none">
-          {headings.map((heading) => (
-            <TocItem key={heading.id} heading={heading} indents={heading.depth - minDepth} />
-          ))}
-        </ul>
-      </nav>
+          <ul className="list-none">
+            {headings.map((heading) => (
+              <TocItem key={heading.id} heading={heading} indents={heading.depth - minDepth} />
+            ))}
+          </ul>
+        </nav>
+      </LayoutGroup>
     </ActiveAnchorsProvider>
   )
 }
