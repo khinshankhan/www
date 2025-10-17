@@ -327,3 +327,29 @@
 @utility link-show {
   background-size: 100% 0.05em;
 }
+
+/* based off https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/layout/src/link-box.tsx */
+@utility link-overlay {
+  position: static;
+  &:after {
+    content: "";
+    cursor: inherit;
+    transition: transform 0.3s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@utility link-box {
+  position: relative;
+  isolation: isolate;
+  /* elevate elements that are interactable also give special linkbox-elevate class privilege as a catchall */
+  & :is(a[href]:not(.link-overlay), button, .linkbox-elevate) {
+    z-index: 1;
+  }
+}
