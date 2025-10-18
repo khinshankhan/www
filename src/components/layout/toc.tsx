@@ -5,14 +5,22 @@ import {
   ActiveAnchorsProvider,
   useActiveAnchors,
 } from "@/components/design-system/patterns/view-observers/active-anchors"
+import { ScrollReveal } from "@/components/design-system/patterns/view-observers/scroll-reveal"
 import { Button } from "@/components/design-system/primitives/button"
+import { Divider } from "@/components/design-system/primitives/divider"
 import { ChevronDown, ListTree } from "@/components/design-system/primitives/icon"
 import { Link } from "@/components/design-system/primitives/link"
 import { ProgressCircle } from "@/components/design-system/primitives/progress-circle"
 import { typographyVariants } from "@/components/design-system/primitives/typography"
 import { useBreakpoint } from "@/hooks/breakpoints"
 import { useIsomorphicEffect } from "@/hooks/core/useIsomorphicEffect"
-import { cn } from "@/lib/utils"
+import {
+  checkIfElementInView,
+  cn,
+  focusElement,
+  scrollToElement,
+  waitForWindowScrollEnd,
+} from "@/lib/utils"
 import { LayoutGroup, motion } from "motion/react"
 import { Collapsible } from "@base-ui-components/react/collapsible"
 
@@ -61,6 +69,32 @@ function TocItem({ heading, indents }: TocItemProps) {
           indents === 4 && "ps-20",
           indents === 5 && "ps-24"
         )}
+        onClick={async (e) => {
+          /* Reasoning for this approach:
+           * Since headings aren't "focusable" elements, the 'focus-within' smooth scroll won't work and we need to
+           * handle the scroll ourselves. Non js users will still get the default anchor behavior ('abruptly jumping'
+           * to the link) which isn't as nice but it's still usable. It's fine as opting to not use js often comes with
+           * a different set of expectations. Similarly, focus element won't work for non-js users but it's a nice to have
+           * for js users, which hopefully most people who need accessibility tools have on.
+           */
+
+          // prevent default anchor behavior
+          e.preventDefault()
+
+          // update the url without causing a full page reload
+          // this may even handle scrolling to target smoothly
+          history.pushState(null, "", `#${heading.id}`)
+
+          // definitively scroll smoothly to the section
+          scrollToElement(`#${heading.id}`, { behavior: "smooth" })
+
+          // wait for scroll to end, then focus the element because focusing 'jumps' the page
+          await waitForWindowScrollEnd()
+          const isElementInView = await checkIfElementInView(`#${heading.id}`)
+          if (isElementInView) {
+            focusElement(`#${heading.id} a`)
+          }
+        }}
       >
         {heading.title}
       </Link>
@@ -82,7 +116,7 @@ function MobileTocLabel({ isOpen, headings }: MobileTocLabelProps) {
   const progress = activeIndex === -1 ? 0 : ((activeIndex + 1) / headings.length) * 100
 
   return (
-    <span className="flex items-center gap-2">
+    <span className="flex items-center justify-center gap-2">
       <ProgressCircle value={progress} className="accent-theme-default text-accent-11 size-[1em]" />
 
       <span className={cn(typographyVariants({ variant: "h5" }), "text-foreground")}>
@@ -150,6 +184,18 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
               </ul>
             </nav>
           </Collapsible.Panel>
+
+          <ScrollReveal rangePx={700}>
+            <Divider
+              className="z-2 w-(--w) absolute bottom-0 left-1/2 block -translate-x-1/2 transform xl:hidden"
+              intensity="solid"
+              style={
+                {
+                  ["--w"]: "calc(100dvw - 20px)",
+                } as React.CSSProperties
+              }
+            />
+          </ScrollReveal>
         </Collapsible.Root>
       </LayoutGroup>
     </ActiveAnchorsProvider>
