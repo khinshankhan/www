@@ -8,6 +8,7 @@ import {
 import { Button } from "@/components/design-system/primitives/button"
 import { ChevronDown, ListTree } from "@/components/design-system/primitives/icon"
 import { Link } from "@/components/design-system/primitives/link"
+import { ProgressCircle } from "@/components/design-system/primitives/progress-circle"
 import { typographyVariants } from "@/components/design-system/primitives/typography"
 import { useBreakpoint } from "@/hooks/breakpoints"
 import { useIsomorphicEffect } from "@/hooks/core/useIsomorphicEffect"
@@ -67,6 +68,30 @@ function TocItem({ heading, indents }: TocItemProps) {
   )
 }
 
+interface MobileTocLabelProps {
+  isOpen: boolean
+  headings: Heading[]
+}
+function MobileTocLabel({ isOpen, headings }: MobileTocLabelProps) {
+  const { activeId } = useActiveAnchors()
+  const activeHeading =
+    (activeId ? headings.find((h) => h.id === activeId) : headings?.[0])?.title ||
+    "No headings found"
+
+  const activeIndex = headings.findIndex((h) => h.id === activeId)
+  const progress = activeIndex === -1 ? 0 : ((activeIndex + 1) / headings.length) * 100
+
+  return (
+    <span className="flex items-center gap-2">
+      <ProgressCircle value={progress} className="accent-theme-default text-accent-11 size-[1em]" />
+
+      <span className={cn(typographyVariants({ variant: "h5" }), "text-foreground")}>
+        {isOpen ? "On this page" : activeHeading}
+      </span>
+    </span>
+  )
+}
+
 interface TableOfContentsProps {
   headings?: Heading[]
   className?: string
@@ -94,12 +119,7 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
                 className="group flex w-full justify-between px-2 py-2 xl:hidden"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <span className="flex items-center gap-2">
-                  <ListTree />
-                  <span className={cn(typographyVariants({ variant: "h5" }), "text-foreground")}>
-                    {`${isOpen ? "Hide" : "Show"} on this page`}
-                  </span>
-                </span>
+                <MobileTocLabel isOpen={isOpen} headings={headings} />
                 <ChevronDown className="size-5 rotate-90 transition-all duration-300 ease-out group-data-[panel-open]:-rotate-90" />
               </Button>
             )}
@@ -114,7 +134,14 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
             </span>
           </div>
 
-          <Collapsible.Panel className={cn("overflow-hidden")}>
+          <Collapsible.Panel
+            className="h-(--h) flex flex-col justify-end overflow-hidden opacity-100 transition-all ease-out data-[ending-style]:h-0 data-[starting-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0"
+            style={
+              {
+                ["--h"]: "var(--collapsible-panel-height)",
+              } as React.CSSProperties
+            }
+          >
             <nav aria-label="Table of contents" className="px-1 pb-2 pt-2">
               <ul className="list-none">
                 {headings.map((heading) => (

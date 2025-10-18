@@ -38,7 +38,7 @@ export function DuoLayout({ title, description, ghPath, children }: DuoLayoutPro
         <EdgeFade direction="top" className="z-2 relative h-12" />
 
         <div className="bg-background-2 z-2 relative isolate flex w-full grow flex-col items-center justify-center">
-          <div className="maxw-content relative w-full grow py-14">{children}</div>
+          <div className="maxw-content relative w-full grow pb-14 pt-6 xl:pt-14">{children}</div>
         </div>
       </article>
 
