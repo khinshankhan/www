@@ -51,7 +51,7 @@ export function ActiveAnchorsProvider({
   }, [activeOffset])
 
   const scan = useCallback(() => {
-    let nodes: HTMLElement[] = ids
+    const nodes: HTMLElement[] = ids
       .map((id) => document.getElementById(id) as HTMLElement | null)
       .filter((el): el is HTMLElement => !!el)
 
@@ -96,8 +96,8 @@ export function ActiveAnchorsProvider({
     mutObs.observe(document.body, { childList: true, subtree: true })
 
     return () => {
-      window.removeEventListener("scroll", onScroll as any)
-      if (rescanOnResize) window.removeEventListener("resize", scan as any)
+      window.removeEventListener("scroll", onScroll)
+      if (rescanOnResize) window.removeEventListener("resize", scan)
       mutObs.disconnect()
     }
   }, [onScroll, rescanOnResize, scan])
