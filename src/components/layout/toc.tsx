@@ -102,11 +102,11 @@ function TocItem({ heading, indents }: TocItemProps) {
   )
 }
 
-interface MobileTocLabelProps {
+interface TocTitleProps {
   isOpen: boolean
   headings: Heading[]
 }
-function MobileTocLabel({ isOpen, headings }: MobileTocLabelProps) {
+function TocTitle({ isOpen, headings }: TocTitleProps) {
   const { activeId } = useActiveAnchors()
   const activeHeading =
     (activeId ? headings.find((h) => h.id === activeId) : headings?.[0])?.title ||
@@ -116,11 +116,12 @@ function MobileTocLabel({ isOpen, headings }: MobileTocLabelProps) {
   const progress = activeIndex === -1 ? 0 : ((activeIndex + 1) / headings.length) * 100
 
   return (
-    <span className="flex items-center justify-center gap-2">
+    <span className="flex items-center justify-center gap-2 xl:justify-start">
       <ProgressCircle value={progress} className="accent-theme-default text-accent-11 size-[1em]" />
 
       <span className={cn(typographyVariants({ variant: "h5" }), "text-foreground")}>
-        {isOpen ? "On this page" : activeHeading}
+        <span className="block xl:hidden"> {isOpen ? "On this page" : activeHeading}</span>
+        <span className="hidden xl:block">On this page</span>
       </span>
     </span>
   )
@@ -153,19 +154,14 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
                 className="group flex w-full justify-between px-2 py-2 xl:hidden"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <MobileTocLabel isOpen={isOpen} headings={headings} />
+                <TocTitle isOpen={isOpen} headings={headings} />
                 <ChevronDown className="size-5 rotate-90 transition-all duration-300 ease-out group-data-[panel-open]:-rotate-90" />
               </Button>
             )}
           />
 
           <div className="text-foreground-muted hidden px-1 xl:block">
-            <span className="flex items-center gap-2">
-              <ListTree />
-              <span className={cn(typographyVariants({ variant: "h5" }), "text-foreground-muted")}>
-                On this page
-              </span>
-            </span>
+            <TocTitle isOpen={isOpen} headings={headings} />
           </div>
 
           <Collapsible.Panel
