@@ -185,15 +185,15 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
             </nav>
           </Collapsible.Panel>
 
-          <ScrollReveal rangePx={700}>
+          <ScrollReveal startPx={150} rangePx={400}>
             <Divider
-              className="z-2 w-(--w) absolute bottom-0 left-1/2 block -translate-x-1/2 transform xl:hidden"
+              className="z-2 absolute bottom-0 left-1/2 block w-full -translate-x-1/2 transform xl:hidden"
               intensity="solid"
-              style={
-                {
-                  ["--w"]: "calc(100dvw - 20px)",
-                } as React.CSSProperties
-              }
+              style={{
+                width:
+                  // NOTE: we minus 20px to account for scrollbar, otherwise a horizontal scroll may appear
+                  "calc(100dvw - 20px)",
+              }}
             />
           </ScrollReveal>
         </Collapsible.Root>

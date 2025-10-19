@@ -5,14 +5,26 @@ import { cn } from "@/lib/utils"
 import { motion, MotionValue, useScroll, useTransform } from "motion/react"
 
 interface ScrollRevealProps {
+  startPx?: number
   rangePx: number
+  startOpacity?: number
+  endOpacity?: number
   className?: string
   children: React.ReactNode
 }
 
-export function ScrollReveal({ rangePx, className = "", children }: ScrollRevealProps) {
+export function ScrollReveal({
+  startPx = 0,
+  rangePx,
+  startOpacity = 0,
+  endOpacity = 1,
+  className = "",
+  children,
+}: ScrollRevealProps) {
   const { scrollY } = useScroll() // window scrollY
-  const opacity = useTransform(scrollY, [0, rangePx], [0, 1], { clamp: true })
+  const opacity = useTransform(scrollY, [startPx, rangePx], [startOpacity, endOpacity], {
+    clamp: true,
+  })
 
   const motionStyle = {
     opacity: opacity as unknown as MotionValue<number>,
@@ -29,6 +41,7 @@ export function ScrollReveal({ rangePx, className = "", children }: ScrollReveal
       className={cn(
         className,
         /* NOTE: this is not cross browser compatible yet, which is why we'll use motion if possible */
+        /* NOTE: these classes do not have 100% parity with the scroll reveal yet */
         "noscript:reveal-on-scroll noscript:animate-fade-in"
       )}
       style={{ ...motionStyle, ...fallbackCssVars }}
