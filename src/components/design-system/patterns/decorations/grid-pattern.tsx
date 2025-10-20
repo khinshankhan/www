@@ -51,8 +51,8 @@ export function GridPattern({
   const size2 = `${s2} ${s2}, ${s2} ${s2}`
 
   const cssVarsStyle = {
-    ["--grid-size-1" as any]: s1,
-    ["--grid-size-2" as any]: s2,
+    ["--grid-size-1"]: s1,
+    ["--grid-size-2"]: s2,
   } as React.CSSProperties
 
   return (

@@ -8,7 +8,7 @@ import {
 import { ScrollReveal } from "@/components/design-system/patterns/view-observers/scroll-reveal"
 import { Button } from "@/components/design-system/primitives/button"
 import { Divider } from "@/components/design-system/primitives/divider"
-import { ChevronDown, ListTree } from "@/components/design-system/primitives/icon"
+import { ChevronDown } from "@/components/design-system/primitives/icon"
 import { Link } from "@/components/design-system/primitives/link"
 import { ProgressCircle } from "@/components/design-system/primitives/progress-circle"
 import { typographyVariants } from "@/components/design-system/primitives/typography"
@@ -41,16 +41,16 @@ function TocItem({ heading, indents }: TocItemProps) {
   return (
     <li
       data-active={isActive ? "true" : "false"}
-      className="link-box data-[active=true]:bg-surface-5/25 relative mx-1 w-full transition-[background-color] data-[active=false]:duration-500 data-[active=true]:duration-1000"
+      className="link-box relative mx-1 w-full transition-[background-color] data-[active=false]:duration-500 data-[active=true]:bg-surface-5/25 data-[active=true]:duration-1000"
     >
       {/* default sideline */}
-      <span className="bg-surface-12/10 absolute left-0 top-0 h-full w-0.5" />
+      <span className="absolute top-0 left-0 h-full w-0.5 bg-surface-12/10" />
 
       {/* shared sideline that morphs between active items */}
       {isActive && (
         <motion.span
           layoutId="toc-active-indicator"
-          className="bg-accent-11 absolute inset-y-0 left-0 w-0.5 will-change-transform"
+          className="absolute inset-y-0 left-0 w-0.5 bg-accent-11 will-change-transform"
           transition={{ type: "spring", stiffness: 420, damping: 36, mass: 0.6 }}
         />
       )}
@@ -117,7 +117,7 @@ function TocTitle({ isOpen, headings }: TocTitleProps) {
 
   return (
     <span className="flex items-center justify-center gap-2 xl:justify-start">
-      <ProgressCircle value={progress} className="accent-theme-default text-accent-11 size-[1em]" />
+      <ProgressCircle value={progress} className="accent-theme-default size-[1em] text-accent-11" />
 
       <span className={cn(typographyVariants({ variant: "h5" }), "text-foreground")}>
         <span className="block xl:hidden"> {isOpen ? "On this page" : activeHeading}</span>
@@ -144,7 +144,7 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
       <LayoutGroup id="toc">
         <Collapsible.Root
           open={isOpen}
-          className={cn("bg-background-2 sticky top-0 w-full py-2", className)}
+          className={cn("sticky top-0 w-full bg-background-2 py-2", className)}
         >
           <Collapsible.Trigger
             render={(props) => (
@@ -160,19 +160,19 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
             )}
           />
 
-          <div className="text-foreground-muted hidden px-1 xl:block">
+          <div className="hidden px-1 text-foreground-muted xl:block">
             <TocTitle isOpen={isOpen} headings={headings} />
           </div>
 
           <Collapsible.Panel
-            className="h-(--h) flex flex-col justify-end overflow-hidden opacity-100 transition-all ease-out data-[ending-style]:h-0 data-[starting-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0"
+            className="flex h-(--h) flex-col justify-end overflow-hidden opacity-100 transition-all ease-out data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0"
             style={
               {
                 ["--h"]: "var(--collapsible-panel-height)",
               } as React.CSSProperties
             }
           >
-            <nav aria-label="Table of contents" className="px-1 pb-2 pt-2">
+            <nav aria-label="Table of contents" className="px-1 pt-2 pb-2">
               <ul className="list-none">
                 {headings.map((heading) => (
                   <TocItem key={heading.id} heading={heading} indents={heading.depth - minDepth} />
@@ -183,7 +183,7 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
 
           <ScrollReveal startPx={150} rangePx={400}>
             <Divider
-              className="z-2 absolute bottom-0 left-1/2 block w-full -translate-x-1/2 transform xl:hidden"
+              className="absolute bottom-0 left-1/2 z-2 block w-full -translate-x-1/2 transform xl:hidden"
               intensity="solid"
               style={{
                 width:
