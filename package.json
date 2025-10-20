@@ -22,6 +22,7 @@
     "react-dom": "19.1.0",
     "react-medium-image-zoom": "^5.4.0",
     "tailwind-merge": "^3.3.1",
+    "tailwindcss-animate": "^1.0.7",
     "vaul-base": "^0.0.6"
   },
   "devDependencies": {
