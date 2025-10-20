@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@base-ui-components/react": "1.0.0-beta.4",
+    "@khinshankhan/emoji-helper-core": "^3.0.1",
+    "@khinshankhan/emoji-helper-pack-github": "^3.0.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "geist": "^1.5.1",
