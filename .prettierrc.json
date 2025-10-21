@@ -11,7 +11,7 @@
   "tailwindStylesheet": "./src/app/globals.css",
   "tailwindFunctions": ["cn", "cva"],
   "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
-  "importOrderTypeScriptVersion": "5.3.3",
+  "importOrderTypeScriptVersion": "5.9.3",
   "importOrder": [
     "",
     "<BUILTIN_MODULES>",
