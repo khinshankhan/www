@@ -126,7 +126,7 @@ function NavLinksMobile() {
               <p
                 className={cn(
                   textVariants({ variant: "xs", weight: "medium" }),
-                  "text-muted-foreground mb-6 tracking-[0.16em] uppercase"
+                  "mb-6 tracking-[0.16em] text-foreground uppercase"
                 )}
               >
                 Navigation
@@ -157,7 +157,7 @@ function NavLinksMobile() {
                           >
                             <span>{link.label}</span>
                             <span
-                              className="text-muted-foreground ml-3 transition group-hover:-rotate-90"
+                              className="ml-3 text-foreground transition group-hover:-rotate-90"
                               aria-hidden="true"
                             >
                               &rarr;
