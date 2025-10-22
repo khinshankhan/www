@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "next-lint": "next lint",
+    "next-lint": "eslint .",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "lint": "pnpm run typecheck && pnpm run next-lint && pnpm run format:check",
@@ -32,6 +32,7 @@
     "vaul-base": "^0.0.6"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.38.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@next/eslint-plugin-next": "^15.5.6",
@@ -45,7 +46,6 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.0",
-    "eslint-plugin-tailwindcss": "^3.18.2",
     "globals": "^16.4.0",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",

@@ -1,0 +1,292 @@
+@import "tailwindcss";
+
+@import "../quicksilver/css/color-palette-tokens.css";
+@import "../quicksilver/css/tw-sane-base.css";
+@import "../quicksilver/css/tw-grand-links.css";
+@import "../quicksilver/css/tw-prose.css";
+
+@custom-variant dark (&: where(.dark *));
+@custom-variant light (&:where(.light *));
+
+@plugin "tailwindcss-animate";
+
+:root {
+  --background-1: var(--celestial-2);
+  --background-2: var(--celestial-1);
+}
+
+@theme inline {
+  /* COLORS */
+
+  --color-*: initial;
+  --color-transparent: var(--transparent);
+  --color-black: var(--black);
+  --color-white: var(--white);
+
+  --color-stark-contrast: var(--stark-contrast);
+
+  --color-surface-1: var(--celestial-1);
+  --color-surface-2: var(--celestial-2);
+  --color-surface-3: var(--celestial-3);
+  --color-surface-4: var(--celestial-4);
+  --color-surface-5: var(--celestial-5);
+  --color-surface-6: var(--celestial-6);
+  --color-surface-7: var(--celestial-7);
+  --color-surface-8: var(--celestial-8);
+  --color-surface-9: var(--celestial-9);
+  --color-surface-10: var(--celestial-10);
+  --color-surface-11: var(--celestial-11);
+  --color-surface-12: var(--celestial-12);
+
+  --color-surface-a1: var(--celestial-a1);
+  --color-surface-a2: var(--celestial-a2);
+  --color-surface-a3: var(--celestial-a3);
+  --color-surface-a4: var(--celestial-a4);
+  --color-surface-a5: var(--celestial-a5);
+  --color-surface-a6: var(--celestial-a6);
+  --color-surface-a7: var(--celestial-a7);
+  --color-surface-a8: var(--celestial-a8);
+  --color-surface-a9: var(--celestial-a9);
+  --color-surface-a10: var(--celestial-a10);
+  --color-surface-a11: var(--celestial-a11);
+  --color-surface-a12: var(--celestial-a12);
+
+  --color-accent-1: var(--accent-1);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-accent-4: var(--accent-4);
+  --color-accent-5: var(--accent-5);
+  --color-accent-6: var(--accent-6);
+  --color-accent-7: var(--accent-7);
+  --color-accent-8: var(--accent-8);
+  --color-accent-9: var(--accent-9);
+  --color-accent-10: var(--accent-10);
+  --color-accent-11: var(--accent-11);
+  --color-accent-12: var(--accent-12);
+
+  --color-accent-a1: var(--accent-a1);
+  --color-accent-a2: var(--accent-a2);
+  --color-accent-a3: var(--accent-a3);
+  --color-accent-a4: var(--accent-a4);
+  --color-accent-a5: var(--accent-a5);
+  --color-accent-a6: var(--accent-a6);
+  --color-accent-a7: var(--accent-a7);
+  --color-accent-a8: var(--accent-a8);
+  --color-accent-a9: var(--accent-a9);
+  --color-accent-a10: var(--accent-a10);
+  --color-accent-a11: var(--accent-a11);
+  --color-accent-a12: var(--accent-a12);
+
+  /* SEMANTIC TOKENS -- tokens not directly mapped to the semantic color step scale (1-12) */
+  --color-background-1: var(--background-1);
+  --color-background-2: var(--background-2);
+
+  --color-foreground: color-mix(in oklab, var(--celestial-12) 90%, transparent);
+  --color-foreground-muted: color-mix(in oklab, var(--celestial-12) 70%, transparent);
+  --color-foreground-subtle: color-mix(in oklab, var(--celestial-12) 60%, transparent);
+  --color-foreground-strong: var(--celestial-12);
+
+  /* ANIMATIONS */
+
+  --animate-bg-fade-in: bg-fade-in var(--animation-duration, 1s) ease-in both;
+  --animate-waving-hand: waving 2.5s infinite;
+
+  /* KEYFRAMES */
+
+  @keyframes bg-fade-in {
+    from {
+      background-color: var(--from-color, var(--background-1));
+    }
+    to {
+      background-color: var(--to-color, var(--background-1));
+    }
+  }
+
+  /* https://jarv.is/notes/css-waving-hand-emoji/ */
+  @keyframes waving {
+    0% {
+      transform: rotate(0deg);
+    }
+    10% {
+      transform: rotate(14deg);
+    }
+    20% {
+      transform: rotate(-8deg);
+    }
+    30% {
+      transform: rotate(14deg);
+    }
+    40% {
+      transform: rotate(-4deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    60% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+@layer base {
+  /* we define variables for light directly in :root in case the next-themes fails for some reason, could be a print setting */
+  :root,
+  .light {
+    color-scheme: light dark;
+  }
+
+  .light {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
+  /*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--celestial-6, currentColor);
+  }
+}
+
+@layer components {
+  /* style specific elements from here */
+  html {
+    touch-action: manipulation;
+    scroll-behavior: auto;
+  }
+  html:focus-within {
+    /* allows ctr-f to work without smooth scrolling https://css-tricks.com/fixing-smooth-scrolling-with-find-on-page/ */
+    scroll-behavior: smooth;
+  }
+
+  /* this gives a nice highlight color for text selection, especially as we switch between section types */
+  ::selection {
+    background: var(--accent-a7);
+  }
+
+  /* a custom scrollbar style that fits the theme better */
+  * {
+    scrollbar-color: var(--color-foreground) var(--background-2);
+  }
+}
+
+/**
+ * Philosophy on show/hide: While "visible" has many possible states (block, inline-block, flex, grid), hiding content
+ * (`display: none`) only has one state. To keep things simple, we'll use `display: none` for hiding and leave the code
+ * to handle the specific visible state when showing (use a specific visible display property can mess with intended
+ * experience). This assumption works for now but may need rethinking as the project evolves.
+ */
+@utility show-mobile {
+  @media not print {
+    @media (min-width: theme(--breakpoint-md)) {
+      /* force hidden when not mobile */
+      display: none !important;
+    }
+  }
+}
+
+@utility hide-mobile {
+  @media not print {
+    @media not all and (min-width: theme(--breakpoint-md)) {
+      /* force hidden when mobile */
+      display: none !important;
+    }
+  }
+}
+
+/* faux containers */
+
+@utility maxw-page {
+  --maxw-page: 90%;
+  max-width: var(--maxw-page, 90%);
+
+  @media (min-width: theme(--breakpoint-xl)) {
+    --maxw-page: 77rem;
+  }
+
+  @media (min-width: theme(--breakpoint-2xl)) {
+    --maxw-page: 87.5rem;
+  }
+}
+
+@utility maxw-content {
+  --maxw-content: 90%;
+  max-width: var(--maxw-content, 90%);
+
+  @media (min-width: theme(--breakpoint-xl)) {
+    --maxw-content: 62rem;
+  }
+
+  @media (min-width: theme(--breakpoint-2xl)) {
+    --maxw-content: 72rem;
+  }
+}
+
+@utility maxw-content-with-sidebar {
+  --sidebar-w: 100%;
+  --sidebar-gap: 0rem;
+  max-width: 100%;
+
+  @media (min-width: theme(--breakpoint-xl)) {
+    --sidebar-gap: 4rem;
+    --sidebar-w: 17rem;
+    max-width: calc(100% + var(--sidebar-gap, 4rem) - var(--sidebar-w, 17rem));
+  }
+  @media (min-width: theme(--breakpoint-2xl)) {
+    --sidebar-w: 18rem;
+    max-width: calc(100% + var(--sidebar-gap, 4rem) - var(--sidebar-w, 18rem));
+  }
+}
+
+/* NOTE: this should be used in unision with animate-fade-in utility */
+@utility reveal-on-scroll {
+  opacity: 0;
+  animation-duration: 1ms;
+  animation-timeline: scroll();
+  animation-range: 0 var(--range, 100px);
+  animation-fill-mode: both;
+  animation-timing-function: steps(100, end);
+}
+
+/* NOTE: this should be used in unision with animate-bg-fade-in utility */
+@utility reveal-bg-on-scroll {
+  background-color: var(--from-color, var(--color-background-1));
+  animation-duration: 1ms;
+  animation-timeline: scroll();
+  animation-range: 0 var(--range, 100px);
+  animation-fill-mode: both;
+  animation-timing-function: steps(100, end);
+}
+
+/* based off https://css-tricks.com/grainy-gradients/ */
+@utility noise {
+  &:before {
+    content: "";
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3C!-- svg: first layer --%3E%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 182px;
+    opacity: 0.15;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
