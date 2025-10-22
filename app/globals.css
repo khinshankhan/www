@@ -80,6 +80,7 @@
   /* SEMANTIC TOKENS -- tokens not directly mapped to the semantic color step scale (1-12) */
   --color-background-1: var(--background-1);
   --color-background-2: var(--background-2);
+  --color-muted: var(--celestial-a4);
 
   --color-foreground: color-mix(in oklab, var(--celestial-12) 90%, transparent);
   --color-foreground-muted: color-mix(in oklab, var(--celestial-12) 70%, transparent);
@@ -182,6 +183,16 @@
   /* a custom scrollbar style that fits the theme better */
   * {
     scrollbar-color: var(--color-foreground) var(--background-2);
+  }
+
+  /* image styling */
+  [data-rmiz-modal-overlay="visible"] {
+    background-color: color-mix(in srgb, var(--background-1) 80%, var(--transparent)) !important;
+    backdrop-filter: blur(4px);
+  }
+
+  [data-rmiz-modal-overlay="hidden"] {
+    background-color: var(--transparent) !important;
   }
 }
 
