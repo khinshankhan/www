@@ -20,7 +20,6 @@ export function Emoji({ name, className = "", wrapperClassName = "" }: EmojiProp
 
   return (
     <span className={wrapperClassName}>
-      {/* eslint-disable @next/next/no-img-element */}
       <img
         className={cn("inline aspect-auto size-[1em]", className)}
         src={emojiInfo.url}
