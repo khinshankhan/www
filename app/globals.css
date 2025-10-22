@@ -284,6 +284,26 @@
   animation-timing-function: steps(100, end);
 }
 
+/* loosely based off https://codepen.io/brucebrotherton/pen/GRxwQar */
+@utility surround-quotes {
+  &:before,
+  &:after {
+    color: var(--color-muted-foreground);
+    position: absolute;
+    font-size: 5rem;
+  }
+  &:before {
+    top: -3.75rem;
+    left: 0rem;
+    content: open-quote;
+  }
+  &:after {
+    bottom: -5.25rem;
+    right: 1.25rem;
+    content: close-quote;
+  }
+}
+
 /* based off https://css-tricks.com/grainy-gradients/ */
 @utility noise {
   &:before {
