@@ -57,14 +57,19 @@ function TocItem({ heading, indents }: TocItemProps) {
         variant="toc"
         className={cn(
           textVariants({ variant: "xs" }),
-          "ml-1 inline-block w-full scroll-smooth py-0 pe-1 text-left",
-          indents === 0 && "ps-4",
-          indents === 1 && "ps-8",
-          indents === 2 && "ps-12",
-          indents === 3 && "ps-16",
-          indents === 4 && "ps-20",
-          indents === 5 && "ps-24"
+          "ml-2 inline-block w-(--w) scroll-smooth py-0 text-left",
+          indents === 0 && "ps-2",
+          indents === 1 && "ps-6",
+          indents === 2 && "ps-10",
+          indents === 3 && "ps-14",
+          indents === 4 && "ps-18",
+          indents === 5 && "ps-22"
         )}
+        style={
+          {
+            "--w": `calc(100% - 0.7rem)`,
+          } as CSSProperties
+        }
         onClick={async (e) => {
           /* Reasoning for this approach:
            * Since headings aren't "focusable" elements, the 'focus-within' smooth scroll won't work and we need to
