@@ -1,6 +1,7 @@
 "use client"
 
 import React, { type ReactNode } from "react"
+import { processMarkdownAttribute } from "@/lib/seo/open-graph"
 import { cn } from "@/quicksilver/lib/classname"
 import { EdgeFade } from "@/quicksilver/react/primitives/edge-fade"
 import { Link } from "@/quicksilver/react/primitives/link"
@@ -32,7 +33,10 @@ export function DuotoneLayout({ title, description, ghPath, children }: DuotoneL
               return <span {...props} />
             }}
           >
-            {description}
+            {
+              // TODO: replace with a different processor to account for emoji
+              processMarkdownAttribute(description)
+            }
           </Paragraph>
         </header>
 
