@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { identity } from "@/quicksilver/lib/combinators"
 import { defaultMetadata } from "@/settings"
 import { remark } from "remark"
 import remarkSmartypants from "remark-smartypants"
@@ -42,41 +41,37 @@ interface CreateMetadata {
   title?: NextMetadata["title"]
   description?: NextMetadata["description"]
   icons?: NextMetadata["icons"]
+  twitter?: NextMetadata["twitter"]
+
   slug?: string
 
-  openGraph?: (openGraphObject: OpenGraphObject) => OpenGraphObject
-
-  twitter?: NextMetadata["twitter"]
+  transformOpenGraph?: (precalculatedOpenGraphObject: OpenGraphObject) => OpenGraphObject
 }
 
 export function createMetadata({
-  openGraph = identity<OpenGraphObject>,
+  transformOpenGraph = (ogo) => ogo,
   ...props
 }: CreateMetadata): Metadata {
   const metadataBase = props.metadataBase ?? defaultMetadata.metadataBase
   const title = props.title ?? defaultMetadata.title
   const description = props.description ?? defaultMetadata.description
   const icons = props.icons ?? defaultMetadata.icons
+  const twitter = props.twitter ?? defaultMetadata.twitter
 
-  const url = metadataBase.href + (props.slug ?? "/")
-
-  const precalculatedOpenGraphObject: OpenGraphObject = {
+  const openGraph = transformOpenGraph({
     ...defaultMetadata.openGraph,
     // this should be right
     title: title as string,
     description,
-    url,
-  }
-  const openGraphObject = openGraph(precalculatedOpenGraphObject)
-
-  const twitter = props.twitter ?? defaultMetadata.twitter
+    url: metadataBase.href + (props.slug ?? "/"),
+  })
 
   return {
     metadataBase,
     title,
     description,
     icons,
-    openGraph: openGraphObject,
+    openGraph,
     twitter,
   }
 }
