@@ -47,9 +47,11 @@ export function Spoiler({ className = "", children, ...props }: SpoilerProps) {
       title={toggleText}
       className={cn(
         "text-knockout relative inline rounded-lg px-1 py-0.5",
-        "focus:ring-ring focus:ring-offset-background cursor-pointer focus:ring-2 focus:ring-offset-2",
+        "cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-stark-contrast focus-visible:ring-offset-0",
         !isRevealed && "select-none", // prevent text selection due to 'double click' on mobile
-        isRevealed ? "bg-stark-contrast/10" : "bg-stark-contrast/70 hover:bg-stark-contrast/65",
+        isRevealed
+          ? "bg-stark-contrast/10 hover:bg-stark-contrast/15"
+          : "bg-stark-contrast/70 hover:bg-stark-contrast/65",
         className
       )}
       onClick={handleClick}
