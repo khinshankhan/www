@@ -4,6 +4,7 @@ import { DuotoneLayout } from "@/components/layouts/duotone"
 import { Shell } from "@/components/layouts/elements/shell"
 import { WithSidebar } from "@/components/layouts/with-sidebar"
 import { createMetadata, processMarkdownAttribute } from "@/lib/seo/open-graph"
+import { Callout } from "@/quicksilver/react/primitives/callout"
 
 const title = "Writings"
 const description =
@@ -17,9 +18,10 @@ export default function Page() {
       <DuotoneLayout title={title} description={description} ghPath={ghPath}>
         <WithSidebar sidebar={null} direction="right">
           <div className="mx-auto min-w-full">
-            <div className="prose max-w-none text-foreground-muted">
-              <p>Coming soon...</p>
-            </div>
+            <Callout variant="note" title="Work in Progress" icon={null}>
+              I am currently working on converting my previous articles from different formats to
+              markdown. This process will take some time. Stay tuned... coming soon!
+            </Callout>
           </div>
         </WithSidebar>
       </DuotoneLayout>

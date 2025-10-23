@@ -4,6 +4,7 @@ import { DuotoneLayout } from "@/components/layouts/duotone"
 import { Shell } from "@/components/layouts/elements/shell"
 import { WithSidebar } from "@/components/layouts/with-sidebar"
 import { createMetadata, processMarkdownAttribute } from "@/lib/seo/open-graph"
+import { Callout } from "@/quicksilver/react/primitives/callout"
 
 const title = "Connect"
 const description =
@@ -17,9 +18,10 @@ export default function Page() {
       <DuotoneLayout title={title} description={description} ghPath={ghPath}>
         <WithSidebar sidebar={null} direction="right">
           <div className="mx-auto min-w-full">
-            <div className="prose max-w-none text-foreground-muted">
-              <p>Coming soon...</p>
-            </div>
+            <Callout variant="note" title="Work in Progress" icon={null}>
+              This page is a work in progress. Soon, it will feature links to my socials, projects,
+              and a contact method to reach out directly. Stay tuned for updates!
+            </Callout>
           </div>
         </WithSidebar>
       </DuotoneLayout>

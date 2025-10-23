@@ -4,6 +4,8 @@ import { DuotoneLayout } from "@/components/layouts/duotone"
 import { Shell } from "@/components/layouts/elements/shell"
 import { WithSidebar } from "@/components/layouts/with-sidebar"
 import { createMetadata, processMarkdownAttribute } from "@/lib/seo/open-graph"
+import { Callout } from "@/quicksilver/react/primitives/callout"
+import { Link } from "@/quicksilver/react/primitives/link"
 
 const title = "Projects"
 const description =
@@ -17,9 +19,11 @@ export default function Page() {
       <DuotoneLayout title={title} description={description} ghPath={ghPath}>
         <WithSidebar sidebar={null} direction="right">
           <div className="mx-auto min-w-full">
-            <div className="prose max-w-none text-foreground-muted">
-              <p>Coming soon...</p>
-            </div>
+            <Callout variant="note" title="Work in Progress" icon={null}>
+              I am currently in the process of revamping my projects and website. Follow the journey
+              on <Link href="https://github.com/khinshankhan/www">GitHub</Link>. Progress is steady
+              but slow &mdash; stay tuned for more updates coming soon!
+            </Callout>
           </div>
         </WithSidebar>
       </DuotoneLayout>
