@@ -1,9 +1,11 @@
 import React from "react"
+import type { Metadata } from "next"
 import { DuotoneLayout } from "@/components/layouts/duotone"
 import { Header } from "@/components/layouts/elements/header"
 import { Shell } from "@/components/layouts/elements/shell"
 import { TOC, type Heading } from "@/components/layouts/sidebars/toc"
 import { WithSidebar } from "@/components/layouts/with-sidebar"
+import { createMetadata } from "@/lib/seo/open-graph"
 import { Figcaption } from "@/quicksilver/react/primitives/figcaption"
 import { Figure } from "@/quicksilver/react/primitives/figure"
 import { Image } from "@/quicksilver/react/primitives/image"
@@ -16,6 +18,7 @@ const title = "About"
 const description =
   "Exploring the intersections of the online and offline worlds with curiosity, creativity, and a dash of adventure."
 const ghPath = "/app/(duotone)/about/page.tsx"
+const slug = "/about"
 
 export default function Page() {
   const sectionsCount = 5
@@ -155,4 +158,13 @@ export default function Page() {
       </DuotoneLayout>
     </Shell>
   )
+}
+
+export function generateMetadata(): Metadata | undefined {
+  return createMetadata({
+    title,
+    // TODO: process to interweave emoji and special characters correctly
+    description,
+    slug,
+  })
 }

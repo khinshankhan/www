@@ -1,12 +1,15 @@
 import React from "react"
+import type { Metadata } from "next"
 import { DuotoneLayout } from "@/components/layouts/duotone"
 import { Shell } from "@/components/layouts/elements/shell"
 import { WithSidebar } from "@/components/layouts/with-sidebar"
+import { createMetadata } from "@/lib/seo/open-graph"
 
 const title = "Projects"
 const description =
   "A collection of my tinkering, experiments, and explorations from the creative nebula and beyond -- a sidequest within a sidequest, endlessly unfolding."
 const ghPath = "/app/(duotone)/projects/page.tsx"
+const slug = "/projects"
 
 export default function Page() {
   return (
@@ -22,4 +25,13 @@ export default function Page() {
       </DuotoneLayout>
     </Shell>
   )
+}
+
+export function generateMetadata(): Metadata | undefined {
+  return createMetadata({
+    title,
+    // TODO: process to interweave emoji and special characters correctly
+    description,
+    slug,
+  })
 }
