@@ -5,12 +5,12 @@ export const alertVariants = cva(
   {
     variants: {
       variant: {
-        note: "info-theme",
-        tip: "success-theme",
-        important: "critical-theme",
-        warning: "warning-theme",
-        caution: "danger-theme",
-        neutral: "gray-theme",
+        note: "accent-theme-info",
+        tip: "accent-theme-success",
+        important: "accent-theme-critical",
+        warning: "accent-theme-warning",
+        caution: "accent-theme-danger",
+        neutral: "accent-theme-surface",
         default: "",
       },
     },
