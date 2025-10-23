@@ -1,5 +1,3 @@
-"use client"
-
 import React from "react"
 import { DuotoneLayout } from "@/components/layouts/duotone"
 import { Shell } from "@/components/layouts/elements/shell"

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { type ReactNode } from "react"
 import { cn } from "@/quicksilver/lib/classname"
 import { EdgeFade } from "@/quicksilver/react/primitives/edge-fade"

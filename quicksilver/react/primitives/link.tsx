@@ -1,3 +1,5 @@
+"use client"
+
 import React, { Fragment, type ReactNode } from "react"
 import { cn } from "@/quicksilver/lib/classname"
 import { useLinkContext } from "@/quicksilver/react/headless/link/context"
