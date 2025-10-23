@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { DuotoneLayout } from "@/components/layouts/duotone"
 import { Shell } from "@/components/layouts/elements/shell"
 import { WithSidebar } from "@/components/layouts/with-sidebar"
-import { createMetadata } from "@/lib/seo/open-graph"
+import { createMetadata, processMarkdownAttribute } from "@/lib/seo/open-graph"
 
 const title = "Projects"
 const description =
@@ -30,8 +30,7 @@ export default function Page() {
 export function generateMetadata(): Metadata | undefined {
   return createMetadata({
     title,
-    // TODO: process to interweave emoji and special characters correctly
-    description,
+    description: processMarkdownAttribute(description),
     slug,
   })
 }

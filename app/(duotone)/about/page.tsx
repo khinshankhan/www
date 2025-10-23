@@ -5,7 +5,7 @@ import { Header } from "@/components/layouts/elements/header"
 import { Shell } from "@/components/layouts/elements/shell"
 import { TOC, type Heading } from "@/components/layouts/sidebars/toc"
 import { WithSidebar } from "@/components/layouts/with-sidebar"
-import { createMetadata } from "@/lib/seo/open-graph"
+import { createMetadata, processMarkdownAttribute } from "@/lib/seo/open-graph"
 import { Figcaption } from "@/quicksilver/react/primitives/figcaption"
 import { Figure } from "@/quicksilver/react/primitives/figure"
 import { Image } from "@/quicksilver/react/primitives/image"
@@ -163,8 +163,7 @@ export default function Page() {
 export function generateMetadata(): Metadata | undefined {
   return createMetadata({
     title,
-    // TODO: process to interweave emoji and special characters correctly
-    description,
+    description: processMarkdownAttribute(description),
     slug,
   })
 }

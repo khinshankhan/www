@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { identity } from "@/quicksilver/lib/combinators"
 import { defaultMetadata } from "@/settings"
+import { remark } from "remark"
+import remarkSmartypants from "remark-smartypants"
 
 export type NextMetadata = Metadata
 export type NextOpenGraph = NonNullable<NextMetadata["openGraph"]>
@@ -77,4 +79,16 @@ export function createMetadata({
     openGraph: openGraphObject,
     twitter,
   }
+}
+
+export function processMarkdownAttribute(text: string): string {
+  const processed = remark()
+    .use(remarkSmartypants, {
+      backticks: false,
+      ellipses: false,
+      quotes: false,
+    })
+    .processSync(text)
+
+  return processed.value.toString().trim()
 }
