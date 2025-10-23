@@ -9,8 +9,12 @@
     "moduleResolution": "bundler",
     "moduleDetection": "force",
     "verbatimModuleSyntax": true,
-    "jsx": "preserve",
-    "plugins": [{ "name": "next" }],
+    "jsx": "react-jsx",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
@@ -30,6 +34,6 @@
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": [".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "**/*.mjs"],
+  "include": [".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "**/*.mjs", ".next/dev/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
