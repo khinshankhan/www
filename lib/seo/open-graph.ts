@@ -63,7 +63,7 @@ export function createMetadata({
     // this should be right
     title: title as string,
     description,
-    url: metadataBase.href + (props.slug ?? "/"),
+    url: metadataBase.toString() + (props.slug ?? "/"),
   })
 
   return {
