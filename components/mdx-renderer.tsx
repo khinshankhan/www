@@ -26,6 +26,7 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import remarkGfm from "remark-gfm"
 import remarkSmartypants from "remark-smartypants"
+import { z } from "zod"
 import { remarkSimpleEmoji } from "@khinshankhan/emoji-helper-remark"
 
 export const calloutKeywords = Object.keys(calloutIcons) as NonNullable<CalloutProps["variant"]>[]
@@ -40,40 +41,34 @@ const mdxBlockquoteMetaRegex = /\[!([^\]]+)\]\s*(.*)/
 
 const mdxHeadingClasses = "scroll-mt-28"
 
-const components: MDXComponents = {
-  a: ({ href = "#", children = null, ...props }) => (
-    <Link href={href} {...props}>
-      {children}
-    </Link>
-  ),
-  // TODO: look into why heading component isn't compatible with MDX headings
-  h2: ({ className = "", children, ...props }) => (
-    <H2 {...props} className={cn(mdxHeadingClasses, className)}>
-      {children}
-    </H2>
-  ),
-  h3: ({ className = "", children, ...props }) => (
-    <H3 {...props} className={cn(mdxHeadingClasses, className)}>
-      {children}
-    </H3>
-  ),
-  h4: ({ className = "", children, ...props }) => (
-    <H4 {...props} className={cn(mdxHeadingClasses, className)}>
-      {children}
-    </H4>
-  ),
-  h5: ({ className = "", children, ...props }) => (
-    <H5 {...props} className={cn(mdxHeadingClasses, className)}>
-      {children}
-    </H5>
-  ),
-  h6: ({ className = "", children, ...props }) => (
-    <H6 {...props} className={cn(mdxHeadingClasses, className)}>
-      {children}
-    </H6>
-  ),
+function getSafeClassName(className: unknown): string {
+  const parsedClassName = z.string().safeParse(className)
+  return parsedClassName.success ? parsedClassName.data : ""
+}
 
-  li: ({ className = "", ...props }) => <li className={cn("prose", className)} {...props} />,
+const components: MDXComponents = {
+  a: ({ className = "", ...props }) => {
+    return <Link className={cn("prose", getSafeClassName(className))} {...props} />
+  },
+  h2: ({ className = "", ...props }) => {
+    return <H2 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
+  },
+  h3: ({ className = "", ...props }) => {
+    return <H3 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
+  },
+  h4: ({ className = "", ...props }) => {
+    return <H4 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
+  },
+  h5: ({ className = "", ...props }) => {
+    return <H5 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
+  },
+  h6: ({ className = "", ...props }) => {
+    return <H6 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
+  },
+
+  li: ({ className = "", ...props }) => {
+    return <li className={cn("prose", getSafeClassName(className))} {...props} />
+  },
 
   Emoji,
   Spoiler,
@@ -111,7 +106,7 @@ const components: MDXComponents = {
   },
 }
 
-export async function MDXRenderer({ source }: { source: string }) {
+export function MDXRenderer({ source }: { source: string }) {
   return (
     <MDXRemote
       source={source}
@@ -133,8 +128,12 @@ export async function MDXRenderer({ source }: { source: string }) {
                 validate: (name: string) => emojiLookup.get(name as EmojiKey),
                 lookup: (name: string) => {
                   const emoji = emojiLookup.get(name as EmojiKey)
-                  // NOTE: this should be guranteed due to validate
-                  return emoji!.alt
+                  // NOTE: this should be guranteed due to validate but TS doesn't know that
+                  const alt = emoji?.alt
+                  if (!alt) {
+                    throw new Error(`Emoji alt text not found for name: ${name}`)
+                  }
+                  return alt
                 },
               },
             ],
@@ -155,7 +154,7 @@ export async function MDXRenderer({ source }: { source: string }) {
               {
                 elementMatcher: (node) => {
                   // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
-                  if (node?.name === "img") {
+                  if (node.name === "img") {
                     return "Image"
                   }
 
@@ -166,13 +165,13 @@ export async function MDXRenderer({ source }: { source: string }) {
                   // NOTE: I wonder if it's worth investigating around the node so different versions
                   // of figcaption can be rendered if it's preceded by an img vs blockquote
                   // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
-                  if (node?.name === "figcaption") {
+                  if (node.name === "figcaption") {
                     return "Figcaption"
                   }
 
                   if (node.type === "blockquote") {
                     // @ts-expect-error: seems the node type doesn't account for MdxJsxFlowElements
-                    const firstChildText = toString(node?.children?.[0] ?? "")
+                    const firstChildText = toString(node.children?.[0] ?? "") // eslint-disable-line @typescript-eslint/no-unsafe-member-access
                     const match = mdxBlockquoteMetaRegex.exec(firstChildText)
                     const [, keyword] = match ?? []
                     const variant = (keyword ?? "").toLowerCase()
@@ -185,7 +184,7 @@ export async function MDXRenderer({ source }: { source: string }) {
                 elementModifier: (jsxName, element) => {
                   if (["Blockquote", "Callout"].includes(jsxName)) {
                     // @ts-expect-error: we're extracting the element from the auto p tag
-                    const possibleHeadingTree = (element?.children?.[0]?.children ||
+                    const possibleHeadingTree = (element.children[0]?.children ??
                       []) as MdastContent[]
                     const possibleHeadingText = toString(possibleHeadingTree)
 

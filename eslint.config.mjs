@@ -5,11 +5,10 @@ import reactHooks from "eslint-plugin-react-hooks"
 import { defineConfig } from "eslint/config"
 import globals from "globals"
 import tseslint from "typescript-eslint"
-import { FlatCompat } from "@eslint/eslintrc"
 import js from "@eslint/js"
+import nextPlugin from "@next/eslint-plugin-next"
 
 const tsconfigRootDir = new URL(".", import.meta.url).pathname
-const compat = new FlatCompat({ baseDirectory: tsconfigRootDir })
 
 export default defineConfig([
   {
@@ -24,7 +23,7 @@ export default defineConfig([
     ],
   },
 
-  ...compat.extends("plugin:@next/next/core-web-vitals"),
+  nextPlugin.configs["core-web-vitals"],
 
   js.configs.recommended,
 

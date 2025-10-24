@@ -13,7 +13,7 @@ export interface TocItem {
 // only need one slugger instance for the entire build
 const slugger = new Slugger()
 
-type Options = {
+interface Options {
   reservedIds?: string[]
 }
 

@@ -8,7 +8,7 @@ import { visit } from "unist-util-visit"
 // only need one slugger instance for the entire build
 const slugger = new Slugger()
 
-type Options = {
+interface Options {
   prefix?: string
   reservedIds?: string[]
 }

@@ -1,3 +1,7 @@
+/* eslint-disable */
+
+// TODO: review and rewrite this logic with new available types and constructs
+
 import type { RootContent as MdastContent, Node as MdastNode, Root as MdastRoot } from "mdast"
 import type { Transformer } from "unified"
 import { CONTINUE, SKIP, visit } from "unist-util-visit"
@@ -33,13 +37,12 @@ export function createMdxJsxFlowElement(
   }
 }
 
-// eslint-disable-line no-unused-vars
 export type MatchFunction<P, T> = (node: P) => T
 
-export type RemarkJsxifyElementOptions = {
+export interface RemarkJsxifyElementOptions {
   elementMatcher: MatchFunction<MdastNode, string | null>
   isSandbox?: MatchFunction<Attribute, boolean>
-  // eslint-disable-line no-unused-vars
+
   elementModifier?: (jsxName: string, mdxJsxFlowElement: MdxJsxFlowElement) => MdxJsxFlowElement
 }
 
@@ -50,7 +53,6 @@ const defaultIsSandbox: NonNullable<RemarkJsxifyElementOptions["isSandbox"]> = (
 }
 
 const defaultElementModifier: NonNullable<RemarkJsxifyElementOptions["elementModifier"]> = (
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   jsxName,
   element
 ) => {

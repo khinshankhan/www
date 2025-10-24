@@ -29,7 +29,7 @@ export function processMarkdown(content: string) {
 
   return {
     // NOTE: this is guaranteed because of remarkTocExport
-    toc: (computedData?.data?.toc ?? []) as TocItem[],
+    toc: (computedData.data.toc ?? []) as TocItem[],
   }
 }
 

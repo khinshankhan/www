@@ -63,8 +63,8 @@ export const ContentFrontmatterSchema = z
     return {
       ...data,
       og: {
-        title: data?.og?.title ?? data.title,
-        description: data?.og?.description ?? data.description,
+        title: data.og?.title ?? data.title,
+        description: data.og?.description ?? data.description,
       },
       showToc: data.showToc ?? defaultShowTocForSource[source],
       markExcerpt: data.markExcerpt ?? true,
