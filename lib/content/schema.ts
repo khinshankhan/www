@@ -7,8 +7,8 @@ export type ContentSource = (typeof contentSources)[number]
 const ContentSourceSchema = z.enum(contentSources)
 
 export function getContentSource(segments?: GroupSegment[]): ContentSource {
-  const firstSegmentValue = segments?.[0]?.value
-  const parsed = ContentSourceSchema.safeParse(firstSegmentValue)
+  const firstGroupSegment = segments?.find((segment) => segment.type === "paren")
+  const parsed = ContentSourceSchema.safeParse(firstGroupSegment?.value)
   return parsed.success ? parsed.data : "pages"
 }
 
