@@ -31,7 +31,8 @@
     "remark-smartypants": "^3.0.2",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
-    "vaul-base": "^0.0.6"
+    "vaul-base": "^0.0.6",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
