@@ -26,6 +26,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      fast-glob:
+        specifier: ^3.3.3
+        version: 3.3.3
       geist:
         specifier: ^1.5.1
         version: 1.5.1(next@16.0.0(@babel/core@7.28.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
