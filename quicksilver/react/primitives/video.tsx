@@ -1,7 +1,8 @@
 "use client"
 
-import React, { type ComponentPropsWithRef, type ReactNode } from "react"
+import React, { Children, type ComponentPropsWithRef, type ReactNode } from "react"
 import { cn } from "@/quicksilver/lib/classname"
+import { Link } from "./link"
 
 // TODO: we'll circle back to "jsx-a11y/media-has-caption", it's currently a bit complicated to handle in this HoC
 
@@ -21,5 +22,31 @@ export function Video({ children, className = "", ...props }: VideoProps) {
     >
       {children}
     </video>
+  )
+}
+
+export function SmartVideo({ children, ...props }: VideoProps) {
+  // extract `src` from `props` or any `<source>` children
+  const fallbackSrc =
+    props.src ??
+    Children.toArray(children)
+      .filter((child) => React.isValidElement(child) && child.type === "source")
+      // @ts-expect-error hacky but works
+      .map((child) => (child as unknown as React.ReactElement).props.src as unknown as string)[0]
+
+  if (!fallbackSrc) throw new Error("Video has no source!")
+
+  return (
+    <Video {...props}>
+      {children}
+
+      {/* not sure how to check if a fallback was provided */}
+      {!children && fallbackSrc && (
+        <>
+          Your browser does not support embedded videos. You can{" "}
+          <Link href={fallbackSrc}>view the video directly</Link> instead.
+        </>
+      )}
+    </Video>
   )
 }
