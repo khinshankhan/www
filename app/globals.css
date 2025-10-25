@@ -4,6 +4,7 @@
 @import "../quicksilver/css/tw-sane-base.css";
 @import "../quicksilver/css/tw-grand-links.css";
 @import "../quicksilver/css/tw-prose.css";
+@import "./styles/hljs-github.css";
 
 @custom-variant dark (&: where(.dark *));
 @custom-variant light (&:where(.light *));

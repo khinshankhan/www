@@ -13,13 +13,13 @@ import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-he
 import { cn } from "@/quicksilver/lib/classname"
 import { Blockquote, type BlockquoteProps } from "@/quicksilver/react/primitives/blockquote"
 import { Callout, calloutIcons, type CalloutProps } from "@/quicksilver/react/primitives/callout"
+import { Code } from "@/quicksilver/react/primitives/code"
 import { Figcaption } from "@/quicksilver/react/primitives/figcaption"
 import { Figure } from "@/quicksilver/react/primitives/figure"
 import { Image } from "@/quicksilver/react/primitives/image"
 import { Link } from "@/quicksilver/react/primitives/link"
 import { Spoiler } from "@/quicksilver/react/primitives/spoiler"
 import { H2, H3, H4, H5, H6 } from "@/quicksilver/react/primitives/text"
-import { textVariants } from "@/quicksilver/react/primitives/text.variants"
 import { SmartVideo } from "@/quicksilver/react/primitives/video"
 import type { RootContent as MdastContent } from "mdast"
 import { toString } from "mdast-util-to-string"
@@ -67,26 +67,18 @@ const components: MDXComponents = {
   h6: ({ className = "", ...props }) => {
     return <H6 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
   },
-  code: ({ className = "", ...props }) => {
+  code: ({ className = "", children, ...props }) => {
     const language =
       getSafeClassName(className)
         .split(" ")
         .find((c) => c.startsWith("language-"))
         ?.split("language-")
-        .pop() || "plaintext"
+        .pop() ?? "plaintext"
 
     return (
-      <code
-        data-lang={language}
-        className={cn(
-          textVariants({
-            variant: "xs",
-          }),
-          "relative rounded-md border-1 border-stark-contrast/10 bg-muted/30 px-1 py-0.25",
-          "before:border-0.25 noise before:rounded-md"
-        )}
-        {...props}
-      />
+      <Code language={language} {...props}>
+        {children as string}
+      </Code>
     )
   },
 
