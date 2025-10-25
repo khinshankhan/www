@@ -120,7 +120,16 @@ function TocTitle({ isOpen, headings }: TocTitleProps) {
       <ProgressCircle value={progress} className="accent-theme-default size-[1em] text-accent-11" />
 
       <span className={cn(textVariants({ variant: "h5" }), "text-foreground")}>
-        <span className="block xl:hidden"> {isOpen ? "On this page" : activeHeading}</span>
+        <span
+          className="block max-w-(--max-w-mobile) overflow-hidden text-ellipsis xl:hidden"
+          style={
+            {
+              "--max-w-mobile": "calc(55ch - 4em)",
+            } as CSSProperties
+          }
+        >
+          {isOpen ? "On this page" : activeHeading}
+        </span>
         <span className="hidden xl:block">On this page</span>
       </span>
     </span>
@@ -151,7 +160,7 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
               <Button
                 {...props}
                 variant="ghost"
-                className="group flex w-full justify-between px-2 py-2 xl:hidden"
+                className="group relative mx-auto flex w-full max-w-[55ch] justify-between px-2 py-2 xl:hidden xl:max-w-full"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 <TocTitle isOpen={isOpen} headings={headings} />
@@ -165,7 +174,7 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
           </div>
 
           <Collapsible.Panel
-            className="flex h-(--h) flex-col justify-end overflow-hidden opacity-100 transition-all ease-out data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0"
+            className="mx-auto flex h-(--h) max-w-[55ch] flex-col justify-end overflow-hidden opacity-100 transition-all ease-out data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0"
             style={
               {
                 ["--h"]: "var(--collapsible-panel-height)",

@@ -25,19 +25,21 @@ export function DuotoneLayout({ title, description, ghPath, children }: DuotoneL
             headerHeight
           )}
         >
-          <H1 className="text-balance">{title}</H1>
+          <H1 className="text-center text-balance xl:text-left">{title}</H1>
           <Paragraph
             variant="nav"
-            className="max-w-[75ch] leading-relaxed text-foreground-muted"
+            className="max-w-[75ch] text-center leading-relaxed text-foreground-muted xl:text-left"
             render={(props) => {
-              return <span {...props} />
+              return (
+                <span {...props}>
+                  {
+                    // TODO: replace with a different processor to account for emoji
+                    processMarkdownAttribute(description)
+                  }
+                </span>
+              )
             }}
-          >
-            {
-              // TODO: replace with a different processor to account for emoji
-              processMarkdownAttribute(description)
-            }
-          </Paragraph>
+          />
         </header>
 
         {/* acts as a fade effect to gradually introduce content and hide content */}

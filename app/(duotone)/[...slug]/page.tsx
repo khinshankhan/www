@@ -49,7 +49,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
           direction="right"
         >
           <div className="mx-auto min-w-full">
-            <MDXRenderer source={contentData.content} />
+            <div className="mx-auto max-w-[55ch] xl:mx-0 xl:max-w-full">
+              <MDXRenderer source={contentData.content} />
+            </div>
           </div>
         </WithSidebar>
       </DuotoneLayout>
