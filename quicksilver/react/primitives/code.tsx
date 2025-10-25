@@ -10,6 +10,7 @@ const lowlight = createLowlight(all)
 
 export interface CodeProps extends React.ComponentPropsWithRef<"code"> {
   children: string
+  isFenced?: boolean
   language?: string
 
   highlighted?: string
@@ -19,6 +20,7 @@ export interface CodeProps extends React.ComponentPropsWithRef<"code"> {
 
 export function Code({
   children,
+  isFenced = false,
   className = "",
   language = "plaintext",
 
@@ -51,7 +53,7 @@ export function Code({
       data-lang={language}
       className={cn(
         textVariants({
-          variant: "xs",
+          variant: isFenced ? "small" : "xs",
         }),
         "relative rounded-md border-1 border-stark-contrast/10 bg-muted/30 px-1 py-0.25",
         "before:border-0.25 noise before:rounded-md",
