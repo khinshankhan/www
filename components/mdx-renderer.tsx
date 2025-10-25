@@ -19,6 +19,7 @@ import { Image } from "@/quicksilver/react/primitives/image"
 import { Link } from "@/quicksilver/react/primitives/link"
 import { Spoiler } from "@/quicksilver/react/primitives/spoiler"
 import { H2, H3, H4, H5, H6 } from "@/quicksilver/react/primitives/text"
+import { SmartVideo } from "@/quicksilver/react/primitives/video"
 import type { RootContent as MdastContent } from "mdast"
 import { toString } from "mdast-util-to-string"
 import type { MDXComponents } from "mdx/types"
@@ -72,9 +73,10 @@ const components: MDXComponents = {
 
   Emoji,
   Spoiler,
-  Image,
   Figure,
   Figcaption,
+  Image,
+  SmartVideo,
   Blockquote: ({
     variant,
     children,
@@ -153,11 +155,6 @@ export function MDXRenderer({ source }: { source: string }) {
               remarkJsxifyElements,
               {
                 elementMatcher: (node) => {
-                  // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
-                  if (node.name === "img") {
-                    return "Image"
-                  }
-
                   if (node.type === "figure") {
                     return "Figure"
                   }
@@ -167,6 +164,16 @@ export function MDXRenderer({ source }: { source: string }) {
                   // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
                   if (node.name === "figcaption") {
                     return "Figcaption"
+                  }
+
+                  // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
+                  if (node.name === "img") {
+                    return "Image"
+                  }
+
+                  // @ts-expect-error: technically we shouldn't be modifying mdxJsxFlowElement
+                  if (node.name === "video") {
+                    return "SmartVideo"
                   }
 
                   if (node.type === "blockquote") {
