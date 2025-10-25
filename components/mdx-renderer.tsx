@@ -82,7 +82,8 @@ const components: MDXComponents = {
           textVariants({
             variant: "xs",
           }),
-          "rounded-md bg-accent-3 px-1 py-0.25"
+          "relative rounded-md border-1 border-stark-contrast/10 bg-muted/30 px-1 py-0.25",
+          "before:border-0.25 noise before:rounded-md"
         )}
         {...props}
       />
