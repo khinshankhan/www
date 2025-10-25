@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Children, type ComponentPropsWithRef, type ReactNode } from "react"
+import React, { Children, Fragment, type ComponentPropsWithRef, type ReactNode } from "react"
 import { cn } from "@/quicksilver/lib/classname"
 import { Link } from "./link"
 
@@ -41,12 +41,16 @@ export function SmartVideo({ children, ...props }: VideoProps) {
       {children}
 
       {/* not sure how to check if a fallback was provided */}
-      {!children && fallbackSrc && (
-        <>
-          Your browser does not support embedded videos. You can{" "}
-          <Link href={fallbackSrc}>view the video directly</Link> instead.
-        </>
-      )}
+      {!children &&
+        fallbackSrc &&
+        (typeof fallbackSrc === "string" ? (
+          <Fragment>
+            Your browser does not support embedded videos. You can{" "}
+            <Link href={fallbackSrc}>view the video directly</Link> instead.
+          </Fragment>
+        ) : (
+          <Fragment>Your browser does not support embedded videos.</Fragment>
+        ))}
     </Video>
   )
 }
