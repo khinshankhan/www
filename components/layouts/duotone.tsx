@@ -46,7 +46,7 @@ export function DuotoneLayout({ title, description, ghPath, children }: DuotoneL
         <EdgeFade direction="top" className="relative z-2 h-12" />
 
         <div className="relative isolate z-2 flex w-full grow flex-col items-center justify-center bg-background-2">
-          <div className="relative w-full maxw-content grow pt-6 pb-14 xl:pt-14">{children}</div>
+          <div className="relative w-full grow pt-6 pb-14 xl:pt-14">{children}</div>
         </div>
       </article>
 

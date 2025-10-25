@@ -124,7 +124,7 @@ function TocTitle({ isOpen, headings }: TocTitleProps) {
           className="block max-w-(--max-w-mobile) overflow-hidden text-ellipsis xl:hidden"
           style={
             {
-              "--max-w-mobile": "calc(55ch - 4em)",
+              "--max-w-mobile": "calc(min(55ch, 100vw) - 5em)",
             } as CSSProperties
           }
         >
@@ -174,7 +174,7 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
           </div>
 
           <Collapsible.Panel
-            className="mx-auto flex h-(--h) max-w-[55ch] flex-col justify-end overflow-hidden opacity-100 transition-all ease-out data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0"
+            className="mx-auto flex h-(--h) flex-col justify-end overflow-hidden opacity-100 transition-all ease-out data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0"
             style={
               {
                 ["--h"]: "var(--collapsible-panel-height)",
