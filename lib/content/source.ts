@@ -62,20 +62,11 @@ export async function getAllContentData(): Promise<ContentData[]> {
   )
 }
 
-const _allContentData = await getAllContentData()
-
-export function getCachedAllContentData(): ContentData[] {
-  return _allContentData
-}
-
-const _allContentDataBySlug = ((data) => {
-  const out: Record<string, ContentData> = {}
+export async function getContentDataBySlug(slug: string): Promise<ContentData | null> {
+  const data = await getAllContentData()
+  const lookup: Record<string, ContentData> = {}
   data.forEach((contentData) => {
-    out[contentData.slug] = contentData
+    lookup[contentData.slug] = contentData
   })
-  return out
-})(_allContentData)
-
-export function getCachedContentDataBySlug(slug: string): ContentData | null {
-  return _allContentDataBySlug[slug] ?? null
+  return lookup[slug] ?? null
 }

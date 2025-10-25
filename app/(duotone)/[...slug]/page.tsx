@@ -6,11 +6,12 @@ import { Shell } from "@/components/layouts/elements/shell"
 import { TOC } from "@/components/layouts/sidebars/toc"
 import { WithSidebar } from "@/components/layouts/with-sidebar"
 import { MDXRenderer } from "@/components/mdx-renderer"
-import { getCachedAllContentData, getCachedContentDataBySlug } from "@/lib/content/source"
+import { getAllContentData, getContentDataBySlug } from "@/lib/content/source"
 import { createMetadata, processMarkdownAttribute } from "@/lib/seo/open-graph"
 
-export function generateStaticParams() {
-  const slugsParts = getCachedAllContentData().map((contentData) => {
+export async function generateStaticParams() {
+  const list = await getAllContentData()
+  const slugsParts = list.map((contentData) => {
     return {
       slug: contentData.slug.split("/").filter((part) => part.trim() !== ""),
     }
@@ -22,7 +23,7 @@ export function generateStaticParams() {
 export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
   const fileSlug = (await params).slug
   const realFileSlug = `/${fileSlug.join("/")}/`
-  const contentData = getCachedContentDataBySlug(realFileSlug)
+  const contentData = await getContentDataBySlug(realFileSlug)
   if (!contentData) {
     throw new Error(`Could not find metadata for ${realFileSlug}`)
   }
@@ -66,7 +67,7 @@ export async function generateMetadata({
 }): Promise<Metadata | undefined> {
   const fileSlug = (await params).slug
   const realFileSlug = `/${fileSlug.join("/")}/`
-  const contentData = getCachedContentDataBySlug(realFileSlug)
+  const contentData = await getContentDataBySlug(realFileSlug)
   if (!contentData) {
     throw new Error(`Could not find metadata for ${realFileSlug}`)
   }
