@@ -235,7 +235,7 @@ export function Header({ edgeFadeProps }: HeaderProps) {
       toColor="var(--color-background-2)"
       rangePx={900}
       className={cn(
-        "sticky top-0 z-2 flex h-(--h) w-full flex-col items-center justify-center",
+        "relative top-0 z-2 flex h-(--h) w-full flex-col items-center justify-center vh-comfy:sticky",
         headerHeight
       )}
     >

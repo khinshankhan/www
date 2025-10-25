@@ -8,6 +8,8 @@
 @custom-variant dark (&: where(.dark *));
 @custom-variant light (&:where(.light *));
 
+@custom-variant vh-comfy (@media (min-height: 32rem)); /* 512px */
+
 @plugin "tailwindcss-animate";
 
 :root {

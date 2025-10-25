@@ -39,7 +39,7 @@ export function WithSidebar({
         {sidebar && (
           <aside
             className={cn(
-              "sticky z-50 w-full pb-4 lg:self-start xl:pb-0",
+              "relative z-50 w-full pb-4 lg:self-start xl:pb-0 vh-comfy:sticky",
               headerHeight,
               sidebarTopDisplacement,
               sidebarClassName

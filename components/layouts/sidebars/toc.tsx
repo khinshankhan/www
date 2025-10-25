@@ -153,7 +153,7 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
       <LayoutGroup id="toc">
         <Collapsible.Root
           open={isOpen}
-          className={cn("sticky top-0 w-full bg-background-2 py-2", className)}
+          className={cn("relative top-0 w-full bg-background-2 py-2 vh-comfy:sticky", className)}
         >
           <Collapsible.Trigger
             render={({ style = {}, ...props }) => (
@@ -199,7 +199,7 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
 
           <ScrollFadeIn startPx={150} rangePx={400}>
             <Divider
-              className="absolute bottom-0 left-1/2 z-2 block w-full -translate-x-1/2 transform xl:hidden"
+              className="absolute bottom-0 left-1/2 z-2 hidden w-full -translate-x-1/2 transform xl:hidden vh-comfy:max-xl:block"
               intensity="solid"
               style={{
                 width:
