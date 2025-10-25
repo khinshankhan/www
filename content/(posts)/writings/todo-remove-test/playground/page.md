@@ -130,30 +130,40 @@ motion: every line a microcosm of contrast, texture, and rhythm.
 > Highlights information that users should take into account, even when skimming.
 >
 > Second paragraph. With a [lorem ipsum](#) link.
+>
+> Some `backticks` for inline.
 
 > [!TIP] Tip
 >
 > Optional information to help a user be more successful.
 >
 > Second paragraph. With a [lorem ipsum](#) link.
+>
+> Some `backticks` for inline.
 
 > [!IMPORTANT] Important
 >
 > Crucial information necessary for users to succeed.
 >
 > Second paragraph. With a [lorem ipsum](#) link.
+>
+> Some `backticks` for inline.
 
 > [!WARNING] Warning
 >
 > Critical content demanding immediate user attention due to potential risks.
 >
 > Second paragraph. With a [lorem ipsum](#) link.
+>
+> Some `backticks` for inline.
 
 > [!CAUTION] Caution
 >
 > Negative potential consequences of an action.
 >
 > Second paragraph. With a [lorem ipsum](#) link.
+>
+> Some `backticks` for inline.
 
 And nesting callouts
 
@@ -399,3 +409,10 @@ dictum. Donec tincidunt facilisis fringilla. Sed semper suscipit dictum. Etiam s
 eros. Mauris et laoreet odio. Ut orci dui, malesuada pretium iaculis id, pretium eget magna. Etiam tellus est, imperdiet
 in posuere sed, venenatis venenatis eros. Mauris risus est, suscipit eu luctus a, pellentesque nec tellus. Sed quis urna
 fringilla, vestibulum urna id, dictum arcu. Mauris lectus odio, faucibus eget est at, maximus sodales ipsum.
+
+## Codeblocks
+
+### Inline Code
+
+Because `code` should exist within words too. Awkward if the next line also had a `codeblock` (for safety sake, a second
+`codeblocks`) and the blocks touched :pensive:

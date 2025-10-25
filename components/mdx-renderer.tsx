@@ -19,6 +19,7 @@ import { Image } from "@/quicksilver/react/primitives/image"
 import { Link } from "@/quicksilver/react/primitives/link"
 import { Spoiler } from "@/quicksilver/react/primitives/spoiler"
 import { H2, H3, H4, H5, H6 } from "@/quicksilver/react/primitives/text"
+import { textVariants } from "@/quicksilver/react/primitives/text.variants"
 import { SmartVideo } from "@/quicksilver/react/primitives/video"
 import type { RootContent as MdastContent } from "mdast"
 import { toString } from "mdast-util-to-string"
@@ -65,6 +66,19 @@ const components: MDXComponents = {
   },
   h6: ({ className = "", ...props }) => {
     return <H6 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
+  },
+  code: (props) => {
+    return (
+      <code
+        className={cn(
+          textVariants({
+            variant: "xs",
+          }),
+          "rounded-md bg-accent-3 px-1 py-0.25"
+        )}
+        {...props}
+      />
+    )
   },
 
   Emoji,
