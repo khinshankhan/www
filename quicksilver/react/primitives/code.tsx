@@ -55,8 +55,8 @@ export function Code({
         textVariants({
           variant: isFenced ? "small" : "xs",
         }),
-        "relative rounded-md border-1 border-stark-contrast/10 bg-muted/30 px-1 py-0.25",
-        "before:border-0.25 noise before:rounded-md",
+        "relative z-2 rounded-md border-1 border-stark-contrast/10 bg-muted/30 px-1 py-0.25",
+        "before:border-0.25 noise before:-z-1 before:rounded-md",
         className
       )}
       dangerouslySetInnerHTML={{ __html: content }}
