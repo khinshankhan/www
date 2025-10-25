@@ -67,10 +67,6 @@ const components: MDXComponents = {
     return <H6 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
   },
 
-  li: ({ className = "", ...props }) => {
-    return <li className={cn("prose", getSafeClassName(className))} {...props} />
-  },
-
   Emoji,
   Spoiler,
   Figure,
