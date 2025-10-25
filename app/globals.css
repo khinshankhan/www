@@ -187,6 +187,13 @@
     scrollbar-color: var(--color-foreground) var(--background-2);
   }
 
+  /* code block styling */
+  pre {
+    code {
+      display: block;
+    }
+  }
+
   /* image styling */
   [data-rmiz-modal-overlay="visible"] {
     background-color: color-mix(in srgb, var(--background-1) 80%, var(--transparent)) !important;

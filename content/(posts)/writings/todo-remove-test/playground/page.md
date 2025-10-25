@@ -132,6 +132,10 @@ motion: every line a microcosm of contrast, texture, and rhythm.
 > Second paragraph. With a [lorem ipsum](#) link.
 >
 > Some `backticks` for inline.
+>
+> ```javascript
+> backtick.fences("for blocks")
+> ```
 
 > [!TIP] Tip
 >
@@ -140,6 +144,10 @@ motion: every line a microcosm of contrast, texture, and rhythm.
 > Second paragraph. With a [lorem ipsum](#) link.
 >
 > Some `backticks` for inline.
+>
+> ```javascript
+> backtick.fences("for blocks")
+> ```
 
 > [!IMPORTANT] Important
 >
@@ -148,6 +156,10 @@ motion: every line a microcosm of contrast, texture, and rhythm.
 > Second paragraph. With a [lorem ipsum](#) link.
 >
 > Some `backticks` for inline.
+>
+> ```javascript
+> backtick.fences("for blocks")
+> ```
 
 > [!WARNING] Warning
 >
@@ -156,6 +168,10 @@ motion: every line a microcosm of contrast, texture, and rhythm.
 > Second paragraph. With a [lorem ipsum](#) link.
 >
 > Some `backticks` for inline.
+>
+> ```javascript
+> backtick.fences("for blocks")
+> ```
 
 > [!CAUTION] Caution
 >
@@ -164,6 +180,10 @@ motion: every line a microcosm of contrast, texture, and rhythm.
 > Second paragraph. With a [lorem ipsum](#) link.
 >
 > Some `backticks` for inline.
+>
+> ```javascript
+> backtick.fences("for blocks")
+> ```
 
 And nesting callouts
 
@@ -416,3 +436,11 @@ fringilla, vestibulum urna id, dictum arcu. Mauris lectus odio, faucibus eget es
 
 Because `code` should exist within words too. Awkward if the next line also had a `codeblock` (for safety sake, a second
 `codeblocks`) and the blocks touched :pensive:
+
+### Hmmm
+
+Some `backticks` for inline.
+
+```javascript
+backtick.fences("for blocks")
+```

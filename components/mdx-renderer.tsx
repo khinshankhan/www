@@ -67,9 +67,17 @@ const components: MDXComponents = {
   h6: ({ className = "", ...props }) => {
     return <H6 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
   },
-  code: (props) => {
+  code: ({ className = "", ...props }) => {
+    const language =
+      getSafeClassName(className)
+        .split(" ")
+        .find((c) => c.startsWith("language-"))
+        ?.split("language-")
+        .pop() || "plaintext"
+
     return (
       <code
+        data-lang={language}
         className={cn(
           textVariants({
             variant: "xs",
