@@ -45,6 +45,10 @@ export function Text({
   })
 }
 
+export function Span({ variant = "body", render, ...props }: TextProps) {
+  return <Text {...props} variant={variant} render={render ?? ((props) => <span {...props} />)} />
+}
+
 export function H1({ variant = "h1", render, ...props }: TextProps) {
   return <Text {...props} variant={variant} render={render ?? ((props) => <h1 {...props} />)} />
 }
