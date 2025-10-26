@@ -69,11 +69,14 @@ const components: MDXComponents = {
     return <H6 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
   },
   pre: ({ className = "", ...props }) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const givenLanguage = getSafeClassName(props?.children?.props?.className)
       .split(" ")
       .find((c) => c.startsWith("language-"))
       ?.split("language-")
       .pop()
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const text = props?.children?.props?.children as string
 
     // TODO: add support for better inline vs fenced code detection
