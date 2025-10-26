@@ -18,6 +18,7 @@ import { Figcaption } from "@/quicksilver/react/primitives/figcaption"
 import { Figure } from "@/quicksilver/react/primitives/figure"
 import { Image } from "@/quicksilver/react/primitives/image"
 import { Link } from "@/quicksilver/react/primitives/link"
+import { Pre } from "@/quicksilver/react/primitives/pre"
 import { Spoiler } from "@/quicksilver/react/primitives/spoiler"
 import { H2, H3, H4, H5, H6 } from "@/quicksilver/react/primitives/text"
 import { SmartVideo } from "@/quicksilver/react/primitives/video"
@@ -66,6 +67,9 @@ const components: MDXComponents = {
   },
   h6: ({ className = "", ...props }) => {
     return <H6 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
+  },
+  pre: ({ className = "", ...props }) => {
+    return <Pre className={cn("h-full w-full", getSafeClassName(className))} {...props} />
   },
   code: ({ className = "", children, ...props }) => {
     const givenLanguage = getSafeClassName(className)

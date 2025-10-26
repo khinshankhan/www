@@ -189,7 +189,16 @@
   }
 
   /* code block styling */
+  code {
+    border-radius: 0.375rem 0.375rem 0.375rem 0.375rem;
+    overflow: hidden;
+    @apply noise;
+    &:before {
+      z-index: -1;
+    }
+  }
   pre {
+    position: relative;
     code {
       display: block;
     }
