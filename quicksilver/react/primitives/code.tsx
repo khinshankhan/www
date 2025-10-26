@@ -18,7 +18,7 @@ interface CopyButtonProps {
   text: string
   onCopy?: () => void
 }
-function CopyButton({ text, onCopy }: CopyButtonProps) {
+export function CopyButton({ text, onCopy }: CopyButtonProps) {
   const copyCallback = useCallback(async () => {
     await copyToClipboardGraceful(text)
     onCopy?.()
@@ -34,7 +34,7 @@ function CopyButton({ text, onCopy }: CopyButtonProps) {
       aria-label="Copy text to clipboard"
       variant="phantom"
       size="icon-sm"
-      className="absolute top-2 right-2 z-2 opacity-70 transition-opacity hover:opacity-100"
+      className="absolute top-1 right-2 z-2 opacity-70 transition-opacity hover:opacity-100 md:top-1.5 lg:top-2"
       onClick={handleClick}
     >
       {copied ? (
@@ -54,6 +54,8 @@ export interface CodeProps extends React.ComponentPropsWithRef<"code"> {
   highlighted?: string
   add?: string
   remove?: string
+
+  allowCopy?: boolean
 }
 
 export function Code({
@@ -65,6 +67,8 @@ export function Code({
   highlighted = "",
   add = "",
   remove = "",
+
+  allowCopy = false,
 }: CodeProps) {
   const linesToMarkHighlighted = new Set(rangeParser(highlighted))
   const linesToMarkAdd = new Set(rangeParser(add))
@@ -88,7 +92,7 @@ export function Code({
 
   return (
     <>
-      {isFenced && <CopyButton text={children} />}
+      {allowCopy && isFenced && <CopyButton text={children} />}
       <code
         data-lang={language}
         className={cn(
