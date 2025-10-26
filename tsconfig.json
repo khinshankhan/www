@@ -3,25 +3,37 @@
   "compilerOptions": {
     "incremental": true,
     "tsBuildInfoFile": "./.tsbuildinfo",
-    "target": "es2017",
-    "lib": ["dom", "dom.iterable", "ES2017"],
-    "jsx": "preserve",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "verbatimModuleSyntax": true,
+    "jsx": "react-jsx",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     },
     "resolveJsonModule": true,
+    "allowArbitraryExtensions": true,
     "allowJs": true,
+    "checkJs": false,
     "noEmit": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false,
+    "useUnknownInCatchVariables": true,
     "skipLibCheck": true,
-    "plugins": [{ "name": "next" }]
+    "noFallthroughCasesInSwitch": true
   },
-  "include": [".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "**/*.mjs"],
+  "include": [".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "**/*.mjs", ".next/dev/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

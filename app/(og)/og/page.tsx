@@ -1,19 +1,42 @@
 import React, { type ReactNode } from "react"
-import { Star } from "@/components/base/icon"
-import { Logo } from "@/components/base/logo"
+import { Logo } from "@/components/layouts/elements/logo"
+import { Shell } from "@/components/layouts/elements/shell"
 import { color1_base, color1_bold, color2_base, color2_bold, defaultSeed } from "@/lib/constants"
-import { createStarGlow, seededRandom } from "@/lib/utils"
+import { Star } from "@/quicksilver/react/primitives/icons"
 import { info } from "@/settings"
+
+export function createStarGlow(color: string) {
+  return `drop-shadow(0 0 10px ${color}) drop-shadow(0 0 20px ${color})`
+}
+
+/* pseudo randomness */
+
+// Lehmer random number generator (PRNG)
+export function seededRandom(seed: number) {
+  // ensure the seed is within the valid range
+  let value = seed % 2147483647 || 44364
+  return () => {
+    // Lehmer PRNG core logic
+    value = (value * 16807) % 2147483647
+
+    // normalize to return a value between 0 and 1
+    return (value - 1) / 2147483646
+  }
+}
+
+const backgroundColor = "var(--celestial-1)"
 
 function OgLayout({ children }: { children: ReactNode }) {
   return (
-    <div>
+    <Shell header={null}>
       <div className="py-14">
-        <div id="og" className="bg-background h-[590px] w-[1125px] text-foreground">
-          {children}
+        <div id="og" className="h-[590px] w-[1125px] overflow-hidden text-foreground">
+          <div className="noise h-full w-full" style={{ backgroundColor }}>
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+    </Shell>
   )
 }
 
@@ -26,6 +49,10 @@ export default function Og() {
     return Math.floor(random() * 60 - 30)
   }
 
+  const outerSz = "55px"
+  // NOTE: puppeteer scales weirdly at certain sizes, so 165.5px works best here
+  const innerSz = "165px"
+
   return (
     <OgLayout>
       <main className="relative flex h-full w-full items-center justify-center">
@@ -33,10 +60,10 @@ export default function Og() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.1) 1%, transparent 1%),
-                              linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+            backgroundImage: `linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
                               linear-gradient(0deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
-            backgroundSize: "50px 50px, 50px 50px, 50px 50px",
+            backgroundSize: `${outerSz} ${outerSz}, ${outerSz} ${outerSz}`,
+            backgroundPosition: "center",
           }}
         />
 
@@ -100,24 +127,41 @@ export default function Og() {
         <div className="relative z-10 p-8 text-center">
           {/* Blur Effect */}
           <div
-            className="absolute inset-0 mx-auto max-w-xl bg-transparent backdrop-blur-sm"
+            className="noise absolute inset-0 mx-auto max-w-xl"
             style={{
-              borderRadius: "10px",
+              backgroundColor,
+              borderRadius: "0px",
+              backgroundImage: `linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+                              linear-gradient(0deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
+              backgroundSize: `${innerSz} ${innerSz}, ${innerSz} ${innerSz}`,
+              backgroundPosition: "center",
             }}
           ></div>
 
           {/* Logo */}
           <div className="relative z-10 flex justify-center">
-            <Logo className="text-cyan-500 h-[150px] w-[150px]" />
+            <style>
+              {`
+          #logo-container::before {
+              top: 50%;
+              left: 37%;
+              transform: translate(0%, -50%);
+              width:150px;
+          }
+        `}
+            </style>
+            <div id="logo-container" className="w-min-content noise bg-background-2">
+              <Logo className="text-cyan-500 size-[150px]" />
+            </div>
           </div>
 
           {/* Full Name */}
-          <h1 className="relative z-10 mt-6 text-6xl font-bold tracking-tight text-knockout">
+          <h1 className="noise relative z-10 mt-6 bg-background-2 text-60 font-bold tracking-tight text-foreground-strong">
             {info.fullname}
           </h1>
 
           {/* Tagline */}
-          <h2 className="relative z-10 mx-auto mt-4 max-w-xl text-xl text-balance text-muted-foreground">
+          <h2 className="noise relative z-10 mx-auto mt-4 max-w-xl bg-background-2 text-24 text-balance text-foreground-subtle">
             Exploring the intersections of <span style={{ color: color2_bold }}>creativity</span>{" "}
             and <span style={{ color: color1_bold }}>technology</span>
           </h2>

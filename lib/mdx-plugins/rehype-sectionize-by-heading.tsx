@@ -1,10 +1,14 @@
+/* eslint-disable */
+
+// TODO: review and rewrite this logic with new available types and constructs
+
 import type { Element as HastElement, Root as HastRoot, RootContent as HastRootContent } from "hast"
 import { headingRank } from "hast-util-heading-rank"
 import type { Transformer } from "unified"
 import { u } from "unist-builder"
 import { SKIP, visit } from "unist-util-visit"
 
-type Options = {
+interface Options {
   isFlat: boolean
   sectionProperties: Record<string, unknown>
 }
@@ -30,7 +34,7 @@ export function rehypeSectionizeByHeading(options?: Options): Transformer<HastRo
 
       // NOTE: by transversing "element" nodes, we can ensure that we only sectionize headings
       // that are coming from markdown and not HTML literals
-      const isHeading = node.type === "element" && node.tagName.match(/^h[1-6]$/)
+      const isHeading = node.type === "element" && /^h[1-6]$/.exec(node.tagName)
 
       if (isHeading) {
         const depth = headingRank(node) ?? 0

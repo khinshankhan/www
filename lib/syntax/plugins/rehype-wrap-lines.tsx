@@ -1,3 +1,8 @@
+/* eslint-disable */
+// @ts-nocheck
+
+// TODO: review and rewrite this logic with new available types and constructs
+
 // Inspired by https://github.com/radix-ui/website/blob/52578d3c5956b26c117ad8328ee40ecc6170b648/utils/rehype-highlight-line.mjs
 
 import { RootContent, type Root as HastRoot } from "hast"

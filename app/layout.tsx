@@ -1,14 +1,11 @@
-import React from "react"
+import React, { type CSSProperties, type ReactNode } from "react"
 import type { Metadata } from "next"
-import { TooltipProvider } from "@/components/base/tooltip"
-import { typographyVariants } from "@/components/base/typography"
-import { Navbar } from "@/components/section/navbar"
-import { createMetadata } from "@/lib/seo"
-import { cn } from "@/lib/utils"
-import { info } from "@/settings"
+import { createMetadata } from "@/lib/seo/open-graph"
+import { cn } from "@/quicksilver/lib/classname"
+import { textVariants } from "@/quicksilver/react/primitives/text.variants"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
-import { BreakpointsIndicator, ThemeProvider } from "./providers"
+import { RootProvider } from "./providers"
 
 import "./globals.css"
 
@@ -16,9 +13,13 @@ const fontAliases = {
   ["--font-heading"]: "var(--font-geist-sans)",
   ["--font-body"]: "var(--font-geist-sans)",
   ["--font-mono"]: "var(--font-geist-mono)",
-} as React.CSSProperties
+} as CSSProperties
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: ReactNode
+}>) {
   return (
     <html
       lang="en"
@@ -26,53 +27,18 @@ export default async function Layout({ children }: { children: React.ReactNode }
       className={cn(GeistSans.variable, GeistMono.variable)}
       style={fontAliases}
     >
-      <head></head>
       <body
         className={cn(
-          typographyVariants({ variant: "body" }),
-          "font-body relative min-h-screen bg-background-1 text-foreground antialiased"
+          textVariants({ variant: "body" }),
+          "accent-theme-default relative isolate flex flow-root min-h-screen flex-col bg-background-1 text-foreground"
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TooltipProvider>
-            <div role="presentation" className="noise" />
-
-            <div
-              className={
-                // z-1 ensures content is above the noise background
-                "z-1"
-              }
-            >
-              <div className="relative isolate z-0 flex min-h-[87vh] flex-col xs:min-h-[96vh]">
-                <Navbar />
-                {/* NOTE: assumes pages will be wrapped in main tags with background color + grow */}
-                <div className="relative flex grow flex-col">{children}</div>
-              </div>
-
-              <div className="relative isolate z-0 flex flex-col">
-                <footer className="bounded-page-layout h-40 py-8">
-                  <p
-                    className="text-center text-balance"
-                    dangerouslySetInnerHTML={{
-                      __html: `&copy; ${info.startYear}+, ${info.fullname}. All rights reserved.`,
-                    }}
-                  />
-                </footer>
-              </div>
-            </div>
-            <BreakpointsIndicator />
-          </TooltipProvider>
-        </ThemeProvider>
+        <RootProvider>{children}</RootProvider>
       </body>
     </html>
   )
 }
 
-export async function generateMetadata(): Promise<Metadata | undefined> {
+export function generateMetadata(): Metadata | undefined {
   return createMetadata({})
 }

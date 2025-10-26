@@ -2,7 +2,7 @@ import type { Heading as MdastHeading, Root as MdastRoot } from "mdast"
 import type { Transformer } from "unified"
 import { u } from "unist-builder"
 
-type Options = {
+interface Options {
   depth: 1 | 2 | 3 | 4 | 5 | 6
   text: string
   properties: Record<string, unknown>

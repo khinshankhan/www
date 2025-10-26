@@ -3,7 +3,7 @@ import { toString } from "mdast-util-to-string"
 import type { Transformer } from "unified"
 import { EXIT, visit } from "unist-util-visit"
 
-type Options = {
+interface Options {
   id: string
 }
 
@@ -12,7 +12,7 @@ const defaultOptions: Options = {
 }
 
 export function remarkMarkFirstParagraph(options?: Options): Transformer<MdastRoot, MdastRoot> {
-  const settings = options || defaultOptions
+  const settings = options ?? defaultOptions
 
   return function transformer(tree) {
     visit(tree, "paragraph", function (node, _, parent) {
@@ -22,8 +22,8 @@ export function remarkMarkFirstParagraph(options?: Options): Transformer<MdastRo
         return
       }
 
-      node.data = node.data || {}
-      node.data.hProperties = node.data.hProperties || {}
+      node.data = node.data ?? {}
+      node.data.hProperties = node.data.hProperties ?? {}
 
       // NOTE: types are dumb, Data represents information associated by the ecosystem with the node.
       // This space is guaranteed to never be specified by unist or specifications implementing unist.
@@ -39,7 +39,6 @@ export function remarkMarkFirstParagraph(options?: Options): Transformer<MdastRo
 
 export function remarkExcerptExport(): Transformer<MdastRoot, MdastRoot> {
   return function transformer(tree, vfile) {
-    vfile.data = vfile.data || {}
     vfile.data.excerpt = ""
     visit(tree, "paragraph", function (node, _, parent) {
       // elements like callouts may contain p tags but they don't count as excerpts
