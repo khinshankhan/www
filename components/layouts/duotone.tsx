@@ -54,7 +54,7 @@ export function DuotoneLayout({ title, description, ghPath, children }: DuotoneL
         <div className="z-1 flex w-full flex-col items-center pt-14">
           <div className="w-full maxw-page text-center md:px-4 md:text-end">
             <Link
-              href={`https://github.com/khinshankhan/www/tree/v52${ghPath}`}
+              href={`https://github.com/khinshankhan/www/tree/main${ghPath}`}
               className={textVariants({ variant: "nav" })}
             >
               View page on GitHub
