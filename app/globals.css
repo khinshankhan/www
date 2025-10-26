@@ -270,16 +270,17 @@
 @utility maxw-content-with-sidebar {
   --sidebar-w: 100%;
   --sidebar-gap: 0rem;
-  max-width: 100%;
+  --maxw-content: 100%;
+  max-width: var(--maxw-content, 100%);
 
   @media (min-width: theme(--breakpoint-xl)) {
     --sidebar-gap: 4rem;
     --sidebar-w: 17rem;
-    max-width: calc(100% + var(--sidebar-gap, 4rem) - var(--sidebar-w, 17rem));
+    --maxw-content: calc(100% + var(--sidebar-gap, 4rem) - var(--sidebar-w, 17rem));
   }
   @media (min-width: theme(--breakpoint-2xl)) {
     --sidebar-w: 18rem;
-    max-width: calc(100% + var(--sidebar-gap, 4rem) - var(--sidebar-w, 18rem));
+    --maxw-content: calc(100% + var(--sidebar-gap, 4rem) - var(--sidebar-w, 18rem));
   }
 }
 

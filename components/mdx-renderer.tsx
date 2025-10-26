@@ -69,7 +69,22 @@ const components: MDXComponents = {
     return <H6 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
   },
   pre: ({ className = "", ...props }) => {
-    return <Pre className={cn("h-full w-full", getSafeClassName(className))} {...props} />
+    const givenLanguage = getSafeClassName(props?.children?.props?.className)
+      .split(" ")
+      .find((c) => c.startsWith("language-"))
+      ?.split("language-")
+      .pop()
+    const text = props?.children?.props?.children as string
+
+    // TODO: add support for better inline vs fenced code detection
+    const isFenced = givenLanguage && givenLanguage.length > 0
+    return (
+      <Pre
+        className={cn("h-full w-full", getSafeClassName(className))}
+        textToCopy={isFenced ? text : undefined}
+        {...props}
+      />
+    )
   },
   code: ({ className = "", children, ...props }) => {
     const givenLanguage = getSafeClassName(className)
