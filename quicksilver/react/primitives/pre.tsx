@@ -10,13 +10,7 @@ export interface PreProps extends ComponentProps<"pre"> {
 
 export function Pre({ className = "", textToCopy, ...props }: PreProps) {
   return (
-    <ScrollArea
-      className="relative w-full"
-      type="auto"
-      style={{
-        maxWidth: "calc(min(var(--maxw-content, min(65ch, 100%)), 90vw) - var(--sidebar-w, 0px))",
-      }}
-    >
+    <ScrollArea className="relative w-full" type="auto">
       <ScrollViewport
         className={cn(
           "size-full rounded-md border-1 border-stark-contrast/10 bg-muted/30",
