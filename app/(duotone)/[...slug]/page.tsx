@@ -49,8 +49,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
           }
           direction="right"
         >
-          <div className="mx-auto min-w-full">
-            <div className="mx-auto max-w-[55ch] xl:mx-0 xl:max-w-full">
+          <div className="min-w-full">
+            <div className="mx-auto">
               <MDXRenderer source={contentData.content} />
             </div>
           </div>
