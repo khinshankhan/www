@@ -35,7 +35,7 @@ export function processMarkdown(content: string) {
 
 export async function getAllContentData(): Promise<ContentData[]> {
   const contentFileAbsolutePaths = await findContentFilesAbsolutePaths()
-  return Promise.all(
+  const allPossibleContentData = await Promise.all(
     contentFileAbsolutePaths.map(async (filePath) => {
       const { segments, fileContent, slug, baseName, ghSlug, groups } =
         await getContentDataByAbsolutePath(filePath)
@@ -60,6 +60,26 @@ export async function getAllContentData(): Promise<ContentData[]> {
       })
     })
   )
+
+  return allPossibleContentData.sort((a, b) => {
+    // Compare by datePublished in descending order
+    if (a.frontmatter.datePublished.getTime() !== b.frontmatter.datePublished.getTime()) {
+      return b.frontmatter.datePublished.getTime() - a.frontmatter.datePublished.getTime()
+    }
+
+    // Compare by priority, from lowest to highest
+    if (a.frontmatter.nice !== b.frontmatter.nice) {
+      return a.frontmatter.nice - b.frontmatter.nice
+    }
+
+    // Compare by dateCreated in descending order
+    if (a.frontmatter.dateCreated.getTime() !== b.frontmatter.dateCreated.getTime()) {
+      return b.frontmatter.dateCreated.getTime() - a.frontmatter.dateCreated.getTime()
+    }
+
+    // Compare by title in reverse alphabetical order
+    return b.frontmatter.title.localeCompare(a.frontmatter.title)
+  })
 }
 
 export async function getContentDataBySlug(slug: string): Promise<ContentData | null> {
