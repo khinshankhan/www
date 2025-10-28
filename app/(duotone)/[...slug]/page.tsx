@@ -50,7 +50,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
           direction="right"
         >
           <div className="min-w-full">
-            <div className="mx-auto">
+            <div className="mx-auto maxw-prose">
               <MDXRenderer source={contentData.content} />
             </div>
           </div>

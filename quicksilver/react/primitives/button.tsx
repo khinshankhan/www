@@ -5,7 +5,7 @@ import { mergeProps } from "@base-ui-components/react/merge-props"
 import { useRender } from "@base-ui-components/react/use-render"
 import { buttonVariants, type ButtonVariantProps } from "./button.variants"
 
-interface ButtonProps extends useRender.ComponentProps<"button">, ButtonVariantProps {
+export interface ButtonProps extends useRender.ComponentProps<"button">, ButtonVariantProps {
   className?: string
 }
 

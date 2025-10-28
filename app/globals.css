@@ -284,6 +284,18 @@
   }
 }
 
+@utility maxw-prose {
+  --maxw-prose: 55ch;
+  max-width: var(--maxw-prose, 55ch);
+
+  @media (min-width: theme(--breakpoint-lg)) {
+    --maxw-prose: 60ch;
+  }
+  @media (min-width: theme(--breakpoint-2xl)) {
+    --maxw-prose: 68ch;
+  }
+}
+
 /* NOTE: this should be used in unision with animate-fade-in utility */
 @utility reveal-on-scroll {
   opacity: 0;

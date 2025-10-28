@@ -11,7 +11,7 @@ import {
   useActiveAnchors,
 } from "@/quicksilver/react/headless/anchor/use-active-anchors"
 import { ScrollFadeIn } from "@/quicksilver/react/patterns/motion/scroll-fade-in"
-import { Button } from "@/quicksilver/react/primitives/button"
+import { Button, type ButtonProps } from "@/quicksilver/react/primitives/button"
 import { Divider } from "@/quicksilver/react/primitives/divider"
 import { ChevronRight } from "@/quicksilver/react/primitives/icons"
 import { Link } from "@/quicksilver/react/primitives/link"
@@ -103,11 +103,23 @@ function TocItem({ heading, indents }: TocItemProps) {
   )
 }
 
-interface TocTitleProps {
+interface TocTitleTriggerProps extends ButtonProps {
   isOpen: boolean
   headings: Heading[]
+  renderChevron?: boolean
 }
-function TocTitle({ isOpen, headings }: TocTitleProps) {
+
+const tocTitleTriggerGroupClasses =
+  "group mx-auto flex w-full maxw-prose items-center justify-start gap-2 px-2 py-2"
+
+function TocTitleTrigger({
+  isOpen,
+  headings,
+  className = "",
+
+  renderChevron = false,
+  ...props
+}: TocTitleTriggerProps) {
   const { activeId } = useActiveAnchors()
   const activeHeading =
     (activeId ? headings.find((h) => h.id === activeId) : headings[0])?.title ?? "No headings found"
@@ -116,23 +128,38 @@ function TocTitle({ isOpen, headings }: TocTitleProps) {
   const progress = activeIndex === -1 ? 0 : ((activeIndex + 1) / headings.length) * 100
 
   return (
-    <span className="flex items-center justify-center gap-2 xl:justify-start">
-      <ProgressCircle value={progress} className="accent-theme-default size-[1em] text-accent-11" />
+    <Button {...props} variant="ghost" className={cn(className, tocTitleTriggerGroupClasses)}>
+      <ProgressCircle
+        value={progress}
+        className="accent-theme-default size-[1em] shrink-0 text-accent-11"
+      />
 
-      <span className={cn(textVariants({ variant: "h5" }), "text-foreground")}>
+      <span className="relative grid min-w-0 flex-1 text-left *:col-start-1 *:row-start-1 *:my-auto">
         <span
-          className="block max-w-(--max-w-mobile) overflow-hidden text-ellipsis xl:hidden"
-          style={
-            {
-              "--max-w-mobile": "calc(min(55ch, 100vw) - 8em)",
-            } as CSSProperties
-          }
+          className={cn(
+            textVariants({ variant: "h5" }),
+            "truncate text-left text-foreground transition-all",
+            isOpen && "pointer-events-none -translate-y-4 opacity-0"
+          )}
+          title={activeHeading}
         >
-          {isOpen ? "On this page" : activeHeading}
+          {activeHeading}
         </span>
-        <span className="hidden xl:block">On this page</span>
+        <span
+          className={cn(
+            textVariants({ variant: "h5" }),
+            "truncate text-left text-foreground transition-all",
+            !isOpen && "pointer-events-none -translate-y-4 opacity-0"
+          )}
+        >
+          On this page
+        </span>
       </span>
-    </span>
+
+      {renderChevron && (
+        <ChevronRight className="ml-auto size-5 shrink-0 rotate-90 transition-all duration-300 ease-out group-data-[panel-open]:-rotate-90" />
+      )}
+    </Button>
   )
 }
 
@@ -155,36 +182,39 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
           open={isOpen}
           className={cn("relative top-0 w-full bg-background-2 py-2 vh-comfy:sticky", className)}
         >
-          <Collapsible.Trigger
-            render={({ style = {}, ...props }) => (
-              <Button
-                {...props}
-                variant="ghost"
-                className="group relative mx-auto flex w-full max-w-(--max-w-mobile) max-w-[55ch] justify-between px-2 py-2 xl:hidden xl:max-w-full"
-                onClick={() => setIsOpen(!isOpen)}
-                style={{
-                  ...style,
-                  ...({
-                    "--max-w-mobile": "calc(min(55ch, 90%))",
-                  } as CSSProperties),
-                }}
-              >
-                <TocTitle isOpen={isOpen} headings={headings} />
-                <ChevronRight className="size-5 rotate-90 transition-all duration-300 ease-out group-data-[panel-open]:-rotate-90" />
-              </Button>
-            )}
-          />
+          <div className="mx-auto maxw-content">
+            <Collapsible.Trigger
+              render={(props) => (
+                <TocTitleTrigger
+                  {...props}
+                  className="xl:hidden xl:max-w-full"
+                  onClick={() => setIsOpen(!isOpen)}
+                  isOpen={isOpen}
+                  headings={headings}
+                  renderChevron={true}
+                />
+              )}
+            />
 
-          <div className="hidden px-1 text-foreground-muted xl:block">
-            <TocTitle isOpen={isOpen} headings={headings} />
+            <div>
+              <TocTitleTrigger
+                isOpen={isOpen}
+                headings={headings}
+                render={(props) => {
+                  return (
+                    <div {...props} className={cn(tocTitleTriggerGroupClasses, "hidden xl:flex")} />
+                  )
+                }}
+              />
+            </div>
           </div>
 
           <Collapsible.Panel
-            className="mx-auto flex h-(--h) max-w-(--max-w-mobile) flex-col justify-end overflow-hidden opacity-100 transition-all ease-out data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0 xl:max-w-full"
+            className="mx-auto flex h-(--h) maxw-prose max-w-(--max-w) flex-col justify-end opacity-100 transition-all ease-out data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0 xl:max-w-full"
             style={
               {
                 "--h": "var(--collapsible-panel-height)",
-                "--max-w-mobile": "calc(min(55ch, 90%))",
+                "--max-w": "min(var(--maxw-prose, 55ch), 90%)",
               } as CSSProperties
             }
           >
