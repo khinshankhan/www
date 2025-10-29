@@ -94,6 +94,7 @@ export function Code({
     <>
       {allowCopy && isFenced && <CopyButton text={children} />}
       <code
+        data-fenced={isFenced}
         data-lang={language}
         className={cn(
           textVariants({

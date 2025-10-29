@@ -199,6 +199,11 @@
       z-index: -1;
     }
   }
+  code[data-fenced="false"] {
+    &:before {
+      border-radius: 0.3125rem;
+    }
+  }
   pre {
     position: relative;
     code {
