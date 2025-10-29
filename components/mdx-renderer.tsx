@@ -11,6 +11,7 @@ import {
 } from "@/lib/mdx-plugins/remark-jsxify-elements"
 import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
 import { cn } from "@/quicksilver/lib/classname"
+import { YouTubeEmbed } from "@/quicksilver/react/embeds/youtube"
 import { Blockquote, type BlockquoteProps } from "@/quicksilver/react/primitives/blockquote"
 import { Callout, calloutIcons, type CalloutProps } from "@/quicksilver/react/primitives/callout"
 import { Code } from "@/quicksilver/react/primitives/code"
@@ -112,6 +113,7 @@ const components: MDXComponents = {
   Figcaption,
   Image,
   SmartVideo,
+  YouTubeEmbed,
   Blockquote: ({
     variant,
     children,
