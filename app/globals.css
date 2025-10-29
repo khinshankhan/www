@@ -190,6 +190,8 @@
 
   /* code block styling */
   code {
+    font-variant-ligatures: none;
+
     border-radius: 0.375rem 0.375rem 0.375rem 0.375rem;
     overflow: hidden;
     @apply noise;
