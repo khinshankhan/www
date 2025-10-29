@@ -3,7 +3,13 @@ import { remarkTocExport, type TocItem } from "@/lib/mdx-plugins/remark-toc-expo
 import matter from "gray-matter"
 import { remark } from "remark"
 import remarkSmartypants from "remark-smartypants"
-import { findContentFilesAbsolutePaths, getContentDataByAbsolutePath } from "./fs"
+import {
+  calculateSegmentsFromFilePath,
+  calculateSlugFromSegments,
+  findContentFilesAbsolutePaths,
+  getContentMetaByAbsolutePath,
+  type ContentMeta,
+} from "./fs"
 import {
   ContentDataSchema,
   ContentFrontmatterSchema,
@@ -33,31 +39,36 @@ export function processMarkdown(content: string) {
   }
 }
 
+function getContentDataByContentMeta(contentMeta: ContentMeta): ContentData {
+  const { segments, fileContent, slug, baseName, ghSlug, groups } = contentMeta
+
+  const source = getContentSource(segments)
+  const { data: rawFrontmatter, content } = matter(fileContent)
+  const frontmatter = ContentFrontmatterSchema.parse({ source, ...rawFrontmatter })
+
+  const { toc } = processMarkdown(content)
+
+  return ContentDataSchema.parse({
+    slug: slug,
+    source,
+    frontmatter,
+    computed: {
+      baseName,
+      ghSlug,
+      groups,
+      toc,
+    },
+    content,
+  })
+}
+
 export async function getAllContentData(): Promise<ContentData[]> {
   const contentFileAbsolutePaths = await findContentFilesAbsolutePaths()
   const allPossibleContentData = await Promise.all(
     contentFileAbsolutePaths.map(async (filePath) => {
-      const { segments, fileContent, slug, baseName, ghSlug, groups } =
-        await getContentDataByAbsolutePath(filePath)
-
-      const source = getContentSource(segments)
-      const { data: rawFrontmatter, content } = matter(fileContent)
-      const frontmatter = ContentFrontmatterSchema.parse({ source, ...rawFrontmatter })
-
-      const { toc } = processMarkdown(content)
-
-      return ContentDataSchema.parse({
-        slug: slug,
-        source,
-        frontmatter,
-        computed: {
-          baseName,
-          ghSlug,
-          groups,
-          toc,
-        },
-        content,
-      })
+      const contentMeta = await getContentMetaByAbsolutePath(filePath)
+      const contentData = getContentDataByContentMeta(contentMeta)
+      return contentData
     })
   )
 
@@ -83,10 +94,18 @@ export async function getAllContentData(): Promise<ContentData[]> {
 }
 
 export async function getContentDataBySlug(slug: string): Promise<ContentData | null> {
-  const data = await getAllContentData()
-  const lookup: Record<string, ContentData> = {}
-  data.forEach((contentData) => {
-    lookup[contentData.slug] = contentData
+  const contentFileAbsolutePaths = await findContentFilesAbsolutePaths()
+  const relevantFilePath = contentFileAbsolutePaths.find((filePath) => {
+    const segments = calculateSegmentsFromFilePath(filePath)
+    const calculatedSlug = calculateSlugFromSegments(segments)
+    return calculatedSlug === slug
   })
-  return lookup[slug] ?? null
+
+  if (!relevantFilePath) {
+    return null
+  }
+
+  const contentMeta = await getContentMetaByAbsolutePath(relevantFilePath)
+  const contentData = getContentDataByContentMeta(contentMeta)
+  return contentData
 }

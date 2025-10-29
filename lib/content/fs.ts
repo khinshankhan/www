@@ -1,6 +1,6 @@
 import fs from "fs"
 import path from "path"
-import { segmentText } from "@/lib/routing"
+import { segmentText, type GroupSegment } from "@/lib/routing"
 import fg from "fast-glob"
 
 export const PROJECT_DIR = process.cwd()
@@ -24,28 +24,47 @@ export async function findContentFilesAbsolutePaths(): Promise<string[]> {
   return rels.map((rel) => path.join(CONTENT_DIR, rel))
 }
 
-export async function getContentDataByAbsolutePath(filePath: string) {
-  const fileContent = await fs.promises.readFile(filePath, "utf8")
-
+export function calculateSegmentsFromFilePath(filePath: string): GroupSegment[] {
   const relPath = filePath.replace(CONTENT_DIR, "")
   const segments = segmentText(relPath)
+  return segments
+}
+
+export function calculateSlugFromSegments(segments: GroupSegment[]): string {
+  return (
+    "/" +
+    segments
+      .filter((segment) => segment.type === "text")
+      .map((segment) => segment.value.trim())
+      .filter((part) => part !== "" && part !== "/")
+      .join("/")
+      .split("/")
+      .map((part) => part.trim())
+      .filter((part) => part !== "")
+      .slice(0, -1)
+      .join("/") +
+    "/"
+  )
+}
+
+export interface ContentMeta {
+  ghSlug: string
+  segments: GroupSegment[]
+  slug: string
+  baseName: string
+  groups: string[]
+  fileContent: string
+}
+
+export async function getContentMetaByAbsolutePath(filePath: string): Promise<ContentMeta> {
+  const fileContent = await fs.promises.readFile(filePath, "utf8")
+
+  const segments = calculateSegmentsFromFilePath(filePath)
 
   return {
     ghSlug: filePath.replace(PROJECT_DIR, ""),
     segments,
-    slug:
-      "/" +
-      segments
-        .filter((segment) => segment.type === "text")
-        .map((segment) => segment.value.trim())
-        .filter((part) => part !== "" && part !== "/")
-        .join("/")
-        .split("/")
-        .map((part) => part.trim())
-        .filter((part) => part !== "")
-        .slice(0, -1)
-        .join("/") +
-      "/",
+    slug: calculateSlugFromSegments(segments),
     baseName: path.basename(filePath),
     groups: segments.filter((segment) => segment.type === "paren").map((segment) => segment.value),
     fileContent,
