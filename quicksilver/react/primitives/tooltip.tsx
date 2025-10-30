@@ -12,19 +12,23 @@ export const TooltipPortal = Tooltip.Portal
 export const TooltipArrow = Tooltip.Arrow
 export const TooltipPositioner = Tooltip.Positioner
 
+type TooltipPositionerProps = React.ComponentPropsWithoutRef<typeof Tooltip.Positioner>
+
 interface TooltipContentProps extends React.ComponentPropsWithoutRef<typeof Tooltip.Popup> {
-  sideOffset?: number
+  side?: TooltipPositionerProps["side"]
+  sideOffset?: TooltipPositionerProps["sideOffset"]
 }
 
 export function TooltipContent({
   className,
-  sideOffset = 8,
+  side = "top",
+  sideOffset = 10,
   children,
   ...props
 }: TooltipContentProps) {
   return (
     <TooltipPortal>
-      <TooltipPositioner sideOffset={sideOffset}>
+      <TooltipPositioner side={side} sideOffset={sideOffset}>
         <Tooltip.Popup
           {...props}
           className={cn(

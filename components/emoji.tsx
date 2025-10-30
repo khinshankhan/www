@@ -66,6 +66,7 @@ export function Emoji({
           )}
         />
         <TooltipContent
+          side="top"
           className={cn(textVariants({ variant: "xs" }), "w-full p-2")}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
