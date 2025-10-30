@@ -1,5 +1,6 @@
 import React, { Children } from "react"
 import { Emoji } from "@/components/emoji"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/table"
 import { emojiLookup, type EmojiKey } from "@/lib/emoji"
 import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-by-heading"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
@@ -107,6 +108,13 @@ const components: MDXComponents = {
       </Code>
     )
   },
+
+  table: Table,
+  thead: TableHead,
+  tbody: TableBody,
+  tr: TableRow,
+  th: TableHeader,
+  td: TableCell,
 
   Emoji,
   Spoiler,
