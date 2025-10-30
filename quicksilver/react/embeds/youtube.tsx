@@ -1,13 +1,15 @@
-import React from "react"
+import React, { type CSSProperties, type IframeHTMLAttributes } from "react"
 import { cn } from "@/quicksilver/lib/classname"
 import { Figcaption } from "@/quicksilver/react/primitives/figcaption"
 import { Link } from "@/quicksilver/react/primitives/link"
-import { EmbedIframe, type EmbedIframeProps } from "./iframe"
 
-export interface YouTubeEmbedProps extends EmbedIframeProps {
+export interface YouTubeEmbedProps extends IframeHTMLAttributes<HTMLIFrameElement> {
   src: string
+  width: number | string
+  height: number | string
   title?: string
   fallbackSrc?: string
+  className?: string
 }
 
 export function YouTubeEmbed({
@@ -17,20 +19,36 @@ export function YouTubeEmbed({
   fallbackSrc,
   width,
   height,
+  loading = "lazy",
   allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+  referrerPolicy = "strict-origin-when-cross-origin",
+  style = {},
   ...props
 }: YouTubeEmbedProps) {
+  const aspectStyles = {
+    ["--aspect-width"]: width,
+    ["--aspect-height"]: height,
+  } as CSSProperties
+
   return (
     <figure>
-      <EmbedIframe
-        src={src}
-        title={title}
-        width={width}
-        height={height}
-        allow={allow}
-        className={cn("max-h-[725px] rounded-lg border border-muted", className)}
-        {...props}
-      />
+      <div
+        className="relative !aspect-[var(--aspect-width)/var(--aspect-height)] w-full"
+        style={{
+          ...aspectStyles,
+          ...style,
+        }}
+      >
+        <iframe
+          src={src}
+          title={title}
+          className={cn("absolute inset-0 h-full w-full rounded-lg", className)}
+          loading={loading}
+          referrerPolicy={referrerPolicy}
+          allow={allow}
+          {...props}
+        />
+      </div>
 
       {fallbackSrc && (
         <Figcaption>
