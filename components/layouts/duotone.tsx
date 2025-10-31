@@ -25,10 +25,13 @@ export function DuotoneLayout({ title, description, ghPath, children }: DuotoneL
             headerHeight
           )}
         >
-          <H1 className="text-center text-balance xl:text-left">{title}</H1>
+          <H1 className="text-left text-pretty">{title}</H1>
           <Paragraph
             variant="nav"
-            className="max-w-[75ch] text-center leading-relaxed text-foreground-muted xl:text-left"
+            className="text-left leading-relaxed text-pretty text-foreground-muted"
+            style={{
+              maxWidth: "60ch",
+            }}
             render={(props) => {
               return (
                 <span {...props}>
