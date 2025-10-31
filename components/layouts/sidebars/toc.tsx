@@ -151,6 +151,7 @@ function TocTitleTrigger({
             "truncate text-left text-foreground transition-all",
             !isOpen && "pointer-events-none -translate-y-4 opacity-0"
           )}
+          title="On this page"
         >
           On this page
         </span>
