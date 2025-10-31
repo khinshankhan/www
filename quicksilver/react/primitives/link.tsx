@@ -17,12 +17,14 @@ interface LinkIconProps {
 export const LinkIcon = ({ href, kind = undefined }: LinkIconProps) => {
   const isExternal = kind ? kind === "external" : resolveKindLite(href) === "external"
   if (isExternal) {
-    return <SquareArrowOutUpRight aria-label="External link." className="inline size-3 align-top" />
+    return (
+      <SquareArrowOutUpRight aria-label="External link." className="mb-0 inline size-3 align-top" />
+    )
   }
 
   const isFile = isFileLite(href)
   if (isFile) {
-    return <Download aria-label="File link." className="inline size-3 align-middle" />
+    return <Download aria-label="File link." className="mb-0 inline size-3 align-middle" />
   }
 
   return null
