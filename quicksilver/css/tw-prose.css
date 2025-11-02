@@ -44,6 +44,22 @@
   .prose :where(ol, ul):not(.not-prose, .not-prose *) {
     padding-left: 1em;
 
+    & > li {
+      margin-bottom: 0.75rem;
+
+      & > * {
+        margin-bottom: 0.5rem;
+
+        @media (min-width: theme(--breakpoint-md)) {
+          margin-bottom: 0.625rem;
+        }
+
+        @media (min-width: theme(--breakpoint-lg)) {
+          margin-bottom: 0.75rem;
+        }
+      }
+    }
+
     & :where(& > :not(:last-child)) {
       margin-bottom: 0.375em;
     }

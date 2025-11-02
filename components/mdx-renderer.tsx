@@ -109,6 +109,10 @@ const components: MDXComponents = {
     )
   },
 
+  li: ({ className = "", ...props }) => {
+    return <li className={cn("", getSafeClassName(className))} {...props} />
+  },
+
   table: Table,
   thead: TableHead,
   tbody: TableBody,
