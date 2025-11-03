@@ -18,7 +18,6 @@ interface EmojiProps {
   wrapperClassName?: string
 }
 
-// TODO: add tooltip/ popover support for emoji names
 export function Emoji({
   name,
   className: providedClassName = "",
