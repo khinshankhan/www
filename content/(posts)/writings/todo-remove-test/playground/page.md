@@ -195,6 +195,37 @@ export function greeting(user: User) {
 
 </Tabbify>
 
+### Tabbify with Description and Code Block
+
+<Tabbify labels={["JavaScript", "TypeScript"]} className="mx-auto">
+
+<TabbifyPanel>
+JavaScript version with no explicit type annotations.
+
+```js
+export function greeting(user) {
+  return `Hello, ${user.name}`
+}
+```
+</TabbifyPanel>
+
+<TabbifyPanel>
+TypeScript version with an explicit `User` type.
+
+```ts
+type User = {
+  id: string
+  name: string
+}
+
+export function greeting(user: User) {
+  return `Hello, ${user.name}`
+}
+```
+</TabbifyPanel>
+
+</Tabbify>
+
 ## Callouts
 
 > [!NOTE] Note

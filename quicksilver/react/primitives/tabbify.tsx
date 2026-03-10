@@ -19,10 +19,15 @@ export interface TabbifyProps {
 
 export interface TabbifyPanelProps {
   children: ReactNode
+  className?: string
 }
 
-export function TabbifyPanel({ children }: TabbifyPanelProps) {
-  return <>{children}</>
+export function TabbifyPanel({ children, className = "" }: TabbifyPanelProps) {
+  return (
+    <div className={cn("prose block px-4 py-4 md:px-5 md:py-5 **:last:mb-0", className)}>
+      {children}
+    </div>
+  )
 }
 
 export function Tabbify({
