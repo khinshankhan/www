@@ -23,6 +23,13 @@ import { Image } from "@/quicksilver/react/primitives/image"
 import { Link } from "@/quicksilver/react/primitives/link"
 import { Pre } from "@/quicksilver/react/primitives/pre"
 import { Spoiler } from "@/quicksilver/react/primitives/spoiler"
+import {
+  TabsIndicator,
+  TabsList,
+  TabsPanel,
+  TabsRoot,
+  TabsTab,
+} from "@/quicksilver/react/primitives/tabs"
 import { H2, H3, H4, H5, H6 } from "@/quicksilver/react/primitives/text"
 import { SmartVideo } from "@/quicksilver/react/primitives/video"
 import type { RootContent as MdastContent } from "mdast"
@@ -125,6 +132,11 @@ const components: MDXComponents = {
   Figure,
   Figcaption,
   Image,
+  TabsRoot,
+  TabsList,
+  TabsTab,
+  TabsIndicator,
+  TabsPanel,
   SmartVideo,
   YouTubeEmbed,
   SpotifyEmbed,

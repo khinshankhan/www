@@ -123,6 +123,32 @@ motion: every line a microcosm of contrast, texture, and rhythm.
    </figcaption>
 </figure>
 
+## Tabs
+
+<TabsRoot defaultValue="html" className="mx-auto">
+  <TabsList aria-label="Frontend stack layers">
+    <TabsTab value="html">HTML</TabsTab>
+    <TabsTab value="css">CSS</TabsTab>
+    <TabsTab value="js">JavaScript</TabsTab>
+    <TabsIndicator />
+  </TabsList>
+
+  <TabsPanel value="html" className="h-auto items-start justify-start p-4">
+    HTML is the structure. It gives the browser the bones: headings, paragraphs, buttons, figures,
+    and enough semantic shape for everything else to have a place to live.
+  </TabsPanel>
+
+  <TabsPanel value="css" className="h-auto items-start justify-start p-4">
+    CSS handles presentation. Spacing, color, typography, layout, and motion all land here,
+    ideally without leaking too much stateful behavior into style alone.
+  </TabsPanel>
+
+  <TabsPanel value="js" className="h-auto items-start justify-start p-4">
+    JavaScript brings behavior. It coordinates state, events, and richer interactions like this tab
+    switcher without forcing everything else to become imperative soup.
+  </TabsPanel>
+</TabsRoot>
+
 ## Callouts
 
 > [!NOTE] Note
