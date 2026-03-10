@@ -149,6 +149,52 @@ motion: every line a microcosm of contrast, texture, and rhythm.
   </TabsPanel>
 </TabsRoot>
 
+### Tabbify with Code Blocks
+
+<Tabbify labels={["TypeScript", "JavaScript"]} className="mx-auto">
+
+```ts
+type User = {
+  id: string
+  name: string
+}
+
+export function greeting(user: User) {
+  return `Hello, ${user.name}`
+}
+```
+
+```js
+export function greeting(user) {
+  return `Hello, ${user.name}`
+}
+```
+
+</Tabbify>
+
+### Tabbify with Non-First Default Tab
+
+<Tabbify labels={["JavaScript", "TypeScript"]} defaultIndex={1} className="mx-auto">
+
+```js
+export function greeting(user) {
+  return `Hello, ${user.name}`
+}
+```
+
+```ts
+type User = {
+  id: string
+  name: string
+}
+
+export function greeting(user: User) {
+  return `Hello, ${user.name}`
+}
+```
+
+</Tabbify>
+
 ## Callouts
 
 > [!NOTE] Note

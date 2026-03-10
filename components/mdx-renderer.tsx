@@ -23,6 +23,7 @@ import { Image } from "@/quicksilver/react/primitives/image"
 import { Link } from "@/quicksilver/react/primitives/link"
 import { Pre } from "@/quicksilver/react/primitives/pre"
 import { Spoiler } from "@/quicksilver/react/primitives/spoiler"
+import { Tabbify, TabbifyPanel } from "@/quicksilver/react/primitives/tabbify"
 import {
   TabsIndicator,
   TabsList,
@@ -137,6 +138,8 @@ const components: MDXComponents = {
   TabsTab,
   TabsIndicator,
   TabsPanel,
+  Tabbify,
+  TabbifyPanel,
   SmartVideo,
   YouTubeEmbed,
   SpotifyEmbed,
