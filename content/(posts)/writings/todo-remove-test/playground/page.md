@@ -176,11 +176,17 @@ export function greeting(user) {
 
 <Tabbify labels={["JavaScript", "TypeScript"]} defaultIndex={1} className="mx-auto">
 
+<TabbifyPanel>
+
 ```js
 export function greeting(user) {
   return `Hello, ${user.name}`
 }
 ```
+
+</TabbifyPanel>
+
+<TabbifyPanel>
 
 ```ts
 type User = {
@@ -192,6 +198,8 @@ export function greeting(user: User) {
   return `Hello, ${user.name}`
 }
 ```
+
+</TabbifyPanel>
 
 </Tabbify>
 
@@ -207,6 +215,7 @@ export function greeting(user) {
   return `Hello, ${user.name}`
 }
 ```
+
 </TabbifyPanel>
 
 <TabbifyPanel>
@@ -222,6 +231,7 @@ export function greeting(user: User) {
   return `Hello, ${user.name}`
 }
 ```
+
 </TabbifyPanel>
 
 </Tabbify>
