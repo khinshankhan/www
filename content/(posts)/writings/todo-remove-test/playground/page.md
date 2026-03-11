@@ -149,26 +149,23 @@ motion: every line a microcosm of contrast, texture, and rhythm.
   </TabsPanel>
 </TabsRoot>
 
-### Tabbed Code Blocks
+### Tabbed Text and Code Blocks
 
-<TabsRoot defaultValue="ts" className="mx-auto">
-  <TabsList aria-label="Greeting examples">
-    <TabsTab value="ts">TypeScript</TabsTab>
+<TabsRoot defaultValue="js" className="mx-auto">
+  <TabsList aria-label="Greeting examples with descriptions">
     <TabsTab value="js">JavaScript</TabsTab>
+    <TabsTab value="ts">TypeScript</TabsTab>
     <TabsIndicator />
   </TabsList>
 
-  <TabsPanel value="ts" className="h-auto items-start justify-start p-0">
+  <TabsPanel value="js" className="h-auto items-start justify-start p-0">
 
   <TabbifyPanel>
 
-```ts
-type User = {
-  id: string
-  name: string
-}
+JavaScript version with no explicit type annotations.
 
-export function greeting(user: User) {
+```js
+export function greeting(user) {
   return `Hello, ${user.name}`
 }
 ```
@@ -177,12 +174,19 @@ export function greeting(user: User) {
 
   </TabsPanel>
 
-  <TabsPanel value="js" className="h-auto items-start justify-start p-0">
+  <TabsPanel value="ts" className="h-auto items-start justify-start p-0">
 
   <TabbifyPanel>
 
-```js
-export function greeting(user) {
+TypeScript version with an explicit `User` type.
+
+```ts
+type User = {
+  id: string
+  name: string
+}
+
+export function greeting(user: User) {
   return `Hello, ${user.name}`
 }
 ```
