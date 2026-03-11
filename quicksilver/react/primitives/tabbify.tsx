@@ -1,8 +1,8 @@
 "use client"
 
-import React, { Children, isValidElement, type ReactNode } from "react"
-import Slugger from "github-slugger"
+import { Children, isValidElement, type ReactNode } from "react"
 import { cn } from "@/quicksilver/lib/classname"
+import Slugger from "github-slugger"
 import { TabsIndicator, TabsList, TabsPanel, TabsRoot, TabsTab } from "./tabs"
 
 const slugger = new Slugger()
@@ -24,7 +24,7 @@ export interface TabbifyPanelProps {
 
 export function TabbifyPanel({ children, className = "" }: TabbifyPanelProps) {
   return (
-    <div className={cn("prose block px-4 py-4 md:px-5 md:py-5 **:last:mb-0", className)}>
+    <div className={cn("prose block w-full px-4 py-4 **:last:mb-0 md:px-5 md:py-5", className)}>
       {children}
     </div>
   )

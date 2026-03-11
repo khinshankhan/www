@@ -160,6 +160,8 @@ motion: every line a microcosm of contrast, texture, and rhythm.
 
   <TabsPanel value="ts" className="h-auto items-start justify-start p-0">
 
+  <TabbifyPanel>
+
 ```ts
 type User = {
   id: string
@@ -171,15 +173,21 @@ export function greeting(user: User) {
 }
 ```
 
+  </TabbifyPanel>
+
   </TabsPanel>
 
   <TabsPanel value="js" className="h-auto items-start justify-start p-0">
+
+  <TabbifyPanel>
 
 ```js
 export function greeting(user) {
   return `Hello, ${user.name}`
 }
 ```
+
+  </TabbifyPanel>
 
   </TabsPanel>
 </TabsRoot>
