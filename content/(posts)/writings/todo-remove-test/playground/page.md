@@ -149,44 +149,16 @@ motion: every line a microcosm of contrast, texture, and rhythm.
   </TabsPanel>
 </TabsRoot>
 
-### Tabbify with Code Blocks
+### Tabbed Code Blocks
 
-<Tabbify labels={["TypeScript", "JavaScript"]} className="mx-auto">
+<TabsRoot defaultValue="ts" className="mx-auto">
+  <TabsList aria-label="Greeting examples">
+    <TabsTab value="ts">TypeScript</TabsTab>
+    <TabsTab value="js">JavaScript</TabsTab>
+    <TabsIndicator />
+  </TabsList>
 
-```ts
-type User = {
-  id: string
-  name: string
-}
-
-export function greeting(user: User) {
-  return `Hello, ${user.name}`
-}
-```
-
-```js
-export function greeting(user) {
-  return `Hello, ${user.name}`
-}
-```
-
-</Tabbify>
-
-### Tabbify with Non-First Default Tab
-
-<Tabbify labels={["JavaScript", "TypeScript"]} defaultIndex={1} className="mx-auto">
-
-<TabbifyPanel>
-
-```js
-export function greeting(user) {
-  return `Hello, ${user.name}`
-}
-```
-
-</TabbifyPanel>
-
-<TabbifyPanel>
+  <TabsPanel value="ts" className="h-auto items-start justify-start p-0">
 
 ```ts
 type User = {
@@ -199,16 +171,9 @@ export function greeting(user: User) {
 }
 ```
 
-</TabbifyPanel>
+  </TabsPanel>
 
-</Tabbify>
-
-### Tabbify with Description and Code Block
-
-<Tabbify labels={["JavaScript", "TypeScript"]} className="mx-auto">
-
-<TabbifyPanel>
-JavaScript version with no explicit type annotations.
+  <TabsPanel value="js" className="h-auto items-start justify-start p-0">
 
 ```js
 export function greeting(user) {
@@ -216,25 +181,8 @@ export function greeting(user) {
 }
 ```
 
-</TabbifyPanel>
-
-<TabbifyPanel>
-TypeScript version with an explicit `User` type.
-
-```ts
-type User = {
-  id: string
-  name: string
-}
-
-export function greeting(user: User) {
-  return `Hello, ${user.name}`
-}
-```
-
-</TabbifyPanel>
-
-</Tabbify>
+  </TabsPanel>
+</TabsRoot>
 
 ## Callouts
 
