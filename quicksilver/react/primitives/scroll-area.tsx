@@ -2,7 +2,7 @@
 
 import React from "react"
 import { cn } from "@/quicksilver/lib/classname"
-import { ScrollArea as ScrollAreaPrimitive } from "radix-ui"
+import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area"
 
 type ScrollViewportProps = React.ComponentPropsWithRef<typeof ScrollAreaPrimitive.Viewport>
 
@@ -12,14 +12,18 @@ export function ScrollViewport({ className = "", children, ...props }: ScrollVie
       className={cn("size-full rounded-[inherit]", className)}
       {...props}
     >
-      {children}
+      <ScrollAreaPrimitive.Content>{children}</ScrollAreaPrimitive.Content>
     </ScrollAreaPrimitive.Viewport>
   )
 }
 
-type ScrollAreaProps = React.ComponentPropsWithRef<typeof ScrollAreaPrimitive.Root>
+type ScrollAreaProps = React.ComponentPropsWithRef<typeof ScrollAreaPrimitive.Root> & {
+  type?: "auto" | "always" | "scroll" | "hover"
+}
 
-export function ScrollArea({ className = "", children, ...props }: ScrollAreaProps) {
+export function ScrollArea({ className = "", children, type, ...props }: ScrollAreaProps) {
+  void type
+
   return (
     <ScrollAreaPrimitive.Root className={cn("overflow-hidden", className)} {...props}>
       {children}
@@ -42,7 +46,7 @@ export function ScrollBar({ className, orientation = "vertical", ...props }: Scr
       )}
       {...props}
     >
-      <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 cursor-pointer rounded-full bg-foreground hover:bg-stark-contrast" />
+      <ScrollAreaPrimitive.Thumb className="relative flex-1 cursor-pointer rounded-full bg-foreground hover:bg-stark-contrast" />
     </ScrollAreaPrimitive.Scrollbar>
   )
 }
