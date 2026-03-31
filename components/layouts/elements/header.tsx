@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useMemo, useState } from "react"
 import NextLink from "next/link"
 import { usePathname } from "next/navigation"
 import { useMounted } from "@/hooks/core/use-mounted"
@@ -10,6 +10,7 @@ import { ScrollFadeIn } from "@/quicksilver/react/patterns/motion/scroll-fade-in
 import { Button } from "@/quicksilver/react/primitives/button"
 import { buttonVariants } from "@/quicksilver/react/primitives/button.variants"
 import { Divider } from "@/quicksilver/react/primitives/divider"
+import { Drawer } from "@/quicksilver/react/primitives/drawer"
 import { EdgeFade, type EdgeFadeProps } from "@/quicksilver/react/primitives/edge-fade"
 import {
   Close,
@@ -24,7 +25,6 @@ import { Link, ResolvedLinkComponent } from "@/quicksilver/react/primitives/link
 import { textVariants } from "@/quicksilver/react/primitives/text.variants"
 import { navLinks } from "@/settings"
 import { useTheme } from "next-themes"
-import { Drawer } from "@base-ui/react/drawer"
 import { FooterParagraph } from "./footer"
 import { Logo } from "./logo"
 
@@ -86,51 +86,6 @@ function NavLinksDesktop({ className = "" }: { className?: string }) {
 function NavLinksMobile() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
-  const popupRef = useRef<HTMLDivElement | null>(null)
-  const underlayRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    if (!isOpen) {
-      return
-    }
-
-    let frame = 0
-    const underlay = underlayRef.current
-
-    const clampReverseSwipe = () => {
-      const popup = popupRef.current
-
-      if (!popup) {
-        frame = requestAnimationFrame(clampReverseSwipe)
-        return
-      }
-
-      const rawMovement = getComputedStyle(popup).getPropertyValue("--drawer-swipe-movement-y")
-      const movement = Number.parseFloat(rawMovement)
-
-      const rawTransform = popup.style.transform
-      const translateYMatch = /translateY\((-?\d+(?:\.\d+)?)px\)/.exec(rawTransform)
-      const translateY = translateYMatch?.[1] ? Number.parseFloat(translateYMatch[1]) : 0
-      const overshootingUp =
-        (Number.isFinite(translateY) && translateY < -0.5) ||
-        (Number.isFinite(movement) && movement < -0.5)
-
-      if (underlay) {
-        underlay.style.opacity = overshootingUp ? "1" : "0"
-      }
-
-      frame = requestAnimationFrame(clampReverseSwipe)
-    }
-
-    frame = requestAnimationFrame(clampReverseSwipe)
-
-    return () => {
-      cancelAnimationFrame(frame)
-      if (underlay) {
-        underlay.style.opacity = "0"
-      }
-    }
-  }, [isOpen])
 
   return (
     <Drawer.Root open={isOpen} onOpenChange={setIsOpen} swipeDirection="down">
@@ -152,93 +107,78 @@ function NavLinksMobile() {
         )}
       />
 
-      <Drawer.Portal>
-        <Drawer.SwipeArea className="fixed inset-x-0 bottom-0 z-1 h-8 touch-none" />
-        <Drawer.Backdrop className="fixed inset-0 bg-black/60 opacity-100 transition-opacity duration-220 ease-out data-[ending-style]:opacity-0 data-[starting-style]:opacity-0 data-[swiping]:transition-none motion-reduce:transition-none" />
-        <Drawer.Viewport className="fixed inset-0 overflow-hidden">
-          <div
-            ref={underlayRef}
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-[40vh] bg-background-1 opacity-0 transition-opacity duration-100"
-          />
-          <Drawer.Popup
-            ref={popupRef}
-            className="pointer-events-none absolute inset-0 flex transform-gpu items-end transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] data-[ending-style]:translate-y-full data-[starting-style]:translate-y-full data-[swiping]:transition-none motion-reduce:transition-none"
-          >
-            <Drawer.Content
-              aria-label="Main menu"
-              className="pointer-events-auto relative h-[72vh] w-full overscroll-contain rounded-t-3xl border border-surface-7/60 bg-background-1 shadow-[0_-24px_80px_rgba(0,0,0,0.22)]"
+      <Drawer.Sheet
+        open={isOpen}
+        contentProps={{ "aria-label": "Main menu" }}
+        contentClassName="h-[72vh]"
+      >
+        <div
+          aria-hidden="true"
+          className="absolute top-3.5 left-1/2 h-1.5 w-12 -translate-x-1/2 rounded-full bg-surface-7/80"
+        />
+
+        <nav
+          className="mx-auto flex h-full w-full max-w-[23rem] flex-col gap-2 px-6 pt-8 pb-7"
+          style={{
+            paddingBottom: "max(1.75rem, env(safe-area-inset-bottom))",
+          }}
+        >
+          <header className="mb-10 pt-2">
+            <p
+              className={cn(
+                textVariants({ variant: "xs", weight: "medium" }),
+                "mb-7 tracking-[0.18em] text-foreground uppercase"
+              )}
             >
-              <div
-                aria-hidden="true"
-                className="absolute top-3.5 left-1/2 h-1.5 w-12 -translate-x-1/2 rounded-full bg-surface-7/80"
-              />
+              Navigation
+            </p>
+            <Divider />
+          </header>
 
-              <nav
-                className="mx-auto flex h-full w-full max-w-[23rem] flex-col gap-2 px-6 pt-8 pb-7"
-                style={{
-                  paddingBottom: "max(1.75rem, env(safe-area-inset-bottom))",
-                }}
-              >
-                <header className="mb-10 pt-2">
-                  <p
-                    className={cn(
-                      textVariants({ variant: "xs", weight: "medium" }),
-                      "mb-7 tracking-[0.18em] text-foreground uppercase"
-                    )}
-                  >
-                    Navigation
-                  </p>
-                  <Divider />
-                </header>
+          <ul className="flex flex-col gap-5">
+            {navLinks.map((link) => {
+              const active = pathname === link.href
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    aria-current={active ? "page" : undefined}
+                    render={(props, { kind }) => {
+                      // NOTE: we purposefully override the Link component's className here to match the design
+                      return (
+                        <ResolvedLinkComponent
+                          kind={kind}
+                          {...props}
+                          className={cn(
+                            buttonVariants({ variant: "ghost" }),
+                            textVariants({ variant: "nav" }),
+                            "group flex w-full flex-row items-center justify-between px-3 py-1.5"
+                          )}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          <span>{link.label}</span>
+                          <span
+                            className="ml-3 text-foreground transition group-hover:-rotate-90"
+                            aria-hidden="true"
+                          >
+                            &rarr;
+                          </span>
+                        </ResolvedLinkComponent>
+                      )
+                    }}
+                  />
+                </li>
+              )
+            })}
+          </ul>
 
-                <ul className="flex flex-col gap-5">
-                  {navLinks.map((link) => {
-                    const active = pathname === link.href
-                    return (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          aria-current={active ? "page" : undefined}
-                          render={(props, { kind }) => {
-                            // NOTE: we purposefully override the Link component's className here to match the design
-                            return (
-                              <ResolvedLinkComponent
-                                kind={kind}
-                                {...props}
-                                className={cn(
-                                  buttonVariants({ variant: "ghost" }),
-                                  textVariants({ variant: "nav" }),
-                                  "group flex w-full flex-row items-center justify-between px-3 py-1.5"
-                                )}
-                                onClick={() => setIsOpen(false)}
-                              >
-                                <span>{link.label}</span>
-                                <span
-                                  className="ml-3 text-foreground transition group-hover:-rotate-90"
-                                  aria-hidden="true"
-                                >
-                                  &rarr;
-                                </span>
-                              </ResolvedLinkComponent>
-                            )
-                          }}
-                        />
-                      </li>
-                    )
-                  })}
-                </ul>
+          <div className="mt-auto pt-12">
+            <Divider intensity="solid" thickness="light" className="mb-7" />
 
-                <div className="mt-auto pt-12">
-                  <Divider intensity="solid" thickness="light" className="mb-7" />
-
-                  <FooterParagraph />
-                </div>
-              </nav>
-            </Drawer.Content>
-          </Drawer.Popup>
-        </Drawer.Viewport>
-      </Drawer.Portal>
+            <FooterParagraph />
+          </div>
+        </nav>
+      </Drawer.Sheet>
     </Drawer.Root>
   )
 }
