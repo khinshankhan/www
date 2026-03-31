@@ -1,13 +1,6 @@
 import React, { Children } from "react"
 import { Emoji } from "@/components/emoji"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/table"
-import {
-  FontSmoothingPlayground,
-  OpticalAlignmentPlayground,
-  OpticalPlayAlignmentPlayground,
-  OpticalStarAlignmentPlayground,
-  TabularNumbersPlayground,
-} from "@/content/(posts)/writings/todo-remove-test/playground/components"
 import { emojiLookup, type EmojiKey } from "@/lib/emoji"
 import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-by-heading"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
@@ -67,7 +60,7 @@ function getSafeClassName(className: unknown): string {
   return parsedClassName.success ? parsedClassName.data : ""
 }
 
-const components: MDXComponents = {
+const baseComponents: MDXComponents = {
   a: ({ className = "", ...props }) => {
     return <Link className={cn("prose", getSafeClassName(className))} {...props} />
   },
@@ -136,11 +129,6 @@ const components: MDXComponents = {
   td: TableCell,
 
   Emoji,
-  FontSmoothingPlayground,
-  OpticalAlignmentPlayground,
-  OpticalPlayAlignmentPlayground,
-  OpticalStarAlignmentPlayground,
-  TabularNumbersPlayground,
   Spoiler,
   Figure,
   Figcaption,
@@ -186,11 +174,17 @@ const components: MDXComponents = {
   },
 }
 
-export function MDXRenderer({ source }: { source: string }) {
+export function MDXRenderer({
+  source,
+  articleComponents = {},
+}: {
+  source: string
+  articleComponents?: MDXComponents
+}) {
   return (
     <MDXRemote
       source={source}
-      components={components}
+      components={{ ...baseComponents, ...articleComponents }}
       options={{
         mdxOptions: {
           remarkPlugins: [

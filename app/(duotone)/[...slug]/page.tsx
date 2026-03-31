@@ -6,6 +6,7 @@ import { Shell } from "@/components/layouts/elements/shell"
 import { TOC } from "@/components/layouts/sidebars/toc"
 import { WithSidebar } from "@/components/layouts/with-sidebar"
 import { MDXRenderer } from "@/components/mdx-renderer"
+import { getContentMdxComponents } from "@/lib/content/components"
 import { getAllContentData, getContentDataBySlug } from "@/lib/content/source"
 import { createMetadata, processMarkdownAttribute } from "@/lib/seo/open-graph"
 
@@ -27,6 +28,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
   if (!contentData) {
     throw new Error(`Could not find metadata for ${realFileSlug}`)
   }
+  const articleComponents = await getContentMdxComponents(contentData)
 
   return (
     <Shell
@@ -51,7 +53,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
         >
           <div className="min-w-full">
             <div className="mx-auto maxw-prose">
-              <MDXRenderer source={contentData.content} />
+              <MDXRenderer articleComponents={articleComponents} source={contentData.content} />
             </div>
           </div>
         </WithSidebar>
