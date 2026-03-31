@@ -45,6 +45,83 @@ Meanwhile, the jaded wizard quickly vexes the bold dwarf. The vowels glow, the d
 pirouettes between words: commas, colons, semicolons -- all demand balance. For font makers, this is meditation in
 motion: every line a microcosm of contrast, texture, and rhythm.
 
+## Testing MDX
+
+This section is here to make sure we can render richer MDX content cleanly, including interactive
+examples, figures, and code blocks.
+
+### Jakub
+
+These first examples are my rendition of [Details That Make Interfaces Feel
+Better](https://jakub.kr/writing/details-that-make-interfaces-feel-better) by
+[Jakub](https://jakub.kr/).
+
+#### Make Text Crispy
+
+On `macOS`, text rendering can sometimes appear heavier than intended.
+
+<FontSmoothingPlayground />
+
+Setting `-webkit-font-smoothing: antialiased` or just `antialiased` in Tailwind makes text render
+slightly thinner and crisper.
+
+```html
+<html lang="en">
+  <body class="font-sans antialiased">
+    <main>{children}</main>
+  </body>
+</html>
+```
+
+The best way to apply this is to add it to the entire layout. That way it applies to all of the
+text elements in your app.
+
+#### Tabular Numbers
+
+If your numbers shift when they update, use `font-variant-numeric: tabular-nums`.
+In Tailwind, use `tabular-nums`.
+
+<figure>
+  <TabularNumbersPlayground />
+
+  <figcaption>Press play to compare how the digits hold their width.</figcaption>
+</figure>
+
+It makes the digits equal width. Keep in mind that some fonts change the look of numerals when this
+property is enabled.
+
+#### Align Optically, Not Geometrically
+
+Aligning items geometrically works great most of the time, but there are instances where it just
+looks off. When that happens, it is best to align items optically instead.
+
+<OpticalAlignmentPlayground />
+
+For example, when a button has both text and an icon, it is better to have a slightly smaller
+padding on the side of the icon to optically align the content.
+
+<figure>
+  <OpticalPlayAlignmentPlayground />
+
+  <figcaption>
+    Change the alignment mode to compare the play icon inside a circular button. In this version,
+    only the icon is optically aligned.
+  </figcaption>
+</figure>
+
+This often happens with icons. While a lot of icon packs already account for this, there are shapes
+that still need to be optically aligned. I usually fix it by adjusting `margin` or `padding`
+depending on the container.
+
+<figure>
+  <OpticalStarAlignmentPlayground />
+
+  <figcaption>Change the alignment mode and click the button to see the difference.</figcaption>
+</figure>
+
+For icons, the best way to fix it is in the `svg` itself, so no additional `margin` or `padding`
+needs to be added.
+
 ## Images
 
 <figure>
@@ -151,7 +228,7 @@ motion: every line a microcosm of contrast, texture, and rhythm.
 
 ### Tabbed Text and Code Blocks
 
-<TabsRoot defaultValue="js" className="mx-auto">
+<TabsRoot defaultValue="ts" className="mx-auto">
   <TabsList aria-label="Greeting examples with descriptions">
     <TabsTab value="js">JavaScript</TabsTab>
     <TabsTab value="ts">TypeScript</TabsTab>
