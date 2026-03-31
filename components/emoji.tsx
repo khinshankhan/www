@@ -4,12 +4,7 @@ import React, { useState } from "react"
 import { emojiLookup, type EmojiKey } from "@/lib/emoji"
 import { cn } from "@/quicksilver/lib/classname"
 import { textVariants } from "@/quicksilver/react/primitives/text.variants"
-import {
-  TooltipArrow,
-  TooltipContent,
-  TooltipRoot,
-  TooltipTrigger,
-} from "@/quicksilver/react/primitives/tooltip"
+import { TooltipContent, TooltipRoot, TooltipTrigger } from "@/quicksilver/react/primitives/tooltip"
 import { InvalidEmojiException } from "@khinshankhan/emoji-helper-core"
 
 interface EmojiProps {
@@ -66,12 +61,11 @@ export function Emoji({
         />
         <TooltipContent
           side="top"
-          className={cn(textVariants({ variant: "xs" }), "w-full p-2")}
+          className={cn(textVariants({ variant: "xs" }), "w-full px-2.5 py-2")}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
           <span className="text-surface-1">{emojiInfo.alt}</span>
-          <TooltipArrow />
         </TooltipContent>
       </TooltipRoot>
     </span>

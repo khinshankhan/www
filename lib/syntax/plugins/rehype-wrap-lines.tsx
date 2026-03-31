@@ -5,7 +5,7 @@
 
 // Inspired by https://github.com/radix-ui/website/blob/52578d3c5956b26c117ad8328ee40ecc6170b648/utils/rehype-highlight-line.mjs
 
-import { RootContent, type Root as HastRoot } from "hast"
+import type { Root as HastRoot, RootContent } from "hast"
 import { toHtml as hastToHtml } from "hast-util-to-html"
 import parse from "rehype-parse"
 import { unified } from "unified"

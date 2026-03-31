@@ -26,6 +26,7 @@ export function ProgressCircle({
   const determinate = Number.isFinite(value)
   const pct = determinate ? Math.min(Math.max((value - min) / (max - min), 0), 1) : 0.25
   const dashOffset = C - C * pct
+  const progressDashOffset = determinate ? dashOffset : C - C * 0.25
 
   return (
     <motion.svg
@@ -61,8 +62,9 @@ export function ProgressCircle({
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeDasharray={C}
+        strokeDashoffset={progressDashOffset}
         transform={`rotate(-90 ${w / 2} ${w / 2})`}
-        animate={{ strokeDashoffset: determinate ? dashOffset : C - C * 0.25 }}
+        animate={{ strokeDashoffset: progressDashOffset }}
         transition={reduce ? { duration: 0 } : { type: "tween", duration: 0.3, ease: "easeOut" }}
       />
     </motion.svg>

@@ -1,8 +1,8 @@
 "use client"
 
 import { cn } from "@/quicksilver/lib/classname"
-import { mergeProps } from "@base-ui-components/react/merge-props"
-import { useRender } from "@base-ui-components/react/use-render"
+import { mergeProps } from "@base-ui/react/merge-props"
+import { useRender } from "@base-ui/react/use-render"
 import { buttonVariants, type ButtonVariantProps } from "./button.variants"
 
 export interface ButtonProps extends useRender.ComponentProps<"button">, ButtonVariantProps {

@@ -5,8 +5,8 @@ import { cn } from "@/quicksilver/lib/classname"
 import { useLinkContext } from "@/quicksilver/react/headless/link/context"
 import type { LinkKind, LinkProps } from "@/quicksilver/react/headless/link/types"
 import { getSaneProps, isFileLite, resolveKindLite } from "@/quicksilver/react/headless/link/utils"
-import { mergeProps } from "@base-ui-components/react/merge-props"
-import { useRender } from "@base-ui-components/react/use-render"
+import { mergeProps } from "@base-ui/react/merge-props"
+import { useRender } from "@base-ui/react/use-render"
 import { Download, SquareArrowOutUpRight } from "./icons"
 import { linkVariants, type LinkVariants } from "./link.variants"
 
@@ -65,10 +65,13 @@ export function LinkComponent({
   ...props
 }: LinkComponentProps) {
   const kind: LinkKind = resolveKindLite(href)
+  const renderResolvedLink = (renderProps: React.ComponentPropsWithoutRef<"a">) => (
+    <ResolvedLinkComponent kind={kind} {...renderProps} />
+  )
 
   return useRender({
     defaultTagName: "a",
-    render: render ?? ((props) => <ResolvedLinkComponent kind={kind} {...props} />),
+    render: render ?? renderResolvedLink,
     state: { kind },
     props: mergeProps<"a">(
       {

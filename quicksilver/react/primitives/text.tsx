@@ -2,8 +2,8 @@
 
 import React, { type JSX } from "react"
 import { cn } from "@/quicksilver/lib/classname"
-import { mergeProps } from "@base-ui-components/react/merge-props"
-import { useRender } from "@base-ui-components/react/use-render"
+import { mergeProps } from "@base-ui/react/merge-props"
+import { useRender } from "@base-ui/react/use-render"
 import { textVariants, type TextVariantProps } from "./text.variants"
 
 interface TextProps extends useRender.ComponentProps<"p">, Omit<TextVariantProps, "variant"> {

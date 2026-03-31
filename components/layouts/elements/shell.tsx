@@ -15,10 +15,7 @@ export function Shell({
 }: ShellProps) {
   return (
     <div className="isolate flex min-h-screen w-full grow flex-col">
-      <div
-        className="flex min-h-[87vh] w-full grow flex-col xs:min-h-[96vh]"
-        vaul-drawer-wrapper="true"
-      >
+      <div className="flex min-h-[87vh] w-full grow flex-col xs:min-h-[96vh]">
         {header}
 
         {children}

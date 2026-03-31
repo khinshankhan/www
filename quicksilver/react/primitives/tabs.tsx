@@ -3,7 +3,7 @@
 import React, { type ComponentProps } from "react"
 import { cn } from "@/quicksilver/lib/classname"
 import { textVariants } from "@/quicksilver/react/primitives/text.variants"
-import { Tabs as HeadlessTabs } from "@base-ui-components/react/tabs"
+import { Tabs as HeadlessTabs } from "@base-ui/react/tabs"
 import {
   tabsIndicatorVariants,
   tabsListVariants,

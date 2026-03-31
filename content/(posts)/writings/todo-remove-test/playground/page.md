@@ -289,7 +289,7 @@ export function greeting(user: User) {
 >
 > ```js
 > import * as React from "react"
-> import { ScrollArea } from "@base-ui-components/react/scroll-area"
+> import { ScrollArea } from "@base-ui/react/scroll-area"
 >
 > export default function ExampleScrollArea() {
 >   return (
@@ -339,7 +339,7 @@ export function greeting(user: User) {
 >
 > ```js
 > import * as React from "react"
-> import { ScrollArea } from "@base-ui-components/react/scroll-area"
+> import { ScrollArea } from "@base-ui/react/scroll-area"
 >
 > export default function ExampleScrollArea() {
 >   return (
@@ -389,7 +389,7 @@ export function greeting(user: User) {
 >
 > ```js
 > import * as React from "react"
-> import { ScrollArea } from "@base-ui-components/react/scroll-area"
+> import { ScrollArea } from "@base-ui/react/scroll-area"
 >
 > export default function ExampleScrollArea() {
 >   return (
@@ -439,7 +439,7 @@ export function greeting(user: User) {
 >
 > ```js
 > import * as React from "react"
-> import { ScrollArea } from "@base-ui-components/react/scroll-area"
+> import { ScrollArea } from "@base-ui/react/scroll-area"
 >
 > export default function ExampleScrollArea() {
 >   return (
@@ -489,7 +489,7 @@ export function greeting(user: User) {
 >
 > ```js
 > import * as React from "react"
-> import { ScrollArea } from "@base-ui-components/react/scroll-area"
+> import { ScrollArea } from "@base-ui/react/scroll-area"
 >
 > export default function ExampleScrollArea() {
 >   return (
@@ -787,7 +787,7 @@ backtick.fences("for blocks")
 
 ```js
 import * as React from "react"
-import { ScrollArea } from "@base-ui-components/react/scroll-area"
+import { ScrollArea } from "@base-ui/react/scroll-area"
 
 export default function ExampleScrollArea() {
   return (

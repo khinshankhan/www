@@ -18,7 +18,7 @@ import { Link } from "@/quicksilver/react/primitives/link"
 import { ProgressCircle } from "@/quicksilver/react/primitives/progress-circle"
 import { textVariants } from "@/quicksilver/react/primitives/text.variants"
 import { LayoutGroup, motion } from "motion/react"
-import { Collapsible } from "@base-ui-components/react/collapsible"
+import { Collapsible } from "@base-ui/react/collapsible"
 
 export interface Heading {
   id: string
@@ -211,7 +211,7 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
           </div>
 
           <Collapsible.Panel
-            className="mx-auto flex h-(--h) maxw-prose max-w-(--max-w) flex-col justify-end opacity-100 transition-all ease-out data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0 xl:max-w-full"
+            className="mx-auto flex h-(--h) maxw-prose max-w-(--max-w) flex-col justify-end opacity-100 transition-[height,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0 xl:max-w-full"
             style={
               {
                 "--h": "var(--collapsible-panel-height)",
