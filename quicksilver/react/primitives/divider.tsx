@@ -132,7 +132,8 @@ export const labelVariants = cva("", {
 type LabelVariantProps = VariantProps<typeof labelVariants>
 
 interface DividerProps
-  extends HTMLAttributes<HTMLDivElement>,
+  extends
+    HTMLAttributes<HTMLDivElement>,
     RailVariantProps,
     LineVariantProps,
     LabelWrapperVariantProps,

@@ -35,9 +35,7 @@ interface LinkComponentState {
 }
 
 interface LinkComponentProps
-  extends useRender.ComponentProps<"a", LinkComponentState>,
-    LinkProps,
-    LinkVariants {
+  extends useRender.ComponentProps<"a", LinkComponentState>, LinkProps, LinkVariants {
   className?: string
   /**
    * Trailing icon/adornment behavior.
