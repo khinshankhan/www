@@ -26,13 +26,7 @@ const tagName = {
   xs: "small",
 } as const satisfies Record<NonNullable<TextProps["variant"]>, keyof JSX.IntrinsicElements>
 
-export function Text({
-  variant = "body",
-  weight = undefined,
-  className = "",
-  render,
-  ...props
-}: TextProps) {
+export function Text({ variant = "body", weight, className = "", render, ...props }: TextProps) {
   const TagName = tagName[variant ?? "body"]
 
   return useRender({

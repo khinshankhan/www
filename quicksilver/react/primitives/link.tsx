@@ -14,7 +14,7 @@ interface LinkIconProps {
   href: string
   kind?: LinkKind
 }
-export const LinkIcon = ({ href, kind = undefined }: LinkIconProps) => {
+export const LinkIcon = ({ href, kind }: LinkIconProps) => {
   const isExternal = kind ? kind === "external" : resolveKindLite(href) === "external"
   if (isExternal) {
     return (
@@ -59,9 +59,9 @@ export function LinkComponent({
   className = "",
   variant = "default",
   isMonochrome = false,
-  icon = undefined,
+  icon,
   children = null,
-  render = undefined,
+  render,
   ...props
 }: LinkComponentProps) {
   const kind: LinkKind = resolveKindLite(href)

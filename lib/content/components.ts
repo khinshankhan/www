@@ -4,7 +4,9 @@ import {
 } from "@/.generated/content/components.manifest"
 import type { ContentData } from "./schema"
 
-type ContentMdxComponentModule = { default?: MDXComponents }
+interface ContentMdxComponentModule {
+  default?: MDXComponents
+}
 
 export async function getContentMdxComponents(contentData: ContentData): Promise<MDXComponents> {
   const loadComponents = contentMdxComponentLoaders[contentData.slug]

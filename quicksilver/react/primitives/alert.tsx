@@ -6,7 +6,7 @@ interface AlertProps extends HTMLAttributes<HTMLDivElement>, AlertVariants {
   children?: ReactNode
 }
 
-export function Alert({ className, variant = undefined, ...props }: AlertProps) {
+export function Alert({ className, variant, ...props }: AlertProps) {
   return <aside className={cn(alertVariants({ variant }), className)} {...props} />
 }
 

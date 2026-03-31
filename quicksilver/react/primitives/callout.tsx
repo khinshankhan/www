@@ -50,7 +50,7 @@ export interface CalloutProps extends AlertVariants {
   children: React.ReactNode
 }
 
-export function Callout({ variant = undefined, icon = undefined, title, children }: CalloutProps) {
+export function Callout({ variant, icon, title, children }: CalloutProps) {
   const Icon = getCalloutIcon({ icon, variant })
 
   return (

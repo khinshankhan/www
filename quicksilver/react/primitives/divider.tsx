@@ -157,7 +157,7 @@ export function Divider({
   intensity,
   align: alignProp = "center",
   label,
-  side: sideProp = undefined,
+  side: sideProp,
   labelBgClass = "bg-background-2",
   railClassName,
   lineClassName,
