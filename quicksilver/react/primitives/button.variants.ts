@@ -17,6 +17,8 @@ export const buttonVariants = cva(
         default: "bg-accent-4 hover:bg-accent-3",
         ghost: "bg-transparent hover:bg-accent-6/40",
         phantom: "bg-accent-4/40 hover:bg-accent-6/40",
+        panel:
+          "border border-accent-7/20 bg-accent-4/55 text-foreground-strong shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_1px_2px_rgba(0,0,0,0.12)] transition-[color,background-color,border-color,box-shadow,transform] hover:border-accent-7/35 hover:bg-accent-5 hover:text-foreground hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_10px_18px_-14px_rgba(0,0,0,0.45)] active:translate-y-px active:border-accent-8/30 active:bg-accent-6/80 active:shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] disabled:border-surface-3/50 disabled:bg-surface-a1 disabled:text-foreground-subtle/45 disabled:shadow-none",
       },
       size: {
         default: "h-10 px-4 py-2",
