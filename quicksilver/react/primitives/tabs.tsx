@@ -4,6 +4,12 @@ import React, { type ComponentProps } from "react"
 import { cn } from "@/quicksilver/lib/classname"
 import { textVariants } from "@/quicksilver/react/primitives/text.variants"
 import { Tabs as HeadlessTabs } from "@base-ui-components/react/tabs"
+import {
+  tabsIndicatorVariants,
+  tabsListVariants,
+  tabsTabVariants,
+  type TabsVariantProps,
+} from "./tabs.variants"
 
 export function TabsRoot({ className = "", ...props }: ComponentProps<typeof HeadlessTabs.Root>) {
   return (
@@ -15,39 +21,36 @@ export function TabsRoot({ className = "", ...props }: ComponentProps<typeof Hea
   )
 }
 
-export function TabsList({ className = "", ...props }: ComponentProps<typeof HeadlessTabs.List>) {
+export interface TabsListProps
+  extends ComponentProps<typeof HeadlessTabs.List>, Pick<TabsVariantProps, "variant"> {}
+
+export function TabsList({ className = "", variant = "default", ...props }: TabsListProps) {
+  return <HeadlessTabs.List className={cn(tabsListVariants({ variant }), className)} {...props} />
+}
+
+export interface TabsTabProps
+  extends ComponentProps<typeof HeadlessTabs.Tab>, Pick<TabsVariantProps, "variant"> {}
+
+export function TabsTab({ className = "", variant = "default", ...props }: TabsTabProps) {
   return (
-    <HeadlessTabs.List
-      className={cn("relative z-0 flex gap-1 border-b border-surface-4 px-1 py-0.5", className)}
+    <HeadlessTabs.Tab
+      className={cn(textVariants({ variant: "small" }), tabsTabVariants({ variant }), className)}
       {...props}
     />
   )
 }
 
-export function TabsTab({ className = "", ...props }: ComponentProps<typeof HeadlessTabs.Tab>) {
-  return (
-    <HeadlessTabs.Tab
-      className={cn(
-        textVariants({ variant: "small" }),
-        "flex h-8 items-center justify-center border-0 px-2 font-medium break-keep whitespace-nowrap text-foreground-muted hover:text-foreground data-[selected]:text-foreground-strong",
-        "cursor-pointer outline-none select-none before:inset-x-0 before:inset-y-1 before:rounded-sm before:-outline-offset-1 before:outline-stark-contrast focus-visible:relative focus-visible:before:absolute focus-visible:before:outline focus-visible:before:outline-1",
-        className
-      )}
-      {...props}
-    />
-  )
-}
+export interface TabsIndicatorProps
+  extends ComponentProps<typeof HeadlessTabs.Indicator>, Pick<TabsVariantProps, "variant"> {}
 
 export function TabsIndicator({
   className = "",
+  variant = "default",
   ...props
-}: ComponentProps<typeof HeadlessTabs.Indicator>) {
+}: TabsIndicatorProps) {
   return (
     <HeadlessTabs.Indicator
-      className={cn(
-        "absolute top-1/2 left-0 -z-1 h-6 w-[var(--active-tab-width)] translate-x-[var(--active-tab-left)] -translate-y-1/2 rounded-sm bg-stark-contrast/10 transition-all duration-200 ease-in-out",
-        className
-      )}
+      className={cn(tabsIndicatorVariants({ variant }), className)}
       {...props}
     />
   )
