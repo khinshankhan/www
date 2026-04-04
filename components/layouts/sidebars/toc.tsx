@@ -30,8 +30,9 @@ interface TocItemProps {
   heading: Heading
   indents: number
   onSelect?: () => void
+  layoutId?: string
 }
-function TocItem({ heading, indents, onSelect }: TocItemProps) {
+function TocItem({ heading, indents, onSelect, layoutId }: TocItemProps) {
   const { activeId } = useActiveAnchors()
   const isActive = activeId === heading.id
 
@@ -44,9 +45,9 @@ function TocItem({ heading, indents, onSelect }: TocItemProps) {
       <span className="absolute top-0 left-0 h-full w-0.5 bg-surface-12/10" />
 
       {/* shared sideline that morphs between active items */}
-      {isActive && (
+      {isActive && layoutId && (
         <motion.span
-          layoutId="toc-active-indicator"
+          layoutId={layoutId}
           className="absolute inset-y-0 left-0 w-0.5 bg-accent-11 will-change-transform"
           transition={{ type: "spring", stiffness: 420, damping: 36, mass: 0.6 }}
         />
@@ -109,15 +110,60 @@ function TocList({
   headings,
   minDepth,
   onSelect,
+  layoutId,
+  shouldCenterActive = false,
 }: {
   headings: Heading[]
   minDepth: number
   onSelect?: () => void
+  layoutId?: string
+  shouldCenterActive?: boolean
 }) {
   const { activeId } = useActiveAnchors()
   const navRef = useRef<HTMLElement | null>(null)
   const [scrollMask, setScrollMask] = useState<"none" | "top" | "bottom" | "both">("none")
-  const [desktopMaxHeight, setDesktopMaxHeight] = useState("24rem")
+  const [desktopMaxHeight, setDesktopMaxHeight] = useState("calc(100svh - 8rem)")
+
+  const centerActiveItem = useCallback(
+    (behavior: ScrollBehavior = "smooth") => {
+      const nav = navRef.current
+      if (!nav || !activeId) {
+        return
+      }
+
+      const activeItem = nav.querySelector<HTMLElement>(`li[data-active="true"]`)
+      if (!activeItem) {
+        return
+      }
+
+      const navHeight = nav.clientHeight
+      const itemTop = activeItem.offsetTop
+      const itemHeight = activeItem.offsetHeight
+      const currentScrollTop = nav.scrollTop
+      const itemStart = itemTop - currentScrollTop
+      const itemEnd = itemStart + itemHeight
+
+      // Keep the active item around the middle of the TOC viewport instead of hugging the edges.
+      const bandTop = navHeight * 0.32
+      const bandBottom = navHeight * 0.68
+      const isAboveBand = itemStart < bandTop
+      const isBelowBand = itemEnd > bandBottom
+
+      if (isAboveBand || isBelowBand) {
+        const targetTop = itemTop - navHeight * 0.5 + itemHeight / 2
+        const maxScrollTop = Math.max(0, nav.scrollHeight - navHeight)
+        const nextScrollTop = Math.max(0, Math.min(targetTop, maxScrollTop))
+
+        if (Math.abs(nextScrollTop - currentScrollTop) > 6) {
+          nav.scrollTo({
+            top: nextScrollTop,
+            behavior,
+          })
+        }
+      }
+    },
+    [activeId]
+  )
 
   const updateScrollMask = useCallback(() => {
     const nav = navRef.current
@@ -149,42 +195,20 @@ function TocList({
   }, [])
 
   useEffect(() => {
-    const nav = navRef.current
-    if (!nav || !activeId) {
+    centerActiveItem("smooth")
+  }, [activeId, centerActiveItem])
+
+  useEffect(() => {
+    if (!shouldCenterActive) {
       return
     }
 
-    const activeItem = nav.querySelector<HTMLElement>(`li[data-active="true"]`)
-    if (!activeItem) {
-      return
-    }
+    const frame = requestAnimationFrame(() => {
+      centerActiveItem("auto")
+    })
 
-    const navHeight = nav.clientHeight
-    const itemTop = activeItem.offsetTop
-    const itemHeight = activeItem.offsetHeight
-    const currentScrollTop = nav.scrollTop
-    const itemStart = itemTop - currentScrollTop
-    const itemEnd = itemStart + itemHeight
-
-    // Keep the active item in a stable "reading band" instead of hugging the edges.
-    const bandTop = navHeight * 0.22
-    const bandBottom = navHeight * 0.72
-    const isAboveBand = itemStart < bandTop
-    const isBelowBand = itemEnd > bandBottom
-
-    if (isAboveBand || isBelowBand) {
-      const targetTop = itemTop - navHeight * 0.32 + itemHeight / 2
-      const maxScrollTop = Math.max(0, nav.scrollHeight - navHeight)
-      const nextScrollTop = Math.max(0, Math.min(targetTop, maxScrollTop))
-
-      if (Math.abs(nextScrollTop - currentScrollTop) > 6) {
-        nav.scrollTo({
-          top: nextScrollTop,
-          behavior: "smooth",
-        })
-      }
-    }
-  }, [activeId])
+    return () => cancelAnimationFrame(frame)
+  }, [centerActiveItem, shouldCenterActive])
 
   useEffect(() => {
     const nav = navRef.current
@@ -267,14 +291,15 @@ function TocList({
       >
         <ul className="list-none xl:pb-6">
           {headings.map((heading) => (
-            <TocItem
-              key={heading.id}
-              heading={heading}
-              indents={heading.depth - minDepth}
-              onSelect={onSelect}
-            />
-          ))}
-        </ul>
+          <TocItem
+            key={heading.id}
+            heading={heading}
+            indents={heading.depth - minDepth}
+            onSelect={onSelect}
+            layoutId={layoutId}
+          />
+        ))}
+      </ul>
       </nav>
     </div>
   )
@@ -339,94 +364,158 @@ interface TableOfContentsProps {
   headings?: Heading[]
   className?: string
 }
+const tocListFrameStyle = {
+  "--max-w": "min(var(--maxw-prose, 55ch), 90%)",
+} as CSSProperties
+
+function TocListFrame({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div className={cn("mx-auto maxw-prose max-w-(--max-w) xl:max-w-full", className)} style={tocListFrameStyle}>
+      <div className="px-1 pt-2 pb-2">{children}</div>
+    </div>
+  )
+}
+
+function DesktopToc({
+  headings,
+  minDepth,
+  className = "",
+}: {
+  headings: Heading[]
+  minDepth: number
+  className?: string
+}) {
+  return (
+    <div
+      className={cn("relative top-0 hidden w-full bg-background-2 py-2 vh-comfy:sticky xl:block", className)}
+    >
+      <div className="mx-auto maxw-content">
+        <TocTitleTrigger
+          isOpen={true}
+          headings={headings}
+          render={(props) => <div {...props} className={tocTitleTriggerGroupClasses} />}
+        />
+      </div>
+
+        <TocListFrame>
+        <TocList headings={headings} minDepth={minDepth} layoutId="toc-active-indicator-desktop" />
+      </TocListFrame>
+    </div>
+  )
+}
+
+function MobileToc({
+  headings,
+  minDepth,
+  className = "",
+  isOpen,
+  setIsOpen,
+  shouldCloseOnSelect,
+}: {
+  headings: Heading[]
+  minDepth: number
+  className?: string
+  isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  shouldCloseOnSelect: boolean
+}) {
+  return (
+    <Collapsible.Root
+      open={isOpen}
+      className={cn("relative top-0 w-full bg-background-2 py-2 vh-comfy:sticky xl:hidden", className)}
+    >
+      <div className="mx-auto maxw-content">
+        <Collapsible.Trigger
+          render={(props) => (
+            <TocTitleTrigger
+              {...props}
+              onClick={() => setIsOpen(!isOpen)}
+              isOpen={isOpen}
+              headings={headings}
+              renderChevron={true}
+            />
+          )}
+        />
+      </div>
+
+      <Collapsible.Panel
+        className="mx-auto flex h-(--h) maxw-prose max-w-(--max-w) flex-col justify-start overflow-hidden opacity-100 transition-[height,opacity] duration-320 ease-[cubic-bezier(0.22,1,0.36,1)] data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0 xl:max-w-full"
+        style={
+          {
+            "--h": "var(--collapsible-panel-height)",
+            "--max-w": "min(var(--maxw-prose, 55ch), 90%)",
+          } as CSSProperties
+        }
+      >
+        <motion.div
+          className="px-1 pt-2 pb-2"
+          initial={false}
+          animate={{
+            opacity: isOpen ? 1 : 0,
+            y: isOpen ? 0 : -4,
+          }}
+          transition={{
+            duration: isOpen ? 0.2 : 0.12,
+            ease: [0.22, 1, 0.36, 1],
+            delay: isOpen ? 0.04 : 0,
+          }}
+        >
+          <TocListFrame className="max-w-(--max-w)">
+            <TocList
+              headings={headings}
+              minDepth={minDepth}
+              layoutId="toc-active-indicator-mobile"
+              shouldCenterActive={isOpen}
+              onSelect={() => {
+                if (shouldCloseOnSelect) {
+                  setIsOpen(false)
+                }
+              }}
+            />
+          </TocListFrame>
+        </motion.div>
+      </Collapsible.Panel>
+
+      <ScrollFadeIn startPx={150} rangePx={400}>
+        <Divider
+          className="absolute bottom-0 left-1/2 z-2 hidden w-full -translate-x-1/2 transform vh-comfy:max-xl:block"
+          intensity="solid"
+          style={{
+            width:
+              // NOTE: we minus 20px to account for scrollbar, otherwise a horizontal scroll may appear
+              "calc(100dvw - 20px)",
+          }}
+        />
+      </ScrollFadeIn>
+    </Collapsible.Root>
+  )
+}
+
 export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
   const [isOpen, setIsOpen] = useState(false)
   const isXl = useBreakpoint("xl")
   useIsomorphicEffect(() => setIsOpen(isXl), [isXl])
-
   const minDepth = headings.length === 0 ? 1 : Math.min(...headings.map(({ depth }) => depth))
   const ids = useMemo(() => headings.map((h) => h.id), [headings])
 
   return (
     <ActiveAnchorsProvider ids={ids}>
       <LayoutGroup id="toc">
-        <Collapsible.Root
-          open={isOpen}
-          className={cn("relative top-0 w-full bg-background-2 py-2 vh-comfy:sticky", className)}
-        >
-          <div className="mx-auto maxw-content">
-            <Collapsible.Trigger
-              render={(props) => (
-                <TocTitleTrigger
-                  {...props}
-                  className="xl:hidden xl:max-w-full"
-                  onClick={() => setIsOpen(!isOpen)}
-                  isOpen={isOpen}
-                  headings={headings}
-                  renderChevron={true}
-                />
-              )}
-            />
-
-            <div>
-              <TocTitleTrigger
-                isOpen={isOpen}
-                headings={headings}
-                render={(props) => {
-                  return (
-                    <div {...props} className={cn(tocTitleTriggerGroupClasses, "hidden xl:flex")} />
-                  )
-                }}
-              />
-            </div>
-          </div>
-
-          <Collapsible.Panel
-            className="mx-auto flex h-(--h) maxw-prose max-w-(--max-w) flex-col justify-start overflow-hidden opacity-100 transition-[height,opacity] duration-320 ease-[cubic-bezier(0.22,1,0.36,1)] data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0 xl:max-w-full"
-            style={
-              {
-                "--h": "var(--collapsible-panel-height)",
-                "--max-w": "min(var(--maxw-prose, 55ch), 90%)",
-              } as CSSProperties
-            }
-          >
-            <motion.div
-              className="px-1 pt-2 pb-2"
-              initial={false}
-              animate={{
-                opacity: isOpen ? 1 : 0,
-                y: isOpen ? 0 : -4,
-              }}
-              transition={{
-                duration: isOpen ? 0.2 : 0.12,
-                ease: [0.22, 1, 0.36, 1],
-                delay: isOpen ? 0.04 : 0,
-              }}
-            >
-              <TocList
-                headings={headings}
-                minDepth={minDepth}
-                onSelect={() => {
-                  if (!isXl) {
-                    setIsOpen(false)
-                  }
-                }}
-              />
-            </motion.div>
-          </Collapsible.Panel>
-
-          <ScrollFadeIn startPx={150} rangePx={400}>
-            <Divider
-              className="absolute bottom-0 left-1/2 z-2 hidden w-full -translate-x-1/2 transform xl:hidden vh-comfy:max-xl:block"
-              intensity="solid"
-              style={{
-                width:
-                  // NOTE: we minus 20px to account for scrollbar, otherwise a horizontal scroll may appear
-                  "calc(100dvw - 20px)",
-              }}
-            />
-          </ScrollFadeIn>
-        </Collapsible.Root>
+        <DesktopToc headings={headings} minDepth={minDepth} className={className} />
+        <MobileToc
+          headings={headings}
+          minDepth={minDepth}
+          className={className}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          shouldCloseOnSelect={!isXl}
+        />
       </LayoutGroup>
     </ActiveAnchorsProvider>
   )
