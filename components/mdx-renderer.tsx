@@ -10,6 +10,7 @@ import {
   remarkJsxifyElements,
   type RemarkJsxifyElementOptions,
 } from "@/lib/mdx-plugins/remark-jsxify-elements"
+import { remarkLatexRender } from "@/lib/mdx-plugins/remark-latex-render"
 import { remarkMermaidRender } from "@/lib/mdx-plugins/remark-mermaid-render"
 import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
 import { cn } from "@/quicksilver/lib/classname"
@@ -21,6 +22,7 @@ import { Code } from "@/quicksilver/react/primitives/code"
 import { Figcaption } from "@/quicksilver/react/primitives/figcaption"
 import { Figure } from "@/quicksilver/react/primitives/figure"
 import { Image } from "@/quicksilver/react/primitives/image"
+import { LatexBlock } from "@/quicksilver/react/primitives/latex"
 import { Link } from "@/quicksilver/react/primitives/link"
 import { MermaidDiagram } from "@/quicksilver/react/primitives/mermaid"
 import { Pre } from "@/quicksilver/react/primitives/pre"
@@ -40,7 +42,9 @@ import { toString } from "mdast-util-to-string"
 import type { MDXComponents } from "mdx/types"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypeKatex from "rehype-katex"
 import remarkGfm from "remark-gfm"
+import remarkMath from "remark-math"
 import remarkSmartypants from "remark-smartypants"
 import { z } from "zod"
 import { remarkSimpleEmoji } from "@khinshankhan/emoji-helper-remark"
@@ -135,6 +139,7 @@ const baseComponents: MDXComponents = {
   Figure,
   Figcaption,
   Image,
+  LatexBlock,
   TabsRoot,
   TabsList,
   TabsTab,
@@ -215,6 +220,8 @@ export function MDXRenderer({
               },
             ],
             remarkMarkFirstParagraph,
+            remarkMath,
+            remarkLatexRender,
             remarkMermaidRender,
             [
               remarkPrependTopHeading,
@@ -348,6 +355,7 @@ export function MDXRenderer({
                 },
               },
             ],
+            rehypeKatex,
           ],
         },
       }}

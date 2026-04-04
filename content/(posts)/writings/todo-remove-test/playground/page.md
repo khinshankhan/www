@@ -649,6 +649,30 @@ graph TD
   <figcaption>A simple workflow.</figcaption>
 </figure>
 
+### Math
+
+Inline math `e^{i\pi} + 1 = 0` becomes $e^{i\pi} + 1 = 0$.
+
+Display math:
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
+$$
+
+Code block only:
+
+```latex
+$$
+\int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
+$$
+```
+
+Rendered code block:
+
+```latex render
+\int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
+```
+
 ## Spoilers
 
 Don't you just hate <Spoiler>spoilers</Spoiler>?
