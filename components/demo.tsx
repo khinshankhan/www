@@ -134,14 +134,15 @@ export function DemoSegmentedControl<T extends string>({
   return (
     <TabsRoot
       className={className}
+      variant="segmented"
       render={<div />}
       onValueChange={(nextValue) => onChange(nextValue as T)}
       value={value}
     >
-      <TabsList variant="segmented">
-        <TabsIndicator variant="segmented" />
+      <TabsList>
+        <TabsIndicator />
         {options.map((option) => (
-          <TabsTab key={option.value} value={option.value} variant="segmented">
+          <TabsTab key={option.value} value={option.value}>
             {option.label}
           </TabsTab>
         ))}
