@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useMemo, useState, type CSSProperties } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { useIsomorphicEffect } from "@/hooks/core/use-isomorphic-effect"
 import { useBreakpoint } from "@/hooks/use-breakpoint"
 import { checkIfElementInView, focusElement } from "@/lib/focus"
@@ -13,7 +13,7 @@ import {
 import { ScrollFadeIn } from "@/quicksilver/react/patterns/motion/scroll-fade-in"
 import { Button, type ButtonProps } from "@/quicksilver/react/primitives/button"
 import { Divider } from "@/quicksilver/react/primitives/divider"
-import { ChevronRight } from "@/quicksilver/react/primitives/icons"
+import { ChevronRight, ListTree } from "@/quicksilver/react/primitives/icons"
 import { Link } from "@/quicksilver/react/primitives/link"
 import { ProgressCircle } from "@/quicksilver/react/primitives/progress-circle"
 import { textVariants } from "@/quicksilver/react/primitives/text.variants"
@@ -29,8 +29,9 @@ export interface Heading {
 interface TocItemProps {
   heading: Heading
   indents: number
+  onSelect?: () => void
 }
-function TocItem({ heading, indents }: TocItemProps) {
+function TocItem({ heading, indents, onSelect }: TocItemProps) {
   const { activeId } = useActiveAnchors()
   const isActive = activeId === heading.id
 
@@ -88,6 +89,7 @@ function TocItem({ heading, indents }: TocItemProps) {
 
           // definitively scroll smoothly to the section
           scrollToElement(`#${heading.id}`, { behavior: "smooth" })
+          onSelect?.()
 
           // wait for scroll to end, then focus the element because focusing 'jumps' the page
           await waitForWindowScrollEnd()
@@ -100,6 +102,181 @@ function TocItem({ heading, indents }: TocItemProps) {
         {heading.title}
       </Link>
     </li>
+  )
+}
+
+function TocList({
+  headings,
+  minDepth,
+  onSelect,
+}: {
+  headings: Heading[]
+  minDepth: number
+  onSelect?: () => void
+}) {
+  const { activeId } = useActiveAnchors()
+  const navRef = useRef<HTMLElement | null>(null)
+  const [scrollMask, setScrollMask] = useState<"none" | "top" | "bottom" | "both">("none")
+  const [desktopMaxHeight, setDesktopMaxHeight] = useState("24rem")
+
+  const updateScrollMask = useCallback(() => {
+    const nav = navRef.current
+    if (!nav) {
+      return
+    }
+
+    const maxScrollTop = Math.max(0, nav.scrollHeight - nav.clientHeight)
+    const scrollTop = nav.scrollTop
+    const atTop = scrollTop <= 2
+    const atBottom = maxScrollTop - scrollTop <= 2
+
+    if (maxScrollTop <= 2) {
+      setScrollMask("none")
+      return
+    }
+
+    if (atTop) {
+      setScrollMask("bottom")
+      return
+    }
+
+    if (atBottom) {
+      setScrollMask("top")
+      return
+    }
+
+    setScrollMask("both")
+  }, [])
+
+  useEffect(() => {
+    const nav = navRef.current
+    if (!nav || !activeId) {
+      return
+    }
+
+    const activeItem = nav.querySelector<HTMLElement>(`li[data-active="true"]`)
+    if (!activeItem) {
+      return
+    }
+
+    const navHeight = nav.clientHeight
+    const itemTop = activeItem.offsetTop
+    const itemHeight = activeItem.offsetHeight
+    const currentScrollTop = nav.scrollTop
+    const itemStart = itemTop - currentScrollTop
+    const itemEnd = itemStart + itemHeight
+
+    // Keep the active item in a stable "reading band" instead of hugging the edges.
+    const bandTop = navHeight * 0.22
+    const bandBottom = navHeight * 0.72
+    const isAboveBand = itemStart < bandTop
+    const isBelowBand = itemEnd > bandBottom
+
+    if (isAboveBand || isBelowBand) {
+      const targetTop = itemTop - navHeight * 0.32 + itemHeight / 2
+      const maxScrollTop = Math.max(0, nav.scrollHeight - navHeight)
+      const nextScrollTop = Math.max(0, Math.min(targetTop, maxScrollTop))
+
+      if (Math.abs(nextScrollTop - currentScrollTop) > 6) {
+        nav.scrollTo({
+          top: nextScrollTop,
+          behavior: "smooth",
+        })
+      }
+    }
+  }, [activeId])
+
+  useEffect(() => {
+    const nav = navRef.current
+    if (!nav) {
+      return
+    }
+
+    updateScrollMask()
+
+    nav.addEventListener("scroll", updateScrollMask, { passive: true })
+    window.addEventListener("resize", updateScrollMask)
+
+    return () => {
+      nav.removeEventListener("scroll", updateScrollMask)
+      window.removeEventListener("resize", updateScrollMask)
+    }
+  }, [headings, updateScrollMask])
+
+  useEffect(() => {
+    const nav = navRef.current
+    if (!nav) {
+      return
+    }
+
+    const updateDesktopMaxHeight = () => {
+      if (typeof window === "undefined") {
+        return
+      }
+
+      if (window.innerWidth < 1280) {
+        setDesktopMaxHeight("24rem")
+        return
+      }
+
+      const rect = nav.getBoundingClientRect()
+      const viewportHeight = window.innerHeight
+      const bottomGap = 8
+      const availableHeight = Math.max(0, viewportHeight - rect.top - bottomGap)
+      setDesktopMaxHeight(`${Math.floor(availableHeight)}px`)
+    }
+
+    updateDesktopMaxHeight()
+
+    window.addEventListener("resize", updateDesktopMaxHeight)
+    window.addEventListener("scroll", updateDesktopMaxHeight, { passive: true })
+
+    return () => {
+      window.removeEventListener("resize", updateDesktopMaxHeight)
+      window.removeEventListener("scroll", updateDesktopMaxHeight)
+    }
+  }, [])
+
+  return (
+    <div className="relative">
+      {(scrollMask === "top" || scrollMask === "both") && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 z-10 h-10"
+          style={{
+            background:
+              "linear-gradient(to bottom, var(--background-1) 0%, color-mix(in oklab, var(--background-1) 92%, transparent) 38%, color-mix(in oklab, var(--background-1) 56%, transparent) 72%, transparent 100%)",
+          }}
+        />
+      )}
+      {(scrollMask === "bottom" || scrollMask === "both") && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-10"
+          style={{
+            background:
+              "linear-gradient(to top, var(--background-1) 0%, color-mix(in oklab, var(--background-1) 92%, transparent) 38%, color-mix(in oklab, var(--background-1) 56%, transparent) 72%, transparent 100%)",
+          }}
+        />
+      )}
+      <nav
+        ref={navRef}
+        aria-label="Table of contents"
+        className="max-h-[min(24rem,calc(100svh-12rem))] overflow-y-auto overscroll-contain pr-1 [scrollbar-gutter:stable] xl:pr-0 xl:[scrollbar-width:none] [&::-webkit-scrollbar]:w-1 xl:[&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-accent-11 [&::-webkit-scrollbar-thumb]:shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-accent-12)_20%,transparent)] [&::-webkit-scrollbar-track]:bg-transparent"
+        style={{ maxHeight: desktopMaxHeight }}
+      >
+        <ul className="list-none xl:pb-6">
+          {headings.map((heading) => (
+            <TocItem
+              key={heading.id}
+              heading={heading}
+              indents={heading.depth - minDepth}
+              onSelect={onSelect}
+            />
+          ))}
+        </ul>
+      </nav>
+    </div>
   )
 }
 
@@ -123,7 +300,6 @@ function TocTitleTrigger({
   const { activeId } = useActiveAnchors()
   const activeHeading =
     (activeId ? headings.find((h) => h.id === activeId) : headings[0])?.title ?? "No headings found"
-
   const activeIndex = headings.findIndex((h) => h.id === activeId)
   const progress = activeIndex === -1 ? 0 : ((activeIndex + 1) / headings.length) * 100
 
@@ -134,26 +310,21 @@ function TocTitleTrigger({
         className="accent-theme-default size-[1em] shrink-0 text-accent-11"
       />
 
-      <span className="relative grid min-w-0 flex-1 text-left *:col-start-1 *:row-start-1 *:my-auto">
+      <span className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden text-left">
+        <span className="sr-only xl:not-sr-only xl:truncate">On this page</span>
+        <ListTree
+          aria-hidden="true"
+          className="size-4.5 shrink-0 text-foreground-muted xl:hidden"
+        />
         <span
+          title={activeHeading}
           className={cn(
             textVariants({ variant: "h5" }),
-            "truncate text-left text-foreground transition-all",
-            isOpen && "pointer-events-none -translate-y-4 opacity-0"
+            "min-w-0 truncate text-left leading-tight text-foreground transition-[opacity,transform] duration-220 ease-[cubic-bezier(0.22,1,0.36,1)] xl:hidden",
+            isOpen ? "opacity-70" : "opacity-100"
           )}
-          title={activeHeading}
         >
           {activeHeading}
-        </span>
-        <span
-          className={cn(
-            textVariants({ variant: "h5" }),
-            "truncate text-left text-foreground transition-all",
-            !isOpen && "pointer-events-none -translate-y-4 opacity-0"
-          )}
-          title="On this page"
-        >
-          On this page
         </span>
       </span>
 
@@ -211,7 +382,7 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
           </div>
 
           <Collapsible.Panel
-            className="mx-auto flex h-(--h) maxw-prose max-w-(--max-w) flex-col justify-end opacity-100 transition-[height,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0 xl:max-w-full"
+            className="mx-auto flex h-(--h) maxw-prose max-w-(--max-w) flex-col justify-start overflow-hidden opacity-100 transition-[height,opacity] duration-320 ease-[cubic-bezier(0.22,1,0.36,1)] data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0 xl:max-w-full"
             style={
               {
                 "--h": "var(--collapsible-panel-height)",
@@ -219,13 +390,29 @@ export function TOC({ headings = [], className = "" }: TableOfContentsProps) {
               } as CSSProperties
             }
           >
-            <nav aria-label="Table of contents" className="px-1 pt-2 pb-2">
-              <ul className="list-none">
-                {headings.map((heading) => (
-                  <TocItem key={heading.id} heading={heading} indents={heading.depth - minDepth} />
-                ))}
-              </ul>
-            </nav>
+            <motion.div
+              className="px-1 pt-2 pb-2"
+              initial={false}
+              animate={{
+                opacity: isOpen ? 1 : 0,
+                y: isOpen ? 0 : -4,
+              }}
+              transition={{
+                duration: isOpen ? 0.2 : 0.12,
+                ease: [0.22, 1, 0.36, 1],
+                delay: isOpen ? 0.04 : 0,
+              }}
+            >
+              <TocList
+                headings={headings}
+                minDepth={minDepth}
+                onSelect={() => {
+                  if (!isXl) {
+                    setIsOpen(false)
+                  }
+                }}
+              />
+            </motion.div>
           </Collapsible.Panel>
 
           <ScrollFadeIn startPx={150} rangePx={400}>
