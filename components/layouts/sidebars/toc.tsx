@@ -291,15 +291,15 @@ function TocList({
       >
         <ul className="list-none xl:pb-6">
           {headings.map((heading) => (
-          <TocItem
-            key={heading.id}
-            heading={heading}
-            indents={heading.depth - minDepth}
-            onSelect={onSelect}
-            layoutId={layoutId}
-          />
-        ))}
-      </ul>
+            <TocItem
+              key={heading.id}
+              heading={heading}
+              indents={heading.depth - minDepth}
+              onSelect={onSelect}
+              layoutId={layoutId}
+            />
+          ))}
+        </ul>
       </nav>
     </div>
   )
@@ -376,7 +376,10 @@ function TocListFrame({
   className?: string
 }) {
   return (
-    <div className={cn("mx-auto maxw-prose max-w-(--max-w) xl:max-w-full", className)} style={tocListFrameStyle}>
+    <div
+      className={cn("mx-auto maxw-prose max-w-(--max-w) xl:max-w-full", className)}
+      style={tocListFrameStyle}
+    >
       <div className="px-1 pt-2 pb-2">{children}</div>
     </div>
   )
@@ -393,7 +396,10 @@ function DesktopToc({
 }) {
   return (
     <div
-      className={cn("relative top-0 hidden w-full bg-background-2 py-2 vh-comfy:sticky xl:block", className)}
+      className={cn(
+        "relative top-0 hidden w-full bg-background-2 py-2 xl:block vh-comfy:sticky",
+        className
+      )}
     >
       <div className="mx-auto maxw-content">
         <TocTitleTrigger
@@ -403,7 +409,7 @@ function DesktopToc({
         />
       </div>
 
-        <TocListFrame>
+      <TocListFrame>
         <TocList headings={headings} minDepth={minDepth} layoutId="toc-active-indicator-desktop" />
       </TocListFrame>
     </div>
@@ -428,7 +434,10 @@ function MobileToc({
   return (
     <Collapsible.Root
       open={isOpen}
-      className={cn("relative top-0 w-full bg-background-2 py-2 vh-comfy:sticky xl:hidden", className)}
+      className={cn(
+        "relative top-0 w-full bg-background-2 py-2 xl:hidden vh-comfy:sticky",
+        className
+      )}
     >
       <div className="mx-auto maxw-content">
         <Collapsible.Trigger
