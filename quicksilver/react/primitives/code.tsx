@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useCallback } from "react"
+import { mermaidLanguage } from "@/lib/syntax/languages/mermaid"
 import rehypeWrapLines from "@/lib/syntax/plugins/rehype-wrap-lines"
 import { useCopyButton } from "@/quicksilver/hooks/use-copy-button"
 import { cn } from "@/quicksilver/lib/classname"
@@ -13,6 +14,8 @@ import { Check, Copy } from "./icons"
 import { textVariants } from "./text.variants"
 
 const lowlight = createLowlight(all)
+
+lowlight.register({ mermaid: mermaidLanguage })
 
 interface CopyButtonProps {
   text: string

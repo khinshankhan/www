@@ -616,11 +616,38 @@ Here is a list with different formatting:
 3. ~~Strikethrough Item~~
 4. **_Bold and Italicized Item_**
 
-## TODO: Extended Formatting
+## Extended Formatting
 
-H_2_O
+- TODO
+  - subscript: H_2_O
+  - superscript: X^2
 
-X^2
+### Mermaid
+
+Code block only:
+
+```mermaid
+graph TD
+  A[Write Idea] --> B{Ready to Ship?}
+  B -->|No| C[Refine Draft]
+  C --> B
+  B -->|Yes| D[Publish]
+```
+
+Rendered diagram:
+
+<figure>
+
+```mermaid render
+graph TD
+  A[Write Idea] --> B{Ready to Ship?}
+  B -->|No| C[Refine Draft]
+  C --> B
+  B -->|Yes| D[Publish]
+```
+
+  <figcaption>A simple workflow.</figcaption>
+</figure>
 
 ## Spoilers
 

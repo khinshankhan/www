@@ -10,6 +10,7 @@ import {
   remarkJsxifyElements,
   type RemarkJsxifyElementOptions,
 } from "@/lib/mdx-plugins/remark-jsxify-elements"
+import { remarkMermaidRender } from "@/lib/mdx-plugins/remark-mermaid-render"
 import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
 import { cn } from "@/quicksilver/lib/classname"
 import { SpotifyEmbed } from "@/quicksilver/react/embeds/spotify"
@@ -21,6 +22,7 @@ import { Figcaption } from "@/quicksilver/react/primitives/figcaption"
 import { Figure } from "@/quicksilver/react/primitives/figure"
 import { Image } from "@/quicksilver/react/primitives/image"
 import { Link } from "@/quicksilver/react/primitives/link"
+import { MermaidDiagram } from "@/quicksilver/react/primitives/mermaid"
 import { Pre } from "@/quicksilver/react/primitives/pre"
 import { Spoiler } from "@/quicksilver/react/primitives/spoiler"
 import { Tabbify, TabbifyPanel } from "@/quicksilver/react/primitives/tabbify"
@@ -140,6 +142,7 @@ const baseComponents: MDXComponents = {
   TabsPanel,
   Tabbify,
   TabbifyPanel,
+  MermaidDiagram,
   SmartVideo,
   YouTubeEmbed,
   SpotifyEmbed,
@@ -212,6 +215,7 @@ export function MDXRenderer({
               },
             ],
             remarkMarkFirstParagraph,
+            remarkMermaidRender,
             [
               remarkPrependTopHeading,
               {

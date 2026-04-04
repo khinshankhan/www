@@ -33,6 +33,7 @@
     "hast-util-to-string": "^3.0.1",
     "lowlight": "^3.3.0",
     "mdast-util-to-string": "^4.0.0",
+    "mermaid": "^11.14.0",
     "motion": "^12.35.2",
     "next": "^16.1.6",
     "next-mdx-remote": "^6.0.0",
