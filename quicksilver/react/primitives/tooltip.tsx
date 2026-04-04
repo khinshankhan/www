@@ -2,19 +2,20 @@
 
 import * as React from "react"
 import { cn } from "@/quicksilver/lib/classname"
-import { Tooltip } from "@base-ui/react/tooltip"
+import { Tooltip as HeadlessTooltip } from "@base-ui/react/tooltip"
 import { textVariants } from "./text.variants"
 
-export const TooltipProvider = Tooltip.Provider
-export const TooltipRoot = Tooltip.Root
-export const TooltipTrigger = Tooltip.Trigger
-export const TooltipPortal = Tooltip.Portal
-export const TooltipArrow = Tooltip.Arrow
-export const TooltipPositioner = Tooltip.Positioner
+export const TooltipProvider = HeadlessTooltip.Provider
+export const TooltipRoot = HeadlessTooltip.Root
+export const TooltipTrigger = HeadlessTooltip.Trigger
+export const TooltipPortal = HeadlessTooltip.Portal
+export const TooltipArrow = HeadlessTooltip.Arrow
+export const TooltipPositioner = HeadlessTooltip.Positioner
+export const TooltipPopup = HeadlessTooltip.Popup
 
-type TooltipPositionerProps = React.ComponentPropsWithoutRef<typeof Tooltip.Positioner>
+type TooltipPositionerProps = React.ComponentPropsWithoutRef<typeof HeadlessTooltip.Positioner>
 
-interface TooltipContentProps extends React.ComponentPropsWithoutRef<typeof Tooltip.Popup> {
+interface TooltipContentProps extends React.ComponentPropsWithoutRef<typeof HeadlessTooltip.Popup> {
   side?: TooltipPositionerProps["side"]
   sideOffset?: TooltipPositionerProps["sideOffset"]
 }
@@ -29,7 +30,7 @@ export function TooltipContent({
   return (
     <TooltipPortal>
       <TooltipPositioner side={side} sideOffset={sideOffset}>
-        <Tooltip.Popup
+        <TooltipPopup
           {...props}
           className={cn(
             textVariants({ variant: "small" }),
@@ -40,7 +41,7 @@ export function TooltipContent({
             "data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:data-[side=bottom]:-translate-y-0.5 data-[ending-style]:data-[side=left]:translate-x-0.5 data-[ending-style]:data-[side=right]:-translate-x-0.5 data-[ending-style]:data-[side=top]:translate-y-0.5",
             className
           )}
-        >
+          >
           {children}
           <TooltipArrow className="pointer-events-none data-[side=bottom]:-top-2 data-[side=left]:-right-[14px] data-[side=left]:rotate-90 data-[side=right]:-left-[14px] data-[side=right]:-rotate-90 data-[side=top]:-bottom-2 data-[side=top]:rotate-180">
             <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
@@ -50,7 +51,7 @@ export function TooltipContent({
               />
             </svg>
           </TooltipArrow>
-        </Tooltip.Popup>
+        </TooltipPopup>
       </TooltipPositioner>
     </TooltipPortal>
   )

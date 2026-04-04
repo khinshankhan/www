@@ -13,8 +13,6 @@ import {
   type DrawerContentVariantProps,
 } from "./drawer.variants"
 
-export const DrawerPrimitive = HeadlessDrawer
-
 export const DrawerRoot = HeadlessDrawer.Root
 export const DrawerTrigger = HeadlessDrawer.Trigger
 export const DrawerPortal = HeadlessDrawer.Portal

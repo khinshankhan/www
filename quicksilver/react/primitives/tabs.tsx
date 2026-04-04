@@ -1,6 +1,6 @@
 "use client"
 
-import React, { type ComponentProps } from "react"
+import { type ComponentProps } from "react"
 import { cn } from "@/quicksilver/lib/classname"
 import { textVariants } from "@/quicksilver/react/primitives/text.variants"
 import { Tabs as HeadlessTabs } from "@base-ui/react/tabs"
@@ -15,7 +15,7 @@ export function TabsRoot({ className = "", ...props }: ComponentProps<typeof Hea
   return (
     <HeadlessTabs.Root
       data-elem="tabs"
-      className={cn("overflow-hidden rounded-md border border-muted bg-background-1", className)}
+      className={cn("overflow-hidden rounded-md", className)}
       {...props}
     />
   )

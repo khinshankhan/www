@@ -185,7 +185,7 @@
 
   /* a custom scrollbar style that fits the theme better */
   * {
-    scrollbar-color: var(--color-foreground) var(--background-2);
+    scrollbar-color: var(--color-accent-11) var(--color-accent-a4);
   }
 
   /* code block styling */

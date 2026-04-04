@@ -2,22 +2,22 @@
 
 import React from "react"
 import { cn } from "@/quicksilver/lib/classname"
-import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area"
+import { ScrollArea as HeadlessScrollArea } from "@base-ui/react/scroll-area"
 
-type ScrollViewportProps = React.ComponentPropsWithRef<typeof ScrollAreaPrimitive.Viewport>
+type ScrollViewportProps = React.ComponentPropsWithRef<typeof HeadlessScrollArea.Viewport>
 
 export function ScrollViewport({ className = "", children, ...props }: ScrollViewportProps) {
   return (
-    <ScrollAreaPrimitive.Viewport
+    <HeadlessScrollArea.Viewport
       className={cn("size-full rounded-[inherit]", className)}
       {...props}
     >
-      <ScrollAreaPrimitive.Content>{children}</ScrollAreaPrimitive.Content>
-    </ScrollAreaPrimitive.Viewport>
+      <HeadlessScrollArea.Content>{children}</HeadlessScrollArea.Content>
+    </HeadlessScrollArea.Viewport>
   )
 }
 
-type ScrollAreaProps = React.ComponentPropsWithRef<typeof ScrollAreaPrimitive.Root> & {
+type ScrollAreaProps = React.ComponentPropsWithRef<typeof HeadlessScrollArea.Root> & {
   type?: "auto" | "always" | "scroll" | "hover"
 }
 
@@ -25,28 +25,28 @@ export function ScrollArea({ className = "", children, type, ...props }: ScrollA
   void type
 
   return (
-    <ScrollAreaPrimitive.Root className={cn("overflow-hidden", className)} {...props}>
+    <HeadlessScrollArea.Root className={cn("overflow-hidden", className)} {...props}>
       {children}
-      <ScrollAreaPrimitive.Corner />
-    </ScrollAreaPrimitive.Root>
+      <HeadlessScrollArea.Corner />
+    </HeadlessScrollArea.Root>
   )
 }
 
-type ScrollBarProps = React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Scrollbar>
+type ScrollBarProps = React.ComponentPropsWithoutRef<typeof HeadlessScrollArea.Scrollbar>
 
 export function ScrollBar({ className, orientation = "vertical", ...props }: ScrollBarProps) {
   return (
-    <ScrollAreaPrimitive.Scrollbar
+    <HeadlessScrollArea.Scrollbar
       orientation={orientation}
       className={cn(
-        "z-2 flex touch-none p-0.5 transition-colors duration-[160ms] ease-out select-none hover:bg-background-1",
+        "pointer-events-none z-2 flex touch-none rounded-full bg-transparent p-0.5 transition-colors duration-[160ms] ease-out select-none data-[hovering]:bg-accent-a3/25 data-[scrolling]:bg-accent-a3/25",
         orientation === "vertical" && "z-2 w-2 flex-row",
         orientation === "horizontal" && "h-2 flex-col",
         className
       )}
       {...props}
     >
-      <ScrollAreaPrimitive.Thumb className="relative flex-1 cursor-pointer rounded-full bg-foreground hover:bg-stark-contrast" />
-    </ScrollAreaPrimitive.Scrollbar>
+      <HeadlessScrollArea.Thumb className="pointer-events-auto relative flex-1 cursor-pointer rounded-full bg-accent-11 shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-accent-12)_20%,transparent)] transition-colors duration-[160ms] ease-out hover:bg-accent-8/80 focus-visible:bg-accent-8/80" />
+    </HeadlessScrollArea.Scrollbar>
   )
 }
