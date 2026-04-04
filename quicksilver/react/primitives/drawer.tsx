@@ -104,6 +104,7 @@ function useDrawerOvershootUnderlay({
       return
     }
 
+    const cleanupUnderlay = underlayRef.current
     let frame = 0
 
     const syncUnderlay = () => {
@@ -140,10 +141,9 @@ function useDrawerOvershootUnderlay({
 
     return () => {
       cancelAnimationFrame(frame)
-      const underlay = underlayRef.current
-      if (underlay) {
-        underlay.style.opacity = "0"
-        underlay.style.height = "0px"
+      if (cleanupUnderlay) {
+        cleanupUnderlay.style.opacity = "0"
+        cleanupUnderlay.style.height = "0px"
       }
     }
   }, [contentRef, enabled, popupRef, underlayRef, viewportRef])

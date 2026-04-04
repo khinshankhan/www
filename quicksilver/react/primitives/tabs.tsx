@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, type ComponentProps, useContext } from "react"
+import { createContext, useContext, type ComponentProps } from "react"
 import { cn } from "@/quicksilver/lib/classname"
 import { textVariants } from "@/quicksilver/react/primitives/text.variants"
 import { Tabs as HeadlessTabs } from "@base-ui/react/tabs"
@@ -14,14 +14,9 @@ import {
 const TabsVariantContext = createContext<NonNullable<TabsVariantProps["variant"]>>("default")
 
 export interface TabsRootProps
-  extends ComponentProps<typeof HeadlessTabs.Root>,
-    Pick<TabsVariantProps, "variant"> {}
+  extends ComponentProps<typeof HeadlessTabs.Root>, Pick<TabsVariantProps, "variant"> {}
 
-export function TabsRoot({
-  className = "",
-  variant = "default",
-  ...props
-}: TabsRootProps) {
+export function TabsRoot({ className = "", variant = "default", ...props }: TabsRootProps) {
   const resolvedVariant = variant ?? "default"
 
   return (
@@ -76,11 +71,7 @@ export function TabsTab({ className = "", variant, ...props }: TabsTabProps) {
 export interface TabsIndicatorProps
   extends ComponentProps<typeof HeadlessTabs.Indicator>, Pick<TabsVariantProps, "variant"> {}
 
-export function TabsIndicator({
-  className = "",
-  variant,
-  ...props
-}: TabsIndicatorProps) {
+export function TabsIndicator({ className = "", variant, ...props }: TabsIndicatorProps) {
   const inheritedVariant = useContext(TabsVariantContext)
   const resolvedVariant = variant ?? inheritedVariant
 

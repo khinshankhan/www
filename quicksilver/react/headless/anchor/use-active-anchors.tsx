@@ -53,7 +53,7 @@ export function ActiveAnchorsProvider({
   const ticking = useRef(false)
 
   const offsetRef = useRef(activeOffset)
-  const idsRef = useRef<string[]>(ids)
+  const idsRef = useRef(ids)
 
   useEffect(() => {
     offsetRef.current = activeOffset
@@ -133,7 +133,7 @@ export function ActiveAnchorsProvider({
     }
   }, [onScroll, rescanOnResize, scan])
 
-  const value = useMemo<ActiveAnchorState>(
+  const value = useMemo(
     () => ({
       activeId,
       ids: resolvedIds,

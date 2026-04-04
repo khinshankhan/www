@@ -41,7 +41,7 @@ export function TooltipContent({
             "data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:data-[side=bottom]:-translate-y-0.5 data-[ending-style]:data-[side=left]:translate-x-0.5 data-[ending-style]:data-[side=right]:-translate-x-0.5 data-[ending-style]:data-[side=top]:translate-y-0.5",
             className
           )}
-          >
+        >
           {children}
           <TooltipArrow className="pointer-events-none data-[side=bottom]:-top-2 data-[side=left]:-right-[14px] data-[side=left]:rotate-90 data-[side=right]:-left-[14px] data-[side=right]:-rotate-90 data-[side=top]:-bottom-2 data-[side=top]:rotate-180">
             <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
