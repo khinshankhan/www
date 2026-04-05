@@ -4,6 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { emojiLookup, type EmojiKey } from "@/lib/emoji"
 import { rehypeSectionizeByHeading } from "@/lib/mdx-plugins/rehype-sectionize-by-heading"
 import { rehypeSlug } from "@/lib/mdx-plugins/rehype-slug"
+import { remarkExcalidrawRender } from "@/lib/mdx-plugins/remark-excalidraw-render"
 import { remarkMarkFirstParagraph } from "@/lib/mdx-plugins/remark-excerpt"
 import {
   createMdxJsxFlowElement,
@@ -19,6 +20,7 @@ import { YouTubeEmbed } from "@/quicksilver/react/embeds/youtube"
 import { Blockquote, type BlockquoteProps } from "@/quicksilver/react/primitives/blockquote"
 import { Callout, calloutIcons, type CalloutProps } from "@/quicksilver/react/primitives/callout"
 import { Code } from "@/quicksilver/react/primitives/code"
+import { ExcalidrawScene } from "@/quicksilver/react/primitives/excalidraw"
 import { Figcaption } from "@/quicksilver/react/primitives/figcaption"
 import { Figure } from "@/quicksilver/react/primitives/figure"
 import { Image } from "@/quicksilver/react/primitives/image"
@@ -112,7 +114,7 @@ const baseComponents: MDXComponents = {
       .find((c) => c.startsWith("language-"))
       ?.split("language-")
       .pop()
-    const language = givenLanguage ?? "plaintext"
+    const language = givenLanguage === "excalidraw" ? "json" : (givenLanguage ?? "plaintext")
 
     // TODO: add support for better inline vs fenced code detection
     const isFenced = givenLanguage && givenLanguage.length > 0
@@ -139,6 +141,7 @@ const baseComponents: MDXComponents = {
   Figure,
   Figcaption,
   Image,
+  ExcalidrawScene,
   LatexBlock,
   TabsRoot,
   TabsList,
@@ -221,6 +224,7 @@ export function MDXRenderer({
             ],
             remarkMarkFirstParagraph,
             remarkMath,
+            remarkExcalidrawRender,
             remarkLatexRender,
             remarkMermaidRender,
             [

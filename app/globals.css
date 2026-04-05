@@ -364,3 +364,31 @@
     height: 100%;
   }
 }
+
+/* Excalidraw overrides */
+
+.article-excalidraw .excalidraw {
+  --ui-padding: 0.75rem;
+  background: transparent;
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  width: 100%;
+}
+
+.article-excalidraw .excalidraw__canvas {
+  filter: none !important;
+  z-index: -1;
+}
+
+.article-excalidraw .layer-ui__wrapper__footer,
+.article-excalidraw .footer-center,
+.article-excalidraw .App-menu__left,
+.article-excalidraw .App-bottom-bar {
+  display: none !important;
+}
+
+.article-excalidraw .layer-ui__wrapper__top-right {
+  top: 0.75rem;
+  right: 0.75rem;
+}

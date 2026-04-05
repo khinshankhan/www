@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "assets:excalidraw": "node scripts/sync-excalidraw-assets.mjs",
     "content:components": "node scripts/generate-content-component-manifest.mjs",
     "typecheck": "pnpm run content:components && tsc --noEmit",
     "next-lint": "pnpm run content:components && eslint .",
@@ -16,6 +17,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",
+    "@excalidraw/excalidraw": "^0.18.0",
     "@khinshankhan/emoji-helper-core": "^3.0.1",
     "@khinshankhan/emoji-helper-pack-github": "^3.0.4",
     "@khinshankhan/emoji-helper-remark": "^3.1.1",

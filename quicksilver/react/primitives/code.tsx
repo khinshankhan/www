@@ -20,8 +20,9 @@ lowlight.register({ mermaid: mermaidLanguage })
 interface CopyButtonProps {
   text: string
   onCopy?: () => void
+  className?: string
 }
-export function CopyButton({ text, onCopy }: CopyButtonProps) {
+export function CopyButton({ text, onCopy, className = "" }: CopyButtonProps) {
   const copyCallback = useCallback(async () => {
     await copyToClipboardGraceful(text)
     onCopy?.()
@@ -37,7 +38,10 @@ export function CopyButton({ text, onCopy }: CopyButtonProps) {
       aria-label="Copy text to clipboard"
       variant="phantom"
       size="icon-sm"
-      className="absolute top-1 right-2 z-2 opacity-70 transition-opacity hover:opacity-100 md:top-1.5 lg:top-2"
+      className={cn(
+        "pointer-events-auto absolute top-1 right-2 z-2 opacity-70 transition-opacity hover:opacity-100 md:top-1.5 lg:top-2",
+        className
+      )}
       onClick={handleClick}
     >
       {copied ? (
