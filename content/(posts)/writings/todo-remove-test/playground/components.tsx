@@ -186,6 +186,7 @@ function OpticalStarButton({ mode, showMargin }: { mode: AlignmentMode; showMarg
 
       <div className="relative">
         <button
+          aria-label="Example star button"
           className="relative inline-flex size-28 items-center justify-center overflow-hidden rounded-[1.4rem] bg-[#232323] text-white select-none"
           type="button"
         >
@@ -260,6 +261,7 @@ function OpticalPlayButton({ mode, showMargin }: { mode: AlignmentMode; showMarg
 
       <div className="relative">
         <button
+          aria-label="Example play button"
           className="relative inline-flex size-20 items-center justify-center overflow-hidden rounded-full bg-[#232323] text-white select-none"
           type="button"
         >

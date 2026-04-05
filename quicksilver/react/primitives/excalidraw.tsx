@@ -27,6 +27,8 @@ const Excalidraw = dynamic(
 
 export interface ExcalidrawSceneProps extends React.ComponentPropsWithoutRef<"div"> {
   code: string
+  description: string
+  title: string
 }
 
 interface ExcalidrawClipboardData {
@@ -48,8 +50,8 @@ function isClipboardScene(
 }
 
 const excalidrawThemeVars = {
-  ["--color-surface-lowest"]: "var(--background-1)",
-  ["--color-surface-low"]: "var(--background-1)",
+  ["--color-surface-lowest"]: "var(--background-2)",
+  ["--color-surface-low"]: "var(--background-2)",
   ["--color-surface-mid"]: "var(--color-surface-3)",
   ["--color-surface-high"]: "var(--color-surface-4)",
   ["--color-primary"]: "var(--color-accent-9)",
@@ -57,9 +59,9 @@ const excalidrawThemeVars = {
   ["--color-primary-darkest"]: "var(--color-accent-11)",
   ["--color-on-primary-container"]: "var(--color-accent-12)",
   ["--default-border-color"]: "color-mix(in oklab, var(--stark-contrast) 12%, transparent)",
-  ["--island-bg-color"]: "color-mix(in oklab, var(--background-1) 92%, transparent)",
-  ["--popup-bg-color"]: "var(--background-1)",
-  ["--overlay-bg-color"]: "color-mix(in oklab, var(--background-1) 72%, transparent)",
+  ["--island-bg-color"]: "color-mix(in oklab, var(--background-2) 92%, transparent)",
+  ["--popup-bg-color"]: "var(--background-2)",
+  ["--overlay-bg-color"]: "color-mix(in oklab, var(--background-2) 72%, transparent)",
   ["--text-primary-color"]: "var(--color-foreground)",
   ["--icon-fill-color"]: "var(--color-foreground)",
   ["--color-gray-10"]: "var(--color-foreground-strong)",
@@ -74,6 +76,7 @@ const FALLBACK_BACKGROUND = {
   dark: "#161634",
   light: "#f5f5fb",
 } as const
+const excalidrawViewportClassName = "relative isolate h-[28rem] w-full overflow-hidden rounded-md"
 
 function parseScene(code: string): ImportedDataState | null {
   try {
@@ -170,14 +173,13 @@ function resolveViewBackgroundColor(theme: "light" | "dark") {
   }
 
   const fallback = FALLBACK_BACKGROUND[theme]
-  const background = getTokenValue("--background-1", fallback)
-  const pageBackground = window.getComputedStyle(document.body).backgroundColor || fallback
+  const foreground = getTokenValue("--background-1", fallback)
+  const background = getTokenValue("--background-2", fallback)
   const surfaceBackground = resolveColor(
-    `color-mix(in oklab, ${background} 60%, transparent)`,
-    background
+    `color-mix(in oklab, ${foreground} 60%, transparent)`,
+    foreground
   )
-
-  return blendColors(surfaceBackground, pageBackground, background)
+  return blendColors(surfaceBackground, background, foreground)
 }
 
 function hasViewportDrifted(current: ViewportState, baseline: ViewportState | null) {
@@ -220,7 +222,13 @@ function ExcalidrawResetButton({
   )
 }
 
-export function ExcalidrawScene({ code, className = "", ...props }: ExcalidrawSceneProps) {
+export function ExcalidrawScene({
+  code,
+  className = "",
+  description,
+  title,
+  ...props
+}: ExcalidrawSceneProps) {
   const scene = useMemo(() => parseScene(code), [code])
   const [api, setApi] = useState<ExcalidrawImperativeAPI | null>(null)
   const [isMounted, setIsMounted] = useState(false)
@@ -362,23 +370,31 @@ export function ExcalidrawScene({ code, className = "", ...props }: ExcalidrawSc
     )
   }
 
+  const accessibilityDescription = `${description} Interactive diagram. Pan and zoom are available. Use Recenter diagram to restore the default view.`
+
   return (
     <div
       className={cn(
         "article-excalidraw my-4 overflow-hidden rounded-md border border-stark-contrast/10 bg-background-1/60",
         className
       )}
+      aria-description={accessibilityDescription}
+      aria-label={title}
+      role="group"
       style={excalidrawThemeVars}
       {...props}
     >
-      {!isMounted || !viewBackgroundColor ? (
-        <ExcalidrawFallback />
-      ) : (
-        <div className="relative isolate h-[28rem] w-full overflow-hidden rounded-md">
-          <div className="pointer-events-none absolute inset-0 z-2">
+      <div className={excalidrawViewportClassName}>
+        <div className="pointer-events-none absolute inset-0 z-2">
+          {!isMounted || !viewBackgroundColor ? null : (
             <ExcalidrawResetButton needsReset={needsReset} onClick={fitScene} />
-            <CopyButton text={code} />
-          </div>
+          )}
+          <CopyButton text={code} />
+        </div>
+        {!isMounted || !viewBackgroundColor ? (
+          <ExcalidrawFallback />
+        ) : (
+          <>
           <div className="relative z-0 h-full w-full">
             <Excalidraw
               excalidrawAPI={handleExcalidrawApi}
@@ -403,8 +419,9 @@ export function ExcalidrawScene({ code, className = "", ...props }: ExcalidrawSc
               }}
             />
           </div>
-        </div>
-      )}
+          </>
+        )}
+      </div>
     </div>
   )
 }
