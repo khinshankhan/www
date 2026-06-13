@@ -103,6 +103,50 @@ function parseScene(code: string): ImportedDataState | null {
   }
 }
 
+function normalizeSceneColors(scene: ImportedDataState, theme: "light" | "dark"): ImportedDataState {
+  if (typeof window === "undefined") {
+    return scene
+  }
+
+  const foregroundStrong = resolveColor(
+    getTokenValue("--color-foreground-strong", theme === "dark" ? "#f5f5fb" : "#1f2937"),
+    theme === "dark" ? "#f5f5fb" : "#1f2937"
+  )
+  const foreground = resolveColor(
+    getTokenValue("--color-foreground", theme === "dark" ? "#e5e7eb" : "#374151"),
+    theme === "dark" ? "#e5e7eb" : "#374151"
+  )
+  const background = resolveColor(
+    getTokenValue("--background-1", theme === "dark" ? "#161634" : "#ffffff"),
+    theme === "dark" ? "#161634" : "#ffffff"
+  )
+
+  const normalizedElements = scene.elements?.map((element) => {
+    const nextElement = { ...element }
+    const strokeColor = nextElement.strokeColor?.toLowerCase()
+    const backgroundColor = nextElement.backgroundColor?.toLowerCase()
+
+    if (strokeColor === "#1e1e1e") {
+      nextElement.strokeColor = nextElement.type === "text" ? foregroundStrong : foreground
+    }
+
+    if (backgroundColor === "#ffffff" && (nextElement.type === "text" || nextElement.type === "arrow")) {
+      nextElement.backgroundColor = "transparent"
+    }
+
+    if (backgroundColor === "#ffffff" && nextElement.type !== "text" && nextElement.type !== "arrow") {
+      nextElement.backgroundColor = background
+    }
+
+    return nextElement
+  })
+
+  return {
+    ...scene,
+    elements: normalizedElements,
+  }
+}
+
 function getTokenValue(name: string, fallback: string) {
   if (typeof window === "undefined") {
     return fallback
@@ -304,14 +348,16 @@ export function ExcalidrawScene({
       return null
     }
 
+    const normalizedScene = normalizeSceneColors(scene, theme)
+
     return {
-      ...scene,
+      ...normalizedScene,
       appState: {
-        ...scene.appState,
+        ...normalizedScene.appState,
         viewBackgroundColor,
       },
     }
-  }, [scene, viewBackgroundColor])
+  }, [scene, theme, viewBackgroundColor])
 
   useEffect(() => {
     if (!api || !initialData?.elements?.length) {
