@@ -1,4 +1,5 @@
 import React, { Children } from "react"
+import * as demoComponents from "@/components/demo"
 import { Emoji } from "@/components/emoji"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/table"
 import { emojiLookup, type EmojiKey } from "@/lib/emoji"
@@ -183,6 +184,7 @@ const baseComponents: MDXComponents = {
       </Callout>
     )
   },
+  ...demoComponents,
 }
 
 export function MDXRenderer({
