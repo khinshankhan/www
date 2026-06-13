@@ -12,7 +12,7 @@ export interface MermaidDiagramProps extends React.ComponentPropsWithoutRef<"div
 
 const renderedShellClassName =
   "relative my-4 overflow-hidden rounded-md border border-stark-contrast/10 bg-background-1/60 isolate"
-const mermaidViewportClassName = "min-h-[28rem] overflow-x-auto px-3 py-4"
+const mermaidViewportClassName = "min-h-[28rem] overflow-x-auto px-3 py-4 flex items-center justify-center"
 const FALLBACK_BACKGROUND = {
   dark: "#161634",
   light: "#f5f5fb",
@@ -391,7 +391,7 @@ export function MermaidDiagram({
       </div>
       <div className={mermaidViewportClassName}>
         <div
-          className="mermaid-diagram relative z-0 [&_.label]:fill-foreground [&_.label]:text-foreground [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full [&_.node_rect]:stroke-stark-contrast/20"
+          className="mermaid-diagram relative z-0 flex justify-center [&_.label]:fill-foreground [&_.label]:text-foreground [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full [&_.node_rect]:stroke-stark-contrast/20"
           dangerouslySetInnerHTML={{ __html: accessibleSvg ?? "" }}
         />
       </div>
