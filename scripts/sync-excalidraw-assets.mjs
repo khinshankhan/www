@@ -1,5 +1,3 @@
-/* global process */
-
 import fs from "fs/promises"
 import path from "path"
 import assetConfig from "../excalidraw-assets.json" with { type: "json" }

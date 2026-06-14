@@ -123,8 +123,8 @@ function normalizeSceneColors(scene: ImportedDataState, theme: "light" | "dark")
 
   const normalizedElements = scene.elements?.map((element) => {
     const nextElement = { ...element }
-    const strokeColor = nextElement.strokeColor?.toLowerCase()
-    const backgroundColor = nextElement.backgroundColor?.toLowerCase()
+    const strokeColor = nextElement.strokeColor.toLowerCase()
+    const backgroundColor = nextElement.backgroundColor.toLowerCase()
 
     if (strokeColor === "#1e1e1e") {
       nextElement.strokeColor = nextElement.type === "text" ? foregroundStrong : foreground

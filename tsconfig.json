@@ -10,12 +10,12 @@
     "moduleDetection": "force",
     "verbatimModuleSyntax": true,
     "jsx": "react-jsx",
+    "types": ["node"],
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     },

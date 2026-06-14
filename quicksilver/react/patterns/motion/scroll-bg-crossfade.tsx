@@ -2,7 +2,7 @@
 
 import React, { type CSSProperties, type ReactNode } from "react"
 import { cn } from "@/quicksilver/lib/classname"
-import { motion, MotionValue, useScroll, useTransform } from "motion/react"
+import { motion, useScroll, useTransform } from "motion/react"
 
 interface ScrollBgCrossfadeProps {
   rangePx: number
@@ -24,7 +24,7 @@ export function ScrollBgCrossfade({
   const pct = useTransform(progress, (p) => `${p * 100}%`)
 
   const motionCssVars = {
-    "--reveal-pct": pct as unknown as MotionValue<string>,
+    "--reveal-pct": pct,
   } as CSSProperties
 
   const motionStyle = {

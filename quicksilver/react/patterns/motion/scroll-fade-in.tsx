@@ -2,7 +2,7 @@
 
 import React, { type CSSProperties, type ReactNode } from "react"
 import { cn } from "@/quicksilver/lib/classname"
-import { motion, MotionValue, useScroll, useTransform } from "motion/react"
+import { motion, useScroll, useTransform } from "motion/react"
 
 interface ScrollFadeInProps {
   startPx?: number
@@ -27,7 +27,7 @@ export function ScrollFadeIn({
   })
 
   const motionStyle = {
-    opacity: opacity as unknown as MotionValue<number>,
+    opacity,
     willChange: "opacity",
   }
 

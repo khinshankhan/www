@@ -40,7 +40,7 @@ function enhanceSvgAccessibility({
   const parsed = new DOMParser().parseFromString(svg, "image/svg+xml")
   const root = parsed.documentElement
 
-  if (!root || root.nodeName.toLowerCase() !== "svg") {
+  if (root.nodeName.toLowerCase() !== "svg") {
     return svg
   }
 
