@@ -5,6 +5,8 @@ export const contentSources = ["pages", "collections", "series", "posts"] as con
 export type ContentSource = (typeof contentSources)[number]
 
 const ContentSourceSchema = z.enum(contentSources)
+const SidebarModeSchema = z.enum(["toc", "spacer", "none"])
+const ContentWidthSchema = z.enum(["prose", "wide"])
 
 export function getContentSource(segments?: GroupSegment[]): ContentSource {
   const firstGroupSegment = segments?.find((segment) => segment.type === "paren")
@@ -12,11 +14,18 @@ export function getContentSource(segments?: GroupSegment[]): ContentSource {
   return parsed.success ? parsed.data : "pages"
 }
 
-const defaultShowTocForSource: Record<ContentSource, boolean> = {
-  pages: true,
-  collections: false,
-  series: true,
-  posts: true,
+const defaultSidebarModeForSource: Record<ContentSource, z.infer<typeof SidebarModeSchema>> = {
+  pages: "toc",
+  collections: "none",
+  series: "toc",
+  posts: "toc",
+}
+
+const defaultContentWidthForSource: Record<ContentSource, z.infer<typeof ContentWidthSchema>> = {
+  pages: "prose",
+  collections: "wide",
+  series: "prose",
+  posts: "prose",
 }
 
 export const ContentFrontmatterSchema = z
@@ -41,7 +50,8 @@ export const ContentFrontmatterSchema = z
       .optional(),
 
     // appearance fields
-    showToc: z.boolean().optional(),
+    sidebar: SidebarModeSchema.optional(),
+    contentWidth: ContentWidthSchema.optional(),
     markExcerpt: z.boolean().optional(),
 
     // misc fields
@@ -66,7 +76,8 @@ export const ContentFrontmatterSchema = z
         title: data.og?.title ?? data.title,
         description: data.og?.description ?? data.description,
       },
-      showToc: data.showToc ?? defaultShowTocForSource[source],
+      sidebar: data.sidebar ?? defaultSidebarModeForSource[source],
+      contentWidth: data.contentWidth ?? defaultContentWidthForSource[source],
       markExcerpt: data.markExcerpt ?? true,
     }
   })

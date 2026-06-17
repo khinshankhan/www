@@ -7,6 +7,7 @@ import { headerHeight } from "./elements/header"
 export interface WithSidebarProps {
   direction?: "left" | "right"
   sidebar?: ReactNode
+  reserveSidebarSpace?: boolean
   className?: string
   sidebarClassName?: string
 
@@ -21,22 +22,26 @@ export const sidebarTop = "calc(var(--h) + var(--h-d))"
 export function WithSidebar({
   direction = "right",
   sidebar,
+  reserveSidebarSpace = false,
   className = "",
   sidebarClassName = "",
   children,
 }: WithSidebarProps) {
+  const hasSidebar = Boolean(sidebar)
+  const hasSidebarSpace = reserveSidebarSpace || hasSidebar
+
   return (
     <div className="relative mx-auto xl:maxw-content">
       <div
         className={cn(
-          sidebar && "xl:maxw-content-with-sidebar",
+          hasSidebarSpace && "xl:maxw-content-with-sidebar",
           "flex w-full flex-col xl:justify-end",
           direction === "left" ? "xl:ml-auto xl:flex-row" : "xl:mr-auto xl:flex-row-reverse",
           className
         )}
-        style={{ gap: sidebar ? "var(--sidebar-gap)" : undefined }}
+        style={{ gap: hasSidebarSpace ? "var(--sidebar-gap)" : undefined }}
       >
-        {sidebar && (
+        {hasSidebar && (
           <aside
             className={cn(
               "relative z-50 w-full pb-4 lg:self-start xl:pb-0 vh-comfy:sticky",
@@ -57,7 +62,7 @@ export function WithSidebar({
         <div
           className={cn(
             "mx-auto flex w-full flex-col",
-            sidebar ? "maxw-content xl:min-w-full" : "maxw-content"
+            hasSidebarSpace ? "maxw-content xl:min-w-full" : "maxw-content"
           )}
         >
           {children}

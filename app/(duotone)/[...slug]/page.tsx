@@ -29,13 +29,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
     throw new Error(`Could not find metadata for ${realFileSlug}`)
   }
   const articleComponents = await getContentMdxComponents(contentData)
+  const sidebarMode = contentData.frontmatter.sidebar
 
   return (
     <Shell
       header={
         <Header
           edgeFadeProps={{
-            className: contentData.frontmatter.showToc ? "hidden xl:block" : "",
+            className: sidebarMode === "toc" ? "hidden xl:block" : "",
           }}
         />
       }
@@ -46,13 +47,18 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
         ghPath={contentData.computed.ghSlug}
       >
         <WithSidebar
-          sidebar={
-            contentData.frontmatter.showToc ? <TOC headings={contentData.computed.toc} /> : null
-          }
+          sidebar={sidebarMode === "toc" ? <TOC headings={contentData.computed.toc} /> : null}
+          reserveSidebarSpace={sidebarMode === "spacer"}
           direction="right"
         >
           <div className="min-w-full">
-            <div className="mx-auto maxw-prose">
+            <div
+              className={
+                contentData.frontmatter.contentWidth === "wide"
+                  ? "mx-auto min-w-full"
+                  : "mx-auto maxw-prose"
+              }
+            >
               <MDXRenderer articleComponents={articleComponents} source={contentData.content} />
             </div>
           </div>
