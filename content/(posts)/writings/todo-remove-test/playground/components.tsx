@@ -16,6 +16,7 @@ import {
 import { cn } from "@/quicksilver/lib/classname"
 import { Button } from "@/quicksilver/react/primitives/button"
 import { Checkbox } from "@/quicksilver/react/primitives/checkbox"
+import { FullBleed } from "@/quicksilver/react/primitives/full-bleed"
 import { ChevronRight, Play, Star } from "@/quicksilver/react/primitives/icons"
 
 function FontSmoothingColumn({
@@ -63,6 +64,66 @@ export function FontSmoothingPlayground() {
             ok
             title="Antialiased rendering"
           />
+        </div>
+      </DemoStage>
+    </DemoFrame>
+  )
+}
+
+export function FullBleedPlayground() {
+  return (
+    <DemoFrame className="overflow-visible">
+      <DemoStage className="space-y-7">
+        <p className="mx-auto max-w-[32rem] text-[1.02rem] leading-8 text-foreground-subtle">
+          The content keeps the same reading width as the surrounding prose.
+        </p>
+
+        <FullBleed
+          background="var(--accent-3)"
+          border="var(--accent-7)"
+          className="accent-theme-success py-7"
+        >
+          <div className="mx-auto max-w-[32rem] space-y-2">
+            <div className="text-[0.72rem] font-semibold tracking-[0.22em] text-accent-12 uppercase">
+              Full bleed band
+            </div>
+            <p className="m-0 text-[1.1rem] leading-8 text-accent-12">
+              Only the paint escapes the local column. The component can be used inside framed demos
+              too, as long as the wrapper allows overflow.
+            </p>
+          </div>
+        </FullBleed>
+
+        <p className="mx-auto max-w-[32rem] text-[1.02rem] leading-8 text-foreground-subtle">
+          The following paragraph lands back on the same column without a breakout wrapper.
+        </p>
+      </DemoStage>
+    </DemoFrame>
+  )
+}
+
+export function DemoStageWidthPlayground() {
+  return (
+    <DemoFrame>
+      <DemoStage className="space-y-5">
+        <div className="mx-auto max-w-[32rem] text-[1.02rem] leading-8 text-foreground-subtle">
+          This example uses normal layout width. The band is <code>w-full</code>, so it fills the
+          padded demo stage instead of escaping it.
+        </div>
+
+        <div className="accent-theme-warning w-full border border-accent-7 bg-accent-3 px-5 py-6 text-accent-12">
+          <div className="text-[0.72rem] font-semibold tracking-[0.22em] text-accent-12 uppercase">
+            Stage width band
+          </div>
+          <div className="mt-2 text-[1.1rem] leading-8">
+            This is a regular full-width element inside its parent. It respects the demo stage
+            padding and never paints beyond the frame.
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-[32rem] text-[1.02rem] leading-8 text-foreground-subtle">
+          The frame edge makes the difference visible: this band reaches the stage content width,
+          not the viewport width.
         </div>
       </DemoStage>
     </DemoFrame>

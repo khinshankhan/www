@@ -50,6 +50,34 @@ motion: every line a microcosm of contrast, texture, and rhythm.
 This section is here to make sure we can render richer MDX content cleanly, including interactive
 examples, figures, and code blocks.
 
+### Full Bleed
+
+#### In Prose
+
+This paragraph sits in the normal prose column before the band.
+
+<FullBleed background="var(--accent-3)" border="var(--accent-7)" className="accent-theme-success not-prose my-8 py-7">
+  <div className="space-y-2">
+    <div className="text-[0.72rem] font-semibold tracking-[0.22em] text-accent-12 uppercase">
+      Full bleed band
+    </div>
+    <div className="text-[1.1rem] leading-8 text-accent-12">
+      Only the paint escapes the prose column. The block itself still participates in the normal
+      document flow.
+    </div>
+  </div>
+</FullBleed>
+
+This paragraph returns to the same prose column after the band.
+
+#### In Demo
+
+<FullBleedPlayground />
+
+#### Stage Width
+
+<DemoStageWidthPlayground />
+
 ### Jakub
 
 These first examples are my rendition of [Details That Make Interfaces Feel

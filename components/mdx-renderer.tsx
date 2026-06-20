@@ -24,6 +24,7 @@ import { Code } from "@/quicksilver/react/primitives/code"
 import { ExcalidrawScene } from "@/quicksilver/react/primitives/excalidraw"
 import { Figcaption } from "@/quicksilver/react/primitives/figcaption"
 import { Figure } from "@/quicksilver/react/primitives/figure"
+import { FullBleed } from "@/quicksilver/react/primitives/full-bleed"
 import { Image } from "@/quicksilver/react/primitives/image"
 import { LatexBlock } from "@/quicksilver/react/primitives/latex"
 import { Link } from "@/quicksilver/react/primitives/link"
@@ -141,6 +142,7 @@ const baseComponents: MDXComponents = {
   Spoiler,
   Figure,
   Figcaption,
+  FullBleed,
   Image,
   ExcalidrawScene,
   LatexBlock,
