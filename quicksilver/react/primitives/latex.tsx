@@ -17,10 +17,7 @@ export function LatexBlock({ code, className = "", ...props }: LatexBlockProps) 
   })
 
   return (
-    <div
-      className={cn(renderedShellClassName, className)}
-      {...props}
-    >
+    <div className={cn(renderedShellClassName, className)} {...props}>
       <div className="pointer-events-none absolute inset-0 z-2">
         <CopyButton className="pointer-events-auto" text={code} />
       </div>

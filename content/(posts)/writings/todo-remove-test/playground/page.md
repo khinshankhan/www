@@ -56,7 +56,7 @@ examples, figures, and code blocks.
 
 This paragraph sits in the normal prose column before the band.
 
-<FullBleed background="var(--accent-3)" border="var(--accent-7)" className="accent-theme-success not-prose my-8 py-7">
+<FullBleed background="var(--accent-3)" border="var(--accent-7)" className="accent-theme-info not-prose my-8 py-7">
   <div className="space-y-2">
     <div className="text-[0.72rem] font-semibold tracking-[0.22em] text-accent-12 uppercase">
       Full bleed band

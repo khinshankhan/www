@@ -2,8 +2,8 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import dynamic from "next/dynamic"
-import { cn } from "@/quicksilver/lib/classname"
 import excalidrawAssetConfig from "@/excalidraw-assets.json"
+import { cn } from "@/quicksilver/lib/classname"
 import type { ImportedDataState } from "@excalidraw/excalidraw/data/types"
 import type { ExcalidrawImperativeAPI } from "@excalidraw/excalidraw/types"
 import { Button } from "./button"
@@ -103,7 +103,10 @@ function parseScene(code: string): ImportedDataState | null {
   }
 }
 
-function normalizeSceneColors(scene: ImportedDataState, theme: "light" | "dark"): ImportedDataState {
+function normalizeSceneColors(
+  scene: ImportedDataState,
+  theme: "light" | "dark"
+): ImportedDataState {
   if (typeof window === "undefined") {
     return scene
   }
@@ -130,11 +133,18 @@ function normalizeSceneColors(scene: ImportedDataState, theme: "light" | "dark")
       nextElement.strokeColor = nextElement.type === "text" ? foregroundStrong : foreground
     }
 
-    if (backgroundColor === "#ffffff" && (nextElement.type === "text" || nextElement.type === "arrow")) {
+    if (
+      backgroundColor === "#ffffff" &&
+      (nextElement.type === "text" || nextElement.type === "arrow")
+    ) {
       nextElement.backgroundColor = "transparent"
     }
 
-    if (backgroundColor === "#ffffff" && nextElement.type !== "text" && nextElement.type !== "arrow") {
+    if (
+      backgroundColor === "#ffffff" &&
+      nextElement.type !== "text" &&
+      nextElement.type !== "arrow"
+    ) {
       nextElement.backgroundColor = background
     }
 
@@ -240,7 +250,7 @@ function hasViewportDrifted(current: ViewportState, baseline: ViewportState | nu
 
 function ExcalidrawFallback() {
   return (
-    <div className="flex h-full items-center justify-center px-4 py-6 text-sm text-foreground-subtle">
+    <div className="text-sm flex h-full items-center justify-center px-4 py-6 text-foreground-subtle">
       Rendering scene...
     </div>
   )
@@ -258,7 +268,7 @@ function ExcalidrawResetButton({
       aria-label="Recenter diagram"
       variant="phantom"
       size="icon-sm"
-      className="absolute top-1 right-11 z-2 pointer-events-auto opacity-70 transition-opacity hover:opacity-100 md:top-1.5 lg:top-2"
+      className="pointer-events-auto absolute top-1 right-11 z-2 opacity-70 transition-opacity hover:opacity-100 md:top-1.5 lg:top-2"
       onClick={onClick}
     >
       {needsReset ? <Focus className="h-4" /> : <Maximize className="h-4" />}
@@ -441,30 +451,30 @@ export function ExcalidrawScene({
           <ExcalidrawFallback />
         ) : (
           <>
-          <div className="relative z-0 h-full w-full">
-            <Excalidraw
-              excalidrawAPI={handleExcalidrawApi}
-              key={`${theme}-${viewBackgroundColor}`}
-              initialData={initialData}
-              theme={theme}
-              viewModeEnabled
-              zenModeEnabled
-              UIOptions={{
-                canvasActions: {
-                  changeViewBackgroundColor: false,
-                  clearCanvas: false,
-                  export: false,
-                  loadScene: false,
-                  saveAsImage: false,
-                  saveToActiveFile: false,
-                  toggleTheme: false,
-                },
-                tools: {
-                  image: false,
-                },
-              }}
-            />
-          </div>
+            <div className="relative z-0 h-full w-full">
+              <Excalidraw
+                excalidrawAPI={handleExcalidrawApi}
+                key={`${theme}-${viewBackgroundColor}`}
+                initialData={initialData}
+                theme={theme}
+                viewModeEnabled
+                zenModeEnabled
+                UIOptions={{
+                  canvasActions: {
+                    changeViewBackgroundColor: false,
+                    clearCanvas: false,
+                    export: false,
+                    loadScene: false,
+                    saveAsImage: false,
+                    saveToActiveFile: false,
+                    toggleTheme: false,
+                  },
+                  tools: {
+                    image: false,
+                  },
+                }}
+              />
+            </div>
           </>
         )}
       </div>

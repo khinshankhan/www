@@ -286,7 +286,7 @@ function TocList({
       <nav
         ref={navRef}
         aria-label="Table of contents"
-        className="max-h-[min(24rem,calc(100svh-12rem))] overflow-y-auto overscroll-contain pr-1 [scrollbar-gutter:stable] xl:pr-0 xl:[scrollbar-width:none] [&::-webkit-scrollbar]:w-1 xl:[&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-accent-11 [&::-webkit-scrollbar-thumb]:shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-accent-12)_20%,transparent)] [&::-webkit-scrollbar-track]:bg-transparent"
+        className="max-h-[min(24rem,calc(100svh-12rem))] [scrollbar-gutter:stable] overflow-y-auto overscroll-contain pr-1 xl:[scrollbar-width:none] xl:pr-0 [&::-webkit-scrollbar]:w-1 xl:[&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-accent-11 [&::-webkit-scrollbar-thumb]:shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-accent-12)_20%,transparent)] [&::-webkit-scrollbar-track]:bg-transparent"
         style={{ maxHeight: desktopMaxHeight }}
       >
         <ul className="list-none xl:pb-6">
