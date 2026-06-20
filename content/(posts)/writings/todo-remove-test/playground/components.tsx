@@ -19,6 +19,19 @@ import { Checkbox } from "@/quicksilver/react/primitives/checkbox"
 import { FullBleed } from "@/quicksilver/react/primitives/full-bleed"
 import { ChevronRight, Play, Star } from "@/quicksilver/react/primitives/icons"
 
+const guideStyles = {
+  padding: {
+    theme: "accent-theme-success",
+    badge: "accent-theme-success border-accent-8 bg-accent-4 text-accent-12",
+    overlay: "accent-theme-success bg-accent-6/60",
+  },
+  margin: {
+    theme: "accent-theme-warning",
+    badge: "accent-theme-warning border-accent-8 bg-accent-4 text-accent-12",
+    overlay: "accent-theme-warning bg-accent-6/60",
+  },
+}
+
 function FontSmoothingColumn({
   title,
   description,
@@ -81,7 +94,7 @@ export function FullBleedPlayground() {
         <FullBleed
           background="var(--accent-3)"
           border="var(--accent-7)"
-          className="accent-theme-success py-7"
+          className="accent-theme-info py-7"
         >
           <div className="mx-auto max-w-[32rem] space-y-2">
             <div className="text-[0.72rem] font-semibold tracking-[0.22em] text-accent-12 uppercase">
@@ -111,8 +124,8 @@ export function DemoStageWidthPlayground() {
           padded demo stage instead of escaping it.
         </div>
 
-        <div className="accent-theme-warning w-full border border-accent-7 bg-accent-3 px-5 py-6 text-accent-12">
-          <div className="text-[0.72rem] font-semibold tracking-[0.22em] text-accent-12 uppercase">
+        <div className="w-full border border-surface-5 bg-surface-2 px-5 py-6 text-foreground-strong">
+          <div className="text-[0.72rem] font-semibold tracking-[0.22em] text-foreground-strong uppercase">
             Stage width band
           </div>
           <div className="mt-2 text-[1.1rem] leading-8">
@@ -134,7 +147,12 @@ type AlignmentMode = "geometric" | "optical"
 
 function PaddingBadge({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inline-flex min-w-[4.5rem] items-center justify-center rounded-full border border-[#00c46a]/55 bg-[#082517] px-3 py-1.5 text-[1.05rem] leading-none font-medium text-[#00dd78]">
+    <div
+      className={cn(
+        guideStyles.padding.badge,
+        "inline-flex min-w-[4.5rem] items-center justify-center rounded-full border px-3 py-1.5 text-[1.05rem] leading-none font-medium"
+      )}
+    >
       {children}
     </div>
   )
@@ -156,7 +174,10 @@ function OpticalAlignmentButton({
 
       <div className="relative">
         <button
-          className="relative inline-flex h-12 items-center justify-center gap-[10px] overflow-hidden rounded-full bg-[#232323] text-white select-none"
+          className={cn(
+            guideStyles.padding.theme,
+            "relative inline-flex h-12 items-center justify-center gap-[10px] overflow-hidden rounded-full bg-surface-10 text-surface-1 select-none"
+          )}
           style={{
             paddingLeft: `${leftPadding}px`,
             paddingRight: `${rightPadding}px`,
@@ -168,11 +189,17 @@ function OpticalAlignmentButton({
           {showPadding && (
             <>
               <div
-                className="pointer-events-none absolute inset-y-0 left-0 bg-[#22c55e]/30 select-none"
+                className={cn(
+                  guideStyles.padding.overlay,
+                  "pointer-events-none absolute inset-y-0 left-0 select-none"
+                )}
                 style={{ width: `${leftPadding}px` }}
               />
               <div
-                className="pointer-events-none absolute inset-y-0 right-0 bg-[#22c55e]/30 select-none"
+                className={cn(
+                  guideStyles.padding.overlay,
+                  "pointer-events-none absolute inset-y-0 right-0 select-none"
+                )}
                 style={{ width: `${rightPadding}px` }}
               />
             </>
@@ -181,7 +208,7 @@ function OpticalAlignmentButton({
           <span className="relative z-1 text-[1.15rem] leading-none font-medium tracking-tight">
             Button
           </span>
-          <span className="relative z-1 inline-flex size-7 items-center justify-center rounded-full bg-white text-black">
+          <span className="relative z-1 inline-flex size-7 items-center justify-center rounded-full bg-surface-1 text-surface-12">
             <ChevronRight className="size-4.5 stroke-[2.6]" />
           </span>
         </button>
@@ -229,7 +256,12 @@ export function OpticalAlignmentPlayground() {
 
 function MarginBadge({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inline-flex min-w-[3.25rem] items-center justify-center rounded-full border border-[#ff8400]/45 bg-[#321700] px-2.5 py-1 text-[1.05rem] leading-none font-medium text-[#ff8400]">
+    <div
+      className={cn(
+        guideStyles.margin.badge,
+        "inline-flex min-w-[3.25rem] items-center justify-center rounded-full border px-2.5 py-1 text-[1.05rem] leading-none font-medium"
+      )}
+    >
       {children}
     </div>
   )
@@ -248,12 +280,12 @@ function OpticalStarButton({ mode, showMargin }: { mode: AlignmentMode; showMarg
       <div className="relative">
         <button
           aria-label="Example star button"
-          className="relative inline-flex size-28 items-center justify-center overflow-hidden rounded-[1.4rem] bg-[#232323] text-white select-none"
+          className="relative inline-flex size-28 items-center justify-center overflow-hidden rounded-[1.4rem] bg-surface-10 text-surface-1 select-none"
           type="button"
         >
           {showMargin && offsets.bottom > 0 && (
             <div
-              className="pointer-events-none absolute bg-[#ff8400]/30 select-none"
+              className={cn(guideStyles.margin.overlay, "pointer-events-none absolute select-none")}
               style={{
                 top: starBottomEdge,
                 left: 0,
@@ -264,10 +296,10 @@ function OpticalStarButton({ mode, showMargin }: { mode: AlignmentMode; showMarg
           )}
 
           <span
-            className="relative z-1 inline-flex size-28 items-center justify-center"
+            className="accent-theme-info relative z-1 inline-flex size-28 items-center justify-center"
             style={{ transform: `translateY(${iconShift}px)` }}
           >
-            <Star className="size-16 fill-[#3b82f6] stroke-none" />
+            <Star className="size-16 fill-current stroke-none text-accent-9" />
           </span>
         </button>
       </div>
@@ -323,12 +355,15 @@ function OpticalPlayButton({ mode, showMargin }: { mode: AlignmentMode; showMarg
       <div className="relative">
         <button
           aria-label="Example play button"
-          className="relative inline-flex size-20 items-center justify-center overflow-hidden rounded-full bg-[#232323] text-white select-none"
+          className="relative inline-flex size-20 items-center justify-center overflow-hidden rounded-full bg-surface-10 text-surface-1 select-none"
           type="button"
         >
           {showMargin && offsets.left > 0 && (
             <div
-              className="pointer-events-none absolute inset-y-0 bg-[#ff8400]/30 select-none"
+              className={cn(
+                guideStyles.margin.overlay,
+                "pointer-events-none absolute inset-y-0 select-none"
+              )}
               style={{
                 left: `calc(50% - 0.75rem + ${iconShift}px - ${offsets.left}px)`,
                 width: `${offsets.left}px`,
@@ -340,7 +375,7 @@ function OpticalPlayButton({ mode, showMargin }: { mode: AlignmentMode; showMarg
             className="relative z-1 inline-flex size-20 items-center justify-center"
             style={{ transform: `translateX(${iconShift}px)` }}
           >
-            <Play className="size-9 fill-current stroke-none text-white/65" />
+            <Play className="size-9 fill-current stroke-none text-surface-1/65" />
           </span>
         </button>
       </div>
