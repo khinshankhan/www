@@ -93,5 +93,92 @@ export default defineConfig([
     },
   },
 
+  // quicksilver layer boundaries: css < lib < hooks < headless < primitives < patterns < embeds.
+  // a layer may only import from layers below it.
+  {
+    files: ["quicksilver/lib/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/quicksilver/hooks/*", "@/quicksilver/react/*"],
+              message: "quicksilver/lib is framework-free; it must not import hooks or react/.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ["quicksilver/hooks/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/quicksilver/react/*"],
+              message: "quicksilver/hooks sits below react/; it must not import from it.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ["quicksilver/react/headless/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: [
+                "@/quicksilver/react/primitives/*",
+                "@/quicksilver/react/patterns/*",
+                "@/quicksilver/react/embeds/*",
+              ],
+              message: "headless sits below primitives, patterns, and embeds.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ["quicksilver/react/primitives/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/quicksilver/react/patterns/*", "@/quicksilver/react/embeds/*"],
+              message: "primitives sit below patterns and embeds.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ["quicksilver/react/patterns/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/quicksilver/react/embeds/*"],
+              message: "patterns sit below embeds.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+
   eslintConfigPrettier,
 ])
