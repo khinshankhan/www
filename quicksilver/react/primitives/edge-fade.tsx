@@ -25,11 +25,6 @@ export interface EdgeFadeProps extends HTMLAttributes<HTMLDivElement>, FadeVaria
   direction: NonNullable<FadeVariantProps["direction"]>
 }
 
-export function EdgeFade({
-  direction,
-  intensity = "soft",
-  className = "",
-  ...props
-}: EdgeFadeProps) {
+export function EdgeFade({ direction, intensity = "soft", className, ...props }: EdgeFadeProps) {
   return <div className={cn(fadeVariants({ direction, intensity }), className)} {...props} />
 }

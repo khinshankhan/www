@@ -1,4 +1,17 @@
 import { cva, type VariantProps } from "class-variance-authority"
+import { focusRingInset } from "./focus.variants"
+
+export const tabsRootVariants = cva("overflow-hidden rounded-md", {
+  variants: {
+    variant: {
+      default: "border border-muted bg-background-1",
+      segmented: "",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+})
 
 export const tabsListVariants = cva("", {
   variants: {
@@ -16,10 +29,14 @@ export const tabsListVariants = cva("", {
 export const tabsTabVariants = cva("", {
   variants: {
     variant: {
-      default:
-        "flex h-8 cursor-pointer items-center justify-center border-0 px-2 font-medium break-keep whitespace-nowrap text-foreground-muted transition-[color,transform] duration-200 ease-out outline-none select-none before:inset-x-0 before:inset-y-1 before:rounded-sm before:-outline-offset-1 before:outline-stark-contrast hover:text-foreground focus-visible:relative focus-visible:before:absolute focus-visible:before:outline focus-visible:before:outline-1 data-[active]:text-foreground-strong",
-      segmented:
+      default: [
+        focusRingInset,
+        "flex h-8 cursor-pointer items-center justify-center rounded-sm border-0 px-2 font-medium break-keep whitespace-nowrap text-foreground-muted transition-[color,transform] duration-200 ease-out select-none hover:text-foreground data-[active]:text-foreground-strong",
+      ],
+      segmented: [
+        focusRingInset,
         "text-base min-w-[7.5rem] cursor-pointer rounded-full border border-transparent px-4 py-2 leading-none font-medium whitespace-nowrap text-foreground-subtle transition-[color,transform] duration-200 ease-out hover:text-foreground data-[active]:translate-y-[-0.5px] data-[active]:text-foreground",
+      ],
     },
   },
   defaultVariants: {
@@ -31,14 +48,19 @@ export const tabsIndicatorVariants = cva("", {
   variants: {
     variant: {
       default:
-        "absolute top-1/2 left-0 -z-1 h-6 w-[var(--active-tab-width)] translate-x-[var(--active-tab-left)] -translate-y-1/2 rounded-sm bg-stark-contrast/10 transition-[translate,width,height] duration-250 ease-[cubic-bezier(0.22,1,0.36,1)]",
+        "absolute top-1/2 left-0 -z-1 h-6 w-[var(--active-tab-width)] translate-x-[var(--active-tab-left)] -translate-y-1/2 rounded-sm bg-stark-contrast/10 transition-[translate,width,height] duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
       segmented:
-        "absolute top-1/2 left-0 -z-1 h-[calc(100%-0.5rem)] w-[var(--active-tab-width)] translate-x-[var(--active-tab-left)] -translate-y-1/2 rounded-full border border-surface-5/75 bg-surface-a4 transition-[translate,width,height] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+        "absolute top-1/2 left-0 -z-1 h-[calc(100%-0.5rem)] w-[var(--active-tab-width)] translate-x-[var(--active-tab-left)] -translate-y-1/2 rounded-full border border-surface-5/75 bg-surface-a4 transition-[translate,width,height] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
     },
   },
   defaultVariants: {
     variant: "default",
   },
 })
+
+export const tabsPanelVariants = cva([
+  focusRingInset,
+  "relative bg-background-2 focus-visible:rounded-md focus-visible:rounded-t-none",
+])
 
 export type TabsVariantProps = VariantProps<typeof tabsListVariants>

@@ -6,7 +6,7 @@ export interface FigcaptionProps extends ComponentPropsWithRef<"figcaption"> {
   children: ReactNode
 }
 
-export function Figcaption({ children, className = "", ...props }: FigcaptionProps) {
+export function Figcaption({ children, className, ...props }: FigcaptionProps) {
   return (
     <figcaption
       className={cn(

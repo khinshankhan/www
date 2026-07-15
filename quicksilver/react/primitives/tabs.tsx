@@ -7,29 +7,22 @@ import { Tabs as HeadlessTabs } from "@base-ui/react/tabs"
 import {
   tabsIndicatorVariants,
   tabsListVariants,
+  tabsPanelVariants,
+  tabsRootVariants,
   tabsTabVariants,
   type TabsVariantProps,
 } from "./tabs.variants"
 
 const TabsVariantContext = createContext<NonNullable<TabsVariantProps["variant"]>>("default")
 
-export interface TabsRootProps
-  extends ComponentProps<typeof HeadlessTabs.Root>, Pick<TabsVariantProps, "variant"> {}
+export interface TabsRootProps extends ComponentProps<typeof HeadlessTabs.Root> {
+  variant?: NonNullable<TabsVariantProps["variant"]>
+}
 
-export function TabsRoot({ className = "", variant = "default", ...props }: TabsRootProps) {
-  const resolvedVariant = variant ?? "default"
-
+export function TabsRoot({ className, variant = "default", ...props }: TabsRootProps) {
   return (
-    <TabsVariantContext.Provider value={resolvedVariant}>
-      <HeadlessTabs.Root
-        data-elem="tabs"
-        className={cn(
-          "overflow-hidden rounded-md",
-          resolvedVariant === "default" && "border border-muted bg-background-1",
-          className
-        )}
-        {...props}
-      />
+    <TabsVariantContext.Provider value={variant}>
+      <HeadlessTabs.Root className={cn(tabsRootVariants({ variant }), className)} {...props} />
     </TabsVariantContext.Provider>
   )
 }
@@ -37,7 +30,7 @@ export function TabsRoot({ className = "", variant = "default", ...props }: Tabs
 export interface TabsListProps
   extends ComponentProps<typeof HeadlessTabs.List>, Pick<TabsVariantProps, "variant"> {}
 
-export function TabsList({ className = "", variant, ...props }: TabsListProps) {
+export function TabsList({ className, variant, ...props }: TabsListProps) {
   const inheritedVariant = useContext(TabsVariantContext)
   const resolvedVariant = variant ?? inheritedVariant
 
@@ -52,7 +45,7 @@ export function TabsList({ className = "", variant, ...props }: TabsListProps) {
 export interface TabsTabProps
   extends ComponentProps<typeof HeadlessTabs.Tab>, Pick<TabsVariantProps, "variant"> {}
 
-export function TabsTab({ className = "", variant, ...props }: TabsTabProps) {
+export function TabsTab({ className, variant, ...props }: TabsTabProps) {
   const inheritedVariant = useContext(TabsVariantContext)
   const resolvedVariant = variant ?? inheritedVariant
 
@@ -71,7 +64,7 @@ export function TabsTab({ className = "", variant, ...props }: TabsTabProps) {
 export interface TabsIndicatorProps
   extends ComponentProps<typeof HeadlessTabs.Indicator>, Pick<TabsVariantProps, "variant"> {}
 
-export function TabsIndicator({ className = "", variant, ...props }: TabsIndicatorProps) {
+export function TabsIndicator({ className, variant, ...props }: TabsIndicatorProps) {
   const inheritedVariant = useContext(TabsVariantContext)
   const resolvedVariant = variant ?? inheritedVariant
 
@@ -83,17 +76,8 @@ export function TabsIndicator({ className = "", variant, ...props }: TabsIndicat
   )
 }
 
-export function TabsPanel({ className = "", ...props }: ComponentProps<typeof HeadlessTabs.Panel>) {
-  return (
-    <HeadlessTabs.Panel
-      className={cn(
-        "relative flex h-32 items-center justify-center bg-background-2",
-        "-outline-offset-1 outline-stark-contrast focus-visible:rounded-md focus-visible:rounded-t-none focus-visible:outline focus-visible:outline-1",
-        className
-      )}
-      {...props}
-    />
-  )
+export function TabsPanel({ className, ...props }: ComponentProps<typeof HeadlessTabs.Panel>) {
+  return <HeadlessTabs.Panel className={cn(tabsPanelVariants(), className)} {...props} />
 }
 
 export const Tabs = {

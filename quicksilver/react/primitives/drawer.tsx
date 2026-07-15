@@ -28,63 +28,36 @@ export function DrawerSwipeArea({ className, ...props }: DrawerSwipeAreaProps) {
   )
 }
 
-export type DrawerBackdropProps = React.ComponentPropsWithoutRef<typeof HeadlessDrawer.Backdrop>
+export type DrawerBackdropProps = React.ComponentProps<typeof HeadlessDrawer.Backdrop>
 
-export const DrawerBackdrop = React.forwardRef<HTMLDivElement, DrawerBackdropProps>(
-  function DrawerBackdrop({ className, ...props }, ref) {
-    return (
-      <HeadlessDrawer.Backdrop
-        ref={ref}
-        className={cn(drawerBackdropVariants(), className)}
-        {...props}
-      />
-    )
-  }
-)
+export function DrawerBackdrop({ className, ...props }: DrawerBackdropProps) {
+  return <HeadlessDrawer.Backdrop className={cn(drawerBackdropVariants(), className)} {...props} />
+}
 
-export type DrawerViewportProps = React.ComponentPropsWithoutRef<typeof HeadlessDrawer.Viewport>
+export type DrawerViewportProps = React.ComponentProps<typeof HeadlessDrawer.Viewport>
 
-export const DrawerViewport = React.forwardRef<HTMLDivElement, DrawerViewportProps>(
-  function DrawerViewport({ className, ...props }, ref) {
-    return (
-      <HeadlessDrawer.Viewport
-        ref={ref}
-        className={cn(drawerViewportVariants(), className)}
-        {...props}
-      />
-    )
-  }
-)
+export function DrawerViewport({ className, ...props }: DrawerViewportProps) {
+  return <HeadlessDrawer.Viewport className={cn(drawerViewportVariants(), className)} {...props} />
+}
 
-export type DrawerPopupProps = React.ComponentPropsWithoutRef<typeof HeadlessDrawer.Popup>
+export type DrawerPopupProps = React.ComponentProps<typeof HeadlessDrawer.Popup>
 
-export const DrawerPopup = React.forwardRef<HTMLDivElement, DrawerPopupProps>(function DrawerPopup(
-  { className, ...props },
-  ref
-) {
-  return (
-    <HeadlessDrawer.Popup ref={ref} className={cn(drawerPopupVariants(), className)} {...props} />
-  )
-})
+export function DrawerPopup({ className, ...props }: DrawerPopupProps) {
+  return <HeadlessDrawer.Popup className={cn(drawerPopupVariants(), className)} {...props} />
+}
 
 export interface DrawerContentProps
   extends
-    Omit<React.ComponentPropsWithoutRef<typeof HeadlessDrawer.Content>, "className">,
+    Omit<React.ComponentProps<typeof HeadlessDrawer.Content>, "className">,
     DrawerContentVariantProps {
   className?: string
 }
 
-export const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps>(
-  function DrawerContent({ className, size = "default", ...props }, ref) {
-    return (
-      <HeadlessDrawer.Content
-        ref={ref}
-        className={cn(drawerContentVariants({ size }), className)}
-        {...props}
-      />
-    )
-  }
-)
+export function DrawerContent({ className, size = "default", ...props }: DrawerContentProps) {
+  return (
+    <HeadlessDrawer.Content className={cn(drawerContentVariants({ size }), className)} {...props} />
+  )
+}
 
 function useDrawerOvershootUnderlay({
   enabled,
@@ -171,16 +144,16 @@ export function DrawerSheet({
   children,
   showSwipeArea = true,
   swipeAreaProps,
-  swipeAreaClassName = "",
+  swipeAreaClassName,
   backdropProps,
-  backdropClassName = "",
+  backdropClassName,
   viewportProps,
-  viewportClassName = "",
+  viewportClassName,
   popupProps,
-  popupClassName = "",
+  popupClassName,
   contentProps,
-  contentClassName = "",
-  underlayClassName = "",
+  contentClassName,
+  underlayClassName,
 }: DrawerSheetProps) {
   const viewportRef = React.useRef<HTMLDivElement | null>(null)
   const popupRef = React.useRef<HTMLDivElement | null>(null)

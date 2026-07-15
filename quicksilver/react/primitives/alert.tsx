@@ -1,16 +1,14 @@
-import React, { type HTMLAttributes, type ReactNode } from "react"
+import { type ComponentProps } from "react"
 import { cn } from "@/quicksilver/lib/classname"
 import { alertVariants, type AlertVariants } from "./alert.variants"
 
-interface AlertProps extends HTMLAttributes<HTMLDivElement>, AlertVariants {
-  children?: ReactNode
-}
+export interface AlertProps extends ComponentProps<"aside">, AlertVariants {}
 
-export function Alert({ className, variant, ...props }: AlertProps) {
+export function AlertRoot({ variant, className, ...props }: AlertProps) {
   return <aside className={cn(alertVariants({ variant }), className)} {...props} />
 }
 
-type AlertHeadingProps = HTMLAttributes<HTMLHeadingElement>
+export type AlertHeadingProps = ComponentProps<"div">
 
 export function AlertHeading({ className, ...props }: AlertHeadingProps) {
   return (
@@ -21,14 +19,22 @@ export function AlertHeading({ className, ...props }: AlertHeadingProps) {
   )
 }
 
-type AlertTitleProps = HTMLAttributes<HTMLSpanElement>
+export type AlertTitleProps = ComponentProps<"span">
 
-export function AlertTitle({ className = "", style = {}, ...props }: AlertTitleProps) {
-  return <span className={cn(className)} style={{ fontSize: "120%", ...style }} {...props} />
+export function AlertTitle({ className, ...props }: AlertTitleProps) {
+  return <span className={cn("text-[1.2em]", className)} {...props} />
 }
 
-type AlertDescriptionProps = HTMLAttributes<HTMLParagraphElement>
+export type AlertDescriptionProps = ComponentProps<"div">
 
 export function AlertDescription({ className, ...props }: AlertDescriptionProps) {
   return <div className={cn("flex flex-col gap-4", className)} {...props} />
 }
+
+// callable as <Alert> for compatibility; parts hang off it like the other compound namespaces
+export const Alert = Object.assign(AlertRoot, {
+  Root: AlertRoot,
+  Heading: AlertHeading,
+  Title: AlertTitle,
+  Description: AlertDescription,
+})

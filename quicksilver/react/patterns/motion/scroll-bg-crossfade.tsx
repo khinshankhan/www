@@ -16,7 +16,7 @@ export function ScrollBgCrossfade({
   rangePx,
   fromColor,
   toColor,
-  className = "",
+  className,
   children,
 }: ScrollBgCrossfadeProps) {
   const { scrollY } = useScroll()

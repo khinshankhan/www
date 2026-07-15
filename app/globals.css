@@ -329,7 +329,7 @@
 @utility surround-quotes {
   &:before,
   &:after {
-    color: var(--color-muted-foreground);
+    color: var(--color-foreground-muted);
     position: absolute;
     font-size: 5rem;
   }

@@ -18,7 +18,7 @@ export function ScrollFadeIn({
   rangePx,
   startOpacity = 0,
   endOpacity = 1,
-  className = "",
+  className,
   children,
 }: ScrollFadeInProps) {
   const { scrollY } = useScroll() // window scrollY

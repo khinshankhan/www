@@ -1,6 +1,4 @@
-"use client"
-
-import React, { useMemo, type HTMLAttributes } from "react"
+import React, { type HTMLAttributes } from "react"
 import { existPredicate } from "@/quicksilver/lib/array"
 import { cn } from "@/quicksilver/lib/classname"
 
@@ -36,7 +34,7 @@ export function GridPattern({
   absolute = true,
   lineWidth1 = "1px",
   lineWidth2 = "1px",
-  className = "",
+  className,
   style = {},
   ...props
 }: GridPatternProps) {
@@ -54,33 +52,25 @@ export function GridPattern({
   const shouldRenderPrimary = pattern === "1" || pattern === "both"
   const shouldRenderSecondary = pattern === "2" || pattern === "both"
 
-  const { backgroundImage, backgroundSize } = useMemo(() => {
-    const layer = (
-      color: string,
-      sizePx: string,
-      lineWidth: string
-    ): { img: string; sz: string } => {
-      return {
-        img: `linear-gradient(90deg, ${color} ${lineWidth}, transparent 0),
-              linear-gradient(0deg, ${color} ${lineWidth}, transparent 0)`,
-        sz: `${sizePx} ${sizePx}, ${sizePx} ${sizePx}`,
-      }
-    }
-
-    const layers: { img: string; sz: string }[] = [
-      shouldRenderPrimary
-        ? layer("var(--grid-color-1)", "var(--grid-size-1)", "var(--grid-line-1)")
-        : null,
-      shouldRenderSecondary
-        ? layer("var(--grid-color-2)", "var(--grid-size-2)", "var(--grid-line-2)")
-        : null,
-    ].filter(existPredicate)
-
+  const layer = (color: string, sizePx: string, lineWidth: string): { img: string; sz: string } => {
     return {
-      backgroundImage: layers.map((l) => l.img).join(", "),
-      backgroundSize: layers.map((l) => l.sz).join(", "),
+      img: `linear-gradient(90deg, ${color} ${lineWidth}, transparent 0),
+            linear-gradient(0deg, ${color} ${lineWidth}, transparent 0)`,
+      sz: `${sizePx} ${sizePx}, ${sizePx} ${sizePx}`,
     }
-  }, [shouldRenderPrimary, shouldRenderSecondary])
+  }
+
+  const layers: { img: string; sz: string }[] = [
+    shouldRenderPrimary
+      ? layer("var(--grid-color-1)", "var(--grid-size-1)", "var(--grid-line-1)")
+      : null,
+    shouldRenderSecondary
+      ? layer("var(--grid-color-2)", "var(--grid-size-2)", "var(--grid-line-2)")
+      : null,
+  ].filter(existPredicate)
+
+  const backgroundImage = layers.map((l) => l.img).join(", ")
+  const backgroundSize = layers.map((l) => l.sz).join(", ")
 
   return (
     <div

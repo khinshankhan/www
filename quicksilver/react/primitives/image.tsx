@@ -29,7 +29,7 @@ export function Image({
   alt,
   width,
   height,
-  className = "",
+  className,
   disableZoom = false,
   style = {},
   ...props

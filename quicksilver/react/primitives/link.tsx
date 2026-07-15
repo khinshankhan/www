@@ -56,7 +56,7 @@ export function LinkComponent({
   // homepage link for safety, but we'll use linters and and validators to ensure href is always provided when consumed
   // from data sources.
   href = "/",
-  className = "",
+  className,
   variant = "default",
   isMonochrome = false,
   icon,

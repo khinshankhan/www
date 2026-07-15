@@ -1,7 +1,11 @@
 import { cva, type VariantProps } from "class-variance-authority"
+import { focusRing } from "./focus.variants"
 
 export const buttonVariants = cva(
-  "ring-offset-background focus-visible:ring-ring text-sm inline-flex cursor-pointer items-center justify-center rounded-md font-medium whitespace-nowrap transition-colors focus-visible:ring-1 focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
+  [
+    focusRing,
+    "text-sm inline-flex cursor-pointer items-center justify-center rounded-md font-medium whitespace-nowrap transition-colors disabled:cursor-not-allowed disabled:opacity-50",
+  ],
   {
     variants: {
       accent: {

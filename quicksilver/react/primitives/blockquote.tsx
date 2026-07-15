@@ -12,7 +12,7 @@ export interface BlockquoteProps extends BlockquoteElementProps, BlockquoteVaria
 }
 
 export function Blockquote({
-  className = "",
+  className,
   variant = "blockquote",
   children,
   ...props

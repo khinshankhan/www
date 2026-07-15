@@ -6,7 +6,7 @@ import { ScrollArea as HeadlessScrollArea } from "@base-ui/react/scroll-area"
 
 type ScrollViewportProps = React.ComponentPropsWithRef<typeof HeadlessScrollArea.Viewport>
 
-export function ScrollViewport({ className = "", children, ...props }: ScrollViewportProps) {
+export function ScrollViewport({ className, children, ...props }: ScrollViewportProps) {
   return (
     <HeadlessScrollArea.Viewport
       className={cn("size-full rounded-[inherit]", className)}
@@ -21,7 +21,7 @@ type ScrollAreaProps = React.ComponentPropsWithRef<typeof HeadlessScrollArea.Roo
   type?: "auto" | "always" | "scroll" | "hover"
 }
 
-export function ScrollArea({ className = "", children, type, ...props }: ScrollAreaProps) {
+export function ScrollArea({ className, children, type, ...props }: ScrollAreaProps) {
   void type
 
   return (
@@ -46,7 +46,7 @@ export function ScrollBar({ className, orientation = "vertical", ...props }: Scr
       )}
       {...props}
     >
-      <HeadlessScrollArea.Thumb className="pointer-events-auto relative flex-1 cursor-pointer rounded-full bg-accent-11 shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-accent-12)_20%,transparent)] transition-colors duration-[160ms] ease-out hover:bg-accent-8/80 focus-visible:bg-accent-8/80" />
+      <HeadlessScrollArea.Thumb className="pointer-events-auto relative flex-1 cursor-pointer rounded-full bg-accent-11 shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-accent-12)_20%,transparent)] transition-colors duration-160 ease-out hover:bg-accent-8/80 focus-visible:bg-accent-8/80" />
     </HeadlessScrollArea.Scrollbar>
   )
 }

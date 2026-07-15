@@ -15,24 +15,14 @@ export interface CheckboxProps
   className?: string
 }
 
-export function Checkbox({ checked, className = "", size = "default", ...props }: CheckboxProps) {
+export function Checkbox({ checked, className, size = "default", ...props }: CheckboxProps) {
   return (
     <HeadlessCheckbox.Root
       checked={checked}
-      className={cn(
-        checkboxVariants({ size }),
-        "hover:bg-background-3 cursor-pointer border-surface-4/55 bg-background-2 text-transparent transition-[background-color,border-color,color,transform,box-shadow] duration-200 ease-out hover:border-surface-5/70 active:scale-[0.97] data-[checked]:border-stark-contrast/75 data-[checked]:bg-stark-contrast/85 data-[checked]:text-surface-1 data-[checked]:shadow-[0_8px_20px_-14px_rgba(255,255,255,0.45)]",
-        className
-      )}
+      className={cn(checkboxVariants({ size }), className)}
       {...props}
     >
-      <HeadlessCheckbox.Indicator
-        keepMounted
-        className={cn(
-          checkboxIndicatorVariants({ size }),
-          "pointer-events-none scale-75 opacity-0 transition-[opacity,transform] duration-150 ease-out data-[checked]:scale-100 data-[checked]:opacity-100 data-[ending-style]:scale-75 data-[starting-style]:scale-75"
-        )}
-      >
+      <HeadlessCheckbox.Indicator keepMounted className={checkboxIndicatorVariants({ size })}>
         <Check className="size-full stroke-[2.8]" />
       </HeadlessCheckbox.Indicator>
     </HeadlessCheckbox.Root>

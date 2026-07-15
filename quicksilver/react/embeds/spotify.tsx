@@ -18,7 +18,7 @@ export function SpotifyEmbed({
   height,
   title = "Spotify Embed",
   fallbackSrc,
-  className = "",
+  className,
   style = {},
   allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture",
   loading = "lazy",
