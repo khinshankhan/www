@@ -1,14 +1,14 @@
 import React, { type ComponentProps } from "react"
 import { cn } from "@/quicksilver/lib/classname"
-import { CopyButton } from "./code"
-import { ScrollArea, ScrollBar, ScrollViewport } from "./scroll-area"
+import { CopyButton } from "@/quicksilver/react/patterns/actions/copy-button"
+import { ScrollArea, ScrollBar, ScrollViewport } from "@/quicksilver/react/primitives/scroll-area"
 
 export interface PreProps extends ComponentProps<"pre"> {
   className?: string
   textToCopy?: string
 }
 
-export function Pre({ className = "", textToCopy, ...props }: PreProps) {
+export function Pre({ className, textToCopy, ...props }: PreProps) {
   return (
     <ScrollArea className="relative w-full" type="auto">
       <ScrollViewport

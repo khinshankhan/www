@@ -16,22 +16,27 @@ import { remarkLatexRender } from "@/lib/mdx-plugins/remark-latex-render"
 import { remarkMermaidRender } from "@/lib/mdx-plugins/remark-mermaid-render"
 import { remarkPrependTopHeading } from "@/lib/mdx-plugins/remark-prepend-top-heading"
 import { cn } from "@/quicksilver/lib/classname"
+import { Code } from "@/quicksilver/react/embeds/code"
+import { ExcalidrawScene } from "@/quicksilver/react/embeds/excalidraw"
+import { LatexBlock } from "@/quicksilver/react/embeds/latex"
+import { MermaidDiagram } from "@/quicksilver/react/embeds/mermaid"
 import { SpotifyEmbed } from "@/quicksilver/react/embeds/spotify"
+import { SmartVideo } from "@/quicksilver/react/embeds/video"
 import { YouTubeEmbed } from "@/quicksilver/react/embeds/youtube"
+import {
+  Callout,
+  calloutIcons,
+  type CalloutProps,
+} from "@/quicksilver/react/patterns/content/callout"
+import { Pre } from "@/quicksilver/react/patterns/content/pre"
+import { Tabbify, TabbifyPanel } from "@/quicksilver/react/patterns/content/tabbify"
 import { Blockquote, type BlockquoteProps } from "@/quicksilver/react/primitives/blockquote"
-import { Callout, calloutIcons, type CalloutProps } from "@/quicksilver/react/primitives/callout"
-import { Code } from "@/quicksilver/react/primitives/code"
-import { ExcalidrawScene } from "@/quicksilver/react/primitives/excalidraw"
 import { Figcaption } from "@/quicksilver/react/primitives/figcaption"
 import { Figure } from "@/quicksilver/react/primitives/figure"
 import { FullBleed } from "@/quicksilver/react/primitives/full-bleed"
 import { Image } from "@/quicksilver/react/primitives/image"
-import { LatexBlock } from "@/quicksilver/react/primitives/latex"
 import { Link } from "@/quicksilver/react/primitives/link"
-import { MermaidDiagram } from "@/quicksilver/react/primitives/mermaid"
-import { Pre } from "@/quicksilver/react/primitives/pre"
 import { Spoiler } from "@/quicksilver/react/primitives/spoiler"
-import { Tabbify, TabbifyPanel } from "@/quicksilver/react/primitives/tabbify"
 import {
   TabsIndicator,
   TabsList,
@@ -40,7 +45,6 @@ import {
   TabsTab,
 } from "@/quicksilver/react/primitives/tabs"
 import { H2, H3, H4, H5, H6 } from "@/quicksilver/react/primitives/text"
-import { SmartVideo } from "@/quicksilver/react/primitives/video"
 import type { RootContent as MdastContent } from "mdast"
 import { toString } from "mdast-util-to-string"
 import type { MDXComponents } from "mdx/types"

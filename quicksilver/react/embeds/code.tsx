@@ -1,57 +1,16 @@
-"use client"
-
-import React, { useCallback } from "react"
-import { mermaidLanguage } from "@/lib/syntax/languages/mermaid"
-import rehypeWrapLines from "@/lib/syntax/plugins/rehype-wrap-lines"
-import { useCopyButton } from "@/quicksilver/hooks/use-copy-button"
+import React from "react"
 import { cn } from "@/quicksilver/lib/classname"
-import { copyToClipboardGraceful } from "@/quicksilver/lib/clipboard"
+import { mermaidLanguage } from "@/quicksilver/lib/syntax/languages/mermaid"
+import rehypeWrapLines from "@/quicksilver/lib/syntax/plugins/rehype-wrap-lines"
+import { CopyButton } from "@/quicksilver/react/patterns/actions/copy-button"
+import { textVariants } from "@/quicksilver/react/primitives/text.variants"
 import { toHtml as hastToHtml } from "hast-util-to-html"
 import { all, createLowlight } from "lowlight"
 import rangeParser from "parse-numeric-range"
-import { Button } from "./button"
-import { Check, Copy } from "./icons"
-import { textVariants } from "./text.variants"
 
 const lowlight = createLowlight(all)
 
 lowlight.register({ mermaid: mermaidLanguage })
-
-interface CopyButtonProps {
-  text: string
-  onCopy?: () => void
-  className?: string
-}
-export function CopyButton({ text, onCopy, className = "" }: CopyButtonProps) {
-  const copyCallback = useCallback(async () => {
-    await copyToClipboardGraceful(text)
-    onCopy?.()
-  }, [text, onCopy])
-
-  const { copied, handleClick } = useCopyButton({
-    action: copyCallback,
-    durationMs: 1000,
-  })
-
-  return (
-    <Button
-      aria-label="Copy text to clipboard"
-      variant="phantom"
-      size="icon-sm"
-      className={cn(
-        "pointer-events-auto absolute top-1 right-2 z-2 opacity-70 transition-opacity hover:opacity-100 md:top-1.5 lg:top-2",
-        className
-      )}
-      onClick={handleClick}
-    >
-      {copied ? (
-        <Check className="accent-theme-success h-4 stroke-accent-11" />
-      ) : (
-        <Copy className="h-4" />
-      )}
-    </Button>
-  )
-}
 
 export interface CodeProps extends React.ComponentPropsWithRef<"code"> {
   children: string
@@ -68,7 +27,7 @@ export interface CodeProps extends React.ComponentPropsWithRef<"code"> {
 export function Code({
   children,
   isFenced = false,
-  className = "",
+  className,
   language = "plaintext",
 
   highlighted = "",
@@ -76,6 +35,7 @@ export function Code({
   remove = "",
 
   allowCopy = false,
+  ...props
 }: CodeProps) {
   const linesToMarkHighlighted = new Set(rangeParser(highlighted))
   const linesToMarkAdd = new Set(rangeParser(add))
@@ -112,6 +72,7 @@ export function Code({
           className
         )}
         dangerouslySetInnerHTML={{ __html: content }}
+        {...props}
       />
     </>
   )

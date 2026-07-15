@@ -8,7 +8,7 @@ import { type ContentData } from "@/lib/content/schema"
 import { getAllContentData } from "@/lib/content/source"
 import { createMetadata, processMarkdownAttribute } from "@/lib/seo/open-graph"
 import { cn } from "@/quicksilver/lib/classname"
-import { Callout } from "@/quicksilver/react/primitives/callout"
+import { Callout } from "@/quicksilver/react/patterns/content/callout"
 import { Link } from "@/quicksilver/react/primitives/link"
 import { H2, H3, Span, Text } from "@/quicksilver/react/primitives/text"
 

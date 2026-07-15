@@ -4,11 +4,11 @@ import React, { useCallback, useEffect, useMemo, useRef, useState, type CSSPrope
 import dynamic from "next/dynamic"
 import excalidrawAssetConfig from "@/excalidraw-assets.json"
 import { cn } from "@/quicksilver/lib/classname"
+import { CopyButton } from "@/quicksilver/react/patterns/actions/copy-button"
+import { Button } from "@/quicksilver/react/primitives/button"
+import { Focus, Maximize } from "@/quicksilver/react/primitives/icons"
 import type { ImportedDataState } from "@excalidraw/excalidraw/data/types"
 import type { ExcalidrawImperativeAPI } from "@excalidraw/excalidraw/types"
-import { Button } from "./button"
-import { CopyButton } from "./code"
-import { Focus, Maximize } from "./icons"
 
 declare global {
   interface Window {
@@ -278,7 +278,7 @@ function ExcalidrawResetButton({
 
 export function ExcalidrawScene({
   code,
-  className = "",
+  className,
   description,
   title,
   ...props

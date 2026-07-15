@@ -1,7 +1,7 @@
 import React from "react"
 import { cn } from "@/quicksilver/lib/classname"
+import { CopyButton } from "@/quicksilver/react/patterns/actions/copy-button"
 import katex from "katex"
-import { CopyButton } from "./code"
 
 export interface LatexBlockProps extends React.ComponentPropsWithoutRef<"div"> {
   code: string
@@ -10,7 +10,7 @@ export interface LatexBlockProps extends React.ComponentPropsWithoutRef<"div"> {
 const renderedShellClassName =
   "relative my-4 overflow-hidden rounded-md border border-stark-contrast/10 bg-background-1/60 isolate"
 
-export function LatexBlock({ code, className = "", ...props }: LatexBlockProps) {
+export function LatexBlock({ code, className, ...props }: LatexBlockProps) {
   const html = katex.renderToString(code, {
     displayMode: true,
     throwOnError: false,

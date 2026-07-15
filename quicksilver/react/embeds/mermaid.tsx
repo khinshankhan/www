@@ -2,7 +2,7 @@
 
 import React, { useEffect, useId, useMemo, useState } from "react"
 import { cn } from "@/quicksilver/lib/classname"
-import { CopyButton } from "./code"
+import { CopyButton } from "@/quicksilver/react/patterns/actions/copy-button"
 
 export interface MermaidDiagramProps extends React.ComponentPropsWithoutRef<"div"> {
   code: string
@@ -254,7 +254,7 @@ function resolveMermaidThemeVariables(theme: "light" | "dark") {
 
 export function MermaidDiagram({
   code,
-  className = "",
+  className,
   description,
   title,
   ...props

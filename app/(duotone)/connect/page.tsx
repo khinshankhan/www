@@ -4,7 +4,7 @@ import { DuotoneLayout } from "@/components/layouts/duotone"
 import { Shell } from "@/components/layouts/elements/shell"
 import { WithSidebar } from "@/components/layouts/with-sidebar"
 import { createMetadata, processMarkdownAttribute } from "@/lib/seo/open-graph"
-import { Callout } from "@/quicksilver/react/primitives/callout"
+import { Callout } from "@/quicksilver/react/patterns/content/callout"
 
 const title = "Connect"
 const description =

@@ -1,9 +1,21 @@
 import React from "react"
 import { cn } from "@/quicksilver/lib/classname"
 import { capitalize } from "@/quicksilver/lib/string"
-import { Alert, AlertDescription, AlertHeading, AlertTitle } from "./alert"
-import { alertVariants, type AlertVariants } from "./alert.variants"
-import { Info, Lightbulb, OctagonAlert, Star, TriangleAlert, type IconComponent } from "./icons"
+import {
+  Alert,
+  AlertDescription,
+  AlertHeading,
+  AlertTitle,
+} from "@/quicksilver/react/primitives/alert"
+import { alertVariants, type AlertVariants } from "@/quicksilver/react/primitives/alert.variants"
+import {
+  Info,
+  Lightbulb,
+  OctagonAlert,
+  Star,
+  TriangleAlert,
+  type IconComponent,
+} from "@/quicksilver/react/primitives/icons"
 
 type IconLookup = Record<NonNullable<AlertVariants["variant"]>, IconComponent | null>
 
@@ -44,18 +56,19 @@ export function getCalloutIcon({
   return null
 }
 
-export interface CalloutProps extends AlertVariants {
+export interface CalloutProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, "title">, AlertVariants {
   title?: React.ReactNode
   icon?: IconComponent | null
   children: React.ReactNode
 }
 
-export function Callout({ variant, icon, title, children }: CalloutProps) {
+export function Callout({ variant, icon, title, children, className, ...props }: CalloutProps) {
   const Icon = getCalloutIcon({ icon, variant })
 
   return (
     <div className={cn(Icon && "pt-4")}>
-      <Alert variant={variant} className="relative">
+      <Alert variant={variant} className={cn("relative", className)} {...props}>
         {Icon && (
           <div
             className={cn(

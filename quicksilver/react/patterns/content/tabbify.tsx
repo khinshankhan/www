@@ -1,11 +1,13 @@
-"use client"
-
 import { Children, isValidElement, type ReactNode } from "react"
 import { cn } from "@/quicksilver/lib/classname"
+import {
+  TabsIndicator,
+  TabsList,
+  TabsPanel,
+  TabsRoot,
+  TabsTab,
+} from "@/quicksilver/react/primitives/tabs"
 import Slugger from "github-slugger"
-import { TabsIndicator, TabsList, TabsPanel, TabsRoot, TabsTab } from "./tabs"
-
-const slugger = new Slugger()
 
 export interface TabbifyProps {
   labels: string[]
@@ -22,7 +24,7 @@ export interface TabbifyPanelProps {
   className?: string
 }
 
-export function TabbifyPanel({ children, className = "" }: TabbifyPanelProps) {
+export function TabbifyPanel({ children, className }: TabbifyPanelProps) {
   return (
     <div className={cn("prose block w-full px-4 py-4 **:last:mb-0 md:px-5 md:py-5", className)}>
       {children}
@@ -34,9 +36,9 @@ export function Tabbify({
   labels,
   defaultIndex = 0,
   children,
-  className = "",
-  listClassName = "",
-  panelClassName = "",
+  className,
+  listClassName,
+  panelClassName,
   ariaLabel = "Tabbed content",
 }: TabbifyProps) {
   const panels = Children.toArray(children).filter((child) => {
@@ -59,7 +61,9 @@ export function Tabbify({
     throw new Error("Tabbify requires labels and children to have the same length")
   }
 
-  slugger.reset()
+  // per render: a shared slugger mutated during render can interleave across
+  // concurrently rendering instances
+  const slugger = new Slugger()
   const items = labels.map((label) => ({
     label,
     value: slugger.slug(label),

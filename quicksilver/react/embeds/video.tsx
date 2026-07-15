@@ -1,8 +1,6 @@
-"use client"
-
 import React, { Children, Fragment, type ComponentPropsWithRef, type ReactNode } from "react"
 import { cn } from "@/quicksilver/lib/classname"
-import { Link } from "./link"
+import { Link } from "@/quicksilver/react/primitives/link"
 
 // TODO: we'll circle back to "jsx-a11y/media-has-caption", it's currently a bit complicated to handle in this HoC
 
@@ -13,7 +11,7 @@ export interface VideoProps extends VideoElementProps {
 }
 
 // TODO: add in video skeleton, possibly leverage the image shimmer effect
-export function Video({ children, className = "", ...props }: VideoProps) {
+export function Video({ children, className, ...props }: VideoProps) {
   return (
     <video
       controls
