@@ -43,10 +43,14 @@ export function Spoiler({ className, children, ...props }: SpoilerProps) {
           "aria-label": toggleText,
           title: toggleText,
           className: cn(
-            "relative inline rounded-lg px-1 py-0.5",
+            // NOTE: avoid vertical padding: the inline box already overshoots the line advance, so
+            // any py makes wrapped fragments overlap; clone gives each wrapped line its own rounded
+            // caps and horizontal padding
+            "relative inline rounded-lg box-decoration-clone px-1",
             focusRing,
-            "cursor-pointer",
-            !isRevealed && "select-none", // prevent text selection due to 'double click' on mobile
+            "cursor-pointer transition-colors",
+            // prevent text selection due to 'double click' on mobile
+            !isRevealed && "select-none",
             isRevealed
               ? "bg-stark-contrast/10 hover:bg-stark-contrast/15"
               : "bg-stark-contrast/70 hover:bg-stark-contrast/65",
