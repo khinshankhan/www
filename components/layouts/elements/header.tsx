@@ -217,7 +217,11 @@ export function HeaderEdgeFade({ className = "", ...props }: HeaderBufferProps) 
   return (
     <EdgeFade
       direction="bottom"
-      className={cn("absolute -bottom-16 z-2 h-16", className)}
+      className={cn(
+        /* fade from the header's live crossfaded color so no seam appears once scrolled */
+        "absolute -bottom-16 z-2 h-16 [--edge-fade-color:var(--scroll-bg,var(--color-background-1))]",
+        className
+      )}
       {...props}
     />
   )

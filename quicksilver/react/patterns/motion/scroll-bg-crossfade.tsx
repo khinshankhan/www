@@ -25,12 +25,13 @@ export function ScrollBgCrossfade({
 
   const motionCssVars = {
     "--reveal-pct": pct,
+    /* exposed so descendants (eg edge fades) can match the current crossfaded color */
+    "--scroll-bg": `color-mix(in oklab, ${fromColor} calc(100% - var(--reveal-pct)), ${toColor} var(--reveal-pct))`,
   } as CSSProperties
 
   const motionStyle = {
     ...motionCssVars,
-    background: `color-mix(in oklab, ${fromColor} calc(100% - var(--reveal-pct)), ${toColor} var(--reveal-pct))`,
-    willChange: "background-color",
+    background: "var(--scroll-bg)",
   }
 
   const fallbackCssVars = {
