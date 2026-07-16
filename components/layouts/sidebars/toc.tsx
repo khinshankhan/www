@@ -269,7 +269,7 @@ function TocList({
           className="pointer-events-none absolute inset-x-0 top-0 z-10 h-10"
           style={{
             background:
-              "linear-gradient(to bottom, var(--background-1) 0%, color-mix(in oklab, var(--background-1) 92%, transparent) 38%, color-mix(in oklab, var(--background-1) 56%, transparent) 72%, transparent 100%)",
+              "linear-gradient(to bottom, var(--background-2) 0%, color-mix(in oklab, var(--background-2) 92%, transparent) 38%, color-mix(in oklab, var(--background-2) 56%, transparent) 72%, transparent 100%)",
           }}
         />
       )}
@@ -279,14 +279,14 @@ function TocList({
           className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-10"
           style={{
             background:
-              "linear-gradient(to top, var(--background-1) 0%, color-mix(in oklab, var(--background-1) 92%, transparent) 38%, color-mix(in oklab, var(--background-1) 56%, transparent) 72%, transparent 100%)",
+              "linear-gradient(to top, var(--background-2) 0%, color-mix(in oklab, var(--background-2) 92%, transparent) 38%, color-mix(in oklab, var(--background-2) 56%, transparent) 72%, transparent 100%)",
           }}
         />
       )}
       <nav
         ref={navRef}
         aria-label="Table of contents"
-        className="max-h-[min(24rem,calc(100svh-12rem))] [scrollbar-gutter:stable] overflow-y-auto overscroll-contain pr-1 xl:[scrollbar-width:none] xl:pr-0 [&::-webkit-scrollbar]:w-1 xl:[&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-accent-11 [&::-webkit-scrollbar-thumb]:shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-accent-12)_20%,transparent)] [&::-webkit-scrollbar-track]:bg-transparent"
+        className="max-h-[min(24rem,calc(100svh-12rem))] [scrollbar-gutter:stable] overflow-y-auto overscroll-contain pr-1 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-accent-11 [&::-webkit-scrollbar-thumb]:shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-accent-12)_20%,transparent)] [&::-webkit-scrollbar-track]:bg-transparent"
         style={{ maxHeight: desktopMaxHeight }}
       >
         <ul className="list-none xl:pb-6">
