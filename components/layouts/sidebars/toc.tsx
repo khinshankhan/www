@@ -123,12 +123,12 @@ function TocList({
   const navRef = useRef<HTMLElement | null>(null)
   const tweenRef = useRef<number | null>(null)
   const [scrollMask, setScrollMask] = useState<"none" | "top" | "bottom" | "both">("none")
-  // Mobile cap, not the tall desktop default: a stale tall value makes the mobile drawer
-  // animate to full height on first open then snap to the cap. Raised on desktop below.
+  // Default to the mobile cap; a tall value makes the drawer overshoot then snap on first
+  // open. Raised to the real available height on desktop below.
   const [desktopMaxHeight, setDesktopMaxHeight] = useState("24rem")
 
-  // Eased internal scroll, gentler than the browser's short native smooth-scroll; cancels
-  // any in-flight tween so successive repositions don't fight.
+  // Eased scroll for the rail's internal reposition, gentler than native smooth-scroll.
+  // Cancels any in-flight tween so successive repositions don't fight.
   const tweenScrollTo = useCallback((nav: HTMLElement, to: number, duration = 420) => {
     if (tweenRef.current !== null) {
       cancelAnimationFrame(tweenRef.current)
@@ -144,7 +144,7 @@ function TocList({
       return
     }
 
-    // easeOutCubic — quick to start, soft to settle
+    // easeOutCubic: quick to start, soft to settle
     const ease = (t: number) => 1 - Math.pow(1 - t, 3)
     const start = performance.now()
 
@@ -241,8 +241,8 @@ function TocList({
   }, [])
 
   useEffect(() => {
-    // Coalesce the rapid activeId changes during a scroll into one reposition, so the rail
-    // doesn't chase the active item with a stack of smooth scrolls.
+    // Debounce so the rail settles once after scrolling instead of chasing every activeId
+    // change with its own smooth scroll.
     const timer = setTimeout(() => centerActiveItem("smooth"), 120)
     return () => clearTimeout(timer)
   }, [activeId, centerActiveItem])
@@ -282,21 +282,21 @@ function TocList({
       return
     }
 
-    const updateDesktopMaxHeight = () => {
+    const measure = () => {
       if (typeof window === "undefined") {
         return
       }
 
       if (window.innerWidth < 1280) {
-        setDesktopMaxHeight("24rem")
+        setDesktopMaxHeight((prev) => (prev === "24rem" ? prev : "24rem"))
         return
       }
 
       const rect = nav.getBoundingClientRect()
 
-      // Clamp to the rail's pinned top: at the page end the sticky rail releases and its
-      // top scrolls off-screen, so a live rect.top would over-grow the height and kill the
-      // scrollbar. Sum the nested sticky offsets, plus the nav's offset below the outermost.
+      // Use the rail's pinned top, not its live one: at the page end the sticky rail releases
+      // and rect.top scrolls off-screen, which would over-grow the height and hide the
+      // scrollbar. Pinned top = summed sticky offsets + the nav's offset below the outermost.
       let outermostSticky: HTMLElement | null = null
       let stickyOffsetSum = 0
       for (let el = nav.parentElement; el && el.tagName !== "BODY"; el = el.parentElement) {
@@ -313,17 +313,33 @@ function TocList({
       const viewportHeight = window.innerHeight
       const bottomGap = 8
       const availableHeight = Math.max(0, viewportHeight - effectiveTop - bottomGap)
-      setDesktopMaxHeight(`${Math.floor(availableHeight)}px`)
+      const next = `${Math.floor(availableHeight)}px`
+      // Runs every scroll frame, so skip the re-render when the value is unchanged.
+      setDesktopMaxHeight((prev) => (prev === next ? prev : next))
     }
 
-    updateDesktopMaxHeight()
+    // Throttle to one measure per frame; measure() reads layout, so running it on every
+    // scroll event janks the page scroll.
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) {
+        return
+      }
+      ticking = true
+      requestAnimationFrame(() => {
+        ticking = false
+        measure()
+      })
+    }
 
-    window.addEventListener("resize", updateDesktopMaxHeight)
-    window.addEventListener("scroll", updateDesktopMaxHeight, { passive: true })
+    measure()
+
+    window.addEventListener("resize", onScroll)
+    window.addEventListener("scroll", onScroll, { passive: true })
 
     return () => {
-      window.removeEventListener("resize", updateDesktopMaxHeight)
-      window.removeEventListener("scroll", updateDesktopMaxHeight)
+      window.removeEventListener("resize", onScroll)
+      window.removeEventListener("scroll", onScroll)
     }
   }, [])
 
@@ -524,9 +540,8 @@ function MobileToc({
       </div>
 
       <Collapsible.Panel
-        /* Overlay the list below the trigger (absolute) instead of expanding in flow. An
-         * in-flow expand grows the sticky root, and the browser compensates by shifting
-         * window scroll — the visible jump on open. Absolute keeps the root's height fixed. */
+        /* Overlay (absolute) rather than in-flow: an in-flow expand grows the sticky root and
+           the browser shifts window scroll to compensate, which is the visible jump on open. */
         className="absolute inset-x-0 top-full z-40 flex h-(--h) w-full flex-col justify-start overflow-hidden bg-background-2 opacity-100 transition-[height,opacity] duration-320 ease-[cubic-bezier(0.22,1,0.36,1)] data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0"
         style={
           {
@@ -563,14 +578,14 @@ function MobileToc({
           </TocListFrame>
         </motion.div>
 
-        {/* Rides the drawer's bottom edge (the panel's own height animates). Absent when
-            closed since the panel is display:none — the root divider below covers that. */}
+        {/* Rides the drawer's bottom edge as the panel's own height animates. Gone when
+            closed (the panel is display:none), so the root divider below covers that case. */}
         <Divider
           aria-hidden="true"
           className="absolute bottom-0 left-1/2 z-2 hidden w-full -translate-x-1/2 transform vh-comfy:max-xl:block"
           intensity="solid"
           style={{
-            // minus 20px to account for scrollbar, otherwise a horizontal scroll may appear
+            // minus 20px to account for the scrollbar, else a horizontal scroll may appear
             width: "calc(100dvw - 20px)",
           }}
         />

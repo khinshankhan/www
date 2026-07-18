@@ -32,6 +32,9 @@ export function ScrollBgCrossfade({
   const motionStyle = {
     ...motionCssVars,
     background: "var(--scroll-bg)",
+    // Promote to its own layer so the per-scroll color-mix crossfade composites instead of
+    // repainting on the main thread. Notably smoother on Firefox mobile.
+    willChange: "background",
   }
 
   const fallbackCssVars = {
