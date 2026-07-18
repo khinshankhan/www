@@ -121,8 +121,53 @@ function TocList({
 }) {
   const { activeId } = useActiveAnchors()
   const navRef = useRef<HTMLElement | null>(null)
+  const tweenRef = useRef<number | null>(null)
   const [scrollMask, setScrollMask] = useState<"none" | "top" | "bottom" | "both">("none")
-  const [desktopMaxHeight, setDesktopMaxHeight] = useState("calc(100svh - 8rem)")
+  // Mobile cap, not the tall desktop default: a stale tall value makes the mobile drawer
+  // animate to full height on first open then snap to the cap. Raised on desktop below.
+  const [desktopMaxHeight, setDesktopMaxHeight] = useState("24rem")
+
+  // Eased internal scroll, gentler than the browser's short native smooth-scroll; cancels
+  // any in-flight tween so successive repositions don't fight.
+  const tweenScrollTo = useCallback((nav: HTMLElement, to: number, duration = 420) => {
+    if (tweenRef.current !== null) {
+      cancelAnimationFrame(tweenRef.current)
+    }
+
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const from = nav.scrollTop
+    const delta = to - from
+    if (prefersReduced || duration <= 0) {
+      nav.scrollTop = to
+      return
+    }
+
+    // easeOutCubic — quick to start, soft to settle
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3)
+    const start = performance.now()
+
+    const step = (now: number) => {
+      const t = Math.min(1, (now - start) / duration)
+      nav.scrollTop = from + delta * ease(t)
+      if (t < 1) {
+        tweenRef.current = requestAnimationFrame(step)
+      } else {
+        tweenRef.current = null
+      }
+    }
+
+    tweenRef.current = requestAnimationFrame(step)
+  }, [])
+
+  useEffect(() => {
+    return () => {
+      if (tweenRef.current !== null) {
+        cancelAnimationFrame(tweenRef.current)
+      }
+    }
+  }, [])
 
   const centerActiveItem = useCallback(
     (behavior: ScrollBehavior = "smooth") => {
@@ -155,14 +200,15 @@ function TocList({
         const nextScrollTop = Math.max(0, Math.min(targetTop, maxScrollTop))
 
         if (Math.abs(nextScrollTop - currentScrollTop) > 6) {
-          nav.scrollTo({
-            top: nextScrollTop,
-            behavior,
-          })
+          if (behavior === "smooth") {
+            tweenScrollTo(nav, nextScrollTop)
+          } else {
+            nav.scrollTop = nextScrollTop
+          }
         }
       }
     },
-    [activeId]
+    [activeId, tweenScrollTo]
   )
 
   const updateScrollMask = useCallback(() => {
@@ -195,7 +241,10 @@ function TocList({
   }, [])
 
   useEffect(() => {
-    centerActiveItem("smooth")
+    // Coalesce the rapid activeId changes during a scroll into one reposition, so the rail
+    // doesn't chase the active item with a stack of smooth scrolls.
+    const timer = setTimeout(() => centerActiveItem("smooth"), 120)
+    return () => clearTimeout(timer)
   }, [activeId, centerActiveItem])
 
   useEffect(() => {
@@ -244,9 +293,26 @@ function TocList({
       }
 
       const rect = nav.getBoundingClientRect()
+
+      // Clamp to the rail's pinned top: at the page end the sticky rail releases and its
+      // top scrolls off-screen, so a live rect.top would over-grow the height and kill the
+      // scrollbar. Sum the nested sticky offsets, plus the nav's offset below the outermost.
+      let outermostSticky: HTMLElement | null = null
+      let stickyOffsetSum = 0
+      for (let el = nav.parentElement; el && el.tagName !== "BODY"; el = el.parentElement) {
+        if (getComputedStyle(el).position === "sticky") {
+          stickyOffsetSum += parseFloat(getComputedStyle(el).top) || 0
+          outermostSticky = el
+        }
+      }
+      const pinnedTop = outermostSticky
+        ? stickyOffsetSum + (rect.top - outermostSticky.getBoundingClientRect().top)
+        : rect.top
+      const effectiveTop = Math.max(rect.top, pinnedTop)
+
       const viewportHeight = window.innerHeight
       const bottomGap = 8
-      const availableHeight = Math.max(0, viewportHeight - rect.top - bottomGap)
+      const availableHeight = Math.max(0, viewportHeight - effectiveTop - bottomGap)
       setDesktopMaxHeight(`${Math.floor(availableHeight)}px`)
     }
 
@@ -458,7 +524,10 @@ function MobileToc({
       </div>
 
       <Collapsible.Panel
-        className="mx-auto flex h-(--h) maxw-prose max-w-(--max-w) flex-col justify-start overflow-hidden opacity-100 transition-[height,opacity] duration-320 ease-[cubic-bezier(0.22,1,0.36,1)] data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0 xl:max-w-full"
+        /* Overlay the list below the trigger (absolute) instead of expanding in flow. An
+         * in-flow expand grows the sticky root, and the browser compensates by shifting
+         * window scroll — the visible jump on open. Absolute keeps the root's height fixed. */
+        className="absolute inset-x-0 top-full z-40 flex h-(--h) w-full flex-col justify-start overflow-hidden bg-background-2 opacity-100 transition-[height,opacity] duration-320 ease-[cubic-bezier(0.22,1,0.36,1)] data-[ending-style]:h-0 data-[ending-style]:opacity-0 data-[starting-style]:h-0 data-[starting-style]:opacity-0"
         style={
           {
             "--h": "var(--collapsible-panel-height)",
@@ -493,19 +562,34 @@ function MobileToc({
             />
           </TocListFrame>
         </motion.div>
-      </Collapsible.Panel>
 
-      <ScrollFadeIn startPx={150} rangePx={400}>
+        {/* Rides the drawer's bottom edge (the panel's own height animates). Absent when
+            closed since the panel is display:none — the root divider below covers that. */}
         <Divider
+          aria-hidden="true"
           className="absolute bottom-0 left-1/2 z-2 hidden w-full -translate-x-1/2 transform vh-comfy:max-xl:block"
           intensity="solid"
           style={{
-            width:
-              // NOTE: we minus 20px to account for scrollbar, otherwise a horizontal scroll may appear
-              "calc(100dvw - 20px)",
+            // minus 20px to account for scrollbar, otherwise a horizontal scroll may appear
+            width: "calc(100dvw - 20px)",
           }}
         />
-      </ScrollFadeIn>
+      </Collapsible.Panel>
+
+      {/* Closed-state separator under the bar (revealed on scroll). Hidden while open so the
+          panel's own bottom divider is the only line. */}
+      {!isOpen && (
+        <ScrollFadeIn startPx={150} rangePx={400}>
+          <Divider
+            aria-hidden="true"
+            className="absolute bottom-0 left-1/2 z-2 hidden w-full -translate-x-1/2 transform vh-comfy:max-xl:block"
+            intensity="solid"
+            style={{
+              width: "calc(100dvw - 20px)",
+            }}
+          />
+        </ScrollFadeIn>
+      )}
     </Collapsible.Root>
   )
 }
