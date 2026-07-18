@@ -398,6 +398,10 @@ function DesktopToc({
     <div
       className={cn(
         "relative top-0 hidden w-full bg-background-2 py-2 xl:block vh-comfy:sticky",
+        /* fill the sticky column top-to-bottom so full-bleed bands can't leak through the rail's gaps */
+        "vh-comfy:min-h-[calc(100svh-var(--h)-var(--h-d))]",
+        /* extend the opaque rail up through the header displacement gap so bands can't leak above the title */
+        "before:absolute before:inset-x-0 before:top-0 before:hidden before:h-(--h-d) before:-translate-y-full before:bg-background-2 before:content-[''] vh-comfy:before:block",
         className
       )}
     >
