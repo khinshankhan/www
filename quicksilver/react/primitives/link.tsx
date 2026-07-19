@@ -78,7 +78,6 @@ export function LinkComponent({
         href,
         className: cn(linkVariants({ variant, isMonochrome }), className),
         ...getSaneProps(kind),
-        ...props,
         children: (
           <Fragment>
             {children}
