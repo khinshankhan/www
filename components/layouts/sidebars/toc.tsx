@@ -135,8 +135,7 @@ function TocList({
     }
 
     const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
     const from = nav.scrollTop
     const delta = to - from
     if (prefersReduced || duration <= 0) {
