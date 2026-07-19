@@ -67,7 +67,9 @@ export function isCalloutKeyword(keyword: string): keyword is NonNullable<Callou
 // match blockquotes `> [!variant] heading`
 const mdxBlockquoteMetaRegex = /\[!([^\]]+)\]\s*(.*)/
 
-const mdxHeadingClasses = "scroll-mt-28"
+// clear the sticky header (112px), plus the sticky article index bar when it overlays content
+// (below xl, comfy viewport height): header 88px + bar 56px + breathing room
+const mdxHeadingClasses = "scroll-mt-28 vh-comfy:max-xl:scroll-mt-42"
 
 function getSafeClassName(className: unknown): string {
   const parsedClassName = z.string().safeParse(className)
