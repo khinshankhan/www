@@ -12,9 +12,9 @@ export const inputVariants = cva(
         bare: "border-0 bg-transparent p-0",
       },
       inputSize: {
-        default: "text-base",
-        sm: "text-sm",
-        lg: "text-lg",
+        default: "text-16",
+        sm: "text-14",
+        lg: "text-18",
       },
     },
     defaultVariants: {

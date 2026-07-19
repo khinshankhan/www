@@ -250,7 +250,7 @@ function hasViewportDrifted(current: ViewportState, baseline: ViewportState | nu
 
 function ExcalidrawFallback() {
   return (
-    <div className="text-sm flex h-full items-center justify-center px-4 py-6 text-foreground-subtle">
+    <div className="flex h-full items-center justify-center px-4 py-6 text-14 text-foreground-subtle">
       Rendering scene...
     </div>
   )
@@ -416,7 +416,7 @@ export function ExcalidrawScene({
     return (
       <div
         className={cn(
-          "border-accent-theme-danger/20 bg-accent-theme-danger/5 text-sm my-4 rounded-md border px-4 py-3 text-accent-11",
+          "border-accent-theme-danger/20 bg-accent-theme-danger/5 my-4 rounded-md border px-4 py-3 text-14 text-accent-11",
           className
         )}
         {...props}

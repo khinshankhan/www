@@ -120,7 +120,7 @@ export function WritingsSearch({
                 <button
                   type="button"
                   onClick={() => setQuery("")}
-                  className="text-sm text-accent-11 underline underline-offset-4 transition-colors hover:text-accent-12"
+                  className="text-14 text-accent-11 underline underline-offset-4 transition-colors hover:text-accent-12"
                 >
                   Clear search
                 </button>

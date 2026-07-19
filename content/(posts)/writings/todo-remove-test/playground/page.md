@@ -323,7 +323,7 @@ export function greeting(user: User) {
 >   return (
 >     <ScrollArea.Root className="h-[8.5rem] w-96 max-w-[calc(100vw-8rem)]">
 >       <ScrollArea.Viewport className="outline-gray-200 focus-visible:outline-blue-800 h-full overscroll-contain rounded-md outline outline-1 -outline-offset-1 focus-visible:outline focus-visible:outline-2">
->         <div className="text-sm text-gray-900 flex flex-col gap-4 py-3 pr-6 pl-4 leading-[1.375rem]">
+>         <div className="text-14 text-gray-900 flex flex-col gap-4 py-3 pr-6 pl-4 leading-[1.375rem]">
 >           <p>
 >             Vernacular architecture is building done outside any academic tradition, and without
 >             professional guidance. It is not a particular architectural movement or style, but
@@ -373,7 +373,7 @@ export function greeting(user: User) {
 >   return (
 >     <ScrollArea.Root className="h-[8.5rem] w-96 max-w-[calc(100vw-8rem)]">
 >       <ScrollArea.Viewport className="outline-gray-200 focus-visible:outline-blue-800 h-full overscroll-contain rounded-md outline outline-1 -outline-offset-1 focus-visible:outline focus-visible:outline-2">
->         <div className="text-sm text-gray-900 flex flex-col gap-4 py-3 pr-6 pl-4 leading-[1.375rem]">
+>         <div className="text-14 text-gray-900 flex flex-col gap-4 py-3 pr-6 pl-4 leading-[1.375rem]">
 >           <p>
 >             Vernacular architecture is building done outside any academic tradition, and without
 >             professional guidance. It is not a particular architectural movement or style, but
@@ -423,7 +423,7 @@ export function greeting(user: User) {
 >   return (
 >     <ScrollArea.Root className="h-[8.5rem] w-96 max-w-[calc(100vw-8rem)]">
 >       <ScrollArea.Viewport className="outline-gray-200 focus-visible:outline-blue-800 h-full overscroll-contain rounded-md outline outline-1 -outline-offset-1 focus-visible:outline focus-visible:outline-2">
->         <div className="text-sm text-gray-900 flex flex-col gap-4 py-3 pr-6 pl-4 leading-[1.375rem]">
+>         <div className="text-14 text-gray-900 flex flex-col gap-4 py-3 pr-6 pl-4 leading-[1.375rem]">
 >           <p>
 >             Vernacular architecture is building done outside any academic tradition, and without
 >             professional guidance. It is not a particular architectural movement or style, but
@@ -473,7 +473,7 @@ export function greeting(user: User) {
 >   return (
 >     <ScrollArea.Root className="h-[8.5rem] w-96 max-w-[calc(100vw-8rem)]">
 >       <ScrollArea.Viewport className="outline-gray-200 focus-visible:outline-blue-800 h-full overscroll-contain rounded-md outline outline-1 -outline-offset-1 focus-visible:outline focus-visible:outline-2">
->         <div className="text-sm text-gray-900 flex flex-col gap-4 py-3 pr-6 pl-4 leading-[1.375rem]">
+>         <div className="text-14 text-gray-900 flex flex-col gap-4 py-3 pr-6 pl-4 leading-[1.375rem]">
 >           <p>
 >             Vernacular architecture is building done outside any academic tradition, and without
 >             professional guidance. It is not a particular architectural movement or style, but
@@ -523,7 +523,7 @@ export function greeting(user: User) {
 >   return (
 >     <ScrollArea.Root className="h-[8.5rem] w-96 max-w-[calc(100vw-8rem)]">
 >       <ScrollArea.Viewport className="outline-gray-200 focus-visible:outline-blue-800 h-full overscroll-contain rounded-md outline outline-1 -outline-offset-1 focus-visible:outline focus-visible:outline-2">
->         <div className="text-sm text-gray-900 flex flex-col gap-4 py-3 pr-6 pl-4 leading-[1.375rem]">
+>         <div className="text-14 text-gray-900 flex flex-col gap-4 py-3 pr-6 pl-4 leading-[1.375rem]">
 >           <p>
 >             Vernacular architecture is building done outside any academic tradition, and without
 >             professional guidance. It is not a particular architectural movement or style, but
@@ -880,7 +880,7 @@ export default function ExampleScrollArea() {
   return (
     <ScrollArea.Root className="h-[8.5rem] w-96 max-w-[calc(100vw-8rem)]">
       <ScrollArea.Viewport className="outline-gray-200 focus-visible:outline-blue-800 h-full overscroll-contain rounded-md outline outline-1 -outline-offset-1 focus-visible:outline focus-visible:outline-2">
-        <div className="text-sm text-gray-900 flex flex-col gap-4 py-3 pr-6 pl-4 leading-[1.375rem]">
+        <div className="text-14 text-gray-900 flex flex-col gap-4 py-3 pr-6 pl-4 leading-[1.375rem]">
           <p>
             Vernacular architecture is building done outside any academic tradition, and without
             professional guidance. It is not a particular architectural movement or style, but

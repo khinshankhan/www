@@ -12,9 +12,9 @@ import "katex/dist/katex.min.css"
 import "./globals.css"
 
 const fontAliases = {
-  ["--font-heading"]: "var(--font-geist-sans)",
-  ["--font-body"]: "var(--font-geist-sans)",
-  ["--font-mono"]: "var(--font-geist-mono)",
+  ["--font-heading-src"]: "var(--font-geist-sans)",
+  ["--font-body-src"]: "var(--font-geist-sans)",
+  ["--font-mono-src"]: "var(--font-geist-mono)",
 } as CSSProperties
 
 export default function RootLayout({

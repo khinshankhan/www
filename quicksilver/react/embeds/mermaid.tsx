@@ -347,7 +347,7 @@ export function MermaidDiagram({
     return (
       <div
         className={cn(
-          "border-accent-theme-danger/20 bg-accent-theme-danger/5 text-sm mt-3 rounded-md border px-4 py-3 text-accent-11",
+          "border-accent-theme-danger/20 bg-accent-theme-danger/5 mt-3 rounded-md border px-4 py-3 text-14 text-accent-11",
           className
         )}
         {...props}
@@ -366,7 +366,7 @@ export function MermaidDiagram({
         <div
           className={cn(
             mermaidViewportClassName,
-            "text-sm flex items-center justify-center text-foreground-subtle"
+            "flex items-center justify-center text-14 text-foreground-subtle"
           )}
         >
           Rendering diagram...

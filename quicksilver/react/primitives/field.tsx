@@ -12,18 +12,18 @@ function FieldRoot({ className, ...props }: ComponentProps<typeof BaseField.Root
 
 function FieldLabel({ className, ...props }: ComponentProps<typeof BaseField.Label>) {
   return (
-    <BaseField.Label className={cn("text-sm font-medium text-foreground", className)} {...props} />
+    <BaseField.Label className={cn("text-14 font-medium text-foreground", className)} {...props} />
   )
 }
 
 function FieldDescription({ className, ...props }: ComponentProps<typeof BaseField.Description>) {
   return (
-    <BaseField.Description className={cn("text-sm text-foreground-muted", className)} {...props} />
+    <BaseField.Description className={cn("text-14 text-foreground-muted", className)} {...props} />
   )
 }
 
 function FieldError({ className, ...props }: ComponentProps<typeof BaseField.Error>) {
-  return <BaseField.Error className={cn("text-sm text-accent-11", className)} {...props} />
+  return <BaseField.Error className={cn("text-14 text-accent-11", className)} {...props} />
 }
 
 export const Field = {

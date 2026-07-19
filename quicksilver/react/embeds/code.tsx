@@ -3,7 +3,6 @@ import { cn } from "@/quicksilver/lib/classname"
 import { mermaidLanguage } from "@/quicksilver/lib/syntax/languages/mermaid"
 import rehypeWrapLines from "@/quicksilver/lib/syntax/plugins/rehype-wrap-lines"
 import { CopyButton } from "@/quicksilver/react/patterns/actions/copy-button"
-import { textVariants } from "@/quicksilver/react/primitives/text.variants"
 import { toHtml as hastToHtml } from "hast-util-to-html"
 import { all, createLowlight } from "lowlight"
 import rangeParser from "parse-numeric-range"
@@ -64,10 +63,10 @@ export function Code({
         data-fenced={isFenced}
         data-lang={language}
         className={cn(
-          textVariants({
-            variant: isFenced ? "small" : "xs",
-          }),
-          isFenced ? "p-2" : "px-1 py-0.25",
+          "font-mono",
+          isFenced
+            ? "p-2 text-14 md:text-16 lg:text-18"
+            : "px-1 py-0.25 text-12 md:text-14 lg:text-16",
           "relative z-1 h-full w-full max-w-full border-1 border-stark-contrast/10 bg-muted/30",
           className
         )}

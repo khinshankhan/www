@@ -432,7 +432,7 @@ function NumberPill({ value, tabular = false }: { value: number; tabular?: boole
       <div className="pointer-events-none absolute inset-x-5 bottom-3 h-px bg-surface-7/14" />
       <div
         className={cn(
-          "font-heading relative text-[2.2rem] leading-none font-medium tracking-[-0.06em] text-foreground-strong sm:text-[2.5rem]",
+          "relative font-heading text-[2.2rem] leading-none font-medium tracking-[-0.06em] text-foreground-strong sm:text-[2.5rem]",
           tabular && "[font-variant-numeric:tabular-nums]"
         )}
       >

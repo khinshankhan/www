@@ -4,7 +4,7 @@ import { focusRing } from "./focus.variants"
 export const buttonVariants = cva(
   [
     focusRing,
-    "text-sm inline-flex cursor-pointer items-center justify-center rounded-md font-medium whitespace-nowrap transition-colors disabled:cursor-not-allowed disabled:opacity-50",
+    "inline-flex cursor-pointer items-center justify-center rounded-md text-14 font-medium whitespace-nowrap transition-colors disabled:cursor-not-allowed disabled:opacity-50",
   ],
   {
     variants: {

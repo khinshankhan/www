@@ -1,13 +1,15 @@
 @theme inline {
   /* FONTS */
 
-  --font-family-*: initial;
-  --font-family-heading:
-    var(--font-heading), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-family-body:
-    var(--font-body), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-family-mono:
-    var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+  --font-*: initial;
+  --font-heading:
+    var(--font-heading-src), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  --font-body:
+    var(--font-body-src), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  --font-mono:
+    var(--font-mono-src), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
 
   /* SPACING */
@@ -223,10 +225,10 @@
 
   --default-transition-duration: 150ms;
   --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  --default-font-family: var(--font-family-body, initial);
+  --default-font-family: var(--font-body, initial);
   --default-font-feature-settings: --theme(--font-sans--font-feature-settings, initial);
   --default-font-variation-settings: --theme(--font-sans--font-variation-settings, initial);
-  --default-mono-font-family: var(--font-family-mono, initial);
+  --default-mono-font-family: var(--font-mono, initial);
   --default-mono-font-feature-settings: --theme(--font-mono--font-feature-settings, initial);
   --default-mono-font-variation-settings: --theme(--font-mono--font-variation-settings, initial);
 }

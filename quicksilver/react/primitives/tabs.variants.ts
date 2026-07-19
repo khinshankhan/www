@@ -35,7 +35,7 @@ export const tabsTabVariants = cva("", {
       ],
       segmented: [
         focusRingInset,
-        "text-base min-w-[7.5rem] cursor-pointer rounded-full border border-transparent px-4 py-2 leading-none font-medium whitespace-nowrap text-foreground-subtle transition-[color,transform] duration-200 ease-out hover:text-foreground data-[active]:translate-y-[-0.5px] data-[active]:text-foreground",
+        "min-w-[7.5rem] cursor-pointer rounded-full border border-transparent px-4 py-2 text-16 leading-none font-medium whitespace-nowrap text-foreground-subtle transition-[color,transform] duration-200 ease-out hover:text-foreground data-[active]:translate-y-[-0.5px] data-[active]:text-foreground",
       ],
     },
   },

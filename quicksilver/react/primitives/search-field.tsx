@@ -177,7 +177,7 @@ export function SearchFieldCount({ className }: { className?: string }) {
     <span
       aria-hidden="true"
       className={cn(
-        "text-xs shrink-0 font-mono tabular-nums transition-colors duration-300",
+        "shrink-0 font-mono text-12 tabular-nums transition-colors duration-300",
         isSearching && matched > 0 ? "text-accent-11" : "text-foreground-muted",
         className
       )}
@@ -228,7 +228,7 @@ export function SearchFieldShortcutHint({
     <kbd
       aria-hidden="true"
       className={cn(
-        "text-xs hidden shrink-0 rounded border border-solid border-surface-7 px-1.5 py-0.5 font-mono leading-none text-foreground-muted transition-opacity duration-200 select-none peer-focus:opacity-40 sm:inline-block",
+        "hidden shrink-0 rounded border border-solid border-surface-7 px-1.5 py-0.5 font-mono text-12 leading-none text-foreground-muted transition-opacity duration-200 select-none peer-focus:opacity-40 sm:inline-block",
         className
       )}
     >
