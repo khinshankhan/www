@@ -6,20 +6,33 @@
 // Inspired by https://github.com/radix-ui/website/blob/52578d3c5956b26c117ad8328ee40ecc6170b648/utils/rehype-highlight-line.mjs
 
 import type { Root as HastRoot, RootContent } from "hast"
-import { toHtml as hastToHtml } from "hast-util-to-html"
-import parse from "rehype-parse"
-import { unified } from "unified"
 
-// https://github.com/gatsbyjs/gatsby/pull/26161/files
-const MULTILINE_TOKEN_SPAN = /<span class="token ([^"]+)">[^<]*\n[^<]*<\/span>/g
+// Split multiline token elements before assigning line numbers.
+function endsWithNewline(node: RootContent): boolean {
+  if (node.type === "text") return node.value.endsWith("\n")
+  if ("children" in node && node.children.length > 0) {
+    return endsWithNewline(node.children[node.children.length - 1])
+  }
+  return false
+}
 
-function applyMultilineFix(ast: HastRoot) {
-  const html = hastToHtml(ast).replace(MULTILINE_TOKEN_SPAN, (match, token) =>
-    match.replace(/\n/g, `</span>\n<span class="token ${token}">`)
-  )
+function splitMultilineNodes(nodes: RootContent[]): RootContent[] {
+  return nodes.flatMap((node) => {
+    if (node.type === "text") {
+      const pieces = node.value.match(/[^\n]*\n|[^\n]+/g) ?? []
+      return pieces.map((value) => ({ ...node, value }))
+    }
+    if (!("children" in node) || node.children.length === 0) return [node]
 
-  const hast = unified().use(parse, { emitParseErrors: true, fragment: true }).parse(html)
-  return hast.children
+    const groups: RootContent[][] = [[]]
+    for (const kid of splitMultilineNodes(node.children)) {
+      groups[groups.length - 1].push(kid)
+      if (endsWithNewline(kid)) groups.push([])
+    }
+    if (groups[groups.length - 1].length === 0) groups.pop()
+
+    return groups.map((children) => ({ ...node, children }))
+  })
 }
 
 interface LineNumberifyResult {
@@ -36,19 +49,15 @@ const lineNumberify = function lineNumberify(
   return ast.reduce<LineNumberifyResult>(
     (result, node) => {
       if (node.type === "text") {
-        // no newline, just assign line number
         if (node.value.indexOf("\n") === -1) {
           const currentNode = { ...node, lineNumber }
           result.nodes.push(currentNode)
           return result
         }
 
-        // split the text by newlines and assign line numbers accordingly
         const lines = node.value.split("\n")
         for (let i = 0; i < lines.length; i++) {
-          // increment line number *after* the first line (first line = initial carry over number)
           if (i !== 0) lineNumber++
-          // skip empty last line
           if (i === lines.length - 1 && lines[i].length === 0) continue
 
           result.nodes.push({
@@ -62,18 +71,17 @@ const lineNumberify = function lineNumberify(
         return result
       }
 
-      // if the node has children, recursively apply lineNumberify
       if ("children" in node) {
         const currentNode = { ...node, lineNumber }
         const processed = lineNumberify(node.children, lineNumber)
-        // @ts-expect-error: too lazy to rewrite RootContent children to expect lineNumber recursively
+        // @ts-expect-error: RootContent children do not include lineNumber
         currentNode.children = processed.nodes
-        result.lineNumber = processed.lineNumber
+        lineNumber = processed.lineNumber
+        result.lineNumber = lineNumber
         result.nodes.push(currentNode)
         return result
       }
 
-      // push the node as it is if it's not a text or an element with children
       result.nodes.push({ ...node, lineNumber })
       return result
     },
@@ -87,35 +95,28 @@ function wrapLines(
   ast: (RootContent & { lineNumber: number })[],
   determineClasses: DetermineClasses
 ) {
-  // get all unique line numbers from the AST nodes
   const allLines = Array.from(new Set(ast.map((x) => x.lineNumber)))
 
   let i = 0
   const wrapped = allLines.reduce<RootContent[]>((nodes, marker) => {
     const line = marker
     const children = []
-    // collect all children for the current line
-    // multiple children tend to belong to 1 line
     for (; i < ast.length; i++) {
-      // NOTE: a bit confused here, will circle back to it
       if (ast[i].lineNumber < line) {
         nodes.push(ast[i])
         continue
       }
 
-      // collect nodes belonging to the current line
       if (ast[i].lineNumber === line) {
         children.push(ast[i])
         continue
       }
 
-      // process next line in the next iteration
       if (ast[i].lineNumber > line) {
         break
       }
     }
 
-    // this is the line element, opt to use a span to avoid any loss of flow
     nodes.push({
       type: "element",
       tagName: "span",
@@ -123,7 +124,7 @@ function wrapLines(
         dataLine: line,
         className: determineClasses(line),
       },
-      // @ts-expect-error: children has lineNumber attached to it (which is probably fine as hast just ignored unknown properties unless they're data properties)
+      // @ts-expect-error: children carry lineNumber metadata
       children: children,
       lineNumber: line,
     })
@@ -135,8 +136,8 @@ function wrapLines(
 }
 
 export function rehypeWrapLines(ast: HastRoot, determineClasses: DetermineClasses = () => "line") {
-  const formattedAst = applyMultilineFix(ast)
-  const numbered = lineNumberify(formattedAst).nodes
+  const split = splitMultilineNodes(ast.children)
+  const numbered = lineNumberify(split).nodes
 
   return wrapLines(numbered, determineClasses)
 }
