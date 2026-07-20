@@ -81,7 +81,9 @@ export function ActiveAnchorsProvider({
       .filter((el): el is HTMLElement => !!el)
 
     nodeRefs.current = nodes
-    setResolvedIds(list)
+    setResolvedIds((prev) =>
+      prev.length === list.length && prev.every((id, i) => id === list[i]) ? prev : list
+    )
   }, [])
 
   const onScroll = useCallback(() => {
