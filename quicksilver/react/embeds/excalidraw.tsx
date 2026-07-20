@@ -1,9 +1,24 @@
 "use client"
 
-import React, { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
+import React, {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react"
 import dynamic from "next/dynamic"
 import excalidrawAssetConfig from "@/excalidraw-assets.json"
+import { useDocumentTheme } from "@/quicksilver/hooks/use-document-theme"
 import { cn } from "@/quicksilver/lib/classname"
+import {
+  getTokenValue,
+  resolveColor,
+  resolveEmbedShellBackground,
+  type DocumentTheme,
+} from "@/quicksilver/lib/color"
 import { CopyButton } from "@/quicksilver/react/patterns/actions/copy-button"
 import { Button } from "@/quicksilver/react/primitives/button"
 import { Focus, Maximize } from "@/quicksilver/react/primitives/icons"
@@ -72,10 +87,6 @@ const excalidrawThemeVars = {
   ["--color-gray-100"]: "var(--color-foreground-strong)",
 } as CSSProperties
 
-const FALLBACK_BACKGROUND = {
-  dark: "#161634",
-  light: "#f5f5fb",
-} as const
 const excalidrawViewportClassName = "relative isolate h-[28rem] w-full overflow-hidden rounded-md"
 
 function parseScene(code: string): ImportedDataState | null {
@@ -103,10 +114,7 @@ function parseScene(code: string): ImportedDataState | null {
   }
 }
 
-function normalizeSceneColors(
-  scene: ImportedDataState,
-  theme: "light" | "dark"
-): ImportedDataState {
+function normalizeSceneColors(scene: ImportedDataState, theme: DocumentTheme): ImportedDataState {
   if (typeof window === "undefined") {
     return scene
   }
@@ -157,85 +165,6 @@ function normalizeSceneColors(
   }
 }
 
-function getTokenValue(name: string, fallback: string) {
-  if (typeof window === "undefined") {
-    return fallback
-  }
-
-  const value = window.getComputedStyle(document.documentElement).getPropertyValue(name).trim()
-  return value || fallback
-}
-
-function resolveColor(value: string, fallback: string) {
-  if (typeof window === "undefined") {
-    return fallback
-  }
-
-  const probe = document.createElement("div")
-  probe.style.background = value
-  probe.style.position = "fixed"
-  probe.style.opacity = "0"
-  probe.style.pointerEvents = "none"
-  document.body.append(probe)
-
-  const resolved = window.getComputedStyle(probe).backgroundColor
-  probe.remove()
-
-  return resolved || fallback
-}
-
-function blendColors(foreground: string, background: string, fallback: string) {
-  if (typeof window === "undefined") {
-    return fallback
-  }
-
-  const canvas = document.createElement("canvas")
-  canvas.width = 1
-  canvas.height = 1
-
-  const context = canvas.getContext("2d")
-  if (!context) {
-    return fallback
-  }
-
-  context.clearRect(0, 0, 1, 1)
-  context.fillStyle = background
-  context.fillRect(0, 0, 1, 1)
-  context.fillStyle = foreground
-  context.fillRect(0, 0, 1, 1)
-
-  const pixel = context.getImageData(0, 0, 1, 1).data
-  const red = pixel[0] ?? 0
-  const green = pixel[1] ?? 0
-  const blue = pixel[2] ?? 0
-  const alpha = pixel[3] ?? 255
-
-  return `rgba(${red}, ${green}, ${blue}, ${Number((alpha / 255).toFixed(3))})`
-}
-
-function getDocumentTheme() {
-  if (typeof document === "undefined") {
-    return "light" as const
-  }
-
-  return document.documentElement.classList.contains("dark") ? "dark" : "light"
-}
-
-function resolveViewBackgroundColor(theme: "light" | "dark") {
-  if (typeof window === "undefined") {
-    return FALLBACK_BACKGROUND[theme]
-  }
-
-  const fallback = FALLBACK_BACKGROUND[theme]
-  const foreground = getTokenValue("--background-1", fallback)
-  const background = getTokenValue("--background-2", fallback)
-  const surfaceBackground = resolveColor(
-    `color-mix(in oklab, ${foreground} 60%, transparent)`,
-    foreground
-  )
-  return blendColors(surfaceBackground, background, foreground)
-}
-
 function hasViewportDrifted(current: ViewportState, baseline: ViewportState | null) {
   if (!baseline) {
     return false
@@ -284,13 +213,12 @@ export function ExcalidrawScene({
   ...props
 }: ExcalidrawSceneProps) {
   const scene = useMemo(() => parseScene(code), [code])
+  const descriptionId = useId()
   const [api, setApi] = useState<ExcalidrawImperativeAPI | null>(null)
   const [isMounted, setIsMounted] = useState(false)
   const [needsReset, setNeedsReset] = useState(false)
-  const [theme, setTheme] = useState<"light" | "dark">(() => getDocumentTheme())
-  const [viewBackgroundColor, setViewBackgroundColor] = useState(() =>
-    resolveViewBackgroundColor(getDocumentTheme())
-  )
+  const theme = useDocumentTheme()
+  const viewBackgroundColor = useMemo(() => resolveEmbedShellBackground(theme), [theme])
   const fittedViewportRef = useRef<ViewportState | null>(null)
 
   const handleExcalidrawApi = useCallback((api: ExcalidrawImperativeAPI) => {
@@ -327,30 +255,6 @@ export function ExcalidrawScene({
 
   useEffect(() => {
     setIsMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return
-    }
-
-    const syncTheme = () => {
-      const nextTheme = getDocumentTheme()
-      setTheme(nextTheme)
-      setViewBackgroundColor(resolveViewBackgroundColor(nextTheme))
-    }
-
-    syncTheme()
-
-    const observer = new MutationObserver(syncTheme)
-    observer.observe(document.documentElement, {
-      attributeFilter: ["class"],
-      attributes: true,
-    })
-
-    return () => {
-      observer.disconnect()
-    }
   }, [])
 
   const initialData = useMemo(() => {
@@ -434,12 +338,15 @@ export function ExcalidrawScene({
         "article-excalidraw my-4 overflow-hidden rounded-md border border-stark-contrast/10 bg-background-1/60",
         className
       )}
-      aria-description={accessibilityDescription}
+      aria-describedby={descriptionId}
       aria-label={title}
       role="group"
       style={excalidrawThemeVars}
       {...props}
     >
+      <p id={descriptionId} className="sr-only">
+        {accessibilityDescription}
+      </p>
       <div className={excalidrawViewportClassName}>
         <div className="pointer-events-none absolute inset-0 z-2">
           {!isMounted || !viewBackgroundColor ? null : (

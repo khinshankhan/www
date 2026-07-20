@@ -1,7 +1,13 @@
 "use client"
 
 import React, { useEffect, useId, useMemo, useState } from "react"
+import { useDocumentTheme } from "@/quicksilver/hooks/use-document-theme"
 import { cn } from "@/quicksilver/lib/classname"
+import {
+  resolveCssColor,
+  resolveEmbedShellBackground,
+  type DocumentTheme,
+} from "@/quicksilver/lib/color"
 import { CopyButton } from "@/quicksilver/react/patterns/actions/copy-button"
 
 export interface MermaidDiagramProps extends React.ComponentPropsWithoutRef<"div"> {
@@ -14,10 +20,6 @@ const renderedShellClassName =
   "relative my-4 overflow-hidden rounded-md border border-stark-contrast/10 bg-background-1/60 isolate"
 const mermaidViewportClassName =
   "min-h-[28rem] overflow-x-auto px-3 py-4 flex items-center justify-center"
-const FALLBACK_BACKGROUND = {
-  dark: "#161634",
-  light: "#f5f5fb",
-} as const
 
 function enhanceSvgAccessibility({
   edgeLabelMaskColor,
@@ -104,126 +106,8 @@ function enhanceSvgAccessibility({
   return new XMLSerializer().serializeToString(root)
 }
 
-function resolveCssColor(value: string, fallback: string) {
-  if (typeof window === "undefined") {
-    return fallback
-  }
-
-  const probe = document.createElement("div")
-  probe.style.color = value
-  probe.style.position = "fixed"
-  probe.style.opacity = "0"
-  probe.style.pointerEvents = "none"
-  document.body.append(probe)
-
-  const resolved = window.getComputedStyle(probe).color
-  probe.remove()
-
-  if (!resolved) {
-    return fallback
-  }
-
-  const canvas = document.createElement("canvas")
-  canvas.width = 1
-  canvas.height = 1
-
-  const context = canvas.getContext("2d")
-  if (!context) {
-    return resolved
-  }
-
-  context.clearRect(0, 0, 1, 1)
-  context.fillStyle = resolved
-  context.fillRect(0, 0, 1, 1)
-  const [red, green, blue, alpha] = context.getImageData(0, 0, 1, 1).data
-
-  return `rgba(${red ?? 0}, ${green ?? 0}, ${blue ?? 0}, ${Number(
-    ((alpha ?? 255) / 255).toFixed(3)
-  )})`
-}
-
-function getTokenValue(name: string, fallback: string) {
-  if (typeof window === "undefined") {
-    return fallback
-  }
-
-  const value = window.getComputedStyle(document.documentElement).getPropertyValue(name).trim()
-  return value || fallback
-}
-
-function getDocumentTheme() {
-  if (typeof document === "undefined") {
-    return "light" as const
-  }
-
-  return document.documentElement.classList.contains("dark") ? "dark" : "light"
-}
-
-function resolveColor(value: string, fallback: string) {
-  if (typeof window === "undefined") {
-    return fallback
-  }
-
-  const probe = document.createElement("div")
-  probe.style.background = value
-  probe.style.position = "fixed"
-  probe.style.opacity = "0"
-  probe.style.pointerEvents = "none"
-  document.body.append(probe)
-
-  const resolved = window.getComputedStyle(probe).backgroundColor
-  probe.remove()
-
-  return resolved || fallback
-}
-
-function blendColors(foreground: string, background: string, fallback: string) {
-  if (typeof window === "undefined") {
-    return fallback
-  }
-
-  const canvas = document.createElement("canvas")
-  canvas.width = 1
-  canvas.height = 1
-
-  const context = canvas.getContext("2d")
-  if (!context) {
-    return fallback
-  }
-
-  context.clearRect(0, 0, 1, 1)
-  context.fillStyle = background
-  context.fillRect(0, 0, 1, 1)
-  context.fillStyle = foreground
-  context.fillRect(0, 0, 1, 1)
-
-  const pixel = context.getImageData(0, 0, 1, 1).data
-  const red = pixel[0] ?? 0
-  const green = pixel[1] ?? 0
-  const blue = pixel[2] ?? 0
-  const alpha = pixel[3] ?? 255
-
-  return `rgba(${red}, ${green}, ${blue}, ${Number((alpha / 255).toFixed(3))})`
-}
-
-function resolveShellBackgroundColor(theme: "light" | "dark") {
-  if (typeof window === "undefined") {
-    return FALLBACK_BACKGROUND[theme]
-  }
-
-  const fallback = FALLBACK_BACKGROUND[theme]
-  const foreground = getTokenValue("--background-1", fallback)
-  const background = getTokenValue("--background-2", fallback)
-  const shellBackground = resolveColor(
-    `color-mix(in oklab, ${foreground} 60%, transparent)`,
-    foreground
-  )
-
-  return blendColors(shellBackground, background, foreground)
-}
-
-function resolveMermaidThemeVariables(theme: "light" | "dark") {
-  const shellBackground = resolveShellBackgroundColor(theme)
+function resolveMermaidThemeVariables(theme: DocumentTheme) {
+  const shellBackground = resolveEmbedShellBackground(theme)
 
   return {
     background: shellBackground,
@@ -264,31 +148,9 @@ export function MermaidDiagram({
   const accessibleDescriptionId = `${diagramId}-description`
   const [svg, setSvg] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [theme, setTheme] = useState<"light" | "dark">(() => getDocumentTheme())
+  const theme = useDocumentTheme()
 
-  useEffect(() => {
-    if (typeof window === "undefined" || typeof document === "undefined") {
-      return
-    }
-
-    const syncTheme = () => {
-      setTheme(getDocumentTheme())
-    }
-
-    syncTheme()
-
-    const observer = new MutationObserver(syncTheme)
-    observer.observe(document.documentElement, {
-      attributeFilter: ["class"],
-      attributes: true,
-    })
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [])
-
-  const edgeLabelMaskColor = useMemo(() => resolveShellBackgroundColor(theme), [theme])
+  const edgeLabelMaskColor = useMemo(() => resolveEmbedShellBackground(theme), [theme])
   const themeVariables = useMemo(() => resolveMermaidThemeVariables(theme), [theme])
 
   useEffect(() => {
