@@ -4,18 +4,18 @@ import { useCallback, useEffect, useState } from "react"
 import { useActionLock } from "./use-action-lock"
 
 interface UseCopyButtonProps {
-  /** Action to perform on copy */
+  /** Action to run when copying. */
   action: () => Promise<void> | void
-  /** Lock duration in ms */
+  /** Copied-state duration in ms. */
   durationMs?: number
 }
 
 interface UseCopyButtonResult {
-  /** Whether the action was successfully performed */
+  /** Whether the action completed successfully. */
   copied: boolean
-  /** Any error encountered during the action */
+  /** Error from the most recent action attempt. */
   error: Error | null
-  /** Click handler to trigger the action */
+  /** Triggers the copy action. */
   handleClick: () => void
 }
 
@@ -25,10 +25,10 @@ export function useCopyButton({
 }: UseCopyButtonProps): UseCopyButtonResult {
   const [copied, setCopied] = useState(false)
   const [error, setError] = useState<Error | null>(null)
-  const { isLocked, run } = useActionLock({ durationMs, refreshOnInvoke: true })
+  const { isLocked, run } = useActionLock({ durationMs })
 
   const handleClick = useCallback(() => {
-    if (isLocked) return
+    // no lock check needed: run() ignores calls while locked
     void run(async () => {
       try {
         await action()
@@ -39,10 +39,9 @@ export function useCopyButton({
         setCopied(false)
       }
     })
-  }, [action, isLocked, run])
+  }, [action, run])
 
   useEffect(() => {
-    // reset automatically when lock releases
     if (!isLocked && copied) {
       setCopied(false)
       setError(null)
