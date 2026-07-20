@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useEffect, useMemo, useRef } from "react"
 
 export function useStableTimeout() {
   const idRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -22,5 +22,5 @@ export function useStableTimeout() {
 
   useEffect(() => clear, [clear])
 
-  return { set, clear, isActive: () => idRef.current !== null }
+  return useMemo(() => ({ set, clear }), [set, clear])
 }
