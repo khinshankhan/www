@@ -392,8 +392,10 @@ interface TocTitleTriggerProps extends ButtonProps {
   renderChevron?: boolean
 }
 
-const tocTitleTriggerGroupClasses =
-  "group mx-auto flex w-full maxw-prose items-center justify-start gap-2 px-2 py-2"
+const tocTitleTriggerGroupClasses = cn(
+  "group flex w-full items-center justify-start gap-2 px-2 py-2",
+  textVariants({ variant: "body" })
+)
 
 function TocTitleTrigger({
   isOpen,
@@ -525,17 +527,19 @@ function MobileToc({
       )}
     >
       <div className="mx-auto maxw-content">
-        <Collapsible.Trigger
-          render={(props) => (
-            <TocTitleTrigger
-              {...props}
-              onClick={() => setIsOpen(!isOpen)}
-              isOpen={isOpen}
-              headings={headings}
-              renderChevron={true}
-            />
-          )}
-        />
+        <div className={cn("mx-auto maxw-prose", textVariants({ variant: "body" }))}>
+          <Collapsible.Trigger
+            render={(props) => (
+              <TocTitleTrigger
+                {...props}
+                onClick={() => setIsOpen(!isOpen)}
+                isOpen={isOpen}
+                headings={headings}
+                renderChevron={true}
+              />
+            )}
+          />
+        </div>
       </div>
 
       <Collapsible.Panel
