@@ -234,6 +234,7 @@ export function OpticalAlignmentPlayground() {
             { label: "Optical", value: "optical" },
           ]}
           value={mode}
+          ariaLabel="Alignment mode"
         />
       </DemoToolbar>
 
@@ -324,6 +325,7 @@ export function OpticalStarAlignmentPlayground() {
             { label: "Optical", value: "optical" },
           ]}
           value={mode}
+          ariaLabel="Alignment mode"
         />
       </DemoToolbar>
 
@@ -400,6 +402,7 @@ export function OpticalPlayAlignmentPlayground() {
             { label: "Optical", value: "optical" },
           ]}
           value={mode}
+          ariaLabel="Alignment mode"
         />
       </DemoToolbar>
 

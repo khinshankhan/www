@@ -25,6 +25,8 @@ export function CopyButton({ text, onCopy, onClick, className, ...props }: CopyB
 
   return (
     <Button
+      // keep the name static and let the live region below announce "Copied"; a changing name
+      // would re-announce on some screen readers and double up with the live region
       aria-label="Copy text to clipboard"
       variant="phantom"
       size="icon-sm"
@@ -43,6 +45,10 @@ export function CopyButton({ text, onCopy, onClick, className, ...props }: CopyB
       ) : (
         <Copy className="h-4" />
       )}
+      {/* the icon swap is visual-only; announce the outcome to screen readers */}
+      <span aria-live="polite" className="sr-only">
+        {copied ? "Copied" : ""}
+      </span>
     </Button>
   )
 }

@@ -56,6 +56,7 @@ function TocItem({ heading, indents, onSelect, layoutId }: TocItemProps) {
       <Link
         href={`#${heading.id}`}
         data-active={isActive ? "true" : "false"}
+        aria-current={isActive ? "location" : undefined}
         variant="toc"
         className={cn(
           textVariants({ variant: "xs" }),
@@ -415,6 +416,7 @@ function TocTitleTrigger({
     <Button {...props} variant="ghost" className={cn(className, tocTitleTriggerGroupClasses)}>
       <ProgressCircle
         value={progress}
+        aria-label="Reading progress"
         className="accent-theme-default size-[1em] shrink-0 text-accent-11"
       />
 

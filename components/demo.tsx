@@ -124,11 +124,14 @@ export function DemoSegmentedControl<T extends string>({
   options,
   value,
   onChange,
+  ariaLabel,
   className = "",
 }: {
   options: { label: string; value: T }[]
   value: T
   onChange: (value: T) => void
+  /** What this control switches, e.g. "Grid pattern style" (read as the tablist's accessible name). */
+  ariaLabel: string
   className?: string
 }) {
   return (
@@ -139,7 +142,7 @@ export function DemoSegmentedControl<T extends string>({
       onValueChange={(nextValue) => onChange(nextValue as T)}
       value={value}
     >
-      <TabsList>
+      <TabsList aria-label={ariaLabel}>
         <TabsIndicator />
         {options.map((option) => (
           <TabsTab key={option.value} value={option.value}>

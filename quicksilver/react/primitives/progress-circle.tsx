@@ -1,8 +1,13 @@
 "use client"
 
+import type React from "react"
 import { motion, useReducedMotion } from "motion/react"
 
-interface ProgressCircleProps {
+interface ProgressCircleProps extends Omit<
+  React.ComponentPropsWithoutRef<"svg">,
+  // motion.svg owns these; their motion prop types conflict with the DOM/SVG ones
+  "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart" | "values"
+> {
   value: number
   size?: number
   strokeWidth?: number
@@ -18,6 +23,8 @@ export function ProgressCircle({
   min = 0,
   max = 100,
   className,
+  style,
+  ...props
 }: ProgressCircleProps) {
   const reduce = useReducedMotion()
   const w = size,
@@ -30,17 +37,25 @@ export function ProgressCircle({
 
   return (
     <motion.svg
+      {...props}
       role="progressbar"
       viewBox={`0 0 ${w} ${w}`}
       width={w}
       height={w}
       aria-valuemin={min}
       aria-valuemax={max}
-      {...(determinate ? { "aria-valuenow": Math.round(pct * 100) } : {})}
+      {...(determinate
+        ? {
+            // the clamped value on the caller's scale: screen readers derive the percentage
+            // from now/min/max themselves, so reporting pct * 100 here misstates any
+            // range that isn't exactly 0-100
+            "aria-valuenow": min + pct * (max - min),
+          }
+        : {})}
       className={className}
       animate={determinate || reduce ? {} : { rotate: 360 }}
       transition={determinate || reduce ? {} : { repeat: Infinity, ease: "linear", duration: 1.1 }}
-      style={{ originX: "50%", originY: "50%" }}
+      style={{ originX: "50%", originY: "50%", ...style }}
     >
       {/* Track */}
       <circle

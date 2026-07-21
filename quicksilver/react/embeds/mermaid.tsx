@@ -208,6 +208,7 @@ export function MermaidDiagram({
   if (error) {
     return (
       <div
+        role="alert"
         className={cn(
           "border-accent-theme-danger/20 bg-accent-theme-danger/5 mt-3 rounded-md border px-4 py-3 text-14 text-accent-11",
           className

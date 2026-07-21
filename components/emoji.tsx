@@ -19,12 +19,14 @@ export function Emoji({
   wrapperClassName = "",
 }: EmojiProps) {
   const [hovering, setHovering] = useState(false)
+  const [focused, setFocused] = useState(false)
   const [clicked, setClicked] = useState(false)
 
   const handleMouseEnter = () => setHovering(true)
   const handleMouseLeave = () => setHovering(false)
 
-  const isTooltipOpen = hovering || clicked
+  // controlled open bypasses Base UI's built-in triggers, so each open path is tracked here
+  const isTooltipOpen = hovering || focused || clicked
 
   const emojiInfo = emojiLookup.get(name)
   if (emojiInfo === undefined) {
@@ -39,24 +41,44 @@ export function Emoji({
           if (eventDetail.reason === "outside-press") {
             setClicked(false)
           }
+          if (eventDetail.reason === "escape-key") {
+            setClicked(false)
+            setFocused(false)
+            setHovering(false)
+          }
         }}
       >
         <TooltipTrigger
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          onFocus={() => setFocused(true)}
+          onBlur={() => {
+            setFocused(false)
+            setClicked(false)
+          }}
           onClick={() => setClicked((prev) => !prev)}
           render={({ className = "", ...props }) => (
-            <img
+            <button
               {...props}
-              className={cn("inline aspect-auto size-[1em]", className, providedClassName)}
-              src={emojiInfo.url}
-              alt={emojiInfo.char ?? emojiInfo.alt}
+              type="button"
               aria-label={emojiInfo.alt}
-              data-type="emoji"
-              draggable="false"
-              height="72"
-              width="72"
-            />
+              className={cn(
+                "inline cursor-pointer appearance-none border-0 bg-transparent p-0 align-baseline",
+                className
+              )}
+            >
+              <img
+                // the button owns the name; alt stays for the broken-image fallback (the emoji char)
+                aria-hidden="true"
+                className={cn("inline aspect-auto size-[1em]", providedClassName)}
+                src={emojiInfo.url}
+                alt={emojiInfo.char ?? emojiInfo.alt}
+                data-type="emoji"
+                draggable="false"
+                height="72"
+                width="72"
+              />
+            </button>
           )}
         />
         <TooltipContent

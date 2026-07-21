@@ -8,21 +8,17 @@ export function ProfileImage() {
   const [isActive, setIsActive] = useState(false)
 
   return (
-    <div
-      role="button"
+    <button
+      type="button"
       aria-label="Toggle profile image appearance"
-      tabIndex={0}
+      aria-pressed={isActive}
       data-active={isActive}
-      className="group relative isolate cursor-pointer rounded-[128px] md:ml-8"
+      className="group relative isolate cursor-pointer appearance-none rounded-[128px] border-0 bg-transparent p-0 md:ml-8"
       style={{
         minWidth: "256px",
         minHeight: "256px",
       }}
       onClick={() => setIsActive((prev) => !prev)}
-      onKeyUp={(e) => {
-        if (e.code !== "Enter") return
-        setIsActive((prev) => !prev)
-      }}
     >
       <Image
         alt="Profile Image"
@@ -38,10 +34,11 @@ export function ProfileImage() {
         draggable="false"
         disableZoom
       />
-      <div
+      {/* span, not div: <button> only permits phrasing content */}
+      <span
         data-active={isActive}
-        className="noise before:z-1 before:rounded-[128px] before:opacity-100 group-hover:before:-z-1 group-hover:before:rounded-none group-hover:before:opacity-0 data-[active=true]:before:-z-1 data-[active=true]:before:rounded-none data-[active=true]:before:opacity-0"
+        className="noise block before:z-1 before:rounded-[128px] before:opacity-100 group-hover:before:-z-1 group-hover:before:rounded-none group-hover:before:opacity-0 data-[active=true]:before:-z-1 data-[active=true]:before:rounded-none data-[active=true]:before:opacity-0"
       />
-    </div>
+    </button>
   )
 }

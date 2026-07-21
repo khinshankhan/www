@@ -159,6 +159,7 @@ export function SearchFieldInput({
         value={query}
         onValueChange={(next) => setQuery(next)}
         placeholder={`Search ${entity.plural}...`}
+        aria-keyshortcuts={shortcutKey ?? undefined}
         autoComplete="off"
         spellCheck={false}
         // drops the input's default intrinsic min-width so it can shrink in a flex row

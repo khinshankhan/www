@@ -17,14 +17,24 @@ interface LinkIconProps {
 export const LinkIcon = ({ href, kind }: LinkIconProps) => {
   const isExternal = kind ? kind === "external" : resolveKindLite(href) === "external"
   if (isExternal) {
+    // decorative icon + hidden text: an aria-label on a bare svg is unreliable across
+    // screen readers, and text also survives translation and find-in-page
     return (
-      <SquareArrowOutUpRight aria-label="External link." className="mb-0 inline size-3 align-top" />
+      <Fragment>
+        <SquareArrowOutUpRight className="mb-0 inline size-3 align-top" />
+        <span className="sr-only"> (external link)</span>
+      </Fragment>
     )
   }
 
   const isFile = isFileLite(href)
   if (isFile) {
-    return <Download aria-label="File link." className="mb-0 inline size-3 align-middle" />
+    return (
+      <Fragment>
+        <Download className="mb-0 inline size-3 align-middle" />
+        <span className="sr-only"> (file link)</span>
+      </Fragment>
+    )
   }
 
   return null

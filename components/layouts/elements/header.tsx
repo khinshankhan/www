@@ -74,7 +74,12 @@ function NavLinksDesktop({ className = "" }: { className?: string }) {
     <ul className={cn("flex flex-col gap-4 md:flex-row", className)}>
       {navLinks.map((link) => (
         <li key={link.href} className={textVariants({ variant: "nav" })}>
-          <Link href={link.href} variant="nav" data-active={pathname === link.href}>
+          <Link
+            href={link.href}
+            variant="nav"
+            data-active={pathname === link.href}
+            aria-current={pathname === link.href ? "page" : undefined}
+          >
             {link.label}
           </Link>
         </li>
@@ -118,6 +123,7 @@ function NavLinksMobile() {
         />
 
         <nav
+          aria-label="Main menu"
           className="mx-auto flex h-full w-full max-w-[23rem] flex-col gap-2 px-6 pt-8 pb-7"
           style={{
             paddingBottom: "max(1.75rem, env(safe-area-inset-bottom))",
@@ -245,7 +251,7 @@ export function Header({ edgeFadeProps }: HeaderProps) {
     >
       <header className="align-center flex w-full justify-center">
         <div className="w-full maxw-page">
-          <nav className="align-center flex flex-row items-center justify-between">
+          <nav aria-label="Main" className="align-center flex flex-row items-center justify-between">
             {/* lhs on all views */}
             <NextLink aria-label="Navigate to homepage." href="/" className="group">
               <Logo className={cn("size-[42px] md:size-[45px] lg:size-[52px]")} />

@@ -319,6 +319,7 @@ export function ExcalidrawScene({
   if (!scene) {
     return (
       <div
+        role="alert"
         className={cn(
           "border-accent-theme-danger/20 bg-accent-theme-danger/5 my-4 rounded-md border px-4 py-3 text-14 text-accent-11",
           className

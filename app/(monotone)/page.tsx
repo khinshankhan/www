@@ -31,10 +31,13 @@ function IntroSection() {
 
                 {info.fullname.split(" ").map((part, i, arr) => {
                   const color = [color1_bold, color2_bold][i % 2]
+                  // trailing nbsp (not a plain space) keeps the name from wrapping; one node per
+                  // part avoids the redundant whitespace text nodes React would otherwise emit
+                  const spaced = i !== arr.length - 1 ? `${part}\u00a0` : part
 
                   return (
                     <span key={i} style={{ color: color }}>
-                      {part} {i !== arr.length - 1 && <>&nbsp;</>}
+                      {spaced}
                     </span>
                   )
                 })}
