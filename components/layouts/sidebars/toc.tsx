@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
+import { TOC_CONTENT_ID } from "@/components/layouts/elements/skip-targets"
 import { useIsomorphicEffect } from "@/hooks/core/use-isomorphic-effect"
 import { useBreakpoint } from "@/hooks/use-breakpoint"
 import { checkIfElementInView, focusElement } from "@/lib/focus"
@@ -13,6 +14,7 @@ import {
 import { ScrollFadeIn } from "@/quicksilver/react/patterns/motion/scroll-fade-in"
 import { Button, type ButtonProps } from "@/quicksilver/react/primitives/button"
 import { Divider } from "@/quicksilver/react/primitives/divider"
+import { focusRingInset } from "@/quicksilver/react/primitives/focus.variants"
 import { ChevronRight, ListTree } from "@/quicksilver/react/primitives/icons"
 import { Link } from "@/quicksilver/react/primitives/link"
 import { ProgressCircle } from "@/quicksilver/react/primitives/progress-circle"
@@ -112,12 +114,15 @@ function TocList({
   minDepth,
   onSelect,
   layoutId,
+  navId,
   shouldCenterActive = false,
 }: {
   headings: Heading[]
   minDepth: number
   onSelect?: () => void
   layoutId?: string
+  /** Set on the desktop instance only (both desktop + mobile mount, so an id here must be unique). */
+  navId?: string
   shouldCenterActive?: boolean
 }) {
   const { activeId } = useActiveAnchors()
@@ -367,8 +372,14 @@ function TocList({
       )}
       <nav
         ref={navRef}
+        id={navId}
+        tabIndex={navId ? -1 : undefined}
         aria-label="Table of contents"
-        className="max-h-[min(24rem,calc(100svh-12rem))] [scrollbar-gutter:stable] overflow-y-auto overscroll-contain pr-1 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-accent-11 [&::-webkit-scrollbar-thumb]:shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-accent-12)_20%,transparent)] [&::-webkit-scrollbar-track]:bg-transparent"
+        className={cn(
+          "max-h-[min(24rem,calc(100svh-12rem))] [scrollbar-gutter:stable] overflow-y-auto overscroll-contain pr-1 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-accent-11 [&::-webkit-scrollbar-thumb]:shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-accent-12)_20%,transparent)] [&::-webkit-scrollbar-track]:bg-transparent",
+          // only the instance that can actually receive focus needs a focus ring
+          navId && focusRingInset
+        )}
         style={{ maxHeight: desktopMaxHeight }}
       >
         <ul className="list-none xl:pb-6">
@@ -499,7 +510,12 @@ function DesktopToc({
       </div>
 
       <TocListFrame>
-        <TocList headings={headings} minDepth={minDepth} layoutId="toc-active-indicator-desktop" />
+        <TocList
+          headings={headings}
+          minDepth={minDepth}
+          layoutId="toc-active-indicator-desktop"
+          navId={TOC_CONTENT_ID}
+        />
       </TocListFrame>
     </div>
   )

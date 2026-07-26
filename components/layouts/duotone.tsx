@@ -8,16 +8,32 @@ import { Link } from "@/quicksilver/react/primitives/link"
 import { H1, Paragraph } from "@/quicksilver/react/primitives/text"
 import { textVariants } from "@/quicksilver/react/primitives/text.variants"
 import { headerHeight } from "./elements/header"
+import { mainContentTargetProps } from "./elements/skip-targets"
 
 interface DuotoneLayoutProps {
   title: string
   description: string
   ghPath?: string
+  /**
+   * Set when a child owns the skip target instead. WithSidebar renders its sidebar DOM-first, so
+   * on those pages the target has to sit past it or the skip link lands on the sidebar.
+   */
+  skipTargetInChild?: boolean
   children?: ReactNode
 }
-export function DuotoneLayout({ title, description, ghPath, children }: DuotoneLayoutProps) {
+export function DuotoneLayout({
+  title,
+  description,
+  ghPath,
+  skipTargetInChild = false,
+  children,
+}: DuotoneLayoutProps) {
+  const skipTargetProps = skipTargetInChild ? undefined : mainContentTargetProps
   return (
-    <main className="relative isolate z-1 flex grow flex-col">
+    <main
+      {...skipTargetProps}
+      className={cn("relative isolate z-1 flex grow flex-col", skipTargetProps?.className)}
+    >
       <article className="relative isolate z-2 flex w-full grow flex-col items-center bg-background-1">
         <header
           className={cn(

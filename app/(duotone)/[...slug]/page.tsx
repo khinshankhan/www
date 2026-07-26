@@ -3,12 +3,14 @@ import type { Metadata } from "next"
 import { DuotoneLayout } from "@/components/layouts/duotone"
 import { Header } from "@/components/layouts/elements/header"
 import { Shell } from "@/components/layouts/elements/shell"
+import { mainContentTargetProps } from "@/components/layouts/elements/skip-targets"
 import { TOC } from "@/components/layouts/sidebars/toc"
 import { WithSidebar } from "@/components/layouts/with-sidebar"
 import { MDXRenderer } from "@/components/mdx-renderer"
 import { getContentMdxComponents } from "@/lib/content/components"
 import { getAllContentData, getContentDataBySlug } from "@/lib/content/source"
 import { createMetadata, processMarkdownAttribute } from "@/lib/seo/open-graph"
+import { cn } from "@/quicksilver/lib/classname"
 
 export async function generateStaticParams() {
   const list = await getAllContentData()
@@ -45,6 +47,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
         title={contentData.frontmatter.title}
         description={contentData.frontmatter.description}
         ghPath={contentData.computed.ghSlug}
+        skipTargetInChild
       >
         <WithSidebar
           sidebar={sidebarMode === "toc" ? <TOC headings={contentData.computed.toc} /> : null}
@@ -52,12 +55,15 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
           direction="right"
         >
           <div className="min-w-full">
+            {/* skip target lives here, not on <main>, which also wraps the TOC aside */}
             <div
-              className={
+              {...mainContentTargetProps}
+              className={cn(
+                mainContentTargetProps.className,
                 contentData.frontmatter.contentWidth === "wide"
                   ? "mx-auto min-w-full"
                   : "mx-auto maxw-prose"
-              }
+              )}
             >
               <MDXRenderer articleComponents={articleComponents} source={contentData.content} />
             </div>

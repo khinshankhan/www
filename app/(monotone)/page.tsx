@@ -3,6 +3,7 @@
 import React, { type ReactNode } from "react"
 import { Emoji } from "@/components/emoji"
 import { Shell } from "@/components/layouts/elements/shell"
+import { mainContentTargetProps } from "@/components/layouts/elements/skip-targets"
 import { color1_bold, color2_bold, color3_base, color3_bold } from "@/lib/constants"
 import { cn } from "@/quicksilver/lib/classname"
 import { GridPattern } from "@/quicksilver/react/patterns/decorations/grid-pattern"
@@ -130,7 +131,10 @@ function MainContent() {
 export default function Page() {
   return (
     <Shell>
-      <div className="relative pb-24">
+      <main
+        {...mainContentTargetProps}
+        className={cn("relative pb-24", mainContentTargetProps.className)}
+      >
         <section className="mx-auto mt-8 flex maxw-page flex-col items-center justify-center space-y-12 md:mt-20">
           <GridPattern
             pattern="both"
@@ -148,7 +152,7 @@ export default function Page() {
 
           <MainContent />
         </section>
-      </div>
+      </main>
     </Shell>
   )
 }

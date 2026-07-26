@@ -1,5 +1,6 @@
 import React, { type CSSProperties, type ReactNode } from "react"
 import type { Metadata } from "next"
+import { SkipLinks } from "@/components/layouts/elements/skip-links"
 import { createMetadata } from "@/lib/seo/open-graph"
 import { cn } from "@/quicksilver/lib/classname"
 import { textVariants } from "@/quicksilver/react/primitives/text.variants"
@@ -35,6 +36,7 @@ export default function RootLayout({
           "accent-theme-default relative isolate flex flow-root min-h-screen flex-col bg-background-1 text-foreground"
         )}
       >
+        <SkipLinks />
         <RootProvider>{children}</RootProvider>
       </body>
     </html>

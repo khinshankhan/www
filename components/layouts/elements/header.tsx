@@ -251,7 +251,10 @@ export function Header({ edgeFadeProps }: HeaderProps) {
     >
       <header className="align-center flex w-full justify-center">
         <div className="w-full maxw-page">
-          <nav aria-label="Main" className="align-center flex flex-row items-center justify-between">
+          <nav
+            aria-label="Main"
+            className="align-center flex flex-row items-center justify-between"
+          >
             {/* lhs on all views */}
             <NextLink aria-label="Navigate to homepage." href="/" className="group">
               <Logo className={cn("size-[42px] md:size-[45px] lg:size-[52px]")} />
