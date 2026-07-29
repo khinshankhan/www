@@ -1,13 +1,11 @@
-"use client"
-
 import React, { type ReactNode } from "react"
+import { headerHeight } from "@/lib/constants"
 import { processMarkdownAttribute } from "@/lib/seo/open-graph"
 import { cn } from "@/quicksilver/lib/classname"
 import { EdgeFade } from "@/quicksilver/react/primitives/edge-fade"
 import { Link } from "@/quicksilver/react/primitives/link"
-import { H1, Paragraph } from "@/quicksilver/react/primitives/text"
+import { H1, Span } from "@/quicksilver/react/primitives/text"
 import { textVariants } from "@/quicksilver/react/primitives/text.variants"
-import { headerHeight } from "./elements/header"
 import { mainContentTargetProps } from "./elements/skip-targets"
 
 interface DuotoneLayoutProps {
@@ -42,23 +40,18 @@ export function DuotoneLayout({
           )}
         >
           <H1 className="text-left text-pretty">{title}</H1>
-          <Paragraph
+          <Span
             variant="nav"
             className="text-left leading-relaxed text-pretty text-foreground-muted"
             style={{
               maxWidth: "60ch",
             }}
-            render={(props) => {
-              return (
-                <span {...props}>
-                  {
-                    // TODO: replace with a different processor to account for emoji
-                    processMarkdownAttribute(description)
-                  }
-                </span>
-              )
-            }}
-          />
+          >
+            {
+              // TODO: replace with a different processor to account for emoji
+              processMarkdownAttribute(description)
+            }
+          </Span>
         </header>
 
         {/* acts as a fade effect to gradually introduce content and hide content */}

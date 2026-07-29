@@ -1,8 +1,8 @@
 "use client"
 
 import React, { type ReactNode } from "react"
+import { headerHeight } from "@/lib/constants"
 import { cn } from "@/quicksilver/lib/classname"
-import { headerHeight } from "./elements/header"
 
 export interface WithSidebarProps {
   direction?: "left" | "right"

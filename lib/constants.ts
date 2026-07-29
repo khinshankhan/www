@@ -22,3 +22,14 @@ export const color4_base = red400
 
 /** Default PRNG seed */
 export const defaultSeed = 44364
+
+/* Layout metrics
+ *
+ * These live here, and not in the components that use them, because a value exported from a
+ * "use client" module comes back to a server component as a client reference rather than the
+ * value itself. cn() then silently drops it and the offsets vanish — no error, no type failure.
+ * Anything shared across that boundary belongs in a module with no "use client" directive.
+ */
+
+/** Drives `top-(--h)` for every sticky element that has to clear the site header. */
+export const headerHeight = "[--h:68px] md:[--h:78px] lg:[--h:88px]"

@@ -4,6 +4,7 @@ import React, { useMemo, useState } from "react"
 import NextLink from "next/link"
 import { usePathname } from "next/navigation"
 import { useMounted } from "@/hooks/core/use-mounted"
+import { headerHeight } from "@/lib/constants"
 import { cn } from "@/quicksilver/lib/classname"
 import { ScrollBgCrossfade } from "@/quicksilver/react/patterns/motion/scroll-bg-crossfade"
 import { ScrollFadeIn } from "@/quicksilver/react/patterns/motion/scroll-fade-in"
@@ -232,8 +233,6 @@ export function HeaderEdgeFade({ className = "", ...props }: HeaderBufferProps) 
     />
   )
 }
-
-export const headerHeight = "[--h:68px] md:[--h:78px] lg:[--h:88px]"
 
 export interface HeaderProps {
   edgeFadeProps?: Partial<EdgeFadeProps>

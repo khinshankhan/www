@@ -1,7 +1,7 @@
 "use client"
 
 import React, { memo, useDeferredValue, useMemo, useState } from "react"
-import { headerHeight } from "@/components/layouts/elements/header"
+import { headerHeight } from "@/lib/constants"
 import { cn } from "@/quicksilver/lib/classname"
 import { ScrollFadeIn } from "@/quicksilver/react/patterns/motion/scroll-fade-in"
 import { EmptyState } from "@/quicksilver/react/primitives/empty-state"
