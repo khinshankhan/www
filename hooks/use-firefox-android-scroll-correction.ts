@@ -15,11 +15,16 @@ import { isFirefoxAndroid } from "@/lib/user-agent"
 /** Give up if the navigation never settles, so a watcher can't outlive the thing it's watching. */
 const NAVIGATION_TIMEOUT_MS = 5_000
 /**
- * Frames the page must sit at the top before we trust the landing. Long enough to outlast the
- * drift, short enough not to catch a deliberate scroll. Frames, not a timeout, because the shift
- * is tied to paint.
+ * How many rendered frames to keep watching the top after a navigation. Once the page has held the
+ * top for this many, later movement stops being treated as toolbar drift -- an empirical cutoff,
+ * not a guarantee from the browser. Counted in frames because the check has to observe successive
+ * painted states, the drift being a layout event that a timer firing between frames can miss. Not a
+ * fixed duration either: eight frames is roughly 133ms at 60Hz and about 67ms at 120Hz.
+ *
+ * Inside this window a reader who scrolls immediately after tapping a link is indistinguishable
+ * from drift and gets reset too. Kept short so that stays cheap.
  */
-const SETTLE_FRAME_COUNT = 8
+const TOP_WATCH_FRAME_COUNT = 8
 
 export function useFirefoxAndroidScrollCorrection() {
   useEffect(() => {
@@ -49,13 +54,13 @@ export function useFirefoxAndroidScrollCorrection() {
         if (window.scrollY <= 1) {
           framesAtTop += 1
 
-          if (framesAtTop >= SETTLE_FRAME_COUNT) {
+          if (framesAtTop >= TOP_WATCH_FRAME_COUNT) {
             stop()
             return
           }
         } else if (framesAtTop > 0) {
-          // Only a departure from a top we already saw settle counts as drift. Without that
-          // guard, someone scrolling immediately after navigating would get yanked back.
+          // Left a top we had already seen, so treat it as drift. A reader scrolling within the
+          // watch window looks identical and gets reset too; that is the accepted tradeoff.
           stop()
           window.scrollTo({ top: 0, left: window.scrollX, behavior: "instant" })
           return
