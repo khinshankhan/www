@@ -27,7 +27,7 @@ export const defaultSeed = 44364
  *
  * These live here, and not in the components that use them, because a value exported from a
  * "use client" module comes back to a server component as a client reference rather than the
- * value itself. cn() then silently drops it and the offsets vanish — no error, no type failure.
+ * value itself. cn() then silently drops it and the offsets vanish -- no error, no type failure.
  * Anything shared across that boundary belongs in a module with no "use client" directive.
  */
 

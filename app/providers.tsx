@@ -2,6 +2,7 @@
 
 import React, { type ReactNode } from "react"
 import NextLink from "next/link"
+import { useFirefoxAndroidScrollCorrection } from "@/hooks/use-firefox-android-scroll-correction"
 import { cn } from "@/quicksilver/lib/classname"
 import { LinkProvider } from "@/quicksilver/react/headless/link/context"
 import type { LinkProps } from "@/quicksilver/react/headless/link/types"
@@ -36,6 +37,8 @@ function InternalLink({ href, ...props }: LinkProps) {
 }
 
 export function RootProvider({ children }: { children: ReactNode }) {
+  useFirefoxAndroidScrollCorrection()
+
   return (
     <LinkProvider InternalComponent={InternalLink}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
