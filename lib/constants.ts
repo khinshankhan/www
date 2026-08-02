@@ -31,5 +31,11 @@ export const defaultSeed = 44364
  * Anything shared across that boundary belongs in a module with no "use client" directive.
  */
 
-/** Drives `top-(--h)` for every sticky element that has to clear the site header. */
-export const headerHeight = "[--h:68px] md:[--h:78px] lg:[--h:88px]"
+/**
+ * Drives `top-(--h)` for every sticky element that has to clear the site header.
+ *
+ * The ladder itself lives on `:root` as `--header-h` (see `app/globals.css`) so the
+ * `scroll-padding-top` that keeps focus clear of these same bars reads one source; this
+ * just republishes it as `--h` on the elements that pin to it.
+ */
+export const headerHeight = "[--h:var(--header-h)]"

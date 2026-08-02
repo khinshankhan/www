@@ -16,6 +16,26 @@
 :root {
   --background-1: var(--celestial-2);
   --background-2: var(--celestial-1);
+
+  /**
+   * Layout metrics. Single source of truth for the sticky-header ladder: `headerHeight`
+   * in `lib/constants.ts` feeds these into `--h` for the elements that pin to it, and
+   * `scroll-padding-top` below reads them so focus lands clear of the same bars.
+   */
+  --header-h: 68px;
+  --index-bar-h: 56px;
+}
+
+@media (width >= 48rem) {
+  :root {
+    --header-h: 78px;
+  }
+}
+
+@media (width >= 64rem) {
+  :root {
+    --header-h: 88px;
+  }
 }
 
 @theme inline {
@@ -172,6 +192,28 @@
   html {
     touch-action: manipulation;
     scroll-behavior: auto;
+  }
+
+  /**
+   * Keep focus out from under the sticky header. `scroll-margin` on headings only helps
+   * the element that carries it, and only when tabbing forward -- going backward the
+   * browser aligns the target to the viewport top, tucking it (and whatever heading it
+   * sits under) beneath the bar. `scroll-padding` sits on the scroller instead, so every
+   * scroll-into-view honors it in both directions.
+   *
+   * Below xl the article index bar stacks under the header and overlays content too, so
+   * those widths clear both; at xl it moves into the sidebar and only the header needs
+   * clearing. The 1rem tail keeps the focused element off the bar rather than flush to it.
+   */
+  @media (min-height: 32rem) {
+    html {
+      scroll-padding-top: calc(var(--header-h) + var(--index-bar-h) + 1rem);
+    }
+  }
+  @media (min-height: 32rem) and (width >= 80rem) {
+    html {
+      scroll-padding-top: calc(var(--header-h) + 1rem);
+    }
   }
   html:focus-within {
     /* allows ctr-f to work without smooth scrolling https://css-tricks.com/fixing-smooth-scrolling-with-find-on-page/ */
