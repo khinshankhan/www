@@ -67,10 +67,6 @@ export function isCalloutKeyword(keyword: string): keyword is NonNullable<Callou
 // match blockquotes `> [!variant] heading`
 const mdxBlockquoteMetaRegex = /\[!([^\]]+)\]\s*(.*)/
 
-// clear the sticky header (112px), plus the sticky article index bar when it overlays content
-// (below xl, comfy viewport height): header 88px + bar 56px + breathing room
-const mdxHeadingClasses = "scroll-mt-28 vh-comfy:max-xl:scroll-mt-42"
-
 function getSafeClassName(className: unknown): string {
   const parsedClassName = z.string().safeParse(className)
   return parsedClassName.success ? parsedClassName.data : ""
@@ -80,20 +76,22 @@ const baseComponents: MDXComponents = {
   a: ({ className = "", ...props }) => {
     return <Link className={cn("prose", getSafeClassName(className))} {...props} />
   },
+  // headings need no scroll offset of their own; `scroll-padding-top` on the scroller
+  // keeps every scroll-into-view -- anchor jumps, focus, find-in-page -- clear of the bars
   h2: ({ className = "", ...props }) => {
-    return <H2 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
+    return <H2 className={cn(getSafeClassName(className))} {...props} />
   },
   h3: ({ className = "", ...props }) => {
-    return <H3 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
+    return <H3 className={cn(getSafeClassName(className))} {...props} />
   },
   h4: ({ className = "", ...props }) => {
-    return <H4 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
+    return <H4 className={cn(getSafeClassName(className))} {...props} />
   },
   h5: ({ className = "", ...props }) => {
-    return <H5 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
+    return <H5 className={cn(getSafeClassName(className))} {...props} />
   },
   h6: ({ className = "", ...props }) => {
-    return <H6 className={cn(mdxHeadingClasses, getSafeClassName(className))} {...props} />
+    return <H6 className={cn(getSafeClassName(className))} {...props} />
   },
   pre: ({ className = "", ...props }) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
