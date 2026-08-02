@@ -15,7 +15,12 @@ export interface WithSidebarProps {
 }
 
 export const sidebarTopDisplacement = "[--h-d:0px] xl:[--h-d:56px]"
-export const sidebarTop = "calc(var(--h) + var(--h-d))"
+/**
+ * Only offsets once the rail is actually pinned. As an inline style this applied at every
+ * height, so below `vh-comfy` -- where the aside is static and there is no sticky header to
+ * clear -- it pushed the sidebar down by a header's worth of nothing.
+ */
+export const sidebarTop = "vh-comfy:top-[calc(var(--h)+var(--h-d))]"
 
 // NOTE: children should leverage the min-w-full class to ensure it fills the width of the container rather than
 // allowing it to be constrained by the sidebar width
@@ -44,15 +49,15 @@ export function WithSidebar({
         {hasSidebar && (
           <aside
             className={cn(
-              "relative z-50 w-full pb-4 lg:self-start xl:pb-0 vh-comfy:sticky",
+              "relative top-0 z-50 w-full pb-4 lg:self-start xl:pb-0 vh-comfy:sticky",
               headerHeight,
               sidebarTopDisplacement,
+              sidebarTop,
               sidebarClassName
             )}
             style={{
               minWidth: "var(--sidebar-w)",
               maxWidth: "var(--sidebar-w)",
-              top: sidebarTop,
             }}
           >
             {sidebar}

@@ -292,7 +292,10 @@ function TocList({
         return
       }
 
-      if (window.innerWidth < 1280) {
+      // Below `vh-comfy` the rail is never pinned, so there is no pinned top to measure
+      // against: `rect.top` goes far negative once the rail scrolls off and the growth
+      // below turns into a viewport-sized max-height. Fall back to the mobile cap.
+      if (window.innerWidth < 1280 || !window.matchMedia("(min-height: 32rem)").matches) {
         setDesktopMaxHeight((prev) => (prev === "24rem" ? prev : "24rem"))
         return
       }
