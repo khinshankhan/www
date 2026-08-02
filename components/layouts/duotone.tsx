@@ -35,7 +35,9 @@ export function DuotoneLayout({
       <article className="relative isolate z-2 flex w-full grow flex-col items-center bg-background-1">
         <header
           className={cn(
-            "sticky top-(--h) -z-1 flex w-full maxw-content flex-col gap-4 pt-14 pb-2",
+            // matches the header's own `vh-comfy:sticky`; pinning this when the header
+            // is static leaves it stranded over the content it should scroll under
+            "relative top-0 -z-1 flex w-full maxw-content flex-col gap-4 pt-14 pb-2 vh-comfy:sticky vh-comfy:top-(--h)",
             headerHeight
           )}
         >

@@ -86,7 +86,9 @@ export function WritingsSearch({
           under it can't peek their hover glow out beside it */}
       <div
         className={cn(
-          "sticky top-(--h) z-30 bg-background-2 py-3",
+          // only pin when the header does; on short viewports a pinned console and the
+          // pinned title block both claim `--h` and eat most of the screen
+          "relative top-0 z-30 bg-background-2 py-3 vh-comfy:sticky vh-comfy:top-(--h)",
           "shadow-[0_0_0_100vmax_var(--color-background-2)] [clip-path:inset(0_-100vmax)]",
           headerHeight
         )}
