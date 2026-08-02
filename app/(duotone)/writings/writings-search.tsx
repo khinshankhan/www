@@ -28,9 +28,21 @@ function matches(post: WritingSummary, query: string) {
 // memoized so a keystroke only re-renders changed cards, not the whole list
 const WritingCard = memo(function WritingCard({ post }: { post: WritingSummary }) {
   return (
-    <li className="link-box w-full overflow-hidden rounded-lg border border-solid border-accent-8 bg-background-1 transition-all duration-500 ease-in-out group-hover:shadow-accent-8 hover:-translate-y-1 hover:border-accent-11 hover:bg-surface-5/25 hover:shadow-[0px_0px_10px_1px]">
+    <li
+      className={
+        // `transition-all` would also ease the focus outline in over 500ms, so the ring
+        // would appear long after you had already tabbed past; name the hover properties
+        "link-box w-full overflow-hidden rounded-lg border border-solid border-accent-8 bg-background-1 transition-[transform,border-color,background-color,box-shadow] duration-500 ease-in-out group-hover:shadow-accent-8 hover:-translate-y-1 hover:border-accent-11 hover:bg-surface-5/25 hover:shadow-[0px_0px_10px_1px]"
+      }
+    >
       <div className="flex grow flex-col gap-2 p-4">
-        <H3 className="line-clamp-2 md:line-clamp-1">
+        <H3
+          className={
+            // `link-label` takes the focus ring on the stretched link's behalf; `self-start`
+            // keeps it hugging the title instead of spanning the column
+            "link-label line-clamp-2 self-start md:line-clamp-1"
+          }
+        >
           <Link href={post.slug} className="link-overlay">
             {post.title}
           </Link>

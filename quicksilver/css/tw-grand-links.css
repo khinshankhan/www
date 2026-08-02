@@ -45,6 +45,27 @@
   }
 }
 
+/**
+ * Stretched-link focus. A `.link-overlay` is `position: static` and inline, so its own
+ * outline splits across line boxes -- a wrapped title gets a ragged, per-line ring.
+ * Draw it on `.link-label` (the block element wrapping the link text) instead, which
+ * gives one clean rectangle. Lives outside `@utility` and after the utilities layer so
+ * it outranks the `focus-visible:outline-*` classes the Link primitive applies.
+ */
+.link-box:has(.link-overlay:focus-visible) .link-label {
+  outline: 2px solid var(--color-stark-contrast);
+  outline-offset: 3px;
+  /**
+   * outlines trace the element's own radius, and a heading has none of its own --
+   * without this the ring is a hard-cornered box around the title
+   */
+  border-radius: 0.25rem;
+}
+
+.link-box:has(.link-label) .link-overlay:focus-visible {
+  outline: none;
+}
+
 /* HACK: too lazy to figure out how to pass variant from markdown, much easier to just use classes */
 @utility anchor-link {
   /* since color of url in content can't easily be adjusted, use the mask trick instead https://stackoverflow.com/a/66093928/7413060 */
