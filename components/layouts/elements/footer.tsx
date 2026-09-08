@@ -1,5 +1,6 @@
 import React, { type HTMLAttributes } from "react"
 import { cn } from "@/quicksilver/lib/classname"
+import { ScrollBgCrossfade } from "@/quicksilver/react/patterns/motion/scroll-bg-crossfade"
 import { Link } from "@/quicksilver/react/primitives/link"
 import { Paragraph } from "@/quicksilver/react/primitives/text"
 import { textVariants } from "@/quicksilver/react/primitives/text.variants"
@@ -94,8 +95,22 @@ export function RevealFooter({ ghPath, className = "", ...props }: RevealFooterP
 
   return (
     <footer className={cn("footer-reveal", className)} {...props}>
-      {/* opaque backdrop so the window never shows the page scrolling behind it */}
-      <div className="footer-reveal-layer bg-background-1" aria-hidden="true" />
+      {/*
+        Opaque backdrop so the window never shows the page scrolling behind it. It crossfades as
+        the bottom is approached: the footer enters on the darker content surface and resolves to
+        the page colour as it settles, so it arrives as its own surface rather than matching the
+        page it was hiding behind the whole way up. `from="end"` anchors the range to the end of
+        the document -- the reveal is driven by clipping, so how far the footer has been uncovered
+        tracks distance from the bottom, not from the top.
+      */}
+      <ScrollBgCrossfade
+        fromColor="var(--color-background-2)"
+        toColor="var(--color-background-1)"
+        rangePx={600}
+        from="end"
+        className="footer-reveal-layer"
+        aria-hidden="true"
+      />
 
       {/*
         Pinning the real copy takes it out of flow, which would collapse the footer to nothing.

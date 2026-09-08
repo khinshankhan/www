@@ -382,6 +382,21 @@
   animation-timing-function: steps(100, end);
 }
 
+/*
+ * End-anchored counterpart to `reveal-bg-on-scroll`, matching how `reveal-on-scroll-end` relates
+ * to `reveal-on-scroll`. The crossfade plays out over the last `--range` px of the timeline, so
+ * anything anchored to the bottom of the document -- the footer reveal -- lands on its end colour
+ * regardless of how tall the page is. The no-JS mirror of `<ScrollBgCrossfade from="end">`.
+ */
+@utility reveal-bg-on-scroll-end {
+  background-color: var(--from-color, var(--color-background-1));
+  animation-duration: 1ms;
+  animation-timeline: scroll();
+  animation-range: calc(100% - var(--range, 100px)) 100%;
+  animation-fill-mode: both;
+  animation-timing-function: steps(100, end);
+}
+
 /* loosely based off https://codepen.io/brucebrotherton/pen/GRxwQar */
 @utility surround-quotes {
   &:before,
