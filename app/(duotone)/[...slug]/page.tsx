@@ -42,11 +42,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
           }}
         />
       }
+      ghPath={contentData.computed.ghSlug}
     >
       <DuotoneLayout
         title={contentData.frontmatter.title}
         description={contentData.frontmatter.description}
-        ghPath={contentData.computed.ghSlug}
         skipTargetInChild
       >
         <WithSidebar

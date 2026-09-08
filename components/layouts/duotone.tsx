@@ -3,15 +3,12 @@ import { headerHeight } from "@/lib/constants"
 import { processMarkdownAttribute } from "@/lib/seo/open-graph"
 import { cn } from "@/quicksilver/lib/classname"
 import { EdgeFade } from "@/quicksilver/react/primitives/edge-fade"
-import { Link } from "@/quicksilver/react/primitives/link"
 import { H1, Span } from "@/quicksilver/react/primitives/text"
-import { textVariants } from "@/quicksilver/react/primitives/text.variants"
 import { mainContentTargetProps } from "./elements/skip-targets"
 
 interface DuotoneLayoutProps {
   title: string
   description: string
-  ghPath?: string
   /**
    * Set when a child owns the skip target instead. WithSidebar renders its sidebar DOM-first, so
    * on those pages the target has to sit past it or the skip link lands on the sidebar.
@@ -22,7 +19,6 @@ interface DuotoneLayoutProps {
 export function DuotoneLayout({
   title,
   description,
-  ghPath,
   skipTargetInChild = false,
   children,
 }: DuotoneLayoutProps) {
@@ -32,7 +28,13 @@ export function DuotoneLayout({
       {...skipTargetProps}
       className={cn("relative isolate z-1 flex grow flex-col", skipTargetProps?.className)}
     >
-      <article className="relative isolate z-2 flex w-full grow flex-col items-center bg-background-1">
+      {/*
+        The line between the article and the footer. It lives here rather than on the footer
+        because the reveal clips that element with `clip-path: border-box`, which clips to the
+        border box and takes the border row with it -- and an unclipped border also stays put
+        instead of riding the reveal's moving edge.
+      */}
+      <article className="relative isolate z-2 flex w-full grow flex-col items-center border-b border-surface-5 bg-background-1">
         <header
           className={cn(
             // matches the header's own `vh-comfy:sticky`; pinning this when the header
@@ -59,23 +61,10 @@ export function DuotoneLayout({
         {/* acts as a fade effect to gradually introduce content and hide content */}
         <EdgeFade direction="top" className="relative z-2 h-12" />
 
-        <div className="relative isolate z-2 flex w-full grow flex-col items-center justify-center bg-background-2">
+        <div className="relative isolate z-2 flex w-full grow flex-col items-center justify-center border-t border-surface-5 bg-background-2">
           <div className="relative w-full grow pt-6 pb-14 xl:pt-14">{children}</div>
         </div>
       </article>
-
-      {ghPath && (
-        <div className="z-1 flex w-full flex-col items-center pt-14">
-          <div className="w-full maxw-page text-center md:px-4 md:text-end">
-            <Link
-              href={`https://github.com/khinshankhan/www/tree/main${ghPath}`}
-              className={textVariants({ variant: "nav" })}
-            >
-              View page on GitHub
-            </Link>
-          </div>
-        </div>
-      )}
     </main>
   )
 }

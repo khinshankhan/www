@@ -2,6 +2,7 @@
 
 import React, { type ReactNode } from "react"
 import { Emoji } from "@/components/emoji"
+import { Footer } from "@/components/layouts/elements/footer"
 import { Shell } from "@/components/layouts/elements/shell"
 import { mainContentTargetProps } from "@/components/layouts/elements/skip-targets"
 import { color1_bold, color2_bold, color3_base, color3_bold } from "@/lib/constants"
@@ -130,7 +131,7 @@ function MainContent() {
 
 export default function Page() {
   return (
-    <Shell>
+    <Shell footer={<Footer position="static" />}>
       <main
         {...mainContentTargetProps}
         className={cn("relative pb-24", mainContentTargetProps.className)}

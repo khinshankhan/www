@@ -357,6 +357,21 @@
   animation-timing-function: steps(100, end);
 }
 
+/**
+ * End-anchored counterpart to `reveal-on-scroll`, for elements whose cue is the bottom of the
+ * page rather than the top. `animation-range` is expressed from the far end of the scroll
+ * timeline, so the reveal plays out over the last `--range` px no matter how tall the document
+ * is -- the no-JS mirror of `<ScrollFadeIn from="end">`.
+ */
+@utility reveal-on-scroll-end {
+  opacity: 0;
+  animation-duration: 1ms;
+  animation-timeline: scroll();
+  animation-range: calc(100% - var(--range, 100px)) 100%;
+  animation-fill-mode: both;
+  animation-timing-function: steps(100, end);
+}
+
 /* NOTE: this should be used in unision with animate-bg-fade-in utility */
 @utility reveal-bg-on-scroll {
   background-color: var(--from-color, var(--color-background-1));
@@ -433,4 +448,97 @@
 .article-excalidraw .layer-ui__wrapper__top-right {
   top: 0.75rem;
   right: 0.75rem;
+}
+
+/**
+ * Scroll-revealed footer (see `components/layouts/elements/footer.tsx`).
+ *
+ * Default is the ordinary static footer, matching the `static` position variant. The reveal is
+ * layered on only above `md` and the same 32rem height floor the sticky header ladder uses --
+ * on a short or narrow viewport the footer would take most of what the reader can see.
+ */
+.footer-reveal {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  /*
+   * No padding of its own: the content block carries the full `pt-14` (above the gh link) and
+   * `pt-14.5` (between link and copyright) that the old layout+footer pair produced between
+   * them, so adding the static footer's outer padding here would double-count it.
+   */
+  padding-bottom: 6rem;
+}
+
+/* the pinned layer and the spacer only exist to serve the reveal */
+.footer-reveal-layer,
+.footer-reveal-spacer {
+  display: none;
+}
+
+.footer-reveal-inner {
+  position: static;
+}
+
+@media (min-width: theme(--breakpoint-md)) and (min-height: 32rem) {
+  /*
+   * The footer keeps its natural, content-driven height -- the same box the static footer
+   * occupies -- and only the painted copy is pinned. The reveal changes how the footer arrives,
+   * not where it lands or how much room it takes.
+   */
+  .footer-reveal {
+    overflow: hidden;
+    /* load-bearing: an inert shape whose only job is to make the clip apply to fixed children */
+    clip-path: border-box;
+  }
+
+  .footer-reveal-layer {
+    display: block;
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* reserves the box; `visibility` keeps it unpainted and out of the a11y tree */
+  .footer-reveal-spacer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    visibility: hidden;
+  }
+
+  /*
+   * Pinned to the viewport bottom so it holds still while the window widens over it. It keeps
+   * the padding it had in flow, so the pinned copy lands exactly where the static one would.
+   */
+  .footer-reveal-inner {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* the footer's own `pb-24`, which the pinned copy no longer inherits from flow */
+    padding-bottom: 6rem;
+    /* above the backdrop layer */
+    z-index: 2;
+    isolation: isolate;
+  }
+}
+
+@media print {
+  .footer-reveal {
+    overflow: visible;
+    clip-path: none;
+  }
+  .footer-reveal-layer,
+  .footer-reveal-spacer {
+    display: none;
+  }
+  .footer-reveal-inner {
+    position: static;
+  }
 }

@@ -36,8 +36,8 @@ export default async function Page() {
 
   return (
     // hide the header's edge fade; its gradient would wash over the sticky search once scrolled
-    <Shell header={<Header edgeFadeProps={{ className: "hidden" }} />}>
-      <DuotoneLayout title={title} description={description} ghPath={ghPath}>
+    <Shell header={<Header edgeFadeProps={{ className: "hidden" }} />} ghPath={ghPath}>
+      <DuotoneLayout title={title} description={description}>
         <WithSidebar sidebar={null} direction="right">
           <div className="mx-auto min-w-full">
             <div className="flex grow flex-col gap-8">

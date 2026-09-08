@@ -15,8 +15,8 @@ const slug = "/projects"
 
 export default function Page() {
   return (
-    <Shell>
-      <DuotoneLayout title={title} description={description} ghPath={ghPath}>
+    <Shell ghPath={ghPath}>
+      <DuotoneLayout title={title} description={description}>
         <WithSidebar sidebar={null} direction="right">
           <div className="mx-auto min-w-full">
             <Callout variant="note" title="Work in Progress" icon={null}>
